@@ -97,7 +97,7 @@ end
 -- Checkbox for Alliance
 -----------------------------------------------------------------------------
 function Alliance_OnClick()
-	Allianceorhorde = 1
+	AtlasQuest_Faction = 1
 	AtlasQuestFrameHordeButton:SetChecked(false);
 	AtlasQuestFrameAllianceButton:SetChecked(true);
 	HideUIPanel(AtlasQuestInsideFrame);
@@ -108,7 +108,7 @@ end
 -- Checkbox for Horde
 -----------------------------------------------------------------------------
 function Horde_OnClick()
-	Allianceorhorde = 2
+	AtlasQuest_Faction = 2
 	AtlasQuestFrameHordeButton:SetChecked(true);
 	AtlasQuestFrameAllianceButton:SetChecked(false);
 	HideUIPanel(AtlasQuestInsideFrame);
@@ -172,23 +172,23 @@ function AQInsertQuestInformation()
 	local Quest
 	Quest = AQSHOWNQUEST;
 	if (Quest <= 9) then
-		if (Allianceorhorde == 1) then
+		if (AtlasQuest_Faction == 1) then
 			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest),
 				4)
-		elseif (Allianceorhorde == 2) then
+		elseif (AtlasQuest_Faction == 2) then
 			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(
 			getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest .. "_HORDE"), 4)
 		end
 	elseif (Quest > 9) then
-		if (Allianceorhorde == 1) then
+		if (AtlasQuest_Faction == 1) then
 			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest),
 				5)
-		elseif (Allianceorhorde == 2) then
+		elseif (AtlasQuest_Faction == 2) then
 			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(
 			getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest .. "_HORDE"), 5)
 		end
 	end
-	if (Allianceorhorde == 1) then
+	if (AtlasQuest_Faction == 1) then
 		ChatFrameEditBox:Insert("[" ..
 			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber ..
 			"] [" .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Level") .. "]");
@@ -212,9 +212,9 @@ function AQButton_SetText()
 	ShowUIPanel(AtlasQuestInsideFrameFinishedButton);
 	AtlasQuestInsideFrameFinishedText:SetText(BLUE .. AQFinishedTEXT);
 	--
-	if (Allianceorhorde == 1) then
+	if (AtlasQuest_Faction == 1) then
 		AQColourCheck(1); --CC swaped out (see below)
-		AQCompareQLtoAQ(Quest)
+		AtlasQuest_HasQuest(Quest)
 		AtlasQuestInsideFrameQuestName:SetText(AQQuestfarbe .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST));
 		AtlasQuestInsideFrameQuestLevel:SetText(BLUE ..
 			AQDiscription_LEVEL .. WHITE .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Level"));
@@ -304,7 +304,7 @@ function AQButton_SetText()
 		end
 	end
 
-	if (Allianceorhorde == 2) then
+	if (AtlasQuest_Faction == 2) then
 		AQColourCheck(0) --CC swaped out (see below)
 		AtlasQuestInsideFrameQuestName:SetText(AQQuestfarbe ..
 		getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"));
@@ -411,7 +411,7 @@ function AQgetItemInformation(count, what)
 	local itemdiscription;
 	local itemName, itemQuality, itemTEXTSAVED
 
-	if (Allianceorhorde == 2) then
+	if (AtlasQuest_Faction == 2) then
 		itemId = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. count .. "_HORDE")
 		itemdiscription = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "description" .. count .. "_HORDE")
 		itemTEXTSAVED = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ITC" .. count .. "_HORDE") ..
@@ -471,7 +471,7 @@ function AQColourCheck(arg1)
 		if (AQNOColourCheck) then
 			AQQuestfarbe = Gelb;
 		end
-		if (AQQuestlevelf == 100 or AQCompareQLtoAQ()) then
+		if (AQQuestlevelf == 100 or AtlasQuest_HasQuest()) then
 			AQQuestfarbe = Blau;
 		end
 		if (arg1 == 1) then
@@ -491,7 +491,7 @@ end
 -- swaped out to get the code clear
 -----------------------------------------------------------------------------
 function AQQuestFinishedSetChecked()
-	if (Allianceorhorde == 1) then
+	if (AtlasQuest_Faction == 1) then
 		if (AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] == 1) then
 			AtlasQuestInsideFrameFinishedButton:SetChecked(true);
 		else
@@ -514,7 +514,7 @@ end
 function AQExtendedPages()
 	local SHIT
 	-- SHIT is added to make the code smaller it give back the right link for horde or alliance
-	if (Allianceorhorde == 1) then --Alliance
+	if (AtlasQuest_Faction == 1) then --Alliance
 		SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Page")
 	else
 		SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Page")
@@ -596,7 +596,7 @@ function AQNextPageR_OnClick()
 	-- it is a quest text
 	if (AQ_NextPageCount == "Quest") then
 		-- SHIT is added to make the code smaller it give back the right link for horde or alliance
-		if (Allianceorhorde == 1) then --Alliance
+		if (AtlasQuest_Faction == 1) then --Alliance
 			SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Page")
 		else
 			SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Page")
@@ -656,7 +656,7 @@ function AQNextPageL_OnClick()
 	-- it is a quest text
 	if (AQ_NextPageCount == "Quest") then
 		-- SHIT is added to make the code smaller it give back the right link for horde or alliance
-		if (Allianceorhorde == 1) then --Alliance
+		if (AtlasQuest_Faction == 1) then --Alliance
 			SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Page")
 		else
 			SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Page")
@@ -690,21 +690,21 @@ end
 -- Checkbox for the finished quest option
 -----------------------------------------------------------------------------
 function AQFinishedQuest_OnClick()
-	if (AtlasQuestInsideFrameFinishedButton:GetChecked() and Allianceorhorde == 1) then
+	if (AtlasQuestInsideFrameFinishedButton:GetChecked() and AtlasQuest_Faction == 1) then
 		AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] = 1;
 		setglobal("AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST, 1);
-	elseif (AtlasQuestInsideFrameFinishedButton:GetChecked() and Allianceorhorde == 2) then
+	elseif (AtlasQuestInsideFrameFinishedButton:GetChecked() and AtlasQuest_Faction == 2) then
 		AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"] = 1;
-	elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (Allianceorhorde == 1)) then
+	elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (AtlasQuest_Faction == 1)) then
 		AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] = nil;
-	elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (Allianceorhorde == 2)) then
+	elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (AtlasQuest_Faction == 2)) then
 		AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"] = nil;
 	end
 	--save everything
-	if (Allianceorhorde == 1) then
+	if (AtlasQuest_Faction == 1) then
 		AtlasQuest_Options[UnitName("player")]["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] = AQ
 			["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST]
-	elseif (Allianceorhorde == 2) then
+	elseif (AtlasQuest_Faction == 2) then
 		AtlasQuest_Options[UnitName("player")]["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"] =
 			AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"]
 	end

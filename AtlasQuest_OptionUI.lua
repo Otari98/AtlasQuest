@@ -31,9 +31,7 @@ local GREY = "|cff999999"; -- really grey
 -----------------------------------------------------------------------------
 function AtlasQuestOptionFrame_OnShow()
 	--autoshow
-	if (AQAtlasAuto == 2) then
-		AQAutoshowOption:SetChecked(false);
-	end
+	AQAutoshowOption:SetChecked(AQAtlasAuto);
 
 	--left/right
 	if (AQ_ShownSide == "Left") then
@@ -52,7 +50,7 @@ function AtlasQuestOptionFrame_OnShow()
 	end
 
 	--AQCheckQuestlog
-	if (AQCheckQuestlog == nil) then
+	if (AQCheckQuestlog) then
 		AQCheckQuestlogButton:SetChecked(true);
 	else
 		AQCheckQuestlogButton:SetChecked(false);
@@ -84,15 +82,12 @@ end
 -- Autoshow option
 -----------------------------------------------------------------------------
 function AQAutoshowOption_OnClick()
-	if (AQAtlasAuto == 1) then
-		AQAtlasAuto = 2;
-		ChatFrame1:AddMessage(AQAtlasAutoOFF);
-		AQAutoshowOption:SetChecked(false);
+	if (AQAtlasAuto) then
+		AQAtlasAuto = false;
 	else
-		AQAtlasAuto = 1;
-		ChatFrame1:AddMessage(AQAtlasAutoON);
-		AQAutoshowOption:SetChecked(true);
+		AQAtlasAuto = true;
 	end
+	AQAutoshowOption:SetChecked(AQAtlasAuto);
 	AtlasQuest_SaveData();
 end
 
@@ -158,11 +153,11 @@ end
 -- CheckQuestlog option
 -----------------------------------------------------------------------------
 function AQCheckQuestlogButton_OnClick()
-	if (AQCheckQuestlog == nil) then
-		AQCheckQuestlog = "no";
+	if (AQCheckQuestlog) then
+		AQCheckQuestlog = false;
 		AQCheckQuestlogButton:SetChecked(false);
 	else
-		AQCheckQuestlog = nil;
+		AQCheckQuestlog = true;
 		AQCheckQuestlogButton:SetChecked(true);
 	end
 	AtlasQuest_SaveData();
