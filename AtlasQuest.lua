@@ -51,11 +51,11 @@ local MAX_INSTANCES = 68                       -- Sets the max number of instanc
 local MAX_QUESTS = 23
 AtlasQuest_Faction = 1;                           -- variable that configures whether horde or allianz is shown
 AQINSTANZ = 1;                                 -- currently shown instance index
-AQINSTATM = "";                                -- variable to check whether AQINSTANZ has changed (see function AtlasQuestSetTextandButtons())
+local AQINSTATM;                                -- variable to check whether AQINSTANZ has changed
 AQ_ShownSide = "Left"                          -- configures at which side the AQ panel is shown
 AQAtlasAuto = true;                            -- option to show the AQpanel automatically at atlas-startup
 AQNOColourCheck = nil;
-ATLASQUEST_VERSION = BLUE .. "AtlasQuest 4.1.3"; -- Set title for AtlasQuest side panel
+ATLASQUEST_VERSION = GetAddOnMetadata("AtlasQuest", "Version") -- Set title for AtlasQuest side panel
 
 local playerName = UnitName("player")
 local _, race = UnitRace("player")
@@ -122,7 +122,7 @@ end
 function AQVersionCheck()
 	if (AtlasQuest_Options["Version"] == nil or AtlasQuest_Options["Version"] ~= AtlasQuest_Defaults["Version"]) then
 		AtlasQuest_Options["Version"] = AtlasQuest_Defaults["Version"];
-		DEFAULT_CHAT_FRAME:AddMessage("First load after updating to " .. ATLASQUEST_VERSION);
+		DEFAULT_CHAT_FRAME:AddMessage("First load after updating to version " .. ATLASQUEST_VERSION);
 	end
 end
 
@@ -225,7 +225,7 @@ function AQ_OnUpdate(arg1)
 		HideUIPanel(AtlasQuestFrame);
 		HideUIPanel(AtlasQuestInsideFrame);
 	elseif ((AQINSTANZ ~= previousValue) or AQUpdateNOW) then
-		AtlasQuestSetTextandButtons();
+		AtlasQuest_UpdateButtons();
 		AQUpdateNOW = false
 		AtlasQuestFrameZoneName:SetText();
 		if (getglobal("Inst" .. AQINSTANZ .. "Caption") ~= nil) then
@@ -270,97 +270,54 @@ function AQ_AtlasOrAlphamap()
 	end
 end
 
------------------------------------------------------------------------------
---  Set the Buttontext and the buttons if available
---  and check whether its a other inst or not -> works fine
---  added: Check for Questline arrows
---  Questline arrows are shown if InstXQuestYFQuest = "true"
---  QuestStart icon are shown if InstXQuestYPreQuest = "true"
------------------------------------------------------------------------------
-function AtlasQuestSetTextandButtons()
+function AtlasQuest_UpdateButtons()
 	if (AQINSTATM ~= AQINSTANZ) then
-		HideUIPanel(AtlasQuestInsideFrame);
+		AtlasQuestInsideFrame:Hide();
 	end
+	AQINSTATM = AQINSTANZ;
 	if (AtlasQuest_Faction == 1) then
-		AQINSTATM = AQINSTANZ;
 		AtlasQuestFrameNumQuests:SetText(getglobal("Inst" .. AQINSTANZ .. "QAA") or "");
-		for i = 1, MAX_QUESTS do
-			local button = getglobal("AQQuestButton" .. i)
-			local icon = getglobal("AQQuestButton" .. i .. "Icon")
-			local text = getglobal("Inst" .. AQINSTANZ .. "Quest" .. i)
-			local isFinished = AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. i] == 1
-			local questLevel = tonumber(getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_Level"));
-			if (text) then
-				if (getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "FQuest")) then
-					icon:SetTexture("Interface\\Glues\\Login\\UI-BackArrow")
-					icon:Show();
-					button:SetAlpha(1)
-				elseif (getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "PreQuest")) then
-					icon:SetTexture("Interface\\GossipFrame\\PetitionGossipIcon")
-					icon:Show();
-					button:SetAlpha(1)
-				elseif (isFinished) then
-					icon:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
-					icon:Show();
-					button:SetAlpha(0.6)
-				else
-					icon:Hide();
-					button:SetAlpha(1)
-				end
-				if questLevel then
-					local color = GetDifficultyColor(questLevel, true)
-					button:SetTextColor(color.r, color.g, color.b)
-					if AtlasQuest_HasQuest(text) then
-						button:SetTextColor(1, 1, 1)
-					end
-				end
-				button:SetText(text);
-				button:Show()
-			else
-				button:Hide()
-			end
-		end
 	elseif (AtlasQuest_Faction == 2) then
-		AQINSTATM = AQINSTANZ;
 		AtlasQuestFrameNumQuests:SetText(getglobal("Inst" .. AQINSTANZ .. "QAH") or "");
-		for i = 1, MAX_QUESTS do
-			local button = getglobal("AQQuestButton" .. i)
-			local icon = getglobal("AQQuestButton" .. i .. "Icon")
-			local text = getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE")
-			local isFinished = AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE"] == 1
-			local questLevel = tonumber(getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE_Level"));
-			if (text) then
-				if (getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "FQuest")) then
-					icon:SetTexture("Interface\\Glues\\Login\\UI-BackArrow")
-					icon:Show();
-				elseif (getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "PreQuest")) then
-					icon:SetTexture("Interface\\GossipFrame\\PetitionGossipIcon")
-					icon:Show();
-				elseif (isFinished) then
-					icon:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
-					icon:Show();
-				else
-					icon:Hide();
-				end
-				if questLevel then
-					local color = GetDifficultyColor(questLevel, true)
-					button:SetTextColor(color.r, color.g, color.b)
-					if AtlasQuest_HasQuest(text) then
-						button:SetTextColor(1, 1, 1)
-					end
-				end
-				button:SetText(text);
-				button:Show()
+	end
+	for i = 1, MAX_QUESTS do
+		local button = getglobal("AQQuestButton" .. i)
+		local icon = getglobal("AQQuestButton" .. i .. "Icon")
+		local text = getglobal("Inst" .. AQINSTANZ .. "Quest" .. i)
+		local isFinished = AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. i] == 1
+		local questLevel = tonumber(getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_Level"));
+		if (AtlasQuest_Faction == 2) then
+			text = getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE")
+			isFinished = AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE"] == 1
+			questLevel = tonumber(getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE_Level"));
+		end
+		local hasQuest = AtlasQuest_HasQuest(text)
+		if (text) then
+			if (hasQuest) then
+				icon:SetTexture("Interface\\QuestFrame\\UI-Quest-BulletPoint")
+				icon:Show();
+				button:SetAlpha(1)
 			else
-				button:Hide()
+				icon:Hide();
+				button:SetAlpha(1)
 			end
+			if (isFinished) then
+				icon:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
+				icon:Show();
+				button:SetAlpha(0.6)
+			end
+			if questLevel then
+				local color = GetDifficultyColor(questLevel, true)
+				button:SetTextColor(color.r, color.g, color.b)
+			end
+			button:SetText(text);
+			button:Show()
+		else
+			button:Hide()
 		end
 	end
 end
 
------------------------------------------------------------------------------
--- Colours quest blue if they are in your questlog
------------------------------------------------------------------------------
 function AtlasQuest_HasQuest(questName)
 	if not questName then
 		return false
@@ -404,19 +361,9 @@ end
 --******************************************
 -- Events: OnEnter/OnLeave SHOW ITEM
 --******************************************
-
------------------------------------------------------------------------------
--- Hide Tooltip
------------------------------------------------------------------------------
-
-function AtlasQuestItem_OnLeave()
-	GameTooltip:Hide();
-end
-
 -----------------------------------------------------------------------------
 -- Show Tooltip and automatically query server if option is enabled
 -----------------------------------------------------------------------------
-
 function AtlasQuestItem_OnEnter()
 	local SHOWNID
 
@@ -499,7 +446,7 @@ function AQ_OnShow()
 		AtlasQuestFrameHordeButton:SetChecked(false);
 		AtlasQuestFrameAllianceButton:SetChecked(true);
 	end
-	AtlasQuestSetTextandButtons()
+	AtlasQuest_UpdateButtons()
 end
 
 -----------------------------------------------------------------------------

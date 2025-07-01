@@ -30,6 +30,9 @@
 	<Button name="AtlasQuestButtonTemplate" virtual="true" hidden="true">
 		<Size x="165" y="20"/>
 		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentHighlight" file="Interface\QuestFrame\UI-QuestTitleHighlight" hidden="true" alphaMode="ADD" setAllPoints="true"/>
+			</Layer>
 			<Layer level="OVERLAY">
 				<Texture name="$parentIcon" file="Interface\Glues\Login\UI-BackArrow">
 					<Size x="15" y="15"/>
@@ -49,14 +52,16 @@
 				</Anchor>
 			</Anchors>
 		</ButtonText>
-		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
+		<NormalFont inherits="GameFontNormalSmall" justifyH="LEFT"/>
+		<HighlightFont inherits="GameFontHighlightSmall" justifyH="LEFT"/>
+		<DisabledFont inherits="GameFontHighlightSmall" justifyH="LEFT"/>
 		<Scripts>
 			<OnLoad>
 				RaiseFrameLevel(this);
 			</OnLoad>
 			<OnClick>
 				AQSHOWNQUEST = this:GetID();
-				Quest_OnClick(arg1);
+				AtlasQuestButton_OnClick(arg1);
 			</OnClick>
 		</Scripts>
 	</Button>

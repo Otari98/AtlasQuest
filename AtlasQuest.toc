@@ -9,7 +9,7 @@
 ## Author:
 ## Updated by: Shahopriest
 ## CLI by:
-## Version: 4.1.7
+## Version: 4.1.8
 ## X-eMail: m4r3lk4@gmail.com
 ## X-Website: https://forum.turtle-wow.org/viewtopic.php?t=7959
 ## X-Category: MYADDONS_CATEGORY_MAP

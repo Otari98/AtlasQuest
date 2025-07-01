@@ -44,7 +44,7 @@ local Gelb = "|cffFFd200"
 local Blau = "|cff0070dd"
 
 local AQQuestfarbe
-
+local MAX_QUESTS = 23
 -----------------------------------------------------------------------------
 -- Buttons
 -----------------------------------------------------------------------------
@@ -102,6 +102,9 @@ function Alliance_OnClick()
 	AtlasQuestFrameAllianceButton:SetChecked(true);
 	HideUIPanel(AtlasQuestInsideFrame);
 	AQUpdateNOW = true;
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
 end
 
 -----------------------------------------------------------------------------
@@ -113,6 +116,9 @@ function Horde_OnClick()
 	AtlasQuestFrameAllianceButton:SetChecked(false);
 	HideUIPanel(AtlasQuestInsideFrame);
 	AQUpdateNOW = true;
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
 end
 
 -----------------------------------------------------------------------------
@@ -130,26 +136,36 @@ function AQSTORY1_OnClick()
 		WHICHBUTTON = STORY;
 		AQButtonSTORY_SetText();
 	end
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
 end
 
 -----------------------------------------------------------------------------
 -- Button
 -----------------------------------------------------------------------------
-function Quest_OnClick(arg1)
+function AtlasQuestButton_OnClick(arg1)
 	if (ChatFrameEditBox:IsVisible() and IsShiftKeyDown()) then
 		AQInsertQuestInformation();
 	else
+		for i = 1, MAX_QUESTS do
+			getglobal("AQQuestButton"..i.."Highlight"):Hide()
+		end
 		AQHideAL();
 		AtlasQuestInsideFrameStoryText:SetText("");
-		if (AtlasQuestInsideFrame:IsVisible() == nil) then
+		if (not AtlasQuestInsideFrame:IsVisible()) then
 			ShowUIPanel(AtlasQuestInsideFrame);
 			WHICHBUTTON = AQSHOWNQUEST;
+			getglobal(this:GetName().."Highlight"):SetVertexColor(this:GetTextColor())
+			getglobal(this:GetName().."Highlight"):Show()
 			AQButton_SetText();
 		elseif (WHICHBUTTON == AQSHOWNQUEST) then
 			HideUIPanel(AtlasQuestInsideFrame);
 			WHICHBUTTON = 0;
 		else
 			WHICHBUTTON = AQSHOWNQUEST;
+			getglobal(this:GetName().."Highlight"):SetVertexColor(this:GetTextColor())
+			getglobal(this:GetName().."Highlight"):Show()
 			AQButton_SetText();
 		end
 	end
@@ -159,7 +175,7 @@ end
 -- Hide the AtlasLoot Frame if available
 -----------------------------------------------------------------------------
 function AQHideAL()
-	if (AtlasLootItemsFrame ~= nil) then
+	if (AtlasLootItemsFrame) then
 		AtlasLootItemsFrame:Hide(); -- hide atlasloot
 	end
 end
@@ -169,8 +185,7 @@ end
 -----------------------------------------------------------------------------
 function AQInsertQuestInformation()
 	local OnlyAtlasQuestInsideFrameQuestNameRemovedNumber
-	local Quest
-	Quest = AQSHOWNQUEST;
+	local Quest = AQSHOWNQUEST;
 	if (Quest <= 9) then
 		if (AtlasQuest_Faction == 1) then
 			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest),
@@ -689,7 +704,7 @@ end
 -----------------------------------------------------------------------------
 -- Checkbox for the finished quest option
 -----------------------------------------------------------------------------
-function AQFinishedQuest_OnClick()
+function AQFinishedAtlasQuestButton_OnClick()
 	if (AtlasQuestInsideFrameFinishedButton:GetChecked() and AtlasQuest_Faction == 1) then
 		AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] = 1;
 		setglobal("AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST, 1);
@@ -709,6 +724,12 @@ function AQFinishedQuest_OnClick()
 			AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"]
 	end
 
-	AtlasQuestSetTextandButtons()
+	AtlasQuest_UpdateButtons()
 	AQButton_SetText()
+end
+
+function AtlasQuestInsideFrame_OnHide()
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
 end

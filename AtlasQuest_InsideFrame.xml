@@ -55,7 +55,7 @@
 				AtlasQuestItem_OnEnter();
 			</OnEnter>
 			<OnLeave>
-				AtlasQuestItem_OnLeave();
+				GameTooltip:Hide();
 			</OnLeave>
 			<OnClick>
 				AtlasQuestItem_OnClick(arg1);
@@ -131,7 +131,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						AQFinishedQuest_OnClick();
+						AQFinishedAtlasQuestButton_OnClick();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -251,6 +251,11 @@
 				</FontString>
 			</Layer>
 		</Layers>
+		<Scripts>
+			<OnHide>
+				AtlasQuestInsideFrame_OnHide()
+			</OnHide>
+		</Scripts>
 	</Frame>
 	<Button name="AtlasQuestButton" parent="AtlasFrame" inherits="UIPanelButtonTemplate2" text="AtlasQuest">
 		<Size x="90" y="32"/>
