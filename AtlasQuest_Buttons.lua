@@ -96,7 +96,7 @@ end
 -----------------------------------------------------------------------------
 -- Checkbox for Alliance
 -----------------------------------------------------------------------------
-function Alliance_OnClick()
+function AtlasQuestFrameAllianceButton_OnClick()
 	AtlasQuest_Faction = 1
 	AtlasQuestFrameHordeButton:SetChecked(false);
 	AtlasQuestFrameAllianceButton:SetChecked(true);
@@ -110,7 +110,7 @@ end
 -----------------------------------------------------------------------------
 -- Checkbox for Horde
 -----------------------------------------------------------------------------
-function Horde_OnClick()
+function AtlasQuestFrameHordeButton_OnClick()
 	AtlasQuest_Faction = 2
 	AtlasQuestFrameHordeButton:SetChecked(true);
 	AtlasQuestFrameAllianceButton:SetChecked(false);

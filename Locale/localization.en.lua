@@ -59,8 +59,8 @@ AQAtlasAutoON = "The AtlasQuest panel will be automatically displayed when atlas
 AQAtlasAutoOFF = "The AtlasQuest panel "..RED.."will not"..WHITE.." be displayed when you open atlas."
 
 -- Right/Left
-AQOptionsLEFTTEXT = "Show the AtlasQuest panel "..RED.."left.";
-AQOptionsRIGHTTEXT = "Show the AtlasQuest panel "..RED.."right.";
+AQOptionsLEFTTEXT = "Show the AtlasQuest panel ont the "..WHITE.."left.";
+AQOptionsRIGHTTEXT = "Show the AtlasQuest panel on the "..WHITE.."right.";
 AQShowRight = "Now shows the AtlasQuest Panel on the "..RED.."right"..WHITE.." side.";
 AQShowLeft = "Now shows the AtlasQuest Panel on the "..RED.."left"..WHITE.." side "..GREEN.."(default)";
 

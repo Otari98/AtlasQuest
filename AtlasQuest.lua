@@ -184,16 +184,7 @@ function AQ_OnLoad()
 	this:RegisterEvent("VARIABLES_LOADED");
 	AtlasQuestFrameStoryButton:SetText(AQStoryB);
 	AtlasQuestFrameOptionsButton:SetText(AQOptionB);
-	AQOptionCloseButton:SetText(AQ_OK);
-	AQAutoshowOptionTEXT:SetText(AQOptionsAutoshowTEXT);
-	AQLEFTOptionTEXT:SetText(AQOptionsLEFTTEXT);
-	AQRIGHTOptionTEXT:SetText(AQOptionsRIGHTTEXT);
-	AQColourOptionTEXT:SetText(AQOptionsCCTEXT);
 	AtlasQuestInsideFrameFinishedText:SetText(AQFinishedTEXT);
-	AQCheckQuestlogTEXT:SetText(AQQLColourChange);
-	AQAutoQueryTEXT:SetText(AQOptionsAutoQueryTEXT);
-	AQNoQuerySpamTEXT:SetText(AQOptionsNoQuerySpamTEXT);
-	AQCompareTooltipTEXT:SetText(AQOptionsCompareTooltipTEXT);
 	AQUpdateNOW = true;
 	AtlasQuestFrame_Title:SetText("AtlasQuest");
 	this:SetFrameLevel(this:GetParent():GetFrameLevel() - 1)
@@ -735,11 +726,6 @@ function AtlasQuestOptionFrame_OnShow()
 		AQRIGHTOption:SetChecked(true);
 		AQLEFTOption:SetChecked(false);
 	end
-	AQColourOption:SetChecked(AQNOColourCheck);
-	AQCheckQuestlogButton:SetChecked(AQCheckQuestlog);
-	AQAutoQueryOption:SetChecked(AQAutoQuery);
-	AQNoQuerySpamOption:SetChecked(AQNoQuerySpam);
-	AQCompareTooltipOption:SetChecked(AQCompareTooltip);
 end
 
 -----------------------------------------------------------------------------
@@ -789,53 +775,5 @@ function AQLEFTOption_OnClick()
 	AQRIGHTOption:SetChecked(false);
 	AQLEFTOption:SetChecked(true);
 	AQ_ShownSide = "Left";
-	AtlasQuest_SaveData();
-end
-
------------------------------------------------------------------------------
--- Colour Check
--- if AQNOColourCheck = true then NO Colour Check
------------------------------------------------------------------------------
-function AQColourOption_OnClick()
-	AQNOColourCheck = not AQNOColourCheck;
-	AQColourOption:SetChecked(AQNOColourCheck);
-	AtlasQuest_SaveData();
-	AQUpdateNOW = true;
-end
-
------------------------------------------------------------------------------
--- CheckQuestlog option
------------------------------------------------------------------------------
-function AQCheckQuestlogButton_OnClick()
-	AQCheckQuestlog = not AQCheckQuestlog;
-	AQCheckQuestlogButton:SetChecked(AQCheckQuestlog);
-	AtlasQuest_SaveData();
-	AQUpdateNOW = true;
-end
-
------------------------------------------------------------------------------
--- AutoQuery Option
------------------------------------------------------------------------------
-function AQAutoQueryOption_OnClick()
-	AQAutoQuery = not AQAutoQuery;
-	AQAutoQueryOption:SetChecked(AQAutoQuery);
-	AtlasQuest_SaveData();
-end
-
------------------------------------------------------------------------------
--- Suppress AutoQuery Text Option
------------------------------------------------------------------------------
-function AQNoQuerySpamOption_OnClick()
-	AQNoQuerySpam = not AQNoQuerySpam;
-	AQNoQuerySpamOption:SetChecked(AQNoQuerySpam);
-	AtlasQuest_SaveData();
-end
-
------------------------------------------------------------------------------
--- Comparison Tooltips Option
------------------------------------------------------------------------------
-function AQCompareTooltipOption_OnClick()
-	AQCompareTooltip = not AQCompareTooltip;
-	AQCompareTooltipOption:SetChecked(AQCompareTooltip);
 	AtlasQuest_SaveData();
 end

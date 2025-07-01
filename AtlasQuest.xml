@@ -68,7 +68,7 @@
 
 	<!-- Option panel -->
 	<Frame name="AtlasQuestOptionFrame" enableMouse="true" movable="true" hidden="true" parent="UIParent" toplevel="true" frameStrata="DIALOG" enableKeyboard="true">
-		<Size x="300" y="350"/>
+		<Size x="300" y="150"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
 		</Anchors>
@@ -92,74 +92,64 @@
 						<Anchor point="TOP"/>
 					</Anchors>
 				</FontString>
-				<FontString name="AQAutoshowOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size x="240" y="25"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-50"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQLEFTOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size x="240" y="25"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-80"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQRIGHTOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size x="240" y="25"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-110"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQColourOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size x="240" y="25"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-140"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQCheckQuestlogTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size x="240" y="25"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-170"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQAutoQueryTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT" >
-					<Size x="240" y="35"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-200"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQNoQuerySpamTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT" >
-					<Size x="240" y="35"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-230"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQCompareTooltipTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT" >
-					<Size x="240" y="35"/>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="45" y="-260"/>
-						</Anchor>
-					</Anchors>
-				</FontString>
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button name="AQOptionCloseButton" inherits="OptionsButtonTemplate">
+			<CheckButton name="AQAutoshowOption" inherits="OptionsCheckButtonTemplate">
+				<Size x="30" y="30"/>
+				<HitRectInsets left="0" right="0" top="0" bottom="0"/>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="20" y="-28"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AQAutoshowOption_OnClick();
+						PlayClickSound()
+					</OnClick>
+					<OnShow>
+						getglobal(this:GetName().."Text"):SetText(AQOptionsAutoshowTEXT)
+					</OnShow>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="AQLEFTOption" inherits="OptionsCheckButtonTemplate">
+				<Size x="30" y="30"/>
+				<HitRectInsets left="0" right="0" top="0" bottom="0"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AQAutoshowOption" relativePoint="BOTTOMLEFT">
+						<Offset x="0" y="4"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AQLEFTOption_OnClick();
+						PlayClickSound()
+					</OnClick>
+					<OnShow>
+						getglobal(this:GetName().."Text"):SetText(AQOptionsLEFTTEXT)
+					</OnShow>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="AQRIGHTOption" inherits="OptionsCheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
+				<HitRectInsets left="0" right="0" top="0" bottom="0"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AQLEFTOption" relativePoint="BOTTOMLEFT">
+						<Offset x="0" y="4"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AQRIGHTOption_OnClick();
+						PlayClickSound()
+					</OnClick>
+					<OnShow>
+						getglobal(this:GetName().."Text"):SetText(AQOptionsRIGHTTEXT)
+					</OnShow>
+				</Scripts>
+			</CheckButton>
+			<Button name="AQOptionCloseButton" inherits="OptionsButtonTemplate" text="OKAY">
 				<Size x="80" y="20"/>
 				<Anchors>
 					<Anchor point="BOTTOM">
@@ -168,141 +158,10 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						HideUIPanel(AtlasQuestOptionFrame);
+						AtlasQuestOptionFrame:Hide();
 					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
 				</Scripts>
 			</Button>
-			<CheckButton name="AQAutoshowOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-50"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQAutoshowOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>
-			<CheckButton name="AQLEFTOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-80"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQLEFTOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>
-			<CheckButton name="AQRIGHTOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-110"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQRIGHTOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>
-			<CheckButton name="AQColourOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-140"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQColourOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>
-			<CheckButton name="AQCheckQuestlogButton" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-170"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQCheckQuestlogButton_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>
-			<CheckButton name="AQAutoQueryOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-200"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQAutoQueryOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>	
-			<CheckButton name="AQNoQuerySpamOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-230"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQNoQuerySpamOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>		
-			<CheckButton name="AQCompareTooltipOption" inherits="UICheckButtonTemplate" checked="true">
-				<Size x="30" y="30"/>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="10" y="-260"/>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQCompareTooltipOption_OnClick();
-					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
-				</Scripts>
-			</CheckButton>
 		</Frames>
 		<Scripts>
 			<OnLoad>
@@ -357,9 +216,6 @@
 					<OnClick>
 						AQOPTION1_OnClick();
 					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
 				</Scripts>
 			</Button>
 			<Button name="$parentStoryButton" inherits="OptionsButtonTemplate" text="Story">
@@ -373,12 +229,9 @@
 					<OnClick>
 						AQSTORY1_OnClick();
 					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
 				</Scripts>
 			</Button>
-			<CheckButton name="AtlasQuestFrameAllianceButton" inherits="UICheckButtonTemplate" checked="true">
+			<CheckButton name="AtlasQuestFrameAllianceButton" inherits="UICheckButtonTemplate">
 				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
@@ -390,14 +243,12 @@
 				</HitRectInsets>
 				<Scripts>
 					<OnClick>
-						Alliance_OnClick();
+						AtlasQuestFrameAllianceButton_OnClick();
+						PlayClickSound()
 					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="AtlasQuestFrameHordeButton" inherits="UICheckButtonTemplate" checked="false">
+			<CheckButton name="AtlasQuestFrameHordeButton" inherits="UICheckButtonTemplate">
 				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPRIGHT">
@@ -409,11 +260,9 @@
 				</HitRectInsets>
 				<Scripts>
 					<OnClick>
-						Horde_OnClick();
+						AtlasQuestFrameHordeButton_OnClick();
+						PlayClickSound()
 					</OnClick>
-					<OnShow>
-						RaiseFrameLevel(this);
-					</OnShow>
 				</Scripts>
 			</CheckButton>
 			<Button name="AQQuestButton1" inherits="AtlasQuestButtonTemplate" id="1">
