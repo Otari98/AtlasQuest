@@ -71,7 +71,7 @@ local AtlasQuest_Defaults = {
 		["NOColourCheck"] = nil,
 		["CheckQuestlog"] = nil,
 		["AutoQuery"] = nil,
-		["NoQuerySpam"] = "yes",
+		["NoQuerySpam"] = true,
 		["CompareTooltip"] = nil,
 	},
 };
@@ -112,23 +112,6 @@ function AtlasQuest_Initialize()
 	if (type(AtlasQuest_Options[playerName]) == "table") then
 		AQVersionCheck();
 		AtlasQuest_LoadData();
-	end
-
-	-- Register AQ Tooltip with EquipCompare if enabled.
-	if (AQCompareTooltip ~= nil) then
-		if IsAddOnLoaded("EquipCompare") then
-			EquipCompare_RegisterTooltip(AtlasQuestTooltip);
-		end
-		if IsAddOnLoaded("EQCompare") then
-			EQCompare:RegisterTooltip(AtlasQuestTooltip);
-		end
-	else
-		if IsAddOnLoaded("EquipCompare") then -- Unregister the AtlasQuest Tooltip with EquipCompare if it's enabled
-			EquipCompare_UnregisterTooltip(AtlasQuestTooltip);
-		end
-		if IsAddOnLoaded("EQCompare") then
-			EQCompare:UnRegisterTooltip(AtlasQuestTooltip);
-		end
 	end
 	Initialized = 1;
 end
@@ -427,20 +410,7 @@ end
 -----------------------------------------------------------------------------
 
 function AtlasQuestItem_OnLeave()
-	if (GameTooltip:IsVisible()) then
-		GameTooltip:Hide();
-		if (ShoppingTooltip2:IsVisible() or ShoppingTooltip1.IsVisible) then
-			ShoppingTooltip2:Hide();
-			ShoppingTooltip1:Hide();
-		end
-	end
-	if (AtlasQuestTooltip:IsVisible()) then
-		AtlasQuestTooltip:Hide();
-		if (ShoppingTooltip2:IsVisible() or ShoppingTooltip1.IsVisible) then
-			ShoppingTooltip2:Hide();
-			ShoppingTooltip1:Hide();
-		end
-	end
+	GameTooltip:Hide();
 end
 
 -----------------------------------------------------------------------------
@@ -458,15 +428,15 @@ function AtlasQuestItem_OnEnter()
 
 	if (SHOWNID ~= nil) then
 		if (GetItemInfo(SHOWNID) ~= nil) then
-			AtlasQuestTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-			AtlasQuestTooltip:SetHyperlink("item:" .. SHOWNID .. ":0:0:0");
-			AtlasQuestTooltip:Show();
+			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
+			GameTooltip:SetHyperlink("item:" .. SHOWNID .. ":0:0:0");
+			GameTooltip:Show();
 		else
-			AtlasQuestTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-			AtlasQuestTooltip:ClearLines();
-			AtlasQuestTooltip:AddLine(RED .. AQERRORNOTSHOWN);
-			AtlasQuestTooltip:AddLine(AQERRORASKSERVER);
-			AtlasQuestTooltip:Show();
+			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
+			GameTooltip:ClearLines();
+			GameTooltip:AddLine(RED .. AQERRORNOTSHOWN);
+			GameTooltip:AddLine(AQERRORASKSERVER);
+			GameTooltip:Show();
 		end
 	end
 end
@@ -495,9 +465,9 @@ function AtlasQuestItem_OnClick(arg1)
 	end
 
 	if (arg1 == "RightButton") then
-		AtlasQuestTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-		AtlasQuestTooltip:SetHyperlink("item:" .. SHOWNID .. ":0:0:0");
-		AtlasQuestTooltip:Show();
+		GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
+		GameTooltip:SetHyperlink("item:" .. SHOWNID .. ":0:0:0");
+		GameTooltip:Show();
 		if (AQNoQuerySpam == nil) then
 			DEFAULT_CHAT_FRAME:AddMessage(AQSERVERASK ..
 			"[" .. colour .. nameDATA .. WHITE .. "]" .. AQSERVERASKInformation);
@@ -804,3 +774,121 @@ end
 -- 46 - Emerald Sanctum (ES)
 
 -- 99 =  default "rest"
+
+-----------------------------------------------------------------------------
+-- initialises the options panel
+-- and sets checks after the variables
+-----------------------------------------------------------------------------
+function AtlasQuestOptionFrame_OnShow()
+	AQAutoshowOption:SetChecked(AQAtlasAuto);
+	if (AQ_ShownSide == "Left") then
+		AQRIGHTOption:SetChecked(false);
+		AQLEFTOption:SetChecked(true);
+	else
+		AQRIGHTOption:SetChecked(true);
+		AQLEFTOption:SetChecked(false);
+	end
+	AQColourOption:SetChecked(AQNOColourCheck);
+	AQCheckQuestlogButton:SetChecked(AQCheckQuestlog);
+	AQAutoQueryOption:SetChecked(AQAutoQuery);
+	AQNoQuerySpamOption:SetChecked(AQNoQuerySpam);
+	AQCompareTooltipOption:SetChecked(AQCompareTooltip);
+end
+
+-----------------------------------------------------------------------------
+-- Autoshow option
+-----------------------------------------------------------------------------
+function AQAutoshowOption_OnClick()
+	if (AQAtlasAuto) then
+		AQAtlasAuto = false;
+	else
+		AQAtlasAuto = true;
+	end
+	AQAutoshowOption:SetChecked(AQAtlasAuto);
+	AtlasQuest_SaveData();
+end
+
+-----------------------------------------------------------------------------
+-- Right option
+-----------------------------------------------------------------------------
+function AQRIGHTOption_OnClick()
+	if ((AtlasFrame ~= nil) and (AtlasORAlphaMap == "Atlas")) then
+		AtlasQuestFrame:ClearAllPoints();
+		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, -10); --AtlasQuest right frame position when you change position regarding Atlas Addon by clicking the button
+	elseif (AtlasORAlphaMap == "AlphaMap") then
+		AtlasQuestFrame:ClearAllPoints();
+		AtlasQuestFrame:SetPoint("TOP", "AlphaMapFrame", 400, -107);
+	end
+	AQRIGHTOption:SetChecked(true);
+	AQLEFTOption:SetChecked(false);
+	if (AQ_ShownSide ~= "Right") then
+		ChatFrame1:AddMessage(AQShowRight);
+	end
+	AQ_ShownSide = "Right";
+	AtlasQuest_SaveData();
+end
+
+-----------------------------------------------------------------------------
+-- Left option
+-----------------------------------------------------------------------------
+function AQLEFTOption_OnClick()
+	if ((AtlasFrame ~= nil) and (AtlasORAlphaMap == "Atlas") and (AQ_ShownSide == "Right")) then
+		AtlasQuestFrame:ClearAllPoints();
+		AtlasQuestFrame:SetPoint("RIGHT", AtlasFrame, "LEFT", 16, -10); --AtlasQuest left frame position when you change position regarding Atlas Addon by clicking the button
+	elseif ((AtlasORAlphaMap == "AlphaMap") and (AQ_ShownSide == "Right")) then
+		AtlasQuestFrame:ClearAllPoints();
+		AtlasQuestFrame:SetPoint("TOPLEFT", "AlphaMapFrame", -195, -107);
+	end
+	AQRIGHTOption:SetChecked(false);
+	AQLEFTOption:SetChecked(true);
+	AQ_ShownSide = "Left";
+	AtlasQuest_SaveData();
+end
+
+-----------------------------------------------------------------------------
+-- Colour Check
+-- if AQNOColourCheck = true then NO Colour Check
+-----------------------------------------------------------------------------
+function AQColourOption_OnClick()
+	AQNOColourCheck = not AQNOColourCheck;
+	AQColourOption:SetChecked(AQNOColourCheck);
+	AtlasQuest_SaveData();
+	AQUpdateNOW = true;
+end
+
+-----------------------------------------------------------------------------
+-- CheckQuestlog option
+-----------------------------------------------------------------------------
+function AQCheckQuestlogButton_OnClick()
+	AQCheckQuestlog = not AQCheckQuestlog;
+	AQCheckQuestlogButton:SetChecked(AQCheckQuestlog);
+	AtlasQuest_SaveData();
+	AQUpdateNOW = true;
+end
+
+-----------------------------------------------------------------------------
+-- AutoQuery Option
+-----------------------------------------------------------------------------
+function AQAutoQueryOption_OnClick()
+	AQAutoQuery = not AQAutoQuery;
+	AQAutoQueryOption:SetChecked(AQAutoQuery);
+	AtlasQuest_SaveData();
+end
+
+-----------------------------------------------------------------------------
+-- Suppress AutoQuery Text Option
+-----------------------------------------------------------------------------
+function AQNoQuerySpamOption_OnClick()
+	AQNoQuerySpam = not AQNoQuerySpam;
+	AQNoQuerySpamOption:SetChecked(AQNoQuerySpam);
+	AtlasQuest_SaveData();
+end
+
+-----------------------------------------------------------------------------
+-- Comparison Tooltips Option
+-----------------------------------------------------------------------------
+function AQCompareTooltipOption_OnClick()
+	AQCompareTooltip = not AQCompareTooltip;
+	AQCompareTooltipOption:SetChecked(AQCompareTooltip);
+	AtlasQuest_SaveData();
+end
