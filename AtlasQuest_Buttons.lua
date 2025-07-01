@@ -49,17 +49,17 @@ local AQQuestfarbe
 -- Buttons
 -----------------------------------------------------------------------------
 function AQClearALL()
-  AQPageCount:SetText();
-  HideUIPanel(AQNextPageButton_Right);
-  HideUIPanel(AQNextPageButton_Left);
-  QuestName:SetText("");
-  QuestLeveltext:SetText("");
-  Prequesttext:SetText("");
-  QuestAttainLeveltext:SetText("");
-  REWARDstext:SetText();
-  StoryTEXT:SetText();
-  AQFQ_TEXT:SetText();
-  HideUIPanel(AQFinishedQuest);
+  AtlasQuestInsideFramePagesText:SetText();
+  HideUIPanel(AtlasQuestInsideFrameNextPage);
+  HideUIPanel(AtlasQuestInsideFramePrevPage);
+  AtlasQuestInsideFrameQuestName:SetText("");
+  AtlasQuestInsideFrameQuestLevel:SetText("");
+  AtlasQuestInsideFramePrequest:SetText("");
+  AtlasQuestInsideFrameAttainLevel:SetText("");
+  AtlasQuestInsideFrameRewardText:SetText();
+  AtlasQuestInsideFrameStoryText:SetText();
+  AtlasQuestInsideFrameFinishedText:SetText();
+  HideUIPanel(AtlasQuestInsideFrameFinishedButton);
   for b = 1, 6 do
     getglobal("AtlasQuestItemframe" .. b .. "_Icon"):SetTexture();
     getglobal("AtlasQuestItemframe" .. b .. "_Name"):SetText();
@@ -94,27 +94,12 @@ function AQCLOSE_OnClick()
 end
 
 -----------------------------------------------------------------------------
--- upper left button on the panel for closing
------------------------------------------------------------------------------
-function AQCLOSE1_OnClick()
-  HideUIPanel(AtlasQuestFrame);
-end
-
------------------------------------------------------------------------------
--- inside button to close the quest display
------------------------------------------------------------------------------
-function AQCLOSE2_OnClick()
-  HideUIPanel(AtlasQuestInsideFrame);
-  WHICHBUTTON = 0;
-end
-
------------------------------------------------------------------------------
 -- Checkbox for Alliance
 -----------------------------------------------------------------------------
 function Alliance_OnClick()
   Allianceorhorde = 1
-  AQHCB:SetChecked(false);
-  AQACB:SetChecked(true);
+  AtlasQuestFrameHordeButton:SetChecked(false);
+  AtlasQuestFrameAllianceButton:SetChecked(true);
   HideUIPanel(AtlasQuestInsideFrame);
   AQUpdateNOW = true;
 end
@@ -124,8 +109,8 @@ end
 -----------------------------------------------------------------------------
 function Horde_OnClick()
   Allianceorhorde = 2
-  AQHCB:SetChecked(true);
-  AQACB:SetChecked(false);
+  AtlasQuestFrameHordeButton:SetChecked(true);
+  AtlasQuestFrameAllianceButton:SetChecked(false);
   HideUIPanel(AtlasQuestInsideFrame);
   AQUpdateNOW = true;
 end
@@ -155,7 +140,7 @@ function Quest_OnClick(arg1)
     AQInsertQuestInformation();
   else
     AQHideAL();
-    StoryTEXT:SetText("");
+    AtlasQuestInsideFrameStoryText:SetText("");
     if (AtlasQuestInsideFrame:IsVisible() == nil) then
       ShowUIPanel(AtlasQuestInsideFrame);
       WHICHBUTTON = AQSHOWNQUEST;
@@ -183,28 +168,28 @@ end
 -- Insert Quest Information into the chat box
 -----------------------------------------------------------------------------
 function AQInsertQuestInformation()
-  local OnlyQuestNameRemovedNumber
+  local OnlyAtlasQuestInsideFrameQuestNameRemovedNumber
   local Quest
   Quest = AQSHOWNQUEST;
   if (Quest <= 9) then
     if (Allianceorhorde == 1) then
-      OnlyQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest), 4)
+      OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest), 4)
     elseif (Allianceorhorde == 2) then
-      OnlyQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest .. "_HORDE"), 4)
+      OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest .. "_HORDE"), 4)
     end
   elseif (Quest > 9) then
     if (Allianceorhorde == 1) then
-      OnlyQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest), 5)
+      OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest), 5)
     elseif (Allianceorhorde == 2) then
-      OnlyQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest .. "_HORDE"), 5)
+      OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. AQINSTANZ .. "Quest" .. Quest .. "_HORDE"), 5)
     end
   end
   if (Allianceorhorde == 1) then
     ChatFrameEditBox:Insert("[" ..
-    OnlyQuestNameRemovedNumber .. "] [" .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Level") .. "]");
+    OnlyAtlasQuestInsideFrameQuestNameRemovedNumber .. "] [" .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Level") .. "]");
   else
     ChatFrameEditBox:Insert("[" ..
-    OnlyQuestNameRemovedNumber .. "] [" .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Level") ..
+    OnlyAtlasQuestInsideFrameQuestNameRemovedNumber .. "] [" .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Level") ..
     "]");
   end
 end
@@ -218,18 +203,18 @@ function AQButton_SetText()
 
   AQClearALL();
   -- Show the finished button
-  ShowUIPanel(AQFinishedQuest);
-  AQFQ_TEXT:SetText(BLUE .. AQFinishedTEXT);
+  ShowUIPanel(AtlasQuestInsideFrameFinishedButton);
+  AtlasQuestInsideFrameFinishedText:SetText(BLUE .. AQFinishedTEXT);
   --
   if (Allianceorhorde == 1) then
     AQColourCheck(1); --CC swaped out (see below)
     AQCompareQLtoAQ(Quest)
-    QuestName:SetText(AQQuestfarbe .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST));
-    QuestLeveltext:SetText(BLUE ..
+    AtlasQuestInsideFrameQuestName:SetText(AQQuestfarbe .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST));
+    AtlasQuestInsideFrameQuestLevel:SetText(BLUE ..
     AQDiscription_LEVEL .. WHITE .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Level"));
-    QuestAttainLeveltext:SetText(BLUE ..
+    AtlasQuestInsideFrameAttainLevel:SetText(BLUE ..
     AQDiscription_ATTAIN .. WHITE .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Attain"));
-    Prequesttext:SetText(BLUE ..
+    AtlasQuestInsideFramePrequest:SetText(BLUE ..
     AQDiscription_PREQUEST ..
     WHITE ..
     getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Prequest") ..
@@ -254,7 +239,7 @@ function AQButton_SetText()
     -- If there are other descriptions for alphamap and alphamap is shown then show them
     -----------------------------------------------------------------------------
     if ((AtlasORAlphaMap == "AlphaMap") and (getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Note_AlphaMap") ~= nil)) then
-      Prequesttext:SetText(BLUE ..
+      AtlasQuestInsideFramePrequest:SetText(BLUE ..
       AQDiscription_PREQUEST ..
       WHITE ..
       getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_Prequest") ..
@@ -278,7 +263,7 @@ function AQButton_SetText()
     end
 
     for b = 1, 6 do
-      REWARDstext:SetText(getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "Rewardtext"))
+      AtlasQuestInsideFrameRewardText:SetText(getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "Rewardtext"))
       if (getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. b) ~= nil) then
         -----------------------------------------------------------------------------
         -- Yay for AutoQuery. Boo for odd variable names.
@@ -312,12 +297,12 @@ function AQButton_SetText()
 
   if (Allianceorhorde == 2) then
     AQColourCheck(0) --CC swaped out (see below)
-    QuestName:SetText(AQQuestfarbe .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"));
-    QuestLeveltext:SetText(BLUE ..
+    AtlasQuestInsideFrameQuestName:SetText(AQQuestfarbe .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"));
+    AtlasQuestInsideFrameQuestLevel:SetText(BLUE ..
     AQDiscription_LEVEL .. WHITE .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Level"));
-    QuestAttainLeveltext:SetText(BLUE ..
+    AtlasQuestInsideFrameAttainLevel:SetText(BLUE ..
     AQDiscription_ATTAIN .. WHITE .. getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Attain"));
-    Prequesttext:SetText(BLUE ..
+    AtlasQuestInsideFramePrequest:SetText(BLUE ..
     AQDiscription_PREQUEST ..
     WHITE ..
     getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Prequest") ..
@@ -343,7 +328,7 @@ function AQButton_SetText()
     -- If there are other descriptions for alphamap and alphamap is shown then show them
     -----------------------------------------------------------------------------
     if ((AtlasORAlphaMap == "AlphaMap") and (getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Note_AlphaMap") ~= nil)) then
-      Prequesttext:SetText(BLUE ..
+      AtlasQuestInsideFramePrequest:SetText(BLUE ..
       AQDiscription_PREQUEST ..
       WHITE ..
       getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Prequest") ..
@@ -368,7 +353,7 @@ function AQButton_SetText()
     end
 
     for b = 1, 6 do
-      REWARDstext:SetText(getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "Rewardtext_HORDE"))
+      AtlasQuestInsideFrameRewardText:SetText(getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "Rewardtext_HORDE"))
       if (getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. b .. "_HORDE") ~= nil) then
         -----------------------------------------------------------------------------
         -- Yay for AutoQuery. Boo for odd variable names.
@@ -496,15 +481,15 @@ end
 function AQQuestFinishedSetChecked()
   if (Allianceorhorde == 1) then
     if (AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] == 1) then
-      AQFinishedQuest:SetChecked(true);
+      AtlasQuestInsideFrameFinishedButton:SetChecked(true);
     else
-      AQFinishedQuest:SetChecked(false);
+      AtlasQuestInsideFrameFinishedButton:SetChecked(false);
     end
   else
     if (AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"] == 1) then
-      AQFinishedQuest:SetChecked(true);
+      AtlasQuestInsideFrameFinishedButton:SetChecked(true);
     else
-      AQFinishedQuest:SetChecked(false);
+      AtlasQuestInsideFrameFinishedButton:SetChecked(false);
     end
   end
 end
@@ -512,7 +497,7 @@ end
 -----------------------------------------------------------------------------
 -- Allow pages
 -- InstXXQuestXX_Page = number of pages
--- HideUIPanel(AQNextPageButton_Left); AQPageCount:SetText();
+-- HideUIPanel(AtlasQuestInsideFramePrevPage); AtlasQuestInsideFramePagesText:SetText();
 -----------------------------------------------------------------------------
 function AQExtendedPages()
   local SHIT
@@ -525,10 +510,10 @@ function AQExtendedPages()
 
   if (type(SHIT) == "table") then
     if (type(SHIT[1]) == "number") then
-      ShowUIPanel(AQNextPageButton_Right);
+      ShowUIPanel(AtlasQuestInsideFrameNextPage);
       AQ_NextPageCount = "Quest";
       AQ_CurrentSide = 1;
-      AQPageCount:SetText(AQ_CurrentSide .. "/" .. SHIT[1]);
+      AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. SHIT[1]);
     end
   end
 end
@@ -542,25 +527,25 @@ function AQButtonSTORY_SetText()
 
   -- show right story text
   if (getglobal("Inst" .. AQINSTANZ .. "Story") ~= nil) then
-    QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption"));
+    AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption"));
     if (type(getglobal("Inst" .. AQINSTANZ .. "Story")) == "table") then
-      StoryTEXT:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story")["Page1"]);
+      AtlasQuestInsideFrameStoryText:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story")["Page1"]);
       -- Show Next side button if next site is avaiable
       if (getglobal("Inst" .. AQINSTANZ .. "Story")["Page2"] ~= nil) then
-        ShowUIPanel(AQNextPageButton_Right);
+        ShowUIPanel(AtlasQuestInsideFrameNextPage);
         AQ_CurrentSide = 1;
         -- shows total amount of pages
-        AQPageCount:SetText(AQ_CurrentSide .. "/" .. getglobal("Inst" .. AQINSTANZ .. "Story")["MaxPages"])
+        AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. getglobal("Inst" .. AQINSTANZ .. "Story")["MaxPages"])
         -- count to make a diffrent between story and normal text
         AQ_NextPageCount = "Story";
       end
     elseif (type(getglobal("Inst" .. AQINSTANZ .. "Story")) == "string") then
-      StoryTEXT:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story"));
+      AtlasQuestInsideFrameStoryText:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story"));
     end
     -- added to work with future versions of atlas (before i update e.g. before you dl the update)
   elseif (getglobal("Inst" .. AQINSTANZ .. "Story") == nil) then
-    QuestName:SetText("not available");
-    StoryTEXT:SetText("not available");
+    AtlasQuestInsideFrameQuestName:SetText("not available");
+    AtlasQuestInsideFrameStoryText:SetText("not available");
   end
 end
 
@@ -578,18 +563,18 @@ function AQNextPageR_OnClick()
 
   -- it is a story text
   if (AQ_NextPageCount == "Story") then
-    StoryTEXT:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story")["Page" .. AQ_CurrentSide]);
-    AQPageCount:SetText(AQ_CurrentSide .. "/" .. getglobal("Inst" .. AQINSTANZ .. "Story")["MaxPages"])
+    AtlasQuestInsideFrameStoryText:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story")["Page" .. AQ_CurrentSide]);
+    AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. getglobal("Inst" .. AQINSTANZ .. "Story")["MaxPages"])
     if (getglobal("Inst" .. AQINSTANZ .. "Caption" .. AQ_CurrentSide) ~= nil) then
-      QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption" .. AQ_CurrentSide));
+      AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption" .. AQ_CurrentSide));
     else
-      QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption"));
+      AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption"));
     end
     -- hide button if no next side
     if (getglobal("Inst" .. AQINSTANZ .. "Story")["Page" .. SideAfterThis] == nil) then
-      HideUIPanel(AQNextPageButton_Right);
+      HideUIPanel(AtlasQuestInsideFrameNextPage);
     else
-      ShowUIPanel(AQNextPageButton_Right);
+      ShowUIPanel(AtlasQuestInsideFrameNextPage);
     end
   end
 
@@ -601,32 +586,32 @@ function AQNextPageR_OnClick()
     else
       SHIT = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE_Page")
     end
-    StoryTEXT:SetText(WHITE .. SHIT[AQ_CurrentSide])
-    AQPageCount:SetText(AQ_CurrentSide .. "/" .. SHIT[1])
+    AtlasQuestInsideFrameStoryText:SetText(WHITE .. SHIT[AQ_CurrentSide])
+    AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. SHIT[1])
     -- hide button if no next side
     if (SHIT[SideAfterThis] == nil) then
-      HideUIPanel(AQNextPageButton_Right);
+      HideUIPanel(AtlasQuestInsideFrameNextPage);
     else
-      ShowUIPanel(AQNextPageButton_Right);
+      ShowUIPanel(AtlasQuestInsideFrameNextPage);
     end
   end
 
   -- it is a boss text
   if (AQ_NextPageCount == "Boss") then
-    QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][1]);
-    StoryTEXT:SetText(WHITE ..
+    AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][1]);
+    AtlasQuestInsideFrameStoryText:SetText(WHITE ..
     getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][2] ..
     "\n \n" .. getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][3]);
     -- Show Next side button if next site is avaiable
     if (getglobal("Inst" .. AQINSTANZ .. "General")[SideAfterThis] ~= nil) then
-      ShowUIPanel(AQNextPageButton_Right);
+      ShowUIPanel(AtlasQuestInsideFrameNextPage);
     end
     -- shows total amount of pages
-    AQPageCount:SetText(AQ_CurrentSide .. "/" .. getn(getglobal("Inst" .. AQINSTANZ .. "General")))
+    AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. getn(getglobal("Inst" .. AQINSTANZ .. "General")))
   end
 
   -- Show backwards button
-  ShowUIPanel(AQNextPageButton_Left);
+  ShowUIPanel(AtlasQuestInsideFramePrevPage);
 end
 
 -----------------------------------------------------------------------------
@@ -638,16 +623,16 @@ function AQNextPageL_OnClick()
 
   -- it is a story text
   if (AQ_NextPageCount == "Story") then
-    StoryTEXT:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story")["Page" .. AQ_CurrentSide]);
-    AQPageCount:SetText(AQ_CurrentSide .. "/" .. getglobal("Inst" .. AQINSTANZ .. "Story")["MaxPages"])
+    AtlasQuestInsideFrameStoryText:SetText(WHITE .. getglobal("Inst" .. AQINSTANZ .. "Story")["Page" .. AQ_CurrentSide]);
+    AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. getglobal("Inst" .. AQINSTANZ .. "Story")["MaxPages"])
     if (getglobal("Inst" .. AQINSTANZ .. "Caption" .. AQ_CurrentSide) ~= nil) then
-      QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption" .. AQ_CurrentSide));
+      AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption" .. AQ_CurrentSide));
     else
-      QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption"));
+      AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "Caption"));
     end
     -- hide button if first side
     if (AQ_CurrentSide == 1) then
-      HideUIPanel(AQNextPageButton_Left);
+      HideUIPanel(AtlasQuestInsideFramePrevPage);
     end
   end
 
@@ -662,40 +647,40 @@ function AQNextPageL_OnClick()
     if (AQ_CurrentSide == 1) then
       AQButton_SetText()
     else
-      StoryTEXT:SetText(WHITE .. SHIT[AQ_CurrentSide])
+      AtlasQuestInsideFrameStoryText:SetText(WHITE .. SHIT[AQ_CurrentSide])
     end
-    AQPageCount:SetText(AQ_CurrentSide .. "/" .. SHIT[1])
+    AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. SHIT[1])
   end
 
   -- it is a boss text
   if (AQ_NextPageCount == "Boss") then
-    QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][1]);
-    StoryTEXT:SetText(WHITE ..
+    AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][1]);
+    AtlasQuestInsideFrameStoryText:SetText(WHITE ..
     getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][2] ..
     "\n \n" .. getglobal("Inst" .. AQINSTANZ .. "General")[AQ_CurrentSide][3]);
     -- Show Next side button if next site is avaiable
     if (AQ_CurrentSide == 1) then
-      HideUIPanel(AQNextPageButton_Left);
+      HideUIPanel(AtlasQuestInsideFramePrevPage);
     end
     -- shows total amount of pages
-    AQPageCount:SetText(AQ_CurrentSide .. "/" .. getn(getglobal("Inst" .. AQINSTANZ .. "General")))
+    AtlasQuestInsideFramePagesText:SetText(AQ_CurrentSide .. "/" .. getn(getglobal("Inst" .. AQINSTANZ .. "General")))
   end
 
-  ShowUIPanel(AQNextPageButton_Right);
+  ShowUIPanel(AtlasQuestInsideFrameNextPage);
 end
 
 -----------------------------------------------------------------------------
 -- Checkbox for the finished quest option
 -----------------------------------------------------------------------------
 function AQFinishedQuest_OnClick()
-  if (AQFinishedQuest:GetChecked() and Allianceorhorde == 1) then
+  if (AtlasQuestInsideFrameFinishedButton:GetChecked() and Allianceorhorde == 1) then
     AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] = 1;
     setglobal("AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST, 1);
-  elseif (AQFinishedQuest:GetChecked() and Allianceorhorde == 2) then
+  elseif (AtlasQuestInsideFrameFinishedButton:GetChecked() and Allianceorhorde == 2) then
     AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"] = 1;
-  elseif ((not AQFinishedQuest:GetChecked()) and (Allianceorhorde == 1)) then
+  elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (Allianceorhorde == 1)) then
     AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST] = nil;
-  elseif ((not AQFinishedQuest:GetChecked()) and (Allianceorhorde == 2)) then
+  elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (Allianceorhorde == 2)) then
     AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "_HORDE"] = nil;
   end
   --save everything
@@ -711,31 +696,3 @@ function AQFinishedQuest_OnClick()
   AQButton_SetText()
 end
 
------------------------------------------------------------------------------
--- General Information for the Instance
------------------------------------------------------------------------------
-function AQGeneral_OnClick(arg1)
-  -- first clear display
-  AQClearALL();
-  AQHideAL();
-  if (AtlasQuestInsideFrame:IsVisible()) then
-    HideUIPanel(AtlasQuestInsideFrame);
-  else
-    ShowUIPanel(AtlasQuestInsideFrame);
-  end
-
-  --
-  if (getglobal("Inst" .. AQINSTANZ .. "General") ~= nil) then
-    QuestName:SetText(BLUE .. getglobal("Inst" .. AQINSTANZ .. "General")[1][1]);
-    StoryTEXT:SetText(WHITE ..
-    getglobal("Inst" .. AQINSTANZ .. "General")[1][2] .. "\n \n" .. getglobal("Inst" .. AQINSTANZ .. "General")[1][3]);
-    -- Show Next side button if next site is avaiable
-    AQ_NextPageCount = "Boss";
-    if (getglobal("Inst" .. AQINSTANZ .. "General")[2] ~= nil) then
-      ShowUIPanel(AQNextPageButton_Right);
-      AQ_CurrentSide = 1;
-      -- shows total amount of pages
-      AQPageCount:SetText(AQ_CurrentSide .. "/" .. getn(getglobal("Inst" .. AQINSTANZ .. "General")))
-    end
-  end
-end

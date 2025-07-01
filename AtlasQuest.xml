@@ -21,7 +21,7 @@
 	
 -->
 
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
 	
 	<Script file="AtlasQuest_Instanzen.lua" />
 	<Script file="AtlasQuest_Buttons.lua" />
@@ -29,148 +29,129 @@
 	<Script file="AtlasQuest_Items.lua" />
 	<Script file="AtlasQuest.lua" />
 	
-	-- Tooltip
 	<GameTooltip name="AtlasQuestTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true"/>
 	
+	<Button name="AtlasQuestButtonTemplate" virtual="true" hidden="true">
+		<Size x="165" y="20"/>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="$parentIcon" file="Interface\Glues\Login\UI-BackArrow">
+					<Size x="15" y="15"/>
+					<Anchors>
+						<Anchor point="LEFT" >
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+			<Size x="165" y="20"/>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset x="15" y="0"/>
+				</Anchor>
+			</Anchors>
+		</ButtonText>
+		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
+		<Scripts>
+			<OnLoad>
+				RaiseFrameLevel(this);
+			</OnLoad>
+			<OnClick>
+				AQSHOWNQUEST = this:GetID();
+				Quest_OnClick(arg1);
+			</OnClick>
+		</Scripts>
+	</Button>
+
 	<!-- Option panel -->
 	<Frame name="AtlasQuestOptionFrame" enableMouse="true" movable="true" hidden="true" parent="UIParent" toplevel="true" frameStrata="DIALOG" enableKeyboard="true">
-		<Size>
-			<AbsDimension x="300" y="350"/>
-		</Size>
+		<Size x="300" y="350"/>
 		<Anchors>
-			<Anchor point="CENTER">
-				<Offset>
-					<AbsDimension x="0" y="0"/>
-				</Offset>
-			</Anchor>
+			<Anchor point="CENTER"/>
 		</Anchors>
-		<Backdrop name="$parentBackdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<BackgroundInsets>
-				<AbsInset left="11" right="12" top="12" bottom="11"/>
-			</BackgroundInsets>
-			<TileSize>
-				<AbsValue val="32"/>
-			</TileSize>
-			<EdgeSize>
-				<AbsValue val="32"/>
-			</EdgeSize>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets left="11" right="12" top="12" bottom="11"/>
+			<TileSize val="32"/>
+			<EdgeSize val="32"/>
 		</Backdrop>
 		<Layers>
 			<Layer level="ARTWORK">
 				<Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
-					<Size>
-						<AbsDimension x="320" y="64"/>
-					</Size>
+					<Size x="320" y="64"/>
 					<Anchors>
 						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="14"/>
-							</Offset>
+							<Offset x="0" y="14"/>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<FontString name="$parent_Title" inherits="GameFontNormal">
 					<Anchors>
-						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOP"/>
 					</Anchors>
 				</FontString>
 				<FontString name="AQAutoshowOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size>
-						<AbsDimension x="240" y="25"/>
-					</Size>
+					<Size x="240" y="25"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-50"/>
-							</Offset>
+							<Offset x="45" y="-50"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQLEFTOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size>
-						<AbsDimension x="240" y="25"/>
-					</Size>
+					<Size x="240" y="25"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-80"/>
-							</Offset>
+							<Offset x="45" y="-80"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQRIGHTOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size>
-						<AbsDimension x="240" y="25"/>
-					</Size>
+					<Size x="240" y="25"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-110"/>
-							</Offset>
+							<Offset x="45" y="-110"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQColourOptionTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size>
-						<AbsDimension x="240" y="25"/>
-					</Size>
+					<Size x="240" y="25"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-140"/>
-							</Offset>
+							<Offset x="45" y="-140"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQCheckQuestlogTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT">
-					<Size>
-						<AbsDimension x="240" y="25"/>
-					</Size>
+					<Size x="240" y="25"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-170"/>
-							</Offset>
+							<Offset x="45" y="-170"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQAutoQueryTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT" >
-					<Size>
-						<AbsDimension x="240" y="35"/>
-					</Size>
+					<Size x="240" y="35"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-200"/>
-							</Offset>
+							<Offset x="45" y="-200"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQNoQuerySpamTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT" >
-					<Size>
-						<AbsDimension x="240" y="35"/>
-					</Size>
+					<Size x="240" y="35"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-230"/>
-							</Offset>
+							<Offset x="45" y="-230"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<FontString name="AQCompareTooltipTEXT" inherits="GameFontNormalSmall" justifyH = "LEFT" >
-					<Size>
-						<AbsDimension x="240" y="35"/>
-					</Size>
+					<Size x="240" y="35"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="45" y="-260"/>
-							</Offset>
+							<Offset x="45" y="-260"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
@@ -178,14 +159,10 @@
 		</Layers>
 		<Frames>
 			<Button name="AQOptionCloseButton" inherits="OptionsButtonTemplate">
-				<Size>
-					<AbsDimension x="80" y="20"/>
-				</Size>
+				<Size x="80" y="20"/>
 				<Anchors>
 					<Anchor point="BOTTOM">
-						<Offset>
-							<AbsDimension x="0" y="15"/>
-						</Offset>
+						<Offset x="0" y="15"/>
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -193,191 +170,135 @@
 						HideUIPanel(AtlasQuestOptionFrame);
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</Button>
-			<CheckButton name="AQAutoshowOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQAutoshowOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-50"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-50"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQAutoshowOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="AQLEFTOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQLEFTOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-80"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-80"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQLEFTOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="AQRIGHTOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQRIGHTOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-110"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-110"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQRIGHTOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="AQColourOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQColourOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-140"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-140"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQColourOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="AQCheckQuestlogButton" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQCheckQuestlogButton" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-170"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-170"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQCheckQuestlogButton_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="AQAutoQueryOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQAutoQueryOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-200"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-200"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQAutoQueryOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>	
-			<CheckButton name="AQNoQuerySpamOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQNoQuerySpamOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-230"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-230"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQNoQuerySpamOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>		
-			<CheckButton name="AQCompareTooltipOption" inherits="OptionsCheckButtonTemplate" checked="true">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AQCompareTooltipOption" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-260"></AbsDimension>
-						</Offset>
+						<Offset x="10" y="-260"/>
 					</Anchor>
-					<HitRectInsets>
-						<AbsInset left="0" right="0" top="0" bottom="0"/>
-					</HitRectInsets>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						AQCompareTooltipOption_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
@@ -404,14 +325,10 @@
 	
 	<!-- AtlasQuest Panel-->
 	<Frame name="AtlasQuestFrame" toplevel="false" enableMouse="true" movable="false" parent="AtlasFrame">
-		<Size>
-			<AbsDimension x="220" y="590"/>
-		</Size>
+		<Size x="220" y="590"/>
 		<Anchors>
 			<Anchor point="TOP" relativeTo="AtlasFrame">
-				<Offset>
-					<AbsDimension x="-556" y="-30"/>
-				</Offset>
+				<Offset x="-556" y="-30"/>
 			</Anchor>
 		</Anchors>
 		<Backdrop name="$parentBackdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
@@ -426,35 +343,19 @@
 			</BackgroundInsets>
 		</Backdrop>
 		<Frames>
-			<Button name="CLOSEbutton" inherits="UIPanelCloseButton" text="X">
-				<Size>
-					<AbsDimension x="27" y="27"/>
-				</Size>
+			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
+				<Size x="27" y="27"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="-10"/>
-						</Offset>
+						<Offset x="10" y="-10"/>
 					</Anchor>
 				</Anchors>
-				<Scripts>
-					<OnClick>
-						AQCLOSE1_OnClick();
-					</OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="OPTIONbutton" inherits="OptionsButtonTemplate" text="Options">
-				<Size>
-					<AbsDimension x="80" y="20"/>
-				</Size>
+			<Button name="$parentOptionsButton" inherits="OptionsButtonTemplate" text="Options">
+				<Size x="80" y="20"/>
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT">
-						<Offset>
-							<AbsDimension x="-20" y="15"/>
-						</Offset>
+						<Offset x="-20" y="15"/>
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -462,19 +363,15 @@
 						AQOPTION1_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</Button>
-			<Button name="STORYbutton" inherits="OptionsButtonTemplate" text="Story">
-				<Size>
-					<AbsDimension x="70" y="20"/>
-				</Size>
+			<Button name="$parentStoryButton" inherits="OptionsButtonTemplate" text="Story">
+				<Size x="70" y="20"/>
 				<Anchors>
 					<Anchor point="BOTTOMLEFT">
-						<Offset>
-							<AbsDimension x="20" y="15"/>
-						</Offset>
+						<Offset x="20" y="15"/>
 					</Anchor>
 				</Anchors>
 				<Scripts>
@@ -482,953 +379,258 @@
 						AQSTORY1_OnClick();
 					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</Button>
-		<!--AlLiance Check Button-->
-			<CheckButton name="AQACB" inherits="OptionsCheckButtonTemplate" checked="true" text="AQACB">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AtlasQuestFrameAllianceButton" inherits="UICheckButtonTemplate" checked="true">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="12" y="-52"></AbsDimension>
-						</Offset>
+						<Offset x="12" y="-52"/>
 					</Anchor>
 				</Anchors>
 				<HitRectInsets>
 					<AbsInset left="0" right="0" top="0" bottom="0"/>
 				</HitRectInsets>
 				<Scripts>
-					<OnClick> Alliance_OnClick(); </OnClick>
+					<OnClick>
+						Alliance_OnClick();
+					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-		<!--Horde Check Button-->
-			<CheckButton name="AQHCB" inherits="OptionsCheckButtonTemplate" checked="false" text="AQHCB">
-				<Size>
-					<AbsDimension x="30" y="30"/>
-				</Size>
+			<CheckButton name="AtlasQuestFrameHordeButton" inherits="UICheckButtonTemplate" checked="false">
+				<Size x="30" y="30"/>
 				<Anchors>
 					<Anchor point="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="-12" y="-52"></AbsDimension>
-						</Offset>
+						<Offset x="-12" y="-52"/>
 					</Anchor>
 				</Anchors>
 				<HitRectInsets>
 					<AbsInset left="0" right="0" top="0" bottom="0"/>
 				</HitRectInsets>
 				<Scripts>
-					<OnClick> Horde_OnClick(); </OnClick>
+					<OnClick>
+						Horde_OnClick();
+					</OnClick>
 					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
+						RaiseFrameLevel(this);
 					</OnShow>
 				</Scripts>
 			</CheckButton>
-			<Button name="AQGeneralButton" inherits="" text="G">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton1" inherits="AtlasQuestButtonTemplate" id="1">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-30"/>
-						</Offset>
+						<Offset x="15" y="-90"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick>
-						AQGeneral_OnClick(arg1);
-					</OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton1" inherits="" text="1">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton2" inherits="AtlasQuestButtonTemplate" id="2">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-90"/>
-						</Offset>
+						<Offset x="15" y="-110"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick>
-						AQSHOWNQUEST = 1;
-						Quest_OnClick(arg1);
-					</OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton2" inherits="" text="2">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton3" inherits="AtlasQuestButtonTemplate" id="3">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-110"/>
-						</Offset>
+						<Offset x="15" y="-130"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick>
-						AQSHOWNQUEST = 2;
-						Quest_OnClick(arg1);
-					</OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton3" inherits="" text="3">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton4" inherits="AtlasQuestButtonTemplate" id="4">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-130"/>
-						</Offset>
+						<Offset x="15" y="-150"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 3; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton4" inherits="" text="4">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton5" inherits="AtlasQuestButtonTemplate" id="5">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-150"/>
-						</Offset>
+						<Offset x="15" y="-170"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 4; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton5" inherits="" text="5">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton6" inherits="AtlasQuestButtonTemplate" id="6">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-170"/>
-						</Offset>
+						<Offset x="15" y="-190"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 5;  Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton6" inherits="" text="6">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton7" inherits="AtlasQuestButtonTemplate" id="7">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-190"/>
-						</Offset>
+						<Offset x="15" y="-210"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 6; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton7" inherits="" text="7">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton8" inherits="AtlasQuestButtonTemplate" id="8">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-210"/>
-						</Offset>
+						<Offset x="15" y="-230"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 7; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton8" inherits="" text="8">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton9" inherits="AtlasQuestButtonTemplate" id="9">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-230"/>
-						</Offset>
+						<Offset x="15" y="-250"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 8; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton9" inherits="" text="9">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton10" inherits="AtlasQuestButtonTemplate" id="10">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-250"/>
-						</Offset>
+						<Offset x="15" y="-270"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 9; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton10" inherits="" text="10">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton11" inherits="AtlasQuestButtonTemplate" id="11">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-270"/>
-						</Offset>
+						<Offset x="15" y="-290"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 10; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton11" inherits="" text="11">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton12" inherits="AtlasQuestButtonTemplate" id="12">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-290"/>
-						</Offset>
+						<Offset x="15" y="-310"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 11; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton12" inherits="" text="12">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton13" inherits="AtlasQuestButtonTemplate" id="13">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-310"/>
-						</Offset>
+						<Offset x="15" y="-330"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 12; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton13" inherits="" text="13">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton14" inherits="AtlasQuestButtonTemplate" id="14">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-330"/>
-						</Offset>
+						<Offset x="15" y="-350"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 13; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton14" inherits="" text="14">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton15" inherits="AtlasQuestButtonTemplate" id="15">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-350"/>
-						</Offset>
+						<Offset x="15" y="-370"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 14; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton15" inherits="" text="15">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton16" inherits="AtlasQuestButtonTemplate" id="16">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-370"/>
-						</Offset>
+						<Offset x="15" y="-390"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 15; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton16" inherits="" text="16">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton17" inherits="AtlasQuestButtonTemplate" id="17">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-390"/>
-						</Offset>
+						<Offset x="15" y="-410"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 16; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton17" inherits="" text="17">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton18" inherits="AtlasQuestButtonTemplate" id="18">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-410"/>
-						</Offset>
+						<Offset x="15" y="-430"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 17; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton18" inherits="" text="18">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton19" inherits="AtlasQuestButtonTemplate" id="19">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-430"/>
-						</Offset>
+						<Offset x="15" y="-450"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 18; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton19" inherits="" text="19">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton20" inherits="AtlasQuestButtonTemplate" id="20">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-450"/>
-						</Offset>
+						<Offset x="15" y="-470"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 19; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton20" inherits="" text="20">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton21" inherits="AtlasQuestButtonTemplate" id="21">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-470"/>
-						</Offset>
+						<Offset x="15" y="-490"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 20; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton21" inherits="" text="21">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton22" inherits="AtlasQuestButtonTemplate" id="22">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-490"/>
-						</Offset>
+						<Offset x="15" y="-510"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 21; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
-			<Button name="AQQuestbutton22" inherits="" text="22">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
+			<Button name="AQQuestButton23" inherits="AtlasQuestButtonTemplate" id="23">
 				<Anchors>
 					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-510"/>
-						</Offset>
+						<Offset x="15" y="-530"/>
 					</Anchor>
 				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 22; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
-			</Button>
-			<Button name="AQQuestbutton23" inherits="" text="23">
-				<Size>
-					<AbsDimension x="165" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="15" y="-530"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
-				<Scripts>
-					<OnClick> AQSHOWNQUEST = 23; Quest_OnClick(arg1); </OnClick>
-					<OnShow>
-						this:SetFrameLevel( this:GetParent():GetFrameLevel() + 1 );
-					</OnShow>
-				</Scripts>
 			</Button>
 		</Frames>
 		<Layers>
 			<Layer level="ARTWORK">
 				<Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
-					<Size>
-						<AbsDimension x="160" y="64"/>
-					</Size>
+					<Size x="160" y="64"/>
 					<Anchors>
 						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="14"/>
-							</Offset>
+							<Offset x="0" y="14"/>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<FontString name="$parent_Title" inherits="GameFontNormal">
 					<Anchors>
 						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
+							<Offset x="0" y="0"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="Ueberschriftborder" inherits="GameFontNormal">
-					<Size>
-						<AbsDimension x="220" y="12"/>
-					</Size>
+				<FontString name="AtlasQuestFrameZoneName" inherits="GameFontNormal">
+					<Size x="220" y="12"/>
 					<Anchors>
 						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="-32"/>
-							</Offset>
+							<Offset x="0" y="-32"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="AtlasQuestAnzahl" inherits="GameFontNormal">
-					<Size>
-						<AbsDimension x="60" y="40"/>
-					</Size>
+				<FontString name="AtlasQuestFrameNumQuests" inherits="GameFontNormal">
+					<Size x="60" y="40"/>
 					<Anchors>
 						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="-45"/>
-							</Offset>
+							<Offset x="0" y="-45"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
 			</Layer>
 			<Layer level="OVERLAY">
-				<Texture name="AQQuestlineArrow_1" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" >
-							<Offset>
-								<AbsDimension x="16" y="-95"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_2" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_1" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_3" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_2" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_4" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_3" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_5" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_4" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_6" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_5" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_7" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_6" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_8" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_7" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_9" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_8" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_10" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_9" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_11" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_10" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_12" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_11" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_13" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_12" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_14" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_13" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_15" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_14" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_16" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_15" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_17" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_16" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_18" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_17" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_19" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_18" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_20" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_19" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_21" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_20" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_22" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_21" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<Texture name="AQQuestlineArrow_23" file="Interface\Glues\Login\UI-BackArrow">
-					<Size><AbsDimension x="13" y="15"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQQuestlineArrow_22" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<FontString name="AQBUTTONTEXT1" inherits="GameFontNormalSmall" text="1" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="30" y="-90"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT2" inherits="GameFontNormalSmall" text="2" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT1" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT3" inherits="GameFontNormalSmall" text="3" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT2" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT4" inherits="GameFontNormalSmall" text="4" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT3" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT5" inherits="GameFontNormalSmall" text="5" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT4" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT6" inherits="GameFontNormalSmall" text="6" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT5" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT7" inherits="GameFontNormalSmall" text="7" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT6" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT8" inherits="GameFontNormalSmall" text="8" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT7" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT9" inherits="GameFontNormalSmall" text="9" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT8" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT10" inherits="GameFontNormalSmall" text="10" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT9" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT11" inherits="GameFontNormalSmall" text="11" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT10" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT12" inherits="GameFontNormalSmall" text="12" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT11" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT13" inherits="GameFontNormalSmall" text="13" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT12" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT14" inherits="GameFontNormalSmall" text="14" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT13" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT15" inherits="GameFontNormalSmall" text="15" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT14" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT16" inherits="GameFontNormalSmall" text="16" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT15" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT17" inherits="GameFontNormalSmall" text="17" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT16" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT18" inherits="GameFontNormalSmall" text="18" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT17" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT19" inherits="GameFontNormalSmall" text="19" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT18" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT20" inherits="GameFontNormalSmall" text="20" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT19" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT21" inherits="GameFontNormalSmall" text="21" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT20" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT22" inherits="GameFontNormalSmall" text="22" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT21" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="AQBUTTONTEXT23" inherits="GameFontNormalSmall" text="23" justifyH = "LEFT">
-					<Size><AbsDimension x="165" y="20"/></Size>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="AQBUTTONTEXT22" relativePoint="TOPLEFT">
-							<Offset><AbsDimension x="0" y="-20"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
 				<Texture name="AQ_HordeTexture" file="Interface\TargetingFrame\UI-PVP-HORDE">
-					<Size><AbsDimension x="50" y="50"/></Size>
+					<Size x="50" y="50"/>
 					<Anchors>
 						<Anchor point="TOPRIGHT" >
-							<Offset><AbsDimension x="-26" y="-50"/></Offset>
+							<Offset x="-26" y="-50"/>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="AQ_AllianceTexture" file="Interface\TargetingFrame\UI-PVP-ALLIANCE">
-					<Size><AbsDimension x="50" y="50"/></Size>
+					<Size x="50" y="50"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
-							<Offset><AbsDimension x="38" y="-50"/></Offset>
+							<Offset x="38" y="-50"/>
 						</Anchor>
 					</Anchors>
 				</Texture>
@@ -1454,14 +656,10 @@
 	<!-- Added for AlphaMap Compatibility -->
 	
 	<Button name="AQ_AMCloseButton" inherits="OptionsButtonTemplate" text="AQ" parent="AlphaMapAlphaMapFrame">
-		<Size>
-			<AbsDimension x="45" y="35"/>
-		</Size>
+		<Size x="45" y="35"/>
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="AlphaMapAlphaMapFrame">
-				<Offset>
-					<AbsDimension x="0" y="5"/>
-				</Offset>
+				<Offset x="0" y="5"/>
 			</Anchor>
 		</Anchors>
 		<Scripts>
