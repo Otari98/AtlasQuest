@@ -174,13 +174,14 @@ end
 -- Saves the variables
 -----------------------------------------------------------------------------
 function AtlasQuest_SaveData()
-	AtlasQuest_Options[UnitName("player")]["ShownSide"] = AQ_ShownSide;
-	AtlasQuest_Options[UnitName("player")]["AtlasAutoShow"] = AQAtlasAuto;
-	AtlasQuest_Options[UnitName("player")]["ColourCheck"] = AQNOColourCheck;
-	AtlasQuest_Options[UnitName("player")]["CheckQuestlog"] = AQCheckQuestlog;
-	AtlasQuest_Options[UnitName("player")]["AutoQuery"] = AQAutoQuery;
-	AtlasQuest_Options[UnitName("player")]["NoQuerySpam"] = AQNoQuerySpam;
-	AtlasQuest_Options[UnitName("player")]["CompareTooltip"] = AQCompareTooltip;
+	local player = UnitName("player")
+	AtlasQuest_Options[player]["ShownSide"] = AQ_ShownSide;
+	AtlasQuest_Options[player]["AtlasAutoShow"] = AQAtlasAuto;
+	AtlasQuest_Options[player]["ColourCheck"] = AQNOColourCheck;
+	AtlasQuest_Options[player]["CheckQuestlog"] = AQCheckQuestlog;
+	AtlasQuest_Options[player]["AutoQuery"] = AQAutoQuery;
+	AtlasQuest_Options[player]["NoQuerySpam"] = AQNoQuerySpam;
+	AtlasQuest_Options[player]["CompareTooltip"] = AQCompareTooltip;
 end
 
 --******************************************
@@ -193,19 +194,11 @@ end
 function AQ_OnLoad()
 	this:RegisterEvent("PLAYER_ENTERING_WORLD");
 	this:RegisterEvent("VARIABLES_LOADED");
-	AQSetButtontext(); -- translation for all buttons
-	if (AtlasFrame) then
-		AQATLASMAP = AtlasMap:GetTexture()
-	else
-		AQATLASMAP = 99;
-	end
-	--this:RegisterForDrag("LeftButton");
+	AQSetButtonText(); -- translation for all buttons
 	AQSlashCommandfunction();
-	-- not showed yet
-	HideUIPanel(AtlasQuestFrame);
-	HideUIPanel(AtlasQuestInsideFrame);
-	HideUIPanel(AtlasQuestOptionFrame);
 	AQUpdateNOW = true;
+	AtlasQuestFrame_Title:SetText("AtlasQuest");
+	this:SetFrameLevel(this:GetParent():GetFrameLevel() - 1)
 end
 
 -----------------------------------------------------------------------------
@@ -220,7 +213,7 @@ end
 -----------------------------------------------------------------------------
 -- Set the button text
 -----------------------------------------------------------------------------
-function AQSetButtontext()
+function AQSetButtonText()
 	AtlasQuestFrameStoryButton:SetText(AQStoryB);
 	AtlasQuestFrameOptionsButton:SetText(AQOptionB);
 	AQOptionCloseButton:SetText(AQ_OK);
@@ -412,11 +405,11 @@ function AQ_AtlasOrAlphamap()
 		if (AQ_ShownSide == "Right") then
 			AtlasQuestFrame:ClearAllPoints();
 			--AtlasQuest right frame position TurtleWOW
-			AtlasQuestFrame:SetPoint("TOP", "AtlasFrame", 567, -30);
+			AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, -10);
 		else
 			AtlasQuestFrame:ClearAllPoints();
 			--AtlasQuest left frame position TurtleWOW
-			AtlasQuestFrame:SetPoint("TOP", "AtlasFrame", -556, -30);
+			AtlasQuestFrame:SetPoint("RIGHT", AtlasFrame, "LEFT", 16, -10);
 		end
 		AtlasQuestInsideFrame:SetParent(AtlasFrame);
 		AtlasQuestInsideFrame:ClearAllPoints();

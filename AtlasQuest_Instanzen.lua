@@ -26,290 +26,198 @@
 -- This functions returns AQINSTANZ with a number
 -- that tells which instance is shown atm for Atlas or AlphaMap
 -----------------------------------------------------------------------------
+local pathAtlas = "Interface\\AddOns\\Atlas\\Images\\Maps\\"
+
 function AtlasQuest_Instanzenchecken()
-	AQATLASMAP = AtlasMap:GetTexture()
-
-
+	local map = AtlasMap:GetTexture()
 	-- Original Instances
-
-	if (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheDeadmines") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheDeadminesEnt") then
+	if (map == pathAtlas.."TheDeadmines") or (map == pathAtlas.."TheDeadminesEnt") then
 		AQINSTANZ = 1;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\WailingCaverns") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\WailingCavernsEnt") then
+	elseif (map == pathAtlas.."WailingCaverns") or (map == pathAtlas.."WailingCavernsEnt") then
 		AQINSTANZ = 2;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\RagefireChasm") then
+	elseif (map == pathAtlas.."RagefireChasm") then
 		AQINSTANZ = 3;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Uldaman") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\UldamanEnt") then
+	elseif (map == pathAtlas.."Uldaman") or (map == pathAtlas.."UldamanEnt") then
 		AQINSTANZ = 4;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\BlackrockDepths") then
+	elseif (map == pathAtlas.."BlackrockDepths") then
 		AQINSTANZ = 5;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\BlackwingLair") then
+	elseif (map == pathAtlas.."BlackwingLair") then
 		AQINSTANZ = 6;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\BlackfathomDeeps") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\BlackfathomDeepsEnt") then
+	elseif (map == pathAtlas.."BlackfathomDeeps") or (map == pathAtlas.."BlackfathomDeepsEnt") then
 		AQINSTANZ = 7;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\BlackrockSpireLower") then
+	elseif (map == pathAtlas.."BlackrockSpireLower") then
 		AQINSTANZ = 8;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\BlackrockSpireUpper") then
+	elseif (map == pathAtlas.."BlackrockSpireUpper") then
 		AQINSTANZ = 9;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\DireMaulEast") then
+	elseif (map == pathAtlas.."DireMaulEast") then
 		AQINSTANZ = 10;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\DireMaulNorth") then
+	elseif (map == pathAtlas.."DireMaulNorth") then
 		AQINSTANZ = 11;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\DireMaulWest") then
+	elseif (map == pathAtlas.."DireMaulWest") then
 		AQINSTANZ = 12;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Maraudon") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\MaraudonEnt") then
+	elseif (map == pathAtlas.."Maraudon") or (map == pathAtlas.."MaraudonEnt") then
 		AQINSTANZ = 13;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\MoltenCore") then
+	elseif (map == pathAtlas.."MoltenCore") then
 		AQINSTANZ = 14;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Naxxramas") then
+	elseif (map == pathAtlas.."Naxxramas") then
 		AQINSTANZ = 15;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\OnyxiasLair") then
+	elseif (map == pathAtlas.."OnyxiasLair") then
 		AQINSTANZ = 16;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\RazorfenDowns") then
+	elseif (map == pathAtlas.."RazorfenDowns") then
 		AQINSTANZ = 17;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\RazorfenKraul") then
+	elseif (map == pathAtlas.."RazorfenKraul") then
 		AQINSTANZ = 18;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\SMLibrary") then
+	elseif (map == pathAtlas.."SMLibrary") then
 		AQINSTANZ = 19;
-		
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\SMArmory") then
+	elseif (map == pathAtlas.."SMArmory") then
 		AQINSTANZ = 20;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\SMCathedral") then
+	elseif (map == pathAtlas.."SMCathedral") then
 		AQINSTANZ = 21;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\SMGraveyard") then
+	elseif (map == pathAtlas.."SMGraveyard") then
 		AQINSTANZ = 22;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Scholomance") then
+	elseif (map == pathAtlas.."Scholomance") then
 		AQINSTANZ = 23;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\ShadowfangKeep") then
+	elseif (map == pathAtlas.."ShadowfangKeep") then
 		AQINSTANZ = 24;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Stratholme") then
+	elseif (map == pathAtlas.."Stratholme") then
 		AQINSTANZ = 25;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheRuinsofAhnQiraj") then
+	elseif (map == pathAtlas.."TheRuinsofAhnQiraj") then
 		AQINSTANZ = 26;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheStockade") then
+	elseif (map == pathAtlas.."TheStockade") then
 		AQINSTANZ = 27;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheSunkenTemple") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheSunkenTempleEnt") then
+	elseif (map == pathAtlas.."TheSunkenTemple") or (map == pathAtlas.."TheSunkenTempleEnt") then
 		AQINSTANZ = 28;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheTempleofAhnQiraj") then
+	elseif (map == pathAtlas.."TheTempleofAhnQiraj") then
 		AQINSTANZ = 29;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\ZulFarrak") then
+	elseif (map == pathAtlas.."ZulFarrak") then
 		AQINSTANZ = 30;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\ZulGurub") then
+	elseif (map == pathAtlas.."ZulGurub") then
 		AQINSTANZ = 31;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Gnomeregan") or (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\GnomereganEnt") then
+	elseif (map == pathAtlas.."Gnomeregan") or (map == pathAtlas.."GnomereganEnt") then
 		AQINSTANZ = 32;
-
 	-- Outdoor Raids
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\FourDragons")  then
+	elseif (map == pathAtlas.."FourDragons") then
 		AQINSTANZ = 33;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Azuregos")  then
+	elseif (map == pathAtlas.."Azuregos") then
 		AQINSTANZ = 34;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\LordKazzak")  then
+	elseif (map == pathAtlas.."LordKazzak") then
 		AQINSTANZ = 35;
-
 	-- Battlegrounds
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\AlteracValleyNorth") then
+	elseif (map == pathAtlas.."AlteracValleyNorth") then
 		AQINSTANZ = 36;
-
-	elseif (AQATLASMAP ==  "Interface\\AddOns\\Atlas\\Images\\Maps\\AlteracValleySouth") then
+	elseif (map == pathAtlas.."AlteracValleySouth") then
 		AQINSTANZ = 36;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\ArathiBasin") then
+	elseif (map == pathAtlas.."ArathiBasin") then
 		AQINSTANZ = 37;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\WarsongGulch") then
+	elseif (map == pathAtlas.."WarsongGulch") then
 		AQINSTANZ = 38;
-
 	-- TurtleWOW Dungeons
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\TheCrescentGrove") then
+	elseif (map == pathAtlas.."TheCrescentGrove") then
 		AQINSTANZ = 39;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\HateforgeQuarry") then
+	elseif (map == pathAtlas.."HateforgeQuarry") then
 		AQINSTANZ = 40;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\KarazhanCrypt") then
+	elseif (map == pathAtlas.."KarazhanCrypt") then
 		AQINSTANZ = 41;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\CavernsOfTimeBlackMorass") then
+	elseif (map == pathAtlas.."CavernsOfTimeBlackMorass") then
 		AQINSTANZ = 42;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\StormwindVault") then
+	elseif (map == pathAtlas.."StormwindVault") then
 		AQINSTANZ = 43;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\GilneasCity") then
+	elseif (map == pathAtlas.."GilneasCity") then
 		AQINSTANZ = 44;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\LowerKara") then
+	elseif (map == pathAtlas.."LowerKara") then
 		AQINSTANZ = 45;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\EmeraldSanctum") then
+	elseif (map == pathAtlas.."EmeraldSanctum") then
 		AQINSTANZ = 46;
-
-	elseif (AQATLASMAP == "Interface\\AddOns\\Atlas\\Images\\Maps\\Ostarius") then
+	elseif (map == pathAtlas.."Ostarius") then
 		AQINSTANZ = 47;
-
-	-- Default
-
+		-- Default
 	else --added for newer atlas version until i update atlasquest and for the flight pass maps
 		AQINSTANZ = 99;
 	end
 end
 
-
 -----------------------------------------------------------------------------
--- Alpha Map Support 
+-- Alpha Map Support
 -----------------------------------------------------------------------------
+local pathAlphaMapInst = "Interface\\AddOns\\AlphaMap_Instances\\Maps\\"
+local pathAlphaMapExt = "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\"
+local pathAlphaMapBG = "Interface\\AddOns\\AlphaMap_Battlegrounds\\Maps\\"
 
 function AtlasQuest_InstanzencheckAM()
 	AQALPHAMAP = AlphaMapAlphaMapTexture:GetTexture();
-
-
 	-- Original Instances
-
-	if (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\TheDeadmines") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\TheDeadminesExt") then
+	if (AQALPHAMAP == pathAlphaMapInst.."TheDeadmines") or (AQALPHAMAP == pathAlphaMapExt.."TheDeadminesExt") then
 		AQINSTANZ = 1;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\WailingCaverns") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\WailingCavernsExt") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."WailingCaverns") or (AQALPHAMAP == pathAlphaMapExt.."WailingCavernsExt") then
 		AQINSTANZ = 2;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\RagefireChasm") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."RagefireChasm") then
 		AQINSTANZ = 3;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\Uldaman") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\UldamanExt") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."Uldaman") or (AQALPHAMAP == pathAlphaMapExt.."UldamanExt") then
 		AQINSTANZ = 4;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\BlackrockDepths") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."BlackrockDepths") then
 		AQINSTANZ = 5;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\BlackwingLair") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."BlackwingLair") then
 		AQINSTANZ = 6;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\BlackfathomDeeps") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\BlackfathomDeepsExt") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."BlackfathomDeeps") or (AQALPHAMAP == pathAlphaMapExt.."BlackfathomDeepsExt") then
 		AQINSTANZ = 7;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\LBRS") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."LBRS") then
 		AQINSTANZ = 8;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\UBRS") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."UBRS") then
 		AQINSTANZ = 9;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\DMEast") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."DMEast") then
 		AQINSTANZ = 10;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\DMNorth") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."DMNorth") then
 		AQINSTANZ = 11;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\DMWest") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."DMWest") then
 		AQINSTANZ = 12;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\Maraudon") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\MaraudonExt") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."Maraudon") or (AQALPHAMAP == pathAlphaMapExt.."MaraudonExt") then
 		AQINSTANZ = 13;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\MoltenCore") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."MoltenCore") then
 		AQINSTANZ = 14;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\Naxxramas") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."Naxxramas") then
 		AQINSTANZ = 15;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\OnyxiasLair") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."OnyxiasLair") then
 		AQINSTANZ = 16;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\RazorfenDowns") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."RazorfenDowns") then
 		AQINSTANZ = 17;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\RazorfenKraul") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."RazorfenKraul") then
 		AQINSTANZ = 18;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\ScarletMonastery") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."ScarletMonastery") then
 		AQINSTANZ = 19;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\Scholomance") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."Scholomance") then
 		AQINSTANZ = 23;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\ShadowfangKeep") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."ShadowfangKeep") then
 		AQINSTANZ = 24;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\Stratholme") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."Stratholme") then
 		AQINSTANZ = 25;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\RuinsofAhnQiraj") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."RuinsofAhnQiraj") then
 		AQINSTANZ = 26;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\TheStockade") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."TheStockade") then
 		AQINSTANZ = 27;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\TheSunkenTemple") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\SunkenTempleExt") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."TheSunkenTemple") or (AQALPHAMAP == pathAlphaMapExt.."SunkenTempleExt") then
 		AQINSTANZ = 28;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\TempleofAhnQiraj") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."TempleofAhnQiraj") then
 		AQINSTANZ = 29;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\ZulFarrak") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."ZulFarrak") then
 		AQINSTANZ = 30;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\ZulGurub") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."ZulGurub") then
 		AQINSTANZ = 31;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Instances\\Maps\\Gnomeregan") or (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\GnomereganExt") then
+	elseif (AQALPHAMAP == pathAlphaMapInst.."Gnomeregan") or (AQALPHAMAP == pathAlphaMapExt.."GnomereganExt") then
 		AQINSTANZ = 32;
-
-
 	-- Battlegrounds
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Battlegrounds\\Maps\\AlteracValley") then
+	elseif (AQALPHAMAP == pathAlphaMapBG.."AlteracValley") then
 		AQINSTANZ = 36;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Battlegrounds\\Maps\\ArathiBasin") then
+	elseif (AQALPHAMAP == pathAlphaMapBG.."ArathiBasin") then
 		AQINSTANZ = 37;
-
-	elseif (AQALPHAMAP == "Interface\\AddOns\\AlphaMap_Battlegrounds\\Maps\\WarsongGulch") then
+	elseif (AQALPHAMAP == pathAlphaMapBG.."WarsongGulch") then
 		AQINSTANZ = 38;
-
-
 	-- Default
-
 	else
 		AQINSTANZ = 99;
 	end
-
------------------------------------------------------------------------------
--- function to work with outdoor boss @ alphamap
------------------------------------------------------------------------------
-
+	-----------------------------------------------------------------------------
+	-- function to work with outdoor boss @ alphamap
+	-----------------------------------------------------------------------------
 	if (AlphaMapAlphaMapFrame:IsVisible()) then
 		if (GamAlphaMapMap ~= nil) then -- check to prevent errors (post  ui.worldofwar dunno why error ocour)
 			if (GamAlphaMapMap.type == AM_TYP_WORLDBOSSES) then
@@ -331,14 +239,11 @@ function AtlasQuest_InstanzencheckAM()
 			end
 		end
 	end
-
 end
-
 
 ---------------------------
 --- AQ Instance Numbers ---
 ---------------------------
-
 -- 1  = Deadmines (VC)
 -- 2  = Wailing Caverns (WC)
 -- 3  = Ragefire Chasm (RFC)
@@ -377,12 +282,15 @@ end
 -- 36 = Alterac Valley (AV)
 -- 37 = Arathi Basin (AB)
 -- 38 = Warsong Gulch (WSG)
--- 39 = The Crescent Grove (CG) -- TurtleWOW
--- 40 = Hateforge Quarry (HQ) -- TurtleWOW
--- 41 = Karazhan Crypt (KC) -- TurtleWOW
--- 42 = Black Morass (BM) -- TurtleWOW
--- 43 = Stormwind Vault (SWV) -- TurtleWOW
--- 44 - Gilneas City (GC) -- TurtleWOW
--- 45 - Lower Karazhan Halls (LKH) -- TurtleWOW
--- 46 - Emerald Sanctum (ES) -- TurtleWOW
+
+-- TurtleWOW
+-- 39 = The Crescent Grove (CG) 
+-- 40 = Hateforge Quarry (HQ)
+-- 41 = Karazhan Crypt (KC)
+-- 42 = Black Morass (BM)
+-- 43 = Stormwind Vault (SWV)
+-- 44 - Gilneas City (GC)
+-- 45 - Lower Karazhan Halls (LKH)
+-- 46 - Emerald Sanctum (ES)
+
 -- 99 =  default "rest"
