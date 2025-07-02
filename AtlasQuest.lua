@@ -36,9 +36,12 @@ local CurrentPage = 1
 local PlayerName = UnitName("player")
 local _, Race = UnitRace("player")
 local LastSelectedQuest
+local SearchPattern = gsub(ERR_QUEST_COMPLETE_S, "%%s", "(.+)")
+local PlayerFaction = 1
 
 if (Race == "Orc" or Race == "Troll" or Race == "Scourge" or Race == "Tauren" or Race == "Goblin") then
 	CurrentFaction = 2;
+	PlayerFaction = 2
 end
 
 local AtlasQuest_Defaults = {
@@ -50,7 +53,7 @@ local AtlasQuest_Defaults = {
 
 function AQ_OnLoad()
 	this:RegisterEvent("VARIABLES_LOADED");
-	-- this:RegisterEvent("CHAT_MSG_SYSTEM") -- ERR_QUEST_COMPLETE_S = "%s completed."
+	this:RegisterEvent("CHAT_MSG_SYSTEM") -- ERR_QUEST_COMPLETE_S = "%s completed."
 	AtlasQuestFrameStoryButton:SetText(AQStoryB);
 	AtlasQuestFrameOptionsButton:SetText(AQOptionB);
 	AtlasQuestInsideFrameFinishedText:SetText(AQFinishedTEXT);
@@ -86,6 +89,22 @@ function AtlasQuest_OnEvent()
 				for b = 1, MAX_QUEST_BUTTONS do
 					AtlasQuest_CharData[i][1][b] = AtlasQuest_CharData[i][1][b] or AtlasQuest_Options[PlayerName]["AQFinishedQuest_Inst"..i.."Quest"..b] or false
 					AtlasQuest_CharData[i][2][b] = AtlasQuest_CharData[i][2][b] or AtlasQuest_Options[PlayerName]["AQFinishedQuest_Inst"..i.."Quest"..b.."_HORDE"] or false
+				end
+			end
+		end
+	elseif event == "CHAT_MSG_SYSTEM" then
+		if strfind(arg1, SearchPattern) then
+			local _, _, questName = strfind(arg1, SearchPattern)
+			for k, v in pairs(AtlasQuest_Data) do
+				for k2, v2 in pairs(AtlasQuest_Data[k]) do
+					if k2 == PlayerFaction then
+						for i = 1, getn(AtlasQuest_Data[k][k2]) do
+							if AtlasQuest_Data[k][k2][i].title == questName then
+								AtlasQuest_CharData[k][k2][i] = true
+								return
+							end
+						end
+					end
 				end
 			end
 		end
@@ -894,113 +913,3 @@ function AtlasQuestInsideFrame_OnHide()
 	end
 	LastSelectedQuest = nil
 end
-
-local _G = getfenv(0)
-function AQ_Data()
-	AtlasQuest_Data = {}
-	for i = 1, MAX_INSTANCES do
-		if _G["Inst"..i.."Caption"] then
-			AtlasQuest_Data[i] = {
-				name=_G["Inst"..i.."Caption"],
-				story=_G["Inst"..i.."Story"],
-				[1] = {},
-				[2] = {},
-			}
-		end
-	end
-	for k, v in pairs(AtlasQuest_Data) do
-		for j = 1, MAX_QUEST_BUTTONS do
-			local name = _G["Inst"..k.."Quest"..j]
-			if name then
-				name = gsub(name, "^[%(%)T*W*%d%.]+ ", "")
-				local level = tonumber(_G["Inst"..k.."Quest"..j.."_Level"])
-				local attain = tonumber(_G["Inst"..k.."Quest"..j.."_Attain"])
-				local aim = _G["Inst"..k.."Quest"..j.."_Aim"]
-				local location = _G["Inst"..k.."Quest"..j.."_Location"]
-				local note = _G["Inst"..k.."Quest"..j.."_Note"]
-				local preq = _G["Inst"..k.."Quest"..j.."_Prequest"]
-				local follow = _G["Inst"..k.."Quest"..j.."_Folgequest"]
-				table.insert(AtlasQuest_Data[k][1], {
-					title=name,
-					level=level,
-					attain=attain,
-					aim=aim,
-					location=location,
-					note=note,
-					prequest=preq,
-					folloup=follow,
-					rewards={}
-				})
-			end
-		end
-	end
-	for k, v in pairs(AtlasQuest_Data) do
-		for k2, v2 in pairs(AtlasQuest_Data[k][1]) do
-			local rewText = _G["Inst"..k.."Quest"..k2.."Rewardtext"]
-			AtlasQuest_Data[k][1][k2].rewards.text = rewText
-			for i = 1, 6 do
-				local rewName = _G["Inst"..k.."Quest"..k2.."name"..i]
-				if rewName then
-					local itemID = tonumber(_G["Inst"..k.."Quest"..k2.."ID"..i])
-					local itemName, itemLink, itemQuality, itemLevel, itemType, itemSubType, itemCount, itemEquipLoc, itemTexture = GetItemInfo(itemID or 0)
-					tinsert(AtlasQuest_Data[k][1][k2].rewards, {
-						id = itemID or "NO_ID",
-						quality = itemQuality or "NO_QUALITY",
-						name = itemName or "NO_ITEM_NAME",
-						icon = gsub(itemTexture or "","Interface\\Icons\\","") or "NO_ICON",
-						extra = _G["Inst"..k.."Quest"..k2.."description"..i] or "NO_DESCRIPTION",
-					})
-				end
-			end
-		end
-	end
-	for k, v in pairs(AtlasQuest_Data) do
-		for j = 1, MAX_QUEST_BUTTONS do
-			local name = _G["Inst"..k.."Quest"..j.."_HORDE"]
-			if name then
-				name = gsub(name, "^[%(%)T*W*%d%.]+ ", "")
-				local level = tonumber(_G["Inst"..k.."Quest"..j.."_HORDE_Level"])
-				local attain = tonumber(_G["Inst"..k.."Quest"..j.."_HORDE_Attain"])
-				local aim = _G["Inst"..k.."Quest"..j.."_HORDE_Aim"]
-				local location = _G["Inst"..k.."Quest"..j.."_HORDE_Location"]
-				local note = _G["Inst"..k.."Quest"..j.."_HORDE_Note"]
-				local preq = _G["Inst"..k.."Quest"..j.."_HORDE_Prequest"]
-				local follow = _G["Inst"..k.."Quest"..j.."_HORDE_Folgequest"]
-				table.insert(AtlasQuest_Data[k][2], {
-					title=name,
-					level=level,
-					attain=attain,
-					aim=aim,
-					location=location,
-					note=note,
-					prequest=preq,
-					folloup=follow,
-					rewards={}
-				})
-			end
-		end
-	end
-	for k, v in pairs(AtlasQuest_Data) do
-		for k2, v2 in pairs(AtlasQuest_Data[k][2]) do
-			local rewText = _G["Inst"..k.."Quest"..k2.."Rewardtext_HORDE"]
-			AtlasQuest_Data[k][2][k2].rewards.text = rewText
-			for i = 1, 6 do
-				local rewName = _G["Inst"..k.."Quest"..k2.."name"..i.."_HORDE"]
-				if rewName then
-					local itemID = tonumber(_G["Inst"..k.."Quest"..k2.."ID"..i.."_HORDE"])
-					local itemName, itemLink, itemQuality, itemLevel, itemType, itemSubType, itemCount, itemEquipLoc, itemTexture = GetItemInfo(itemID or 0)
-					tinsert(AtlasQuest_Data[k][2][k2].rewards, {
-						id = itemID or "NO_ID",
-						quality = itemQuality or "NO_QUALITY",
-						name = itemName or "NO_ITEM_NAME",
-						icon = gsub(itemTexture or "","Interface\\Icons\\","") or "NO_ICON",
-						extra = _G["Inst"..k.."Quest"..k2.."description"..i.."_HORDE"] or "NO_DESCRIPTION",
-					})
-				end
-			end
-		end
-	end
-end
-
--- text=_G["Inst"..k.."Quest"..j.."Rewardtext"]
--- text=_G["Inst"..k.."Quest"..j.."Rewardtext_HORDE"]
