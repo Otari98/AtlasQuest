@@ -17,7 +17,7 @@
 ## X-Help: AtlasQuestHelp
 ## OptionalDeps: AlphaMap, myAddOns, AtlasLoot
 ## LoadOnDemand: 0
-## SavedVariablesPerCharacter:
+## SavedVariablesPerCharacter: AtlasQuest_CharData
 ## SavedVariables: AtlasQuest_Options,
 ## Dependencies: Atlas
 

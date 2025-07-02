@@ -208,7 +208,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentPrequest" inherits="QuestFont" maxLines="20" justifyH="LEFT" justifyV="TOP">
+				<FontString name="$parentQuestInfo" inherits="QuestFont" maxLines="20" justifyH="LEFT" justifyV="TOP">
 					<Size x="450" y="500"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -216,7 +216,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentStoryText" inherits="SystemFont" justifyH="LEFT" justifyV="TOP">
+				<FontString name="$parentStoryText" inherits="QuestFont" justifyH="LEFT" justifyV="TOP">
 					<Size x="410" y="450"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -224,7 +224,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentRewardText" inherits="SystemFont" justifyH="LEFT" justifyV="TOP" >
+				<FontString name="$parentRewardText" inherits="QuestFont" justifyH="LEFT" justifyV="TOP" >
 					<Size x="400" y="12"/>
 					<Anchors>
 						<Anchor point="BOTTOMLEFT">

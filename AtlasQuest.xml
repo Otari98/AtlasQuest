@@ -225,7 +225,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						AQSTORY1_OnClick();
+						AtlasQuestStoryButton_OnClick();
 					</OnClick>
 				</Scripts>
 			</Button>
