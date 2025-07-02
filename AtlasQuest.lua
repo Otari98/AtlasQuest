@@ -46,16 +46,14 @@ local Blau = "|cff0070dd"
 -----------------------------------------------------------------------------
 -- Variables
 -----------------------------------------------------------------------------
-local Initialized = nil;                       -- the variables are not loaded yet
-local MAX_INSTANCES = 68                       -- Sets the max number of instances and quests to check for.
+local Initialized = nil;                 -- the variables are not loaded yet
+local MAX_INSTANCES = 68                 -- Sets the max number of instances and quests to check for.
 local MAX_QUESTS = 23
-AtlasQuest_Faction = 1;                           -- variable that configures whether horde or allianz is shown
-AQINSTANZ = 1;                                 -- currently shown instance index
-local AQINSTATM;                                -- variable to check whether AQINSTANZ has changed
-AQ_ShownSide = "Left"                          -- configures at which side the AQ panel is shown
-AQAtlasAuto = true;                            -- option to show the AQpanel automatically at atlas-startup
-AQNOColourCheck = nil;
-ATLASQUEST_VERSION = GetAddOnMetadata("AtlasQuest", "Version") -- Set title for AtlasQuest side panel
+local AtlasQuest_Faction = 1;            -- variable that configures whether horde or allianz is shown
+local CurrentDungeon = 1;                -- currently shown instance index
+local AQINSTATM;                         -- variable to check whether AQINSTANZ has changed
+local AQ_ShownSide = "Left"              -- configures at which side the AQ panel is shown
+local AQAtlasAuto = true;                -- option to show the AQpanel automatically at atlas-startup
 
 local playerName = UnitName("player")
 local _, race = UnitRace("player")
@@ -64,15 +62,9 @@ if (race == "Orc" or race == "Troll" or race == "Scourge" or race == "Tauren" or
 end
 
 local AtlasQuest_Defaults = {
-	["Version"] = "4.1.3",
 	[playerName] = {
 		["ShownSide"] = "Left",
-		["AtlasAutoShow"] = 2,
-		["NOColourCheck"] = nil,
-		["CheckQuestlog"] = nil,
-		["AutoQuery"] = nil,
-		["NoQuerySpam"] = true,
-		["CompareTooltip"] = nil,
+		["AtlasAutoShow"] = true,
 	},
 };
 AQ = {};
@@ -110,20 +102,9 @@ function AtlasQuest_Initialize()
 		AtlasQuest_Options[playerName] = AtlasQuest_Defaults[playerName]
 	end
 	if (type(AtlasQuest_Options[playerName]) == "table") then
-		AQVersionCheck();
 		AtlasQuest_LoadData();
 	end
 	Initialized = 1;
-end
-
------------------------------------------------------------------------------
--- New Version check
------------------------------------------------------------------------------
-function AQVersionCheck()
-	if (AtlasQuest_Options["Version"] == nil or AtlasQuest_Options["Version"] ~= AtlasQuest_Defaults["Version"]) then
-		AtlasQuest_Options["Version"] = AtlasQuest_Defaults["Version"];
-		DEFAULT_CHAT_FRAME:AddMessage("First load after updating to version " .. ATLASQUEST_VERSION);
-	end
 end
 
 -----------------------------------------------------------------------------
@@ -138,25 +119,13 @@ function AtlasQuest_LoadData()
 	if (AtlasQuest_Options[playerName]["AtlasAutoShow"] ~= nil) then
 		AQAtlasAuto = AtlasQuest_Options[playerName]["AtlasAutoShow"];
 	end
-	-- Colour Check? if nil = no cc; if true = cc
-	AQNOColourCheck = AtlasQuest_Options[playerName]["ColourCheck"];
 	-- Finished?
 	for i = 1, MAX_INSTANCES do
 		for b = 1, MAX_QUESTS do
-			AQ["AQFinishedQuest_Inst" .. i .. "Quest" .. b] = AtlasQuest_Options[playerName]
-				["AQFinishedQuest_Inst" .. i .. "Quest" .. b]
-			AQ["AQFinishedQuest_Inst" .. i .. "Quest" .. b .. "_HORDE"] = AtlasQuest_Options[playerName]
-				["AQFinishedQuest_Inst" .. i .. "Quest" .. b .. "_HORDE"]
+			AQ["AQFinishedQuest_Inst" .. i .. "Quest" .. b] = AtlasQuest_Options[playerName]["AQFinishedQuest_Inst" .. i .. "Quest" .. b]
+			AQ["AQFinishedQuest_Inst" .. i .. "Quest" .. b .. "_HORDE"] = AtlasQuest_Options[playerName]["AQFinishedQuest_Inst" .. i .. "Quest" .. b .. "_HORDE"]
 		end
 	end
-	--AQCheckQuestlog
-	AQCheckQuestlog = AtlasQuest_Options[playerName]["CheckQuestlog"];
-	-- AutoQuery option
-	AQAutoQuery = AtlasQuest_Options[playerName]["AutoQuery"];
-	-- Suppress Server Query Text option
-	AQNoQuerySpam = AtlasQuest_Options[playerName]["NoQuerySpam"];
-	-- Comparison Tooltips option
-	AQCompareTooltip = AtlasQuest_Options[playerName]["CompareTooltip"];
 end
 
 -----------------------------------------------------------------------------
@@ -165,11 +134,6 @@ end
 function AtlasQuest_SaveData()
 	AtlasQuest_Options[playerName]["ShownSide"] = AQ_ShownSide;
 	AtlasQuest_Options[playerName]["AtlasAutoShow"] = AQAtlasAuto;
-	AtlasQuest_Options[playerName]["ColourCheck"] = AQNOColourCheck;
-	AtlasQuest_Options[playerName]["CheckQuestlog"] = AQCheckQuestlog;
-	AtlasQuest_Options[playerName]["AutoQuery"] = AQAutoQuery;
-	AtlasQuest_Options[playerName]["NoQuerySpam"] = AQNoQuerySpam;
-	AtlasQuest_Options[playerName]["CompareTooltip"] = AQCompareTooltip;
 end
 
 --******************************************
@@ -197,7 +161,7 @@ end
 -- hide panel if instance is 99 (nothing)
 -----------------------------------------------------------------------------
 function AQ_OnUpdate(arg1)
-	local previousValue = AQINSTANZ;
+	local previousValue = CurrentDungeon;
 	-- Show whether atlas or am is shown atm
 	if ((AtlasFrame ~= nil) and (AtlasFrame:IsVisible())) then
 		AtlasORAlphaMap = "Atlas";
@@ -212,19 +176,19 @@ function AQ_OnUpdate(arg1)
 	end
 
 	-- Hides the panel if the map which is shown no quests have (map = 99)
-	if (AQINSTANZ == 99) then
-		HideUIPanel(AtlasQuestFrame);
-		HideUIPanel(AtlasQuestInsideFrame);
-	elseif ((AQINSTANZ ~= previousValue) or AQUpdateNOW) then
+	if (CurrentDungeon == 99) then
+		AtlasQuestFrame:Hide();
+		AtlasQuestInsideFrame:Hide();
+	elseif ((CurrentDungeon ~= previousValue) or AQUpdateNOW) then
 		AtlasQuest_UpdateButtons();
 		AQUpdateNOW = false
 		AtlasQuestFrameZoneName:SetText();
-		if (getglobal("Inst" .. AQINSTANZ .. "Caption") ~= nil) then
-			AtlasQuestFrameZoneName:SetText(getglobal("Inst" .. AQINSTANZ .. "Caption"))
+		if (getglobal("Inst" .. CurrentDungeon .. "Caption") ~= nil) then
+			AtlasQuestFrameZoneName:SetText(getglobal("Inst" .. CurrentDungeon .. "Caption"))
 		end
 	elseif ((AtlasORAlphaMap == "AlphaMap") and (AlphaMapAlphaMapFrame:IsVisible() == nil)) then
-		HideUIPanel(AtlasQuestFrame);
-		HideUIPanel(AtlasQuestInsideFrame);
+		AtlasQuestFrame:Hide();
+		AtlasQuestInsideFrame:Hide();
 	end
 end
 
@@ -262,25 +226,25 @@ function AQ_AtlasOrAlphamap()
 end
 
 function AtlasQuest_UpdateButtons()
-	if (AQINSTATM ~= AQINSTANZ) then
+	if (AQINSTATM ~= CurrentDungeon) then
 		AtlasQuestInsideFrame:Hide();
 	end
-	AQINSTATM = AQINSTANZ;
+	AQINSTATM = CurrentDungeon;
 	if (AtlasQuest_Faction == 1) then
-		AtlasQuestFrameNumQuests:SetText(getglobal("Inst" .. AQINSTANZ .. "QAA") or "");
+		AtlasQuestFrameNumQuests:SetText(getglobal("Inst" .. CurrentDungeon .. "QAA") or "");
 	elseif (AtlasQuest_Faction == 2) then
-		AtlasQuestFrameNumQuests:SetText(getglobal("Inst" .. AQINSTANZ .. "QAH") or "");
+		AtlasQuestFrameNumQuests:SetText(getglobal("Inst" .. CurrentDungeon .. "QAH") or "");
 	end
 	for i = 1, MAX_QUESTS do
 		local button = getglobal("AQQuestButton" .. i)
 		local icon = getglobal("AQQuestButton" .. i .. "Icon")
-		local text = getglobal("Inst" .. AQINSTANZ .. "Quest" .. i)
-		local isFinished = AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. i] == 1
-		local questLevel = tonumber(getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_Level"));
+		local text = getglobal("Inst" .. CurrentDungeon .. "Quest" .. i)
+		local isFinished = AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. i] == 1
+		local questLevel = tonumber(getglobal("Inst" .. CurrentDungeon .. "Quest" .. i .. "_Level"));
 		if (AtlasQuest_Faction == 2) then
-			text = getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE")
-			isFinished = AQ["AQFinishedQuest_Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE"] == 1
-			questLevel = tonumber(getglobal("Inst" .. AQINSTANZ .. "Quest" .. i .. "_HORDE_Level"));
+			text = getglobal("Inst" .. CurrentDungeon .. "Quest" .. i .. "_HORDE")
+			isFinished = AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. i .. "_HORDE"] == 1
+			questLevel = tonumber(getglobal("Inst" .. CurrentDungeon .. "Quest" .. i .. "_HORDE_Level"));
 		end
 		local hasQuest = AtlasQuest_HasQuest(text)
 		if (text) then
@@ -315,12 +279,10 @@ function AtlasQuest_HasQuest(questName)
 	end
 	local questLogTitle, level, questTag, isHeader, isCollapsed, isComplete
 	questName = gsub(questName, "^[%(%)T*W*%d%.]+ ", "")
-	if (AQCheckQuestlog) then
-		for i = 1, GetNumQuestLogEntries() do
-			questLogTitle, level, questTag, isHeader, isCollapsed, isComplete = GetQuestLogTitle(i)
-			if not isHeader and strfind(questLogTitle or "", questName) then
-				return true
-			end
+	for i = 1, GetNumQuestLogEntries() do
+		questLogTitle, level, questTag, isHeader, isCollapsed, isComplete = GetQuestLogTitle(i)
+		if not isHeader and strfind(questLogTitle or "", questName) then
+			return true
 		end
 	end
 	return false
@@ -337,14 +299,14 @@ end
 local original_Atlas_OnShow = Atlas_OnShow;
 function Atlas_OnShow()
 	if (AQAtlasAuto) then
-		ShowUIPanel(AtlasQuestFrame);
+		AtlasQuestFrame:Show();
 	else
-		HideUIPanel(AtlasQuestFrame);
+		AtlasQuestFrame:Hide();
 	end
 	AtlasQuestInsideFrame:Hide();
 	if (AQ_ShownSide == "Right") then
 		AtlasQuestFrame:ClearAllPoints();
-		AtlasQuestFrame:SetPoint("TOP", "AtlasFrame", 567, -30);
+		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, 10);
 	end
 	original_Atlas_OnShow();
 end
@@ -356,26 +318,18 @@ end
 -- Show Tooltip and automatically query server if option is enabled
 -----------------------------------------------------------------------------
 function AtlasQuestItem_OnEnter()
-	local SHOWNID
+	local itemID
 
 	if (AtlasQuest_Faction == 1) then
-		SHOWNID = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. AQTHISISSHOWN);
+		itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. this:GetID());
 	else
-		SHOWNID = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. AQTHISISSHOWN .. "_HORDE");
+		itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. this:GetID() .. "_HORDE");
 	end
 
-	if (SHOWNID ~= nil) then
-		if (GetItemInfo(SHOWNID) ~= nil) then
-			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-			GameTooltip:SetHyperlink("item:" .. SHOWNID .. ":0:0:0");
-			GameTooltip:Show();
-		else
-			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-			GameTooltip:ClearLines();
-			GameTooltip:AddLine(RED .. AQERRORNOTSHOWN);
-			GameTooltip:AddLine(AQERRORASKSERVER);
-			GameTooltip:Show();
-		end
+	if (itemID) then
+		GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
+		GameTooltip:SetHyperlink("item:" .. itemID .. ":0:0:0");
+		GameTooltip:Show();
 	end
 end
 
@@ -385,43 +339,29 @@ end
 -- + ctrl click for dressroom
 -- BIG THANKS TO Daviesh and ATLASLOOT for the CODE
 -----------------------------------------------------------------------------
-
 function AtlasQuestItem_OnClick(arg1)
-	local SHOWNID
-	local nameDATA
-	local colour
-	local itemName, itemQuality
+	local itemID
 
 	if (AtlasQuest_Faction == 1) then
-		SHOWNID = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. AQTHISISSHOWN);
-		colour = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ITC" .. AQTHISISSHOWN);
-		nameDATA = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "name" .. AQTHISISSHOWN);
+		itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. this:GetID());
 	else
-		SHOWNID = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ID" .. AQTHISISSHOWN .. "_HORDE");
-		colour = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "ITC" .. AQTHISISSHOWN .. "_HORDE");
-		nameDATA = getglobal("Inst" .. AQINSTANZ .. "Quest" .. AQSHOWNQUEST .. "name" .. AQTHISISSHOWN .. "_HORDE");
+		itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. this:GetID() .. "_HORDE");
 	end
 
-	if (arg1 == "RightButton") then
-		GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-		GameTooltip:SetHyperlink("item:" .. SHOWNID .. ":0:0:0");
-		GameTooltip:Show();
-		if (AQNoQuerySpam == nil) then
-			DEFAULT_CHAT_FRAME:AddMessage(AQSERVERASK ..
-			"[" .. colour .. nameDATA .. WHITE .. "]" .. AQSERVERASKInformation);
+	if itemID then
+		if (arg1 == "RightButton") then
+			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
+			GameTooltip:SetHyperlink("item:" .. itemID .. ":0:0:0");
+			GameTooltip:Show();
+		elseif (IsShiftKeyDown()) then
+			if (GetItemInfo(itemID)) then
+				local itemName, _, itemQuality = GetItemInfo(itemID);
+				local r, g, b, hex = GetItemQualityColor(itemQuality);
+				ChatFrameEditBox:Insert(hex .. "|Hitem:" .. itemID .. ":0:0:0|h[" .. itemName .. "]|h|r");
+			end
+		elseif (IsControlKeyDown() and GetItemInfo(itemID)) then
+			DressUpItemLink(itemID);
 		end
-	elseif (IsShiftKeyDown()) then
-		if (GetItemInfo(SHOWNID)) then
-			itemName, _, itemQuality = GetItemInfo(SHOWNID);
-			local r, g, b, hex = GetItemQualityColor(itemQuality);
-			ChatFrameEditBox:Insert(hex .. "|Hitem:" .. SHOWNID .. ":0:0:0|h[" .. itemName .. "]|h|r");
-		else
-			DEFAULT_CHAT_FRAME:AddMessage("Item unsafe! Right click to get the item ID")
-			ChatFrameEditBox:Insert("[" .. nameDATA .. "]");
-		end
-		--If control-clicked, use the dressing room
-	elseif (IsControlKeyDown() and GetItemInfo(SHOWNID)) then
-		DressUpItemLink(SHOWNID);
 	end
 end
 
@@ -450,107 +390,107 @@ function AtlasQuest_Instanzenchecken()
 	local map = AtlasMap:GetTexture()
 	-- Original Instances
 	if (map == pathAtlas.."TheDeadmines") or (map == pathAtlas.."TheDeadminesEnt") then
-		AQINSTANZ = 1;
+		CurrentDungeon = 1;
 	elseif (map == pathAtlas.."WailingCaverns") or (map == pathAtlas.."WailingCavernsEnt") then
-		AQINSTANZ = 2;
+		CurrentDungeon = 2;
 	elseif (map == pathAtlas.."RagefireChasm") then
-		AQINSTANZ = 3;
+		CurrentDungeon = 3;
 	elseif (map == pathAtlas.."Uldaman") or (map == pathAtlas.."UldamanEnt") then
-		AQINSTANZ = 4;
+		CurrentDungeon = 4;
 	elseif (map == pathAtlas.."BlackrockDepths") then
-		AQINSTANZ = 5;
+		CurrentDungeon = 5;
 	elseif (map == pathAtlas.."BlackwingLair") then
-		AQINSTANZ = 6;
+		CurrentDungeon = 6;
 	elseif (map == pathAtlas.."BlackfathomDeeps") or (map == pathAtlas.."BlackfathomDeepsEnt") then
-		AQINSTANZ = 7;
+		CurrentDungeon = 7;
 	elseif (map == pathAtlas.."BlackrockSpireLower") then
-		AQINSTANZ = 8;
+		CurrentDungeon = 8;
 	elseif (map == pathAtlas.."BlackrockSpireUpper") then
-		AQINSTANZ = 9;
+		CurrentDungeon = 9;
 	elseif (map == pathAtlas.."DireMaulEast") then
-		AQINSTANZ = 10;
+		CurrentDungeon = 10;
 	elseif (map == pathAtlas.."DireMaulNorth") then
-		AQINSTANZ = 11;
+		CurrentDungeon = 11;
 	elseif (map == pathAtlas.."DireMaulWest") then
-		AQINSTANZ = 12;
+		CurrentDungeon = 12;
 	elseif (map == pathAtlas.."Maraudon") or (map == pathAtlas.."MaraudonEnt") then
-		AQINSTANZ = 13;
+		CurrentDungeon = 13;
 	elseif (map == pathAtlas.."MoltenCore") then
-		AQINSTANZ = 14;
+		CurrentDungeon = 14;
 	elseif (map == pathAtlas.."Naxxramas") then
-		AQINSTANZ = 15;
+		CurrentDungeon = 15;
 	elseif (map == pathAtlas.."OnyxiasLair") then
-		AQINSTANZ = 16;
+		CurrentDungeon = 16;
 	elseif (map == pathAtlas.."RazorfenDowns") then
-		AQINSTANZ = 17;
+		CurrentDungeon = 17;
 	elseif (map == pathAtlas.."RazorfenKraul") then
-		AQINSTANZ = 18;
+		CurrentDungeon = 18;
 	elseif (map == pathAtlas.."SMLibrary") then
-		AQINSTANZ = 19;
+		CurrentDungeon = 19;
 	elseif (map == pathAtlas.."SMArmory") then
-		AQINSTANZ = 20;
+		CurrentDungeon = 20;
 	elseif (map == pathAtlas.."SMCathedral") then
-		AQINSTANZ = 21;
+		CurrentDungeon = 21;
 	elseif (map == pathAtlas.."SMGraveyard") then
-		AQINSTANZ = 22;
+		CurrentDungeon = 22;
 	elseif (map == pathAtlas.."Scholomance") then
-		AQINSTANZ = 23;
+		CurrentDungeon = 23;
 	elseif (map == pathAtlas.."ShadowfangKeep") then
-		AQINSTANZ = 24;
+		CurrentDungeon = 24;
 	elseif (map == pathAtlas.."Stratholme") then
-		AQINSTANZ = 25;
+		CurrentDungeon = 25;
 	elseif (map == pathAtlas.."TheRuinsofAhnQiraj") then
-		AQINSTANZ = 26;
+		CurrentDungeon = 26;
 	elseif (map == pathAtlas.."TheStockade") then
-		AQINSTANZ = 27;
+		CurrentDungeon = 27;
 	elseif (map == pathAtlas.."TheSunkenTemple") or (map == pathAtlas.."TheSunkenTempleEnt") then
-		AQINSTANZ = 28;
+		CurrentDungeon = 28;
 	elseif (map == pathAtlas.."TheTempleofAhnQiraj") then
-		AQINSTANZ = 29;
+		CurrentDungeon = 29;
 	elseif (map == pathAtlas.."ZulFarrak") then
-		AQINSTANZ = 30;
+		CurrentDungeon = 30;
 	elseif (map == pathAtlas.."ZulGurub") then
-		AQINSTANZ = 31;
+		CurrentDungeon = 31;
 	elseif (map == pathAtlas.."Gnomeregan") or (map == pathAtlas.."GnomereganEnt") then
-		AQINSTANZ = 32;
+		CurrentDungeon = 32;
 	-- Outdoor Raids
 	elseif (map == pathAtlas.."FourDragons") then
-		AQINSTANZ = 33;
+		CurrentDungeon = 33;
 	elseif (map == pathAtlas.."Azuregos") then
-		AQINSTANZ = 34;
+		CurrentDungeon = 34;
 	elseif (map == pathAtlas.."LordKazzak") then
-		AQINSTANZ = 35;
+		CurrentDungeon = 35;
 	-- Battlegrounds
 	elseif (map == pathAtlas.."AlteracValleyNorth") then
-		AQINSTANZ = 36;
+		CurrentDungeon = 36;
 	elseif (map == pathAtlas.."AlteracValleySouth") then
-		AQINSTANZ = 36;
+		CurrentDungeon = 36;
 	elseif (map == pathAtlas.."ArathiBasin") then
-		AQINSTANZ = 37;
+		CurrentDungeon = 37;
 	elseif (map == pathAtlas.."WarsongGulch") then
-		AQINSTANZ = 38;
+		CurrentDungeon = 38;
 	-- TurtleWOW Dungeons
 	elseif (map == pathAtlas.."TheCrescentGrove") then
-		AQINSTANZ = 39;
+		CurrentDungeon = 39;
 	elseif (map == pathAtlas.."HateforgeQuarry") then
-		AQINSTANZ = 40;
+		CurrentDungeon = 40;
 	elseif (map == pathAtlas.."KarazhanCrypt") then
-		AQINSTANZ = 41;
+		CurrentDungeon = 41;
 	elseif (map == pathAtlas.."CavernsOfTimeBlackMorass") then
-		AQINSTANZ = 42;
+		CurrentDungeon = 42;
 	elseif (map == pathAtlas.."StormwindVault") then
-		AQINSTANZ = 43;
+		CurrentDungeon = 43;
 	elseif (map == pathAtlas.."GilneasCity") then
-		AQINSTANZ = 44;
+		CurrentDungeon = 44;
 	elseif (map == pathAtlas.."LowerKara") then
-		AQINSTANZ = 45;
+		CurrentDungeon = 45;
 	elseif (map == pathAtlas.."EmeraldSanctum") then
-		AQINSTANZ = 46;
+		CurrentDungeon = 46;
 	elseif (map == pathAtlas.."Ostarius") then
-		AQINSTANZ = 47;
+		CurrentDungeon = 47;
 		-- Default
 	else --added for newer atlas version until i update atlasquest and for the flight pass maps
-		AQINSTANZ = 99;
+		CurrentDungeon = 99;
 	end
 end
 
@@ -562,76 +502,76 @@ local pathAlphaMapExt = "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\"
 local pathAlphaMapBG = "Interface\\AddOns\\AlphaMap_Battlegrounds\\Maps\\"
 
 function AtlasQuest_InstanzencheckAM()
-	AQALPHAMAP = AlphaMapAlphaMapTexture:GetTexture();
+	local map = AlphaMapAlphaMapTexture:GetTexture();
 	-- Original Instances
-	if (AQALPHAMAP == pathAlphaMapInst.."TheDeadmines") or (AQALPHAMAP == pathAlphaMapExt.."TheDeadminesExt") then
-		AQINSTANZ = 1;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."WailingCaverns") or (AQALPHAMAP == pathAlphaMapExt.."WailingCavernsExt") then
-		AQINSTANZ = 2;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."RagefireChasm") then
-		AQINSTANZ = 3;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."Uldaman") or (AQALPHAMAP == pathAlphaMapExt.."UldamanExt") then
-		AQINSTANZ = 4;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."BlackrockDepths") then
-		AQINSTANZ = 5;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."BlackwingLair") then
-		AQINSTANZ = 6;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."BlackfathomDeeps") or (AQALPHAMAP == pathAlphaMapExt.."BlackfathomDeepsExt") then
-		AQINSTANZ = 7;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."LBRS") then
-		AQINSTANZ = 8;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."UBRS") then
-		AQINSTANZ = 9;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."DMEast") then
-		AQINSTANZ = 10;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."DMNorth") then
-		AQINSTANZ = 11;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."DMWest") then
-		AQINSTANZ = 12;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."Maraudon") or (AQALPHAMAP == pathAlphaMapExt.."MaraudonExt") then
-		AQINSTANZ = 13;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."MoltenCore") then
-		AQINSTANZ = 14;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."Naxxramas") then
-		AQINSTANZ = 15;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."OnyxiasLair") then
-		AQINSTANZ = 16;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."RazorfenDowns") then
-		AQINSTANZ = 17;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."RazorfenKraul") then
-		AQINSTANZ = 18;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."ScarletMonastery") then
-		AQINSTANZ = 19;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."Scholomance") then
-		AQINSTANZ = 23;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."ShadowfangKeep") then
-		AQINSTANZ = 24;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."Stratholme") then
-		AQINSTANZ = 25;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."RuinsofAhnQiraj") then
-		AQINSTANZ = 26;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."TheStockade") then
-		AQINSTANZ = 27;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."TheSunkenTemple") or (AQALPHAMAP == pathAlphaMapExt.."SunkenTempleExt") then
-		AQINSTANZ = 28;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."TempleofAhnQiraj") then
-		AQINSTANZ = 29;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."ZulFarrak") then
-		AQINSTANZ = 30;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."ZulGurub") then
-		AQINSTANZ = 31;
-	elseif (AQALPHAMAP == pathAlphaMapInst.."Gnomeregan") or (AQALPHAMAP == pathAlphaMapExt.."GnomereganExt") then
-		AQINSTANZ = 32;
+	if (map == pathAlphaMapInst.."TheDeadmines") or (map == pathAlphaMapExt.."TheDeadminesExt") then
+		CurrentDungeon = 1;
+	elseif (map == pathAlphaMapInst.."WailingCaverns") or (map == pathAlphaMapExt.."WailingCavernsExt") then
+		CurrentDungeon = 2;
+	elseif (map == pathAlphaMapInst.."RagefireChasm") then
+		CurrentDungeon = 3;
+	elseif (map == pathAlphaMapInst.."Uldaman") or (map == pathAlphaMapExt.."UldamanExt") then
+		CurrentDungeon = 4;
+	elseif (map == pathAlphaMapInst.."BlackrockDepths") then
+		CurrentDungeon = 5;
+	elseif (map == pathAlphaMapInst.."BlackwingLair") then
+		CurrentDungeon = 6;
+	elseif (map == pathAlphaMapInst.."BlackfathomDeeps") or (map == pathAlphaMapExt.."BlackfathomDeepsExt") then
+		CurrentDungeon = 7;
+	elseif (map == pathAlphaMapInst.."LBRS") then
+		CurrentDungeon = 8;
+	elseif (map == pathAlphaMapInst.."UBRS") then
+		CurrentDungeon = 9;
+	elseif (map == pathAlphaMapInst.."DMEast") then
+		CurrentDungeon = 10;
+	elseif (map == pathAlphaMapInst.."DMNorth") then
+		CurrentDungeon = 11;
+	elseif (map == pathAlphaMapInst.."DMWest") then
+		CurrentDungeon = 12;
+	elseif (map == pathAlphaMapInst.."Maraudon") or (map == pathAlphaMapExt.."MaraudonExt") then
+		CurrentDungeon = 13;
+	elseif (map == pathAlphaMapInst.."MoltenCore") then
+		CurrentDungeon = 14;
+	elseif (map == pathAlphaMapInst.."Naxxramas") then
+		CurrentDungeon = 15;
+	elseif (map == pathAlphaMapInst.."OnyxiasLair") then
+		CurrentDungeon = 16;
+	elseif (map == pathAlphaMapInst.."RazorfenDowns") then
+		CurrentDungeon = 17;
+	elseif (map == pathAlphaMapInst.."RazorfenKraul") then
+		CurrentDungeon = 18;
+	elseif (map == pathAlphaMapInst.."ScarletMonastery") then
+		CurrentDungeon = 19;
+	elseif (map == pathAlphaMapInst.."Scholomance") then
+		CurrentDungeon = 23;
+	elseif (map == pathAlphaMapInst.."ShadowfangKeep") then
+		CurrentDungeon = 24;
+	elseif (map == pathAlphaMapInst.."Stratholme") then
+		CurrentDungeon = 25;
+	elseif (map == pathAlphaMapInst.."RuinsofAhnQiraj") then
+		CurrentDungeon = 26;
+	elseif (map == pathAlphaMapInst.."TheStockade") then
+		CurrentDungeon = 27;
+	elseif (map == pathAlphaMapInst.."TheSunkenTemple") or (map == pathAlphaMapExt.."SunkenTempleExt") then
+		CurrentDungeon = 28;
+	elseif (map == pathAlphaMapInst.."TempleofAhnQiraj") then
+		CurrentDungeon = 29;
+	elseif (map == pathAlphaMapInst.."ZulFarrak") then
+		CurrentDungeon = 30;
+	elseif (map == pathAlphaMapInst.."ZulGurub") then
+		CurrentDungeon = 31;
+	elseif (map == pathAlphaMapInst.."Gnomeregan") or (map == pathAlphaMapExt.."GnomereganExt") then
+		CurrentDungeon = 32;
 	-- Battlegrounds
-	elseif (AQALPHAMAP == pathAlphaMapBG.."AlteracValley") then
-		AQINSTANZ = 36;
-	elseif (AQALPHAMAP == pathAlphaMapBG.."ArathiBasin") then
-		AQINSTANZ = 37;
-	elseif (AQALPHAMAP == pathAlphaMapBG.."WarsongGulch") then
-		AQINSTANZ = 38;
+	elseif (map == pathAlphaMapBG.."AlteracValley") then
+		CurrentDungeon = 36;
+	elseif (map == pathAlphaMapBG.."ArathiBasin") then
+		CurrentDungeon = 37;
+	elseif (map == pathAlphaMapBG.."WarsongGulch") then
+		CurrentDungeon = 38;
 	-- Default
 	else
-		AQINSTANZ = 99;
+		CurrentDungeon = 99;
 	end
 	-----------------------------------------------------------------------------
 	-- function to work with outdoor boss @ alphamap
@@ -640,19 +580,19 @@ function AtlasQuest_InstanzencheckAM()
 		if (GamAlphaMapMap ~= nil) then -- check to prevent errors (post  ui.worldofwar dunno why error ocour)
 			if (GamAlphaMapMap.type == AM_TYP_WORLDBOSSES) then
 				if (GamAlphaMapMap.filename == "AM_Kazzak_Map") then
-					AQINSTANZ = 35;
+					CurrentDungeon = 35;
 				elseif (GamAlphaMapMap.filename == "AM_Azuregos_Map") then
-					AQINSTANZ = 34;
+					CurrentDungeon = 34;
 				elseif (GamAlphaMapMap.filename == "AM_Dragon_Duskwood_Map") then
-					AQINSTANZ = 33;
+					CurrentDungeon = 33;
 				elseif (GamAlphaMapMap.filename == "AM_Dragon_Hinterlands_Map") then
-					AQINSTANZ = 33;
+					CurrentDungeon = 33;
 				elseif (GamAlphaMapMap.filename == "AM_Dragon_Feralas_Map") then
-					AQINSTANZ = 33;
+					CurrentDungeon = 33;
 				elseif (GamAlphaMapMap.filename == "AM_Dragon_Ashenvale_Map") then
-					AQINSTANZ = 33;
+					CurrentDungeon = 33;
 				else
-					AQINSTANZ = 99;
+					CurrentDungeon = 99;
 				end
 			end
 		end
@@ -732,11 +672,7 @@ end
 -- Autoshow option
 -----------------------------------------------------------------------------
 function AQAutoshowOption_OnClick()
-	if (AQAtlasAuto) then
-		AQAtlasAuto = false;
-	else
-		AQAtlasAuto = true;
-	end
+	AQAtlasAuto = not AQAtlasAuto;
 	AQAutoshowOption:SetChecked(AQAtlasAuto);
 	AtlasQuest_SaveData();
 end
@@ -754,9 +690,6 @@ function AQRIGHTOption_OnClick()
 	end
 	AQRIGHTOption:SetChecked(true);
 	AQLEFTOption:SetChecked(false);
-	if (AQ_ShownSide ~= "Right") then
-		ChatFrame1:AddMessage(AQShowRight);
-	end
 	AQ_ShownSide = "Right";
 	AtlasQuest_SaveData();
 end
@@ -776,4 +709,610 @@ function AQLEFTOption_OnClick()
 	AQLEFTOption:SetChecked(true);
 	AQ_ShownSide = "Left";
 	AtlasQuest_SaveData();
+end
+
+function AQClearALL()
+	AtlasQuestInsideFramePagesText:SetText();
+	AtlasQuestInsideFrameNextPage:Hide();
+	AtlasQuestInsideFramePrevPage:Hide();
+	AtlasQuestInsideFrameQuestName:SetText("");
+	AtlasQuestInsideFrameQuestLevel:SetText("");
+	AtlasQuestInsideFramePrequest:SetText("");
+	AtlasQuestInsideFrameAttainLevel:SetText("");
+	AtlasQuestInsideFrameRewardText:SetText();
+	AtlasQuestInsideFrameStoryText:SetText();
+	AtlasQuestInsideFrameFinishedText:SetText();
+	AtlasQuestInsideFrameFinishedButton:Hide();
+	for b = 1, 6 do
+		getglobal("AtlasQuestItemframe" .. b .. "_Icon"):SetTexture();
+		getglobal("AtlasQuestItemframe" .. b .. "_Name"):SetText();
+		getglobal("AtlasQuestItemframe" .. b .. "_Extra"):SetText();
+		getglobal("AtlasQuestItemframe" .. b):Disable();
+	end
+end
+
+-----------------------------------------------------------------------------
+-- Option button, shows option frame or hides if shown
+-----------------------------------------------------------------------------
+function AQOPTION1_OnClick()
+	if (AtlasQuestOptionFrame:IsVisible()) then
+		AtlasQuestOptionFrame:Hide();
+	else
+		AtlasQuestOptionFrame:Show();
+	end
+end
+
+-----------------------------------------------------------------------------
+-- upper right button / to show/close panel
+-----------------------------------------------------------------------------
+function AQCLOSE_OnClick()
+	AQ_AtlasOrAlphamap();
+	if (AtlasQuestFrame:IsVisible()) then
+		AtlasQuestFrame:Hide();
+		AtlasQuestInsideFrame:Hide();
+	else
+		AtlasQuestFrame:Show();
+	end
+	AQUpdateNOW = true;
+end
+
+-----------------------------------------------------------------------------
+-- Checkbox for Alliance
+-----------------------------------------------------------------------------
+function AtlasQuestFrameAllianceButton_OnClick()
+	AtlasQuest_Faction = 1
+	AtlasQuestFrameHordeButton:SetChecked(false);
+	AtlasQuestFrameAllianceButton:SetChecked(true);
+	AtlasQuestInsideFrame:Hide();
+	AQUpdateNOW = true;
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
+end
+
+-----------------------------------------------------------------------------
+-- Checkbox for Horde
+-----------------------------------------------------------------------------
+function AtlasQuestFrameHordeButton_OnClick()
+	AtlasQuest_Faction = 2
+	AtlasQuestFrameHordeButton:SetChecked(true);
+	AtlasQuestFrameAllianceButton:SetChecked(false);
+	AtlasQuestInsideFrame:Hide();
+	AQUpdateNOW = true;
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
+end
+
+-----------------------------------------------------------------------------
+-- Story Button
+-----------------------------------------------------------------------------
+function AQSTORY1_OnClick()
+	AQHideAL();
+	if (AtlasQuestInsideFrame:IsVisible() == nil) then
+		AtlasQuestInsideFrame:Show();
+		WHICHBUTTON = STORY;
+		AQButtonSTORY_SetText();
+	elseif (WHICHBUTTON == STORY) then
+		AtlasQuestInsideFrame:Hide();
+	else
+		WHICHBUTTON = STORY;
+		AQButtonSTORY_SetText();
+	end
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
+end
+
+
+function AtlasQuestButton_OnClick()
+	CurrentQuest = this:GetID();
+
+	if (ChatFrameEditBox:IsVisible() and IsShiftKeyDown()) then
+		AQInsertQuestInformation();
+	else
+		for i = 1, MAX_QUESTS do
+			getglobal("AQQuestButton"..i.."Highlight"):Hide()
+		end
+		AQHideAL();
+		AtlasQuestInsideFrameStoryText:SetText("");
+		if (not AtlasQuestInsideFrame:IsVisible()) then
+			AtlasQuestInsideFrame:Show();
+			WHICHBUTTON = CurrentQuest;
+			getglobal(this:GetName().."Highlight"):SetVertexColor(this:GetTextColor())
+			getglobal(this:GetName().."Highlight"):Show()
+			AQButton_SetText();
+		elseif (WHICHBUTTON == CurrentQuest) then
+			AtlasQuestInsideFrame:Hide();
+			WHICHBUTTON = 0;
+		else
+			WHICHBUTTON = CurrentQuest;
+			getglobal(this:GetName().."Highlight"):SetVertexColor(this:GetTextColor())
+			getglobal(this:GetName().."Highlight"):Show()
+			AQButton_SetText();
+		end
+	end
+end
+
+-----------------------------------------------------------------------------
+-- Hide the AtlasLoot Frame if available
+-----------------------------------------------------------------------------
+function AQHideAL()
+	if (AtlasLootItemsFrame) then
+		AtlasLootItemsFrame:Hide(); -- hide atlasloot
+	end
+end
+
+-----------------------------------------------------------------------------
+-- Insert Quest Information into the chat box
+-----------------------------------------------------------------------------
+function AQInsertQuestInformation()
+	local OnlyAtlasQuestInsideFrameQuestNameRemovedNumber
+	local Quest = CurrentQuest;
+	if (Quest <= 9) then
+		if (AtlasQuest_Faction == 1) then
+			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. CurrentDungeon .. "Quest" .. Quest),
+				4)
+		elseif (AtlasQuest_Faction == 2) then
+			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. Quest .. "_HORDE"), 4)
+		end
+	elseif (Quest > 9) then
+		if (AtlasQuest_Faction == 1) then
+			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(getglobal("Inst" .. CurrentDungeon .. "Quest" .. Quest),
+				5)
+		elseif (AtlasQuest_Faction == 2) then
+			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber = strsub(
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. Quest .. "_HORDE"), 5)
+		end
+	end
+	if (AtlasQuest_Faction == 1) then
+		ChatFrameEditBox:Insert("[" ..
+			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber ..
+			"] [" .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Level") .. "]");
+	else
+		ChatFrameEditBox:Insert("[" ..
+			OnlyAtlasQuestInsideFrameQuestNameRemovedNumber ..
+			"] [" .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Level") ..
+			"]");
+	end
+end
+
+-----------------------------------------------------------------------------
+-- set the Quest text
+-- executed when you push a button
+-----------------------------------------------------------------------------
+function AQButton_SetText()
+	local itemID, nameDATA, colour
+
+	AQClearALL();
+	AtlasQuestInsideFrameFinishedButton:Show();
+	AtlasQuestInsideFrameFinishedText:SetText(BLUE .. AQFinishedTEXT);
+	if (AtlasQuest_Faction == 1) then
+		AtlasQuestInsideFrameQuestName:SetText(getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest));
+		AtlasQuestInsideFrameQuestLevel:SetText(BLUE ..
+			AQDiscription_LEVEL .. WHITE .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Level"));
+		AtlasQuestInsideFrameAttainLevel:SetText(BLUE ..
+			AQDiscription_ATTAIN .. WHITE .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Attain"));
+		AtlasQuestInsideFramePrequest:SetText(BLUE ..
+			AQDiscription_PREQUEST ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Prequest") ..
+			"\n \n" ..
+			BLUE ..
+			AQDiscription_FOLGEQUEST ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Folgequest") ..
+			"\n \n" ..
+			BLUE ..
+			AQDiscription_START ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Location") ..
+			"\n \n" ..
+			BLUE ..
+			AQDiscription_AIM ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Aim") ..
+			"\n \n" ..
+			BLUE .. AQDiscription_NOTE .. WHITE .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Note"));
+		-----------------------------------------------------------------------------
+		-- FOR ALPHAMAP SUPPORT
+		-- If there are other descriptions for alphamap and alphamap is shown then show them
+		-----------------------------------------------------------------------------
+		if ((AtlasORAlphaMap == "AlphaMap") and (getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Note_AlphaMap") ~= nil)) then
+			AtlasQuestInsideFramePrequest:SetText(BLUE ..
+				AQDiscription_PREQUEST ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Prequest") ..
+				"\n \n" ..
+				BLUE ..
+				AQDiscription_FOLGEQUEST ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Folgequest") ..
+				"\n \n" ..
+				BLUE ..
+				AQDiscription_START ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Location_AlphaMap") ..
+				"\n \n" ..
+				BLUE ..
+				AQDiscription_AIM ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Aim") ..
+				"\n \n" .. BLUE .. AQDiscription_NOTE ..
+				WHITE .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Note_AlphaMap"));
+		end
+
+		for b = 1, 6 do
+			AtlasQuestInsideFrameRewardText:SetText(getglobal("Inst" ..
+			CurrentDungeon .. "Quest" .. CurrentQuest .. "Rewardtext"))
+			if (getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. b) ~= nil) then
+				-----------------------------------------------------------------------------
+				-- Yay for AutoQuery. Boo for odd variable names.
+				-----------------------------------------------------------------------------
+				itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. b);
+
+				if (AQAutoQuery ~= nil) then
+					colour = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ITC" .. b);
+					nameDATA = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "name" .. b);
+
+					if (GetItemInfo(itemID) == nil) then
+						GameTooltip:SetHyperlink("item:" .. itemID);
+						if (AQNoQuerySpam == nil) then
+							DEFAULT_CHAT_FRAME:AddMessage(AQSERVERASK ..
+							"[" .. colour .. nameDATA .. WHITE .. "]" .. AQSERVERASKAuto);
+						end
+					end
+				end
+				local name, extra, itemTexture = AQgetItemInformation(b)
+				getglobal("AtlasQuestItemframe" .. b .. "_Icon"):SetTexture(itemTexture);
+				getglobal("AtlasQuestItemframe" .. b .. "_Name"):SetText(name);
+				getglobal("AtlasQuestItemframe" .. b .. "_Extra"):SetText(extra);
+				getglobal("AtlasQuestItemframe" .. b):Enable();
+			else
+				getglobal("AtlasQuestItemframe" .. b .. "_Icon"):SetTexture();
+				getglobal("AtlasQuestItemframe" .. b .. "_Name"):SetText();
+				getglobal("AtlasQuestItemframe" .. b .. "_Extra"):SetText();
+				getglobal("AtlasQuestItemframe" .. b):Disable();
+			end
+		end
+	end
+
+	if (AtlasQuest_Faction == 2) then
+		AtlasQuestInsideFrameQuestName:SetText(getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE"));
+		AtlasQuestInsideFrameQuestLevel:SetText(BLUE ..
+			AQDiscription_LEVEL .. WHITE .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Level"));
+		AtlasQuestInsideFrameAttainLevel:SetText(BLUE ..
+			AQDiscription_ATTAIN .. WHITE .. getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Attain"));
+		AtlasQuestInsideFramePrequest:SetText(BLUE ..
+			AQDiscription_PREQUEST ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Prequest") ..
+			"\n \n" ..
+			BLUE ..
+			AQDiscription_FOLGEQUEST ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Folgequest") ..
+			"\n \n" ..
+			BLUE ..
+			AQDiscription_START ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Location") ..
+			"\n \n" ..
+			BLUE ..
+			AQDiscription_AIM ..
+			WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Aim") ..
+			"\n \n" .. BLUE .. AQDiscription_NOTE .. WHITE .. getglobal("Inst" .. CurrentDungeon ..
+				"Quest" .. CurrentQuest .. "_HORDE_Note"));
+		-----------------------------------------------------------------------------
+		-- FOR ALPHAMAP SUPPORT
+		-- If there are other descriptions for alphamap and alphamap is shown then show them
+		-----------------------------------------------------------------------------
+		if ((AtlasORAlphaMap == "AlphaMap") and (getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Note_AlphaMap") ~= nil)) then
+			AtlasQuestInsideFramePrequest:SetText(BLUE ..
+				AQDiscription_PREQUEST ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Prequest") ..
+				"\n \n" ..
+				BLUE ..
+				AQDiscription_FOLGEQUEST ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Folgequest") ..
+				"\n \n" ..
+				BLUE ..
+				AQDiscription_START ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Location_AlphaMap") ..
+				"\n \n" ..
+				BLUE ..
+				AQDiscription_AIM ..
+				WHITE ..
+				getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Aim") ..
+				"\n \n" ..
+				BLUE .. AQDiscription_NOTE .. WHITE .. getglobal("Inst" .. CurrentDungeon ..
+					"Quest" .. CurrentQuest .. "_HORDE_Note_AlphaMap"));
+		end
+
+		for b = 1, 6 do
+			AtlasQuestInsideFrameRewardText:SetText(getglobal("Inst" ..
+			CurrentDungeon .. "Quest" .. CurrentQuest .. "Rewardtext_HORDE"))
+			if (getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. b .. "_HORDE") ~= nil) then
+				-----------------------------------------------------------------------------
+				-- Yay for AutoQuery. Boo for odd variable names.
+				-----------------------------------------------------------------------------
+				itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. b .. "_HORDE");
+
+				if (AQAutoQuery ~= nil) then
+					colour = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ITC" .. b .. "_HORDE");
+					nameDATA = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "name" .. b .. "_HORDE");
+
+					if (GetItemInfo(itemID) == nil) then
+						GameTooltip:SetHyperlink("item:" .. itemID .. ":0:0:0");
+						if (AQNoQuerySpam == nil) then
+							DEFAULT_CHAT_FRAME:AddMessage(AQSERVERASK ..
+							"[" .. colour .. nameDATA .. WHITE .. "]" .. AQSERVERASKAuto);
+						end
+					end
+				end
+				local name, extra, itemTexture = AQgetItemInformation(b)
+				getglobal("AtlasQuestItemframe" .. b .. "_Icon"):SetTexture(itemTexture);
+				getglobal("AtlasQuestItemframe" .. b .. "_Name"):SetText(name);
+				getglobal("AtlasQuestItemframe" .. b .. "_Extra"):SetText(extra);
+				getglobal("AtlasQuestItemframe" .. b):Enable();
+			else
+				getglobal("AtlasQuestItemframe" .. b .. "_Icon"):SetTexture();
+				getglobal("AtlasQuestItemframe" .. b .. "_Name"):SetText();
+				getglobal("AtlasQuestItemframe" .. b .. "_Extra"):SetText();
+				getglobal("AtlasQuestItemframe" .. b):Disable();
+			end
+		end
+	end
+
+	local pages
+
+	if (AtlasQuest_Faction == 1) then
+		pages = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Page")
+		if (AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest] == 1) then
+			AtlasQuestInsideFrameFinishedButton:SetChecked(true);
+		else
+			AtlasQuestInsideFrameFinishedButton:SetChecked(false);
+		end
+	else
+		pages = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Page")
+		if (AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE"] == 1) then
+			AtlasQuestInsideFrameFinishedButton:SetChecked(true);
+		else
+			AtlasQuestInsideFrameFinishedButton:SetChecked(false);
+		end
+	end
+
+	if (type(pages) == "table") then
+		if (type(pages[1]) == "number") then
+			AtlasQuestInsideFrameNextPage:Show();
+			AQ_NextPageType = "Quest";
+			AQ_CurrentPage = 1;
+			AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage .. "/" .. pages[1]);
+		end
+	end
+end
+
+-----------------------------------------------------------------------------
+-- improve the localisation through giving back the right and translated questname
+-- sets the description text too
+-- adds a error messeage to the description if item not available
+-----------------------------------------------------------------------------
+function AQgetItemInformation(id)
+	local itemID
+	local extra;
+	local itemName, itemQuality
+	local itemTexture = "Interface\\Icons\\INV_Misc_QuestionMark"
+
+	if (AtlasQuest_Faction == 2) then
+		itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. id .. "_HORDE")
+		extra = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "description" .. id .. "_HORDE")
+		itemName = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ITC" .. id .. "_HORDE") ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "name" .. id .. "_HORDE");
+	else
+		itemID = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ID" .. id)
+		extra = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "description" .. id)
+		itemName = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "ITC" .. id) ..
+			getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "name" .. id);
+	end
+
+	if (GetItemInfo(itemID)) then
+		itemName, _, itemQuality, _, _, _, _, _, itemTexture = GetItemInfo(itemID);
+		local r, g, b, hex = GetItemQualityColor(itemQuality);
+		itemName = hex .. itemName;
+	end
+	return itemName, extra, itemTexture;
+end
+
+-----------------------------------------------------------------------------
+-- Set Story Text
+-----------------------------------------------------------------------------
+function AQButtonSTORY_SetText()
+	-- first clear display
+	AQClearALL();
+
+	-- show right story text
+	if (getglobal("Inst" .. CurrentDungeon .. "Story") ~= nil) then
+		AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "Caption"));
+		if (type(getglobal("Inst" .. CurrentDungeon .. "Story")) == "table") then
+			AtlasQuestInsideFrameStoryText:SetText(WHITE .. getglobal("Inst" .. CurrentDungeon .. "Story")["Page1"]);
+			-- Show Next side button if next site is avaiable
+			if (getglobal("Inst" .. CurrentDungeon .. "Story")["Page2"] ~= nil) then
+				AtlasQuestInsideFrameNextPage:Show();
+				AQ_CurrentPage = 1;
+				-- shows total amount of pages
+				AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage ..
+				"/" .. getglobal("Inst" .. CurrentDungeon .. "Story")["MaxPages"])
+				-- count to make a diffrent between story and normal text
+				AQ_NextPageType = "Story";
+			end
+		elseif (type(getglobal("Inst" .. CurrentDungeon .. "Story")) == "string") then
+			AtlasQuestInsideFrameStoryText:SetText(WHITE .. getglobal("Inst" .. CurrentDungeon .. "Story"));
+		end
+		-- added to work with future versions of atlas (before i update e.g. before you dl the update)
+	elseif (getglobal("Inst" .. CurrentDungeon .. "Story") == nil) then
+		AtlasQuestInsideFrameQuestName:SetText("not available");
+		AtlasQuestInsideFrameStoryText:SetText("not available");
+	end
+end
+
+-----------------------------------------------------------------------------
+-- shows the next side
+-----------------------------------------------------------------------------
+function AQNextPage_OnClick()
+	local SideAfterThis = 0;
+	local page
+	SideAfterThis = AQ_CurrentPage + 2;
+	AQ_CurrentPage = AQ_CurrentPage + 1;
+
+	-- first clear display
+	AQClearALL();
+
+	-- it is a story text
+	if (AQ_NextPageType == "Story") then
+		AtlasQuestInsideFrameStoryText:SetText(WHITE ..
+		getglobal("Inst" .. CurrentDungeon .. "Story")["Page" .. AQ_CurrentPage]);
+		AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage ..
+		"/" .. getglobal("Inst" .. CurrentDungeon .. "Story")["MaxPages"])
+		if (getglobal("Inst" .. CurrentDungeon .. "Caption" .. AQ_CurrentPage) ~= nil) then
+			AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "Caption" .. AQ_CurrentPage));
+		else
+			AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "Caption"));
+		end
+		-- hide button if no next side
+		if (getglobal("Inst" .. CurrentDungeon .. "Story")["Page" .. SideAfterThis] == nil) then
+			AtlasQuestInsideFrameNextPage:Hide();
+		else
+			AtlasQuestInsideFrameNextPage:Show();
+		end
+	end
+
+	-- it is a quest text
+	if (AQ_NextPageType == "Quest") then
+		-- SHIT is added to make the code smaller it give back the right link for horde or alliance
+		if (AtlasQuest_Faction == 1) then --Alliance
+			page = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Page")
+		else
+			page = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Page")
+		end
+		AtlasQuestInsideFrameStoryText:SetText(WHITE .. page[AQ_CurrentPage])
+		AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage .. "/" .. page[1])
+		-- hide button if no next side
+		if (page[SideAfterThis] == nil) then
+			AtlasQuestInsideFrameNextPage:Hide();
+		else
+			AtlasQuestInsideFrameNextPage:Show();
+		end
+	end
+
+	-- it is a boss text
+	if (AQ_NextPageType == "Boss") then
+		AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "General")[AQ_CurrentPage][1]);
+		AtlasQuestInsideFrameStoryText:SetText(WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "General")[AQ_CurrentPage][2] ..
+			"\n \n" .. getglobal("Inst" .. CurrentDungeon .. "General")[AQ_CurrentPage][3]);
+		-- Show Next side button if next site is avaiable
+		if (getglobal("Inst" .. CurrentDungeon .. "General")[SideAfterThis] ~= nil) then
+			AtlasQuestInsideFrameNextPage:Show();
+		end
+		-- shows total amount of pages
+		AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage .. "/" .. getn(getglobal("Inst" .. CurrentDungeon .. "General")))
+	end
+
+	-- Show backwards button
+	AtlasQuestInsideFramePrevPage:Show();
+end
+
+-----------------------------------------------------------------------------
+-- shows the side before this side
+-----------------------------------------------------------------------------
+function AQPrevPage_OnClick()
+	local page
+	AQ_CurrentPage = AQ_CurrentPage - 1;
+
+	-- it is a story text
+	if (AQ_NextPageType == "Story") then
+		AtlasQuestInsideFrameStoryText:SetText(WHITE ..
+		getglobal("Inst" .. CurrentDungeon .. "Story")["Page" .. AQ_CurrentPage]);
+		AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage ..
+		"/" .. getglobal("Inst" .. CurrentDungeon .. "Story")["MaxPages"])
+		if (getglobal("Inst" .. CurrentDungeon .. "Caption" .. AQ_CurrentPage) ~= nil) then
+			AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "Caption" .. AQ_CurrentPage));
+		else
+			AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "Caption"));
+		end
+		-- hide button if first side
+		if (AQ_CurrentPage == 1) then
+			AtlasQuestInsideFramePrevPage:Hide();
+		end
+	end
+
+	-- it is a quest text
+	if (AQ_NextPageType == "Quest") then
+		-- SHIT is added to make the code smaller it give back the right link for horde or alliance
+		if (AtlasQuest_Faction == 1) then --Alliance
+			page = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_Page")
+		else
+			page = getglobal("Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE_Page")
+		end
+		if (AQ_CurrentPage == 1) then
+			AQButton_SetText()
+		else
+			AtlasQuestInsideFrameStoryText:SetText(WHITE .. page[AQ_CurrentPage])
+		end
+		AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage .. "/" .. page[1])
+	end
+
+	-- it is a boss text
+	if (AQ_NextPageType == "Boss") then
+		AtlasQuestInsideFrameQuestName:SetText(BLUE .. getglobal("Inst" .. CurrentDungeon .. "General")[AQ_CurrentPage][1]);
+		AtlasQuestInsideFrameStoryText:SetText(WHITE ..
+			getglobal("Inst" .. CurrentDungeon .. "General")[AQ_CurrentPage][2] ..
+			"\n \n" .. getglobal("Inst" .. CurrentDungeon .. "General")[AQ_CurrentPage][3]);
+		-- Show Next side button if next site is avaiable
+		if (AQ_CurrentPage == 1) then
+			AtlasQuestInsideFramePrevPage:Hide();
+		end
+		-- shows total amount of pages
+		AtlasQuestInsideFramePagesText:SetText(AQ_CurrentPage .. "/" .. getn(getglobal("Inst" .. CurrentDungeon .. "General")))
+	end
+
+	AtlasQuestInsideFrameNextPage:Show();
+end
+
+-----------------------------------------------------------------------------
+-- Checkbox for the finished quest option
+-----------------------------------------------------------------------------
+function AQFinishedAtlasQuestButton_OnClick()
+	if (AtlasQuestInsideFrameFinishedButton:GetChecked() and AtlasQuest_Faction == 1) then
+		AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest] = 1;
+		setglobal("AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest, 1);
+	elseif (AtlasQuestInsideFrameFinishedButton:GetChecked() and AtlasQuest_Faction == 2) then
+		AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE"] = 1;
+	elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (AtlasQuest_Faction == 1)) then
+		AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest] = nil;
+	elseif ((not AtlasQuestInsideFrameFinishedButton:GetChecked()) and (AtlasQuest_Faction == 2)) then
+		AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE"] = nil;
+	end
+	--save everything
+	if (AtlasQuest_Faction == 1) then
+		AtlasQuest_Options[UnitName("player")]["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest] = AQ
+			["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest]
+	elseif (AtlasQuest_Faction == 2) then
+		AtlasQuest_Options[UnitName("player")]["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE"] =
+			AQ["AQFinishedQuest_Inst" .. CurrentDungeon .. "Quest" .. CurrentQuest .. "_HORDE"]
+	end
+
+	AtlasQuest_UpdateButtons()
+	AQButton_SetText()
+end
+
+function AtlasQuestInsideFrame_OnHide()
+	for i = 1, MAX_QUESTS do
+		getglobal("AQQuestButton"..i.."Highlight"):Hide()
+	end
 end

@@ -23,7 +23,6 @@
 
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 
-	<Script file="AtlasQuest_Buttons.lua" />
 	<Script file="AtlasQuest_Items.lua" />
 	<Script file="AtlasQuest.lua" />
 
@@ -60,7 +59,6 @@
 				RaiseFrameLevel(this);
 			</OnLoad>
 			<OnClick>
-				AQSHOWNQUEST = this:GetID();
 				AtlasQuestButton_OnClick(arg1);
 			</OnClick>
 		</Scripts>

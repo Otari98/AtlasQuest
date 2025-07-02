@@ -51,7 +51,6 @@
 		</Layers>
 		<Scripts>
 			<OnEnter>
-				AQTHISISSHOWN = this:GetID();
 				AtlasQuestItem_OnEnter();
 			</OnEnter>
 			<OnLeave>
@@ -150,7 +149,7 @@
 						RaiseFrameLevel(this);
 					</OnLoad>
 					<OnClick>
-						AQNextPageR_OnClick();
+						AQNextPage_OnClick();
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -169,7 +168,7 @@
 						RaiseFrameLevel(this);
 					</OnLoad>
 					<OnClick>
-						AQNextPageL_OnClick();
+						AQPrevPage_OnClick();
 					</OnClick>
 				</Scripts>
 			</Button>
