@@ -24,7 +24,6 @@
 ---------------
 --- COLOURS ---
 ---------------
-
 local GREY = "|cff999999";
 local RED = "|cffFF0000";
 local REDA = "|cffcc6666";
@@ -47,7 +46,6 @@ local WARLOCK = "|cff9482c9";
 ---------------
 --- OPTIONS ---
 ---------------
-
 AQOptionsCaptionTEXT = "AtlasQuest Options";
 -- Autoshow
 AQOptionsAutoshowTEXT = "Show AtlasQuest panel with Atlas.";
@@ -121,14 +119,41 @@ AQITEM_QUIVER = "Quiver"
 AQITEM_AMMOPOUCH = "Ammo Pouch"
 AQITEM_ENCHANT = "Enchant"
 
-Inst1Quest6_Page = {2, "1. You get the  Whitestone Oak Lumber from Goblin Woodcarvers in "..NORMAL.."[Deadmines]"..WHITE.." near "..NORMAL.."[3]"..WHITE..".\n\n2. To get the Bailor's Refined Ore Shipment you must talk to Bailor Stonehand (Loch Modan - Thelsamar; "..NORMAL.."35,44"..WHITE.."). He gives you the 'Bailor's Ore Shipment' quest. You find the Jordan's Ore Shipment behind a tree at "..NORMAL.."71,21"..WHITE.."\n\n3. You get Jordan's Smithing Hammer in "..NORMAL.."[Shadowfang Keep]"..WHITE.." at "..NORMAL.."[3]"..WHITE..".\n\n4. To get a Kor Gem you have to go to Thundris Windweaver (Darkshore - Auberdine; "..NORMAL.."37,40"..WHITE..") and do the 'Seeking the Kor Gem' quest. For this quest, you must kill Blackfathom oracles or priestesses before "..NORMAL.."[Blackfathom Deeps]"..WHITE..". They drop a corrupted Kor Gem. Thundris Windweaver will clean it for you.", };
-Inst13Quest4_Page = {2, "You find the Centaur Pariah in the south of desolace. He walks between "..NORMAL.."44,85"..WHITE.." and "..NORMAL.."50,87"..WHITE..".\nFirst, you have to kill the The Nameless Prophet ("..NORMAL.."[A] on Entrance Map"..WHITE.."). You find him before you enter the instance, before the point where you can choose whether you take the purple or the orange entrance. After killing him you must kill the 5 Kahns. You find the first if you choose the way in the middle ("..NORMAL.."[1] on Entrance Map"..WHITE.."). The second is in the purple part of Maraudon but before you enter the instance ("..NORMAL.."[2] on Entrance Map"..WHITE.."). The third is in the orange part before you enter the instance ("..NORMAL.."[3] on Entrance Map"..WHITE.."). The fourth is near "..NORMAL.."[4]"..WHITE.." and the fifth is near  "..NORMAL.."[1]"..WHITE..".", };
-Inst13Quest4_HORDE_Page = Inst13Quest4_Page
-Inst24Quest1_Page = {2, "1. You get the  Whitestone Oak Lumber from Goblin Woodcarvers in "..NORMAL.."[Deadmines]"..WHITE..".\n\n2. To get the Bailor's Refined Ore Shipment you must talk to Bailor Stonehand (Loch Modan - Thelsamar; "..NORMAL.."35,44"..WHITE.."). He gives you the 'Bailor's Ore Shipment' quest. You find the Jordan's Ore Shipment behind a tree at "..NORMAL.."71,21"..WHITE.."\n\n3. You get Jordan's Smithing Hammer in "..NORMAL.."[Shadowfang Keep]"..WHITE.." at "..NORMAL.."[3]"..WHITE..".\n\n4. To get a Kor Gem you have to go to Thundris Windweaver (Darkshore - Auberdine; "..NORMAL.."37,40"..WHITE..") and do the 'Seeking the Kor Gem' quest. For this quest, you must kill Blackfathom oracles or priestesses before "..NORMAL.."[Blackfathom Deeps]"..WHITE..". They drop a corrupted Kor Gem. Thundris Windweaver will clean it for you.", };
+------------------
+----- QUESTS -----
+------------------
+-- AtlasQuest_Data = {
+-- 	[dungeonIndex] = {
+-- 		name = "string",
+-- 		story = "string"|table,
+-- 		[1(Alliance)] = {
+-- 			[questIndex] = {
+-- 				title = quest name (string),
+-- 				level = quest level (number),
+-- 				attain = obtainable at level (number),
+-- 				aim = quest objective (string),
+-- 				note = some extra text (string),
+-- 				followup = following quest name (string) ,
+-- 				location = quest pick up location (string),
+-- 				rewards = {
+-- 					[rewardIndex] = {
+-- 						name = item name (string),
+-- 						id = item ID (number),
+-- 						subtext = item types like "Cloth, Head" (string),
+-- 						icon = texture path like "INV_Sword_23" (string),
+-- 						quality = number 0-poor,1-common etc.,
+-- 					},
+-- 					text = "Rewards:1 or 2 or 3" or "No Rewards",
+-- 				},
+-- 				prequest = pre quest name (string),
+--				pages = optional (table),
+-- 			},
+-- 		[2(Horde)] = {
+-- 		...
+-- 		}
+-- 	 }
+-- }
 
-----------------------------------------------
----------------- DUNGEONS --------------------
-----------------------------------------------
 AtlasQuest_Data = {
 	[1] = {
 		name = "Deadmines",

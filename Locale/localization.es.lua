@@ -25,7 +25,7 @@ Last update/Último actualización: 2017-12-30
 --]]
 
 
-if ( GetLocale() == "esES" ) then
+-- if ( GetLocale() == "esES" ) then
 ---------------
 --- COLOURS ---
 ---------------
@@ -39,7 +39,8 @@ local PURPLE = "|cff9F3FFF";
 local BLUE = "|cff0070dd";
 local ORANGE = "|cffFF8400";
 local YELLOW = "|cffFFd200";   -- Ingame Yellow
-
+AQDiscription_OR = GREY.." or "..WHITE
+AQDiscription_AND = GREY.." and "..WHITE
 
 ---------------
 --- OPTIONS ---
@@ -238,7 +239,7 @@ Inst1Quest6_Attain = "20"
 Inst1Quest6_Aim = "Consulta la lista y llévale a Jordan Fontana de Forjaz lo siguiente: madera de roble de Piedrablanca, envío de oro refinado de Jordan, el martillo de herrero de Jordan y una gema Kor."
 Inst1Quest6_Location = "Jordan Fontana (Dun Morogh - Entrada de Forjaz; "..YELLOW.."52,36"..WHITE..")"
 Inst1Quest6_Note = "Solamente Paladín: Para ver la nota haz clic en "..YELLOW.."[Información de La prueba de rectitud]"..WHITE.."."
-Inst1Quest6_Page = {2, "¡Esta misión está disponible solamente para paladines!\n\n1. Despoja a los Talladores de madera goblin en "..YELLOW.."[Las Minas de la Muerte]"..WHITE.." cerca de "..YELLOW.."[3]"..WHITE.." para obtener la Madera de roble de Piedrablanca.\n\n2. Habla con Bailor Petramano (Loch Modan - Thelsamar; "..YELLOW.."35,44"..WHITE..") para obtener el Envío de mena refinada de Jordan. Te da la misión 'Envío de mena de Bailor'. Encuentras el Envío de mena de Jordan detrás de un árbol a "..YELLOW.."71,21"..WHITE..".\n\n3. Encuentras el Martillo de herrería de Jordan en "..YELLOW.."[Castillo de Colmillo Oscuro]"..WHITE.." en "..YELLOW.."[3]"..WHITE..".\n\n4. Para obtener la Gema kor purificada habla con Thundris Tejevientos (Costa Oscura - Auberdine; "..YELLOW.."37,40"..WHITE..") y haga su misión 'La búsqueda de la gema Kor'. Para esta misión, tienes que matar a los Oráculos Brazanegras o Sacerdotisas de las mareas Brazanegras afuera de "..YELLOW.."[Cavernas de Brazanegra]"..WHITE..". Los despojas para obtener la Gema kor corrupta. Thundris Tejevientos la limpiará para ti.", };
+Inst1Quest6_Page = { "¡Esta misión está disponible solamente para paladines!\n\n1. Despoja a los Talladores de madera goblin en "..YELLOW.."[Las Minas de la Muerte]"..WHITE.." cerca de "..YELLOW.."[3]"..WHITE.." para obtener la Madera de roble de Piedrablanca.\n\n2. Habla con Bailor Petramano (Loch Modan - Thelsamar; "..YELLOW.."35,44"..WHITE..") para obtener el Envío de mena refinada de Jordan. Te da la misión 'Envío de mena de Bailor'. Encuentras el Envío de mena de Jordan detrás de un árbol a "..YELLOW.."71,21"..WHITE..".\n\n3. Encuentras el Martillo de herrería de Jordan en "..YELLOW.."[Castillo de Colmillo Oscuro]"..WHITE.." en "..YELLOW.."[3]"..WHITE..".\n\n4. Para obtener la Gema kor purificada habla con Thundris Tejevientos (Costa Oscura - Auberdine; "..YELLOW.."37,40"..WHITE..") y haga su misión 'La búsqueda de la gema Kor'. Para esta misión, tienes que matar a los Oráculos Brazanegras o Sacerdotisas de las mareas Brazanegras afuera de "..YELLOW.."[Cavernas de Brazanegra]"..WHITE..". Los despojas para obtener la Gema kor corrupta. Thundris Tejevientos la limpiará para ti.", };
 Inst1Quest6_Prequest = "Escrito sobre valor -> La prueba de rectitud" -- 1651 -> 1653
 Inst1Quest6_Folgequest = "La prueba de rectitud" -- 1806
 --
@@ -2855,7 +2856,7 @@ Inst13Quest4_Attain = "39"
 Inst13Quest4_Aim = "Lee las instrucciones del Paria. Busca el Amuleto de Unidad en Maraudon y llévaselo al sur de Desolace."
 Inst13Quest4_Location = "Paria Centauro (Desolace; "..YELLOW.."45,86"..WHITE..")"
 Inst13Quest4_Note = "Los 5 Khans (Descripción para Las instrucciones del Paria)"
-Inst13Quest4_Page = {2, "Encuentras el Paria Centauro al sur de Desolace. Camina entre "..YELLOW.."44,85"..WHITE.." y "..YELLOW.."50,87"..WHITE..".\nPrimero, debes matar al Profeta sin nombre ("..YELLOW.."[A] en el mapa de la Entrada"..WHITE.."). Lo encuentras antes de entrar la instancia, antes de la parte con la bifurcación para entrar al lado morado o naranja. Después de matarlo, debes matar a los 5 Khans. El Primer Khan está al camino central ("..YELLOW.."[1] en el mapa de la Entrada"..WHITE.."). El Segundo Khan está en la parte morada de Maraudon antes de entrar la instancia ("..YELLOW.."[2] en el mapa de la Entrada"..WHITE.."). El Tercer Khan está en la parte naranja antes de entrar la instancia ("..YELLOW.."[3] en el mapa de la Entrada"..WHITE.."). El Cuarto Khan está cerca de "..YELLOW.."[4]"..WHITE.." y El Quinto Khan está cerca de  "..YELLOW.."[1]"..WHITE..".", };
+Inst13Quest4_Page = { "Encuentras el Paria Centauro al sur de Desolace. Camina entre "..YELLOW.."44,85"..WHITE.." y "..YELLOW.."50,87"..WHITE..".\nPrimero, debes matar al Profeta sin nombre ("..YELLOW.."[A] en el mapa de la Entrada"..WHITE.."). Lo encuentras antes de entrar la instancia, antes de la parte con la bifurcación para entrar al lado morado o naranja. Después de matarlo, debes matar a los 5 Khans. El Primer Khan está al camino central ("..YELLOW.."[1] en el mapa de la Entrada"..WHITE.."). El Segundo Khan está en la parte morada de Maraudon antes de entrar la instancia ("..YELLOW.."[2] en el mapa de la Entrada"..WHITE.."). El Tercer Khan está en la parte naranja antes de entrar la instancia ("..YELLOW.."[3] en el mapa de la Entrada"..WHITE.."). El Cuarto Khan está cerca de "..YELLOW.."[4]"..WHITE.." y El Quinto Khan está cerca de  "..YELLOW.."[1]"..WHITE..".", };
 Inst13Quest4_Prequest = "Ninguno"
 Inst13Quest4_Folgequest = "Ninguno"
 --
@@ -4153,7 +4154,7 @@ Inst24Quest1_Attain = "20"
 Inst24Quest1_Aim = "Consulta la lista y llévale a Jordan Fontana de Forjaz lo siguiente: madera de roble de Piedrablanca, envío de oro refinado de Bailor, el martillo de herrero de Jordan y una gema Kor."
 Inst24Quest1_Location = "Jordan Fontana (Dun Morogh - Entrada de Forjaz; "..YELLOW.."52,36"..WHITE..")"
 Inst24Quest1_Note = "Solamente para Paladines: Para ver la nota haz clic en "..YELLOW.."[Información de La prueba de rectitud]"..WHITE.."."
-Inst24Quest1_Page = {2, "¡Esta misión está disponible solamente para paladines!\n\n1. Despoja a los Talladores de madera goblin en "..YELLOW.."[Las Minas de la Muerte]"..WHITE.." cerca de "..YELLOW.."[3]"..WHITE.." para obtener la Madera de roble de Piedrablanca.\n\n2. Habla con Bailor Petramano (Loch Modan - Thelsamar; "..YELLOW.."35,44"..WHITE..") para obtener el Envío de mena refinada de Jordan. Te da la misión 'Envío de mena de Bailor'. Encuentras el Envío de mena de Jordan detrás de un árbol a "..YELLOW.."71,21"..WHITE.."\n\n3. Encuentras el Martillo de herrería de Jordan en "..YELLOW.."[Castillo de Colmillo Oscuro]"..WHITE.." en "..YELLOW.."[3]"..WHITE..".\n\n4. para obtener la Gema kor purificada habla con Thundris Tejevientos (Costa Oscura - Auberdine; "..YELLOW.."37,40"..WHITE..") y haga su misión 'La búsqueda de la gema Kor'. Para esta misión, tienes que matar Oráculos Brazanegras o Sacerdotisas de las mareas Brazanegras afuera de "..YELLOW.."[Cavernas de Brazanegra]"..WHITE..". Los despojas para obtener la Gema kor corrupta. Thundris Tejevientos la limpiará para ti.", };
+Inst24Quest1_Page = { "¡Esta misión está disponible solamente para paladines!\n\n1. Despoja a los Talladores de madera goblin en "..YELLOW.."[Las Minas de la Muerte]"..WHITE.." cerca de "..YELLOW.."[3]"..WHITE.." para obtener la Madera de roble de Piedrablanca.\n\n2. Habla con Bailor Petramano (Loch Modan - Thelsamar; "..YELLOW.."35,44"..WHITE..") para obtener el Envío de mena refinada de Jordan. Te da la misión 'Envío de mena de Bailor'. Encuentras el Envío de mena de Jordan detrás de un árbol a "..YELLOW.."71,21"..WHITE.."\n\n3. Encuentras el Martillo de herrería de Jordan en "..YELLOW.."[Castillo de Colmillo Oscuro]"..WHITE.." en "..YELLOW.."[3]"..WHITE..".\n\n4. para obtener la Gema kor purificada habla con Thundris Tejevientos (Costa Oscura - Auberdine; "..YELLOW.."37,40"..WHITE..") y haga su misión 'La búsqueda de la gema Kor'. Para esta misión, tienes que matar Oráculos Brazanegras o Sacerdotisas de las mareas Brazanegras afuera de "..YELLOW.."[Cavernas de Brazanegra]"..WHITE..". Los despojas para obtener la Gema kor corrupta. Thundris Tejevientos la limpiará para ti.", };
 Inst24Quest1_Prequest = "Escrito sobre valor -> La prueba de rectitud" -- 1651 -> 1653
 Inst24Quest1_Folgequest = "La prueba de rectitud" -- 1806
 --
@@ -5788,13 +5789,13 @@ Inst32Quest5name1_HORDE = "Anillo de oro luminoso"
 
 --------------- INST33 - Dragons of Nightmare ---------------
 Inst33Story = {
-	["Page1"] = "Algo va mal en el Sueño Esmeralda. Inmensos dragones con las escamas esmeralda brillantes del Vuelo Verde han sido vistos protegiendo los portales a los Grandes Árboles... pero estas antaño nobles criaturas se han convertido en una nueva y extraña amenaza, ya no son los agentes pacíficos por los que se conoce a Ysera. Si llevas muchos aliados, puedes osar a enfrentarte a ellos; sus poderes son formidables y no dudarán en aplastar a cualquiera que se acerque.",
-	["Page2"] = "Ysera, the great Dreaming dragon Aspect rules over the enigmatic green dragonflight. Her domain is the fantastic, mystical realm of the Emerald Dream - and it is said that from there she guides the evolutionary path of the world itself. She is the protector of nature and imagination, and it is the charge of her flight to guard all of the Great Trees across the world, which only druids use to enter the Dream itself. In recent times, Ysera's most trusted Tenientes have been warped by a dark new power within the Emerald Dream. Now these wayward sentinels have passed through the Great Trees into Azeroth, intending to spread madness and terror throughout the mortal kingdoms. Even the mightiest of adventurers would be well advised to give the dragons a wide berth, or suffer the consequences of their misguided wrath.",
-	["Page3"] = "Lethon's exposure to the aberration within the Emerald Dream not only darkened the hue of the mighty dragon's scales, but also empowered him with the ability to extract malevolent shades from his enemies. Once joined with their master, the shades imbue the dragon with healing energies. It should come as no surprise, then, that Lethon is considered to be among the most formidable of Ysera's wayward Tenientes",
-	["Page4"] = "A  mysterious dark power within the Emerald Dream has transformed the once-majestic Emeriss into a rotting, diseased monstrosity. Reports from the few who have survived encounters with the dragon have told horrifying tales of putrid mushrooms erupting from the corpses of their dead companions. Emeriss is truly the most gruesome and appalling of Ysera's estranged green dragons.",
-	["Page5"] = "Taerar fue tal vez el más afectado de los lugartenientes de Ysera. Su interacción con la fuerza oscura del Sueño Esmeralda destrozó la cordura de Taerar, así como su forma corpórea. El dragón ahora existe como un espectro con la capacidad de dividirse en múltiples entidades, cada una de as cuales posee poderes mágicos destructivos. Taerar es un enemigo astuto e implacable que tiene la intención de convertir la locura de su existencia en la realidad de los habitantes de Azeroth.",
-	["Page6"] = "Una vez fue uno de los lugartenientes de mayor confianza de Ysera, Ysondre se había corrompido, sembrando el terror y el caos a través de todo Azeroth. Sus antiguos poderes curativos dieron paso a la magia oscura, lo que le permitió lanzar un rayo ardiente y convocar a los espíritus enloquecidos de druidas atrapados en el Sueño Esmeralda para ayudarla.",
-	["MaxPages"] = "6",
+	[1] = "Algo va mal en el Sueño Esmeralda. Inmensos dragones con las escamas esmeralda brillantes del Vuelo Verde han sido vistos protegiendo los portales a los Grandes Árboles... pero estas antaño nobles criaturas se han convertido en una nueva y extraña amenaza, ya no son los agentes pacíficos por los que se conoce a Ysera. Si llevas muchos aliados, puedes osar a enfrentarte a ellos; sus poderes son formidables y no dudarán en aplastar a cualquiera que se acerque.",
+	[2] = "Ysera, the great Dreaming dragon Aspect rules over the enigmatic green dragonflight. Her domain is the fantastic, mystical realm of the Emerald Dream - and it is said that from there she guides the evolutionary path of the world itself. She is the protector of nature and imagination, and it is the charge of her flight to guard all of the Great Trees across the world, which only druids use to enter the Dream itself. In recent times, Ysera's most trusted Tenientes have been warped by a dark new power within the Emerald Dream. Now these wayward sentinels have passed through the Great Trees into Azeroth, intending to spread madness and terror throughout the mortal kingdoms. Even the mightiest of adventurers would be well advised to give the dragons a wide berth, or suffer the consequences of their misguided wrath.",
+	[3] = "Lethon's exposure to the aberration within the Emerald Dream not only darkened the hue of the mighty dragon's scales, but also empowered him with the ability to extract malevolent shades from his enemies. Once joined with their master, the shades imbue the dragon with healing energies. It should come as no surprise, then, that Lethon is considered to be among the most formidable of Ysera's wayward Tenientes",
+	[4] = "A  mysterious dark power within the Emerald Dream has transformed the once-majestic Emeriss into a rotting, diseased monstrosity. Reports from the few who have survived encounters with the dragon have told horrifying tales of putrid mushrooms erupting from the corpses of their dead companions. Emeriss is truly the most gruesome and appalling of Ysera's estranged green dragons.",
+	[5] = "Taerar fue tal vez el más afectado de los lugartenientes de Ysera. Su interacción con la fuerza oscura del Sueño Esmeralda destrozó la cordura de Taerar, así como su forma corpórea. El dragón ahora existe como un espectro con la capacidad de dividirse en múltiples entidades, cada una de as cuales posee poderes mágicos destructivos. Taerar es un enemigo astuto e implacable que tiene la intención de convertir la locura de su existencia en la realidad de los habitantes de Azeroth.",
+	[6] = "Una vez fue uno de los lugartenientes de mayor confianza de Ysera, Ysondre se había corrompido, sembrando el terror y el caos a través de todo Azeroth. Sus antiguos poderes curativos dieron paso a la magia oscura, lo que le permitió lanzar un rayo ardiente y convocar a los espíritus enloquecidos de druidas atrapados en el Sueño Esmeralda para ayudarla.",
+	
 };
 Inst33Caption = "Dragones de la Pesadilla"
 Inst33Caption2 = "Ysera y el Vuelo Verde"
@@ -6379,7 +6380,7 @@ Inst38QAA = "No Hay Misiones"
 Inst38QAH = "No Hay Misiones"
 
 ---
-end
+-- end
 ---
 
 ---------------------------
