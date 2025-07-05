@@ -222,6 +222,14 @@ function AtlasQuest_UpdateButtons()
 				end
 				button:SetText(i..". "..text);
 				button:Show()
+				for j = 1, 6 do
+					if AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].rewards[j] then
+						local itemID = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].rewards[j].id
+						if not GetItemInfo(itemID) then
+							GameTooltip:SetHyperlink("item:"..itemID)
+						end
+					end
+				end
 			end
 		end
 	end
