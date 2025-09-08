@@ -153,6 +153,55 @@ AQITEM_ENCHANT = "Enchant"
 -- 	 }
 -- }
 
+-- 1 - Deadmines (DM)
+-- 2 - Wailing Caverns (WC)
+-- 3 - Ragefire Chasm (RFC)
+-- 4 - Uldaman (ULDA)
+-- 5 - Blackrock Depths (BRD)
+-- 6 - Blackwing Lair (BWL)
+-- 7 - Blackfathom Deeps (BFD)
+-- 8 - Lower Blackrock Spire (LBRS)
+-- 9 - Upper Blackrock Spire (UBRS)
+-- 10 - Dire Maul East (DME)
+-- 11 - Dire Maul North (DMN)
+-- 12 - Dire Maul West (DMW)
+-- 13 - Maraudon (Mara)
+-- 14 - Molten Core (MC)
+-- 15 - Naxxramas (Naxx)
+-- 16 - Onyxia's Lair (Ony)
+-- 17 - Razorfen Downs (RFD)
+-- 18 - Razorfen Kraul (RFK)
+-- 19 - SM: Library (SM Lib)
+-- 20 - SM: Armory (SM Arm)
+-- 21 - SM: Cathedral (SM Cath)
+-- 22 - SM: Graveyard (SM GY)
+-- 23 - Scholomance (Scholo)
+-- 24 - Shadowfang Keep (SFK)
+-- 25 - Stratholme (Strat)
+-- 26 - The Ruins of Ahn'Qiraj (AQ20)
+-- 27 - The Stockade (Stocks)
+-- 28 - Sunken Temple (ST)
+-- 29 - The Temple of Ahn'Qiraj (AQ40)
+-- 30 - Zul'Farrak (ZF)
+-- 31 - Zul'Gurub (ZG)
+-- 32 - Gnomeregan (Gnomer)
+-- 33 - Dragons of Nightmare
+-- 34 - Azuregos
+-- 35 - Lord Kazzak
+-- 36 - Alterac Valley (AV)
+-- 37 - Arathi Basin (AB)
+-- 38 - Warsong Gulch (WSG)
+
+-- 39 - The Crescent Grove (TCG)
+-- 40 - Hateforge Quarry (HQ)
+-- 41 - Karazhan Crypt (KC)
+-- 42 - Black Morass (BM)
+-- 43 - Stormwind Vault (SWV)
+-- 44 - Gilneas City (GC)
+-- 45 - Lower Karazhan Halls (LKH)
+-- 46 - Emerald Sanctum (ES)
+-- 47 - Ostarius of Uldum (Ostarius)
+
 AtlasQuest_Data = {
 	[1] = {
 		name = "Deadmines",

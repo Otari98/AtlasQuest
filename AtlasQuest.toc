@@ -22,6 +22,7 @@
 ## Dependencies: Atlas
 
 Locale\localization.en.lua
+Locale\localization.cn.lua
 
 AtlasQuest_InsideFrame.xml
 AtlasQuest.xml

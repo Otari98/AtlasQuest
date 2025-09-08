@@ -4397,6 +4397,240 @@ Inst32Quest7ITC2_HORDE = Itemc4;
 Inst32Quest7description2_HORDE = AQITEM_WAND
 Inst32Quest7ID2_HORDE = "81320"
 
+---------------------------------------------------
+---------------- OUTDOOR RAIDS --------------------
+---------------------------------------------------
+
+--------------- INST33 - Dragons of Nightmare ---------------
+
+--Quest 1 Alliance
+Inst33Quest1Rewardtext = AQDiscription_REWARD..WHITE.."1"
+--ITEM1
+Inst33Quest1ITC1 = Itemc5;
+Inst33Quest1description1 = AQITEM_RING
+Inst33Quest1ID1 = "20600"
+
+
+--Quest 1 Horde
+Inst33Quest1Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"
+--ITEM1
+Inst33Quest1ITC1_HORDE = Itemc5;
+Inst33Quest1description1_HORDE = AQITEM_RING
+Inst33Quest1ID1_HORDE = "20600"
+
+
+
+--------------- INST34 - Azuregos ---------------
+
+--Quest 1 Alliance
+Inst34Quest1Rewardtext = AQDiscription_REWARD..WHITE.."1"
+--ITEM1
+Inst34Quest1ITC1 = Itemc5;
+Inst34Quest1description1 = AQITEM_QUIVER
+Inst34Quest1ID1 = "18714"
+
+
+--Quest 1 Horde
+Inst34Quest1Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"
+--ITEM1
+Inst34Quest1ITC1_HORDE = Itemc5;
+Inst34Quest1description1_HORDE = AQITEM_QUIVER
+Inst34Quest1ID1_HORDE = "18714"
+
+
+--------------- INST35 - Lord Kazzak ---------------
+--
+
+---------------------------------------------------
+---------------- BATTLEGROUNDS --------------------
+---------------------------------------------------
+
+--------------- INST36 - Alterac Valley (AV) ---------------
+
+--Quest 1 Alliance
+Inst36Quest1Rewardtext = AQNoReward
+
+--Quest 2 Alliance
+Inst36Quest2Rewardtext = AQDiscription_REWARD..WHITE.."1"..AQDiscription_AND..WHITE.."2"
+--ITEM1
+Inst36Quest2ITC1 = Itemc3;
+Inst36Quest2description1 = AQITEM_TRINKET
+Inst36Quest2ID1 = "17691"
+--ITEM2
+Inst36Quest2ITC2 = Itemc2;
+Inst36Quest2description2 = AQITEM_ITEM
+Inst36Quest2ID2 = "19484"
+
+--Quest 3 Alliance
+Inst36Quest3Rewardtext = AQDiscription_REWARD..WHITE.."1"..AQDiscription_OR..WHITE.."2"..AQDiscription_OR..WHITE.."3"..AQDiscription_OR..WHITE.."4"
+--ITEM1
+Inst36Quest3ITC1 = Itemc4;
+Inst36Quest3description1 = AQITEM_CROSSBOW
+Inst36Quest3ID1 = "19107"
+--ITEM2
+Inst36Quest3ITC2 = Itemc4;
+Inst36Quest3description2 = AQITEM_POLEARM
+Inst36Quest3ID2 = "19106"
+--ITEM3
+Inst36Quest3ITC3 = Itemc4;
+Inst36Quest3description3 = AQITEM_WAND
+Inst36Quest3ID3 = "19108"
+--ITEM4
+Inst36Quest3ITC4 = Itemc4;
+Inst36Quest3description4 = AQITEM_MAINHAND..AQITEM_MACE
+Inst36Quest3ID4 = "20648"
+
+--Quest 4 Alliance
+Inst36Quest4Rewardtext = AQNoReward
+
+--Quest 5 Alliance
+Inst36Quest5Rewardtext = AQNoReward
+
+--Quest 6 Alliance
+Inst36Quest6Rewardtext = AQNoReward
+
+--Quest 7 Alliance
+Inst36Quest7Rewardtext = AQNoReward
+
+--Quest 8 Alliance
+Inst36Quest8Rewardtext = AQNoReward
+
+--Quest 9 Alliance
+Inst36Quest9Rewardtext = AQNoReward
+
+--Quest 10 Alliance
+Inst36Quest10Rewardtext = AQNoReward
+
+--Quest 11 Alliance
+Inst36Quest11Rewardtext = AQNoReward
+
+--Quest 12 Alliance
+Inst36Quest12Rewardtext = AQNoReward
+
+--Quest 13 Alliance
+Inst36Quest13Rewardtext = AQNoReward
+
+--Quest 14 Alliance
+Inst36Quest14Rewardtext = AQNoReward
+
+--Quest 15 Alliance
+Inst36Quest15Rewardtext = AQNoReward
+
+--Quest 16 Alliance
+Inst36Quest16Rewardtext = AQNoReward
+
+--Quest 17 Alliance
+Inst36Quest17Rewardtext = AQNoReward
+
+
+--Quest 1 Horde
+Inst36Quest1Rewardtext_HORDE = AQNoReward
+
+--Quest 2 Horde
+Inst36Quest2Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"..AQDiscription_AND..WHITE.."2"
+--ITEM1
+Inst36Quest2ITC1_HORDE = Itemc3;
+Inst36Quest2description1_HORDE = AQITEM_TRINKET
+Inst36Quest2ID1_HORDE = "17690"
+--ITEM2
+Inst36Quest2ITC2_HORDE = Itemc2;
+Inst36Quest2description2_HORDE = AQITEM_ITEM
+Inst36Quest2ID2_HORDE = "19483"
+
+--Quest 3 Horde
+Inst36Quest3Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"..AQDiscription_OR..WHITE.."2"..AQDiscription_OR..WHITE.."3"..AQDiscription_OR..WHITE.."4"
+--ITEM1
+Inst36Quest3ITC1_HORDE = Itemc4;
+Inst36Quest3description1_HORDE = AQITEM_CROSSBOW
+Inst36Quest3ID1_HORDE = "19107"
+--ITEM2
+Inst36Quest3ITC2_HORDE = Itemc4;
+Inst36Quest3description2_HORDE = AQITEM_POLEARM
+Inst36Quest3ID2_HORDE = "19106"
+--ITEM3
+Inst36Quest3ITC3_HORDE = Itemc4;
+Inst36Quest3description3_HORDE = AQITEM_WAND
+Inst36Quest3ID3_HORDE = "19108"
+--ITEM4
+Inst36Quest3ITC4_HORDE = Itemc4;
+Inst36Quest3description4_HORDE = AQITEM_MAINHAND..AQITEM_MACE
+Inst36Quest3ID4_HORDE = "20648"
+
+--Quest 4 Horde
+Inst36Quest4Rewardtext_HORDE = AQNoReward
+
+--Quest 5 Horde
+Inst36Quest5Rewardtext_HORDE = AQNoReward
+
+--Quest 6 Horde
+Inst36Quest6Rewardtext_HORDE = AQNoReward
+
+--Quest 7 Horde
+Inst36Quest7Rewardtext_HORDE = AQNoReward
+
+--Quest 8 Horde
+Inst36Quest8Rewardtext_HORDE = AQNoReward
+
+--Quest 9 Horde
+Inst36Quest9Rewardtext_HORDE = AQNoReward
+
+--Quest 10 Horde
+Inst36Quest10Rewardtext_HORDE = AQNoReward
+
+--Quest 11 Horde
+Inst36Quest11Rewardtext_HORDE = AQNoReward
+
+--Quest 12 Horde
+Inst36Quest12Rewardtext_HORDE = AQNoReward
+
+--Quest 13 Horde
+Inst36Quest13Rewardtext_HORDE = AQNoReward
+
+--Quest 14 Horde
+Inst36Quest14Rewardtext_HORDE = AQNoReward
+
+--Quest 15 Horde
+Inst36Quest15Rewardtext_HORDE = AQNoReward
+
+--Quest 16 Horde
+Inst36Quest16Rewardtext_HORDE = AQNoReward
+
+--Quest 17 Horde
+Inst36Quest17Rewardtext_HORDE = AQNoReward
+
+
+
+--------------- INST37 - Arathi Basin (AB) ---------------
+
+--Quest 1 Alliance
+Inst37Quest1Rewardtext = AQNoReward
+
+--Quest 2 Alliance
+Inst37Quest2Rewardtext = AQNoReward
+
+--Quest 3 Alliance
+Inst37Quest3Rewardtext = AQDiscription_REWARD..WHITE.."1"
+--ITEM1
+Inst37Quest3ITC1 = Itemc2;
+Inst37Quest3description1 = AQITEM_TABARD
+Inst37Quest3ID1 = "20132"
+
+--------------- INST38 - Warsong Gulch (WSG) ---------------
+
+--Quest 1 Horde
+Inst37Quest1Rewardtext_HORDE = AQNoReward
+
+--Quest 2 Horde
+Inst37Quest2Rewardtext_HORDE = AQNoReward
+
+--Quest 3 Horde
+Inst37Quest3Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"
+--ITEM1
+Inst37Quest3ITC1_HORDE = Itemc2;
+Inst37Quest3description1_HORDE = AQITEM_TABARD
+Inst37Quest3ID1_HORDE = "20131"
+
+
 --------------- INST39 - The Crescent Grove (CG) ---------------
 
 --Quest 1 Alliance
@@ -5106,49 +5340,6 @@ Inst46Quest2ITC1_HORDE = Itemc5;
 Inst46Quest2description1_HORDE = AQITEM_ITEM
 Inst46Quest2ID1_HORDE = "61445"
 
----------------------------------------------------
----------------- OUTDOOR RAIDS --------------------
----------------------------------------------------
-
---------------- INST33 - Dragons of Nightmare ---------------
-
---Quest 1 Alliance
-Inst33Quest1Rewardtext = AQDiscription_REWARD..WHITE.."1"
---ITEM1
-Inst33Quest1ITC1 = Itemc5;
-Inst33Quest1description1 = AQITEM_RING
-Inst33Quest1ID1 = "20600"
-
-
---Quest 1 Horde
-Inst33Quest1Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"
---ITEM1
-Inst33Quest1ITC1_HORDE = Itemc5;
-Inst33Quest1description1_HORDE = AQITEM_RING
-Inst33Quest1ID1_HORDE = "20600"
-
-
-
---------------- INST34 - Azuregos ---------------
-
---Quest 1 Alliance
-Inst34Quest1Rewardtext = AQDiscription_REWARD..WHITE.."1"
---ITEM1
-Inst34Quest1ITC1 = Itemc5;
-Inst34Quest1description1 = AQITEM_QUIVER
-Inst34Quest1ID1 = "18714"
-
-
---Quest 1 Horde
-Inst34Quest1Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"
---ITEM1
-Inst34Quest1ITC1_HORDE = Itemc5;
-Inst34Quest1description1_HORDE = AQITEM_QUIVER
-Inst34Quest1ID1_HORDE = "18714"
-
-
---------------- INST35 - Lord Kazzak ---------------
---
 
 --------------- INST47 - Ostarius of Uldum (Ostarius) ----------- -- TurtleWOW World Boss
 
@@ -5157,191 +5348,3 @@ Inst47Quest1Rewardtext = AQNoReward
 
 --Quest 1 Horde
 Inst47Quest1Rewardtext_HORDE = AQNoReward
-
----------------------------------------------------
----------------- BATTLEGROUNDS --------------------
----------------------------------------------------
-
---------------- INST36 - Alterac Valley (AV) ---------------
-
---Quest 1 Alliance
-Inst36Quest1Rewardtext = AQNoReward
-
---Quest 2 Alliance
-Inst36Quest2Rewardtext = AQDiscription_REWARD..WHITE.."1"..AQDiscription_AND..WHITE.."2"
---ITEM1
-Inst36Quest2ITC1 = Itemc3;
-Inst36Quest2description1 = AQITEM_TRINKET
-Inst36Quest2ID1 = "17691"
---ITEM2
-Inst36Quest2ITC2 = Itemc2;
-Inst36Quest2description2 = AQITEM_ITEM
-Inst36Quest2ID2 = "19484"
-
---Quest 3 Alliance
-Inst36Quest3Rewardtext = AQDiscription_REWARD..WHITE.."1"..AQDiscription_OR..WHITE.."2"..AQDiscription_OR..WHITE.."3"..AQDiscription_OR..WHITE.."4"
---ITEM1
-Inst36Quest3ITC1 = Itemc4;
-Inst36Quest3description1 = AQITEM_CROSSBOW
-Inst36Quest3ID1 = "19107"
---ITEM2
-Inst36Quest3ITC2 = Itemc4;
-Inst36Quest3description2 = AQITEM_POLEARM
-Inst36Quest3ID2 = "19106"
---ITEM3
-Inst36Quest3ITC3 = Itemc4;
-Inst36Quest3description3 = AQITEM_WAND
-Inst36Quest3ID3 = "19108"
---ITEM4
-Inst36Quest3ITC4 = Itemc4;
-Inst36Quest3description4 = AQITEM_MAINHAND..AQITEM_MACE
-Inst36Quest3ID4 = "20648"
-
---Quest 4 Alliance
-Inst36Quest4Rewardtext = AQNoReward
-
---Quest 5 Alliance
-Inst36Quest5Rewardtext = AQNoReward
-
---Quest 6 Alliance
-Inst36Quest6Rewardtext = AQNoReward
-
---Quest 7 Alliance
-Inst36Quest7Rewardtext = AQNoReward
-
---Quest 8 Alliance
-Inst36Quest8Rewardtext = AQNoReward
-
---Quest 9 Alliance
-Inst36Quest9Rewardtext = AQNoReward
-
---Quest 10 Alliance
-Inst36Quest10Rewardtext = AQNoReward
-
---Quest 11 Alliance
-Inst36Quest11Rewardtext = AQNoReward
-
---Quest 12 Alliance
-Inst36Quest12Rewardtext = AQNoReward
-
---Quest 13 Alliance
-Inst36Quest13Rewardtext = AQNoReward
-
---Quest 14 Alliance
-Inst36Quest14Rewardtext = AQNoReward
-
---Quest 15 Alliance
-Inst36Quest15Rewardtext = AQNoReward
-
---Quest 16 Alliance
-Inst36Quest16Rewardtext = AQNoReward
-
---Quest 17 Alliance
-Inst36Quest17Rewardtext = AQNoReward
-
-
---Quest 1 Horde
-Inst36Quest1Rewardtext_HORDE = AQNoReward
-
---Quest 2 Horde
-Inst36Quest2Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"..AQDiscription_AND..WHITE.."2"
---ITEM1
-Inst36Quest2ITC1_HORDE = Itemc3;
-Inst36Quest2description1_HORDE = AQITEM_TRINKET
-Inst36Quest2ID1_HORDE = "17690"
---ITEM2
-Inst36Quest2ITC2_HORDE = Itemc2;
-Inst36Quest2description2_HORDE = AQITEM_ITEM
-Inst36Quest2ID2_HORDE = "19483"
-
---Quest 3 Horde
-Inst36Quest3Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"..AQDiscription_OR..WHITE.."2"..AQDiscription_OR..WHITE.."3"..AQDiscription_OR..WHITE.."4"
---ITEM1
-Inst36Quest3ITC1_HORDE = Itemc4;
-Inst36Quest3description1_HORDE = AQITEM_CROSSBOW
-Inst36Quest3ID1_HORDE = "19107"
---ITEM2
-Inst36Quest3ITC2_HORDE = Itemc4;
-Inst36Quest3description2_HORDE = AQITEM_POLEARM
-Inst36Quest3ID2_HORDE = "19106"
---ITEM3
-Inst36Quest3ITC3_HORDE = Itemc4;
-Inst36Quest3description3_HORDE = AQITEM_WAND
-Inst36Quest3ID3_HORDE = "19108"
---ITEM4
-Inst36Quest3ITC4_HORDE = Itemc4;
-Inst36Quest3description4_HORDE = AQITEM_MAINHAND..AQITEM_MACE
-Inst36Quest3ID4_HORDE = "20648"
-
---Quest 4 Horde
-Inst36Quest4Rewardtext_HORDE = AQNoReward
-
---Quest 5 Horde
-Inst36Quest5Rewardtext_HORDE = AQNoReward
-
---Quest 6 Horde
-Inst36Quest6Rewardtext_HORDE = AQNoReward
-
---Quest 7 Horde
-Inst36Quest7Rewardtext_HORDE = AQNoReward
-
---Quest 8 Horde
-Inst36Quest8Rewardtext_HORDE = AQNoReward
-
---Quest 9 Horde
-Inst36Quest9Rewardtext_HORDE = AQNoReward
-
---Quest 10 Horde
-Inst36Quest10Rewardtext_HORDE = AQNoReward
-
---Quest 11 Horde
-Inst36Quest11Rewardtext_HORDE = AQNoReward
-
---Quest 12 Horde
-Inst36Quest12Rewardtext_HORDE = AQNoReward
-
---Quest 13 Horde
-Inst36Quest13Rewardtext_HORDE = AQNoReward
-
---Quest 14 Horde
-Inst36Quest14Rewardtext_HORDE = AQNoReward
-
---Quest 15 Horde
-Inst36Quest15Rewardtext_HORDE = AQNoReward
-
---Quest 16 Horde
-Inst36Quest16Rewardtext_HORDE = AQNoReward
-
---Quest 17 Horde
-Inst36Quest17Rewardtext_HORDE = AQNoReward
-
-
-
---------------- INST37 - Arathi Basin (AB) ---------------
-
---Quest 1 Alliance
-Inst37Quest1Rewardtext = AQNoReward
-
---Quest 2 Alliance
-Inst37Quest2Rewardtext = AQNoReward
-
---Quest 3 Alliance
-Inst37Quest3Rewardtext = AQDiscription_REWARD..WHITE.."1"
---ITEM1
-Inst37Quest3ITC1 = Itemc2;
-Inst37Quest3description1 = AQITEM_TABARD
-Inst37Quest3ID1 = "20132"
-
-
---Quest 1 Horde
-Inst37Quest1Rewardtext_HORDE = AQNoReward
-
---Quest 2 Horde
-Inst37Quest2Rewardtext_HORDE = AQNoReward
-
---Quest 3 Horde
-Inst37Quest3Rewardtext_HORDE = AQDiscription_REWARD..WHITE.."1"
---ITEM1
-Inst37Quest3ITC1_HORDE = Itemc2;
-Inst37Quest3description1_HORDE = AQITEM_TABARD
-Inst37Quest3ID1_HORDE = "20131"
