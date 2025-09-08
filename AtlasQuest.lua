@@ -202,6 +202,7 @@ function AtlasQuest_UpdateButtons()
 			local text = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].title
 			local isFinished = AtlasQuest_CharData[CurrentDungeon][CurrentFaction][i]
 			local questLevel = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].level
+			local rewards = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].rewards
 			local hasQuest = AtlasQuest_HasQuest(text)
 			if ( text ) then
 				if ( hasQuest ) then
@@ -223,11 +224,13 @@ function AtlasQuest_UpdateButtons()
 				end
 				button:SetText(i..". "..text);
 				button:Show()
-				for j = 1, 6 do
-					if ( AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].rewards[j] ) then
-						local itemID = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].rewards[j].id
-						if ( not GetItemInfo(itemID ) ) then
-							GameTooltip:SetHyperlink("item:"..itemID)
+				if ( rewards ) then
+					for j = 1, 6 do
+						if ( rewards[j] ) then
+							local itemID = rewards[j].id
+							if ( not GetItemInfo(itemID ) ) then
+								GameTooltip:SetHyperlink("item:"..itemID)
+							end
 						end
 					end
 				end
@@ -768,11 +771,12 @@ function AtlasQuest_SetQuestText()
 
 	local level = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].level
 	local attain = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].attain
-	local prequest = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].prequest
-	local followup = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].followup
+	local prequest = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].prequest or NO
+	local followup = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].followup or NO
 	local location = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].location
 	local aim = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].aim
 	local note = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].note
+	local rewards = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards
 	if ( level ) then
 		local color = GetDifficultyColor(level, true)
 		AtlasQuestInsideFrameQuestName:SetTextColor(color.r, color.g, color.b)
@@ -786,24 +790,36 @@ function AtlasQuest_SetQuestText()
 		..factionColor..AQDiscription_AIM..WHITE..aim.."\n\n"
 		..factionColor..AQDiscription_NOTE..WHITE..note);
 
-	AtlasQuestInsideFrameRewardText:SetText(factionColor..(AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards.text or ""))
-	local numRewards = getn(AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards)
+	local numRewards = rewards and getn(AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards) or 0
+	
 	if ( numRewards > 0 ) then
+		AtlasQuestInsideFrameRewardText:SetText(factionColor..AQDiscription_REWARD)
 		for i = 1, numRewards do
 			local itemID = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].id
-			if ( not GetItemInfo(itemID) ) then
+			local itemName, itemLink, itemQuality, itemLevel, itemType, itemSubType, itemCount, itemEquipLoc, itemTexture = GetItemInfo(itemID)
+			if ( not itemName ) then
 				GameTooltip:SetHyperlink("item:"..itemID);
 			end
-			local name = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].name
-			local quality = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].quality
-			local icon = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].icon
+			local name = itemName or AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].name
+			local quality = itemQuality or AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].quality
+			local icon = itemTexture or ("Interface\\Icons\\"..AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].icon)
 			local subtext = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].subtext
-			local _, _, _, color = GetItemQualityColor(quality)
-			_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexture("Interface\\Icons\\"..icon);
-			_G["AtlasQuestItemframe"..i.."_Name"]:SetText(color..name);
+			local count = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].count
+			local r, g, b = GetItemQualityColor(quality)
+			_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexture(icon);
+			_G["AtlasQuestItemframe"..i.."_Name"]:SetText(name);
+			_G["AtlasQuestItemframe"..i.."_Name"]:SetTextColor(r, g, b);
 			_G["AtlasQuestItemframe"..i.."_Extra"]:SetText(subtext);
+			if ( count ) then
+				_G["AtlasQuestItemframe"..i.."_Count"]:SetText(count);
+				_G["AtlasQuestItemframe"..i.."_Count"]:Show();
+			else
+				_G["AtlasQuestItemframe"..i.."_Count"]:Hide();
+			end
 			_G["AtlasQuestItemframe"..i]:Show();
 		end
+	else
+		AtlasQuestInsideFrameRewardText:SetText(factionColor..AQNoReward)
 	end
 
 	local pages = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
