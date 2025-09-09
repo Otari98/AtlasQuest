@@ -405,7 +405,7 @@ AtlasQuest.AtlasMapToDungeon = {
 	["LowerKara"] = 45,
 	["EmeraldSanctum"] = 46,
 	["Ostarius"] = 47,
-	-- ["DragonmawRetreat"] = 48,
+	["DragonmawRetreat"] = 48,
 	-- ["StormwroughtRuins"] = 49,
 }
 
