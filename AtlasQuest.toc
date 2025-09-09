@@ -9,7 +9,7 @@
 ## Author:
 ## Updated by: Shahopriest
 ## CLI by:
-## Version: 4.2.0
+## Version: 4.2.1
 ## X-eMail: m4r3lk4@gmail.com
 ## X-Website: https://forum.turtle-wow.org/viewtopic.php?t=7959
 ## X-Category: MYADDONS_CATEGORY_MAP
@@ -23,6 +23,8 @@
 
 Locale\localization.en.lua
 Locale\localization.cn.lua
+Locale\localization.de.lua
+Locale\localization.es.lua
+Locale\localization.ru.lua
 
-AtlasQuest_InsideFrame.xml
 AtlasQuest.xml

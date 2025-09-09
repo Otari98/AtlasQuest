@@ -1,6444 +1,13403 @@
--- if ( GetLocale() == "ruRU" ) then
-	--[[
-	
-		Russian localization by Lichery
-		
-		AtlasQuest, a World of Warcraft addon.
-		Email me at m4r3lk4@gmail.com
-		
-		This file is part of AtlasQuest.
-		
-		AtlasQuest is free software; you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation; either version 2 of the License, or
-		(at your option) any later version.
-		
-		AtlasQuest is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.
-		
-		You should have received a copy of the GNU General Public License
-		along with AtlasQuest; if not, write to the Free Software
-		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+--[[
 
-		классовые квесты
-	--]]
-	
-	---------------
-	--- COLOURS ---
-	---------------
-	
-	local GREY = "|cff999999";
-	local RED = "|cffff0000";
-	local REDA = "|cffcc6666";
-	local WHITE = "|cffFFFFFF";
-	local GREEN = "|cff1eff00";
-	local PURPLE = "|cff9F3FFF";
-	local BLUE = "|cff0070dd";
-	local ORANGE = "|cffFF8400";
-	local YELLOW = "|cffffff00";
-	
-	
-	---------------
-	--- OPTIONS ---
-	---------------
-	
-	AQHelpText = "наберите /aq или atlasquest "..YELLOW.."[команда]"..WHITE.."\nкоманды: help; option/config; show/hide; left/right; colour; autoshow"..RED.."(только Атлас)"
-	--
-	AQOptionsCaptionTEXT = "Настройки AtlasQuest";
-	AQ_OK = "Готово"
-	
-	-- Autoshow
-	AQOptionsAutoshowTEXT = "Показывать панель AtlasQuest вместе с Атласом.";
-	AQAtlasAutoON = "Панель AtlasQuest будет показана когда вы откроете Атлас."..GREEN.." (по умолчанию)"
-	AQAtlasAutoOFF = "Панель AtlasQuest "..RED.."не будет"..WHITE.." показана когда вы откроете Атлас."
-	
-	-- Right/Left
-	AQOptionsLEFTTEXT = "Показать панель AtlasQuest "..RED.."слева.";
-	AQOptionsRIGHTTEXT = "Показать панель AtlasQuest "..RED.."справа.";
-	AQShowRight = "Теперь панель AtlasQuest "..RED.."справа.";
-	AQShowLeft = "Теперь панель AtlasQuest "..RED.."слева."..GREEN.." (по умолчанию)";
-	
-	-- Colour Check
-	AQOptionsCCTEXT = "Подкрасить задания в соответствии с их уровнем."
-	AQCCON = "Теперь AtlasQuest будет подкрашивать задания в соответствии с уровнем."
-	AQCCOFF = "AtlasQuest не будет подкрашивать задания."
-	
-	-- QuestLog Colour Check
-	AQQLColourChange = "Подкрашивать все задания, имеющиеся в журнале "..BLUE.."синим."
-	
-	-- AutoQuery Quest Rewards
-	AQOptionsAutoQueryTEXT = "Автоматически запрашивать у сервера предметы которые вы не видели."
-	
-	-- Suppress Server Query text
-	AQOptionsNoQuerySpamTEXT = "Подавление спама запросов к серверу."
-	
-	-- Use Comparison Tooltips
-	AQOptionsCompareTooltipTEXT = "Сравнение награды с надетыми вещами."
-	
-	
-	AQAbilities = BLUE .. "Способности:"
-	AQSERVERASKInformation = " Пожалуйста нажимайте правую кнопку мыши, пока не увидите окно предмета."
-	AQSERVERASKAuto = " Попробуйте задержать курсор мыши над предметом на секунду."
-	AQSERVERASK = "AtlasQuest запрашивает сервер о: "
-	AQERRORNOTSHOWN = "Этот предмет небезопасен!"
-	AQERRORASKSERVER = "Вы можете щелкнуть правой кнопкой, чтобы попытаться запросить информацию о предмете. Имеется риск отсоединения от сервера."
-	AQOptionB = "Настройки"
-	AQStoryB = "История"
-	AQNoReward = BLUE.." Нет наград"
-	AQDiscription_REWARD = BLUE.."Награда: "
-	AQDiscription_OR = GREY.." или "
-	AQDiscription_AND = GREY.." и "
-	AQDiscription_ATTAIN = "Доступно: "
-	AQDiscription_LEVEL = "Уровень: "
-	AQDiscription_START = "Начинается у: \n"
-	AQDiscription_AIM = "Цель: \n"
-	AQDiscription_NOTE = "Заметка: \n"
-	AQDiscription_PREQUEST= "Предыдущее задание: "
-	AQDiscription_FOLGEQUEST = "Следующее задание: "
-	AQFinishedTEXT = "Задание сделано ";
-	
-	
-	------------------
-	--- ITEM TYPES ---
-	------------------
-	
-	AQITEM_DAGGER = " Кинжал"
-	AQITEM_POLEARM = " Древковое"
-	AQITEM_SWORD = " Меч"
-	AQITEM_AXE = " Топор"
-	AQITEM_WAND = "Жезл"
-	AQITEM_STAFF = "Посох"
-	AQITEM_MACE = " Дробящее"
-	AQITEM_SHIELD = "Щит"
-	AQITEM_GUN = "Огнестрельное"
-	AQITEM_BOW = "Лук"
-	AQITEM_CROSSBOW = "Арбалет"
-	AQITEM_THROWN = "Метательное"
-	
-	AQITEM_WAIST = "Пояс,"
-	AQITEM_SHOULDER = "Плечо,"
-	AQITEM_CHEST = "Грудь,"
-	AQITEM_LEGS = "Ноги,"
-	AQITEM_HANDS = "Кисти рук,"
-	AQITEM_FEET = "Ступни,"
-	AQITEM_WRIST = "Запястья,"
-	AQITEM_HEAD = "Голова,"
-	AQITEM_BACK = "Спина"
-	AQITEM_TABARD = "Гербовая накидка"
-	
-	AQITEM_CLOTH = " Ткань"
-	AQITEM_LEATHER = " Кожа"
-	AQITEM_MAIL = " Кольчуга"
-	AQITEM_PLATE = " Латы"
-	
-	AQITEM_OFFHAND = "Левая рука"
-	AQITEM_MAINHAND = "Правая рука,"
-	AQITEM_ONEHAND = "Одноручное,"
-	AQITEM_TWOHAND = "Двуручное,"
-	
-	AQITEM_ITEM = "Предмет" -- Use this for those oddball rewards which aren't really anything else.
-	AQITEM_TRINKET = "Аксессуар"
-	AQITEM_RELIC = "Реликвия"
-	AQITEM_POTION = "Зелье"
-	AQITEM_OFFHAND = "Левая рука"
-	AQITEM_NECK = "Шея"
-	AQITEM_PATTERN = "Выкройка"
-	AQITEM_BAG = "Сумка"
-	AQITEM_RING = "Палец"
-	AQITEM_KEY = "Ключ"
-	AQITEM_QUIVER = "Колчан"
-	AQITEM_AMMOPOUCH = "Подсумок"
-	AQITEM_ENCHANT = "Чары"
-	
-	
-	
-	----------------------------------------------
-	---------------- DUNGEONS --------------------
-	----------------------------------------------
-	
-	--------------- INST1 - Deadmines (DM) ---------------
-	Inst1Story = "Когда-то величайший золотодобывающий центр в землях людей, Мертвые Копи были заброшены когда Орда не оставила камня на камне от Штормграда во время Первой Войны. Сейчас их заняло Братство Справедливости и превратило темные тоннели и в их собственное святилище. Ходят слухи что воры призвали умных гоблинов, чтобы те помогли им построить что-то ужасное в глубине копей - но что это может быть до сих пор не ясно. По слухам путь в Мертвые Копи лежит через тихую, скромную деревушку Луноречье."
-	Inst1Caption = "Мертвые копи"
-	Inst1QAA = "7 заданий" -- how many quests for alliance
-	Inst1QAH = "Нет заданий" -- for Horde
-	
-	--Quest 1 Alliance
-	Inst1Quest1 = "1. Красные шелковые банданы" -- 214
-	Inst1Quest1_Level = "17"
-	Inst1Quest1_Attain = "14"
-	Inst1Quest1_Aim = "Принесите 10 красных шелковых бандан разведчице Риэле к башне на Сторожевом холме."
-	Inst1Quest1_Location = "Разведчица Риэла (Западный Край - Сторожевой холм; "..YELLOW.."56, 47"..WHITE..")"
-	Inst1Quest1_Note = "Вы можете получить красные шелковые банданы с шахтеров в Мертвых копях или в городе, где находится подземелье. Задание становится доступным после выполнения цепочки заданий Братства Справедливости до стадии когда вам нужно убить Эдвина Ван Клифа."
-	Inst1Quest1_Prequest = "Братство Справедливости (id = 155)" -- 155
-	Inst1Quest1_Folgequest = "Нет"
-	--
-	Inst1Quest1name1 = "Solid Shortblade"
-	Inst1Quest1name2 = "Scrimshaw Dagger"
-	Inst1Quest1name3 = "Piercing Axe"
-	
-	--Quest 2 Alliance
-	Inst1Quest2 = "2. Сбор воспоминаний" -- 168
-	Inst1Quest2_Level = "18"
-	Inst1Quest2_Attain = "14"
-	Inst1Quest2_Aim = "Добудьте 4 карточки Союза шахтеров и верните их Вилдеру Крапивцу в Штормград."
-	Inst1Quest2_Location = "Чертополох Дикий (Штормград - Квартал дворфов; "..YELLOW.."65, 21"..WHITE.." )"
-	Inst1Quest2_Note = "Карточки падают с нежити снаружи подземелья в зоне около "..YELLOW.."[3]"..WHITE.." на карте входа."
-	Inst1Quest2_Prequest = "Нет"
-	Inst1Quest2_Folgequest = "Нет"
-	--
-	Inst1Quest2name1 = "Tunneler's Boots"
-	Inst1Quest2name2 = "Dusty Mining Gloves"
-	
-	--Quest 3 Alliance
-	Inst1Quest3 = "3. О, брат мой..." -- 167
-	Inst1Quest3_Level = "20"
-	Inst1Quest3_Attain = "15"
-	Inst1Quest3_Aim = "Принесите значок Лиги Исследователей, принадлежавший Вилдеру Крапивцу, в Штормград."
-	Inst1Quest3_Location = "Вилдер Крапивец (Штормград - Квартал дворфов; "..YELLOW.."65,21"..WHITE.." )"
-	Inst1Quest3_Note = "Вилдер Крапивец находится снаружи подземелья"
-	Inst1Quest3_Prequest = "Нет"
-	Inst1Quest3_Folgequest = "Нет"
-	--
-	Inst1Quest3name1 = "Miner's Revenge"
-	
-	--Quest 4 Alliance
-	Inst1Quest4 = "4. Битва под землей" -- 2040
-	Inst1Quest4_Level = "20"
-	Inst1Quest4_Attain = "15"
-	Inst1Quest4_Aim = "Принесите Шони Молшунье в Штормград зубчатый спрек-механизм гномов из Мертвых копей."
-	Inst1Quest4_Location = "Шони Молшунья (Штормград - Квартал дворфов; "..YELLOW.."55,12"..WHITE.." )"
-	Inst1Quest4_Note = "Предшествующее задание можно взять у Гноарна (Стальгорн - Город механиков; "..YELLOW.."69,50"..WHITE..").\nЗубчатый спрек-механизм гномов добывается с Крошшера Снида "..YELLOW.."[3]"..WHITE.."."
-	Inst1Quest4_Prequest = "Разговор с Шони" -- 2041
-	Inst1Quest4_Folgequest = "Нет"
-	--
-	Inst1Quest4name1 = "Polar Gauntlets"
-	Inst1Quest4name2 = "Sable Wand"
-	
-	--Quest 5 Alliance
-	Inst1Quest5 = "5. Братство Справедливости" -- 166
-	Inst1Quest5_Level = "22"
-	Inst1Quest5_Attain = "14"
-	Inst1Quest5_Aim = "Убейте Эдвина ван Клифа и принесите его голову Гриану Камнегриву."
-	Inst1Quest5_Location = "Гриан Камнегрив (Западный край - Сторожевой холм; "..YELLOW.."56,47"..WHITE..")"
-	Inst1Quest5_Note = "Вы начинаете линейку у Гриана Камнегрива (Западный Край - Сторожевой холм; "..YELLOW.."56,47"..WHITE..").\nЭдвин Ван Клиф это последний босс в Мертвых копях. Вы найдете его на верхней палубе корабля "..YELLOW.."[6]"..WHITE.."."
-	Inst1Quest5_Prequest = "Братство справедливости" -- 155
-	Inst1Quest5_Folgequest = "Нет"
-	--
-	Inst1Quest5name1 = "Chausses of Westfall"
-	Inst1Quest5name2 = "Tunic of Westfall"
-	Inst1Quest5name3 = "Staff of Westfall"
-	
-	--Quest 6 Alliance
-	Inst1Quest6 = "6. Испытание доблести" -- 1654
-	Inst1Quest6_Level = "22"
-	Inst1Quest6_Attain = "20"
-	Inst1Quest6_Aim = "Возьмите список Джордана, добудьте немного древесины белокаменного дуба, партию очищенной руды Бэйлора, кузнечный молот Джордана и самоцвет Кора и отдайте их Джордану Стилвеллу в Стальгорне."
-	Inst1Quest6_Location = "Джордан Стилвелл (Дун Морог - Вход в Стальгорн; "..YELLOW.."52,36"..WHITE..")"
-	Inst1Quest6_Note = "Задание для паладинов: Чтобы увидеть заметки щелкните на "..YELLOW.."[Информация: Испытание доблести]"..WHITE.."."
-	Inst1Quest6_Page = { "Только паладины могут получить это задание!\n1. Вы получите древесину белокаменного дуба у гоблинов-лесорубов в "..YELLOW.."[Мертвые копи]"..WHITE..".\n2. Для получения партии очищенной руды Бэйлора вы должны поговорить с Бэйлором Каменной Дланью (Озеро Модан - Телсамар; 35,44 ). Он даст вам задание 'Партия руды Бэйлора'. Вы найдете руду Джордана за деревом около 71,21\n3. Вы получите кузнечный молот Джордана в "..YELLOW.."[Крепость Темного Клыка]"..WHITE.." около "..YELLOW.."[3]"..WHITE..".\n4. Для получения самоцвета Кора Вам нужно пойти к Тандрису Ветропряду (Темные берега - Аубердин; 37,40) и выполнить задание 'Поиск самоцвета Кора'. Для этого задания, вам нужно убивать Провидзев и Жриц Непроглядной пучины перед "..YELLOW.."[Непроглядная пучина]"..WHITE..". С них добывается Оскверненный самоцвет Кора. Тандрис Ветропряд очистит его для Вас.", };
-	Inst1Quest6_Prequest = "Фолиант Отваги -> Испытание доблести" -- 1651 -> 1653
-	Inst1Quest6_Folgequest = "Испытание доблести" -- 1806
-	--
-	Inst1Quest6name1 = "Verigan's Fist"
-	
-	--Quest 7 Alliance
-	Inst1Quest7 = "7. Неотправленное письмо" -- 373
-	Inst1Quest7_Level = "22"
-	Inst1Quest7_Attain = "16"
-	Inst1Quest7_Aim = "Доставьте письмо городскому архитектору Баросу Алекстону в Штормград."
-	Inst1Quest7_Location = "Неотосланное письмо (добывается с Эдвин ван Клиф; "..YELLOW.."[6]"..WHITE..")"
-	Inst1Quest7_Note = "Барос Алекстон находится в Штормград, рядом с Соборной площадью около "..YELLOW.."49,30"..WHITE.."."
-	Inst1Quest7_Prequest = "Нет"
-	Inst1Quest7_Folgequest = "Базиль Тредд" -- 389
-	-- No Rewards for this quest
-	
-	
-	--------------- INST2 - Wailing Caverns (WC) ---------------
-	Inst2Story = "Не так давно друид ночных эльфов по имени Наралекс обнаружил сеть подземных пещер прямо в сердце Степей. Названные 'Пещерами стенаний', эти естественные пещеры были наполнены трещинами, которые производили долгие жалобные стоны когда пар вырывался из них. Наралекс верил, что он сможет использовать подземные источники пещер для восстановления буйства красок и изобилия Степей - но для исполнения этого потребовалоь перекачивание энергий из сказочного Изумрудного Сна. Однако однажды соединившись со Сном, видения друида превратились в кошмар.  Вскоре Пещеры стенаний начали меняться - воды наполнились грязью и некогда послушные существа внутри превратились в порочных, смертоносных хищников. Поговоривают что сам Наралекс все еще находится где-то в сердце лабиринта, попавший в капкан пределов Изумрудного Сна. Даже его бывшие ученики были испорчены ожившим кошмаром учителя - они превратились в злобных Друидов Клыка."
-	Inst2Caption = "Пещеры стенаний"
-	Inst2QAA = "5 заданий"
-	Inst2QAH = "7 заданий"
-	
-	--Quest 1 Alliance
-	Inst2Quest1 = "1. Шкуры загадочных существ" --1486
-	Inst2Quest1_Level = "17"
-	Inst2Quest1_Attain = "13"
-	Inst2Quest1_Aim = "Принесите 20 искаженных шкур Налпаку в Пещерах Стенаний."
-	Inst2Quest1_Location = "Наплак (Степи - Пещеры стенаний; "..YELLOW.."47,36 "..WHITE..")"
-	Inst2Quest1_Note = "Со всех существ внутри и перед подземельем можно подобрать шкуры.\nНаплака можно найти в тайной пещере над входом в Пещеры стенаний. Простейший путь увидеть его - забраться на гору позади входа и спрыгнуть на небольшой выступ слева над входом в пещеру."
-	Inst2Quest1_Prequest = "Нет"
-	Inst2Quest1_Folgequest = "Нет"
-	--
-	Inst2Quest1name1 = "Slick Deviate Leggings"
-	Inst2Quest1name2 = "Deviate Hide Pack"
-	
-	--Quest 2 Alliance
-	Inst2Quest2 = "2. Неприятности в порту" -- 959
-	Inst2Quest2_Level = "18"
-	Inst2Quest2_Attain = "14"
-	Inst2Quest2_Aim = "Оператор крана Биггльфузз из Кабестана попросил Вас отнять бутылку портвейна 99-летней выдержки у Безумного Магглиша, который прячется в Пещерах Стенаний."
-	Inst2Quest2_Location = "Оператор крана Биггльфузз (Степи - Кабестан; "..YELLOW.."63,37 "..WHITE..")"
-	Inst2Quest2_Note = "Получить бутылку можно прямо перед тем как вы войдете в подземелье, убив Безумного Магглиша. Когда вы только вошли в пещеру идите направо и найдете его в конце прохода. Он скрывается у стены."
-	Inst2Quest2_Prequest = "Нет"
-	Inst2Quest2_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst2Quest3 = "3. Умный напиток" -- 1491
-	Inst2Quest3_Level = "18"
-	Inst2Quest3_Attain = "13"
-	Inst2Quest3_Aim = "Принесите 6 порций воющей субстанции Мебоку Миззриксу в Кабестан."
-	Inst2Quest3_Location = "Мебок Миззрикс (Степи - Кабестан; "..YELLOW.."62,37 "..WHITE..")"
-	Inst2Quest3_Note = "Предшествующее задание также можно взять у Мебока Миззрикса.\nИз всех врагов-эктоплазмы внутри и перед подземельем можно достать субстанцию."
-	Inst2Quest3_Prequest = "Рога ящеров" -- 865
-	Inst2Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst2Quest4 = "4. Искоренение Скверны" -- 1487
-	Inst2Quest4_Level = "21"
-	Inst2Quest4_Attain = "15"
-	Inst2Quest4_Aim = "Убейте для Эбру 7 загадочных опустошителей, 7 загадочных гадюк, 7 загадочных шаркунов и 7 загадочных страхозубов."
-	Inst2Quest4_Location = "Эбру (Степи; "..YELLOW.."47,36 "..WHITE..")"
-	Inst2Quest4_Note = "Эбру находится в тайной пещере над входом в Пещеры стенаний. Простейший путь увидеть его - забраться на гору позади входа и спрыгнуть на небольшой выступ слева над входом в пещеру."
-	Inst2Quest4_Prequest = "Нет"
-	Inst2Quest4_Folgequest = "Нет"
-	--
-	Inst2Quest4name1 = "Pattern: Deviate Scale Belt"
-	Inst2Quest4name2 = "Sizzle Stick"
-	Inst2Quest4name3 = "Dagmire Gauntlets"
-	
-	--Quest 5 Alliance
-	Inst2Quest5 = "5. Светящийся осколок" -- 6981
-	Inst2Quest5_Level = "26"
-	Inst2Quest5_Attain = "15"
-	Inst2Quest5_Aim = "Отправляйтесь в Кабестан и найдите там кого-нибудь, кто сможет вам рассказать об этом светящемся осколке. Затем отнесите осколок туда, куда вас направят."
-	Inst2Quest5_Location = "Светящийся осколок (добывается с Мутануса Пожирателя; (Пещеры стенаний)"
-	Inst2Quest5_Note = "Мутанус Пожиратель появляется только если вы убили всех 4 повелителей змей и проводили таурена-друда от входа.\nКогда вы возьмете осколок, вам нужно принести его к гоблину-пилоту около банка в Кабестане, а потом на вершину горы над Пещерами стенаний к Фалле Мудрости Ветра."
-	Inst2Quest5_Prequest = "Нет"
-	Inst2Quest5_Folgequest = "Кошмары" -- 3370
-	--
-	Inst2Quest5name1 = "Talbar Mantle"
-	Inst2Quest5name2 = "Quagmire Galoshes"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst2Quest1_HORDE = Inst2Quest1
-	Inst2Quest1_HORDE_Level = Inst2Quest1_Level
-	Inst2Quest1_HORDE_Attain = Inst2Quest1_Attain
-	Inst2Quest1_HORDE_Aim = Inst2Quest1_Aim
-	Inst2Quest1_HORDE_Location = Inst2Quest1_Location
-	Inst2Quest1_HORDE_Note = Inst2Quest1_Note
-	Inst2Quest1_HORDE_Prequest = Inst2Quest1_Prequest
-	Inst2Quest1_HORDE_Folgequest = Inst2Quest1_Folgequest
-	--
-	Inst2Quest1name1_HORDE = Inst2Quest1name1
-	Inst2Quest1name2_HORDE = Inst2Quest1name2
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst2Quest2_HORDE = Inst2Quest2
-	Inst2Quest2_HORDE_Level = Inst2Quest2_Level
-	Inst2Quest2_HORDE_Attain = Inst2Quest2_Attain
-	Inst2Quest2_HORDE_Aim = Inst2Quest2_Aim
-	Inst2Quest2_HORDE_Location = Inst2Quest2_Location
-	Inst2Quest2_HORDE_Note = Inst2Quest2_Note
-	Inst2Quest2_HORDE_Prequest = Inst2Quest2_Prequest
-	Inst2Quest2_HORDE_Folgequest = Inst2Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde
-	Inst2Quest3_HORDE = "3. Змеецвет" -- 962
-	Inst2Quest3_HORDE_Level = "18"
-	Inst2Quest3_HORDE_Attain = "14"
-	Inst2Quest3_HORDE_Aim = "Аптекарь Зама из Громового Утеса просит Вас принести ей 10 змеецветов."
-	Inst2Quest3_HORDE_Location = "Аптекарь Зама (Громовой Утес - Вершина Духов; "..YELLOW.."22,20 "..WHITE..")"
-	Inst2Quest3_HORDE_Note = "Аптекарь Зама находится в пещере под Вершиной Духов.\nСобрать Змеецвет можно внутри пещеры перед подземельем и внутри него. Игроки с навыком травничества могут видеть Змеецвет на миникарте."
-	Inst2Quest3_HORDE_Prequest = "Споры грибов -> Аптекарь Зама" -- 848 -> 853
-	Inst2Quest3_HORDE_Folgequest = "Нет"
-	--
-	Inst2Quest3name1_HORDE = "Apothecary Gloves"
-	
-	--Quest 4 Horde (same as Quest 3 Alliance)
-	Inst2Quest4_HORDE = "4. Умный напиток"
-	Inst2Quest4_HORDE_Level = Inst2Quest3_Level
-	Inst2Quest4_HORDE_Attain = Inst2Quest3_Attain
-	Inst2Quest4_HORDE_Aim = Inst2Quest3_Aim
-	Inst2Quest4_HORDE_Location = Inst2Quest3_Location
-	Inst2Quest4_HORDE_Note = Inst2Quest3_Note
-	Inst2Quest4_HORDE_Prequest = Inst2Quest3_Prequest
-	Inst2Quest4_HORDE_Folgequest = Inst2Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 4 Alliance)
-	Inst2Quest5_HORDE = "5. Искоренение Скверны"
-	Inst2Quest5_HORDE_Level = Inst2Quest4_Level
-	Inst2Quest5_HORDE_Attain = Inst2Quest4_Attain
-	Inst2Quest5_HORDE_Aim = Inst2Quest4_Aim
-	Inst2Quest5_HORDE_Location = Inst2Quest4_Location
-	Inst2Quest5_HORDE_Note = Inst2Quest4_Note
-	Inst2Quest5_HORDE_Prequest = Inst2Quest4_Prequest
-	Inst2Quest5_HORDE_Folgequest = Inst2Quest4_Folgequest
-	--
-	Inst2Quest5name1_HORDE = Inst2Quest4name1
-	Inst2Quest5name2_HORDE = Inst2Quest4name2
-	Inst2Quest5name3_HORDE = Inst2Quest4name3
-	
-	--Quest 6 Horde
-	Inst2Quest6_HORDE = "6. Повелители Змей" -- 914
-	Inst2Quest6_HORDE_Level = "22"
-	Inst2Quest6_HORDE_Attain = "11"
-	Inst2Quest6_HORDE_Aim = "Принесите самоцветы Кобрана, Анакондры, Пифаса и Серпентиса Наре Буйногривой в Громовой Утес."
-	Inst2Quest6_HORDE_Location = "Нара Буйногривая (Громовой Утес - Вершина старейшин; "..YELLOW.."75,31"..WHITE..")"
-	Inst2Quest6_HORDE_Note = "Серия заданий начинается у Хамуула Рунного Тотема. (Громовой Утес - Вершина старейшин; "..YELLOW.."78,28"..WHITE..")\nКамни падают с 4 друидов "..YELLOW.."[2]"..WHITE..", "..YELLOW.."[3]"..WHITE..", "..YELLOW.."[5]"..WHITE..", "..YELLOW.."[7]"..WHITE.."."
-	Inst2Quest6_HORDE_Prequest = "Оазисы Степей -> Нара Буйногривая" -- 886 -> 1490
-	Inst2Quest6_HORDE_Folgequest = "Нет"
-	--
-	Inst2Quest6name1_HORDE = "Crescent Staff"
-	Inst2Quest6name2_HORDE = "Wingblade"
-	
-	--Quest 7 Horde (same as Quest 5 Alliance)
-	Inst2Quest7_HORDE = "7. Светяшийся осколок"
-	Inst2Quest7_HORDE_Level = Inst2Quest5_Level
-	Inst2Quest7_HORDE_Attain = Inst2Quest5_Attain
-	Inst2Quest7_HORDE_Aim = Inst2Quest5_Aim
-	Inst2Quest7_HORDE_Location = Inst2Quest5_Location
-	Inst2Quest7_HORDE_Note = Inst2Quest5_Note
-	Inst2Quest7_HORDE_Prequest = Inst2Quest5_Prequest
-	Inst2Quest7_HORDE_Folgequest = Inst2Quest5_Folgequest -- 3369
-	--
-	Inst2Quest7name1_HORDE = Inst2Quest5name1
-	Inst2Quest7name2_HORDE = Inst2Quest5name2
-	
-	
-	
-	--------------- INST3 - Ragefire Chasm (RFC) ---------------
-	Inst3Story = "Огненная пропасть представляет из себя сеть вулканических пещер которые пролегают под новой столицей орков - Оргриммаром. Недавно, прошел слух, что приверженцы демонического культа Совета Теней устроили логово в пламенных глубинах Пропасти. Этот культ, именуемый Пылающий Клинок, угрожает самой независимости Дуротара. Многие верят что Военный Вождь орков, Тралл, знает о существовании Клинка и не стал уничтожать его в надежде на то, что его члены приведут его прямо к Совету Теней. Так или иначе, всплески тёмных сил из Огненной пропасти могут унижтожить все, чего орки пытались достичь."
-	Inst3Caption = "Огненная пропасть"
-	Inst3QAA = "Нет заданий"
-	Inst3QAH = "5 заданий"
-	
-	--Quest 1 Horde
-	Inst3Quest1_HORDE = "1. Испытание силы врага"  -- 5723
-	Inst3Quest1_HORDE_Level = "15"
-	Inst3Quest1_HORDE_Attain = "9"
-	Inst3Quest1_HORDE_Aim = "Найдите в Оргриммаре Огненную пропасть, убейте 8 троггов и 8 шаманов Огненной пропасти и возвращайтесь к Рахауро в Громовой Утес."
-	Inst3Quest1_HORDE_Location = "Рахауро (Громовой Утес - Вершина Старейшин; "..YELLOW.."70,29"..WHITE..")"
-	Inst3Quest1_HORDE_Note = "Вы найдете троггов в самом начале подземелья."
-	Inst3Quest1_HORDE_Prequest = "Нет"
-	Inst3Quest1_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst3Quest2_HORDE = "2. Силы разрушения..." -- 5725
-	Inst3Quest2_HORDE_Level = "16"
-	Inst3Quest2_HORDE_Attain = "9"
-	Inst3Quest2_HORDE_Aim = "Принесите книги \"Заклинания Тьмы\" и \"Заклятия Пустоты\" Вариматасу в Подгород."
-	Inst3Quest2_HORDE_Location = "Вариматас (Подгород - Королевский квартал; "..YELLOW.."56,92"..WHITE..")"
-	Inst3Quest2_HORDE_Note = "Книги падают с Сектантов и Чернокнижников из клана Пылающего клинка"
-	Inst3Quest2_HORDE_Prequest = "Нет"
-	Inst3Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst3Quest2name1_HORDE = "Ghastly Trousers"
-	Inst3Quest2name2_HORDE = "Dredgemire Leggings"
-	Inst3Quest2name3_HORDE = "Gargoyle Leggings"
-	
-	--Quest 3 Horde
-	Inst3Quest3_HORDE = "3. В поисках потерянного ранца" -- 5722
-	Inst3Quest3_HORDE_Level = "16"
-	Inst3Quest3_HORDE_Attain = "9"
-	Inst3Quest3_HORDE_Aim = "Обыщите Огненную пропасть в поисках тела Маура Зловещего Тотема и найдите все необычные предметы."
-	Inst3Quest3_HORDE_Location = "Рахауро (Громовой Утес - Вершина Старейшин; "..YELLOW.."70,29"..WHITE..")"
-	Inst3Quest3_HORDE_Note = "Вы найдете Маура Зловещего Тотема около "..YELLOW.."[1]"..WHITE..". После того как найдете рюкзак, вы должны вернуть его Рахауро в Громовой Утес"
-	Inst3Quest3_HORDE_Prequest = "Нет"
-	Inst3Quest3_HORDE_Folgequest = "Возвращение Потеряного ранца" -- 5724
-	--
-	Inst3Quest3name1_HORDE = "Featherbead Bracers"
-	Inst3Quest3name2_HORDE = "Savannah Bracers"
-	
-	--Quest 4 Horde
-	Inst3Quest4_HORDE = "4. Тайные враги" -- 5728
-	Inst3Quest4_HORDE_Level = "16"
-	Inst3Quest4_HORDE_Attain = "9"
-	Inst3Quest4_HORDE_Aim = "Убейте Баззалана и Жергоша Призывателя Духов и вернитесь в Оргриммар к Траллу."
-	Inst3Quest4_HORDE_Location = "Тралл (Оргриммар - Аллея Мудрости; "..YELLOW.."31,37"..WHITE..")"
-	Inst3Quest4_HORDE_Note = "Вы найдете Баззалана около  "..YELLOW.."[4]"..WHITE.." и Джергоша около "..YELLOW.."[3]"..WHITE..". Линейка заданий начинается у Военного вождя Тралла в Оргриммаре."
-	Inst3Quest4_HORDE_Prequest = "Тайные враги" -- 5727
-	Inst3Quest4_HORDE_Folgequest = "Тайные враги" -- 5729
-	--
-	Inst3Quest4name1_HORDE = "Kris of Оргриммар"
-	Inst3Quest4name2_HORDE = "Hammer of Оргриммар"
-	Inst3Quest4name3_HORDE = "Axe of Оргриммар"
-	Inst3Quest4name4_HORDE = "Staff of Оргриммар"
-	
-	--Quest 5 Horde
-	Inst3Quest5_HORDE = "5. Убить тварь" -- 5761
-	Inst3Quest5_HORDE_Level = "16"
-	Inst3Quest5_HORDE_Attain = "9"
-	Inst3Quest5_HORDE_Aim = "Спуститесь в Огненную пропасть, убейте Тарагамана Ненасытного и принесите его сердце Ниру Огненному Клинку в Оргриммаре."
-	Inst3Quest5_HORDE_Location = "Ниру Огненный Клинок (Оргриммар - Расселина Теней; "..YELLOW.."49,50"..WHITE..")"
-	Inst3Quest5_HORDE_Note = "Вы найдете Тарагамана около "..YELLOW.."[2]"..WHITE.."."
-	Inst3Quest5_HORDE_Prequest = "Нет"
-	Inst3Quest5_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST4 - Uldaman (Ulda) ---------------
-	Inst4Story = "Ульдаман - это древний чертог Титанов, построеный глубоко в толще земли с самого сотворения мира. В недалеком прошлом археологи дворфов проникли в этот забытый город, выпустив первых нейдачных творений Титанов: троггов. Легенды гласят, что титаны создали троггов из камня. Когда они посчитали эксперимент провалившимся, Титаны изолировали троггов и попробовали снова - результатом стало создание расы дворфов. Тайны создания дворфов записаны на мифических Дисках Норганнона - массивных артефактах Титанов, находящихся в глубине древнего города. Недавно, дворфы Темного Железа начали серию набегов в Ульдаман, в надежде захватить диски для их несдержанного мастера, Рагнароса. Однако, подземный город защищало несколько стражей - гигантские големы из живого камня, что сокрушат любого несчастливого нарушителя, которого найдут. Сами Диски охраняйтся массивным, разумным Каменным хранителем по имени Архедас. Некоторые слухи даже предполагают, что каменнокожие предки дворфов, Подземники, все еще обитают в глубоко скрытых переходах города."
-	Inst4Caption = "Ульдаман"
-	Inst4QAA = "16 заданий"
-	Inst4QAH = "10 заданий"
-	
-	--Quest 1 Alliance
-	Inst4Quest1 = "1. Предвестник надежды" -- 721
-	Inst4Quest1_Level = "35"
-	Inst4Quest1_Attain = "33"
-	Inst4Quest1_Aim = "Найдите Греза Тяжелоступа в Ульдамане."
-	Inst4Quest1_Location = "Геолог Ржанец (Бесплодные земли; "..YELLOW.."53,43"..WHITE..")"
-	Inst4Quest1_Note = "Предшествующее задание начинается с Мятой карты (Бесплодные земли; "..YELLOW.."53,33"..WHITE..").\nВы найдете Тяжелоступа Греза перед тем как вы войдете в подземелье."
-	Inst4Quest1_Prequest = "Предвестник надежды" -- 720
-	Inst4Quest1_Folgequest = "Амулет Тайн" -- 722
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst4Quest2 = "2. Амулет Тайн"
-	Inst4Quest2_Level = "40"
-	Inst4Quest2_Attain = "35"
-	Inst4Quest2_Aim = "Найдите амулет Тяжелоступа и верните его ему в Ульдаман."
-	Inst4Quest2_Location = "Тяжелоступ Грез (Ульдаман)."
-	Inst4Quest2_Note = "Амулет добывается из Магрегана Чернотени."
-	Inst4Quest2_Prequest = "Предвестник надежды" -- 721
-	Inst4Quest2_Folgequest = "Клятва верности" -- 723
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst4Quest3 = "3. Утерянные таблички Воли" -- 1139
-	Inst4Quest3_Level = "45"
-	Inst4Quest3_Attain = "35"
-	Inst4Quest3_Aim = "Найдите табличку Воли и принесите ее советнику Белграму в Стальгорн."
-	Inst4Quest3_Location = "Советник Белгрум (Стальгорн - Зал исследователей; "..YELLOW.."77,10"..WHITE..")"
-	Inst4Quest3_Note = "Табличка находится около "..YELLOW.."[8]"..WHITE.."."
-	Inst4Quest3_Prequest = "Амулет Тайн -> Посланник Зла" -- 722 -> 762
-	Inst4Quest3_Folgequest = "Нет"
-	--
-	Inst4Quest3name1 = "Medal of Courage"
-	
-	--Quest 4 Alliance
-	Inst4Quest4 = "4. Силовые камни" -- 2418
-	Inst4Quest4_Level = "36"
-	Inst4Quest4_Attain = "30"
-	Inst4Quest4_Aim = "Принесите 8 дентриевых силовых камней и 8 энелиевых силовых камней Ригглфаззу в Бесплодные земли."
-	Inst4Quest4_Location = "Ригглфазз (Бесплодные земли; "..YELLOW.."42,52"..WHITE..")"
-	Inst4Quest4_Note = "Камни можно найти на любом враге из клана Тенегорна перед и внутри подземелья."
-	Inst4Quest4_Prequest = "Нет"
-	Inst4Quest4_Folgequest = "Нет"
-	--
-	Inst4Quest4name1 = "Energized Stone Circle"
-	Inst4Quest4name2 = "Duracin Bracers"
-	Inst4Quest4name3 = "Everlast Boots"
-	
-	--Quest 5 Alliance
-	Inst4Quest5 = "5. Судьба Эгмонда" -- 704
-	Inst4Quest5_Level = "38"
-	Inst4Quest5_Attain = "30"
-	Inst4Quest5_Aim = "Принесите 4 резные каменные урны геологу Сталекруту в Лок Модан."
-	Inst4Quest5_Location = "Геолог Сталекрут (Лок Модан - Раскопки Сталекрута; "..YELLOW.."65,65"..WHITE..")"
-	Inst4Quest5_Note = "Предшествующее задание начинается у геолога Грозовой Вершины (Стальгорн - Зал исследователей; "..YELLOW.."74,12"..WHITE..").\nУрны расбросаны по пещерам перед подземельем."
-	Inst4Quest5_Prequest = "Вы нужны Сталекруту! -> Мурдалок" -- 707 -> 739
-	Inst4Quest5_Folgequest = "Нет"
-	--
-	Inst4Quest5name1 = "Prospector Gloves"
-	
-	--Quest 6 Alliance
-	Inst4Quest6 = "6. Лекарство от судьбы" -- 709
-	Inst4Quest6_Level = "40"
-	Inst4Quest6_Attain = "30"
-	Inst4Quest6_Aim = "Принесите табличку Рьюн'эха Тельдарину Заблудшему."
-	Inst4Quest6_Location = "Тельдарин Заблудший (Бесплодные земли; "..YELLOW.."51,76"..WHITE..")"
-	Inst4Quest6_Note = "Табличка находится на севере пещер, в восточном конце туннеля, перед подземельем."
-	Inst4Quest6_Prequest = "Нет"
-	Inst4Quest6_Folgequest = "В Стальгорн за книгой Йагина" -- 727
-	--
-	Inst4Quest6name1 = "Doomsayer's Robe"
-	
-	--Quest 7 Alliance
-	Inst4Quest7 = "7. Потерянные дворфы" -- 2398
-	Inst4Quest7_Level = "40"
-	Inst4Quest7_Attain = "35"
-	Inst4Quest7_Aim = "Найдите Бейлога в Ульдамане."
-	Inst4Quest7_Location = "Геолог Грозовая Вершина (Стальгорн - Зал исследователей; "..YELLOW.."75,12"..WHITE..")"
-	Inst4Quest7_Note = "Бейлог находится около "..YELLOW.."[1]"..WHITE.."."
-	Inst4Quest7_Prequest = "Нет"
-	Inst4Quest7_Folgequest = "Потайной чертог" -- 2240
-	-- No Rewards for this quest
-	
-	--Quest 8 Alliance
-	Inst4Quest8 = "8. Потайной чертог" -- 2240
-	Inst4Quest8_Level = "40"
-	Inst4Quest8_Attain = "35"
-	Inst4Quest8_Aim = "Прочитайте журнал Бейлога, исследуйте потайной чертог и потом доложите об увиденном геологу Грозовой Вершине."
-	Inst4Quest8_Location = "Бейлог (Ульдаман; "..YELLOW.."[1]"..WHITE..")"
-	Inst4Quest8_Note = "Тайная комната находится около "..YELLOW.."[4]"..WHITE..". Чтобы открыть тайную комнату вам понадобится Стержень Тсола с Ревелоша "..YELLOW.."[3]"..WHITE.." и Медальон Гни'кив из сундука Баэлога "..YELLOW.."[1]"..WHITE..". Соберите из этих предметов Доисторический посох. Посох используется в Комнате Карты между "..YELLOW.."[3] и [4]"..WHITE.." для вызова Иронаи. После того как убьете её, забегите в комнату откуда она пришла, чтобы выполнить задание."
-	Inst4Quest8_Prequest = "Потерянные дворфы" -- 2398
-	Inst4Quest8_Folgequest = "Нет"
-	--
-	Inst4Quest8name1 = "Dwarven Charge"
-	Inst4Quest8name2 = "Explorer's League Lodestar"
-	
-	--Quest 9 Alliance
-	Inst4Quest9 = "9. Рассыпавшееся ожерелье" -- 2198
-	Inst4Quest9_Level = "41"
-	Inst4Quest9_Attain = "37"
-	Inst4Quest9_Aim = "Найдите создателя ожерелья, чтобы узнать, чего оно стоит."
-	Inst4Quest9_Location = "Рассыпавшееся ожерелье (добывается случайно в Ульдамане)"
-	Inst4Quest9_Note = "Принесите ожерелье Талвашу де Кисселю (Стальгорн - Палаты Магии; "..YELLOW.."36,3"..WHITE..")."
-	Inst4Quest9_Prequest = "Нет"
-	Inst4Quest9_Folgequest = "Мудрость за деньги" -- 2199
-	-- No Rewards for this quest
-	
-	--Quest 10 Alliance
-	Inst4Quest10 = "10. Назад в Ульдаман" -- 2200
-	Inst4Quest10_Level = "42"
-	Inst4Quest10_Attain = "37"
-	Inst4Quest10_Aim = "Выясните, где именно в Ульдамане находится ожерелье Талваша. Убитый паладин, о котором он упоминал, был последним владельцем этого ожерелья."
-	Inst4Quest10_Location = "Талваш дель Киссель (Стальгорн - Палаты магии; "..YELLOW.."36,3"..WHITE..")"
-	Inst4Quest10_Note = "Паладин находится около "..YELLOW.."[2]"..WHITE.."."
-	Inst4Quest10_Prequest = "Мудрость за деньги" -- 2199
-	Inst4Quest10_Folgequest = "Время собирать камни" -- 2201
-	-- No Rewards for this quest
-	
-	--Quest 11 Alliance
-	Inst4Quest11 = "11. Время собирать камни" -- 2201
-	Inst4Quest11_Level = "43"
-	Inst4Quest11_Attain = "40"
-	Inst4Quest11_Aim = "Найдите рубин, сапфир, и топаз, которые спрятаны в разных местах Ульдамана. Когда найдете, свяжитесь с Талвашем дель Кисселем, используя фиал Видения, который он предоставил."
-	Inst4Quest11_Location = "Останки паладина (Ульдаман; "..YELLOW.."[2]"..WHITE..")"
-	Inst4Quest11_Note = "Камни находятся около "..YELLOW.."[1]"..WHITE.." в урне, "..YELLOW.."[8]"..WHITE.." из тайника клана Теневого горна, и "..YELLOW.."[9]"..WHITE.." с Гримлока. Обратите внимание, что когда вы откроете тайник, появятся несколько мобов и атакуют Вас.\nИспользуйте Чашу прорицания Талваша, чтобы сдать задание и продожить дальше."
-	Inst4Quest11_Prequest = "Назад в Ульдаман" -- 2200
-	Inst4Quest11_Folgequest = "Восстановление ожерелья" -- 2204
-	-- No Rewards for this quest
-	
-	--Quest 12 Alliance
-	Inst4Quest12 = "12. Восстановление ожерелья" -- 2204
-	Inst4Quest12_Level = "44"
-	Inst4Quest12_Attain = "37"
-	Inst4Quest12_Aim = "Добудьте источник энергии из самого мощного волшебного создания, которое найдете в Ульдамане и доставьте его Талвашу дель Кисселю в Стальгорн."
-	Inst4Quest12_Location = "Гадальная чаша Талваша"
-	Inst4Quest12_Note = "Источник силы сломанного ожерелья добывается с Архедаса "..YELLOW.."[10]"..WHITE.."."
-	Inst4Quest12_Prequest = "Время собирать камни" -- 2201
-	Inst4Quest12_Folgequest = "Нет"
-	--
-	Inst4Quest12name1 = "Talvash's Enhancing Necklace"
-	
-	--Quest 13 Alliance
-	Inst4Quest13 = "13. В Ульдаман за реактивом" -- 17
-	Inst4Quest13_Level = "42"
-	Inst4Quest13_Attain = "36"
-	Inst4Quest13_Aim = "Принесите 12 грибов-малиновиков Гхаку Целителю в Телcамар."
-	Inst4Quest13_Location = "Гхак Целитель (Лок Модан - Телсамар; "..YELLOW.."37,49"..WHITE..")"
-	Inst4Quest13_Note = "Грибы есть по всему подземелью. Травники могут видеть их на миникарте, если включен Поиск трав и они взяли задание."
-	Inst4Quest13_Prequest = "Пробежка по Бесплодным землям"  -- 2500
-	Inst4Quest13_Folgequest = "Нет"
-	--
-	Inst4Quest13name1 = "Restorative Potion"
-	
-	--Quest 14 Alliance
-	Inst4Quest14 = "14. Возвращенные сокровища" -- 1360
-	Inst4Quest14_Level = "43"
-	Inst4Quest14_Attain = "33"
-	Inst4Quest14_Aim = "Достаньте сокровище Крома Крепкорука из сундука в северном зале Ульдамана и принесите ему в Стальгорн."
-	Inst4Quest14_Location = "Кром Крепкорук (Стальгорн - Зал исследователей; "..YELLOW.."74,9"..WHITE..")"
-	Inst4Quest14_Note = "Вы найдете сокровище перед тем как войдете в подземелье. Оно на севере пещер, в юговосточном конце тоннеля."
-	Inst4Quest14_Prequest = "Нет"
-	Inst4Quest14_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 15 Alliance
-	Inst4Quest15 = "15. Платиновые диски" -- 2278 -> 2439
-	Inst4Quest15_Level = "47"
-	Inst4Quest15_Attain = "40"
-	Inst4Quest15_Aim = "Поговорите с каменным Стражем и запомните все, что он передаст вам. Когда он закончит свой пересказ событий древности, активируйте диски Норганнона. -> Отнесите миниатюрную копию дисков Норганнона в Лигу Исследователей в Стальгорне."
-	Inst4Quest15_Location = "Диски Нограннона (Ульдаман; "..YELLOW.."[11]"..WHITE..")"
-	Inst4Quest15_Note = "После получения задания, поговорите с каменным стражем слева от дисков.  Потом снова используйте платиновые диски, чтобы получить миниатюрную копию, которую вы должны принести старшему исследователю Магелласу в Стальгорн - Зал исследователей ("..YELLOW.."69,18"..WHITE.."). Здесь есть другая линейка, которая называется Посмотрим что произойдет и начинается у историка Карника Стальгорн - Зал исследователей."
-	Inst4Quest15_Prequest = "Нет"
-	Inst4Quest15_Folgequest = "Ульдумские чудеса" -- 2963
-	--
-	Inst4Quest15name1 = "Taupelzsack"
-	Inst4Quest15name2 = "Superior Healing Potion"
-	Inst4Quest15name3 = "Greater Mana Potion"
-	
-	--Quest 16 Alliance
-	Inst4Quest16 = "16. Сила Ульдамана" -- 1956
-	Inst4Quest16_Level = "40"
-	Inst4Quest16_Attain = "35"
-	Inst4Quest16_Aim = "Добудьте обсидиановый источник силы и принесите его Табете в Пылевые топи."
-	Inst4Quest16_Location = "Табета (Пылевые топи; "..YELLOW.."46,57"..WHITE..")"
-	Inst4Quest16_Note = "Задание для магов: \nОбсидиановый источник силы добывается из Обсидианового стража около "..YELLOW.."[5]"..WHITE.."."
-	Inst4Quest16_Prequest = "Поединок с демоном" -- 1955
-	Inst4Quest16_Folgequest = "Волнолов маны" -- 1957
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 4 Alliance)
-	Inst4Quest1_HORDE = "1. Силовые камни"
-	Inst4Quest1_HORDE_Level = Inst4Quest4_Level
-	Inst4Quest1_HORDE_Attain = Inst4Quest4_Attain
-	Inst4Quest1_HORDE_Aim = Inst4Quest4_Aim
-	Inst4Quest1_HORDE_Location = Inst4Quest4_Location
-	Inst4Quest1_HORDE_Note = Inst4Quest4_Note
-	Inst4Quest1_HORDE_Prequest = Inst4Quest4_Prequest
-	Inst4Quest1_HORDE_Folgequest = Inst4Quest4_Folgequest
-	--
-	Inst4Quest1name1_HORDE = Inst4Quest4name1
-	Inst4Quest1name2_HORDE = Inst4Quest4name2
-	Inst4Quest1name3_HORDE = Inst4Quest4name3
-	
-	--Quest 2 Horde (same as Quest 6 Alliance - different followup)
-	Inst4Quest2_HORDE = "2. Лекарство от судьбы"
-	Inst4Quest2_HORDE_Level = Inst4Quest6_Level
-	Inst4Quest2_HORDE_Attain = Inst4Quest6_Attain
-	Inst4Quest2_HORDE_Aim = Inst4Quest6_Aim
-	Inst4Quest2_HORDE_Location = Inst4Quest6_Location
-	Inst4Quest2_HORDE_Note = Inst4Quest6_Note
-	Inst4Quest2_HORDE_Prequest = Inst4Quest6_Prequest
-	Inst4Quest2_HORDE_Folgequest = Inst4Quest6_Folgequest
-	--
-	Inst4Quest2name1_HORDE = Inst4Quest6name1
-	
-	--Quest 3 Horde
-	Inst4Quest3_HORDE = "3. Пропавшее ожерелье" -- 2283
-	Inst4Quest3_HORDE_Level = "41"
-	Inst4Quest3_HORDE_Attain = "37"
-	Inst4Quest3_HORDE_Aim = "Найдите на раскопках Ульдамана драгоценное ожерелье (возможно, поврежденное) и принесите его в Оргриммар Драну Дрофферсу."
-	Inst4Quest3_HORDE_Location = "Дран Дрофферс (Оргриммар - Волок; "..YELLOW.."59,36"..WHITE..")"
-	Inst4Quest3_HORDE_Note = "Ожерелье добывается в подземелье случайно."
-	Inst4Quest3_HORDE_Prequest = "Нет"
-	Inst4Quest3_HORDE_Folgequest = "Пропавшее ожерелье, этап 2" -- 2284
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde
-	Inst4Quest4_HORDE = "4. Пропавшее ожерелье, этап 2" -- 2284
-	Inst4Quest4_HORDE_Level = "41"
-	Inst4Quest4_HORDE_Attain = "37"
-	Inst4Quest4_HORDE_Aim = "Разыщите ключ к местонахождению самоцветов в глубинах Ульдамана."
-	Inst4Quest4_HORDE_Location = "Дран Дрофферс (Оргриммар - Волок; "..YELLOW.."59,36"..WHITE..")"
-	Inst4Quest4_HORDE_Note = "Паладин находится около "..YELLOW.."[2]"..WHITE.."."
-	Inst4Quest4_HORDE_Prequest = "Пропавшее ожерелье" -- 2283
-	Inst4Quest4_HORDE_Folgequest = "Трудности перевода" -- 2318
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde
-	Inst4Quest5_HORDE = "5. Трудности перевода" -- 2318, 2338
-	Inst4Quest5_HORDE_Level = "42"
-	Inst4Quest5_HORDE_Attain = "37"
-	Inst4Quest5_HORDE_Aim = "Найдите кого-нибудь, кто сможет перевести для Вас дневник паладина. Ближайший к вам такой умелец, скорее всего, найдется в Каргате, форпосте в Бесплодных Землях."
-	Inst4Quest5_HORDE_Location = "Останки паладина (Ульдаман; "..YELLOW.."[2]"..WHITE..")"
-	Inst4Quest5_HORDE_Note = "Переводчик Джаркал Замшелый Клык находится в Каргате (Бесплодные земли; "..YELLOW.."2,46"..WHITE..")."
-	Inst4Quest5_HORDE_Prequest = "Пропавшее ожерелье, этап 2" -- 2284
-	Inst4Quest5_HORDE_Folgequest = "Найти самоцветы и источник энергии" -- 2339
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde
-	Inst4Quest6_HORDE = "6. Найти самоцветы и источник энергии" -- 2339
-	Inst4Quest6_HORDE_Level = "44"
-	Inst4Quest6_HORDE_Attain = "37"
-	Inst4Quest6_HORDE_Aim = "Добудьте все три самоцвета и источник энергии для ожерелья из Ульдамана и принесите их Джаркалу Замшелому Клыку в Каргат. Джаркал считает, что источник энергии можно найти у самой сильной твари в Ульдамане."
-	Inst4Quest6_HORDE_Location = "Джаркал Замшелый Клык (Бесплодные земли - Каргат; "..YELLOW.."2,46"..WHITE..")"
-	Inst4Quest6_HORDE_Note = "Самоцветы находятся около "..YELLOW.."[1]"..WHITE.." в урне, "..YELLOW.."[8]"..WHITE.." из тайника клана Тенегорна, и "..YELLOW.."[9]"..WHITE.." с Гримлока. Обратите внимание, что когда вы откроете тайник, появятся несколько мобов и атакуют Вас. Источник энергии сломанного ожерелья добывается с Архедаса "..YELLOW.."[10]"..WHITE.."."
-	Inst4Quest6_HORDE_Prequest = "Трудности перевода" -- 2338
-	Inst4Quest6_HORDE_Folgequest = "Принести самоцветы" -- 2340
-	--
-	Inst4Quest6name1_HORDE = "Jarkal's Enhancing Necklace"
-	
-	--Quest 7 Horde
-	Inst4Quest7_HORDE = "7. В Ульдаман за реактивом" -- 2202
-	Inst4Quest7_HORDE_Level = "42"
-	Inst4Quest7_HORDE_Attain = "36"
-	Inst4Quest7_HORDE_Aim = "Принести 12 грибов-малиновиков Джаркалу Замшелому Клыку в Каргат."
-	Inst4Quest7_HORDE_Location = "Джаркал Замшелый Клык (Бесплодные земли - Каргат; "..YELLOW.."2,69"..WHITE..")"
-	Inst4Quest7_HORDE_Note = "Предшествующее задание вы также возьмете в Каргате.\nШляпки есть по всему подземелью. Травники могут видеть их на миникарте, если включен Поиск трав и они взяли задание. Предыдущее задание дает этот же NPC."
-	Inst4Quest7_HORDE_Prequest = "Пробежка по Бесплодным землям" -- 2258
-	Inst4Quest7_HORDE_Folgequest = "Пробежка по Бесплодным землям-2"  -- 2203
-	--
-	Inst4Quest7name1_HORDE = "Restorative Potion"
-	
-	--Quest 8 Horde
-	Inst4Quest8_HORDE = "8. Возвращенные сокровища" -- 2342
-	Inst4Quest8_HORDE_Level = "43"
-	Inst4Quest8_HORDE_Attain = "33"
-	Inst4Quest8_HORDE_Aim = "Принесите Патрику Гарретту в Подгород фамильное сокровище из сундука в Южном зале Ульдамана."
-	Inst4Quest8_HORDE_Location = "Патрик Гаррет (Подгород; "..YELLOW.."72,48"..WHITE..")"
-	Inst4Quest8_HORDE_Note = "Вы найдете сокровище перед тем как войдете в подземелье. Оно на севере пещер, в юговосточном конце тоннеля."
-	Inst4Quest8_HORDE_Prequest = "Нет"
-	Inst4Quest8_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 9 Horde
-	Inst4Quest9_HORDE = "9. Платиновые диски" -- 2278 -> 2440
-	Inst4Quest9_HORDE_Level = "47"
-	Inst4Quest9_HORDE_Attain = "40"
-	Inst4Quest9_HORDE_Aim = "Поговорите с каменным Стражем и запомните все, что он передаст вам. Когда он закончит свой пересказ событий древности, активируйте диски Норганнона. -> Отнесите миниатюрную копию дисков Норганнона кому-то из мудрецов с Громового Утеса."
-	Inst4Quest9_HORDE_Location = "Диски Нограннона (Ульдаман; "..YELLOW.."[11]"..WHITE..")"
-	Inst4Quest9_HORDE_Note = "После получения задания, поговорите с каменным стражем слева от дисков.  Потом снова используйте платиновые диски, чтобы получить миниатюрную копию, которую вы должны принести ведуну Искателю Истины в Громовой Утес ("..YELLOW.."34,46"..WHITE..")"
-	Inst4Quest9_HORDE_Prequest = "Нет"
-	Inst4Quest9_HORDE_Folgequest = "Ульдумские чудеса" -- 2965
-	--
-	Inst4Quest9name1_HORDE = "Taupelzsack"
-	Inst4Quest9name2_HORDE = "Superior Healing Potion"
-	Inst4Quest9name3_HORDE = "Greater Mana Potion"
-	
-	--Quest 10 Horde (same as Quest 4 Alliance)
-	Inst4Quest10_HORDE = "10. Сила Ульдамана"
-	Inst4Quest10_HORDE_Level = Inst4Quest16_Level
-	Inst4Quest10_HORDE_Attain = Inst4Quest16_Attain
-	Inst4Quest10_HORDE_Aim = Inst4Quest16_Aim
-	Inst4Quest10_HORDE_Location = Inst4Quest16_Location
-	Inst4Quest10_HORDE_Note = Inst4Quest16_Note
-	Inst4Quest10_HORDE_Prequest = Inst4Quest16_Prequest
-	Inst4Quest10_HORDE_Folgequest = Inst4Quest16_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST5 - Глубины Черной горы (BRD) ---------------
-	Inst5Story = "Когда-то будучи столицей дворфов клана Темного Железа, этот вулканический лабиринт теперь является безраздельными владениями Огненого лорда Рагнароса. Рагнорос открыл секрет создания жизни из камня и собирается построить армию неудержимых големов, чтобы те помогли ему завоевать всю Черную гору целиком. Помешавшись на мысли победить Нефариана и его драконьих прислужников, Рагнарос пойдет на любую крайность чтобы достичь окончательной победы."
-	Inst5Caption = "Глубины Черной горы"
-	Inst5QAA = "17 заданий"
-	Inst5QAH = "17 заданий"
-	
-	--Quest 1 Alliance
-	Inst5Quest1 = "1. Наследие Черного Железа" -- 3802
-	Inst5Quest1_Level = "52"
-	Inst5Quest1_Attain = "48"
-	Inst5Quest1_Aim = "Убейте Финия Темностроя и добудьте великий молот, Железный Друг. Отнесите Железного Друга в святилище Тауриссана и вложите его в руки статуи Франклорна Искусника."
-	Inst5Quest1_Location = "Франклорн Искусник (Черная гора)"
-	Inst5Quest1_Note = "Франклорн находится в средине горы, над своей могилой, в здании около камня призыва. Вы должны быть мертвы, чтобы увидеть его! Он также дает предыдущее задание в цепочке.\nФиний Темнострой находится около "..YELLOW.."[9]"..WHITE..". Вы найдете Святилище рядом с ареной "..YELLOW.."[7]"..WHITE.."."
-	Inst5Quest1_Prequest = "Наследие Черного Железа" -- 3801
-	Inst5Quest1_Folgequest = "Нет"
-	--
-	Inst5Quest1name1 = "Shadowforge Key"
-	
-	--Quest 2 Alliance
-	Inst5Quest2 = "2. Риббли Крутипроб" -- 4136
-	Inst5Quest2_Level = "53"
-	Inst5Quest2_Attain = "48"
-	Inst5Quest2_Aim = "Принесите голову Риббли Юке Крутипроб в Пылающие степи."
-	Inst5Quest2_Location = "Юка Крутипроб (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,22"..WHITE..")"
-	Inst5Quest2_Note = "Вы получите предшествующее задание у Юрбы Крутипроба (Танарис - Порт Картеля; "..YELLOW.."67,23"..WHITE..").\nРиббли находится около "..YELLOW.."[15]"..WHITE.."."
-	Inst5Quest2_Prequest = "Юка Крутипроб" -- 4324
-	Inst5Quest2_Folgequest = "Нет"
-	--
-	Inst5Quest2name1 = "Rancor Boots"
-	Inst5Quest2name2 = "Penance Spaulders"
-	Inst5Quest2name3 = "Splintsteel Armor"
-	
-	--Quest 3 Alliance
-	Inst5Quest3 = "3. Приворотное зелье" -- 4201
-	Inst5Quest3_Level = "54"
-	Inst5Quest3_Attain = "50"
-	Inst5Quest3_Aim = "Принесите 4 листа крови Грома, 10 огромных серебряных слитков и наполненный сосуд Нагмары госпоже Нагмаре в Глубины Черной горы."
-	Inst5Quest3_Location = "Госпожа Нагмара (Глубины Черной горы, таверна)"
-	Inst5Quest3_Note = "Получить огромные серебряные слитки можно с Гигантов в Азшаре. Листки крови Грома легко можно найти у травников или на Аукционе. И последнее, сосуд можно наполнить в кратере Го-Лакка (Кратер Ун'Горо; "..YELLOW.."31,50"..WHITE..").\nПосле выполнения задания, вы можете использоать черный ход вместо сражения с Фалангой."
-	Inst5Quest3_Prequest = "Нет"
-	Inst5Quest3_Folgequest = "Нет"
-	--
-	Inst5Quest3name1 = "Manacle Cuffs"
-	Inst5Quest3name2 = "Nagmara's Whipping Belt"
-	
-	--Quest 4 Alliance
-	Inst5Quest4 = "4. Харли Чернопых" -- 4126
-	Inst5Quest4_Level = "55"
-	Inst5Quest4_Attain = "50"
-	Inst5Quest4_Aim = "Найдите украденный рецепт Громоваров и верните его Рагнару Громовару в Каранос."
-	Inst5Quest4_Location = "Рагнар Грозовар  (Дун Морог - Каранос; "..YELLOW.."46,52"..WHITE..")"
-	Inst5Quest4_Note = "Вы возьмете предшествующее задание у Енохи Грозовара (Выжженные земли - Крепость стражей Пустоты; "..YELLOW.."61,18"..WHITE..").\nВы получите рецепт с охранников, которые появятся, если вы уничтожите эль "..YELLOW.."[15]"..WHITE.."."
-	Inst5Quest4_Prequest = "Рагнар Грозовар" -- 4128
-	Inst5Quest4_Folgequest = "Нет"
-	--
-	Inst5Quest4name1 = "Dark Dwarven Lager"
-	Inst5Quest4name2 = "Swiftstrike Cudgel"
-	Inst5Quest4name3 = "Limb Cleaver"
-	
-	--Quest 5 Alliance
-	Inst5Quest5 = "5. Опалитель!" -- 4263
-	Inst5Quest5_Level = "56"
-	Inst5Quest5_Attain = "48"
-	Inst5Quest5_Aim = "Отыщите и уничтожьте лорда Опалителя в глубинах Черной горы!"
-	Inst5Quest5_Location = "Джалинда Тирлипунька (Пылающие степи - Дозор Моргана; "..YELLOW.."85,69"..WHITE..")"
-	Inst5Quest5_Note = "Вы возьмете предшествующее задание также у Джалинды Тирлипуньки. Вы найдете лорда Опалителя около "..YELLOW.."[10]"..WHITE.."."
-	Inst5Quest5_Prequest = "Подчинитель Пирон" -- 4262
-	Inst5Quest5_Folgequest = "Нет"
-	--
-	Inst5Quest5name1 = "Sunborne Cape"
-	Inst5Quest5name2 = "Nightfall Gloves"
-	Inst5Quest5name3 = "Crypt Demon Bracers"
-	Inst5Quest5name4 = "Stalwart Clutch"
-	
-	--Quest 6 Alliance
-	Inst5Quest6 = "6. Сердце горы" -- 4123
-	Inst5Quest6_Level = "55"
-	Inst5Quest6_Attain = "50"
-	Inst5Quest6_Aim = "Принесите сердце горы Максворту Суперблеску в Пылающие степи."
-	Inst5Quest6_Location = "Максворт Суперблеск (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,23"..WHITE..")"
-	Inst5Quest6_Note = "Вы найдете Сердце около "..YELLOW.."[8]"..WHITE.." в сейфе. Вы возьмете ключ от сейфа у сторожа Стиллгисс. Он появляется после открытия всех маленьких сейфов."
-	Inst5Quest6_Prequest = "Нет"
-	Inst5Quest6_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 7 Alliance
-	Inst5Quest7 = "7. Хороший товар" -- 4286
-	Inst5Quest7_Level = "56"
-	Inst5Quest7_Attain = "50"
-	Inst5Quest7_Aim = "Отправьтесь в глубины Черной горы и принесите 20 поясных сумок дворфов Черного Железа. По выполнении задания вернуться к Орелиусу. Предположительно поясные сумки можно отобрать у дворфов Черного Железа в глубинах Черной горы."
-	Inst5Quest7_Location = "Орелиус (Пылающие степи - Дозор Моргана; "..YELLOW.."84,68"..WHITE..")"
-	Inst5Quest7_Note = "Сумки падают со всех дворфов."
-	Inst5Quest7_Prequest = "Нет"
-	Inst5Quest7_Folgequest = "Нет"
-	--
-	Inst5Quest7name1 = "A Dingy Fanny Pack"
-	
-	--Quest 8 Alliance
-	Inst5Quest8 = "8. Маршал Винздор" -- 4241
-	Inst5Quest8_Level = "54"
-	Inst5Quest8_Attain = "48"
-	Inst5Quest8_Aim = "Отправляйтесь на Черную гору на северо-западе и войдите в Глубины Черной горы. Узнайте, что сталось с маршалом Виндзором.\nКажется, Джон-Оборванец говорил о том, что Виндзора утащили в темницу."
-	Inst5Quest8_Location = "Маршал Максвелл (Пылающие степи "..YELLOW.."84,68"..WHITE..")"
-	Inst5Quest8_Note = "Заданиче начинается с Хелендис Речной мыс (Пылающие степи "..YELLOW.."85,68"..WHITE..").\nМаршал Винздор находится около "..YELLOW.."[4]"..WHITE..". После выполнения этого задания, вы должны вернуться к Маршал Максвелл."
-	Inst5Quest8_Prequest = "Драконья угроза -> Подлинные хозяева" -- 4182 -> 4224
-	Inst5Quest8_Folgequest = "Утраченная надежда" -- 4242
-	--
-	Inst5Quest8name1 = "Conservator Helm"
-	Inst5Quest8name2 = "Shieldplate Sabatons"
-	Inst5Quest8name3 = "Windshear Leggings"
-	
-	--Quest 9 Alliance
-	Inst5Quest9 = "9. Измятая записка" -- 4264
-	Inst5Quest9_Level = "58"
-	Inst5Quest9_Attain = "50"
-	Inst5Quest9_Aim = "Не исключено, что ваша находка заинтересует маршала Виндзора. Может быть, все не так плохо, и надежда еще жива."
-	Inst5Quest9_Location = "Измятая записка (добывается в Глубинах Черной горы)"
-	Inst5Quest9_Note = "Маршал Виндзор около "..YELLOW.."[4]"..WHITE.."."
-	Inst5Quest9_Prequest = "Утраченная надежда" -- 4242
-	Inst5Quest9_Folgequest = "Проблеск надежды" -- 4282
-	-- No Rewards for this quest
-	
-	--Quest 10 Alliance
-	Inst5Quest10 = "10. Проблеск надежды" -- 4282
-	Inst5Quest10_Level = "58"
-	Inst5Quest10_Attain = "50"
-	Inst5Quest10_Aim = "Верните маршалу Виндзору утерянную информацию.\nМаршал уверен, что информацией завладели повелитель големов Аргелмах и генерал Кузня Гнева."
-	Inst5Quest10_Location = "Маршал Виндзор (Глубины Черной горы "..YELLOW..""..YELLOW.."[4]"..WHITE..""..WHITE..")"
-	Inst5Quest10_Note = "Маршал Виндзор около "..YELLOW.."[4]"..WHITE..".\nПовелитель големов Аргелмах "..YELLOW.."[14]"..WHITE..", Генерал Кузня Гнева "..YELLOW.."[13]"..WHITE.."."
-	Inst5Quest10_Prequest = "Измятая записка" -- 4264
-	Inst5Quest10_Folgequest = "Побег!" -- 4322
-	-- No Rewards for this quest
-	
-	--Quest 11 Alliance
-	Inst5Quest11 = "11. Побег!" -- 4322
-	Inst5Quest11_Level = "58"
-	Inst5Quest11_Attain = "50"
-	Inst5Quest11_Aim = "Помогите маршалу Виндзору забрать вещи и освободить его друзей, после чего вернитесь к маршалу Максвеллу и получите дальнейшие инструкции."
-	Inst5Quest11_Location = "Маршал Виндзор (Глубины Черной горы "..YELLOW..""..YELLOW.."[4]"..WHITE..""..WHITE..")"
-	Inst5Quest11_Note = "Маршал Виндзор около "..YELLOW.."[4]"..WHITE..".\nВы найдете маршала Максвелла в Пылающих Степях ("..YELLOW.."84,68"..WHITE..")"
-	Inst5Quest11_Prequest = "Проблеск надежды" -- 4282
-	Inst5Quest11_Folgequest = "Встреча в Штормграде" -- 6204
-	--
-	Inst5Quest11name1 = "Ward of the Elements"
-	Inst5Quest11name2 = "Blade of Reckoning"
-	Inst5Quest11name3 = "Skilled Fighting Blade"
-	
-	--Quest 12 Alliance
-	Inst5Quest12 = "12. Вкус пламени" -- 4024
-	Inst5Quest12_Level = "58"
-	Inst5Quest12_Attain = "52"
-	Inst5Quest12_Aim = "Отправьтесь в глубины Черной горы и убейте Бейл'Гора. "..YELLOW.."[11]"..WHITE.." Отнесите пойманную сущность Огня Цирусу Раскаивателю."
-	Inst5Quest12_Location = "Цирус Раскаиватель (Пылающие Степи "..YELLOW.."94,31"..WHITE..")"
-	Inst5Quest12_Note = "Задание начинает Каларан Ветрорез (Тлеющее ущелье; 39,38).\nБейл'Гор "..YELLOW.."[11]"..WHITE.."."
-	Inst5Quest12_Prequest = "Неугасимое пламя -> Вкус пламени" -- 3442 -> 4022
-	Inst5Quest12_Folgequest = "Нет"
-	--
-	Inst5Quest12name1 = "Shaleskin Cape"
-	Inst5Quest12name2 = "Wyrmhide Spaulders"
-	Inst5Quest12name3 = "Valconian Sash"
-	
-	--Quest 13 Alliance
-	Inst5Quest13 = "13. Каран Могучий Молот" -- 4341
-	Inst5Quest13_Level = "59"
-	Inst5Quest13_Attain = "50"
-	Inst5Quest13_Aim = "Пойдите в Глубины Черной горы и найдите Карана Могучего Молота.\nКороль упомянул, что Каран сидит там в плену – может, стоит поискать темницу."
-	Inst5Quest13_Location = "Король Магни Бронзобород (Стальгорн; "..YELLOW.."39,55"..WHITE..")"
-	Inst5Quest13_Note = "Предшествующее задание начинается у Королевского историка Аркессонуса (Стальгорн; "..YELLOW.."38,55"..WHITE.."). Каран Могучий Молот находится около "..YELLOW.."[2]"..WHITE.."."
-	Inst5Quest13_Prequest = "Дымящиеся руины Тауриссана" -- 3701
-	Inst5Quest13_Folgequest = "Недобрые вести" -- 4361
-	-- No Rewards for this quest
-	
-	--Quest 14 Alliance
-	Inst5Quest14 = "14. Судьба королевства" -- 4362
-	Inst5Quest14_Level = "59"
-	Inst5Quest14_Attain = "50"
-	Inst5Quest14_Aim = "Вернитесь в Глубины Черной горы и освободите принцессу Мойру Бронзобород от злобного императора Даграна Тауриссана."
-	Inst5Quest14_Location = "Король Магни Бронзобород (Стальгорн; "..YELLOW.."39,55"..WHITE..")"
-	Inst5Quest14_Note = "Принцесса Мойра Бронзобород находится около "..YELLOW.."[21]"..WHITE..". Во время боя она может лечить Даграна. Постарайтесь по возможности сбивать ей заклинание, но торопитесь, так она не должна умереть или вы провалите задание! После того как поговорите с ней, вы должны вернуться к Магни Бронзобороду."
-	Inst5Quest14_Prequest = "Недобрые вести" -- 4361
-	Inst5Quest14_Folgequest = "Королевский сюрприз" -- 4363
-	--
-	Inst5Quest14name1 = "Magni's Will"
-	Inst5Quest14name2 = "Songstone of Стальгорн"
-	
-	--Quest 15 Alliance
-	Inst5Quest15 = "15. Сродство с недрами" -- 7848
-	Inst5Quest15_Level = "60"
-	Inst5Quest15_Attain = "55"
-	Inst5Quest15_Aim = "Отправляйтесь через портал, ведущий к Огненным Недрам в Глубинах Черной горы и добудьте осколок из Огненных Недр. Принесите его Лотосу Хранителю Портала в Черной горе."
-	Inst5Quest15_Location = "Лотос Хранитель Портала (Черная гора; "..YELLOW.."[2] на карте Входа"..WHITE..")"
-	Inst5Quest15_Note = "После выполнения задания вы сможете использовать камень ряом с Лотосом Хранителем Портала, чтобы войти в Расплавленные недра.\nВы найдете фрагмент ядра около "..YELLOW.."[23]"..WHITE..", сосем близко от портала в Расплавленные недра."
-	Inst5Quest15_Prequest = "Нет"
-	Inst5Quest15_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 16 Alliance
-	Inst5Quest16 = "16. Вызов" -- 9015
-	Inst5Quest16_Level = "60"
-	Inst5Quest16_Attain = "58"
-	Inst5Quest16_Aim = "Войдите в Зал Правосудия в Глубинах Черной горы, выслушайте приговор верховного судьи Мрачнокамня и вонзите знамя Вызова в центр круга. Убейте Телдрена и его гладиаторов, после чего вернитесь к Антиону Хармону в Восточные Чумные земли с первой частью амулета Лорда Вальтхалака."
-	Inst5Quest16_Location = "Фалрин Садовник (Забытый город (Запад); "..YELLOW.."[1] Бибилиотека"..WHITE..")"
-	Inst5Quest16_Note = "Предыдущие задания отличаются для каждого класса."
-	Inst5Quest16_Prequest = "Чары подстрекателя" -- 8950
-	Inst5Quest16_Folgequest = "(Классовые задания)"
-	-- No Rewards for this quest
-	
-	--Quest 17 Alliance
-	Inst5Quest17 = "17. Призрачный кубок" -- 4083
-	Inst5Quest17_Level = "55"
-	Inst5Quest17_Attain = "40"
-	Inst5Quest17_Aim = "Драгоценные камни не издают ни звука, когда они падают в глубь чаши..."
-	Inst5Quest17_Location = "Gloom'rel (Глубины Черной горы; "..YELLOW.."[18]"..WHITE..")"
-	Inst5Quest17_Note = "Только шахтеры с навыком 230 или выше могут получить это задание, чтобы научиться выплавлять черное железо. Материалы для чаши: 2 [Звездный Рубин], 20 [Золотой слиток], 10 [Слиток истинного серебра]. После этого, если у Вас есть [Руда черного железа] Вы можете отнести ее к Черной Кузни "..YELLOW.."[22]"..WHITE.." и выплавить ее."
-	Inst5Quest17_Prequest = "Нет"
-	Inst5Quest17_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst5Quest1_HORDE = Inst5Quest1
-	Inst5Quest1_HORDE_Level = Inst5Quest1_Level
-	Inst5Quest1_HORDE_Attain = Inst5Quest1_Attain
-	Inst5Quest1_HORDE_Aim = Inst5Quest1_Aim
-	Inst5Quest1_HORDE_Location = Inst5Quest1_Location
-	Inst5Quest1_HORDE_Note = Inst5Quest1_Note
-	Inst5Quest1_HORDE_Prequest = Inst5Quest1_Prequest
-	Inst5Quest1_HORDE_Folgequest = Inst5Quest1_Folgequest
-	--
-	Inst5Quest1name1_HORDE = Inst5Quest1name1
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst5Quest2_HORDE = Inst5Quest2
-	Inst5Quest2_HORDE_Level = Inst5Quest2_Level
-	Inst5Quest2_HORDE_Attain = Inst5Quest2_Attain
-	Inst5Quest2_HORDE_Aim = Inst5Quest2_Aim
-	Inst5Quest2_HORDE_Location = Inst5Quest2_Location
-	Inst5Quest2_HORDE_Note = Inst5Quest2_Note
-	Inst5Quest2_HORDE_Prequest = Inst5Quest2_Prequest
-	Inst5Quest2_HORDE_Folgequest = Inst5Quest2_Folgequest
-	--
-	Inst5Quest2name1_HORDE = Inst5Quest2name1
-	Inst5Quest2name2_HORDE = Inst5Quest2name2
-	Inst5Quest2name3_HORDE = Inst5Quest2name3
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst5Quest3_HORDE = Inst5Quest3
-	Inst5Quest3_HORDE_Level = Inst5Quest3_Level
-	Inst5Quest3_HORDE_Attain = Inst5Quest3_Attain
-	Inst5Quest3_HORDE_Aim = Inst5Quest3_Aim
-	Inst5Quest3_HORDE_Location = Inst5Quest3_Location
-	Inst5Quest3_HORDE_Note = Inst5Quest3_Note
-	Inst5Quest3_HORDE_Prequest = Inst5Quest3_Prequest
-	Inst5Quest3_HORDE_Folgequest = Inst5Quest3_Folgequest
-	--
-	Inst5Quest3name1_HORDE = Inst5Quest3name1
-	Inst5Quest3name2_HORDE = Inst5Quest3name2
-	
-	--Quest 4 Horde
-	Inst5Quest4_HORDE = "4. Украденный рецепт Громоваров" -- 4143
-	Inst5Quest4_HORDE_Level = "55"
-	Inst5Quest4_HORDE_Attain = "50"
-	Inst5Quest4_HORDE_Aim = "Принесите рецепт светлого громоварского Вивиан Лягроб в Каргат."
-	Inst5Quest4_HORDE_Location = "Темный маг Вивиан Лягроб (Бесплодные земли - Каргат; "..YELLOW.."2,47"..WHITE..")"
-	Inst5Quest4_HORDE_Note = "Вы получите предшествующее задание у аптекаря Зинга в Подгороде - Район Фармацевтов ("..YELLOW.."50,68"..WHITE..").\nВы получите рецепт у одного из охранников, которые появятся, если вы уничтожите эль "..YELLOW.."[15]"..WHITE.."."
-	Inst5Quest4_HORDE_Prequest = "Вивиан Лягроб" -- 4133
-	Inst5Quest4_HORDE_Folgequest = "Нет"
-	--
-	Inst5Quest4name1_HORDE = "Superior Healing Potion"
-	Inst5Quest4name2_HORDE = "Greater Mana Potion"
-	Inst5Quest4name3_HORDE = "Swiftstrike Cudgel"
-	Inst5Quest4name4_HORDE = "Limb Cleaver"
-	
-	--Quest 5 Horde (same as Quest 6 Alliance)
-	Inst5Quest5_HORDE = "5. Сердце горы"
-	Inst5Quest5_HORDE_Level = Inst5Quest6_Level
-	Inst5Quest5_HORDE_Attain = Inst5Quest6_Attain
-	Inst5Quest5_HORDE_Aim = Inst5Quest6_Aim
-	Inst5Quest5_HORDE_Location = Inst5Quest6_Location
-	Inst5Quest5_HORDE_Note = Inst5Quest6_Note
-	Inst5Quest5_HORDE_Prequest = Inst5Quest6_Prequest
-	Inst5Quest5_HORDE_Folgequest = Inst5Quest6_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde
-	Inst5Quest6_HORDE = "6. УНИЧТОЖИТЬ НА МЕСТЕ: Дворфы Черного Железа" -- 4081
-	Inst5Quest6_HORDE_Level = "52"
-	Inst5Quest6_HORDE_Attain = "48"
-	Inst5Quest6_HORDE_Aim = "Отправляйтесь в Глубины Черной горы и уничтожьте подлых агрессоров! По приказу полководца Клинозуба уничтожьте 15 охранников, 10 надсмотрщиков и 5 пехотинцев из клана Ярости Горна. Вернитесь сразу по выполнении задания."
-	Inst5Quest6_HORDE_Location = "Доска объявлений (Бесплодные земли - Каргат; "..YELLOW.."3,47"..WHITE..")"
-	Inst5Quest6_HORDE_Note = "Вы найдете дворфов в первой части Глубин Черной горы.\nВы найдете полководца Клинозуба в Каргате на вершине башни (Бесплодные земли, "..YELLOW.."5,47"..WHITE..")."
-	Inst5Quest6_HORDE_Prequest = "Нет"
-	Inst5Quest6_HORDE_Folgequest = "УНИЧТОЖИТЬ НА МЕСТЕ: Высокопоставленные чины Черного Железа" -- 4082
-	-- No Rewards for this quest
-	
-	--Quest 7 Horde
-	Inst5Quest7_HORDE = "7. УНИЧТОЖИТЬ НА МЕСТЕ: Высокопоставленные чины Черного Железа" -- 4082
-	Inst5Quest7_HORDE_Level = "54"
-	Inst5Quest7_HORDE_Attain = "50"
-	Inst5Quest7_HORDE_Aim = "Отправляйтесь в Глубины Черной горы и уничтожьте подлых агрессоров! По приказу полководца Клинозуба уничтожьте 10 медиков, 10 солдат и 10 офицеров из клана Ярости Горна. Вернитесь сразу по выполнении задания."
-	Inst5Quest7_HORDE_Location = "Доска объявлений (Бесплодные земли - Каргат; "..YELLOW.."3,47"..WHITE..")"
-	Inst5Quest7_HORDE_Note = "Вы найдете дворфов около Бейл'Гор "..YELLOW.."[11]"..WHITE..". Вы найдете полководца Клинозуба в Каргате на вершине башни (Бесплодные земли, "..YELLOW.."5,47"..WHITE..").\n Последующее задание начинается у Лекслорта (Бесплодные земли - Каргат; "..YELLOW.."5,47"..WHITE.."). Вы найдете Грарка в Пылающих степях ("..YELLOW.."38,35"..WHITE.."). Вы должны опустить его ХП ниже 50%, чтобы начать задание сопровождения."
-	Inst5Quest7_HORDE_Prequest = "УНИЧТОЖИТЬ НА МЕСТЕ: Дворфы Черного Железа" -- 4081
-	Inst5Quest7_HORDE_Folgequest = "Грарк Лоркруб -> Опасное положение (Задание сопровождения)" -- 4122 -> 4121
-	-- No Rewards for this quest
-	
-	--Quest 8 Horde
-	Inst5Quest8_HORDE = "8. Операция: Смерть Кузне Гнева" -- 4132
-	Inst5Quest8_HORDE_Level = "58"
-	Inst5Quest8_HORDE_Attain = "52"
-	Inst5Quest8_HORDE_Aim = "Отправляйтесь в Глубины Черной горы и убейте генерала Кузню Гнева. Вернитесь к полководцу Клинозубу по выполнении задания."
-	Inst5Quest8_HORDE_Location = "Полководец Клинозуб (Бесплодные земли - Каргат; "..YELLOW.."5,47"..WHITE..")"
-	Inst5Quest8_HORDE_Note = "Вы найдете генерала Кузню Гнева около "..YELLOW.."[13]"..WHITE..". Он зовет подкрепление когда ХП ниже 30%!"
-	Inst5Quest8_HORDE_Prequest = "Опасное положение" -- 4121
-	Inst5Quest8_HORDE_Folgequest = "Нет"
-	--
-	Inst5Quest8name1_HORDE = "Conqueror's Medallion"
-	
-	--Quest 9 Horde
-	Inst5Quest9_HORDE = "9. Восстание машин" -- 4063
-	Inst5Quest9_HORDE_Level = "58"
-	Inst5Quest9_HORDE_Attain = "52"
-	Inst5Quest9_HORDE_Aim = "Найдите и убейте повелителя големов Аргелмаха. Принесите его голову Лотвилу. Также соберите 10 невредимых ядер стихий с беспощадных големов и созданий-завоевателей, охраняющих Аргелмаха."
-	Inst5Quest9_HORDE_Location = "Лотвиль Вериатус (Бесплодные земли; "..YELLOW.."25,44"..WHITE..")"
-	Inst5Quest9_HORDE_Note = "Вы возьмете предшествуещее задание у  Верховной Жрицы Теодоры Мальвадании (Бесплодные земли - Каргат; "..YELLOW.."3,47"..WHITE..").\nВы найдете Аргелмаха около "..YELLOW.."[14]"..WHITE.."."
-	Inst5Quest9_HORDE_Prequest = "Восстание машин" -- 4062
-	Inst5Quest9_HORDE_Folgequest = "Нет"
-	--
-	Inst5Quest9name1_HORDE = "Azure Moon Amice"
-	Inst5Quest9name2_HORDE = "Raincaster Drape"
-	Inst5Quest9name3_HORDE = "Basaltscale Armor"
-	Inst5Quest9name4_HORDE = "Lavaplate Gauntlets"
-	
-	--Quest 10 Horde (same as Quest 12 Alliance)
-	Inst5Quest10_HORDE = "10. Вкус пламени"
-	Inst5Quest10_HORDE_Level = Inst5Quest12_Level
-	Inst5Quest10_HORDE_Attain = Inst5Quest12_Attain
-	Inst5Quest10_HORDE_Aim = Inst5Quest12_Aim
-	Inst5Quest10_HORDE_Location = Inst5Quest12_Location
-	Inst5Quest10_HORDE_Note = Inst5Quest12_Note
-	Inst5Quest10_HORDE_Prequest = Inst5Quest12_Prequest
-	Inst5Quest10_HORDE_Folgequest = Inst5Quest12_Folgequest
-	--
-	Inst5Quest10name1_HORDE = Inst5Quest12name1
-	Inst5Quest10name2_HORDE = Inst5Quest12name2
-	Inst5Quest10name3_HORDE = Inst5Quest12name3
-	
-	--Quest 11 Horde
-	Inst5Quest11_HORDE = "11. Дисгармония пламени" -- 3907
-	Inst5Quest11_HORDE_Level = "56"
-	Inst5Quest11_HORDE_Attain = "48"
-	Inst5Quest11_HORDE_Aim = "Ступайте в глубины Черной горы и выследите лорда Опалителя. Убейте его и принесите Громосерду все, что может дать какую-то информацию."
-	Inst5Quest11_HORDE_Location = "Громосерд (Бесплодные земли - Каргат; "..YELLOW.."3,48"..WHITE..")"
-	Inst5Quest11_HORDE_Note = "Вы получите предыдущее задание у Громосерда тоже.\nВы найдете Лорда Опалителя около "..YELLOW.."[10]"..WHITE.."."
-	Inst5Quest11_HORDE_Prequest = "Дисгармония пламени" -- 3906
-	Inst5Quest11_HORDE_Folgequest = "Нет"
-	--
-	Inst5Quest11name1_HORDE = "Sunborne Cape"
-	Inst5Quest11name2_HORDE = "Nightfall Gloves"
-	Inst5Quest11name3_HORDE = "Crypt Demon Bracers"
-	Inst5Quest11name4_HORDE = "Stalwart Clutch"
-	
-	--Quest 12 Horde
-	Inst5Quest12_HORDE = "12. Последний элемент" -- 7201
-	Inst5Quest12_HORDE_Level = "54"
-	Inst5Quest12_HORDE_Attain = "48"
-	Inst5Quest12_HORDE_Aim = "Отправляйтесь в Глубины Черной горы и добудьте 10 мер сущности Стихий. Стоит начать поиски с големов и их создателей. Вивиан Лягроб также бормотала что-то про элементалей."
-	Inst5Quest12_HORDE_Location = "Темный маг Вивиана Лягроб (Бесплодные земли - Каргат; "..YELLOW.."2,47"..WHITE..")"
-	Inst5Quest12_HORDE_Note = "Вы получите предшествующее задание у Громосерда (Бесплодные земли - Каргат; "..YELLOW.."3,48"..WHITE..").\n С каждого элементаля может выпасть сущность стихий"
-	Inst5Quest12_HORDE_Prequest = "Нет"
-	Inst5Quest12_HORDE_Folgequest = "Нет"
-	--
-	Inst5Quest12name1_HORDE = "Lagrave's Seal"
-	
-	--Quest 13 Horde
-	Inst5Quest13_HORDE = "13. Командир Гор'шак" -- 3981
-	Inst5Quest13_HORDE_Level = "52"
-	Inst5Quest13_HORDE_Attain = "48"
-	Inst5Quest13_HORDE_Aim = "Найдите командира Гор'шака в Глубинах Черной горы.\nСудя по рисунку в записке, искать следует в темнице где-то вроде того."
-	Inst5Quest13_HORDE_Location = "Гамалав Стрелок (Бесплодные земли - Каргат; "..YELLOW.."5,47"..WHITE..")"
-	Inst5Quest13_HORDE_Note = "Вы получите предшествующее задание у Громосерда (Бесплодные земли - Каргат; "..YELLOW.."3,48"..WHITE..").\nВы найдете командира Гор'шака около "..YELLOW.."[3]"..WHITE..". Ключ, чтобы открыть камеру, пдает с Веровного Дознавателя Герштаны "..YELLOW.."[5]"..WHITE..". Если вы поговорите с ним, начнется следующее задание и появятся враги."
-	Inst5Quest13_HORDE_Prequest = "Дисгармония пламени" -- 3906
-	Inst5Quest13_HORDE_Folgequest = "Что происходит?" -- 3982
-	-- No Rewards for this quest
-	
-	--Quest 14 Horde
-	Inst5Quest14_HORDE = "14. Спасение принцессы" -- 4003
-	Inst5Quest14_HORDE_Level = "59"
-	Inst5Quest14_HORDE_Attain = "48"
-	Inst5Quest14_HORDE_Aim = "Убейте императора Даграна Тауриссана и освободите принцессу Мойру Бронзобород от его черного заклятия."
-	Inst5Quest14_HORDE_Location = "Тралл (Оргриммар; "..YELLOW.."31,37"..WHITE..")"
-	Inst5Quest14_HORDE_Note = "После того, как вы поговорите с Караном Могучим Молотом и Траллом, вы получите это задание.\nВы найдете императора Даграна Тауриссана около "..YELLOW.."[21]"..WHITE..". Во время боя принцесса может лечить Даграна. Постарайтесь по возможности сбивать ей заклинание, но торопитесь, так она не должна умереть или вы провалите задание! (Награда за Спасенная принцесса)"
-	Inst5Quest14_HORDE_Prequest = "Командир Гор'шак -> Восточные королевства" -- 3981 -> 4002
-	Inst5Quest14_HORDE_Folgequest = "Спасенная принцесса" -- 4004
-	--
-	Inst5Quest14name1_HORDE = "Thrall's Resolve"
-	Inst5Quest14name2_HORDE = "Eye of Оргриммар"
-	
-	--Quest 15 Horde (same as Quest 15 Alliance)
-	Inst5Quest15_HORDE = Inst5Quest15 -- 7487
-	Inst5Quest15_HORDE_Attain = Inst5Quest15_Attain
-	Inst5Quest15_HORDE_Level = Inst5Quest15_Level
-	Inst5Quest15_HORDE_Aim = Inst5Quest15_Aim
-	Inst5Quest15_HORDE_Location = Inst5Quest15_Location
-	Inst5Quest15_HORDE_Note = Inst5Quest15_Note
-	Inst5Quest15_HORDE_Prequest = Inst5Quest15_Prequest
-	Inst5Quest15_HORDE_Folgequest = Inst5Quest15_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 16 Horde (same as Quest 16 Alliance)
-	Inst5Quest16_HORDE = Inst5Quest16
-	Inst5Quest16_HORDE_Level = Inst5Quest16_Level
-	Inst5Quest16_HORDE_Attain = Inst5Quest16_Attain
-	Inst5Quest16_HORDE_Aim = Inst5Quest16_Aim
-	Inst5Quest16_HORDE_Location = Inst5Quest16_Location
-	Inst5Quest16_HORDE_Note = Inst5Quest16_Note
-	Inst5Quest16_HORDE_Prequest = Inst5Quest16_Prequest
-	Inst5Quest16_HORDE_Folgequest = Inst5Quest16_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 17 Horde (same as Quest 17 Alliance)
-	Inst5Quest17_HORDE = Inst5Quest17
-	Inst5Quest17_HORDE_Level = Inst5Quest17_Level
-	Inst5Quest17_HORDE_Attain = Inst5Quest17_Attain
-	Inst5Quest17_HORDE_Aim = Inst5Quest17_Aim
-	Inst5Quest17_HORDE_Location = Inst5Quest17_Location
-	Inst5Quest17_HORDE_Note = Inst5Quest17_Note
-	Inst5Quest17_HORDE_Prequest = Inst5Quest17_Prequest
-	Inst5Quest17_HORDE_Folgequest = Inst5Quest17_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST6 - Blackwing Lair (BWL) ---------------
---[[	Inst6Story = "Логово Крыла Тьмы расположено на самой вершине пика Черной горы. Этот величественный шпиль, высеченный из древнего камня, был выстроен по задумке дракона, и теперь в его темных залах проводит свои кошмарные эксперименты старший сын Смертокрыла – Нефариан. Он управляет могучими существами, словно марионетками, и скрещивает потомство различных драконьих родов. Результаты его трудов ужасают, и если он добьется успеха, он сможет воплотить в жизнь еще более зловещие планы. Но владыка Черной горы – не простой исследователь, а могучий дракон, обосновавшийся в хорошо укрепленном логове. Могут ли смертные бросить ему вызов?"
-	]]
-		Inst6Story = {
-		[1] = "Логово Крыла Тьмы можно найти на самом пике Вершины Черной Горы. Именно там, в темных залах, Нефариан начал разворачивать заключительные этапы своего плана, чтобы раз и навсегда уничтожить Рагнароса, возглавить его армию и прийти к бесспорному превосходству над всеми расами Азерота.",
-		[2] = "Могущественная крепость, высеченная в огненных недрах Черной горы, была спроектирована мастером-каменщиком дварфом Франкларном Форгрейтом. Предназначенная, чтобы быть символом власти клана Темного Железа, крепость удерживалась зловещими дварфами в течение многих столетий. Однако у Нефариана - хитрого сына дракона Смертокрыла - были другие планы на великую крепость. Он и его драконьи миньоны взяли верх над Вершиной Черной Горы и вступили в войну во владениях дварфов в вулканических глубинах горы, которые служат местом силы для Рагнароса Повелителя Огня. Рагнарос раскрыл секрет создания жизни из камня и планирует построить армию неукротимых големов, чтобы помочь ему захватить всю Черную Гору.",
-		[3] = "Нефариан поклялся раздавить Рагнароса. И как и его отец Смертокрыл пытался делать в прошлом, он приступил к укреплению своих сил. Однако теперь кажется что интрига Нефариана может преуспеть там, где Смертокрыл потерпел неудачу. Безумная заявка Нефариана на господство  привлекла даже Огонь Рода Красных Драконов, которые всегда были самым большими врагами Рода Черных Драконов. Хотя намерения Нефариана известны, методы, которые он использует для их достижения, остаются загадкой. Считается, однако, что Нефариан экспериментировал с кровью всех Родов Драконов, чтобы произвести неукротимых воинов.\n Результаты его трудов ужасают, и если он добьется успеха, он сможет воплотить в жизнь еще более зловещие планы. Но владыка Черной горы – не простой исследователь, а могучий дракон, обосновавшийся в хорошо укрепленном логове. Могут ли смертные бросить ему вызов?";
-		
-	};
-	Inst6Caption = "Логово Крыла Тьмы"
-	Inst6Caption2 = "Логово Крыла Тьмы (История Часть 1)"
-	Inst6Caption3 = "Логово Крыла Тьмы (История Часть 2)"
-	
-	Inst6QAA = "4 задания"
-	Inst6QAH = "4 задания"
-	
-	--Quest 1 Alliance
-	Inst6Quest1 = "1. Нефариус, пораженный порчей" -- 8730
-	Inst6Quest1_Level = "60"
-	Inst6Quest1_Attain = "60"
-	Inst6Quest1_Aim = "Убейте Нефариана и добудьте осколок красного скипетра. Верните осколок красного скипетра Анахроносу в Пещеры Времени в Танарис. На выполнение задания у Вас есть 5 часов."
-	Inst6Quest1_Location = "Валестраз Порочный (Логово Крыла Тьмы; "..YELLOW.."[2]"..WHITE..")"
-	Inst6Quest1_Note = "Только один игрок может получить осколок. Анахронос (Танарис - Пещеры Времени; "..YELLOW.."65,49"..WHITE..")"
-	Inst6Quest1_Prequest = "Создание драконов" -- 8555
-	Inst6Quest1_Folgequest = "Армия Калимдора (Необходимо выполнить цепочки заданий Зеленого и Голубого скипетра)"  -- 8742
-	--
-	Inst6Quest1name1 = "Onyx Embedded Leggings"
-	Inst6Quest1name2 = "Amulet of Shadow Shielding"
-	
-	--Quest 2 Alliance
-	Inst6Quest2 = "2. Владыка Черной горы" -- 7781
-	Inst6Quest2_Level = "60"
-	Inst6Quest2_Attain = "60"
-	Inst6Quest2_Aim = "Отнесите голову Нефариана Верховному лорду Болвару Фордрагону в Штормград."
-	Inst6Quest2_Location = "Голова Нефариана (добывается с Нефариана; "..YELLOW.."[9]"..WHITE..")"
-	Inst6Quest2_Note = "Верховный лорд Болвар Фордрагон находится (Штормград - Крепость Штормграда; "..YELLOW.."78,20"..WHITE.."). Далее Вас посылают к Фельдмаршалу Афрасиаби (Штормград - Аллея героев; "..YELLOW.."67,72"..WHITE..") для получения награды."
-	Inst6Quest2_Prequest = "Нет"
-	Inst6Quest2_Folgequest = "Владыка Черной горы" -- 7782
-	--
-	Inst6Quest2name1 = "Master Dragonslayer's Medallion"
-	Inst6Quest2name2 = "Master Dragonslayer's Orb"
-	Inst6Quest2name3 = "Master Dragonslayer's Ring"
-	
-	--Quest 3 Alliance
-	Inst6Quest3 = "3. Кто будет избран?" -- 8288
-	Inst6Quest3_Level = "60"
-	Inst6Quest3_Attain = "60"
-	Inst6Quest3_Aim = "Принесите голову предводителя драконов Разящего Бича Баристольфу из Зыбучих Песков в Крепость Кенария в Силитусе."
-	Inst6Quest3_Location = "Голова предводителя драконидов Разящего Бича (добывается с Предводителя драконов Разящего Бича; "..YELLOW.."[3]"..WHITE..")"
-	Inst6Quest3_Note = "Только один игрок может получить голову."
-	Inst6Quest3_Prequest = "Что ждет нас завтра" -- 8286
-	Inst6Quest3_Folgequest = "Путь праведника" -- 8301
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst6Quest4 = "4. Единственный способ" -- 8620
-	Inst6Quest4_Level = "60"
-	Inst6Quest4_Attain = "60"
-	Inst6Quest4_Aim = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис."
-	Inst6Quest4_Location = "Нарайн Причудень (Танарис; "..YELLOW.."65,18"..WHITE..")"
-	Inst6Quest4_Note = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")"
-	Inst6Quest4_Prequest = "Утка!" -- 8606
-	Inst6Quest4_Folgequest = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")" -- 8728
-	--
-	Inst6Quest4name1 = "Gnomish Turban of Psychic Might"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst6Quest1_HORDE = Inst6Quest1
-	Inst6Quest1_HORDE_Level = Inst6Quest1_Level
-	Inst6Quest1_HORDE_Attain = Inst6Quest1_Attain
-	Inst6Quest1_HORDE_Aim = Inst6Quest1_Aim
-	Inst6Quest1_HORDE_Location = Inst6Quest1_Location
-	Inst6Quest1_HORDE_Note = Inst6Quest1_Note
-	Inst6Quest1_HORDE_Prequest = Inst6Quest1_Prequest
-	Inst6Quest1_HORDE_Folgequest = Inst6Quest1_Folgequest
-	--
-	Inst6Quest1name1_HORDE = Inst6Quest1name1
-	Inst6Quest1name2_HORDE = Inst6Quest1name2
-	
-	--Quest 2 Horde
-	Inst6Quest2_HORDE = "2. Владыка Черной горы" -- 7783
-	Inst6Quest2_HORDE_Level = "60"
-	Inst6Quest2_HORDE_Attain = "60"
-	Inst6Quest2_HORDE_Aim = "Отнесите голову Нефариана Траллу в Оргриммар."
-	Inst6Quest2_HORDE_Location = "Голова Нефариана (добывается с Нефариана; "..YELLOW.."[9]"..WHITE..")"
-	Inst6Quest2_HORDE_Note = "Далее Вас посылают к Верховному правителю Саурфангу (Оргриммар - Аллея Силы; "..YELLOW.."51,76"..WHITE..") для получения награды."
-	Inst6Quest2_HORDE_Prequest = "Нет"
-	Inst6Quest2_HORDE_Folgequest = "Владыка Черной горы" -- 7784
-	--
-	Inst6Quest2name1_HORDE = "Master Dragonslayer's Medallion"
-	Inst6Quest2name2_HORDE = "Master Dragonslayer's Orb"
-	Inst6Quest2name3_HORDE = "Master Dragonslayer's Ring"
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst6Quest3_HORDE = Inst6Quest3
-	Inst6Quest3_HORDE_Level = Inst6Quest3_Level
-	Inst6Quest3_HORDE_Attain = Inst6Quest3_Attain
-	Inst6Quest3_HORDE_Aim = Inst6Quest3_Aim
-	Inst6Quest3_HORDE_Location = Inst6Quest3_Location
-	Inst6Quest3_HORDE_Note = Inst6Quest3_Note
-	Inst6Quest3_HORDE_Prequest = Inst6Quest3_Prequest
-	Inst6Quest3_HORDE_Folgequest = Inst6Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst6Quest4_HORDE = Inst6Quest4
-	Inst6Quest4_HORDE_Level = Inst6Quest4_Level
-	Inst6Quest4_HORDE_Attain = Inst6Quest4_Attain
-	Inst6Quest4_HORDE_Aim = Inst6Quest4_Aim
-	Inst6Quest4_HORDE_Location = Inst6Quest4_Location
-	Inst6Quest4_HORDE_Note = Inst6Quest4_Note
-	Inst6Quest4_HORDE_Prequest = Inst6Quest4_Prequest
-	Inst6Quest4_HORDE_Folgequest = Inst6Quest4_Folgequest
-	--
-	Inst6Quest4name1_HORDE = Inst6Quest4name1
-	
-	
-	
-	--------------- INST7 - Blackfathom Deeps (BFD) ---------------
-	Inst7Story = "Расположенная вдоль побережья Зорам Ясеневого леса, Непроглядная пучина когда-то была знаменитым храмом посвященным богине Луны ночных эльфов, Элуне. Однако, великий Разлом разбил храм - опустив под волны Сокрытого моря. Он оставался нетронутым - пока, привлеченные древней силой - наги и сатиры не приплыли, чтобы раскрыт его секреты. Легенды утверждают что древнее чудовище, Аку'маи, поселилось в руинах храма. Аку'маи, любимый питомец изначальных Старых Богов, теперь охотится на его территории. Привлеченный Аку'маи, культ, известный как Молот Сумерек также пришел чтобы поживиться злым присутствием Старых Богов."
-	Inst7Caption = "Непроглядная пучина"
-	Inst7QAA = "6 заданий"
-	Inst7QAH = "5 заданий"
-	
-	--Quest 1 Alliance
-	Inst7Quest1 = "1. Знание в пучине" -- 971
-	Inst7Quest1_Level = "23"
-	Inst7Quest1_Attain = "10"
-	Inst7Quest1_Aim = "Принесите манускрипт Лоргалиса Геррику Костохвату в Заброшенный грот в Стальгорне."
-	Inst7Quest1_Location = "Геррик Костохват (Стальгорн - Заброшеный Грот; "..YELLOW.."50,5"..WHITE..")"
-	Inst7Quest1_Note = "Вы найдете манускрипт около "..YELLOW.."[2]"..WHITE.." в воде."
-	Inst7Quest1_Prequest = "Нет"
-	Inst7Quest1_Folgequest = "Нет"
-	--
-	Inst7Quest1name1 = "Sustaining Ring"
-	
-	--Quest 2 Alliance
-	Inst7Quest2 = "2. Исследование порчи" -- 1275
-	Inst7Quest2_Level = "24"
-	Inst7Quest2_Attain = "19"
-	Inst7Quest2_Aim = "Гершал Шепот Ночи в Аубердине хочет, чтобы вы принесли ему 8 оскверненных стволов мозга."
-	Inst7Quest2_Location = "Гершал Шепот Ночи (Темные Берега - Аубердин; "..YELLOW.."38,43"..WHITE..")"
-	Inst7Quest2_Note = "Предшествующее задание выполняется по желанию. Вы получите его от Аргоса Шепот Ночи (Штормград - Парк; "..YELLOW.."21,55"..WHITE.."). \n\nСо всех наг перед и внутри Непроглядной пучины можно получить сволы мозга."
-	Inst7Quest2_Prequest = "Проблема за морем" -- 3765
-	Inst7Quest2_Folgequest = "Нет"
-	--
-	Inst7Quest2name1 = "Beetle Clasps"
-	Inst7Quest2name2 = "Prelacy Cape"
-	
-	--Quest 3 Alliance
-	Inst7Quest3 = "3. В поисках Талрида" -- 1198
-	Inst7Quest3_Level = "24"
-	Inst7Quest3_Attain = "18"
-	Inst7Quest3_Aim = "Найдите стража Талрида из ордена Серебряного Рассвета в Непроглядной Пучине."
-	Inst7Quest3_Location = "Рассветный дозорный Шедласс (Дарнасс - Терраса ремесленников; "..YELLOW.."55,24"..WHITE..")"
-	Inst7Quest3_Note = "Вы найдете стража Талрида из ордена Серебряного Рассвета около "..YELLOW.."[4]"..WHITE.."."
-	Inst7Quest3_Prequest = "Нет"
-	Inst7Quest3_Folgequest = "Злодейство в Непроглядной Пучине" -- 1200
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst7Quest4 = "4. Злодейство в Непроглядной Пучине" -- 1200
-	Inst7Quest4_Level = "27"
-	Inst7Quest4_Attain = "18"
-	Inst7Quest4_Aim = "Принесите голову Повелителя сумрака Келриса Рассветному дозорному Селгорму в Дарнас."
-	Inst7Quest4_Location = "Страж Талрид из ордена Серебряного Рассвета (Непроглядная пучина; "..YELLOW.."[4]"..WHITE..")"
-	Inst7Quest4_Note = "Лорд Сумерек Келрис находится около "..YELLOW.."[8]"..WHITE..". Вы найдете Рассветного дозорного Селгорма в Дарнассе - Терраса Ремесленников ("..YELLOW.."55,24"..WHITE.."). \n\nВНИМАНИЕ! Если вы включите огни позади Лорда Келриса, появятся враги и атакуют Вас."
-	Inst7Quest4_Prequest = "В поисках Талрида" -- 1198
-	Inst7Quest4_Folgequest = "Нет"
-	--
-	Inst7Quest4name1 = "Gravestone Scepter"
-	Inst7Quest4name2 = "Arctic Buckler"
-	
-	--Quest 5 Alliance
-	Inst7Quest5 = "5. Наступление сумерек" -- 1199
-	Inst7Quest5_Level = "25"
-	Inst7Quest5_Attain = "20"
-	Inst7Quest5_Aim = "Принесите 10 подвесок Сумерек стражу Менадосу из ордена Серебряного Рассвета в Дарнас."
-	Inst7Quest5_Location = "Страж Менадос из ордена Серебряного рассвета (Дарнасс - Терраса ремесленников; "..YELLOW.."55,23"..WHITE..")"
-	Inst7Quest5_Note = "Из любого сумеречного противника падают подвески."
-	Inst7Quest5_Prequest = "Нет"
-	Inst7Quest5_Folgequest = "Нет"
-	--
-	Inst7Quest5name1 = "Nimbus Boots"
-	Inst7Quest5name2 = "Heartwood Girdle"
-	
-	--Quest 6 Alliance
-	Inst7Quest6 = "6. Шар Соран'рука" -- 1740
-	Inst7Quest6_Level = "25"
-	Inst7Quest6_Attain = "20"
-	Inst7Quest6_Aim = "Соберите 3 фрагмента Соран'рука и 1 большой фрагмент Соран'рука и принесите их Доану Кархану в Степи."
-	Inst7Quest6_Location = "Доан Кархан (Степи; "..YELLOW.."49,57"..WHITE..")"
-	Inst7Quest6_Note = "Задание для чернокнижников: Вы возьмете 3 фрагмента Соран'рука с Сумеречных Прислужников в "..YELLOW.."[Непроглядная пучина]"..WHITE..". Вы возьмете большой фрагмент Соран'рука в "..YELLOW.."[Крепость Темного Клыка]"..WHITE.." у Темных Душ Темного Клыка."
-	Inst7Quest6_Prequest = "Нет"
-	Inst7Quest6_Folgequest = "Нет"
-	--
-	Inst7Quest6name1 = "Orb of Soran'ruk"
-	Inst7Quest6name2 = "Staff of Soran'ruk"
-	
-	
-	--Quest 1 Horde
-	Inst7Quest1_HORDE = "1. Сущность Аку'май" -- 6563
-	Inst7Quest1_HORDE_Level = "22"
-	Inst7Quest1_HORDE_Attain = "17"
-	Inst7Quest1_HORDE_Aim = "Принесите 20 сапфиров Аку'май Дже'неу Санкри в Ясеневый лес."
-	Inst7Quest1_HORDE_Location = "Дже'неу Санкри (Ясеневый лес - Застава Зорам'гар; "..YELLOW.."11,33"..WHITE..")"
-	Inst7Quest1_HORDE_Note = "Вы получите предшествующее задание 'Угроза из Глубин' у Цунамана (Когтистые горы - Приют у Солнечного камня; "..YELLOW.."47,64"..WHITE.."). Сапфиры можно найти в пещерах перед подземельем."
-	Inst7Quest1_HORDE_Prequest = "Угроза из Глубин" -- 6562
-	Inst7Quest1_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst7Quest2_HORDE = "2. Верность Древним богам" -- 6564 -> 6565
-	Inst7Quest2_HORDE_Level = "26"
-	Inst7Quest2_HORDE_Attain = "17"
-	Inst7Quest2_HORDE_Aim = "Принесите отсыревшую записку Дже'неу Санкри в Ясеневый лес. -> Убейте Лоргуса Джетта в Непроглядной Пучине и вернитесь к Дже'неу Санкри в Ясеневый лес."
-	Inst7Quest2_HORDE_Location = "Отсыревшая записка (добывается - см. заметки)"
-	Inst7Quest2_HORDE_Note = "Вы получите Отсыревшую записку с Жриц прилива из Непроглядной Пучины (5% шанс выпадения). Потом принесите ее Дже'неу Санкри (Ясеневый лес - Застава Зорам'гар; "..YELLOW.."11,33"..WHITE.."). Лоргус Джетт находится около "..YELLOW.."[6]"..WHITE.."."
-	Inst7Quest2_HORDE_Prequest = "Нет"
-	Inst7Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst7Quest2name1_HORDE = "Band of the Fist"
-	Inst7Quest2name2_HORDE = "Chestnut Mantle"
-	
-	--Quest 3 Horde
-	Inst7Quest3_HORDE = "3. Среди руин" -- 6921
-	Inst7Quest3_HORDE_Level = "27"
-	Inst7Quest3_HORDE_Attain = "21"
-	Inst7Quest3_HORDE_Aim = "Принесите глубинный сердечник Дже'неу Санкри в форт Зорам'гар в Ясеневый лес."
-	Inst7Quest3_HORDE_Location = "Дже'неу Санкри (Ясеневый лес - Застава Зорам'гар; "..YELLOW.."11,33"..WHITE..")"
-	Inst7Quest3_HORDE_Note = "Вы найдете глубинный сердечник около "..YELLOW.."[7]"..WHITE.." под водой. Когда вы поднимите сердечник появится барон Акванис и атакует Вас. С него добывается предмет, который вы должны принести Дже'неу Санкри."
-	Inst7Quest3_HORDE_Prequest = "Нет"
-	Inst7Quest3_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde
-	Inst7Quest4_HORDE = "4. Злодейство в Непроглядной Пучине" -- 6561
-	Inst7Quest4_HORDE_Level = "27"
-	Inst7Quest4_HORDE_Attain = "18"
-	Inst7Quest4_HORDE_Aim = "Принесите голову Повелителя сумрака Келриса Башане Руническому Тотему в Громовой Утес."
-	Inst7Quest4_HORDE_Location = "Страж Талрид из ордена Серебряного Рассвета (Непроглядная пучина; "..YELLOW.."[4]"..WHITE..")"
-	Inst7Quest4_HORDE_Note = "Лорд Сумерек Келрис находится около "..YELLOW.."[8]"..WHITE..". Вы найдете Башана Рунического Тотема в Громовом Утесе - Вершина Старейшин ("..YELLOW.."55,24"..WHITE.."). \n\nВНИМАНИЕ! Если вы включите огни позади Лорда Келриса, появятся враги и атакуют Вас."
-	Inst7Quest4_HORDE_Prequest = "Нет"
-	Inst7Quest4_HORDE_Folgequest = "Нет"
-	--
-	Inst7Quest4name1_HORDE = "Gravestone Scepter"
-	Inst7Quest4name2_HORDE = "Arctic Buckler"
-	
-	--Quest 5 Horde (Warlock)
-	Inst7Quest5_HORDE = "5. Шар Соран'рука"
-	Inst7Quest5_HORDE_Level = Inst7Quest6_Level
-	Inst7Quest5_HORDE_Attain = Inst7Quest6_Attain
-	Inst7Quest5_HORDE_Aim = Inst7Quest6_Aim
-	Inst7Quest5_HORDE_Location = Inst7Quest6_Location
-	Inst7Quest5_HORDE_Note = Inst7Quest6_Note
-	Inst7Quest5_HORDE_Prequest = Inst7Quest6_Prequest
-	Inst7Quest5_HORDE_Folgequest = Inst7Quest6_Folgequest
-	--
-	Inst7Quest5name1_HORDE = Inst7Quest6name1
-	Inst7Quest5name2_HORDE = Inst7Quest6name2
-	
-	
-	
-	--------------- INST8 - Lower Blackrock Spire (LBRS) ---------------
-	Inst8Story = "Эта величественная крепость, возведенная в пылающих недрах Черной горы, была спроектирована талантливым дворфом-каменщиком Франклорном Искусником как символ могущества клана Черного Железа. Многие столетия злобные дворфы безраздельно правили в крепости, пока на нее не положил глаз Нефариан – коварный сын дракона-аспекта Смертокрыла. Вместе со своими прислужниками Нефариан захватил шпиль крепости и объявил войну дворфам, скрывающимся в вулканических глубинах. Пока дракон проводит свои зловещие эксперименты в своем логове, генералы его огромной армии, включая вождя черной Орды Ренда Чернорука, охраняют подступы к шпилю. Зловещие порождения Нефариана расползаются повсюду от пика Черной горы, и так будет продолжаться, пока крепость не падет."
-	Inst8Caption = "Низина Черной горы"
-	Inst8QAA = "14 заданий"
-	Inst8QAH = "14 заданий"
-	
-	--Quest1 Alliance
-	Inst8Quest1 = "1. Последние таблички"
-	Inst8Quest1_Level = "58"
-	Inst8Quest1_Attain = "40"
-	Inst8Quest1_Aim = "Принесите пятую и шестую таблички Мошару геологу Железному Башмаку в Танарисе."
-	Inst8Quest1_Location = "Геолог Железный Башмак (Танарис - Порт Картеля; "..YELLOW.."66,23"..WHITE..")"
-	Inst8Quest1_Note = "Вы найдете таблички около "..YELLOW.."[4]"..WHITE.." и "..YELLOW.."[5]"..WHITE..".\nНаграда переводит на 'Сопротивление Йекинье'. вы найдете Йе'кинья около геолога Железного Башмака."
-	Inst8Quest1_Prequest = "Утраченные таблички Мошару" -- 5065
-	Inst8Quest1_Folgequest = "Сопротивление Йекинье" -- 8181
-	-- No Rewards for this quest
-	
-	--Quest2 Alliance
-	Inst8Quest2 = "2. Редкие звери Киблера" -- 4729
-	Inst8Quest2_Level = "59"
-	Inst8Quest2_Attain = "55"
-	Inst8Quest2_Aim = "Отправьтесь на пик Черной горы и отыщите там щенков воргов легиона Кровавого Топора. Посадите маленьких тварей в клетку и отнесите Киблеру."
-	Inst8Quest2_Location = "Киблер (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,22"..WHITE..")"
-	Inst8Quest2_Note = "Вы найдете щенков ворга около "..YELLOW.."[10]"..WHITE.."."
-	Inst8Quest2_Prequest = "Нет"
-	Inst8Quest2_Folgequest = "Нет"
-	--
-	Inst8Quest2name1 = "Worg Carrier"
-	
-	--Quest3 Alliance
-	Inst8Quest3 = "3. Товар на любителя" -- 4862
-	Inst8Quest3_Level = "59"
-	Inst8Quest3_Attain = "55"
-	Inst8Quest3_Aim = "Отправьтесь на пик Черной горы и принесите Киблеру 15 яиц скального паука.\nСудя по всему, яйца надо искать недалеко от пауков."
-	Inst8Quest3_Location = "Киблер (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,22"..WHITE..")"
-	Inst8Quest3_Note = "Вы найдете яйца пауков около "..YELLOW.."[6]"..WHITE.."."
-	Inst8Quest3_Prequest = "Нет"
-	Inst8Quest3_Folgequest = "Нет"
-	--
-	Inst8Quest3name1 = "Smolderweb Carrier"
-	
-	--Quest4 Alliance
-	Inst8Quest4 = "4. Материнское молоко" -- 4866
-	Inst8Quest4_Level = "60"
-	Inst8Quest4_Attain = "55"
-	Inst8Quest4_Aim = "Найдите в самом сердце пика Черной горы мать Дымную Паутину. Сражайтесь с ней, пока она не введет вам свой яд. Скорее всего ее также придется убить. Когда яд будет в вас, вернитесь к Джону-Оборванцу, чтобы он смог добыть яд."
-	Inst8Quest4_Location = "Джон-Оборванец (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,23"..WHITE..")"
-	Inst8Quest4_Note = "Мать Дымная Паутина находится около "..YELLOW.."[6]"..WHITE..". Яд также поражает ближаиших игроков. Если яд вылечить, вы провалите задание."
-	Inst8Quest4_Prequest = "Нет"
-	Inst8Quest4_Folgequest = "Нет"
-	--
-	Inst8Quest4name1 = "Ragged John's Neverending Cup"
-	
-	--Quest5 Alliance
-	Inst8Quest5 = "5. Устранение опасности" -- 4701
-	Inst8Quest5_Level = "59"
-	Inst8Quest5_Attain = "55"
-	Inst8Quest5_Aim = "Отправьтесь на пик Черной горы и уничтожьте источник опасности. Хелендис кричит вам вслед одно имя: Халикон. Именно его упоминали орки в связи с воргами."
-	Inst8Quest5_Location = "Хелендис Речной Мыс (Пылающие степи - Дозор Моргана; "..YELLOW.."5,47"..WHITE..")"
-	Inst8Quest5_Note = "Вы найдете Халикон около "..YELLOW.."[10]"..WHITE.."."
-	Inst8Quest5_Prequest = "Нет"
-	Inst8Quest5_Folgequest = "Нет"
-	--
-	Inst8Quest5name1 = "Astoria Robes"
-	Inst8Quest5name2 = "Traphook Jerkin"
-	Inst8Quest5name3 = "Jadescale Breastplate"
-	
-	--Quest6 Alliance
-	Inst8Quest6 = "6. Аррок Смертный Вопль" -- 4867
-	Inst8Quest6_Level = "60"
-	Inst8Quest6_Attain = "55"
-	Inst8Quest6_Aim = "Прочитайте записку Вароша. Принесите Варошу его амулет."
-	Inst8Quest6_Location = "Варош (Вершина Черной горы; "..YELLOW.."[2]"..WHITE..")"
-	Inst8Quest6_Note = "Чтобы получить амулет Вароша нужно вызвать и убить Аррока Смертного Вопля "..YELLOW.."[8]"..WHITE..". Для Вызова понадобится Копье и голова вождя Омокка "..YELLOW.."[3]"..WHITE..". Копье находится около "..YELLOW.."[2]"..WHITE..". Во время Вызова появляется несколько волн огров, перед тем как Вас атакует Аррок Смертный Вопль. Вы можете использовать Копье в бою, чтобы наносить урон ограм."
-	Inst8Quest6_Prequest = "Нет"
-	Inst8Quest6_Folgequest = "Нет"
-	--
-	Inst8Quest6name1 = "Prismcharm"
-	
-	--Quest7 Alliance
-	Inst8Quest7 = "7. Вещи Блестяшки" -- 5001
-	Inst8Quest7_Level = "59"
-	Inst8Quest7_Attain = "55"
-	Inst8Quest7_Aim = "Найдите вещи Блестяшки и верните их владелице. Удачи!"
-	Inst8Quest7_Location = "Блестяшка (Вершина Черной горы; "..YELLOW.."[1] "..WHITE.."и"..YELLOW.." [2]"..WHITE..")"
-	Inst8Quest7_Note = "Вы найдете вещи Блестяшки по пути к Матери Дымной Паутине около "..YELLOW.."[10]"..WHITE..".\nМаксвелл находится около (Пылающие степи - Дозор Моргана; "..YELLOW.."84,58"..WHITE..")."
-	Inst8Quest7_Prequest = "Нет"
-	Inst8Quest7_Folgequest = "Донесение Максвелла" -- 5002
-	-- No Rewards for this quest
-	
-	--Quest8 Alliance
-	Inst8Quest8 = "8. Миссия Максвелла" -- 5081
-	Inst8Quest8_Level = "60"
-	Inst8Quest8_Attain = "55"
-	Inst8Quest8_Aim = "Отправляйтесь на пик Черной горы и устраните воеводу Вуна, вождя Омокка и повелителя Змейталака. По выполнении задания вернитесь к маршалу Максвеллу."
-	Inst8Quest8_Location = "Маршал Максвелл (Пылающие степи - Дозор Моргана; "..YELLOW.."84,58"..WHITE..")"
-	Inst8Quest8_Note = "Вы найдете воеводу Вуна около "..YELLOW.."[5]"..WHITE..", вождя Омокка около "..YELLOW.."[3]"..WHITE.." и повелителя Змейталака около "..YELLOW.."[11]"..WHITE.."."
-	Inst8Quest8_Prequest = "Донесение Максвелла" -- 5002
-	Inst8Quest8_Folgequest = "Нет"
-	--
-	Inst8Quest8name1 = "Wyrmthalak's Shackles"
-	Inst8Quest8name2 = "Omokk's Girth Restrainer"
-	Inst8Quest8name3 = "Halycon's Muzzle"
-	Inst8Quest8name4 = "Vosh'gajin's Strand"
-	Inst8Quest8name5 = "Voone's Vice Grips"
-	
-	--Quest9 Alliance
-	Inst8Quest9 = "9. Печать Вознесения" -- 4742
-	Inst8Quest9_Level = "60"
-	Inst8Quest9_Attain = "57"
-	Inst8Quest9_Aim = "Найдите самоцвет Тлеющего Терновника, самоцвет Черной Вершины и самоцвет Кровавого Топора. Верните их Ваелану вместе с простой печатью Вознесения./nКамни могут быть у трех генералов: у воеводы Вуна из клана Тлеющего Терновника, у вождя Омокка из клана Черной Вершины и у повелителя Змейталака из клана Кровавого Топора."
-	Inst8Quest9_Location = "Ваелан (Вершина Черной горы; "..YELLOW.."[1]"..WHITE..")"
-	Inst8Quest9_Note = "Вы получите самоцвет Черной вершины с вождя Омокка "..YELLOW.."[3]"..WHITE..", самоцвет Тлеющего Терновника с воеводы Вуна около "..YELLOW.."[5]"..WHITE.." самоцвет Кровавого Топора с повелителя Змейталака около "..YELLOW.."[11]"..WHITE..". Простая печать Вознесения может упасть с любого врага в Низине Черной горы. Если вы закончите эту цепочку заданий, то получите ключ к Вершине Черной горы."
-	Inst8Quest9_Prequest = "Нет"
-	Inst8Quest9_Folgequest = "Печать Вознесения" -- 4743
-	-- No Rewards for this quest
-	
-	--Quest10 Alliance
-	Inst8Quest10 = "10. Приказ генерала Драккисата" -- 5089
-	Inst8Quest10_Level = "60"
-	Inst8Quest10_Attain = "55"
-	Inst8Quest10_Aim = "Отнесите приказ генерала Драккисата маршалу Максвеллу в Пылающие степи."
-	Inst8Quest10_Location = "Приказ генерала Драккисата (добывается с повелителя Змейталака; "..YELLOW.."[11]"..WHITE..")"
-	Inst8Quest10_Note = "Маршал Максвелл находится в Пылающие степи - Дозор Моргана; ("..YELLOW.."84,58"..WHITE..")."
-	Inst8Quest10_Prequest = "Нет"
-	Inst8Quest10_Folgequest = "Кончина генерала Драккисата ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 5102
-	-- No Rewards for this quest
-	
-	--Quest 11 Alliance
-	Inst8Quest11 = "11. Левая часть амулета Лорда Вальтхалака" -- 8966
-	Inst8Quest11_Level = "60"
-	Inst8Quest11_Attain = "58"
-	Inst8Quest11_Aim = "Вызвать дух Мора Серого Копыта с помощью жаровни Призыва, прикончить его и забрать недостающую часть амулета Лорда Вальтхалака. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Вальтхалака и жаровню Призыва."
-	Inst8Quest11_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst8Quest11_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nМор Серое Копыто призывается около "..YELLOW.."[9]"..WHITE.."."
-	Inst8Quest11_Prequest = "Важная составляющая заклинания" -- 8962
-	Inst8Quest11_Folgequest = "Я вижу в твоем будущем остров Алькац..." -- 8970
-	-- No Rewards for this quest
-	
-	--Quest 12 Alliance
-	Inst8Quest12 = "12. Правая часть амулета Лорда Вальтхалака" -- 8989
-	Inst8Quest12_Level = "60"
-	Inst8Quest12_Attain = "58"
-	Inst8Quest12_Aim = "Вызвать дух Мора Серого Копыта с помощью жаровни Призыва, прикончить его и забрать недостающую часть амулета Лорда Вальтхалака. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва."
-	Inst8Quest12_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst8Quest12_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nМор Серое Копыто призывается около "..YELLOW.."[9]"..WHITE.."."
-	Inst8Quest12_Prequest = "Еще одна важная составляющая заклинания" -- 8986
-	Inst8Quest12_Folgequest = "Последние приготовления ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 8994
-	-- No Rewards for this quest
-	
-	--Quest 13 Alliance
-	Inst8Quest13 = "13. Змеекамень Пленяющей Духов" -- 5306
-	Inst8Quest13_Level = "60"
-	Inst8Quest13_Attain = "50"
-	Inst8Quest13_Aim = "Отправляйтесь на Пик Черной горы, убейте Темную охотницу Вос'гаджин. Заберите у нее змеекамень и принесите Килраму."
-	Inst8Quest13_Location = "Килрам (Зимние Ключи - Круговзор; "..YELLOW.."61,37"..WHITE..")"
-	Inst8Quest13_Note = "Задание для кузнецов. Темная охотница Вос'гаджин около "..YELLOW.."[7]"..WHITE.."."
-	Inst8Quest13_Prequest = "Нет"
-	Inst8Quest13_Folgequest = "Нет"
-	--
-	Inst8Quest13name1 = "Plans: Dawn's Edge"
-	
-	--Quest 14 Alliance
-	Inst8Quest14 = "14. Смерть в огне" -- 5103
-	Inst8Quest14_Level = "60"
-	Inst8Quest14_Attain = "60"
-	Inst8Quest14_Aim = "Наверняка в этом мире есть кто-то, кто знает, что делать с этими рукавицами."
-	Inst8Quest14_Location = "Человеческие останки (Низина Черной горы; "..YELLOW.."[9]"..WHITE..")"
-	Inst8Quest14_Note = "Задание для кузнецов. Обязательно возьмите Неопалимые латные рукавицы вблизи с Человеческими останками около "..YELLOW.."[11]"..WHITE..". Отнесите их Малифою Черномолоту (Зимние Ключи - Круговзор; "..YELLOW.."61,39"..WHITE.."). Награды перечислены для следующего задания."
-	Inst8Quest14_Prequest = "Нет"
-	Inst8Quest14_Folgequest = "Огненные латные рукавицы" -- 5124
-	--
-	Inst8Quest14name1 = "Plans: Fiery Plate Gauntlets"
-	Inst8Quest14name2 = "Fiery Plate Gauntlets"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst8Quest1_HORDE = Inst8Quest1
-	Inst8Quest1_HORDE_Level = Inst8Quest1_Level
-	Inst8Quest1_HORDE_Attain = Inst8Quest1_Attain
-	Inst8Quest1_HORDE_Aim = Inst8Quest1_Aim
-	Inst8Quest1_HORDE_Location = Inst8Quest1_Location
-	Inst8Quest1_HORDE_Note = Inst8Quest1_Note
-	Inst8Quest1_HORDE_Prequest = Inst8Quest1_Prequest
-	Inst8Quest1_HORDE_Folgequest = Inst8Quest1_Folgequest
-	--
-	Inst8Quest1name1_HORDE = Inst8Quest1name1
-	Inst8Quest1name2_HORDE = Inst8Quest1name2
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst8Quest2_HORDE = Inst8Quest2
-	Inst8Quest2_HORDE_Level = Inst8Quest2_Level
-	Inst8Quest2_HORDE_Attain = Inst8Quest2_Attain
-	Inst8Quest2_HORDE_Aim = Inst8Quest2_Aim
-	Inst8Quest2_HORDE_Location = Inst8Quest2_Location
-	Inst8Quest2_HORDE_Note = Inst8Quest2_Note
-	Inst8Quest2_HORDE_Prequest = Inst8Quest2_Prequest
-	Inst8Quest2_HORDE_Folgequest = Inst8Quest2_Folgequest
-	--
-	Inst8Quest2name1_HORDE = Inst8Quest2name1
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst8Quest3_HORDE = Inst8Quest3
-	Inst8Quest3_HORDE_Level = Inst8Quest3_Level
-	Inst8Quest3_HORDE_Attain = Inst8Quest3_Attain
-	Inst8Quest3_HORDE_Aim = Inst8Quest3_Aim
-	Inst8Quest3_HORDE_Location = Inst8Quest3_Location
-	Inst8Quest3_HORDE_Note = Inst8Quest3_Note
-	Inst8Quest3_HORDE_Prequest = Inst8Quest3_Prequest
-	Inst8Quest3_HORDE_Folgequest = Inst8Quest3_Folgequest
-	--
-	Inst8Quest3name1_HORDE = Inst8Quest3name1
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst8Quest4_HORDE = Inst8Quest4
-	Inst8Quest4_HORDE_Level = Inst8Quest4_Level
-	Inst8Quest4_HORDE_Attain = Inst8Quest4_Attain
-	Inst8Quest4_HORDE_Aim = Inst8Quest4_Aim
-	Inst8Quest4_HORDE_Location = Inst8Quest4_Location
-	Inst8Quest4_HORDE_Note = Inst8Quest4_Note
-	Inst8Quest4_HORDE_Prequest = Inst8Quest4_Prequest
-	Inst8Quest4_HORDE_Folgequest = Inst8Quest4_Folgequest
-	--
-	Inst8Quest4name1_HORDE = Inst8Quest4name1
-	
-	--Quest5 Horde
-	Inst8Quest5_HORDE = "5. Праматерь стаи" -- 4724
-	Inst8Quest5_HORDE_Level = "59"
-	Inst8Quest5_HORDE_Attain = "55"
-	Inst8Quest5_HORDE_Aim = "Убейте Халикон, праматерь стаи воргов Кровавого Топора."
-	Inst8Quest5_HORDE_Location = "Галамав Стрелок (Бесплодные земли - Каргат; "..YELLOW.."5,47"..WHITE..")"
-	Inst8Quest5_HORDE_Note = "Вы найдете Халикон около "..YELLOW.."[10]"..WHITE.."."
-	Inst8Quest5_HORDE_Prequest = "Нет"
-	Inst8Quest5_HORDE_Folgequest = "Нет"
-	--
-	Inst8Quest5name1_HORDE = "Astoria Robes"
-	Inst8Quest5name2_HORDE = "Traphook Jerkin"
-	Inst8Quest5name3_HORDE = "Jadescale Breastplate"
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst8Quest6_HORDE = Inst8Quest6
-	Inst8Quest6_HORDE_Level = Inst8Quest6_Level
-	Inst8Quest6_HORDE_Attain = Inst8Quest6_Attain
-	Inst8Quest6_HORDE_Aim = Inst8Quest6_Aim
-	Inst8Quest6_HORDE_Location = Inst8Quest6_Location
-	Inst8Quest6_HORDE_Note = Inst8Quest6_Note
-	Inst8Quest6_HORDE_Prequest = Inst8Quest6_Prequest
-	Inst8Quest6_HORDE_Folgequest = Inst8Quest6_Folgequest
-	--
-	Inst8Quest6name1_HORDE = Inst8Quest6name1
-	
-	--Quest 7 Horde
-	Inst8Quest7_HORDE = "7. Агент Блестяшка" -- 4981
-	Inst8Quest7_HORDE_Level = "59"
-	Inst8Quest7_HORDE_Attain = "55"
-	Inst8Quest7_HORDE_Aim = "Отправьтесь к пику Черной горы и выясните, что сталось с Блестяшкой."
-	Inst8Quest7_HORDE_Location = "Лекслорт (Бесплодные земли - Каргат; "..YELLOW.."5,47"..WHITE..")"
-	Inst8Quest7_HORDE_Note = "Вы найдете Блестяшку около "..YELLOW.."[1] "..WHITE.."и "..YELLOW.."[2]"..WHITE.."."
-	Inst8Quest7_HORDE_Prequest = "Нет"
-	Inst8Quest7_HORDE_Folgequest = "Вещи Блестяшки" -- 4982
-	-- No Rewards for this quest
-	
-	--Quest 8 Horde
-	Inst8Quest8_HORDE = "8. Вещи Блестяшки" -- 4982
-	Inst8Quest8_HORDE_Level = "59"
-	Inst8Quest8_HORDE_Attain = "55"
-	Inst8Quest8_HORDE_Aim = "Найдите вещи Блестяшки и верните их владелице. Блестяшка сказала, что она спрятала свое оборудование где-то на нижнем ярусе подземелья."
-	Inst8Quest8_HORDE_Location = "Блестяшка (Вершина Черной горы; "..YELLOW.."[3]"..WHITE..")"
-	Inst8Quest8_HORDE_Note = "Вы найдете вещи Блестяшки по пути к Матери Дымной Паутине около "..YELLOW.."[6]"..WHITE..".\nНаграда отправляет к 'По данным разведки'."
-	Inst8Quest8_HORDE_Prequest = "Агент Блестяшка" -- 4982
-	Inst8Quest8_HORDE_Folgequest = "По данным разведки" -- 4983
-	--
-	Inst8Quest8name1_HORDE = "Freewind Gloves"
-	Inst8Quest8name2_HORDE = "Seapost Girdle"
-	
-	--Quest 9 Horde (same as Quest 9 Alliance)
-	Inst8Quest9_HORDE = Inst8Quest9
-	Inst8Quest9_HORDE_Level = Inst8Quest9_Level
-	Inst8Quest9_HORDE_Attain = Inst8Quest9_Attain
-	Inst8Quest9_HORDE_Aim = Inst8Quest9_Aim
-	Inst8Quest9_HORDE_Location = Inst8Quest9_Location
-	Inst8Quest9_HORDE_Note = Inst8Quest9_Note
-	Inst8Quest9_HORDE_Prequest = Inst8Quest9_Prequest
-	Inst8Quest9_HORDE_Folgequest = Inst8Quest9_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest10 Horde
-	Inst8Quest10_HORDE = "10. Приказ полководца" -- 4903
-	Inst8Quest10_HORDE_Level = "60"
-	Inst8Quest10_HORDE_Attain = "55"
-	Inst8Quest10_HORDE_Aim = "Убейте вождя Омокка, воеводу Вуна и повелителя Змейталака. Найденные при них важные бумаги Черной горы доставьте полководцу Клинозубу в Каргат."
-	Inst8Quest10_HORDE_Location = "Полководец Клинозуб (Бесплодные земли - Каргат; "..YELLOW.."65,22"..WHITE..")"
-	Inst8Quest10_HORDE_Note = "Подготовка к Ониксии.\nВождь Омокк находится около "..YELLOW.."[3]"..WHITE..", воевода Вун находится около "..YELLOW.."[5]"..WHITE.." и повелитель Змейталака "..YELLOW.."[11]"..WHITE..". Важные бумаги Черной горы могут остаться после одного из этих 3 боссов."
-	Inst8Quest10_HORDE_Prequest = "Нет"
-	Inst8Quest10_HORDE_Folgequest = "Мудрость Эйтригга -> За Орду! ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 4941 -> 4974
-	--
-	Inst8Quest10name1_HORDE = "Wyrmthalak's Shackles"
-	Inst8Quest10name2_HORDE = "Omokk's Girth Restrainer"
-	Inst8Quest10name3_HORDE = "Halycon's Muzzle"
-	Inst8Quest10name4_HORDE = "Vosh'gajin's Strand"
-	Inst8Quest10name5_HORDE = "Voone's Vice Grips"
-	
-	--Quest 11 Horde (same as Quest 11 Alliance)
-	Inst8Quest11_HORDE = Inst8Quest11
-	Inst8Quest11_HORDE_Level = Inst8Quest11_Level
-	Inst8Quest11_HORDE_Attain = Inst8Quest11_Attain
-	Inst8Quest11_HORDE_Aim = Inst8Quest11_Aim
-	Inst8Quest11_HORDE_Location = Inst8Quest11_Location
-	Inst8Quest11_HORDE_Note = Inst8Quest11_Note
-	Inst8Quest11_HORDE_Prequest = Inst8Quest11_Prequest
-	Inst8Quest11_HORDE_Folgequest = Inst8Quest11_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 12 Horde (same as Quest 12 Alliance)
-	Inst8Quest12_HORDE = Inst8Quest12
-	Inst8Quest12_HORDE_Level = Inst8Quest12_Level
-	Inst8Quest12_HORDE_Attain = Inst8Quest12_Attain
-	Inst8Quest12_HORDE_Aim = Inst8Quest12_Aim
-	Inst8Quest12_HORDE_Location = Inst8Quest12_Location
-	Inst8Quest12_HORDE_Note = Inst8Quest12_Note
-	Inst8Quest12_HORDE_Prequest = Inst8Quest12_Prequest
-	Inst8Quest12_HORDE_Folgequest = Inst8Quest12_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 13 Horde (same as Quest 13 Alliance)
-	Inst8Quest13_HORDE = Inst8Quest13
-	Inst8Quest13_HORDE_Level = Inst8Quest13_Level
-	Inst8Quest13_HORDE_Attain = Inst8Quest13_Attain
-	Inst8Quest13_HORDE_Aim = Inst8Quest13_Aim
-	Inst8Quest13_HORDE_Location = Inst8Quest13_Location
-	Inst8Quest13_HORDE_Note = Inst8Quest13_Note
-	Inst8Quest13_HORDE_Prequest = Inst8Quest13_Prequest
-	Inst8Quest13_HORDE_Folgequest = Inst8Quest13_Folgequest
-	--
-	Inst8Quest13name1_HORDE = Inst8Quest13name1
-	
-	--Quest 14 Horde (same as Quest 14 Alliance)
-	Inst8Quest14_HORDE = Inst8Quest14
-	Inst8Quest14_HORDE_Level = Inst8Quest14_Level
-	Inst8Quest14_HORDE_Attain = Inst8Quest14_Attain
-	Inst8Quest14_HORDE_Aim = Inst8Quest14_Aim
-	Inst8Quest14_HORDE_Location = Inst8Quest14_Location
-	Inst8Quest14_HORDE_Note = Inst8Quest14_Note
-	Inst8Quest14_HORDE_Prequest = Inst8Quest14_Prequest
-	Inst8Quest14_HORDE_Folgequest = Inst8Quest14_Folgequest
-	--
-	Inst8Quest14name1_HORDE = Inst8Quest14name1
-	Inst8Quest14name2_HORDE = Inst8Quest14name2
-	
-	
-	
-	--------------- INST9 - Вершина Черной горы (UBRS) ---------------
-	Inst9Story = "Эта величественная крепость, возведенная в пылающих недрах Черной горы, была спроектирована талантливым дворфом-каменщиком Франклорном Искусником как символ могущества клана Черного Железа. Многие столетия злобные дворфы безраздельно правили в крепости, пока на нее не положил глаз Нефариан – коварный сын дракона-аспекта Смертокрыла. Вместе со своими прислужниками Нефариан захватил шпиль крепости и объявил войну дворфам, скрывающимся в вулканических глубинах. Пока дракон проводит свои зловещие эксперименты в своем логове, генералы его огромной армии, включая вождя черной Орды Ренда Чернорука, охраняют подступы к шпилю. Зловещие порождения Нефариана расползаются повсюду от пика Черной горы, и так будет продолжаться, пока крепость не падет."
-	Inst9Caption = "Вершина Черной горы"
-	Inst9QAA = "11 заданий"
-	Inst9QAH = "12 заданий"
-	
-	--Quest1 Alliance
-	Inst9Quest1 = "1. Матрона-защитница" -- 5160
-	Inst9Quest1_Level = "60"
-	Inst9Quest1_Attain = "57"
-	Inst9Quest1_Aim = "Дойдите до Зимних Ключей и найдите Халех. Отдайте ей пластину чешуи Ауби."
-	Inst9Quest1_Location = "Ауби (Вершина Черной горы; "..YELLOW.."[6]"..WHITE..")"
-	Inst9Quest1_Note = "Вы найдете Ауби в комнате за Ареной около "..YELLOW.."[6]"..WHITE..".\nХалех находится в Зимних Ключах ("..YELLOW.."54,51"..WHITE.."). Используйте знак-портал в конце пещеры, чтобы добраться до нее."
-	Inst9Quest1_Prequest = "Нет"
-	Inst9Quest1_Folgequest = "Гнев синих драконов" -- 5161
-	-- No Rewards for this quest
-	
-	--Quest2 Alliance
-	Inst9Quest2 = "2. Айс Вентурон, к вашим услугам!" -- 5047
-	Inst9Quest2_Level = "60"
-	Inst9Quest2_Attain = "55"
-	Inst9Quest2_Aim = "Переговорите с Малифоем Черномолотом в Круговзоре."
-	Inst9Quest2_Location = "Айс Вентурон (Вершина Черной горы; "..YELLOW.."[7]"..WHITE..")"
-	Inst9Quest2_Note = "Айс Вентурон появляется после свежевания Зверя. Вы найдете Малифоя в (Зимние Ключи - Круговзор; "..YELLOW.."61,38"..WHITE..")."
-	Inst9Quest2_Prequest = "Нет"
-	Inst9Quest2_Folgequest = "Поножи Тайны, Шапка Алого Ученого и Кираса кровавой жажды" -- 5063, 5067, 5068
-	-- No Rewards for this quest
-	
-	--Quest3 Alliance
-	Inst9Quest3 = "3. Заморозка яйца" -- 4734
-	Inst9Quest3_Level = "60"
-	Inst9Quest3_Attain = "57"
-	Inst9Quest3_Aim = "Испытайте прототип яйцехладоскопа на одном из яиц в Гнездовье."
-	Inst9Quest3_Location = "Тинки Кипеллер (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,24"..WHITE..")"
-	Inst9Quest3_Note = "Вы найдете яйца в комнате Отца Пламени около "..YELLOW.."[2]"..WHITE.."."
-	Inst9Quest3_Prequest = "Сущность детеныша дракона -> Тинки Кипеллер" -- 4726 -> 4907
-	Inst9Quest3_Folgequest = "Сбор яиц и Леонид Барталомей -> Рассветный гамбит ("..YELLOW.."Некроситет"..WHITE..")" -- 4735 and 5522 -> 4771
-	-- No Rewards for this quest
-	
-	--Quest4 Alliance
-	Inst9Quest4 = "4. Око Углевзора" -- 6821
-	Inst9Quest4_Level = "60"
-	Inst9Quest4_Attain = "56"
-	Inst9Quest4_Aim = "Принесите око Углевзора герцогу Гидраксису в Азшару."
-	Inst9Quest4_Location = "Герцог Гидраксис (Азшара; "..YELLOW.."79,73"..WHITE..")"
-	Inst9Quest4_Note = "Вы найдете Пиростража Углевзора около "..YELLOW.."[1]"..WHITE.."."
-	Inst9Quest4_Prequest = "Отравленная вода, Буря в пустыне" -- 6804, 6805
-	Inst9Quest4_Folgequest = "Огненные Недра" -- 6822
-	-- No Rewards for this quest
-	
-	--Quest5 Alliance
-	Inst9Quest5 = "5. Кончина генерала Драккисата" -- 5102
-	Inst9Quest5_Level = "60"
-	Inst9Quest5_Attain = "55"
-	Inst9Quest5_Aim = "Отправьтесь на пик Черной горы и устраните генерала Драккисата. По выполнении задания вернитесь к маршалу Максвеллу."
-	Inst9Quest5_Location = "Маршал Максвелл (Пылающие степи - Дозор Моргана; "..YELLOW.."82,68"..WHITE..")"
-	Inst9Quest5_Note = "Вы найдете генерала Драккисата около "..YELLOW.."[8]"..WHITE.."."
-	Inst9Quest5_Prequest = "Приказ генерала Драккисата ("..YELLOW.."Низина Черной горы"..WHITE..")" -- 5089
-	Inst9Quest5_Folgequest = "Нет"
-	--
-	Inst9Quest5name1 = "Mark of Tyranny"
-	Inst9Quest5name2 = "Eye of the Beast"
-	Inst9Quest5name3 = "Blackhand's Breadth"
-	
-	--Quest6 Alliance
-	Inst9Quest6 = "6. Пряжка Роковой оснастки" -- 4764
-	Inst9Quest6_Level = "60"
-	Inst9Quest6_Attain = "57"
-	Inst9Quest6_Aim = "Принесите пряжку Роковой оснастки Майре Светлое Крыло в Пылающие степи."
-	Inst9Quest6_Location = "Майра Светлое Крыло (Пылающие степи - Дозор Моргана; "..YELLOW.."84,69"..WHITE..")"
-	Inst9Quest6_Note = "Вы возьмете предшествующее задание у графа Ремингтона Риджвелла (Штормград - Крепость Штормграда; "..YELLOW.."76.9, 47.4"..WHITE..").\n\nПряжка Роковой оснастки находится около "..YELLOW.."[2]"..WHITE.." с сундуке."
-	Inst9Quest6_Prequest = "Майра Светлое Крыло" -- 4766
-	Inst9Quest6_Folgequest = "Доставить Риджвеллу" -- 4765
-	--
-	Inst9Quest6name1 = "Swiftfoot Treads"
-	Inst9Quest6name2 = "Blinkstrike Armguards"
-	
-	--Quest7 Alliance
-	Inst9Quest7 = "7. Амулет Пламени дракона" -- 6502
-	Inst9Quest7_Level = "60"
-	Inst9Quest7_Attain = "50"
-	Inst9Quest7_Aim = "Добудьте кровь могучего черного дракона генерала Драккисата, которого можно найти сидящим на троне в залах Вознесения в Пике Черной горы."
-	Inst9Quest7_Location = "Хале (Зимние Ключи; "..YELLOW.."54,51"..WHITE..")"
-	Inst9Quest7_Note = "Последний из цепочки заданий на доступ к Логову Ониксии для Альянса\nГенерал Драккисат "..YELLOW.."[8]"..WHITE.."."
-	Inst9Quest7_Prequest = "Око дракона" -- 6501
-	Inst9Quest7_Folgequest = "Нет"
-	--
-	Inst9Quest7name1 = "Drakefire Amulet"
-	
-	--Quest8 Alliance
-	Inst9Quest8 = "8. Приказ Чернорука" -- 7761
-	Inst9Quest8_Level = "60"
-	Inst9Quest8_Attain = "55"
-	Inst9Quest8_Aim = "Вот уж действительно идиот... Похоже, вам нужно найти это клеймо и выжечь на руке метку Драккисата, чтобы получить доступ к сфере Приказа. В письме ясно сказано, что генерал Драккисат охраняет клеймо. Наверное, стоит проверить."
-	Inst9Quest8_Location = "Приказ Чернорука (добывается с Интенданта из легиона Изрубленного Щита)"
-	Inst9Quest8_Note = "Задание для подготовки к Логову Крыла Тьмы. Интенданта из легиона Изрубленного Щита можно найти если повернуть направо перед порталом в LBRS/UBRS.\n\nГенерал Драккисат находится около "..YELLOW.."[8]"..WHITE..". Печать за ним."
-	Inst9Quest8_Prequest = "Нет"
-	Inst9Quest8_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 9 Alliance
-	Inst9Quest9 = "9. Последние приготовления" -- 8994
-	Inst9Quest9_Level = "60"
-	Inst9Quest9_Attain = "58"
-	Inst9Quest9_Aim = "Соберите 40 наручей Черной горы и разыщите склянку великой силы. Отнесите все это Бодли в Черную Скалу."
-	Inst9Quest9_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst9Quest9_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'. Боевые наручи Черной горы добываются с противников, у которых написано Чернорук в имени. Настой великой силы создается алхимиками."
-	Inst9Quest9_Prequest = "Правая часть амулета Лорда Вальтхалака ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 8989
-	Inst9Quest9_Folgequest = "Mea Culpa, Лорд Вальтхалак" -- 8995
-	-- No Rewards for this quest
-	
-	--Quest 10 Alliance
-	Inst9Quest10 = "10. Mea Culpa, Лорд Вальтхалак" -- 8995
-	Inst9Quest10_Level = "60"
-	Inst9Quest10_Attain = "58"
-	Inst9Quest10_Aim = "Вызвать Лорда Вальтхалака с помощью жаровни Призыва. Убить его и использовать амулет. Потом вернуть амулет духу Вальтхалака."
-	Inst9Quest10_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst9Quest10_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'. Лорд Вальтхалак вызывается около "..YELLOW.."[8]"..WHITE..". Награды перечислены для 'Возвращение к Бодли'."
-	Inst9Quest10_Prequest = "Последние приготовления" -- 8994
-	Inst9Quest10_Folgequest = "Возвращение к Бодли" -- 8996
-	--
-	Inst9Quest10name1 = "Brazier of Invocation"
-	Inst9Quest10name2 = "Brazier of Invocation: User's Manual"
-	
-	--Quest 11 Alliance
-	Inst9Quest11 = "11. Демонова кузня" -- 5127
-	Inst9Quest11_Level = "60"
-	Inst9Quest11_Attain = "55"
-	Inst9Quest11_Aim = "Отправляйтесь на пик Черной горы и найдите Горалука Треснувшую Наковальню. Убейте его, а потом воткните в труп окровавленную пику. Таким образом пика вытянет его душу и окрасится ей. Кроме того, вам нужно найти заготовку рунической кирасы. Отнесите пику и кирасу Лораксу в Зимних Ключах."
-	Inst9Quest11_Location = "Лоракс (Зимние Ключи; "..YELLOW.."64,74"..WHITE..")"
-	Inst9Quest11_Note = "Задание для кузнецов. Горалук Треснувшая Наковальня около "..YELLOW.."[5]"..WHITE.."."
-	Inst9Quest11_Prequest = "Нет"
-	Inst9Quest11_Folgequest = "Нет"
-	--
-	Inst9Quest11name1 = "Plans: Demon Forged Breastplate"
-	Inst9Quest11name2 = "Elixir of Demonslaying"
-	Inst9Quest11name3 = "Demon Kissed Sack"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst9Quest1_HORDE = Inst9Quest1
-	Inst9Quest1_HORDE_Level = Inst9Quest1_Level
-	Inst9Quest1_HORDE_Attain = Inst9Quest1_Attain
-	Inst9Quest1_HORDE_Aim = Inst9Quest1_Aim
-	Inst9Quest1_HORDE_Location = Inst9Quest1_Location
-	Inst9Quest1_HORDE_Note = Inst9Quest1_Note
-	Inst9Quest1_HORDE_Prequest = Inst9Quest1_Prequest
-	Inst9Quest1_HORDE_Folgequest = Inst9Quest1_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst9Quest2_HORDE = Inst9Quest2
-	Inst9Quest2_HORDE_Level = Inst9Quest2_Level
-	Inst9Quest2_HORDE_Attain = Inst9Quest2_Attain
-	Inst9Quest2_HORDE_Aim = Inst9Quest2_Aim
-	Inst9Quest2_HORDE_Location = Inst9Quest2_Location
-	Inst9Quest2_HORDE_Note = Inst9Quest2_Note
-	Inst9Quest2_HORDE_Prequest = Inst9Quest2_Prequest
-	Inst9Quest2_HORDE_Folgequest = Inst9Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst9Quest3_HORDE = Inst9Quest3
-	Inst9Quest3_HORDE_Level = Inst9Quest3_Level
-	Inst9Quest3_HORDE_Attain = Inst9Quest3_Attain
-	Inst9Quest3_HORDE_Aim = Inst9Quest3_Aim
-	Inst9Quest3_HORDE_Location = Inst9Quest3_Location
-	Inst9Quest3_HORDE_Note = Inst9Quest3_Note
-	Inst9Quest3_HORDE_Prequest = Inst9Quest3_Prequest
-	Inst9Quest3_HORDE_Folgequest = Inst9Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst9Quest4_HORDE = Inst9Quest4
-	Inst9Quest4_HORDE_Level = Inst9Quest4_Level
-	Inst9Quest4_HORDE_Attain = Inst9Quest4_Attain
-	Inst9Quest4_HORDE_Aim = Inst9Quest4_Aim
-	Inst9Quest4_HORDE_Location = Inst9Quest4_Location
-	Inst9Quest4_HORDE_Note = Inst9Quest4_Note
-	Inst9Quest4_HORDE_Prequest = Inst9Quest4_Prequest
-	Inst9Quest4_HORDE_Folgequest = Inst9Quest4_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest5 Horde
-	Inst9Quest5_HORDE = "5. Табличка Темнокамня" -- 4768
-	Inst9Quest5_HORDE_Level = "60"
-	Inst9Quest5_HORDE_Attain = "57"
-	Inst9Quest5_HORDE_Aim = "Принесите табличку Темного Камня тенемагу Вивиан Лягроб в Каргат."
-	Inst9Quest5_HORDE_Location = "Темный маг Вивиана Лягроб (Бесплодные земли - Каргат; "..YELLOW.."2,47"..WHITE..")"
-	Inst9Quest5_HORDE_Note = "Вы получите предшествующее задание у аптекаря Зинга в Подгороде - Район Фармацевтов ("..YELLOW.."50,68"..WHITE..").\n\nThe Табличка Темнокамня находится около "..YELLOW.."[2]"..WHITE.." в сундуке."
-	Inst9Quest5_HORDE_Prequest = "Вивиан Лягроб и табличка Темнокамня" -- 4769
-	Inst9Quest5_HORDE_Folgequest = "Нет"
-	--
-	Inst9Quest5name1_HORDE = "Swiftfoot Treads"
-	Inst9Quest5name2_HORDE = "Blinkstrike Armguards"
-	
-	--Quest6 Horde
-	Inst9Quest6_HORDE = "6. За Орду!" -- 4974
-	Inst9Quest6_HORDE_Level = "60"
-	Inst9Quest6_HORDE_Attain = "55"
-	Inst9Quest6_HORDE_Aim = "Отправляйтесь в Пик Черной горы и убейте вождя Ренда Чернорука. Принесите его голову в Оргриммар."
-	Inst9Quest6_HORDE_Location = "Тралл (Оргриммар; "..YELLOW.."31,38"..WHITE..")"
-	Inst9Quest6_HORDE_Note = "Задание для подготовки к Ониксии. Вы найдете вождя Ренда Чернорука около "..YELLOW.."[5]"..WHITE.."."
-	Inst9Quest6_HORDE_Prequest = "Приказ полководца -> Мудрость Эйтригга" -- 4903 -> 4941
-	Inst9Quest6_HORDE_Folgequest = "Что принес ветер" -- 6566
-	--
-	Inst9Quest6name1_HORDE = "Mark of Tyranny"
-	Inst9Quest6name2_HORDE = "Eye of the Beast"
-	Inst9Quest6name3_HORDE = "Blackhand's Breadth"
-	
-	--Quest7 Horde
-	Inst9Quest7_HORDE = "7. Иллюзии ока" -- 6569
-	Inst9Quest7_HORDE_Level = "60"
-	Inst9Quest7_HORDE_Attain = "55"
-	Inst9Quest7_HORDE_Aim = "Отправляйтесь на пик Черной горы и добудьте 20 глаз черных драконидов. По выполнении задания вернитесь к Миранде Колдунье."
-	Inst9Quest7_HORDE_Location = "Миранда Колдунья (Западные Чумные земли; "..YELLOW.."50,77"..WHITE..")"
-	Inst9Quest7_HORDE_Note = "Глаза падают с драконидов."
-	Inst9Quest7_HORDE_Prequest = "Что принес ветер -> Мастерица обмана" -- 6566 -> 6568
-	Inst9Quest7_HORDE_Folgequest = "Огнебор" -- 6570
-	-- No Rewards for this quest
-	
-	--Quest8 Horde
-	Inst9Quest8_HORDE = "8. Кровь могучего черного дракона" -- 6602
-	Inst9Quest8_HORDE_Level = "60"
-	Inst9Quest8_HORDE_Attain = "55"
-	Inst9Quest8_HORDE_Aim = "Отправляйтесь к пику Черной горы и убейте генерала Драккисата. Соберите его кровь и вернитесь к Рексару."
-	Inst9Quest8_HORDE_Location = "Рексар (Пустоши - Деревня Ночных охотников; "..YELLOW.."25,71"..WHITE..")"
-	Inst9Quest8_HORDE_Note = "Последняя часть на пути к Ониксии. Вы найдете генерала Драккисата около "..YELLOW.."[8]"..WHITE.."."
-	Inst9Quest8_HORDE_Prequest = "Огнебор -> Вознесение" -- 6570 -> 6601
-	Inst9Quest8_HORDE_Folgequest = "Нет"
-	--
-	Inst9Quest8name1_HORDE = "Drakefire Amulet"
-	
-	--Quest 9 Horde (same as Quest 8 Alliance)
-	Inst9Quest9_HORDE = "7. Приказ Чернорука"
-	Inst9Quest9_HORDE_Level = Inst9Quest8_Level
-	Inst9Quest9_HORDE_Attain = Inst9Quest8_Attain
-	Inst9Quest9_HORDE_Aim = Inst9Quest8_Aim
-	Inst9Quest9_HORDE_Location = Inst9Quest8_Location
-	Inst9Quest9_HORDE_Note = Inst9Quest8_Note
-	Inst9Quest9_HORDE_Prequest = Inst9Quest8_Prequest
-	Inst9Quest9_HORDE_Folgequest = Inst9Quest8_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 10 Horde (same as Quest 9 Alliance)
-	Inst9Quest10_HORDE = "10. Последние приготовления"
-	Inst9Quest10_HORDE_Level = Inst9Quest9_Level
-	Inst9Quest10_HORDE_Attain = Inst9Quest9_Attain
-	Inst9Quest10_HORDE_Aim = Inst9Quest9_Aim
-	Inst9Quest10_HORDE_Location = Inst9Quest9_Location
-	Inst9Quest10_HORDE_Note = Inst9Quest9_Note
-	Inst9Quest10_HORDE_Prequest = Inst9Quest9_Prequest
-	Inst9Quest10_HORDE_Folgequest = Inst9Quest9_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 11 Horde (same as Quest 10 Alliance)
-	Inst9Quest11_HORDE = "11. Mea Culpa, Лорд Вальтхалак"
-	Inst9Quest11_HORDE_Level = Inst9Quest10_Level
-	Inst9Quest11_HORDE_Attain = Inst9Quest10_Attain
-	Inst9Quest11_HORDE_Aim = Inst9Quest10_Aim
-	Inst9Quest11_HORDE_Location = Inst9Quest10_Location
-	Inst9Quest11_HORDE_Note = Inst9Quest10_Note
-	Inst9Quest11_HORDE_Prequest = Inst9Quest10_Prequest
-	Inst9Quest11_HORDE_Folgequest = Inst9Quest10_Folgequest
-	--
-	Inst9Quest11name1_HORDE = Inst9Quest10name1
-	Inst9Quest11name2_HORDE = Inst9Quest10name2
-	
-	--Quest 12 Horde (same as Quest 11 Alliance)
-	Inst9Quest12_HORDE = "12. Демонова кузня"
-	Inst9Quest12_HORDE_Level = Inst9Quest11_Level
-	Inst9Quest12_HORDE_Attain = Inst9Quest11_Attain
-	Inst9Quest12_HORDE_Aim = Inst9Quest11_Aim
-	Inst9Quest12_HORDE_Location = Inst9Quest11_Location
-	Inst9Quest12_HORDE_Note = Inst9Quest11_Note
-	Inst9Quest12_HORDE_Prequest = Inst9Quest11_Prequest
-	Inst9Quest12_HORDE_Folgequest = Inst9Quest11_Folgequest
-	--
-	Inst9Quest12name1_HORDE = Inst9Quest11name1
-	Inst9Quest12name2_HORDE = Inst9Quest11name2
-	Inst9Quest12name3_HORDE = Inst9Quest11name3
-	
-	
-	
-	--------------- INST10 - Dire Maul East (DM) ---------------
-	Inst10Story = "Построенный двенадцать тысяч лет назад тайной сектой волшебников ночных эльфов, древний город Эльдре'Талас использовали, чтобы защитить самые ценные секреты королевы Азшары. Несмотря на то, что он был уничтожен Великим Расколом мира, большая часть изумительного города еще существует как грандиозный Ужасный Кулак. Три самобытных района руин населили всевозможные твари - в основном призрачными высокорожденными, грязными сатирами и безмозглыми ограми. Только группа самых отважных искателей приключений может войти в разрушенный город и встретиться лицом к лицу с древним злом, заключенным в его древних подвалах."
-	Inst10Caption = "Забытый город (Восток)"
-	Inst10QAA = "6 заданий"
-	Inst10QAH = "6 заданий"
-	
-	--Quest 1 Alliance
-	Inst10Quest1 = "1. Пузиллин и старейшина Аж'Тордин" -- 7441
-	Inst10Quest1_Level = "58"
-	Inst10Quest1_Attain = "54"
-	Inst10Quest1_Aim = "Отправляйтесь в Забытый Город и отыщите беса Пузиллина. Любыми доступными средствами убедите Пузиллина отдать вам книгу заклинаний Аж'Тордина. Если добудете книгу, вернитесь к Аж'Тордину в павильон Лорисс в Фераласе."
-	Inst10Quest1_Location = "Аж'Тордин (Фералас; "..YELLOW.."76,37"..WHITE..")"
-	Inst10Quest1_Note = "Пузиллин находится в Забытом городе "..YELLOW.."(Восток)"..WHITE.." около "..YELLOW.."[1]"..WHITE..". Он убегает когда вы поговорите с ним, но останавливается и сражается около "..YELLOW.."[2]"..WHITE..". С него добывается Ключ Полумесяца, используемый в Забытом городе Север и Запад."
-	Inst10Quest1_Prequest = "Нет"
-	Inst10Quest1_Folgequest = "Нет"
-	--
-	Inst10Quest1name1 = "Spry Boots"
-	Inst10Quest1name2 = "Sprinter's Sword"
-	
-	--Quest 2 Alliance
-	Inst10Quest2 = "2. Сеть Лефтендрис" -- 7488
-	Inst10Quest2_Level = "57"
-	Inst10Quest2_Attain = "54"
-	Inst10Quest2_Aim = "Принесите сеть Лефтендрис Латроникусу Лунному Копью в Крепость Оперенной Луны в Фераласе."
-	Inst10Quest2_Location = "Латроникус Лунное Копье (Фералас - Крепость Оперенной Луны; "..YELLOW.."30,46"..WHITE..")"
-	Inst10Quest2_Note = "Лефтендрис находится в Забытом городе "..YELLOW.."(Восток)"..WHITE.." около "..YELLOW.."[3]"..WHITE..". Предшествующее задание идет от Курьера Удар Молота в Стальгорне. Он бродит по всему городу."
-	Inst10Quest2_Prequest = "Крепость Оперенной Луны" -- 7494
-	Inst10Quest2_Folgequest = "Нет"
-	--
-	Inst10Quest2name1 = "Lorespinner"
-	
-	--Quest 3 Alliance
-	Inst10Quest3 = "3. Осколки сквернита" -- 5526
-	Inst10Quest3_Level = "60"
-	Inst10Quest3_Attain = "56"
-	Inst10Quest3_Aim = "Отыщите Сквернит в Забытом Городе и подберите его осколок. Есть шанс, что вам удастся его добыть, только убив Алззина Перевертня. Крепко заприте осколок в реликварии Чистоты, затем верните его Рабину Сатурне в Ночную Гавань в Лунной поляне."
-	Inst10Quest3_Location = "Рабин Сатурна (Лунная поляна - Ночная гавань; "..YELLOW.."51,44"..WHITE..")"
-	Inst10Quest3_Note = "Вы найдете Алззина Вертоградаря в "..YELLOW.."Восточной"..WHITE.." части Забытого города около "..YELLOW.."[5]"..WHITE..". Реликварий находится в Силитусе около "..YELLOW.."62,54"..WHITE..". Предществующее задание также идет от Рабина Сатурна."
-	Inst10Quest3_Prequest = "Реликварий Чистоты" -- 5527
-	Inst10Quest3_Folgequest = "Нет"
-	--
-	Inst10Quest3name1 = "Milli's Shield"
-	Inst10Quest3name2 = "Milli's Lexicon"
-	
-	--Quest 4 Alliance
-	Inst10Quest4 = "4. Левая часть амулета Лорда Вальтхалака" -- 8967
-	Inst10Quest4_Level = "60"
-	Inst10Quest4_Attain = "58"
-	Inst10Quest4_Aim = "С помощью жаровни Призыва вызвать дух Изалиен и убить ее. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва."
-	Inst10Quest4_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst10Quest4_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nИзалиен вызывается около "..YELLOW.."[5]"..WHITE.."."
-	Inst10Quest4_Prequest = "Важная составляющая заклинания" -- 8963
-	Inst10Quest4_Folgequest = "Я вижу в твоем будущем остров Алькац..." -- 8970
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst10Quest5 = "5. Правая часть амулета Лорда Вальтхалака" -- 8990
-	Inst10Quest5_Level = "60"
-	Inst10Quest5_Attain = "58"
-	Inst10Quest5_Aim = "С помощью жаровни Призыва вызвать дух Изалиен и убить ее. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва."
-	Inst10Quest5_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst10Quest5_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nИзалиен вызывается около "..YELLOW.."[5]"..WHITE.."."
-	Inst10Quest5_Prequest = "Еще одна важная составляющая заклинания" -- 8985
-	Inst10Quest5_Folgequest = "Последние приготовления ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 8994
-	-- No Rewards for this quest
-	
-	--Quest 6 Alliance
-	Inst10Quest6 = "6. Тюремные кандалы" -- 7581
-	Inst10Quest6_Level = "60"
-	Inst10Quest6_Attain = "60"
-	Inst10Quest6_Aim = "Отправляйтесь в Забытый Город, что в Фераласе и добудьте 15 порций крови сатиров из племени Исчадий Природы, что живут в Квартале Криводревов. Вернитесь к Дайо из Гниющего шрама по выполнении поручения."
-	Inst10Quest6_Location = "Дайо Дряхлый (Выжженные земли - Гниющий шрам; "..YELLOW.."34,50"..WHITE..")"
-	Inst10Quest6_Note = "Задание для чернокнижников: Это вместе с другими заданиями для чернокнижников начинает Дайо Дряхлый на заклинание Ритуал Рока. Самый простой способ добраться до 'Сатиров из племени Буйного Нрава' это войти в Забытый Город (Восток) через 'заднюю дверь' в Павильон Лорисс (Фералас; "..YELLOW.."77,37"..WHITE.."). Вам понадобится Серповидный ключ."
-	Inst10Quest6_Prequest = "Нет"
-	Inst10Quest6_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst10Quest1_HORDE = Inst10Quest1
-	Inst10Quest1_HORDE_Level = Inst10Quest1_Level
-	Inst10Quest1_HORDE_Attain = Inst10Quest1_Attain
-	Inst10Quest1_HORDE_Aim = Inst10Quest1_Aim
-	Inst10Quest1_HORDE_Location = Inst10Quest1_Location
-	Inst10Quest1_HORDE_Note = Inst10Quest1_Note
-	Inst10Quest1_HORDE_Prequest = Inst10Quest1_Prequest
-	Inst10Quest1_HORDE_Folgequest = Inst10Quest1_Folgequest
-	--
-	Inst10Quest1name1_HORDE = Inst10Quest1name1
-	Inst10Quest1name2_HORDE = Inst10Quest1name2
-	
-	--Quest 2 Horde
-	Inst10Quest2_HORDE = "2. Сеть Лефтендрис" -- 7489
-	Inst10Quest2_HORDE_Level = "57"
-	Inst10Quest2_HORDE_Attain = "54"
-	Inst10Quest2_HORDE_Aim = "Принесите сеть Лефтендрис Тало Терновому Копыту в Лагере Мохаче в Фераласе."
-	Inst10Quest2_HORDE_Location = "Тало Терновое Копыто (Фералас - Лагерь Мохаче; "..YELLOW.."76,43"..WHITE..")"
-	Inst10Quest2_HORDE_Note = "Лефтендрис находится в Забытом городе "..YELLOW.."(Восток)"..WHITE.." около "..YELLOW.."[3]"..WHITE..". Предшествеющее задание идет от Военного глашатая Горлача в Оргриммаре. Он бродит по всему городу."
-	Inst10Quest2_HORDE_Prequest = "Лагерь Мохаче" -- 7492
-	Inst10Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst10Quest2name1_HORDE = "Lorespinner"
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst10Quest3_HORDE = Inst10Quest3
-	Inst10Quest3_HORDE_Level = Inst10Quest3_Level
-	Inst10Quest3_HORDE_Attain = Inst10Quest3_Attain
-	Inst10Quest3_HORDE_Aim = Inst10Quest3_Aim
-	Inst10Quest3_HORDE_Location = Inst10Quest3_Location
-	Inst10Quest3_HORDE_Note = Inst10Quest3_Note
-	Inst10Quest3_HORDE_Prequest = Inst10Quest3_Prequest
-	Inst10Quest3_HORDE_Folgequest = Inst10Quest3_Folgequest
-	--
-	Inst10Quest3name1_HORDE = Inst10Quest3name1
-	Inst10Quest3name2_HORDE = Inst10Quest3name2
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst10Quest4_HORDE = Inst10Quest4
-	Inst10Quest4_HORDE_Level = Inst10Quest4_Level
-	Inst10Quest4_HORDE_Attain = Inst10Quest4_Attain
-	Inst10Quest4_HORDE_Aim = Inst10Quest4_Aim
-	Inst10Quest4_HORDE_Location = Inst10Quest4_Location
-	Inst10Quest4_HORDE_Note = Inst10Quest4_Note
-	Inst10Quest4_HORDE_Prequest = Inst10Quest4_Prequest
-	Inst10Quest4_HORDE_Folgequest = Inst10Quest4_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst10Quest5_HORDE = Inst10Quest5
-	Inst10Quest5_HORDE_Level = Inst10Quest5_Level
-	Inst10Quest5_HORDE_Attain = Inst10Quest5_Attain
-	Inst10Quest5_HORDE_Aim = Inst10Quest5_Aim
-	Inst10Quest5_HORDE_Location = Inst10Quest5_Location
-	Inst10Quest5_HORDE_Note = Inst10Quest5_Note
-	Inst10Quest5_HORDE_Prequest = Inst10Quest5_Prequest
-	Inst10Quest5_HORDE_Folgequest = Inst10Quest5_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst10Quest6_HORDE = Inst10Quest6
-	Inst10Quest6_HORDE_Level = Inst10Quest6_Level
-	Inst10Quest6_HORDE_Attain = Inst10Quest6_Attain
-	Inst10Quest6_HORDE_Aim = Inst10Quest6_Aim
-	Inst10Quest6_HORDE_Location = Inst10Quest6_Location
-	Inst10Quest6_HORDE_Note = Inst10Quest6_Note
-	Inst10Quest6_HORDE_Prequest = Inst10Quest6_Prequest
-	Inst10Quest6_HORDE_Folgequest = Inst10Quest6_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST11 - Dire Maul North (DM) ---------------
-	Inst11Story = Inst10Story
-	Inst11Caption = "Забытый город (Север)"
-	Inst11QAA = "4 задания"
-	Inst11QAH = "4 задания"
-	
-	--Quest 1 Alliance
-	Inst11Quest1 = "1. Сломанная западня" -- 1193
-	Inst11Quest1_Level = "60"
-	Inst11Quest1_Attain = "56"
-	Inst11Quest1_Aim = "Отремонтировать западню."
-	Inst11Quest1_Location = "Сломанная западня (Забытый город; "..YELLOW.."Север"..WHITE..")"
-	Inst11Quest1_Note = "Повторяемое задание. Для ремонта западни нужно использовать [Ториевое устройство] и [Масло льда]."
-	Inst11Quest1_Prequest = "Нет"
-	Inst11Quest1_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst11Quest2 = "2. Броня огров Гордока" -- 5518
-	Inst11Quest2_Level = "60"
-	Inst11Quest2_Attain = "56"
-	Inst11Quest2_Aim = "Принесите 4 рулона рунической ткани, 8 кусков грубой кожи, 2 мотка рунной нити и огрскую дубильную кислоту Уззлу Наперстяку. Он прикован в секторе Гордока в Забытом Городе."
-	Inst11Quest2_Location = "Уззл Наперстяк (Забытый город; "..YELLOW.."Север, [4]"..WHITE..")"
-	Inst11Quest2_Note = "Повторяемое задание. Вы найдете огрскую дубильную кислоту около "..YELLOW.."[4] (сверху)"..WHITE.."."
-	Inst11Quest2_Prequest = "Нет"
-	Inst11Quest2_Folgequest = "Нет"
-	--
-	Inst11Quest2name1 = "Gordok Ogre Suit"
-	
-	--Quest 3 Alliance
-	Inst11Quest3 = "3. Освободите Нотта!" -- 5525
-	Inst11Quest3_Level = "60"
-	Inst11Quest3_Attain = "57"
-	Inst11Quest3_Aim = "Найдите Ключ от оков Гордока для Уззла Наперстяка."
-	Inst11Quest3_Location = "Уззл Наперстяк (Забытый город; "..YELLOW.."Север, [4]"..WHITE..")"
-	Inst11Quest3_Note = "Повторяемое задание. Ключ может выпасть из любого охранника."
-	Inst11Quest3_Prequest = "Нет"
-	Inst11Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst11Quest4 = "4. Неоконченное дело Гордоков" -- 1318 or 7703 lol...
-	Inst11Quest4_Level = "60"
-	Inst11Quest4_Attain = "56"
-	Inst11Quest4_Aim = "Добудьте латную рукавицу Мощи Гордока и вернитесь с ней к капитану Давигрому в Забытом Городе. По словам Давигрома, в \"старых байках\" говорится, что Тортелдрин – \"страшный эльф\", называющий себя принцем, – похитил эту рукавицу у одного из королей Гордоков."
-	Inst11Quest4_Location = "Капитан Давигром (Забытый город; "..YELLOW.."Север, [5]"..WHITE..")"
-	Inst11Quest4_Note = "Принц находится в Забытом городе "..YELLOW.."Запад"..WHITE.." около "..YELLOW.."[7]"..WHITE..". Рукавица в сундуке прямо рядом с ним. Вы можете взять это задание только после Захода почести и с баффом 'Король Гордока'."
-	Inst11Quest4_Prequest = "Нет"
-	Inst11Quest4_Folgequest = "Нет"
-	--
-	Inst11Quest4name1 = "Gordok's Handwraps"
-	Inst11Quest4name2 = "Gordok's Gloves"
-	Inst11Quest4name3 = "Gordok's Gauntlets"
-	Inst11Quest4name4 = "Gordok's Handguards"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst11Quest1_HORDE = Inst11Quest1
-	Inst11Quest1_HORDE_Level = Inst11Quest1_Level
-	Inst11Quest1_HORDE_Attain = Inst11Quest1_Attain
-	Inst11Quest1_HORDE_Aim = Inst11Quest1_Aim
-	Inst11Quest1_HORDE_Location = Inst11Quest1_Location
-	Inst11Quest1_HORDE_Note = Inst11Quest1_Note
-	Inst11Quest1_HORDE_Prequest = Inst11Quest1_Prequest
-	Inst11Quest1_HORDE_Folgequest = Inst11Quest1_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst11Quest2_HORDE = Inst11Quest2
-	Inst11Quest2_HORDE_Level = Inst11Quest2_Level
-	Inst11Quest2_HORDE_Attain = Inst11Quest2_Attain
-	Inst11Quest2_HORDE_Aim = Inst11Quest2_Aim
-	Inst11Quest2_HORDE_Location = Inst11Quest2_Location
-	Inst11Quest2_HORDE_Note = Inst11Quest2_Note
-	Inst11Quest2_HORDE_Prequest = Inst11Quest2_Prequest
-	Inst11Quest2_HORDE_Folgequest = Inst11Quest2_Folgequest
-	--
-	Inst11Quest2name1_HORDE = Inst11Quest2name1
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst11Quest3_HORDE = Inst11Quest3
-	Inst11Quest3_HORDE_Level = Inst11Quest3_Level
-	Inst11Quest3_HORDE_Attain = Inst11Quest3_Attain
-	Inst11Quest3_HORDE_Aim = Inst11Quest3_Aim
-	Inst11Quest3_HORDE_Location = Inst11Quest3_Location
-	Inst11Quest3_HORDE_Note = Inst11Quest3_Note
-	Inst11Quest3_HORDE_Prequest = Inst11Quest3_Prequest
-	Inst11Quest3_HORDE_Folgequest = Inst11Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst11Quest4_HORDE = Inst11Quest4
-	Inst11Quest4_HORDE_Level = Inst11Quest4_Level
-	Inst11Quest4_HORDE_Attain = Inst11Quest4_Attain
-	Inst11Quest4_HORDE_Aim = Inst11Quest4_Aim
-	Inst11Quest4_HORDE_Location = Inst11Quest4_Location
-	Inst11Quest4_HORDE_Note = Inst11Quest4_Note
-	Inst11Quest4_HORDE_Prequest = Inst11Quest4_Prequest
-	Inst11Quest4_HORDE_Folgequest = Inst11Quest4_Folgequest
-	--
-	Inst11Quest4name1_HORDE = Inst11Quest4name1
-	Inst11Quest4name2_HORDE = Inst11Quest4name2
-	Inst11Quest4name3_HORDE = Inst11Quest4name3
-	Inst11Quest4name4_HORDE = Inst11Quest4name4
-	
-	
-	
-	--------------- INST12 - Dire Maul West (DM) ---------------
-	Inst12Story = Inst10Story
-	Inst12Caption = "Забытый город (Запад)"
-	Inst12QAA = "17 заданий"
-	Inst12QAH = "17 заданий"
-	
-	--Quest 1 Alliance
-	Inst12Quest1 = "1. Эльфийские легенды" -- 7482
-	Inst12Quest1_Level = "60"
-	Inst12Quest1_Attain = "54"
-	Inst12Quest1_Aim = "Попытайтесь найти в Забытом Городе Кариэля Винтхалуса. Вернитесь в крепость Оперенной Луны к школяру Рунному Шипу и сообщите ей все, что вам удалось узнать."
-	Inst12Quest1_Location = "Школяр Рунный Шип (Фералас - Крепость Оперенной Луны; "..YELLOW.."31,43"..WHITE..")"
-	Inst12Quest1_Note = "Вы найдете Кариэля Винтхалуса в "..YELLOW.."Библиотека (Запад)"..WHITE.."."
-	Inst12Quest1_Prequest = "Нет"
-	Inst12Quest1_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst12Quest2 = "2. Древнее безумие" -- 7461
-	Inst12Quest2_Level = "60"
-	Inst12Quest2_Attain = "56"
-	Inst12Quest2_Aim = "Перебейте стражей, которые охраняют 5 столпов, снабжающих энергией Тюрьму Бессмер'тера. После того как столпы угаснут, силовое поле, удерживающее Бессмер'тера, рассеется.\nВойдите в Тюрьму Бессмер'тера и уничтожьте злого демона, который находится внутри. И, наконец, сразитесь с принцем Тортелдрином в Читальне. Если задание будет выполнено успешно, вернитесь во двор, к прародительнице Шен\'дралар."
-	Inst12Quest2_Location = "Прародительница Шен'дралар (Забытый город; "..YELLOW.."Запад, [1] (сверху)"..WHITE..")"
-	Inst12Quest2_Note = "Столпы помечены как "..BLUE.."[B]"..WHITE..". Бессмер'тер находится около "..YELLOW.."[6]"..WHITE..", Принц Тортелдрин находится около "..YELLOW.."[7]"..WHITE.."."
-	Inst12Quest2_Prequest = "Нет"
-	Inst12Quest2_Folgequest = "Сокровище Шен'дралар" -- 7877
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst12Quest3 = "3. Сокровище Шен'дралар" -- 7462
-	Inst12Quest3_Level = "60"
-	Inst12Quest3_Attain = "56"
-	Inst12Quest3_Aim = "Вернитесь в Читальню и найдите сокровище Шен'дралар. Получите свою награду!"
-	Inst12Quest3_Location = "Прародительница Шен'дралар (Забытый город; "..YELLOW.."Запад, [1]"..WHITE..")"
-	Inst12Quest3_Note = "Вы найдете Сокровище под ступеньками "..YELLOW.."[7]"..WHITE.."."
-	Inst12Quest3_Prequest = "Древнее безумие" -- 7461
-	Inst12Quest3_Folgequest = "Нет"
-	--
-	Inst12Quest3name1 = "Sedge Boots"
-	Inst12Quest3name2 = "Backwood Helm"
-	Inst12Quest3name3 = "Bonecrusher"
-	
-	--Quest 4 Alliance
-	Inst12Quest4 = "4. Зоротианский конь погибели" -- 7631
-	Inst12Quest4_Level = "60"
-	Inst12Quest4_Attain = "60"
-	Inst12Quest4_Aim = "Прочтите инструкции Мор'зула. Призовите зоротианского коня погибели, одолейте его и подчините его дух."
-	Inst12Quest4_Location = "Мор'зул Вестник Крови (Пылающие степи; "..YELLOW.."12,31"..WHITE..")"
-	Inst12Quest4_Note = "Задание для чернокнижников: Окончательное задание на эпического коня чернокнижников. Сначала вы должны отключить все Пилоны, отмеченные "..BLUE.."[B]"..WHITE.." и убить Бессмер'тера около "..YELLOW.."[6]"..WHITE..". После этого, вы можете начать ритуал призыва. Обязательно иметь свыше 20 готовых Осколков душ и одного чернокнижника специально назначенного для поддержания колокола, свечи и колеса. Стражники ужаса могу быть подчинены. После завершения ритуала, поговорите с Духом коня погибели, чтобы закончить задание."
-	Inst12Quest4_Prequest = "Доставка беса ("..YELLOW.."Некроситет"..WHITE..")" -- 7629
-	Inst12Quest4_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst12Quest5 = "5. Изумрудный Сон" -- 7506
-	Inst12Quest5_Level = "60"
-	Inst12Quest5_Attain = "54"
-	Inst12Quest5_Aim = "Верните книгу законным владельцам."
-	Inst12Quest5_Location = "Изумрудный Сон (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest5_Note = "Задание для друидов: Вы относите книгу Сказителю Явону к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest5_Prequest = "Нет"
-	Inst12Quest5_Folgequest = "Нет"
-	--
-	Inst12Quest5name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 6 Alliance
-	Inst12Quest6 = "6. Величайшая гонка охотников" -- 7503
-	Inst12Quest6_Level = "60"
-	Inst12Quest6_Attain = "54"
-	Inst12Quest6_Aim = "Верните книгу законным владельцам."
-	Inst12Quest6_Location = "Величайшая гонка охотников (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest6_Note = "Задание для охотников: Вы относите книгу Сказительнице Микос к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest6_Prequest = "Нет"
-	Inst12Quest6_Folgequest = "Нет"
-	--
-	Inst12Quest6name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 7 Alliance
-	Inst12Quest7 = "7. Поваренная книга чародея" -- 7500
-	Inst12Quest7_Level = "60"
-	Inst12Quest7_Attain = "54"
-	Inst12Quest7_Aim = "Верните книгу законным владельцам."
-	Inst12Quest7_Location = "Поваренная книга чародея (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest7_Note = "Задание для магов: Вы относите книгу Сказителю Килдрату к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest7_Prequest = "Нет"
-	Inst12Quest7_Folgequest = "Нет"
-	--
-	Inst12Quest7name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 8 Alliance
-	Inst12Quest8 = "8. Свет и как его раскачать" -- 7501
-	Inst12Quest8_Level = "60"
-	Inst12Quest8_Attain = "54"
-	Inst12Quest8_Aim = "Верните книгу законным владельцам."
-	Inst12Quest8_Location = "Свет и как его раскачать (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest8_Note = "Задание для паладинов: Вы относите книгу Сказительнице Микос к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest8_Prequest = "Нет"
-	Inst12Quest8_Folgequest = "Нет"
-	--
-	Inst12Quest8name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 9 Alliance
-	Inst12Quest9 = "9. Святая Болонья: О чем не говорит Свет" -- 7504
-	Inst12Quest9_Level = "60"
-	Inst12Quest9_Attain = "56"
-	Inst12Quest9_Aim = "Верните книгу законным владельцам."
-	Inst12Quest9_Location = "Святая Болонья: О чем не говорит Свет (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest9_Note = "Задание для жрецов: Вы относите книгу Сказителю Явону к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest9_Prequest = "Нет"
-	Inst12Quest9_Folgequest = "Нет"
-	--
-	Inst12Quest9name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 10 Alliance
-	Inst12Quest10 = "10. Гарона: Исследование уловок и предательства" -- 7498
-	Inst12Quest10_Level = "60"
-	Inst12Quest10_Attain = "54"
-	Inst12Quest10_Aim = "Верните книгу законным владельцам."
-	Inst12Quest10_Location = "Гарона: Исследование уловок и предательства (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest10_Note = "Задание для разбойников: Вы относите книгу Сказителю Килдрату к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest10_Prequest = "Нет"
-	Inst12Quest10_Folgequest = "Нет"
-	--
-	Inst12Quest10name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 11 Alliance
-	Inst12Quest11 = "11. Ледяной шок и вы" -- 7505
-	Inst12Quest11_Level = "60"
-	Inst12Quest11_Attain = "54"
-	Inst12Quest11_Aim = "Верните книгу законным владельцам."
-	Inst12Quest11_Location = "Ледяной шок и вы (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest11_Note = "Задание для шаманов: Вы относите книгу Сказителю Явону к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest11_Prequest = "Нет"
-	Inst12Quest11_Folgequest = "Нет"
-	--
-	Inst12Quest11name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 12 Alliance
-	Inst12Quest12 = "12. Укрощая тени" -- 7502
-	Inst12Quest12_Level = "60"
-	Inst12Quest12_Attain = "54"
-	Inst12Quest12_Aim = "Верните книгу законным владельцам."
-	Inst12Quest12_Location = "Укрощая тени (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest12_Note = "Задание для чернокнижников: Вы относите книгу Сказительнице Микос к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest12_Prequest = "Нет"
-	Inst12Quest12_Folgequest = "Нет"
-	--
-	Inst12Quest12name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 13 Alliance
-	Inst12Quest13 = "13. Кодекс Обороны" -- 7499
-	Inst12Quest13_Level = "60"
-	Inst12Quest13_Attain = "54"
-	Inst12Quest13_Aim = "Верните книгу законным владельцам."
-	Inst12Quest13_Location = "Кодекс Обороны (случайная добыча с боссов во всех частях Забытого города)"
-	Inst12Quest13_Note = "Задание для воинов: Вы относите книгу Сказителю Килдрату к "..YELLOW.."1' Библиотеке"..WHITE.."."
-	Inst12Quest13_Prequest = "Нет"
-	Inst12Quest13_Folgequest = "Нет"
-	--
-	Inst12Quest13name1 = "Royal Seal of Eldre'Thalas"
-	
-	--Quest 14 Alliance
-	Inst12Quest14 = "14. Манускрипт Средоточия" -- 7484
-	Inst12Quest14_Level = "60"
-	Inst12Quest14_Attain = "58"
-	Inst12Quest14_Aim = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Средоточия\", 1 безупречный черный алмаз, 4 больших сверкающих осколка и 2 образца шкуры тени, чтобы получить магический знак сосредоточения."
-	Inst12Quest14_Location = "Сказитель Лидрос (Забытый город (Запад); "..YELLOW.."[1'] Библиотека"..WHITE..")"
-	Inst12Quest14_Note = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это."
-	Inst12Quest14_Page = { "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Шкура тени\" персональная и может выпасть с нескольких боссов, Восставших созданий и Восставших костостражей в "..YELLOW.."Некроситете"..WHITE..".", };
-	Inst12Quest14_Prequest = "Нет"
-	Inst12Quest14_Folgequest = "Нет"
-	--
-	Inst12Quest14name1 = "Arcanum of Focus"
-	
-	--Quest 15 Alliance
-	Inst12Quest15 = "15. Манускрипт Защиты" -- 7485
-	Inst12Quest15_Level = "60"
-	Inst12Quest15_Attain = "58"
-	Inst12Quest15_Aim = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Защиты\", 1 безупречный черный алмаз, 2 больших сверкающих осколка и 1 истлевшую шовную нить поганища, чтобы получить магический знак защиты."
-	Inst12Quest15_Location = "Сказитель Лидрос (Забытый город (Запад); "..YELLOW.."[1'] Библиотека"..WHITE..")"
-	Inst12Quest15_Note = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это."
-	Inst12Quest15_Page = { "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Истлевшая шовная нить поганища\" персональная и может выпасть с Рамштайна Ненасытного, Изрыгателя яда, Желчеплюя и Лоскутного ужаса в "..YELLOW.."Стратхольме"..WHITE..".", };
-	Inst12Quest15_Prequest = "Нет"
-	Inst12Quest15_Folgequest = "Нет"
-	--
-	Inst12Quest15name1 = "Arcanum of Protection"
-	
-	--Quest 16 Alliance
-	Inst12Quest16 = "16. Манускрипт Скорости" -- 7483
-	Inst12Quest16_Level = "60"
-	Inst12Quest16_Attain = "58"
-	Inst12Quest16_Aim = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Скорости\", 1 безупречный черный алмаз, 2 больших сверкающих осколка и 2 образца крови героев, чтобы получить магический знак стремительности."
-	Inst12Quest16_Location = "Сказитель Лидрос (Забытый город (Запад); "..YELLOW.."[1'] Библиотека"..WHITE..")"
-	Inst12Quest16_Note = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это."
-	Inst12Quest16_Page = { "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Кровь героев\" персональная и может быть найдена на земле в случайных местах Западных и Восточных Чумных землях.", };
-	Inst12Quest16_Prequest = "Нет"
-	Inst12Quest16_Folgequest = "Нет"
-	--
-	Inst12Quest16name1 = "Arcanum of Rapidity"
-	
-	--Quest 17 Alliance
-	Inst12Quest17 = "17. Справочник Форора" -- 7507
-	Inst12Quest17_Level = "60"
-	Inst12Quest17_Attain = "60"
-	Inst12Quest17_Aim = "Верните \"Справочник Форора по убийству драконов\" в Читальню."
-	Inst12Quest17_Location = "Справочник Форора по истреблению драконов (случайная добыча с боссов в "..YELLOW.."Забытом городе"..WHITE..")"
-	Inst12Quest17_Note = "Задание для воинов или паладинов. Вы относите книгу Сказителю Лидросу в (Забытый город (Запад); "..YELLOW.."[1'] Библиотека"..WHITE.."). Завершение этого позволяет начать задание на Кель'Серрар."
-	Inst12Quest17_Prequest = "Нет"
-	Inst12Quest17_Folgequest = "Ковка Кель'Серрара" -- 7508
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde
-	Inst12Quest1_HORDE = "1. Эльфийские легенды" -- 7481
-	Inst12Quest1_HORDE_Level = "60"
-	Inst12Quest1_HORDE_Attain = "54"
-	Inst12Quest1_HORDE_Aim = "Попытайтесь найти в Забытом Городе Кариэля Винтхалуса. Вернитесь в Лагерь Мохаче к Ведуну Королуску и сообщите ему все, что вам удалось узнать."
-	Inst12Quest1_HORDE_Location = "Ведун Королуск (Фералас - Лагерь Мохаче; "..YELLOW.."74,43"..WHITE..")"
-	Inst12Quest1_HORDE_Note = "Вы найдете Кариэля Винтхалуса в "..YELLOW.."Библиотеке (Запад)"..WHITE.."."
-	Inst12Quest1_HORDE_Prequest = "Нет"
-	Inst12Quest1_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst12Quest2_HORDE = Inst12Quest2
-	Inst12Quest2_HORDE_Level = Inst12Quest2_Level
-	Inst12Quest2_HORDE_Attain = Inst12Quest2_Attain
-	Inst12Quest2_HORDE_Aim = Inst12Quest2_Aim
-	Inst12Quest2_HORDE_Location = Inst12Quest2_Location
-	Inst12Quest2_HORDE_Note = Inst12Quest2_Note
-	Inst12Quest2_HORDE_Prequest = Inst12Quest2_Prequest
-	Inst12Quest2_HORDE_Folgequest = Inst12Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst12Quest3_HORDE = Inst12Quest3
-	Inst12Quest3_HORDE_Level = Inst12Quest3_Level
-	Inst12Quest3_HORDE_Attain = Inst12Quest3_Attain
-	Inst12Quest3_HORDE_Aim = Inst12Quest3_Aim
-	Inst12Quest3_HORDE_Location = Inst12Quest3_Location
-	Inst12Quest3_HORDE_Note = Inst12Quest3_Note
-	Inst12Quest3_HORDE_Prequest = Inst12Quest3_Prequest
-	Inst12Quest3_HORDE_Folgequest = Inst12Quest3_Folgequest
-	--
-	Inst12Quest3name1_HORDE = Inst12Quest3name1
-	Inst12Quest3name2_HORDE = Inst12Quest3name2
-	Inst12Quest3name3_HORDE = Inst12Quest3name3
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst12Quest4_HORDE = Inst12Quest4
-	Inst12Quest4_HORDE_Level = Inst12Quest4_Level
-	Inst12Quest4_HORDE_Attain = Inst12Quest4_Attain
-	Inst12Quest4_HORDE_Aim = Inst12Quest4_Aim
-	Inst12Quest4_HORDE_Location = Inst12Quest4_Location
-	Inst12Quest4_HORDE_Note = Inst12Quest4_Note
-	Inst12Quest4_HORDE_Prequest = Inst12Quest4_Prequest
-	Inst12Quest4_HORDE_Folgequest = Inst12Quest4_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst12Quest5_HORDE = Inst12Quest5
-	Inst12Quest5_HORDE_Level = Inst12Quest5_Level
-	Inst12Quest5_HORDE_Attain = Inst12Quest5_Attain
-	Inst12Quest5_HORDE_Aim = Inst12Quest5_Aim
-	Inst12Quest5_HORDE_Location = Inst12Quest5_Location
-	Inst12Quest5_HORDE_Note = Inst12Quest5_Note
-	Inst12Quest5_HORDE_Prequest = Inst12Quest5_Prequest
-	Inst12Quest5_HORDE_Folgequest = Inst12Quest5_Folgequest
-	--
-	Inst12Quest5name1_HORDE = Inst12Quest5name1
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst12Quest6_HORDE = Inst12Quest6
-	Inst12Quest6_HORDE_Level = Inst12Quest6_Level
-	Inst12Quest6_HORDE_Attain = Inst12Quest6_Attain
-	Inst12Quest6_HORDE_Aim = Inst12Quest6_Aim
-	Inst12Quest6_HORDE_Location = Inst12Quest6_Location
-	Inst12Quest6_HORDE_Note = Inst12Quest6_Note
-	Inst12Quest6_HORDE_Prequest = Inst12Quest6_Prequest
-	Inst12Quest6_HORDE_Folgequest = Inst12Quest6_Folgequest
-	--
-	Inst12Quest6name1_HORDE = Inst12Quest6name1
-	
-	--Quest 7 Horde (same as Quest 7 Alliance)
-	Inst12Quest7_HORDE = Inst12Quest7
-	Inst12Quest7_HORDE_Level = Inst12Quest7_Level
-	Inst12Quest7_HORDE_Attain = Inst12Quest7_Attain
-	Inst12Quest7_HORDE_Aim = Inst12Quest7_Aim
-	Inst12Quest7_HORDE_Location = Inst12Quest7_Location
-	Inst12Quest7_HORDE_Note = Inst12Quest7_Note
-	Inst12Quest7_HORDE_Prequest = Inst12Quest7_Prequest
-	Inst12Quest7_HORDE_Folgequest = Inst12Quest7_Folgequest
-	--
-	Inst12Quest7name1_HORDE = Inst12Quest7name1
-	
-	--Quest 8 Horde (same as Quest 8 Alliance)
-	Inst12Quest8_HORDE = Inst12Quest8
-	Inst12Quest8_HORDE_Level = Inst12Quest8_Level
-	Inst12Quest8_HORDE_Attain = Inst12Quest8_Attain
-	Inst12Quest8_HORDE_Aim = Inst12Quest8_Aim
-	Inst12Quest8_HORDE_Location = Inst12Quest8_Location
-	Inst12Quest8_HORDE_Note = Inst12Quest8_Note
-	Inst12Quest8_HORDE_Prequest = Inst12Quest8_Prequest
-	Inst12Quest8_HORDE_Folgequest = Inst12Quest8_Folgequest
-	--
-	Inst12Quest8name1_HORDE = Inst12Quest8name1
-	
-	--Quest 9 Horde (same as Quest 9 Alliance)
-	Inst12Quest9_HORDE = Inst12Quest9
-	Inst12Quest9_HORDE_Level = Inst12Quest9_Level
-	Inst12Quest9_HORDE_Attain = Inst12Quest9_Attain
-	Inst12Quest9_HORDE_Aim = Inst12Quest9_Aim
-	Inst12Quest9_HORDE_Location = Inst12Quest9_Location
-	Inst12Quest9_HORDE_Note = Inst12Quest9_Note
-	Inst12Quest9_HORDE_Prequest = Inst12Quest9_Prequest
-	Inst12Quest9_HORDE_Folgequest = Inst12Quest9_Folgequest
-	--
-	Inst12Quest9name1_HORDE = Inst12Quest9name1
-	
-	--Quest 10 Horde (same as Quest 10 Alliance)
-	Inst12Quest10_HORDE = Inst12Quest10
-	Inst12Quest10_HORDE_Level = Inst12Quest10_Level
-	Inst12Quest10_HORDE_Attain = Inst12Quest10_Attain
-	Inst12Quest10_HORDE_Aim = Inst12Quest10_Aim
-	Inst12Quest10_HORDE_Location = Inst12Quest10_Location
-	Inst12Quest10_HORDE_Note = Inst12Quest10_Note
-	Inst12Quest10_HORDE_Prequest = Inst12Quest10_Prequest
-	Inst12Quest10_HORDE_Folgequest = Inst12Quest10_Folgequest
-	--
-	Inst12Quest10name1_HORDE = Inst12Quest10name1
-	
-	--Quest 11 Horde (same as Quest 11 Alliance)
-	Inst12Quest11_HORDE = Inst12Quest11
-	Inst12Quest11_HORDE_Level = Inst12Quest11_Level
-	Inst12Quest11_HORDE_Attain = Inst12Quest11_Attain
-	Inst12Quest11_HORDE_Aim = Inst12Quest11_Aim
-	Inst12Quest11_HORDE_Location = Inst12Quest11_Location
-	Inst12Quest11_HORDE_Note = Inst12Quest11_Note
-	Inst12Quest11_HORDE_Prequest = Inst12Quest11_Prequest
-	Inst12Quest11_HORDE_Folgequest = Inst12Quest11_Folgequest
-	--
-	Inst12Quest11name1_HORDE = Inst12Quest11name1
-	
-	--Quest 12 Horde (same as Quest 12 Alliance)
-	Inst12Quest12_HORDE = Inst12Quest12
-	Inst12Quest12_HORDE_Level = Inst12Quest12_Level
-	Inst12Quest12_HORDE_Attain = Inst12Quest12_Attain
-	Inst12Quest12_HORDE_Aim = Inst12Quest12_Aim
-	Inst12Quest12_HORDE_Location = Inst12Quest12_Location
-	Inst12Quest12_HORDE_Note = Inst12Quest12_Note
-	Inst12Quest12_HORDE_Prequest = Inst12Quest12_Prequest
-	Inst12Quest12_HORDE_Folgequest = Inst12Quest12_Folgequest
-	--
-	Inst12Quest12name1_HORDE = Inst12Quest12name1
-	
-	--Quest 13 Horde (same as Quest 13 Alliance)
-	Inst12Quest13_HORDE = Inst12Quest13
-	Inst12Quest13_HORDE_Level = Inst12Quest13_Level
-	Inst12Quest13_HORDE_Attain = Inst12Quest13_Attain
-	Inst12Quest13_HORDE_Aim = Inst12Quest13_Aim
-	Inst12Quest13_HORDE_Location = Inst12Quest13_Location
-	Inst12Quest13_HORDE_Note = Inst12Quest13_Note
-	Inst12Quest13_HORDE_Prequest = Inst12Quest13_Prequest
-	Inst12Quest13_HORDE_Folgequest = Inst12Quest13_Folgequest
-	--
-	Inst12Quest13name1_HORDE = Inst12Quest13name1
-	
-	--Quest 14 Horde (same as Quest 14 Alliance)
-	Inst12Quest14_HORDE = Inst12Quest14
-	Inst12Quest14_HORDE_Level = Inst12Quest14_Level
-	Inst12Quest14_HORDE_Attain = Inst12Quest14_Attain
-	Inst12Quest14_HORDE_Aim = Inst12Quest14_Aim
-	Inst12Quest14_HORDE_Location = Inst12Quest14_Location
-	Inst12Quest14_HORDE_Note = Inst12Quest14_Note
-	Inst12Quest14_HORDE_Page = Inst12Quest14_Page
-	Inst12Quest14_HORDE_Prequest = Inst12Quest14_Prequest
-	Inst12Quest14_HORDE_Folgequest = Inst12Quest14_Folgequest
-	--
-	Inst12Quest14name1_HORDE = Inst12Quest14name1
-	
-	--Quest 15 Horde (same as Quest 15 Alliance)
-	Inst12Quest15_HORDE = Inst12Quest15
-	Inst12Quest15_HORDE_Level = Inst12Quest15_Level
-	Inst12Quest15_HORDE_Attain = Inst12Quest15_Attain
-	Inst12Quest15_HORDE_Aim = Inst12Quest15_Aim
-	Inst12Quest15_HORDE_Location = Inst12Quest15_Location
-	Inst12Quest15_HORDE_Note = Inst12Quest15_Note
-	Inst12Quest15_HORDE_Page = Inst12Quest15_Page
-	Inst12Quest15_HORDE_Prequest = Inst12Quest15_Prequest
-	Inst12Quest15_HORDE_Folgequest = Inst12Quest15_Folgequest
-	--
-	Inst12Quest15name1_HORDE = Inst12Quest15name1
-	
-	--Quest 16 Horde (same as Quest 16 Alliance)
-	Inst12Quest16_HORDE = Inst12Quest16
-	Inst12Quest16_HORDE_Level = Inst12Quest16_Level
-	Inst12Quest16_HORDE_Attain = Inst12Quest16_Attain
-	Inst12Quest16_HORDE_Aim = Inst12Quest16_Aim
-	Inst12Quest16_HORDE_Location = Inst12Quest16_Location
-	Inst12Quest16_HORDE_Note = Inst12Quest16_Note
-	Inst12Quest16_HORDE_Page = Inst12Quest16_Page
-	Inst12Quest16_HORDE_Prequest = Inst12Quest16_Prequest
-	Inst12Quest16_HORDE_Folgequest = Inst12Quest16_Folgequest
-	--
-	Inst12Quest16name1_HORDE = Inst12Quest16name1
-	
-	--Quest 17 Horde (same as Quest 17 Alliance)
-	Inst12Quest17_HORDE = Inst12Quest17
-	Inst12Quest17_HORDE_Level = Inst12Quest17_Level
-	Inst12Quest17_HORDE_Attain = Inst12Quest17_Attain
-	Inst12Quest17_HORDE_Aim = Inst12Quest17_Aim
-	Inst12Quest17_HORDE_Location = Inst12Quest17_Location
-	Inst12Quest17_HORDE_Note = Inst12Quest17_Note
-	Inst12Quest17_HORDE_Prequest = Inst12Quest17_Prequest
-	Inst12Quest17_HORDE_Folgequest = Inst12Quest17_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST13 - Maraudon (Mara) ---------------
-	Inst13Story = "Защищаемый свирепыми мародонскими кентаврами, Мародон является одим из самых священных мест в Пустошах. Великий храм-пещера служит местом последнего упокоения Зейтара, одного из двух бессмертных сыновей полубога Кенариуса. Легенда гласит, что Зейтар и принцесса духов стихии земли, Терадрас,  зачали незаконорожденную расу кентавров. Она также рассказывает о том, что появившись на свет, варвары-кентавры восстали против своего отца и убили его. Кое-кто верит, что Терадрас, полная скорби, заточила дух Зейтара в извилистых пещерах - используя его энергию для злых целей. Подземные тоннели, населенные злобными призраками давно умерших Ханов кентавров, а также яростными духами стихии, слугами Терадрас."
-	Inst13Caption = "Мародон"
-	Inst13QAA = "8 заданий"
-	Inst13QAH = "8 заданий"
-	
-	--Quest 1 Alliance
-	Inst13Quest1 = "1. Фрагменты осколка сумрака" -- 7070
-	Inst13Quest1_Level = "42"
-	Inst13Quest1_Attain = "38"
-	Inst13Quest1_Aim = "Соберите в Мародоне 10 фрагментов осколков сумрака и отнесите их верховному магу Тервошу в Терамор на побережье Пылевых топей."
-	Inst13Quest1_Location = "Верховный маг Тервош (Пылевые топи - Остров Терамор; "..YELLOW.."66,49"..WHITE..")"
-	Inst13Quest1_Note = "Вы получите фрагменты осколка сумрака с 'Темнокаменных грохотунов' или 'Темнокаменных крушителей' снаружи подземелья на Фиолетовой стороне."
-	Inst13Quest1_Prequest = "Нет"
-	Inst13Quest1_Folgequest = "Нет"
-	--
-	Inst13Quest1name1 = "Zealous Shadowshard Pendant"
-	Inst13Quest1name2 = "Prodigious Shadowshard Pendant"
-	
-	--Quest 2 Alliance
-	Inst13Quest2 = "2. Скверна Злоязыкого" -- 7041
-	Inst13Quest2_Level = "47"
-	Inst13Quest2_Attain = "41"
-	Inst13Quest2_Aim = "Наполните лазурный фиал с внутренним покрытием в оранжевом пруду Мародона.\nПолейте гнусь-лозу из наполненного фиала, чтобы изгнать ядовитую лозу.\nИсцелите 8 растений, убивая ядовитые лозы, и вернитесь к Талендрии из Высоты Найджела."
-	Inst13Quest2_Location = "Талендрия (Пустоши - Высота Найджела; "..YELLOW.."68,8"..WHITE..")"
-	Inst13Quest2_Note = "Вы можете наполнить фиал в любом бассейне снаружи подземелья на Оранжевой стороне. Растения находятся в фиолетовой и оранжевой зонах внутри подземелья."
-	Inst13Quest2_Prequest = "Нет"
-	Inst13Quest2_Folgequest = "Нет"
-	--
-	Inst13Quest2name1 = "Woodseed Hoop"
-	Inst13Quest2name2 = "Sagebrush Girdle"
-	Inst13Quest2name3 = "Branchclaw Gauntlets"
-	
-	--Quest 3 Alliance
-	Inst13Quest3 = "3. Хрустальные орнаменты" -- 7028
-	Inst13Quest3_Level = "47"
-	Inst13Quest3_Attain = "41"
-	Inst13Quest3_Aim = "Соберите 15 терадрических хрустальных орнаментов для Ивы из Пустошей."
-	Inst13Quest3_Location = "Ива (Пустоши; "..YELLOW.."62,39"..WHITE..")"
-	Inst13Quest3_Note = "С большинства существ в Мародоне падают орнаменты."
-	Inst13Quest3_Prequest = "Нет"
-	Inst13Quest3_Folgequest = "Нет"
-	--
-	Inst13Quest3name1 = "Acumen Robes"
-	Inst13Quest3name2 = "Sprightring Helm"
-	Inst13Quest3name3 = "Relentless Chain"
-	Inst13Quest3name4 = "Hulkstone Pauldrons"
-	
-	--Quest 4 Horde
-	Inst13Quest4 = "4. Инструкции кентавра-парии" -- 7067
-	Inst13Quest4_Level = "48"
-	Inst13Quest4_Attain = "39"
-	Inst13Quest4_Aim = "Прочтите инструкции кентавра-парии, добудьте из Мародона амулет Соединения и верните его кентавру-парии из южной части Пустошей."
-	Inst13Quest4_Location = "Кентавр-пария (Пустоши; "..YELLOW.."45,86"..WHITE..")"
-	Inst13Quest4_Note = "5 Ханов (Описание для инструкций парии)"
-	Inst13Quest4_Page = { "Вы найдете кентавра-парию в южных Пустошах. Он бродит между "..YELLOW.."44,85"..WHITE.." и "..YELLOW.."50,87"..WHITE..".\nСначала, Вам нужно убить Безымянного пророка. Вы найдете его перед тем, как войти в подземелье, перед точкой, где придется выбрать идти к Оранжевому или Фиолетовому входу. После него нужно убить 5 ханов. Второй - в Фиолетовой части Мародона, но перед входом в подземелье. Третий находится на Оранжевой стороне перед подземельем."};
-	Inst13Quest4_Prequest = "Нет"
-	Inst13Quest4_Folgequest = "Нет"
-	--
-	Inst13Quest4name1 = "Mark of the Chosen"
-	
-	--Quest 5 Alliance
-	Inst13Quest5 = "5. Легенды Мародона" -- 7044
-	Inst13Quest5_Level = "49"
-	Inst13Quest5_Attain = "41"
-	Inst13Quest5_Aim = "Добудьте две части скипетра Келебраса – жезл Келебраса и бриллиант Келебраса.\nНайдите способ поговорить с Келебрасом."
-	Inst13Quest5_Location = "Кавиндра (Пустоши - Мародон; "..YELLOW.."[4] на карте входа"..WHITE..")"
-	Inst13Quest5_Note = "Вы найдете Кавиндру в начале Оранжевой части перед подземельем.\nВы получите Келебрийский жезл с Ноксиона около "..YELLOW.."[2]"..WHITE..", а Келебрийский бриллиант с Лорда Злоязыкого  "..YELLOW.."[5]"..WHITE..". Келебрас находится около "..YELLOW.."[7]"..WHITE..". Вы должны победить его, чтобы поговорить."
-	Inst13Quest5_Prequest = "Нет"
-	Inst13Quest5_Folgequest = "Скипетр Келебраса" -- 7046
-	-- No Rewards for this quest
-	
-	--Quest 6 Alliance
-	Inst13Quest6 = "6. Скипетр Келебраса" -- 7046
-	Inst13Quest6_Level = "49"
-	Inst13Quest6_Attain = "41"
-	Inst13Quest6_Aim = "Помогите Келебрасу Освобожденному воссоздать скипетр Келебраса.\nПо завершении ритуала снова обратитесь к нему."
-	Inst13Quest6_Location = "Келебрас Освобожденный (Мародон; "..YELLOW.."[7]"..WHITE..")"
-	Inst13Quest6_Note = "Келебрас создает Скипетр. Поговорите с ним, когда он закончит."
-	Inst13Quest6_Prequest = "Легенды Мародона" -- 7044
-	Inst13Quest6_Folgequest = "Нет"
-	--
-	Inst13Quest6name1 = "Scepter of Celebras"
-	
-	--Quest 7 Alliance
-	Inst13Quest7 = "7. Яблочко от яблоньки..." -- 7065
-	Inst13Quest7_Level = "51"
-	Inst13Quest7_Attain = "45"
-	Inst13Quest7_Aim = "Убейте принцессу Терадрас и вернитесь к хранителю Марандису на Высоту Найджела в Пустоши."
-	Inst13Quest7_Location = "Хранитель Марандис (Пустоши - Высота Найджела; "..YELLOW.."63,10"..WHITE..")"
-	Inst13Quest7_Note = "Вы найдете принцессу Терадрас около "..YELLOW.."[11]"..WHITE.."."
-	Inst13Quest7_Prequest = "Нет"
-	Inst13Quest7_Folgequest = "Семя Жизни" -- 7066
-	--
-	Inst13Quest7name1 = "Thrash Blade"
-	Inst13Quest7name2 = "Resurgence Rod"
-	Inst13Quest7name3 = "Verdant Keeper's Aim"
-	
-	--Quest 8 Alliance
-	Inst13Quest8 = "8. Семя Жизни" -- 7066
-	Inst13Quest8_Level = "51"
-	Inst13Quest8_Attain = "45"
-	Inst13Quest8_Aim = "Найдите в Лунной поляне Ремула и отдайте ему Семя Жизни."
-	Inst13Quest8_Location = "Дух Зейтара (Мародон; "..YELLOW.."[11]"..WHITE..")"
-	Inst13Quest8_Note = "Дух Зейтара появляется после убийства принцессы Терадрас "..YELLOW.."[11]"..WHITE..". Вы найдете хранителя Ремулоса около (Лунная поляна - Святилище Ремулоса; "..YELLOW.."36,41"..WHITE..")."
-	Inst13Quest8_Prequest = "Яблочко от яблоньки..." -- 7065
-	Inst13Quest8_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde
-	Inst13Quest1_HORDE = "1. Фрагменты осколка сумрака" -- 7068
-	Inst13Quest1_HORDE_Level = "42"
-	Inst13Quest1_HORDE_Attain = "38"
-	Inst13Quest1_HORDE_Aim = "Соберите в Мародоне 10 фрагментов осколков сумрака и отнесите их Утель'наю в Оргриммар."
-	Inst13Quest1_HORDE_Location = "Утель'най (Оргриммар - Аллея духов; "..YELLOW.."38,68"..WHITE..")"
-	Inst13Quest1_HORDE_Note = "Вы получите фрагменты осколка сумрака с 'Темнокаменных грохотунов' или 'Темнокаменных крушителей' снаружи подземелья на Фиолетовой стороне."
-	Inst13Quest1_HORDE_Prequest = "Нет"
-	Inst13Quest1_HORDE_Folgequest = "Нет"
-	--
-	Inst13Quest1name1_HORDE = "Zealous Shadowshard Pendant"
-	Inst13Quest1name2_HORDE = "Prodigious Shadowshard Pendant"
-	
-	--Quest 2 Horde
-	Inst13Quest2_HORDE = "2. Скверна Злоязыкого" -- 7029
-	Inst13Quest2_HORDE_Level = "47"
-	Inst13Quest2_HORDE_Attain = "41"
-	Inst13Quest2_HORDE_Aim = "Наполните лазурный фиал с внутренним покрытием в оранжевом пруду Мародона.\nПолейте гнусь-лозу из наполненного фиала, чтобы изгнать ядовитую лозу.\nИсцелите 8 растений, убивая ядовитые лозы, и вернитесь к Варку Боевому Шраму в Деревню Ночных Охотников."
-	Inst13Quest2_HORDE_Location = "Варк Боевой Шрам (Пустоши - Деревня Ночных охотников; "..YELLOW.."23,70"..WHITE..")"
-	Inst13Quest2_HORDE_Note = "Вы можете наполнить фиал в любом бассейне снаружи подземелья на Оранжевой стороне. Растения находятся в фиолетовой и оранжевой зонах внутри подземелья."
-	Inst13Quest2_HORDE_Prequest = "Нет"
-	Inst13Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst13Quest2name1_HORDE = "Woodseed Hoop"
-	Inst13Quest2name2_HORDE = "Sagebrush Girdle"
-	Inst13Quest2name3_HORDE = "Branchclaw Gauntlets"
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst13Quest3_HORDE = Inst13Quest3
-	Inst13Quest3_HORDE_Level = Inst13Quest3_Level
-	Inst13Quest3_HORDE_Attain = Inst13Quest3_Attain
-	Inst13Quest3_HORDE_Aim = Inst13Quest3_Aim
-	Inst13Quest3_HORDE_Location = Inst13Quest3_Location
-	Inst13Quest3_HORDE_Note = Inst13Quest3_Note
-	Inst13Quest3_HORDE_Prequest = Inst13Quest3_Prequest
-	Inst13Quest3_HORDE_Folgequest = Inst13Quest3_Folgequest
-	--
-	Inst13Quest3name1_HORDE = Inst13Quest3name1
-	Inst13Quest3name2_HORDE = Inst13Quest3name2
-	Inst13Quest3name3_HORDE = Inst13Quest3name3
-	Inst13Quest3name4_HORDE = Inst13Quest3name4
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst13Quest4_HORDE = Inst13Quest4
-	Inst13Quest4_HORDE_Level = Inst13Quest4_Level
-	Inst13Quest4_HORDE_Attain = Inst13Quest4_Attain
-	Inst13Quest4_HORDE_Aim = Inst13Quest4_Aim
-	Inst13Quest4_HORDE_Location = Inst13Quest4_Location
-	Inst13Quest4_HORDE_Note = Inst13Quest4_Note
-	Inst13Quest4_HORDE_Page = Inst13Quest4_Page
-	Inst13Quest4_HORDE_Prequest = Inst13Quest4_Prequest
-	Inst13Quest4_HORDE_Folgequest = Inst13Quest4_Folgequest
-	--
-	Inst13Quest4name1_HORDE = Inst13Quest4name1
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst13Quest5_HORDE = Inst13Quest5
-	Inst13Quest5_HORDE_Level = Inst13Quest5_Level
-	Inst13Quest5_HORDE_Attain = Inst13Quest5_Attain
-	Inst13Quest5_HORDE_Aim = Inst13Quest5_Aim
-	Inst13Quest5_HORDE_Location = Inst13Quest5_Location
-	Inst13Quest5_HORDE_Note = Inst13Quest5_Note
-	Inst13Quest5_HORDE_Prequest = Inst13Quest5_Prequest
-	Inst13Quest5_HORDE_Folgequest = Inst13Quest5_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst13Quest6_HORDE = Inst13Quest6
-	Inst13Quest6_HORDE_Level = Inst13Quest6_Level
-	Inst13Quest6_HORDE_Attain = Inst13Quest6_Attain
-	Inst13Quest6_HORDE_Aim = Inst13Quest6_Aim
-	Inst13Quest6_HORDE_Location = Inst13Quest6_Location
-	Inst13Quest6_HORDE_Note = Inst13Quest6_Note
-	Inst13Quest6_HORDE_Prequest = Inst13Quest6_Prequest
-	Inst13Quest6_HORDE_Folgequest = Inst13Quest6_Folgequest
-	--
-	Inst13Quest6name1_HORDE = Inst13Quest6name1
-	
-	--Quest 7 Horde
-	Inst13Quest7_HORDE = "7. Яблочко от яблоньки..." -- 7064
-	Inst13Quest7_HORDE_Level = "51"
-	Inst13Quest7_HORDE_Attain = "45"
-	Inst13Quest7_HORDE_Aim = "Убейте принцессу Терадрас и вернитесь к Селендре неподалеку от Деревни Ночных Охотников в Пустошах."
-	Inst13Quest7_HORDE_Location = "Селендра (Пустоши; "..YELLOW.."27,77"..WHITE..")"
-	Inst13Quest7_HORDE_Note = "Вы найдете принцессу Терадрас около "..YELLOW.."[11]"..WHITE.."."
-	Inst13Quest7_HORDE_Prequest = "Нет"
-	Inst13Quest7_HORDE_Folgequest = "Семя Жизни" -- 7066
-	--
-	Inst13Quest7name1_HORDE = "Thrash Blade"
-	Inst13Quest7name2_HORDE = "Resurgence Rod"
-	Inst13Quest7name3_HORDE = "Verdant Keeper's Aim"
-	
-	--Quest 8 Horde (same as Quest 8 Alliance)
-	Inst13Quest8_HORDE = Inst13Quest8
-	Inst13Quest8_HORDE_Level = Inst13Quest8_Level
-	Inst13Quest8_HORDE_Attain = Inst13Quest8_Attain
-	Inst13Quest8_HORDE_Aim = Inst13Quest8_Aim
-	Inst13Quest8_HORDE_Location = Inst13Quest8_Location
-	Inst13Quest8_HORDE_Note = Inst13Quest8_Note
-	Inst13Quest8_HORDE_Prequest = Inst13Quest8_Prequest -- 7064
-	Inst13Quest8_HORDE_Folgequest = Inst13Quest8_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST14 - Огненные Недра (MC) ---------------
-	Inst14Story = "В глубинах Черной горы лежат Огненные Недра. Именно здесь, в сердце Черной горы, не в силах совладать с гражданской войной среди дворфов, император Таурисан привел в наш мир Повелителя Огня, Рагнароса. Хотя Повелитель Огня не может удалиться от пылающих Недр, говорят, что дворфы из клана Темной Стали находятся под властью его духов-приспешников, собирающих армию созданий из ожившего камня. Пылающее озеро, в котором спит Рагнарос, служит вратами в обитель стихий огня, через которые и пробираются в наш мир зловредные духи стихий. Первый среди прислужников Рагнароса — Мажордом Экзекутус. Этот коварный гуманоид — единственный, кто может пробудить Повелителя Огня от сна."
-	Inst14Caption = "Огненные Недра"
-	Inst14QAA = "7 заданий"
-	Inst14QAH = "7 заданий"
-	
-	--Quest 1 Alliance
-	Inst14Quest1 = "1. Огненные Недра" -- 6822
-	Inst14Quest1_Level = "60"
-	Inst14Quest1_Attain = "57"
-	Inst14Quest1_Aim = "Убейте 1 Повелителя огня, 1 лавового великана, 1 древнюю гончую Недр и 1 лавового волноплеска и возвращайтесь к герцогу Гидраксису в Азшару."
-	Inst14Quest1_Location = "Герцог Гидраксис (Азшара; "..YELLOW.."79,73"..WHITE..")"
-	Inst14Quest1_Note = "Это не боссы в Огненных Недрах."
-	Inst14Quest1_Prequest = "Око Углевзора ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 6821
-	Inst14Quest1_Folgequest = "Агент Гидраксиса" -- 6823
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst14Quest2 = "2. Руки врага" -- 6824
-	Inst14Quest2_Level = "60"
-	Inst14Quest2_Attain = "60"
-	Inst14Quest2_Aim = "Принесите руки Люцифрона, Сульфурона, Гееннаса и Шаззраха герцогу Гидраксису в Азшару."
-	Inst14Quest2_Location = "Герцог Гидраксис (Азшара; "..YELLOW.."79,73"..WHITE..")"
-	Inst14Quest2_Note = "Люцифрон около"..YELLOW.."[1]"..WHITE..", Сульфурон около"..YELLOW.."[8]"..WHITE..", Гееннас около"..YELLOW.."[3]"..WHITE.." и Шаззрах около"..YELLOW.."[5]"..WHITE.."."
-	Inst14Quest2_Prequest = "Агент Гидраксиса" -- 6823
-	Inst14Quest2_Folgequest = "Награда для героя" -- 7486
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst14Quest3 = "3. Громораан Искатель Ветра" -- 7786
-	Inst14Quest3_Level = "60"
-	Inst14Quest3_Attain = "60"
-	Inst14Quest3_Aim = "Чтобы освободить Громораана Искателя Ветра из тюрьмы, отнесите правый и левый наручник Ветроносца, 10 слитков элементия и сущность Повелителя огня верховному лорду Демитриану."
-	Inst14Quest3_Location = "Верховный лорд Демитриан (Силитус; "..YELLOW.."22,9"..WHITE..")"
-	Inst14Quest3_Note = "Часть цепочки заданий на получение Громовой Ярости, благословенного клинка Искателя Ветра. Оно начинается после получения левого или правого Наручника Искателя Ветра с Гарра около "..YELLOW.."[4]"..WHITE.." или Барона Геддона около "..YELLOW.."[6]"..WHITE..". Затем поговорите с Верховным лордом Демитрианом, чтобы начать цепочку заданий. Сущность повелителя огня добывается с Рагнароса около "..YELLOW.."[10]"..WHITE..". После завершения этого задания призывается Принц Громораан и вы должны убить его. Это босс для 40 игроков."
-	Inst14Quest3_Prequest = "Сосуд Возрождения" -- 7785
-	Inst14Quest3_Folgequest = "Громовая ярость" -- 7787
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst14Quest4 = "4. Заключение договора" -- 7604
-	Inst14Quest4_Level = "60"
-	Inst14Quest4_Attain = "60"
-	Inst14Quest4_Aim = "Подпишите договор с представителем братства Тория Локтосом Недобрым Торговцем, если вам нужен чертеж сульфуронского молота."
-	Inst14Quest4_Location = "Локтос Зловещий Торговец (Глубины Черной горы; "..YELLOW.."[15]"..WHITE..")"
-	Inst14Quest4_Note = "Вам нужен Сульфуронский слиток, чтобы получить контракт у Локтоса. Слитки падают с Големагга Испепелителя в Огненных Недрах около "..YELLOW.."[7]"..WHITE.."."
-	Inst14Quest4_Prequest = "Нет"
-	Inst14Quest4_Folgequest = "Нет"
-	--
-	Inst14Quest4name1 = "Plans: Sulfuron Hammer"
-	
-	--Quest 5 Alliance
-	Inst14Quest5 = "5. Древний лист" -- 7632
-	Inst14Quest5_Level = "60"
-	Inst14Quest5_Attain = "60"
-	Inst14Quest5_Aim = "Найдите хозяина древнего окаменелого древесного листа."
-	Inst14Quest5_Location = "Древний окаменелый древесный лист (содержится в Тайнике повелителя огня; "..YELLOW.."[9]"..WHITE..")"
-	Inst14Quest5_Note = "Отнесите Вартусу Древнему около (Оскверненный лес - Железнолесье; "..YELLOW.."49,24"..WHITE..")."
-	Inst14Quest5_Prequest = "Нет"
-	Inst14Quest5_Folgequest = "Перетянутый жилами лист древня ("..YELLOW.."Азурегос"..WHITE..")" -- 7634
-	-- No Rewards for this quest
-	
-	--Quest 6 Alliance
-	Inst14Quest6 = "6. Единственный способ" -- 8620
-	Inst14Quest6_Level = "60"
-	Inst14Quest6_Attain = "60"
-	Inst14Quest6_Aim = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис."
-	Inst14Quest6_Location = "Нарайн Причудень (Танарис; "..YELLOW.."65,18"..WHITE..")"
-	Inst14Quest6_Note = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")"
-	Inst14Quest6_Prequest = "Утка!" -- 8606
-	Inst14Quest6_Folgequest = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")" -- 8728
-	--
-	Inst14Quest6name1 = "Gnomish Turban of Psychic Might"
-	
-	--Quest 7 Alliance
-	Inst14Quest7 = "7. Гадальные очки? Без проблем!" -- 8578
-	Inst14Quest7_Level = "60"
-	Inst14Quest7_Attain = "60"
-	Inst14Quest7_Aim = "Найдите гадальные очки Нарайна и отнесите их Нарайну Причуденю в Танарис."
-	Inst14Quest7_Location = "Нарайн Причудень (Танарис; "..YELLOW.."65,18"..WHITE..")"
-	Inst14Quest7_Note = "Добываются с боссов в Огненных Недрах."
-	Inst14Quest7_Prequest = "Тушеный Лис, БЛД" -- 8577
-	Inst14Quest7_Folgequest = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")" -- 8728
-	--
-	Inst14Quest7name1 = "Major Rejuvenation Potion"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst14Quest1_HORDE = Inst14Quest1
-	Inst14Quest1_HORDE_Level = Inst14Quest1_Level
-	Inst14Quest1_HORDE_Attain = Inst14Quest1_Attain
-	Inst14Quest1_HORDE_Aim = Inst14Quest1_Aim
-	Inst14Quest1_HORDE_Location = Inst14Quest1_Location
-	Inst14Quest1_HORDE_Note = Inst14Quest1_Note
-	Inst14Quest1_HORDE_Prequest = Inst14Quest1_Prequest
-	Inst14Quest1_HORDE_Folgequest = Inst14Quest1_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst14Quest2_HORDE = Inst14Quest2
-	Inst14Quest2_HORDE_Level = Inst14Quest2_Level
-	Inst14Quest2_HORDE_Attain = Inst14Quest2_Attain
-	Inst14Quest2_HORDE_Aim = Inst14Quest2_Aim
-	Inst14Quest2_HORDE_Location = Inst14Quest2_Location
-	Inst14Quest2_HORDE_Note = Inst14Quest2_Note
-	Inst14Quest2_HORDE_Prequest = Inst14Quest2_Prequest
-	Inst14Quest2_HORDE_Folgequest = Inst14Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst14Quest3_HORDE = Inst14Quest3
-	Inst14Quest3_HORDE_Level = Inst14Quest3_Level
-	Inst14Quest3_HORDE_Attain = Inst14Quest3_Attain
-	Inst14Quest3_HORDE_Aim = Inst14Quest3_Aim
-	Inst14Quest3_HORDE_Location = Inst14Quest3_Location
-	Inst14Quest3_HORDE_Note = Inst14Quest3_Note
-	Inst14Quest3_HORDE_Prequest = Inst14Quest3_Prequest
-	Inst14Quest3_HORDE_Folgequest = Inst14Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst14Quest4_HORDE = Inst14Quest4
-	Inst14Quest4_HORDE_Level = Inst14Quest4_Level
-	Inst14Quest4_HORDE_Attain = Inst14Quest4_Attain
-	Inst14Quest4_HORDE_Aim = Inst14Quest4_Aim
-	Inst14Quest4_HORDE_Location = Inst14Quest4_Location
-	Inst14Quest4_HORDE_Note = Inst14Quest4_Note
-	Inst14Quest4_HORDE_Prequest = Inst14Quest4_Prequest
-	Inst14Quest4_HORDE_Folgequest = Inst14Quest4_Folgequest
-	--
-	Inst14Quest4name1_HORDE = Inst14Quest4name1
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst14Quest5_HORDE = Inst14Quest5
-	Inst14Quest5_HORDE_Level = Inst14Quest5_Level
-	Inst14Quest5_HORDE_Attain = Inst14Quest5_Attain
-	Inst14Quest5_HORDE_Aim = Inst14Quest5_Aim
-	Inst14Quest5_HORDE_Location = Inst14Quest5_Location
-	Inst14Quest5_HORDE_Note = Inst14Quest5_Note
-	Inst14Quest5_HORDE_Prequest = Inst14Quest5_Prequest
-	Inst14Quest5_HORDE_Folgequest = Inst14Quest5_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst14Quest6_HORDE = Inst14Quest6
-	Inst14Quest6_HORDE_Level = Inst14Quest6_Level
-	Inst14Quest6_HORDE_Attain = Inst14Quest6_Attain
-	Inst14Quest6_HORDE_Aim = Inst14Quest6_Aim
-	Inst14Quest6_HORDE_Location = Inst14Quest6_Location
-	Inst14Quest6_HORDE_Note = Inst14Quest6_Note
-	Inst14Quest6_HORDE_Prequest = Inst14Quest6_Prequest
-	Inst14Quest6_HORDE_Folgequest = Inst14Quest6_Folgequest
-	--
-	Inst14Quest6name1_HORDE = Inst14Quest6name1
-	
-	--Quest 7 Horde (same as Quest 7 Alliance)
-	Inst14Quest7_HORDE = Inst14Quest7
-	Inst14Quest7_HORDE_Level = Inst14Quest7_Level
-	Inst14Quest7_HORDE_Attain = Inst14Quest7_Attain
-	Inst14Quest7_HORDE_Aim = Inst14Quest7_Aim
-	Inst14Quest7_HORDE_Location = Inst14Quest7_Location
-	Inst14Quest7_HORDE_Note = Inst14Quest7_Note
-	Inst14Quest7_HORDE_Prequest = Inst14Quest7_Prequest
-	Inst14Quest7_HORDE_Folgequest = Inst14Quest7_Folgequest
-	--
-	Inst14Quest7name1_HORDE = Inst14Quest7name1
-	
-	
-	
-	--------------- INST15 - Naxxramas (Naxx) ---------------
-	Inst15Story = "Над Чумными землями парит некрополь Наксрамас — цитадель одного из самых могущественных сподручных Короля-лича, страшного лича Кел'Тузада. Подданные Короля-лича готовят нападение, и в стенах мертвого города собираются страшные призраки прошлого и новые ужасы…"
-	Inst15Caption = "Наксрамас"
-	Inst15QAA = "5 заданий"
-	Inst15QAH = "5 заданий"
-	
-	--Quest 1 Alliance
-	Inst15Quest1 = "1. Падение Кел'Тузада" -- 9120
-	Inst15Quest1_Level = "60"
-	Inst15Quest1_Attain = "60"
-	Inst15Quest1_Aim = "Отнесите талисман Кел'Тузада в Часовню Последней Надежды в Восточных Чумных землях."
-	Inst15Quest1_Location = " Кел'Тузад (Наксрамас; "..YELLOW.."Зеленая 2"..WHITE..")"
-	Inst15Quest1_Note = "Отец Иниго Монтой (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,58"..WHITE..")"
-	Inst15Quest1_Prequest = "Нет"
-	Inst15Quest1_Folgequest = "Нет"
-	--
-	Inst15Quest1name1 = "Mark of the Champion"
-	Inst15Quest1name2 = "Mark of the Champion"
-	
-	--Quest 2 Alliance
-	Inst15Quest2 = "2. Не разгуляешься..." -- 9232
-	Inst15Quest2_Level = "60"
-	Inst15Quest2_Attain = "60"
-	Inst15Quest2_Aim = "Принесите 2 морозных руны, 2 субстанции Воды, 2 синих сапфира и 30 золотых ремесленнику Вильгельму в часовню Последней Надежды в Восточные Чумные земли."
-	Inst15Quest2_Location = "Ремесленник Вильгельм (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,60"..WHITE..")"
-	Inst15Quest2_Note = "Морозные руны появляются из Нечестивых топоров в Наксрамасе."
-	Inst15Quest2_Prequest = "Нет"
-	Inst15Quest2_Folgequest = "Нет"
-	--
-	Inst15Quest2name1 = "Glacial Leggings"
-	Inst15Quest2name2 = "Icebane Leggings"
-	Inst15Quest2name3 = "Icy Scale Leggings"
-	Inst15Quest2name4 = "Polar Leggings"
-	
-	--Quest 3 Alliance
-	Inst15Quest3 = "3. Отголоски войны" -- 9033
-	Inst15Quest3_Level = "60"
-	Inst15Quest3_Attain = "60"
-	Inst15Quest3_Aim = "Командир Элигор Вестник Рассвета из часовни Последней Надежды, что в Восточных Чумных землях просит убить 5 ходячих ужасов, 5 каменных горгулий, 8 капитанов рыцарей Смерти и 3 ядовитых пауков-скакунов."
-	Inst15Quest3_Location = "Командир Элигор Вестник Рассвета (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."82,58"..WHITE..")"
-	Inst15Quest3_Note = "Существа для этого задания находятся в начале каждого крыла Наксрамаса. Это задание является предварительным условием для заданий на компклекты Тир 3."
-	Inst15Quest3_Prequest = "Цитадель ужаса – Наксрамас" -- 9121 or 9122 or 9123
-	Inst15Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst15Quest4 = "4. Кольцо Судьбы Рамаладни" -- 9229
-	Inst15Quest4_Level = "60"
-	Inst15Quest4_Attain = "60"
-	Inst15Quest4_Aim = "Идите в Наксрамас и найдите кольцо Судьбы Рамаладни."
-	Inst15Quest4_Location = "Корфакс, Воитель Света (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."82,58"..WHITE..")"
-	Inst15Quest4_Note = "Кольцо для этого задания добывается со случайных противников в Наксрамасе. Каждый, кто имеет задание может забрать его."
-	Inst15Quest4_Prequest = "Нет"
-	Inst15Quest4_Folgequest = "Ледяная хватка Рамаладни" -- 9230
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst15Quest5 = "5. Ледяная хватка Рамаладни" -- 9230
-	Inst15Quest5_Level = "60"
-	Inst15Quest5_Attain = "60"
-	Inst15Quest5_Aim = "Принесите 1 морозную руну, 1 синий сапфир и 1 арканитовый слиток Корфаксу в Часовню Последней Надежды в Восточные Чумные земли."
-	Inst15Quest5_Location = "Корфакс, Воитель Света (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."82,58"..WHITE..")"
-	Inst15Quest5_Note = "Морозные руны появляются из Нечестивых топоров в Наксрамасе."
-	Inst15Quest5_Prequest = "Кольцо Судьбы Рамаладни" -- 9229
-	Inst15Quest5_Folgequest = "Нет"
-	--
-	Inst15Quest5name1 = "Ramaladni's Icy Grasp"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst15Quest1_HORDE = Inst15Quest1
-	Inst15Quest1_HORDE_Level = Inst15Quest1_Level
-	Inst15Quest1_HORDE_Attain = Inst15Quest1_Attain
-	Inst15Quest1_HORDE_Aim = Inst15Quest1_Aim
-	Inst15Quest1_HORDE_Location = Inst15Quest1_Location
-	Inst15Quest1_HORDE_Note = Inst15Quest1_Note
-	Inst15Quest1_HORDE_Prequest = Inst15Quest1_Prequest
-	Inst15Quest1_HORDE_Folgequest = Inst15Quest1_Folgequest
-	--
-	Inst15Quest1name1_HORDE = Inst15Quest1name1
-	Inst15Quest1name2_HORDE = Inst15Quest1name2
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst15Quest2_HORDE = Inst15Quest2
-	Inst15Quest2_HORDE_Level = Inst15Quest2_Level
-	Inst15Quest2_HORDE_Attain = Inst15Quest2_Attain
-	Inst15Quest2_HORDE_Aim = Inst15Quest2_Aim
-	Inst15Quest2_HORDE_Location = Inst15Quest2_Location
-	Inst15Quest2_HORDE_Note = Inst15Quest2_Note
-	Inst15Quest2_HORDE_Prequest = Inst15Quest2_Prequest
-	Inst15Quest2_HORDE_Folgequest = Inst15Quest2_Folgequest
-	--
-	Inst15Quest2name1_HORDE = Inst15Quest2name1
-	Inst15Quest2name2_HORDE = Inst15Quest2name2
-	Inst15Quest2name3_HORDE = Inst15Quest2name3
-	Inst15Quest2name4_HORDE = Inst15Quest2name4
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst15Quest3_HORDE = Inst15Quest3
-	Inst15Quest3_HORDE_Level = Inst15Quest3_Level
-	Inst15Quest3_HORDE_Attain = Inst15Quest3_Attain
-	Inst15Quest3_HORDE_Aim = Inst15Quest3_Aim
-	Inst15Quest3_HORDE_Location = Inst15Quest3_Location
-	Inst15Quest3_HORDE_Note = Inst15Quest3_Note
-	Inst15Quest3_HORDE_Prequest = Inst15Quest3_Prequest
-	Inst15Quest3_HORDE_Folgequest = Inst15Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst15Quest4_HORDE = Inst15Quest4
-	Inst15Quest4_HORDE_Level = Inst15Quest4_Level
-	Inst15Quest4_HORDE_Attain = Inst15Quest4_Attain
-	Inst15Quest4_HORDE_Aim = Inst15Quest4_Aim
-	Inst15Quest4_HORDE_Location = Inst15Quest4_Location
-	Inst15Quest4_HORDE_Note = Inst15Quest4_Note
-	Inst15Quest4_HORDE_Prequest = Inst15Quest4_Prequest
-	Inst15Quest4_HORDE_Folgequest = Inst15Quest4_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst15Quest5_HORDE = Inst15Quest5
-	Inst15Quest5_HORDE_Level = Inst15Quest5_Level
-	Inst15Quest5_HORDE_Attain = Inst15Quest5_Attain
-	Inst15Quest5_HORDE_Aim = Inst15Quest5_Aim
-	Inst15Quest5_HORDE_Location = Inst15Quest5_Location
-	Inst15Quest5_HORDE_Note = Inst15Quest5_Note
-	Inst15Quest5_HORDE_Prequest = Inst15Quest5_Prequest
-	Inst15Quest5_HORDE_Folgequest = Inst15Quest5_Folgequest
-	--
-	Inst15Quest5name1_HORDE = Inst15Quest5name1
-	
-	
-	
-	--------------- INST16 - Onyxia's Lair (Ony) ---------------
-	Inst16Story = "Ониксия — дочь могущественного дракона Смертокрыла и сестра злокозненного Нефариана, который властвует над Пиком Черной горы. Об Ониксии известно, что ничто ей так не мило, как совращать смертных, вмешиваясь в их политические дела. Поэтому существует поверие, что она часто принимает человеческий облик и появляется там, где решается какая-нибудь запутанная ситуация между расами: она туманит собеседникам разум и понуждает их действовать по своей указке. Иногда говорят даже, что Ониксии как-то раз случилось выдавать себя за представительницу рода Престор, — как в свое время и ее отцу. Когда Ониксии не до дел смертных, она укрывается в огненном подземном логове в Земле Драконов, в мертвенного вида болоте в Пылевых топях. Там ее охраняют соплеменники — те, кто уцелел из клана коварных черных драконов."
-	Inst16Caption = "Логово Ониксии"
-	Inst16QAA = "3 задания"
-	Inst16QAH = "3 задания"
-	
-	--Quest 1 Alliance
-	Inst16Quest1 = "1. Ковка Кель'Серрара" -- 7509
-	Inst16Quest1_Level = "60"
-	Inst16Quest1_Attain = "60"
-	Inst16Quest1_Aim = "Заставьте Ониксию дохнуть своим огненным дыханием на потускневший древний клинок. После этого схватите раскаленный древний клинок. Имейте в виду, что раскаленным он останется ненадолго, так что медлить не следует! Последнее, что нужно сделать – это убить драконицу и вонзить раскаленный древний клинок в ее труп. Сделайте это – и Кель'Серрар навеки станет вашим!"
-	Inst16Quest1_Location = "Сказитель Лидрос (Забытый город (Запад); "..YELLOW.."[1] Библиотека"..WHITE..")"
-	Inst16Quest1_Note = "Бросьте меч перед Ониксией, когда у нее останется от 10% до 15% здоровья. Она должна будет дышать и нагревать его. Когда Ониксия умрет, заберите меч, нажмите на ее труп и используйте меч. Тогда вы будете готовы, чтобы завершить задание."
-	Inst16Quest1_Prequest = "Справочник Форора ("..YELLOW.."Забытый город (Запад)"..WHITE..") -> Ковка Кель'Серрара" -- 7507 -> 7508
-	Inst16Quest1_Folgequest = "Нет"
-	--
-	Inst16Quest1name1 = "Quel'Serrar"
-	
-	--Quest 2 Alliance
-	Inst16Quest2 = "2. Славная победа Альянса" -- 7495
-	Inst16Quest2_Level = "60"
-	Inst16Quest2_Attain = "60"
-	Inst16Quest2_Aim = "Отнесите голову Ониксии Верховному лорду Болвару Фордрагону в Штормград."
-	Inst16Quest2_Location = "Голова Ониксии (добывается с Ониксии; "..YELLOW.."[3]"..WHITE..")"
-	Inst16Quest2_Note = "Верховный лорд Болвар Фордрагон (Штормград - Крепость Штормграда; "..YELLOW.."78,20"..WHITE.."). Только один человек в рейде может получить этот предмет и задание может быть сделано только один раз.\n\nНаграды перечислены для следующего задания."
-	Inst16Quest2_Prequest = "Нет"
-	Inst16Quest2_Folgequest = "Праздник добрых времен" -- 7496
-	--
-	Inst16Quest2name1 = "Onyxia Blood Talisman"
-	Inst16Quest2name2 = "Dragonslayer's Signet"
-	Inst16Quest2name3 = "Onyxia Tooth Pendant"
-	
-	--Quest 3 Alliance
-	Inst16Quest3 = "6. Единственный способ" -- 8620
-	Inst16Quest3_Level = "60"
-	Inst16Quest3_Attain = "60"
-	Inst16Quest3_Aim = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис."
-	Inst16Quest3_Location = "Нарайн Причудень (Танарис; "..YELLOW.."65,18"..WHITE..")"
-	Inst16Quest3_Note = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")"
-	Inst16Quest3_Prequest = "Утка!" -- 8606
-	Inst16Quest3_Folgequest = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")" -- 8728
-	--
-	Inst16Quest3name1 = "Gnomish Turban of Psychic Might"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst16Quest1_HORDE = Inst16Quest1
-	Inst16Quest1_HORDE_Attain = Inst16Quest1_Attain
-	Inst16Quest1_HORDE_Level = Inst16Quest1_Level
-	Inst16Quest1_HORDE_Aim = Inst16Quest1_Aim
-	Inst16Quest1_HORDE_Location = Inst16Quest1_Location
-	Inst16Quest1_HORDE_Note = Inst16Quest1_Note
-	Inst16Quest1_HORDE_Prequest = Inst16Quest1_Prequest
-	Inst16Quest1_HORDE_Folgequest = Inst16Quest1_Folgequest
-	--
-	Inst16Quest1name1_HORDE = Inst16Quest1name1
-	
-	--Quest 2 Horde
-	Inst16Quest2_HORDE = "2. Победа Орды" -- 7490
-	Inst16Quest2_HORDE_Level = "60"
-	Inst16Quest2_HORDE_Attain = "60"
-	Inst16Quest2_HORDE_Aim = "Отнесите голову Ониксии Траллу в Оргриммар."
-	Inst16Quest2_HORDE_Location = "Голова Ониксии (добывается с Ониксии; "..YELLOW.."[3]"..WHITE..")"
-	Inst16Quest2_HORDE_Note = "Тралл (Оргриммар - Аллея Мудрости; "..YELLOW.."31,37"..WHITE.."). Только один человек в рейде может получить этот предмет и задание может быть сделано только один раз.\n\nНаграды перечислены для следующего задания."
-	Inst16Quest2_HORDE_Prequest = "Нет"
-	Inst16Quest2_HORDE_Folgequest = "На виду у всех" -- 7491
-	--
-	Inst16Quest2name1_HORDE = "Onyxia Blood Talisman"
-	Inst16Quest2name2_HORDE = "Dragonslayer's Signet"
-	Inst16Quest2name3_HORDE = "Onyxia Tooth Pendant"
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst16Quest3_HORDE = Inst16Quest3
-	Inst16Quest3_HORDE_Attain = Inst16Quest3_Attain
-	Inst16Quest3_HORDE_Level = Inst16Quest3_Level
-	Inst16Quest3_HORDE_Aim = Inst16Quest3_Aim
-	Inst16Quest3_HORDE_Location = Inst16Quest3_Location
-	Inst16Quest3_HORDE_Note = Inst16Quest3_Note
-	Inst16Quest3_HORDE_Prequest = Inst16Quest3_Prequest
-	Inst16Quest3_HORDE_Folgequest = Inst16Quest3_Folgequest
-	--
-	Inst16Quest3name1_HORDE = Inst16Quest3name1
-	
-	
-	
-	--------------- INST17 - Razorfen Downs (RFD) ---------------
-	Inst17Story = "Курганы Иглошкурых – столица расы свинобразов, построенная по образцу лабиринтов. В них живет племя Мертвой Головы – целая армия преданных свинобразов, возглавляемых верховными жрецами. Однако сейчас над их обителью сгустилась тьма. Армия Плети под предводительством лича Амненнара Хладовея подчинила иглогривов своей воле и превратила их город в цитадель нежити. Теперь свинобразы сражаются из последних сил, чтобы отвоевать любимый город, пока Амненнар не покорил все Степи."
-	Inst17Caption = "Курганы Иглошкурых"
-	Inst17QAA = "3 задания"
-	Inst17QAH = "4 задания"
-	
-	--Quest 1 Alliance
-	Inst17Quest1 = "1. Воинство зла" -- 6626
-	Inst17Quest1_Level = "35"
-	Inst17Quest1_Attain = "30"
-	Inst17Quest1_Aim = "Убейте 8 боевых стражей и 8 терноплетов из племени Иглошкурых, а также 8 сектанток из племени Мертвой Головы и возвращайтесь к Мириам Лунной Певице на Курганы Иглошкурых."
-	Inst17Quest1_Location = "Мириам Лунная Певица (Степи; "..YELLOW.."49,94"..WHITE..")"
-	Inst17Quest1_Note = "Вы сможете найти мобов и Мириам в зоне перед самым входом в подземелье."
-	Inst17Quest1_Prequest = "Нет"
-	Inst17Quest1_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst17Quest2 = "2. Уничтожить идола" -- 3525
-	Inst17Quest2_Level = "37"
-	Inst17Quest2_Attain = "32"
-	Inst17Quest2_Aim = "Сопроводите Белнистраза к идолу свинобразов в Курганах Иглошкурых. Защищайте Белнистраза, пока он будет проводить ритуал, чтобы разрушить идола."
-	Inst17Quest2_Location = "Белнистраз (Курганы Иглошкурых; "..YELLOW.."[2]"..WHITE..")"
-	Inst17Quest2_Note = "Предшествующее задание заключается просто в согласии помочь ему. Несколько мобов появятся и атакуют Белнистраза когда он попытается сломать идол. После выполнения, вы можете сдать задание у жаровни перед идолом."
-	Inst17Quest2_Prequest = "Плеть в холмах" -- 3523
-	Inst17Quest2_Folgequest = "Нет"
-	--
-	Inst17Quest2name1 = "Dragonclaw Ring"
-	
-	--Quest 3 Alliance
-	Inst17Quest3 = "3. Нести свет" -- 3636
-	Inst17Quest3_Attain = "39"
-	Inst17Quest3_Level = "42"
-	Inst17Quest3_Aim = "Убейте Амненнара Хладовея в Курганах Иглошкурых."
-	Inst17Quest3_Location = "Архиепископ Бенедикт (Штормград - Собор Света; "..YELLOW.."39,27"..WHITE..")"
-	Inst17Quest3_Note = "Амненнар Хладовей это последний босс в Курганах Иглошкурых. Вы найдете его около "..YELLOW.."[6]"..WHITE.."."
-	Inst17Quest3_Prequest = "Нет"
-	Inst17Quest3_Folgequest = "Нет"
-	--
-	Inst17Quest3name1 = "Vanquisher's Sword"
-	Inst17Quest3name2 = "Amberglow Talisman"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst17Quest1_HORDE = Inst17Quest1
-	Inst17Quest1_HORDE_Level = Inst17Quest1_Level
-	Inst17Quest1_HORDE_Attain = Inst17Quest1_Attain
-	Inst17Quest1_HORDE_Aim = Inst17Quest1_Aim
-	Inst17Quest1_HORDE_Location = Inst17Quest1_Location
-	Inst17Quest1_HORDE_Note = Inst17Quest1_Note
-	Inst17Quest1_HORDE_Prequest = Inst17Quest1_Prequest
-	Inst17Quest1_HORDE_Folgequest = Inst17Quest1_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst17Quest2_HORDE = "2. Нечестивый союз" -- 6521
-	Inst17Quest2_HORDE_Level = "36"
-	Inst17Quest2_HORDE_Attain = "28"
-	Inst17Quest2_HORDE_Aim = "Принесите голову посла Малкина Вариматасу в Подгород."
-	Inst17Quest2_HORDE_Location = "Вариматас (Подгород - Королевский квартал; "..YELLOW.."56,92"..WHITE..")"
-	Inst17Quest2_HORDE_Note = "Предшествующее задание можно подобрать с последнего босса в Лабиринтах Иглошкурых. Вы найдете Малкина снаружи (Степи; "..YELLOW.."48,92"..WHITE..")."
-	Inst17Quest2_HORDE_Prequest = "Нечестивый союз" -- 6522
-	Inst17Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst17Quest2name1_HORDE = "Skullbreaker"
-	Inst17Quest2name2_HORDE = "Nail Spitter"
-	Inst17Quest2name3_HORDE = "Zealot's Robe"
-	
-	--Quest 3 Horde (same as Quest 2 Alliance)
-	Inst17Quest3_HORDE = "3. Уничтожить идола"
-	Inst17Quest3_HORDE_Level = Inst17Quest2_Level
-	Inst17Quest3_HORDE_Attain = Inst17Quest2_Attain
-	Inst17Quest3_HORDE_Aim = Inst17Quest2_Aim
-	Inst17Quest3_HORDE_Location = Inst17Quest2_Location
-	Inst17Quest3_HORDE_Note = Inst17Quest2_Note
-	Inst17Quest3_HORDE_Prequest = Inst17Quest2_Prequest
-	Inst17Quest3_HORDE_Folgequest = Inst17Quest2_Folgequest
-	--
-	Inst17Quest3name1_HORDE = Inst17Quest2name1
-	
-	--Quest 4 Horde
-	Inst17Quest4_HORDE = "4. Да сгинет Хладовей" -- 3341
-	Inst17Quest4_HORDE_Level = "42"
-	Inst17Quest4_HORDE_Attain = "37"
-	Inst17Quest4_HORDE_Aim = "Эндрю Браунелл поручил вам убить Амненнара Хладовея и принести его череп."
-	Inst17Quest4_HORDE_Location = "Эндрю Браунелл (Подгород - Квартал магов; "..YELLOW.."72,32"..WHITE..")"
-	Inst17Quest4_HORDE_Note = "Амненнар Хладовей это последний босс в Курганах Иглошкурых. Вы найдете его около "..YELLOW.."[6]"..WHITE.."."
-	Inst17Quest4_HORDE_Prequest = "Нет"
-	Inst17Quest4_HORDE_Folgequest = "Нет"
-	--
-	Inst17Quest4name1_HORDE = "Vanquisher's Sword"
-	Inst17Quest4name2_HORDE = "Amberglow Talisman"
-	
-	
-	
-	--------------- INST18 - Лабиринты Иглошкурых (RFK) ---------------
-	Inst18Story = "Десять тысяч лет назад - во времена Войны Древних, могущественный полубог, Агамагган, вступил в битву против Пылающего Легиона. Огромный крепкий кабан пал в битве, но его действия помогли спасти Азерот от превращения в руины. Спустя некоторое время, в том, месте куда пролилась его кровь, из-под земли выросли толстые, покрытые шипами плети. Иглогривы - верившие, что они являются смертными потомками могучего бога, пришли занять эти места и охранять как святыню. Сердце этих шипастых колоний известно как Иглошкур. Огромные пространства Лабиринтов Иглошкурых были завоеваны старой каргой, Чарлгой Бритый Бок. Под ее рукой, иглогривы-шаманы начали атаковать племена соперников, также как и поселенцев Орды. Некоторые полагают, что Чарлга даже вела переговоры с агентами Плети - приравняв неожиданно ее племя к рангу нежити по каким-то коварным причинам."
-	Inst18Caption = "Лабиринты Иглошкурых"
-	Inst18QAA = "5 заданий"
-	Inst18QAH = "5 заданий"
-	
-	--Quest 1 Alliance
-	Inst18Quest1 = "1. Корни Синелиста" -- 1221
-	Inst18Quest1_Level = "26"
-	Inst18Quest1_Attain = "20"
-	Inst18Quest1_Aim = "В Лабиринтах Иглошкурых выпустите шмыгуноса и воспользуйтесь палочкой-погонялочкой, чтобы он начал искать корни.\nПринесите 6 корней синелиста, палочку и ящик с отверстиями Мебоку Миззриксу в Кабестан."
-	Inst18Quest1_Location = "Мебок Миззрикс (Степи - Кабестан; "..YELLOW.."62,37"..WHITE..")"
-	Inst18Quest1_Note = "Ящик, Стек и инструкцию можно найти рядом с Мебоком Миззриксом."
-	Inst18Quest1_Prequest = "Нет"
-	Inst18Quest1_Folgequest = "Нет"
-	--
-	Inst18Quest1name1 = "A Small Container of Gems"
-	
-	--Quest 2 Alliance
-	Inst18Quest2 = "2. Последнее желание" -- 1142
-	Inst18Quest2_Level = "30"
-	Inst18Quest2_Attain = "25"
-	Inst18Quest2_Aim = "Найдите подвеску Трешалы и верните ее Трешале Бурый Ручей в Дарнас."
-	Inst18Quest2_Location = "Гералат Бурый Ручей (Лабиринты Иглошкурых; "..YELLOW.."[8]"..WHITE..")"
-	Inst18Quest2_Note = "Подвеска добывается случайно. Вы должны вернуть подвеску Трешале Бурый Ручей в Дарнасс - Терраса торговцев ("..YELLOW.."69,67"..WHITE..")."
-	Inst18Quest2_Prequest = "Нет"
-	Inst18Quest2_Folgequest = "Нет"
-	--
-	Inst18Quest2name1 = "Mourning Shawl"
-	Inst18Quest2name2 = "Lancer Boots"
-	
-	--Quest 3 Alliance
-	Inst18Quest3 = "3. Импортер Вилликс" -- 1144
-	Inst18Quest3_Level = "30"
-	Inst18Quest3_Attain = "23"
-	Inst18Quest3_Aim = "Сопроводите Вилликса из Лабиринтов Иглошкурых."
-	Inst18Quest3_Location = "Импортер Вилликс (Лабиринты Иглошкурых; "..YELLOW.."[8]"..WHITE..")"
-	Inst18Quest3_Note = "Импортера Вилликса нужно проводить к выходу из подземелья. Задание можно сдать ему после выполнения."
-	Inst18Quest3_Prequest = "Нет"
-	Inst18Quest3_Folgequest = "Нет"
-	--
-	Inst18Quest3name1 = "Monkey Ring"
-	Inst18Quest3name2 = "Snake Hoop"
-	Inst18Quest3name3 = "Tiger Band"
-	
-	--Quest 4 Alliance
-	Inst18Quest4 = "4. Хозяйка Лабиринтов" -- 1101
-	Inst18Quest4_Level = "34"
-	Inst18Quest4_Attain = "29"
-	Inst18Quest4_Aim = "Принесите медальон Чарлги Остробок Фалфиндеру Хранителю Путей в Таланааре."
-	Inst18Quest4_Location = "Хранитель дорог Фалфиндел (Фералас - Таланаар; "..YELLOW.."89,46"..WHITE..")"
-	Inst18Quest4_Note = "Медальон, нужный для задания, добывается с Чарлги Остробок  "..YELLOW.."[7]"..WHITE.."."
-	Inst18Quest4_Prequest = "Дневник Хмурня" -- 1100
-	Inst18Quest4_Folgequest = "Нет"
-	--
-	Inst18Quest4name1 = "'Mage-Eye' Blunderbuss"
-	Inst18Quest4name2 = "Berylline Pads"
-	Inst18Quest4name3 = "Stonefist Girdle"
-	Inst18Quest4name4 = "Marbled Buckler"
-	
-	--Quest 5 Alliance KRIEGER
-	Inst18Quest5 = "5. Закаленный доспех" -- 1701
-	Inst18Quest5_Level = "28"
-	Inst18Quest5_Attain = "20"
-	Inst18Quest5_Aim = "Соберите все необходимые материалы для Фьюрена Длинноборода и отнесите их в Штормград."
-	Inst18Quest5_Location = "Фьюрен Длиннобород (Штормград - Квартал дворфов; "..YELLOW.."57,16"..WHITE..")"
-	Inst18Quest5_Note = "Задание для воинов. Вы заберете Сосуд флогистона у Ругуга около "..YELLOW.."[1]"..WHITE..".\n\nПоследующее задание отличается для каждой расы. Пылающая кровь для людей, Железный Коралл для дворфов и гномов и Высохшая скорлупа для ночных эльфов." -- 1705, 1710, 1708
-	Inst18Quest5_Prequest = "Щитник" -- 1702
-	Inst18Quest5_Folgequest = "(См. заметку)"
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst18Quest1_HORDE = Inst18Quest1
-	Inst18Quest1_HORDE_Level = Inst18Quest1_Level
-	Inst18Quest1_HORDE_Attain = Inst18Quest1_Attain
-	Inst18Quest1_HORDE_Aim = Inst18Quest1_Aim
-	Inst18Quest1_HORDE_Location = Inst18Quest1_Location
-	Inst18Quest1_HORDE_Note = Inst18Quest1_Note
-	Inst18Quest1_HORDE_Prequest = Inst18Quest1_Prequest
-	Inst18Quest1_HORDE_Folgequest = Inst18Quest1_Folgequest
-	--
-	Inst18Quest1name1_HORDE = Inst18Quest1name1
-	
-	--Quest 2 Horde (same as Quest 3 Alliance)
-	Inst18Quest2_HORDE = "2. Импортер Вилликс"
-	Inst18Quest2_HORDE_Level = Inst18Quest3_Level
-	Inst18Quest2_HORDE_Attain = Inst18Quest3_Attain
-	Inst18Quest2_HORDE_Aim = Inst18Quest3_Aim
-	Inst18Quest2_HORDE_Location = Inst18Quest3_Location
-	Inst18Quest2_HORDE_Note = Inst18Quest3_Note
-	Inst18Quest2_HORDE_Prequest = Inst18Quest3_Prequest
-	Inst18Quest2_HORDE_Folgequest = Inst18Quest3_Folgequest
-	--
-	Inst18Quest2name1_HORDE = Inst18Quest3name1
-	Inst18Quest2name2_HORDE = Inst18Quest3name2
-	Inst18Quest2name3_HORDE = Inst18Quest3name3
-	
-	-- Quest 3 Horde
-	Inst18Quest3_HORDE = "3. Груды гуано" -- 1109
-	Inst18Quest3_HORDE_Level = "33"
-	Inst18Quest3_HORDE_Attain = "30"
-	Inst18Quest3_HORDE_Aim = "Принесите 1 кучку гуано летучей мыши Лабиринтов опытному аптекарю Фаранеллу в Подгород."
-	Inst18Quest3_HORDE_Location = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; "..YELLOW.."48,69 "..WHITE..")"
-	Inst18Quest3_HORDE_Note = "Гуано добывается с любой летучей мыши внутри подземелья."
-	Inst18Quest3_HORDE_Prequest = "Нет"
-	Inst18Quest3_HORDE_Folgequest = "Сердца Доблести ("..YELLOW.."[Монастырь Алого Ордена]"..WHITE..")" -- 1113
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde
-	Inst18Quest4_HORDE = "4. Отмщение грядет!" -- 1102
-	Inst18Quest4_HORDE_Level = "34"
-	Inst18Quest4_HORDE_Attain = "29"
-	Inst18Quest4_HORDE_Aim = "Принесите сердце Чарлги Остробок Ольду Каменному Копью в Громовой Утес."
-	Inst18Quest4_HORDE_Location = "Ольд Каменное Копье (Громовой Утес; "..YELLOW.."36,59"..WHITE..")"
-	Inst18Quest4_HORDE_Note = "Вы найдете Чарглу Остробок около "..YELLOW.."[7]"..WHITE.."."
-	Inst18Quest4_HORDE_Prequest = "Нет"
-	Inst18Quest4_HORDE_Folgequest = "Нет"
-	--
-	Inst18Quest4name1_HORDE = "Berylline Pads"
-	Inst18Quest4name2_HORDE = "Stonefist Girdle"
-	Inst18Quest4name3_HORDE = "Marbled Buckler"
-	
-	--Quest 5 Horde
-	Inst18Quest5_HORDE = "5. Доспехи Жестокости" -- 1838
-	Inst18Quest5_HORDE_Level = "30"
-	Inst18Quest5_HORDE_Attain = "20"
-	Inst18Quest5_HORDE_Aim = "Принесите Тун'гриму Огневзору 15 закопченных железных слитков, 10 мер толченого азурита, 10 железных слитков и сосуд флогистона."
-	Inst18Quest5_HORDE_Location = "Тун'грим Огневзор (Степи; "..YELLOW.."57,30"..WHITE..")"
-	Inst18Quest5_HORDE_Note = "Задание для воинов. Вы заберете Сосуд флогистона у Ругуга около "..YELLOW.."[1]"..WHITE..".\n\nВыполнение задания позволит вам начать еще 4 новых задания у того же персонажа."
-	Inst18Quest5_HORDE_Prequest = "Поговорить с Тун'гримом" -- 1825
-	Inst18Quest5_HORDE_Folgequest = "(см. заметки)"
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST19 - SM: Library (SM Lib) ---------------
-	Inst19Story = "Монастырь когда-то был гордым оплотом жречества Лордерона - центром обучения и просвящения. С появлением нежити Плети во время Третьей войны, мирный монастырь превратился в цитадель фанатичного Алого ордена. Рыцари ордена нетерпимы ко всем нечеловеческим расам, невзирая на союзы и принадлежности. Они верят что любой чужак - потенциальный носитель чумы нежити - и должны быть уничтожены. Судя по донесениям, любителям приключений, которые ходили в монастырь пришлось сражаться с командиром Алого ордена Могрейном, под рукой которого находится большой гарнизон фанатично преданных воинов. Онако настоящая хозяйка монастыря - это Верховный инквизитор Вайтмейн - грозная жрица, обладающая способностью воскрешать павших воинов для сражения во имя нее."
-	Inst19Caption = "SM: Библиотека"
-	Inst19QAA = "3 задания"
-	Inst19QAH = "5 заданий"
-	
-	--Quest 1 Alliance
-	Inst19Quest1 = "1. Во имя Света!" -- 1053
-	Inst19Quest1_Level = "40"
-	Inst19Quest1_Attain = "34"
-	Inst19Quest1_Aim = "Убейте верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Ирода из Алого ордена и псаря Локси, после этого вернитесь с докладом к Ролею Благочестивому в Южнобережье."
-	Inst19Quest1_Location = "Ролей Благочестивый (Предгорья Хилсбрада - Южнобережье; "..YELLOW.."51,58"..WHITE..")"
-	Inst19Quest1_Note = "Эта цепочка заданий начинается у брата Кроули в Штормграде - Собор Света ("..YELLOW.."46,36"..WHITE..")."
-	Inst19Quest1_Prequest = "Брат Антон -> Путями Алого ордена" -- 6141 -> 1052
-	Inst19Quest1_Folgequest = "Нет"
-	--
-	Inst19Quest1name1 = "Sword of Serenity"
-	Inst19Quest1name2 = "Bonebiter"
-	Inst19Quest1name3 = "Black Menace"
-	Inst19Quest1name4 = "Orb of Lorica"
-	
-	--Quest 2 Alliance
-	Inst19Quest2 = "2. \"Мифология Титанов\"" -- 1050
-	Inst19Quest2_Level = "38"
-	Inst19Quest2_Attain = "28"
-	Inst19Quest2_Aim = "Добудьте \"Мифологию Титанов\" из монастыря и принесите ее библиотекарю Мае Белокожке в Стальгорн."
-	Inst19Quest2_Location = "Библиотекарь Мае Белокожка (Стальгорн - Зал исследователей; "..YELLOW.."74,12"..WHITE..")"
-	Inst19Quest2_Note = "Книга лежит на полу на левой стороне коридоров, ведущих к Чародею Доану ("..YELLOW.."[2]"..WHITE..")."
-	Inst19Quest2_Prequest = "Нет"
-	Inst19Quest2_Folgequest = "Нет"
-	--
-	Inst19Quest2name1 = "Explorers' League Commendation"
-	
-	--Quest 3 Alliance
-	Inst19Quest3 = "3. Обряды власти" -- 1951
-	Inst19Quest3_Level = "40"
-	Inst19Quest3_Attain = "30"
-	Inst19Quest3_Aim = "Принесите книгу \"Обряды власти\" Табете в Пылевых топях."
-	Inst19Quest3_Location = "Табета (Пылевые топи; "..YELLOW.."46,57"..WHITE..")"
-	Inst19Quest3_Note = "Задание для магов. Вы найдете книгу в последнем коридоре ведущему к чародею Доану ("..YELLOW.."[2]"..WHITE..")."
-	Inst19Quest3_Prequest = "Волшебное слово" --1950
-	Inst19Quest3_Folgequest = "Магический жезл" -- 1952
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde
-	Inst19Quest1_HORDE = "1. Сердца Доблести" -- 1113
-	Inst19Quest1_HORDE_Level = "33"
-	Inst19Quest1_HORDE_Attain = "30"
-	Inst19Quest1_HORDE_Aim = "Опытный аптекарь Фаранелл из Подгорода просит принести ему 20 сердец Доблести."
-	Inst19Quest1_HORDE_Location = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; "..YELLOW.."48,69"..WHITE..")"
-	Inst19Quest1_HORDE_Note = "Сердца Доблести можно выбить со всех мобов в Алом Монастыре, включая людей вне подземелья."
-	Inst19Quest1_HORDE_Prequest = "Груды гуано ("..YELLOW.."[Лабиринты Иглошкурых]"..WHITE..")" -- 1109
-	Inst19Quest1_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst19Quest2_HORDE = "2. В монастырь Алого ордена" -- 1048
-	Inst19Quest2_HORDE_Level = "42"
-	Inst19Quest2_HORDE_Attain = "33"
-	Inst19Quest2_HORDE_Aim = "Убейте верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Ирода из Алого ордена и псаря Локси. Затем возвращайтесь к Вариматасу в Подгород."
-	Inst19Quest2_HORDE_Location = "Вариматас (Подгород - Королевский квартал; "..YELLOW.."56,92"..WHITE..")"
-	Inst19Quest2_HORDE_Note = "Вы найдете Верховного инквизитора Вайтмейн и Командира Могрейна из Алого ордена около "..YELLOW.."[5]"..WHITE..", Герода около "..YELLOW.."[3]"..WHITE.." и псаря Локси около "..YELLOW.."[1]"..WHITE.."."
-	Inst19Quest2_HORDE_Prequest = "Нет"
-	Inst19Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst19Quest2name1_HORDE = "Sword of Omen"
-	Inst19Quest2name2_HORDE = "Prophetic Cane"
-	Inst19Quest2name3_HORDE = "Dragon's Blood Necklace"
-	
-	--Quest 3 Horde
-	Inst19Quest3_HORDE = "3. \"Компендиум павших\"" -- 1049
-	Inst19Quest3_HORDE_Level = "38"
-	Inst19Quest3_HORDE_Attain = "28"
-	Inst19Quest3_HORDE_Aim = "Добудьте \"Компендиум павших\" из монастыря в Тирисфальских лесах и возвращайтесь к Ведуну Искателю Истины в Громовой Утес."
-	Inst19Quest3_HORDE_Location = "Ведун Искатель Истины (Громовой утес; "..YELLOW.."34,47"..WHITE..")"
-	Inst19Quest3_HORDE_Note = "Вы найдете книгу в библиотечной секции Алого Монастыря. ВНИМАНИЕ! Нежить не может взять это задание."
-	Inst19Quest3_HORDE_Prequest = "Нет"
-	Inst19Quest3_HORDE_Folgequest = "Нет"
-	--
-	Inst19Quest3name1_HORDE = "Vile Protector"
-	Inst19Quest3name2_HORDE = "Forcestone Buckler"
-	Inst19Quest3name3_HORDE = "Omega Orb"
-	
-	-- Quest 4 Horde
-	Inst19Quest4_HORDE = "4. Испытание знаний" -- 1160
-	Inst19Quest4_HORDE_Level = "36"
-	Inst19Quest4_HORDE_Attain = "25"
-	Inst19Quest4_HORDE_Aim = "Найдите книгу \"Истоки угрозы нежити\" и отнесите ее Парквелу Финталласу в Подгород."
-	Inst19Quest4_HORDE_Location = "Парквел Финталлас (Подгород - Район Фармацевтов; "..YELLOW.."57,65"..WHITE..")"
-	Inst19Quest4_HORDE_Note = "Цепочка начинается у Дорна Вольного Ловчего (Тысяча Игл; "..YELLOW.."53,41"..WHITE.."). Вы можете найти книгу в Библиотеке Алого Монастыря."
-	Inst19Quest4_HORDE_Prequest = "Испытание веры -> Испытание знаний" -- 1149 -> 1159
-	Inst19Quest4_HORDE_Folgequest = "Испытание знаний" -- 6628
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 3 Alliance)
-	Inst19Quest5_HORDE = "5. Обряды власти"
-	Inst19Quest5_HORDE_Level = Inst19Quest3_Level
-	Inst19Quest5_HORDE_Attain = Inst19Quest3_Attain
-	Inst19Quest5_HORDE_Aim = Inst19Quest3_Aim
-	Inst19Quest5_HORDE_Location = Inst19Quest3_Location
-	Inst19Quest5_HORDE_Note = Inst19Quest3_Note
-	Inst19Quest5_HORDE_Prequest = Inst19Quest3_Prequest
-	Inst19Quest5_HORDE_Folgequest = Inst19Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST20 - SM: Armory (SM Arm) ---------------
-	Inst20Story = Inst19Story
-	Inst20Caption = "SM: Оружейная"
-	Inst20QAA = "1 задание"
-	Inst20QAH = "2 задания"
-	
-	--Quest 1 Alliance (same as Quest 1 Alliance INST19)
-	Inst20Quest1 = Inst19Quest1
-	Inst20Quest1_Level = Inst19Quest1_Level
-	Inst20Quest1_Attain = Inst19Quest1_Attain
-	Inst20Quest1_Aim = Inst19Quest1_Aim
-	Inst20Quest1_Location = Inst19Quest1_Location
-	Inst20Quest1_Note = Inst19Quest1_Note
-	Inst20Quest1_Prequest = Inst19Quest1_Prequest
-	Inst20Quest1_Folgequest = Inst19Quest1_Folgequest
-	--
-	Inst20Quest1name1 = Inst19Quest1name1
-	Inst20Quest1name2 = Inst19Quest1name2
-	Inst20Quest1name3 = Inst19Quest1name3
-	Inst20Quest1name4 = Inst19Quest1name4
-	
-	
-	--Quest 1 Horde (same as Quest 1 Horde INST19)
-	Inst20Quest1_HORDE = Inst19Quest1_HORDE
-	Inst20Quest1_HORDE_Level = Inst19Quest1_HORDE_Level
-	Inst20Quest1_HORDE_Attain = Inst19Quest1_HORDE_Attain
-	Inst20Quest1_HORDE_Aim = Inst19Quest1_HORDE_Aim
-	Inst20Quest1_HORDE_Location = Inst19Quest1_HORDE_Location
-	Inst20Quest1_HORDE_Note = Inst19Quest1_HORDE_Note
-	Inst20Quest1_HORDE_Prequest = Inst19Quest1_HORDE_Prequest
-	Inst20Quest1_HORDE_Folgequest = Inst19Quest1_HORDE_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Horde INST19)
-	Inst20Quest2_HORDE = Inst19Quest2_HORDE
-	Inst20Quest2_HORDE_Level = Inst19Quest2_HORDE_Level
-	Inst20Quest2_HORDE_Attain = Inst19Quest2_HORDE_Attain
-	Inst20Quest2_HORDE_Aim = Inst19Quest2_HORDE_Aim
-	Inst20Quest2_HORDE_Location = Inst19Quest2_HORDE_Location
-	Inst20Quest2_HORDE_Note = Inst19Quest2_HORDE_Note
-	Inst20Quest2_HORDE_Prequest = Inst19Quest2_HORDE_Prequest
-	Inst20Quest2_HORDE_Folgequest = Inst19Quest2_HORDE_Folgequest
-	--
-	Inst20Quest2name1_HORDE = Inst19Quest2name1_HORDE
-	Inst20Quest2name2_HORDE = Inst19Quest2name2_HORDE
-	Inst20Quest2name3_HORDE = Inst19Quest2name3_HORDE
-	
-	
-	
-	--------------- INST21 - SM: Cathedral (SM Cath) ---------------
-	Inst21Story = Inst19Story
-	Inst21Caption = "SM: Собор"
-	Inst21QAA = "1 задание"
-	Inst21QAH = "2 задания"
-	
-	--Quest 1 Alliance (same as Quest 1 Alliance INST19)
-	Inst21Quest1 = Inst19Quest1
-	Inst21Quest1_Level = Inst19Quest1_Level
-	Inst21Quest1_Attain = Inst19Quest1_Attain
-	Inst21Quest1_Aim = Inst19Quest1_Aim
-	Inst21Quest1_Location = Inst19Quest1_Location
-	Inst21Quest1_Note = Inst19Quest1_Note
-	Inst21Quest1_Prequest = Inst19Quest1_Prequest
-	Inst21Quest1_Folgequest = Inst19Quest1_Folgequest
-	--
-	Inst21Quest1name1 = Inst19Quest1name1
-	Inst21Quest1name2 = Inst19Quest1name2
-	Inst21Quest1name3 = Inst19Quest1name3
-	Inst21Quest1name4 = Inst19Quest1name4
-	
-	
-	--Quest 1 Horde (same as Quest 1 Horde INST19)
-	Inst21Quest1_HORDE = Inst19Quest1_HORDE
-	Inst21Quest1_HORDE_Level = Inst19Quest1_HORDE_Level
-	Inst21Quest1_HORDE_Attain = Inst19Quest1_HORDE_Attain
-	Inst21Quest1_HORDE_Aim = Inst19Quest1_HORDE_Aim
-	Inst21Quest1_HORDE_Location = Inst19Quest1_HORDE_Location
-	Inst21Quest1_HORDE_Note = Inst19Quest1_HORDE_Note
-	Inst21Quest1_HORDE_Prequest = Inst19Quest1_HORDE_Prequest
-	Inst21Quest1_HORDE_Folgequest = Inst19Quest1_HORDE_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Horde INST19)
-	Inst21Quest2_HORDE = Inst19Quest2_HORDE
-	Inst21Quest2_HORDE_Level = Inst19Quest2_HORDE_Level
-	Inst21Quest2_HORDE_Attain = Inst19Quest2_HORDE_Attain
-	Inst21Quest2_HORDE_Aim = Inst19Quest2_HORDE_Aim
-	Inst21Quest2_HORDE_Location = Inst19Quest2_HORDE_Location
-	Inst21Quest2_HORDE_Note = Inst19Quest2_HORDE_Note
-	Inst21Quest2_HORDE_Prequest = Inst19Quest2_HORDE_Prequest
-	Inst21Quest2_HORDE_Folgequest = Inst19Quest2_HORDE_Folgequest
-	--
-	Inst21Quest2name1_HORDE = Inst19Quest2name1_HORDE
-	Inst21Quest2name2_HORDE = Inst19Quest2name2_HORDE
-	Inst21Quest2name3_HORDE = Inst19Quest2name3_HORDE
-	
-	
-	
-	--------------- INST22 - SM: Graveyard (SM GY) ---------------
-	Inst22Story = Inst19Story
-	Inst22Caption = "SM: Кладбище"
-	Inst22QAA = "Нет заданий"
-	Inst22QAH = "2 задания"
-	
-	--Quest 1 Horde (same as Quest 1 Horde INST19)
-	Inst22Quest1_HORDE = Inst19Quest1_HORDE
-	Inst22Quest1_HORDE_Level = Inst19Quest1_HORDE_Level
-	Inst22Quest1_HORDE_Attain = Inst19Quest1_HORDE_Attain
-	Inst22Quest1_HORDE_Aim = Inst19Quest1_HORDE_Aim
-	Inst22Quest1_HORDE_Location = Inst19Quest1_HORDE_Location
-	Inst22Quest1_HORDE_Note = Inst19Quest1_HORDE_Note
-	Inst22Quest1_HORDE_Prequest = Inst19Quest1_HORDE_Prequest
-	Inst22Quest1_HORDE_Folgequest = Inst19Quest1_HORDE_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst22Quest2_HORDE = "2. Vorrel's Revenge"
-	Inst22Quest2_HORDE_Level = "33"
-	Inst22Quest2_HORDE_Attain = "25"
-	Inst22Quest2_HORDE_Aim = "Return Vorrel Sengutz's wedding ring to Monika Sengutz in Tarren Mill."
-	Inst22Quest2_HORDE_Location = "Vorrel Sengutz (Scarlet Monastery - Graveyard; "..YELLOW.."[1]"..WHITE..")"
-	Inst22Quest2_HORDE_Note = "You can find Vorrel Sengutz at the beginning of the Graveyard section of the Scarlet Monastery. Nancy Vishas, who drops the ring needed for this quest, can be found in a house in the Альтеракские горы ("..YELLOW.."31,32"..WHITE..")."
-	Inst22Quest2_HORDE_Prequest = "Нет"
-	Inst22Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst22Quest2name1_HORDE = "Vorrel's Boots"
-	Inst22Quest2name2_HORDE = "Mantle of Woe"
-	Inst22Quest2name3_HORDE = "Grimsteel Cape"
-	
-	
-	
-	--------------- INST23 - Scholomance (Scholo) ---------------
-	Inst23Story = "Некроситет разместился в серии гробниц, лежащих под развалинами крепости Каэр Дарроу. Когда-то принадлежавший знатной семье Баровых, Каэр Дарроу превратился в руины во время Второй войны. Так как колдун Кель'тузед вербовал последователей своего Культа Проклятых, он часто обещал бессмертие в обмен на служение Королю-личу. Семья Баровых поддалась харизматичному влиянию Кель'тузеда и подарила крепость и ее гробницы Плети. После этого культисты убили Баровых и превратили древние гробницы в школу некромантов, известную как Некроситет. Хотя Кель'тузеда больше нет в гробницах, преданные культисты и преподаватели все еще там. Могущественный лич, Рас Снегошепот, руководит охраной и следит за территорией во имя Плети - а смертный некромант, Темный магистр Гандлинг, выступает в роли коварного главы школы."
-	Inst23Caption = "Некроситет"
-	Inst23QAA = "11 заданий"
-	Inst23QAH = "11 заданий"
-	
-	--Quest 1 Alliance
-	Inst23Quest1 = "1. Зачумленные детеныши дракона" 
-	Inst23Quest1_Level = "58"
-	Inst23Quest1_Attain = "55"
-	Inst23Quest1_Aim = "Убейте 20 зачумленных детенышей дракона, затем возвращайтесь к Бетине Биггльцинк в Часовню Последней Надежды."
-	Inst23Quest1_Location = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,59"..WHITE..")"
-	Inst23Quest1_Note = "Зачумленные детеныши дракона находятся по пути к Громоклину в большой комнате."
-	Inst23Quest1_Prequest = "Нет"
-	Inst23Quest1_Folgequest = "Здоровая чешуя дракона" -- 5582
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst23Quest2 = "2. Здоровая чешуя дракона" -- 5582
-	Inst23Quest2_Level = "58"
-	Inst23Quest2_Attain = "55"
-	Inst23Quest2_Aim = "Отнесите здоровую чешую дракона Бетине Биггльцинк в Часовню Последней Надежды в Восточные Чумные земли."
-	Inst23Quest2_Location = "Здоровая чешуя дракона (случайно добывается в Некроситете)"
-	Inst23Quest2_Note = "Здоровая чешуя дракона добывается с зачумленных детенышей дракона (8% шанс). Вы найдете Бетину Биггльцинк в Восточные Чумные земли - Часовня Последней Надежды ("..YELLOW.."81,59"..WHITE..")."
-	Inst23Quest2_Prequest = "Зачумленные детеныши дракона" -- 5529
-	Inst23Quest2_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst23Quest3 = "3. Доктор Теолен Крастинов – Мясник" -- 5382
-	Inst23Quest3_Level = "60"
-	Inst23Quest3_Attain = "55"
-	Inst23Quest3_Aim = "Найдите в Некроситете доктора Теолена Крастинова. Убейте его, затем сожгите останки Евы и Люсьена Саркофф. Выполнив задание, возвращайтесь к Еве Саркофф."
-	Inst23Quest3_Location = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; "..YELLOW.."70,73"..WHITE..")"
-	Inst23Quest3_Note = "Вы найдете доктора Теолена Крастинова, останки Евы и останки Люсьена Саркофф около "..YELLOW.."[9]"..WHITE.."."
-	Inst23Quest3_Prequest = "Нет"
-	Inst23Quest3_Folgequest = "Мешок ужасов Крастинова" -- 5515
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst23Quest4 = "4. Мешок ужасов Крастинова" -- 5515
-	Inst23Quest4_Level = "60"
-	Inst23Quest4_Attain = "55"
-	Inst23Quest4_Aim = "Найдите в Некроситете Джандис Барову и уничтожьте ее. Заберите мешок ужасов Крастинова. Отнесите мешок Еве Саркофф."
-	Inst23Quest4_Location = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; "..YELLOW.."70,73"..WHITE..")"
-	Inst23Quest4_Note = "Вы найдете Джандис Баров около "..YELLOW.."[3]"..WHITE.."."
-	Inst23Quest4_Prequest = "Доктор Теолен Крастинов – Мясник" -- 5382
-	Inst23Quest4_Folgequest = "Киртонос Глашатай" -- 5384
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst23Quest5 = "5. Киртонос Глашатай" -- 5384
-	Inst23Quest5_Level = "60"
-	Inst23Quest5_Attain = "55"
-	Inst23Quest5_Aim = "Вернитесь в Некроситет с кровью невинных. Найдите балкон и вылейте кровь в жаровню. На зов явится Киртонос. Сражайтесь как герой, не сдавайтесь! Уничтожьте Киртоноса и возвращайтесь к Еве Саркофф."
-	Inst23Quest5_Location = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; "..YELLOW.."70,73"..WHITE..")"
-	Inst23Quest5_Note = "Жаровня находится около "..YELLOW.."[2]"..WHITE.."."
-	Inst23Quest5_Prequest = "Мешок ужасов Крастинова" -- 5515
-	Inst23Quest5_Folgequest = "Рас Ледяной Шепот – человек" -- 5461
-	--
-	Inst23Quest5name1 = "Spectral Essence"
-	Inst23Quest5name2 = "Penelope's Rose"
-	Inst23Quest5name3 = "Mirah's Song"
-	
-	--Quest 6 Alliance
-	Inst23Quest6 = "6. Рас Ледяной Шепот – лич" -- 5466
-	Inst23Quest6_Level = "60"
-	Inst23Quest6_Attain = "57"
-	Inst23Quest6_Aim = "Отыщите в Некроситете Раса Ледяного Шепота. Найдя его, воспользуйтесь Книгой Души против его посмертного облика. Если удастся превратить Раса в смертного, убейте его и заберите человеческую голову Раса Ледяного Шепота. Отнесите голову мировому судье Мардуку."
-	Inst23Quest6_Location = "Мировой судья Мардук (Западные Чумные земли - Каэр Дарроу; "..YELLOW.."70,73"..WHITE..")"
-	Inst23Quest6_Note = "Вы сможете найти Раса Леденой Шепот около "..YELLOW.."[7]"..WHITE.."."
-	Inst23Quest6_Prequest = "Рас Ледяной Шепот – человек - >  Книга Души" -- 5461 -> 5465
-	Inst23Quest6_Folgequest = "Нет"
-	--
-	Inst23Quest6name1 = "Darrowshire Strongguard"
-	Inst23Quest6name2 = "Warblade of Caer Darrow"
-	Inst23Quest6name3 = "Crown of Caer Darrow"
-	Inst23Quest6name4 = "Darrowspike"
-	
-	--Quest 7 Alliance
-	Inst23Quest7 = "7. Сокровище Баровых" -- 5343
-	Inst23Quest7_Level = "60"
-	Inst23Quest7_Attain = "52"
-	Inst23Quest7_Aim = "Отправляйтесь в Некроситет и добудьте сокровище семьи Баровых. Оно состоит из четырех документов: на Каэр Дарроу, на Брилл, на Мельницу Таррен и на Южнобережье. После выполнения задания вернитесь к Вэлдону Барову."
-	Inst23Quest7_Location = "Велдон Баров (Западные Чумные земли - Лагерь Промозглого Ветра; "..YELLOW.."43,83"..WHITE..")"
-	Inst23Quest7_Note = "Вы найдете Документы на Каэр Дарроу около "..YELLOW.."[12]"..WHITE..", Документы на Брилл около "..YELLOW.."[7]"..WHITE..", Документы на мельницу Таррен около "..YELLOW.."[4]"..WHITE.." и Документы на Южнобережье около "..YELLOW.."[1]"..WHITE.."."
-	Inst23Quest7_Prequest = "Нет"
-	Inst23Quest7_Folgequest = "Последний из Баровых" -- 5344
-	-- No Rewards for this quest
-	
-	--Quest 8 Alliance
-	Inst23Quest8 = "8. Рассветный гамбит" -- 4771
-	Inst23Quest8_Level = "60"
-	Inst23Quest8_Attain = "57"
-	Inst23Quest8_Aim = "Отнесите рассветный гамбит в Демонстрационную комнату в Некроситете. Уничтожьте Вектуса и возвращайтесь к Бетине Биггльцинк."
-	Inst23Quest8_Location = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,59"..WHITE..")"
-	Inst23Quest8_Note = "Сущность детеныша дракона начинается у Тинки Кипеллера (Пылающие степи - Пламенеющий стяг; "..YELLOW.."65,23"..WHITE.."). Демонстрационная комната находится около "..YELLOW.."[6]"..WHITE.."."
-	Inst23Quest8_Prequest = "Сущность детеныша дракона - > Бетина Биггльцинк" -- 4726 -> 5531
-	Inst23Quest8_Folgequest = "Нет"
-	--
-	Inst23Quest8name1 = "Windreaper"
-	Inst23Quest8name2 = "Dancing Sliver"
-	
-	--Quest 9 Allaince
-	Inst23Quest9 = "9. Доставка беса" -- 7629
-	Inst23Quest9_Level = "60"
-	Inst23Quest9_Attain = "60"
-	Inst23Quest9_Aim = "Отнесите беса в бутылке в алхимическую лабораторию Некроситета. После создания пергамента верните бутылку Горзиеки Дикоглазу."
-	Inst23Quest9_Location = "Горзиеки Дикоглаз (Пылающие степи; "..YELLOW.."12,31"..WHITE..")"
-	Inst23Quest9_Note = "Задание для чернокнижников: Вы найдете алхимическую лабораторию около "..YELLOW.."[7]"..WHITE.."."
-	Inst23Quest9_Prequest = "Мор'зул Вестник Крови - > Зоротианская звездная пыль" -- 7562 -> 7625
-	Inst23Quest9_Folgequest = "Зоротианский конь погибели ("..YELLOW.."Забытый город (Запад)"..WHITE..")" -- 7631
-	-- No Rewards for this quest
-	
-	--Quest 10 Alliance
-	Inst23Quest10 = "10. Левая часть амулета Лорда Вальтхалака" -- 8969
-	Inst23Quest10_Level = "60"
-	Inst23Quest10_Attain = "58"
-	Inst23Quest10_Aim = "С помощью жаровни Призыва вызвать дух Кормока и убить его. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва."
-	Inst23Quest10_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst23Quest10_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nКормок вызывается около "..YELLOW.."[7]"..WHITE.."."
-	Inst23Quest10_Prequest = "Важная составляющая заклинания" -- 8965
-	Inst23Quest10_Folgequest = "Я вижу в твоем будущем остров Алькац..." -- 8970
-	-- No Rewards for this quest
-	
-	--Quest 11 Alliance
-	Inst23Quest11 = "11. Правая часть амулета Лорда Вальтхалака" -- 8992
-	Inst23Quest11_Level = "60"
-	Inst23Quest11_Attain = "58"
-	Inst23Quest11_Aim = "С помощью жаровни Призыва вызвать дух Кормока и убить его. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва."
-	Inst23Quest11_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst23Quest11_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nКормок вызывается около "..YELLOW.."[7]"..WHITE.."."
-	Inst23Quest11_Prequest = "Еще одна важная составляющая заклинания" -- 8988
-	Inst23Quest11_Folgequest = "Последние приготовления ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 8994
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst23Quest1_HORDE = Inst23Quest1
-	Inst23Quest1_HORDE_Level = Inst23Quest1_Level
-	Inst23Quest1_HORDE_Attain = Inst23Quest1_Attain
-	Inst23Quest1_HORDE_Aim = Inst23Quest1_Aim
-	Inst23Quest1_HORDE_Location = Inst23Quest1_Location
-	Inst23Quest1_HORDE_Note = Inst23Quest1_Note
-	Inst23Quest1_HORDE_Prequest = Inst23Quest1_Prequest
-	Inst23Quest1_HORDE_Folgequest = Inst23Quest1_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst23Quest2_HORDE = Inst23Quest2
-	Inst23Quest2_HORDE_Level = Inst23Quest2_Level
-	Inst23Quest2_HORDE_Attain = Inst23Quest2_Attain
-	Inst23Quest2_HORDE_Aim = Inst23Quest2_Aim
-	Inst23Quest2_HORDE_Location = Inst23Quest2_Location
-	Inst23Quest2_HORDE_Note = Inst23Quest2_Note
-	Inst23Quest2_HORDE_Prequest = Inst23Quest2_Prequest
-	Inst23Quest2_HORDE_Folgequest = Inst23Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst23Quest3_HORDE = Inst23Quest3
-	Inst23Quest3_HORDE_Level = Inst23Quest3_Level
-	Inst23Quest3_HORDE_Attain = Inst23Quest3_Attain
-	Inst23Quest3_HORDE_Aim = Inst23Quest3_Aim
-	Inst23Quest3_HORDE_Location = Inst23Quest3_Location
-	Inst23Quest3_HORDE_Note = Inst23Quest3_Note
-	Inst23Quest3_HORDE_Prequest = Inst23Quest3_Prequest
-	Inst23Quest3_HORDE_Folgequest = Inst23Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst23Quest4_HORDE = Inst23Quest4
-	Inst23Quest4_HORDE_Level = Inst23Quest4_Level
-	Inst23Quest4_HORDE_Attain = Inst23Quest4_Attain
-	Inst23Quest4_HORDE_Aim = Inst23Quest4_Aim
-	Inst23Quest4_HORDE_Location = Inst23Quest4_Location
-	Inst23Quest4_HORDE_Note = Inst23Quest4_Note
-	Inst23Quest4_HORDE_Prequest = Inst23Quest4_Prequest
-	Inst23Quest4_HORDE_Folgequest = Inst23Quest4_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst23Quest5_HORDE = Inst23Quest5
-	Inst23Quest5_HORDE_Level = Inst23Quest5_Level
-	Inst23Quest5_HORDE_Attain = Inst23Quest5_Attain
-	Inst23Quest5_HORDE_Aim = Inst23Quest5_Aim
-	Inst23Quest5_HORDE_Location = Inst23Quest5_Location
-	Inst23Quest5_HORDE_Note = Inst23Quest5_Note
-	Inst23Quest5_HORDE_Prequest = Inst23Quest5_Prequest
-	Inst23Quest5_HORDE_Folgequest = Inst23Quest5_Folgequest
-	--
-	Inst23Quest5name1_HORDE = Inst23Quest5name1
-	Inst23Quest5name2_HORDE = Inst23Quest5name2
-	Inst23Quest5name3_HORDE = Inst23Quest5name3
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst23Quest6_HORDE = Inst23Quest6
-	Inst23Quest6_HORDE_Level = Inst23Quest6_Level
-	Inst23Quest6_HORDE_Attain = Inst23Quest6_Attain
-	Inst23Quest6_HORDE_Aim = Inst23Quest6_Aim
-	Inst23Quest6_HORDE_Location = Inst23Quest6_Location
-	Inst23Quest6_HORDE_Note = Inst23Quest6_Note
-	Inst23Quest6_HORDE_Prequest = Inst23Quest6_Prequest
-	Inst23Quest6_HORDE_Folgequest = Inst23Quest6_Folgequest
-	--
-	Inst23Quest6name1_HORDE = Inst23Quest6name1
-	Inst23Quest6name2_HORDE = Inst23Quest6name2
-	Inst23Quest6name3_HORDE = Inst23Quest6name3
-	Inst23Quest6name4_HORDE = Inst23Quest6name4
-	
-	--Quest 7 Horde
-	Inst23Quest7_HORDE = "7. Сокровище Баровых" -- 5341
-	Inst23Quest7_HORDE_Level = "60"
-	Inst23Quest7_HORDE_Attain = "52"
-	Inst23Quest7_HORDE_Aim = "Отправляйтесь в Некроситет и добудьте сокровище семьи Баровых. Оно состоит из четырех документов: на Каэр Дарроу, на Брилл, на Мельницу Таррен и на Южнобережье. После выполнения задания вернитесь к Алексию Барову."
-	Inst23Quest7_HORDE_Location = "Алексий Баров (Западные Чумные земли; "..YELLOW.."28,57"..WHITE..")"
-	Inst23Quest7_HORDE_Note = "Вы найдете Документы на Каэр Дарроу около "..YELLOW.."[12]"..WHITE..", Документы на Брилл около "..YELLOW.."[7]"..WHITE..", Документы на мельницу Таррен около "..YELLOW.."[4]"..WHITE.." и Документы на Южнобережье около "..YELLOW.."[1]"..WHITE.."."
-	Inst23Quest7_HORDE_Prequest = "Нет"
-	Inst23Quest7_HORDE_Folgequest = "Последний из Баровых" -- 5342
-	-- No Rewards for this quest
-	
-	--Quest 8 Horde (same as Quest 8 Alliance)
-	Inst23Quest8_HORDE = Inst23Quest8
-	Inst23Quest8_HORDE_Level = Inst23Quest8_Level
-	Inst23Quest8_HORDE_Attain = Inst23Quest8_Attain
-	Inst23Quest8_HORDE_Aim = Inst23Quest8_Aim
-	Inst23Quest8_HORDE_Location = Inst23Quest8_Location
-	Inst23Quest8_HORDE_Note = Inst23Quest8_Note
-	Inst23Quest8_HORDE_Prequest = Inst23Quest8_Prequest
-	Inst23Quest8_HORDE_Folgequest = Inst23Quest8_Folgequest
-	--
-	Inst23Quest8name1_HORDE = Inst23Quest8name1
-	Inst23Quest8name2_HORDE = Inst23Quest8name2
-	
-	--Quest 9 Horde (same as Quest 9 Alliance)
-	Inst23Quest9_HORDE = Inst23Quest9
-	Inst23Quest9_HORDE_Level = Inst23Quest9_Level
-	Inst23Quest9_HORDE_Attain = Inst23Quest9_Attain
-	Inst23Quest9_HORDE_Aim = Inst23Quest9_Aim
-	Inst23Quest9_HORDE_Location = Inst23Quest9_Location
-	Inst23Quest9_HORDE_Note = Inst23Quest9_Note
-	Inst23Quest9_HORDE_Prequest = Inst23Quest9_Prequest
-	Inst23Quest9_HORDE_Folgequest = Inst23Quest9_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 10 Horde (same as Quest 10 Alliance)
-	Inst23Quest10_HORDE = Inst23Quest10
-	Inst23Quest10_HORDE_Level = Inst23Quest10_Level
-	Inst23Quest10_HORDE_Attain = Inst23Quest10_Attain
-	Inst23Quest10_HORDE_Aim = Inst23Quest10_Aim
-	Inst23Quest10_HORDE_Location = Inst23Quest10_Location
-	Inst23Quest10_HORDE_Note = Inst23Quest10_Note
-	Inst23Quest10_HORDE_Prequest = Inst23Quest10_Prequest
-	Inst23Quest10_HORDE_Folgequest = Inst23Quest10_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 11 Horde (same as Quest 11 Alliance)
-	Inst23Quest11_HORDE = Inst23Quest11
-	Inst23Quest11_HORDE_Level = Inst23Quest11_Level
-	Inst23Quest11_HORDE_Attain = Inst23Quest11_Attain
-	Inst23Quest11_HORDE_Aim = Inst23Quest11_Aim
-	Inst23Quest11_HORDE_Location = Inst23Quest11_Location
-	Inst23Quest11_HORDE_Note = Inst23Quest11_Note
-	Inst23Quest11_HORDE_Prequest = Inst23Quest11_Prequest
-	Inst23Quest11_HORDE_Folgequest = Inst23Quest11_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST24 - Shadowfang Keep (SFK) ---------------
-	Inst24Story = "Во время Третьей Войны, волшебники Кирин Тора сражались против армии нежити Плети. Когда волшебники Даларана погибли в бою, они смогли возродиться после - прибавив свою былую мощь к растущей Плети. Недовольный недостатком прогресса (и вопреки советам его соратников) Архимаг выбрал Аругала для призыва внемировых сущностей, чтобы подкрепить уменьшающиеся силы Даларана. Призыв Аругала привел изголодавшихся воргенов в мир Азерота. Дикие зверолюди устроили резню не только Плети, но быстро принялись и за самих волшебников. Воргены осадили крепость дворянина, барона Сребролена. Расположенная на небольшой деревушкой Погребальных костров, крепость быстро была ввергнута во тьму и разруху. Помешавшись из-за чувства вины, Аругал усыновил воргенов как детей и уединился в заново окрещенной 'Крепости Темного Клыка'. Говорят, он все еще живет там, защищаемый своим огромным питомцем, Фенрусом - и преследуемый мстительным духом барона Сребролена."
-	Inst24Caption = "Крепость Темного Клыка"
-	Inst24QAA = "2 задания"
-	Inst24QAH = "4 задания"
-	
-	--Quest 1 Alliance
-	Inst24Quest1 = "1. Испытание доблести" -- 1654
-	Inst24Quest1_Level = "22"
-	Inst24Quest1_Attain = "20"
-	Inst24Quest1_Aim = "Возьмите список Джордана, добудьте немного древесины белокаменного дуба, партию очищенной руды Бэйлора, кузнечный молот Джордана и самоцвет Кора и отдайте их Джордану Стилвеллу в Стальгорне."
-	Inst24Quest1_Location = "Джордан Стилвелл (Дун Морог - Вход в Стальгорн; "..YELLOW.."52,36"..WHITE..")"
-	Inst24Quest1_Note = "Задание для паладинов: Чтобы увидеть заметки щелкните на "..YELLOW.."[Информация: Испытание доблести]"..WHITE.."."
-	Inst24Quest1_Page = { "Только паладины могут получить это задание!\n\n1. Вы получите древесину белокаменного дуба у гоблинов-лесорубов в "..YELLOW.."[Мертвые копи]"..WHITE.." около "..YELLOW.."[3]"..WHITE..".\n\n2. Для получения партии очищенной руды Бэйлора вы должны поговорить с Бэйлором Каменной Дланью (Озеро Модан - Телсамар; "..YELLOW.."35,44"..WHITE.."). Он даст вам задание 'Партия руды Бэйлора'. Вы найдете руду Джордана за деревом около "..YELLOW.."71,21"..WHITE.."\n\n3. Вы получите кузнечный молот Джордана в "..YELLOW.."[Крепость Темного Клыка]"..WHITE.." около "..YELLOW.."[3]"..WHITE..".\n\n4. Для получения самоцвета Кора Вам нужно пойти к Тандрису Ветропряду (Темные берега - Аубердин; "..YELLOW.."37,40"..WHITE..") и выполнить задание 'Поиск самоцвета Кора'. Для этого задания, вам нужно убивать Провидзев и Жриц Непроглядной пучины перед "..YELLOW.."[Непроглядная пучина]"..WHITE..". С них добывается Оскверненный самоцвет Кора. Тандрис Ветропряд очистит его для Вас.", };
-	Inst24Quest1_Prequest = "Фолиант Отваги -> Испытание доблести" -- 1651 -> 1653
-	Inst24Quest1_Folgequest = "Испытание доблести" -- 1806
-	--
-	Inst24Quest1name1 = "Verigan's Fist"
-	
-	--Quest 2 Alliance
-	Inst24Quest2 = "2. Шар Соран'рука" -- 1740
-	Inst24Quest2_Level = "25"
-	Inst24Quest2_Attain = "20"
-	Inst24Quest2_Aim = "Соберите 3 фрагмента Соран'рука и 1 большой фрагмент Соран'рука и принесите их Доану Кархану в Степи."
-	Inst24Quest2_Location = "Доан Кархан (Степи; "..YELLOW.."49,57"..WHITE..")"
-	Inst24Quest2_Note = "Задание для чернокнижников: Вы возьмете 3 фрагмента Соран'рука с Сумеречных Прислужников в "..YELLOW.."[Непроглядная пучина]"..WHITE..". Вы возьмете большой фрагмент Соран'рука в "..YELLOW.."[Крепость Темного Клыка]"..WHITE.." у Темных Душ Темного Клыка."
-	Inst24Quest2_Prequest = "Нет"
-	Inst24Quest2_Folgequest = "Нет"
-	--
-	Inst24Quest2name1 = "Orb of Soran'ruk"
-	Inst24Quest2name2 = "Staff of Soran'ruk"
-	
-	
-	--Quest 1 Horde
-	Inst24Quest1_HORDE = "1. Пропавшие стражи смерти" -- 1098
-	Inst24Quest1_HORDE_Level = "25"
-	Inst24Quest1_HORDE_Attain = "18"
-	Inst24Quest1_HORDE_Aim = "Найдите стражей смерти Адаманта и Винсента."
-	Inst24Quest1_HORDE_Location = "Верховный палач Хадрек (Серебряный бор - Гробница; "..YELLOW.."43,40"..WHITE..")"
-	Inst24Quest1_HORDE_Note = "Вы найдете стража смерти Адаманта около "..YELLOW.."[1]"..WHITE..". Страж смерти Винсент находится справа когда вы войдете во внутренний двор около "..YELLOW.."[3]"..WHITE.."."
-	Inst24Quest1_HORDE_Prequest = "Нет"
-	Inst24Quest1_HORDE_Folgequest = "Нет"
-	--
-	Inst24Quest1name1_HORDE = "Ghostly Mantle"
-	
-	--Quest 2 Horde
-	Inst24Quest2_HORDE = "2. Книга Ура" -- 1013
-	Inst24Quest2_HORDE_Level = "26"
-	Inst24Quest2_HORDE_Attain = "16"
-	Inst24Quest2_HORDE_Aim = "Принесите книгу Ура хранителю Бел'дугуру в Район Фармацевтов в Подгород."
-	Inst24Quest2_HORDE_Location = "Хранитель Бел'дугур (Подгород - Район Фармацевтов; "..YELLOW.."53,54"..WHITE..")"
-	Inst24Quest2_HORDE_Note = "Вы найдете книгу около "..YELLOW.."[11]"..WHITE.." слева, когда вы войдете в комнату."
-	Inst24Quest2_HORDE_Prequest = "Нет"
-	Inst24Quest2_HORDE_Folgequest = "Нет"
-	--
-	Inst24Quest2name1_HORDE = "Grizzled Boots"
-	Inst24Quest2name2_HORDE = "Steel-clasped Bracers"
-	
-	--Quest 3 Horde
-	Inst24Quest3_HORDE = "3. Смерть Аругалу!" -- 1014
-	Inst24Quest3_HORDE_Level = "27"
-	Inst24Quest3_HORDE_Attain = "18"
-	Inst24Quest3_HORDE_Aim = "Убейте Аругала и принесите его голову Далару Ткачу Рассвета в Гробницу."
-	Inst24Quest3_HORDE_Location = "Далар Ткач Рассвета (Серебряный бор - Гробница; "..YELLOW.."44,39"..WHITE..")"
-	Inst24Quest3_HORDE_Note = "Вы найдете Архимага Аругала около "..YELLOW.."[13]"..WHITE.."."
-	Inst24Quest3_HORDE_Prequest = "Нет"
-	Inst24Quest3_HORDE_Folgequest = "Нет"
-	--
-	Inst24Quest3name1_HORDE = "Seal of Sylvanas"
-	
-	--Quest 4 Horde (same as Quest 2 Alliance)
-	Inst24Quest4_HORDE = "4. Шар Соран'рука"
-	Inst24Quest4_HORDE_Level = Inst24Quest2_Level
-	Inst24Quest4_HORDE_Attain = Inst24Quest2_Attain
-	Inst24Quest4_HORDE_Aim = Inst24Quest2_Aim
-	Inst24Quest4_HORDE_Location = Inst24Quest2_Location
-	Inst24Quest4_HORDE_Note = Inst24Quest2_Note
-	Inst24Quest4_HORDE_Prequest = Inst24Quest2_Prequest
-	Inst24Quest4_HORDE_Folgequest = Inst24Quest2_Folgequest
-	--
-	Inst24Quest4name1_HORDE = "Orb of Soran'ruk"
-	Inst24Quest4name2_HORDE = "Staff of Soran'ruk"
-	
-	
-	
-	--------------- INST25 - Стратхольм (Strat) ---------------
-	Inst25Story = "Когда-то он был жемчужиной северного Лордерона, город Стратхольм, именно тут принц Артес пошел против своего наставника, Утера Несущего Свет, и устроил бойню сотен своих собственных подданных, зараженных ,как он верил, ужасносной чумой нежити. Стремительное падение Артеса и окончательный переход на сторону Короля-лича последовали потом. В разрушенном городе теперь обитает нежить Плети - ведомая могущественным личем, Кель'тузедом. Личный состав Алого ордена, под руководством Grand Crusader Dathrohan, также захватил часть уничтоженного города. Две стороны увязли в непрекращающейся, ожесточенной битве. Искатели приключений, достаточно отважные (или безмозглые), чтобы войти в Стратхольм, столкнуться с противодействием и тех, и других. Поговаривают, что город охраняется тремя огромными смотровыми башнями, а также сильными некромантами, баньши и мерзостями. Также есть свидетельства того, что пагубный рыцарь смерти разъезжает по дьявольской конюшне - без разбору обрушивая свой гнев на головы тех, кто вторгся во владения Плети."
-	Inst25Caption = "Стратхольм"
-	Inst25QAA = "17 заданий"
-	Inst25QAH = "18 заданий"
-	
-	--Quest1 Alliance
-	Inst25Quest1 = "1. Плоть не лжет" -- 5212
-	Inst25Quest1_Level = "60"
-	Inst25Quest1_Attain = "55"
-	Inst25Quest1_Aim = "Принесите 10 препаратов чумной плоти из Стратхольма Бетине Биггльцинк. Предположительно, сойдут ткани любой твари из Стратхольма."
-	Inst25Quest1_Location = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,59"..WHITE..")"
-	Inst25Quest1_Note = "Сбольшинства существ в Стратхольме падают препараты чумной плоти, но шанс очень мал."
-	Inst25Quest1_Prequest = "Нет"
-	Inst25Quest1_Folgequest = "Вирус чумы" -- 5213
-	-- No Rewards for this quest
-	
-	--Quest2 Alliance
-	Inst25Quest2 = "2. Вирус чумы" -- 5213
-	Inst25Quest2_Level = "60"
-	Inst25Quest2_Attain = "55"
-	Inst25Quest2_Aim = "Отправляйтесь в Стратхольм и исследуйте зиккураты. Доставьте сведения о Плети Бетине Биггльцинк."
-	Inst25Quest2_Location = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,59"..WHITE..")"
-	Inst25Quest2_Note = "Сведения о плети находятся в одной из 3 Башен, которые вы найдете около "..YELLOW.."[15]"..WHITE..", "..YELLOW.."[16]"..WHITE.." и "..YELLOW.."[17]"..WHITE.."."
-	Inst25Quest2_Prequest = "Плоть не лжет" -- 5212
-	Inst25Quest2_Folgequest = "Нет"
-	--
-	Inst25Quest2name1 = "Seal of the Dawn"
-	Inst25Quest2name2 = "Rune of the Dawn"
-	
-	--Quest3 Alliance
-	Inst25Quest3 = "3. Святая вода" -- 5243
-	Inst25Quest3_Level = "60"
-	Inst25Quest3_Attain = "55"
-	Inst25Quest3_Aim = "Отправляйтесь на север, в Стратхольм. Обыщите брошенные ящики с припасами и соберите 5 мер святой воды Стратхольма. Возвращайтесь к Леониду Барталомею Чтимому, как только воды будет достаточно."
-	Inst25Quest3_Location = "Леонид Барталомей Чтимый (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."80,58"..WHITE..")"
-	Inst25Quest3_Note = "Вы найдете святую воду в ящиках по всему Стратхольму. При открытии некоторых появятся насекомые и атакуют Вас."
-	Inst25Quest3_Prequest = "Нет"
-	Inst25Quest3_Folgequest = "Нет"
-	--
-	Inst25Quest3name1 = "Superior Healing Potion"
-	Inst25Quest3name2 = "Greater Mana Potion"
-	Inst25Quest3name3 = "Crown of the Penitent"
-	Inst25Quest3name4 = "Band of the Penitent"
-	
-	--Quest4 Alliance
-	Inst25Quest4 = "4. Великий Фрас Сиаби" -- 5214
-	Inst25Quest4_Level = "60"
-	Inst25Quest4_Attain = "55"
-	Inst25Quest4_Aim = "Найдите табачную лавку Фраса Сиаби в Стратхольме, отыщите в ней пачку лучшего табака Сиаби и принесите ее Дымку ЛаРу."
-	Inst25Quest4_Location = "Дымок ЛаРу (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."80,58"..WHITE..")"
-	Inst25Quest4_Note = "Вы найдете табачную лавку около "..YELLOW.."[1]"..WHITE..". Фрас Сиаби появится когда вы откроете коробку."
-	Inst25Quest4_Prequest = "Нет"
-	Inst25Quest4_Folgequest = "Нет"
-	--
-	Inst25Quest4name1 = "Smokey's Lighter"
-	
-	--Quest5 Alliance
-	Inst25Quest5 = "5. Мятущиеся души" -- 5282
-	Inst25Quest5_Level = "60"
-	Inst25Quest5_Attain = "55"
-	Inst25Quest5_Aim = "Стреляйте в призрачных и неупокоенных горожан на улицах Стратхольма из бластера Эгана. Когда душа вырвется из призрачной оболочки, выстрелите в нее еще раз, и она обретет свободу.\nОсвободите 15 неупокоенных душ и возвращайтесь к Эгану."
-	Inst25Quest5_Location = "Эган (Восточные Чумные земли; "..YELLOW.."14,33"..WHITE..")"
-	Inst25Quest5_Note = "Вы возьмете предшествующее задание у управляющего Алена (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."79,63"..WHITE.."). Призраки и неупокоенные бродят по улицам Стратхольма."
-	Inst25Quest5_Prequest = "Мятущиеся души" -- 5281
-	Inst25Quest5_Folgequest = "Нет"
-	--
-	Inst25Quest5name1 = "Testament of Hope"
-	
-	--Quest6 Alliance
-	Inst25Quest6 = "6. Символ семейной любви" -- 5848
-	Inst25Quest6_Level = "60"
-	Inst25Quest6_Attain = "52"
-	Inst25Quest6_Aim = "Отправляйтесь в Стратхольм в северную часть Чумных земель. Найдите в Бастионе Алого ордена картину \"Символ семейной любви\", спрятанную за другой, изображающей две луны нашего мира.\nОтнесите картину Тириону Фордрингу."
-	Inst25Quest6_Location = "Художница Ренфри (Западные Чумные земли - Каэр Дарроу; "..YELLOW.."65,75"..WHITE..")"
-	Inst25Quest6_Note = "Вы возьмете предшествующее задание у Тириона Фордринга (Западные Чумные земли; "..YELLOW.."7,43"..WHITE.."). Вы сможете найти картину около "..YELLOW.."[10]"..WHITE.."."
-	Inst25Quest6_Prequest = "Искупление - > Символ семейной любви" -- 5742 -> 5846
-	Inst25Quest6_Folgequest = "Найти Миранду" -- 5861
-	-- No Rewards for this quest
-	
-	--Quest7 Alliance
-	Inst25Quest7 = "7. Дар Менетила" -- 5463
-	Inst25Quest7_Level = "60"
-	Inst25Quest7_Attain = "57"
-	Inst25Quest7_Aim = "Отправляйтесь в Стратхольм и отыщите Дар Менетила. Положите книгу Воспоминаний на оскверненную землю."
-	Inst25Quest7_Location = "Леонид Барталомей Чтимый (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."80,58"..WHITE..")"
-	Inst25Quest7_Note = "Вы возьмете предшествующее задание у мирового судьи Мардука (Западные Чумные земли - Каэр Дарроу; "..YELLOW.."70,73"..WHITE.."). Вы найдете знак около "..YELLOW.."[19]"..WHITE..". Смотрите также: "..YELLOW.."[Рас Снегошепот – лич]"..WHITE.." в Некроситете."
-	Inst25Quest7_Prequest = "Рас Ледяной Шепот – человек - > Рас Ледяной Шепот – гибель" -- 5461 -> 5462
-	Inst25Quest7_Folgequest = "Дар Менетила" -- 5464
-	-- No Rewards for this quest
-	
-	--Quest8 Alliance
-	Inst25Quest8 = "8. Слова Аурия" -- 5125
-	Inst25Quest8_Level = "60"
-	Inst25Quest8_Attain = "55"
-	Inst25Quest8_Aim = "Убейте барона."
-	Inst25Quest8_Location = "Аурий (Стратхольм; "..YELLOW.."[13]"..WHITE..")"
-	Inst25Quest8_Note = "Чтобы начать выполнение задания вы должны отдать Аурию [Медальон Веры]. Вы получите медальон из сундука. В первой комнате крепости (до того как дороги разойдутся). После того, как вы отдадите Аурию медальон, он поможет вашей группе сражаться против Барона "..YELLOW.."[15]"..WHITE..". После убийства Барона вы должны снова поговорить с Аурием, чтобы получить награду."
-	Inst25Quest8_Prequest = "Нет"
-	Inst25Quest8_Folgequest = "Нет"
-	--
-	Inst25Quest8name1 = "Will of the Martyr"
-	Inst25Quest8name2 = "Blood of the Martyr"
-	
-	--Quest9 Alliance
-	Inst25Quest9 = "9. Архивариус" -- 5251
-	Inst25Quest9_Level = "60"
-	Inst25Quest9_Attain = "55"
-	Inst25Quest9_Aim = "Отправляйтесь в Стратхольм и отыщите архивариуса Галфорда из Алого ордена. Убейте его и сожгите архив Алых."
-	Inst25Quest9_Location = "Герцог Николас Зверенхофф (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,59"..WHITE..")"
-	Inst25Quest9_Note = "Вы найдете архив и архивариуса около "..YELLOW.."[10]"..WHITE.."."
-	Inst25Quest9_Prequest = "Нет"
-	Inst25Quest9_Folgequest = "Ошеломляющая истина" -- 5262
-	-- No Rewards for this quest
-	
-	--Quest10 Alliance
-	Inst25Quest10 = "10. Ошеломляющая истина" -- 5262
-	Inst25Quest10_Level = "60"
-	Inst25Quest10_Attain = "55"
-	Inst25Quest10_Aim = "Отнесите голову Бальназара герцогу Николасу Зверенхоффу в Восточные Чумные земли."
-	Inst25Quest10_Location = "Бальназар (Стратхольм; "..YELLOW.."[11]"..WHITE..")"
-	Inst25Quest10_Note = "Вы найдете герцога Николаса Зверенхоффа в Восточные Чумные земли - Часовня Последней Надежды ("..YELLOW.."81,59"..WHITE..")."
-	Inst25Quest10_Prequest = "Архивариус" -- 5251
-	Inst25Quest10_Folgequest = "Быстрее, выше, сильнее" -- 5263
-	-- No Rewards for this quest
-	
-	--Quest11 Alliance
-	Inst25Quest11 = "11. Быстрее, выше, сильнее" -- 5263
-	Inst25Quest11_Level = "60"
-	Inst25Quest11_Attain = "55"
-	Inst25Quest11_Aim = "Отправляйтесь в Стратхольм и убейте барона Ривендера. Принесите его голову герцогу Николасу Зверенхоффу."
-	Inst25Quest11_Location = "Герцог Николас Зверенхофф (Восточные Чумные земли - Часовня Последней Надежды; "..YELLOW.."81,59"..WHITE..")"
-	Inst25Quest11_Note = "Вы можете найти барона около "..YELLOW.."[19]"..WHITE.."."
-	Inst25Quest11_Prequest = "Ошеломляющая истина" -- 5262
-	Inst25Quest11_Folgequest = "Нет"
-	--
-	Inst25Quest11name1 = "Argent Defender"
-	Inst25Quest11name2 = "Argent Crusader"
-	Inst25Quest11name3 = "Argent Avenger"
-	
-	--Quest 12 Alliance
-	Inst25Quest12 = "12. Просьба мертвеца" -- 8945
-	Inst25Quest12_Level = "60"
-	Inst25Quest12_Attain = "58"
-	Inst25Quest12_Aim = "Отправляйтесь в Стратхольм и спасите Исиду Хармон от Барона Ривендера."
-	Inst25Quest12_Location = "Антион Хармон (Восточные Чумные земли - Стратхольм)"
-	Inst25Quest12_Note = "Антион стоит перед порталом в Стратхольм. Вам нужен Спектральный сканер иных измерений, чтобы увидеть его. Он дается за предыдущее задание. Цепочка заданий начинается со Справедливого вознаграждения. Делиана в Стальгорне ("..YELLOW.."43,52"..WHITE..") для Альянса, Моквар в Оргриммаре ("..YELLOW.."38,37"..WHITE..") для Орды.\nЭто печальный '45-ти минутный' забег на Барона."
-	Inst25Quest12_Prequest = "В поисках Антиона" -- 8929
-	Inst25Quest12_Folgequest = "Доказательство жизни" -- 8946
-	-- No Rewards for this quest
-	
-	--Quest 13 Alliance
-	Inst25Quest13 = "13. Левая часть амулета Лорда Вальтхалака" -- 8968
-	Inst25Quest13_Level = "60"
-	Inst25Quest13_Attain = "58"
-	Inst25Quest13_Aim = "Вызвать духов Джариен и Сотоса с помощью жаровни Призыва и убить их обоих. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва."
-	Inst25Quest13_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst25Quest13_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nДжариен и Сотос вызываются около "..YELLOW.."[11]"..WHITE.."."
-	Inst25Quest13_Prequest = "Важная составляющая заклинания" -- 8964
-	Inst25Quest13_Folgequest = "Я вижу в твоем будущем остров Алькац..." -- 8970
-	-- No Rewards for this quest
-	
-	--Quest 14 Alliance
-	Inst25Quest14 = "14. Правая часть амулета Лорда Вальтхалака" -- 8991
-	Inst25Quest14_Level = "60"
-	Inst25Quest14_Attain = "58"
-	Inst25Quest14_Aim = "Вызвать духов Джариен и Сотоса с помощью жаровни Призыва и убить их обоих. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва."
-	Inst25Quest14_Location = "Бодли (Черная гора; "..YELLOW.."[D] на карте входа"..WHITE..")"
-	Inst25Quest14_Note = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nДжариен и Сотос вызываются около "..YELLOW.."[11]"..WHITE.."."
-	Inst25Quest14_Prequest = "Еще одна важная составляющая заклинания" -- 8987
-	Inst25Quest14_Folgequest = "Последние приготовления ("..YELLOW.."Вершина Черной горы"..WHITE..")" -- 8994
-	-- No Rewards for this quest
-	
-	--Quest 15 Alliance
-	Inst25Quest15 = "15. Атиеш, большой посох Стража"
-	Inst25Quest15_Level = "60"
-	Inst25Quest15_Attain = "60"
-	Inst25Quest15_Aim = "Анахронос из Пещер Времени, что в Танарисе, просит вас отнести Атиеш, большой посох Стража, в Стратхольм и установить его на освященную землю. Одолейте силу, которая исторгнется из посоха, и вернитесь к Анахроносу."
-	Inst25Quest15_Location = "Анахронос (Танарис - Пещеры Времени; "..YELLOW.."65,49"..WHITE..")"
-	Inst25Quest15_Note = "Атиеш вызывается около "..YELLOW.."[2]"..WHITE.."."
-	Inst25Quest15_Prequest = "Основа Атиеша -> Атиеш, оскверненный посох" -- 9250 -> 9251
-	Inst25Quest15_Folgequest = "Нет"
-	--
-	Inst25Quest15name1 = "Atiesh, Greatstaff of the Guardian"
-	Inst25Quest15name2 = "Atiesh, Greatstaff of the Guardian"
-	Inst25Quest15name3 = "Atiesh, Greatstaff of the Guardian"
-	Inst25Quest15name4 = "Atiesh, Greatstaff of the Guardian"
-	
-	--Quest 16 Alliance
-	Inst25Quest16 = "16. Скверна" -- 5307
-	Inst25Quest16_Level = "60"
-	Inst25Quest16_Attain = "50"
-	Inst25Quest16_Aim = "Найдите в Стратхольме оружейника Черной Стражи и уничтожьте его. Возьмите его Знак Черной Стражи и принесите Сирилу Плетебою."
-	Inst25Quest16_Location = "Сирил Плетебой (Зимние Ключи - Круговзор; "..YELLOW.."61,37"..WHITE..")"
-	Inst25Quest16_Note = "Задание для кузнецов: Оружейник Черной Стражи вызывается около "..YELLOW.."[15]"..WHITE.."."
-	Inst25Quest16_Prequest = "Нет"
-	Inst25Quest16_Folgequest = "Нет"
-	--
-	Inst25Quest16name1 = "Plans: Blazing Rapier"
-	
-	--Quest 17 Alliance
-	Inst25Quest17 = "17. Секрет безмятежности" -- 5305
-	Inst25Quest17_Level = "60"
-	Inst25Quest17_Attain = "50"
-	Inst25Quest17_Aim = "Отправляйтесь в Стратхольм и убейте Молотобойца из Багрового легиона. Возьмите его фартук и возвращайтесь к Лилит."
-	Inst25Quest17_Location = "Лилит Гибкая (Зимние Ключи - Круговзор; "..YELLOW.."61,37"..WHITE..")"
-	Inst25Quest17_Note = "Задание для кузнецов: Молотобоец из Багрового Легиона вызывается около "..YELLOW.."[8]"..WHITE.."."
-	Inst25Quest17_Prequest = "Нет"
-	Inst25Quest17_Folgequest = "Нет"
-	--
-	Inst25Quest17name1 = "Plans: Enchanted Battlehammer"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst25Quest1_HORDE = Inst25Quest1
-	Inst25Quest1_HORDE_Level = Inst25Quest1_Level
-	Inst25Quest1_HORDE_Attain = Inst25Quest1_Attain
-	Inst25Quest1_HORDE_Aim = Inst25Quest1_Aim
-	Inst25Quest1_HORDE_Location = Inst25Quest1_Location
-	Inst25Quest1_HORDE_Note = Inst25Quest1_Note
-	Inst25Quest1_HORDE_Prequest = Inst25Quest1_Prequest
-	Inst25Quest1_HORDE_Folgequest = Inst25Quest1_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst25Quest2_HORDE = Inst25Quest2
-	Inst25Quest2_HORDE_Level = Inst25Quest2_Level
-	Inst25Quest2_HORDE_Attain = Inst25Quest2_Attain
-	Inst25Quest2_HORDE_Aim = Inst25Quest2_Aim
-	Inst25Quest2_HORDE_Location = Inst25Quest2_Location
-	Inst25Quest2_HORDE_Note = Inst25Quest2_Note
-	Inst25Quest2_HORDE_Prequest = Inst25Quest2_Prequest
-	Inst25Quest2_HORDE_Folgequest = Inst25Quest2_Folgequest
-	--
-	Inst25Quest2name1_HORDE = Inst25Quest2name1
-	Inst25Quest2name2_HORDE = Inst25Quest2name2
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst25Quest3_HORDE = Inst25Quest3
-	Inst25Quest3_HORDE_Level = Inst25Quest3_Level
-	Inst25Quest3_HORDE_Attain = Inst25Quest3_Attain
-	Inst25Quest3_HORDE_Aim = Inst25Quest3_Aim
-	Inst25Quest3_HORDE_Location = Inst25Quest3_Location
-	Inst25Quest3_HORDE_Note = Inst25Quest3_Note
-	Inst25Quest3_HORDE_Prequest = Inst25Quest3_Prequest
-	Inst25Quest3_HORDE_Folgequest = Inst25Quest3_Folgequest
-	--
-	Inst25Quest3name1_HORDE = Inst25Quest3name1
-	Inst25Quest3name2_HORDE = Inst25Quest3name2
-	Inst25Quest3name3_HORDE = Inst25Quest3name3
-	Inst25Quest3name4_HORDE = Inst25Quest3name4
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst25Quest4_HORDE = Inst25Quest4
-	Inst25Quest4_HORDE_Level = Inst25Quest4_Level
-	Inst25Quest4_HORDE_Attain = Inst25Quest4_Attain
-	Inst25Quest4_HORDE_Aim = Inst25Quest4_Aim
-	Inst25Quest4_HORDE_Location = Inst25Quest4_Location
-	Inst25Quest4_HORDE_Note = Inst25Quest4_Note
-	Inst25Quest4_HORDE_Prequest = Inst25Quest4_Prequest
-	Inst25Quest4_HORDE_Folgequest = Inst25Quest4_Folgequest
-	--
-	Inst25Quest4name1_HORDE = Inst25Quest4name1
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst25Quest5_HORDE = Inst25Quest5
-	Inst25Quest5_HORDE_Level = Inst25Quest5_Level
-	Inst25Quest5_HORDE_Attain = Inst25Quest5_Attain
-	Inst25Quest5_HORDE_Aim = Inst25Quest5_Aim
-	Inst25Quest5_HORDE_Location = Inst25Quest5_Location
-	Inst25Quest5_HORDE_Note = Inst25Quest5_Note
-	Inst25Quest5_HORDE_Prequest = Inst25Quest5_Prequest
-	Inst25Quest5_HORDE_Folgequest = Inst25Quest5_Folgequest
-	--
-	Inst25Quest5name1_HORDE = Inst25Quest5name1
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst25Quest6_HORDE = Inst25Quest6
-	Inst25Quest6_HORDE_Level = Inst25Quest6_Level
-	Inst25Quest6_HORDE_Attain = Inst25Quest6_Attain
-	Inst25Quest6_HORDE_Aim = Inst25Quest6_Aim
-	Inst25Quest6_HORDE_Location = Inst25Quest6_Location
-	Inst25Quest6_HORDE_Note = Inst25Quest6_Note
-	Inst25Quest6_HORDE_Prequest = Inst25Quest6_Prequest
-	Inst25Quest6_HORDE_Folgequest = Inst25Quest6_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 7 Horde (same as Quest 7 Alliance)
-	Inst25Quest7_HORDE = Inst25Quest7
-	Inst25Quest7_HORDE_Level = Inst25Quest7_Level
-	Inst25Quest7_HORDE_Attain = Inst25Quest7_Attain
-	Inst25Quest7_HORDE_Aim = Inst25Quest7_Aim
-	Inst25Quest7_HORDE_Location = Inst25Quest7_Location
-	Inst25Quest7_HORDE_Note = Inst25Quest7_Note
-	Inst25Quest7_HORDE_Prequest = Inst25Quest7_Prequest
-	Inst25Quest7_HORDE_Folgequest = Inst25Quest7_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 8 Horde (same as Quest 8 Alliance)
-	Inst25Quest8_HORDE = Inst25Quest8
-	Inst25Quest8_HORDE_Level = Inst25Quest8_Level
-	Inst25Quest8_HORDE_Attain = Inst25Quest8_Attain
-	Inst25Quest8_HORDE_Aim = Inst25Quest8_Aim
-	Inst25Quest8_HORDE_Location = Inst25Quest8_Location
-	Inst25Quest8_HORDE_Note = Inst25Quest8_Note
-	Inst25Quest8_HORDE_Prequest = Inst25Quest8_Prequest
-	Inst25Quest8_HORDE_Folgequest = Inst25Quest8_Folgequest
-	--
-	Inst25Quest8name1_HORDE = Inst25Quest8name1
-	Inst25Quest8name2_HORDE = Inst25Quest8name2
-	
-	--Quest 9 Horde (same as Quest 9 Alliance)
-	Inst25Quest9_HORDE = Inst25Quest9
-	Inst25Quest9_HORDE_Level = Inst25Quest9_Level
-	Inst25Quest9_HORDE_Attain = Inst25Quest9_Attain
-	Inst25Quest9_HORDE_Aim = Inst25Quest9_Aim
-	Inst25Quest9_HORDE_Location = Inst25Quest9_Location
-	Inst25Quest9_HORDE_Note = Inst25Quest9_Note
-	Inst25Quest9_HORDE_Prequest = Inst25Quest9_Prequest
-	Inst25Quest9_HORDE_Folgequest = Inst25Quest9_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 10 Horde (same as Quest 10 Alliance)
-	Inst25Quest10_HORDE = Inst25Quest10
-	Inst25Quest10_HORDE_Level = Inst25Quest10_Level
-	Inst25Quest10_HORDE_Attain = Inst25Quest10_Attain
-	Inst25Quest10_HORDE_Aim = Inst25Quest10_Aim
-	Inst25Quest10_HORDE_Location = Inst25Quest10_Location
-	Inst25Quest10_HORDE_Note = Inst25Quest10_Note
-	Inst25Quest10_HORDE_Prequest = Inst25Quest10_Prequest
-	Inst25Quest10_HORDE_Folgequest = Inst25Quest10_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 11 Horde (same as Quest 11 Alliance)
-	Inst25Quest11_HORDE = Inst25Quest11
-	Inst25Quest11_HORDE_Level = Inst25Quest11_Level
-	Inst25Quest11_HORDE_Attain = Inst25Quest11_Attain
-	Inst25Quest11_HORDE_Aim = Inst25Quest11_Aim
-	Inst25Quest11_HORDE_Location = Inst25Quest11_Location
-	Inst25Quest11_HORDE_Note = Inst25Quest11_Note
-	Inst25Quest11_HORDE_Prequest = Inst25Quest11_Prequest
-	Inst25Quest11_HORDE_Folgequest = Inst25Quest11_Folgequest
-	--
-	Inst25Quest11name1_HORDE = Inst25Quest11name1
-	Inst25Quest11name2_HORDE = Inst25Quest11name2
-	Inst25Quest11name3_HORDE = Inst25Quest11name3
-	
-	--Quest 12 Horde (same as Quest 12 Alliance)
-	Inst25Quest12_HORDE = Inst25Quest12
-	Inst25Quest12_HORDE_Level = Inst25Quest12_Level
-	Inst25Quest12_HORDE_Attain = Inst25Quest12_Attain
-	Inst25Quest12_HORDE_Aim = Inst25Quest12_Aim
-	Inst25Quest12_HORDE_Location = Inst25Quest12_Location
-	Inst25Quest12_HORDE_Note = Inst25Quest12_Note
-	Inst25Quest12_HORDE_Prequest = Inst25Quest12_Prequest
-	Inst25Quest12_HORDE_Folgequest = Inst25Quest12_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 13 Horde (same as Quest 13 Alliance)
-	Inst25Quest13_HORDE = Inst25Quest13
-	Inst25Quest13_HORDE_Level = Inst25Quest13_Level
-	Inst25Quest13_HORDE_Attain = Inst25Quest13_Attain
-	Inst25Quest13_HORDE_Aim = Inst25Quest13_Aim
-	Inst25Quest13_HORDE_Location = Inst25Quest13_Location
-	Inst25Quest13_HORDE_Note = Inst25Quest13_Note
-	Inst25Quest13_HORDE_Prequest = Inst25Quest13_Prequest
-	Inst25Quest13_HORDE_Folgequest = Inst25Quest13_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 14 Horde (same as Quest 14 Alliance)
-	Inst25Quest14_HORDE = Inst25Quest14
-	Inst25Quest14_HORDE_Level = Inst25Quest14_Level
-	Inst25Quest14_HORDE_Attain = Inst25Quest14_Attain
-	Inst25Quest14_HORDE_Aim = Inst25Quest14_Aim
-	Inst25Quest14_HORDE_Location = Inst25Quest14_Location
-	Inst25Quest14_HORDE_Note = Inst25Quest14_Note
-	Inst25Quest14_HORDE_Prequest = Inst25Quest14_Prequest
-	Inst25Quest14_HORDE_Folgequest = Inst25Quest14_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 15 Horde (same as Quest 15 Alliance)
-	Inst25Quest15_HORDE = Inst25Quest15
-	Inst25Quest15_HORDE_Level = Inst25Quest15_Level
-	Inst25Quest15_HORDE_Attain = Inst25Quest15_Attain
-	Inst25Quest15_HORDE_Aim = Inst25Quest15_Aim
-	Inst25Quest15_HORDE_Location = Inst25Quest15_Location
-	Inst25Quest15_HORDE_Note = Inst25Quest15_Note
-	Inst25Quest15_HORDE_Prequest = Inst25Quest15_Prequest
-	Inst25Quest15_HORDE_Folgequest = Inst25Quest15_Folgequest
-	--
-	Inst25Quest15name1_HORDE = Inst25Quest15name1
-	Inst25Quest15name2_HORDE = Inst25Quest15name2
-	Inst25Quest15name3_HORDE = Inst25Quest15name3
-	Inst25Quest15name4_HORDE = Inst25Quest15name4
-	
-	--Quest 16 Horde (same as Quest 16 Alliance)
-	Inst25Quest16_HORDE = Inst25Quest16
-	Inst25Quest16_HORDE_Level = Inst25Quest16_Level
-	Inst25Quest16_HORDE_Attain = Inst25Quest16_Attain
-	Inst25Quest16_HORDE_Aim = Inst25Quest16_Aim
-	Inst25Quest16_HORDE_Location = Inst25Quest16_Location
-	Inst25Quest16_HORDE_Note = Inst25Quest16_Note
-	Inst25Quest16_HORDE_Prequest = Inst25Quest16_Prequest
-	Inst25Quest16_HORDE_Folgequest = Inst25Quest16_Folgequest
-	--
-	Inst25Quest16name1_HORDE = Inst25Quest16name1
-	
-	--Quest 17 Horde (same as Quest 17 Alliance)
-	Inst25Quest17_HORDE = Inst25Quest17
-	Inst25Quest17_HORDE_Level = Inst25Quest17_Level
-	Inst25Quest17_HORDE_Attain = Inst25Quest17_Attain
-	Inst25Quest17_HORDE_Aim = Inst25Quest17_Aim
-	Inst25Quest17_HORDE_Location = Inst25Quest17_Location
-	Inst25Quest17_HORDE_Note = Inst25Quest17_Note
-	Inst25Quest17_HORDE_Prequest = Inst25Quest17_Prequest
-	Inst25Quest17_HORDE_Folgequest = Inst25Quest17_Folgequest
-	--
-	Inst25Quest17name1_HORDE = Inst25Quest17name1
-	
-	--Quest 18 Horde
-	Inst25Quest18_HORDE = "18. Рамштайн" -- 6163
-	Inst25Quest18_HORDE_Level = "60"
-	Inst25Quest18_HORDE_Attain = "56"
-	Inst25Quest18_HORDE_Aim = "Отправляйтесь в Стратхольм и убейте Рамштайна Ненасытного. Принесите его голову Натаносу в качестве сувенира."
-	Inst25Quest18_HORDE_Location = "Натанос Гниль (Восточные Чумные земли; "..YELLOW.."26,74"..WHITE..")"
-	Inst25Quest18_HORDE_Note = "Вы возьмете предшествующее задание также у Натаноса Гнили. Вы найдете Рамштайна около "..YELLOW.."[18]"..WHITE.."."
-	Inst25Quest18_HORDE_Prequest = "Охота на cледопытов -> Проклятый Тенекрыл" -- 6133 -> 6135
-	Inst25Quest18_HORDE_Folgequest = "Нет"
-	--
-	Inst25Quest18name1_HORDE = "Royal Seal of Alexis"
-	Inst25Quest18name2_HORDE = "Elemental Circle"
-	
-	
-	
-	--------------- INST26 - The Ruins of Ahn'Qiraj (AQ20) ---------------
-	Inst26Story = "В последние часы Войны зыбучих песков, объединенные силы ночных эльфов и четырех драконьих стай довели битву до самого сердца империи кираджи, в город-крепость Ан'Кираж. Еще у городских ворот, армии Калимдора встретились с концентрацией боевых трутней силитидов, намного превосходившей виденую когда-либо ранее. В конечном счете силитиды и их хозяева-кираджи так и не были побеждены, а только изолированы внутри магического барьера. Война оставила проклятый город в руинах. Тысяча лет прошла с того дня, но силы кираджи не сидели без дела. Новая ужасная армия родилась в ульях, и руины Ан'Киража снова кишат роями силитидов и кираджи. Эта угроза должна быть уничтожена, иначе весь Азерот может пасть перед ужасающей мощью новой армии кираджи."
-	Inst26Caption = "Руины Ан'Киража"
-	Inst26QAA = "2 задания"
-	Inst26QAH = "2 задания"
-	
-	--Quest 1 Alliance
-	Inst26Quest1 = "1. Повергнутый Оссириан" -- 8791
-	Inst26Quest1_Level = "60"
-	Inst26Quest1_Attain = "60"
-	Inst26Quest1_Aim = "Принесите голову Оссириана Неуязвимого командиру Мар'алиту в Крепость Кенария."
-	Inst26Quest1_Location = "Голова Оссириана Неуязвимого (добывается с Оссириана Неуязвимого; "..YELLOW.."[6]"..WHITE..")"
-	Inst26Quest1_Note = "Командир Мар'алит (Силитус - Крепость Кенария; "..YELLOW.."49,34"..WHITE..")"
-	Inst26Quest1_Prequest = "Нет"
-	Inst26Quest1_Folgequest = "Нет"
-	--
-	Inst26Quest1name1 = "Charm of the Shifting Sands"
-	Inst26Quest1name2 = "Amulet of the Shifting Sands"
-	Inst26Quest1name3 = "Choker of the Shifting Sands"
-	Inst26Quest1name4 = "Pendant of the Shifting Sands"
-	
-	--Quest 2 Alliance
-	Inst26Quest2 = "2. Идеальный яд" -- 9023
-	Inst26Quest2_Level = "60"
-	Inst26Quest2_Attain = "60"
-	Inst26Quest2_Aim = "Дирк Громодрев из Крепости Кенария попросил принести ему ядовитую железу Веноксиса и ядовитую железу Куриннакса."
-	Inst26Quest2_Location = "Дирк Громодрев (Силитус - Крепость Кенария; "..YELLOW.."52,39"..WHITE..")"
-	Inst26Quest2_Note = "Ядовитая железа Веноксиса добывается с Верховного жреца Веноксиса в "..YELLOW.."Зул'Гурубе"..WHITE..". Ядовитая железа Куриннакса добывается в "..YELLOW.."Руинах Ан'Киража"..WHITE.." at "..YELLOW.."[1]"..WHITE.."."
-	Inst26Quest2_Prequest = "Нет"
-	Inst26Quest2_Folgequest = "Нет"
-	--
-	Inst26Quest2name1 = "Ravenholdt Slicer"
-	Inst26Quest2name2 = "Shivsprocket's Shiv"
-	Inst26Quest2name3 = "The Thunderwood Poker"
-	Inst26Quest2name4 = "Doomulus Prime"
-	Inst26Quest2name5 = "Fahrad's Reloading Repeater"
-	Inst26Quest2name6 = "Simone's Cultivating Hammer"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst26Quest1_HORDE = Inst26Quest1
-	Inst26Quest1_HORDE_Level = Inst26Quest1_Level
-	Inst26Quest1_HORDE_Attain = Inst26Quest1_Attain
-	Inst26Quest1_HORDE_Aim = Inst26Quest1_Aim
-	Inst26Quest1_HORDE_Location = Inst26Quest1_Location
-	Inst26Quest1_HORDE_Note = Inst26Quest1_Note
-	Inst26Quest1_HORDE_Prequest = Inst26Quest1_Prequest
-	Inst26Quest1_HORDE_Folgequest = Inst26Quest1_Folgequest
-	--
-	Inst26Quest1name1_HORDE = Inst26Quest1name1
-	Inst26Quest1name2_HORDE = Inst26Quest1name2
-	Inst26Quest1name3_HORDE = Inst26Quest1name3
-	Inst26Quest1name4_HORDE = Inst26Quest1name4
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst26Quest2_HORDE = Inst26Quest2
-	Inst26Quest2_HORDE_Level = Inst26Quest2_Level
-	Inst26Quest2_HORDE_Attain = Inst26Quest2_Attain
-	Inst26Quest2_HORDE_Aim = Inst26Quest2_Aim
-	Inst26Quest2_HORDE_Location = Inst26Quest2_Location
-	Inst26Quest2_HORDE_Note = Inst26Quest2_Note
-	Inst26Quest2_HORDE_Prequest = Inst26Quest2_Prequest
-	Inst26Quest2_HORDE_Folgequest = Inst26Quest2_Folgequest
-	--
-	Inst26Quest2name1_HORDE = Inst26Quest2name1
-	Inst26Quest2name2_HORDE = Inst26Quest2name2
-	Inst26Quest2name3_HORDE = Inst26Quest2name3
-	Inst26Quest2name4_HORDE = Inst26Quest2name4
-	Inst26Quest2name5_HORDE = Inst26Quest2name5
-	Inst26Quest2name6_HORDE = Inst26Quest2name6
-	
-	
-	
-	--------------- INST27 - The Stockade (Stocks) ---------------
-	Inst27Story = "Тюрьма - это хорошо защищенный тюремный комплекс, скрытый под районом каналов Штормграда. Под руководством тюремщика Телвотера, Тюрьма стала домом мелких жуликов, мятежников, убийц и пары десятков самых опасных преступников в стране. Недавно, поднятое заключенными восстание превратило Тюрьму бог знает во что - охранников выгнали, а осужденные разгуливают на свободе. Тюремщик Телвотер умудрился выбраться из зоны и теперь вербует отважных экстремалов совершить вылазку в тюрьму и убить вдохновителя восстания - опасного уголовника, Базиля Тредда."
-	Inst27Caption = "Тюрьма Штормграда"
-	Inst27QAA = "6 заданий"
-	Inst27QAH = "Нет заданий"
-	
-	--Quest 1 Alliance
-	Inst27Quest1 = "1. Что происходит?" -- 386
-	Inst27Quest1_Level = "25"
-	Inst27Quest1_Attain = "22"
-	Inst27Quest1_Aim = "Принесите голову Таргорра Ужасного стражнику Бертону в Приозерье."
-	Inst27Quest1_Location = "Стражник Бертон (Красногорье - Приозерье; "..YELLOW.."26,46"..WHITE..")"
-	Inst27Quest1_Note = "Вы найдете Таргорра около "..YELLOW.."[1]"..WHITE.."."
-	Inst27Quest1_Prequest = "Нет"
-	Inst27Quest1_Folgequest = "Нет"
-	--
-	Inst27Quest1name1 = "Lucine Longsword"
-	Inst27Quest1name2 = "Hardened Root Staff"
-	
-	--Quest 2 Alliance
-	Inst27Quest2 = "2. Преступление и наказание" -- 377
-	Inst27Quest2_Level = "26"
-	Inst27Quest2_Attain = "22"
-	Inst27Quest2_Aim = "Принесите советнику Миллстайпу руку Декстрена Варда."
-	Inst27Quest2_Location = "Миллстайп (Сумеречный лес - Темнолесье; "..YELLOW.."72,47"..WHITE..")"
-	Inst27Quest2_Note = "Вы найдете Декстрена около "..YELLOW.."[5]"..WHITE.."."
-	Inst27Quest2_Prequest = "Нет"
-	Inst27Quest2_Folgequest = "Нет"
-	--
-	Inst27Quest2name1 = "Ambassador's Boots"
-	Inst27Quest2name2 = "Darkshire Mail Leggings"
-	
-	--Quest 3 Alliance
-	Inst27Quest3 = "3. Подавление бунта" -- 387
-	Inst27Quest3_Level = "26"
-	Inst27Quest3_Attain = "22"
-	Inst27Quest3_Aim = "Тюремщик Телвотер просит вас убить в тюрьме 10 узников из Братства Справедливости, 8 каторжников из Братства Справедливости и 8 мятежников из Братства Справедливости."
-	Inst27Quest3_Location = "Тюремщик Телвотер (Штормград - Тюрьма Штормграда; "..YELLOW.."41,58"..WHITE..")"
-	Inst27Quest3_Note = ""
-	Inst27Quest3_Prequest = "Нет"
-	Inst27Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst27Quest4 = "4. Цвет крови" -- 388
-	Inst27Quest4_Level = "26"
-	Inst27Quest4_Attain = "22"
-	Inst27Quest4_Aim = "Принесите Никове Раскол 10 красных шерстяных бандан."
-	Inst27Quest4_Location = "Никовия Раскол (Штормград - Старый город; "..YELLOW.."73,46"..WHITE..")"
-	Inst27Quest4_Note = "Со всех бандитов внутри Тюрьмы могут упасть красные шерстяные банданы."
-	Inst27Quest4_Prequest = "Нет"
-	Inst27Quest4_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst27Quest5 = "5. Успокоить Гневливого" -- 378
-	Inst27Quest5_Level = "27"
-	Inst27Quest5_Attain = "22"
-	Inst27Quest5_Aim = "Принесите голову Кама Гневливого Мотли Гармасону в Дун Модр."
-	Inst27Quest5_Location = "Мотли Каменщик (Болотина - Дун Модр; "..YELLOW.."49,18"..WHITE..")"
-	Inst27Quest5_Note = "Предшествующее задание также можно взять у Мотли. Вы найдете Кама Гневливого около "..YELLOW.."[2]"..WHITE.."."
-	Inst27Quest5_Prequest = "Война с Черным Железом" -- 303
-	Inst27Quest5_Folgequest = "Нет"
-	--
-	Inst27Quest5name1 = "Belt of Vindication"
-	Inst27Quest5name2 = "Headbasher"
-	
-	--Quest 6 Alliance
-	Inst27Quest6 = "6. Бунтовщики в тюрьме" -- 391
-	Inst27Quest6_Level = "29"
-	Inst27Quest6_Attain = "16"
-	Inst27Quest6_Aim = "Убейте Базиля Тредда и принесите его голову Телвотеру в тюрьму Штормграда."
-	Inst27Quest6_Location = "Тюремщик Телвотер (Штормград - Тюрьма Штормграда; "..YELLOW.."41,58"..WHITE..")"
-	Inst27Quest6_Note = "Для более детальной информации о предшествующем задании смотрите "..YELLOW.."[Мертвые копи, Братство справедливости]"..WHITE..".\nВы найдете Базиля Тредда около "..YELLOW.."[4]"..WHITE.."."
-	Inst27Quest6_Prequest = "Братство Справедливости -> Базиль Тредд" -- 65 -> 389
-	Inst27Quest6_Folgequest = "Таинственный посетитель" -- 392
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST28 - Sunken Temple (ST) ---------------
-	Inst28Story = "Свыше тысячи лет назад, могущественная империя Гурбаши была разорвана на части всеобщей гражданской войной. Влиятельная группа жрецов троллей, известная как Атал'аи, предприняла попытку призвать древнего кровавого бога по имени Хаккар Свежеватель Душ. Несмотря на то, что жрецы потерпели поражение и были изгнаны навеки, великая империя троллей не смогла сохранить целостность. Изгнанные жрецы бежали далеко на север, в Болота Печали. Там они возвели великий храм в честь Хаккара - где они могли приготовиться к его прибытию в материальный мир. Великий дракон Аспект, Изера, узнала о планах Атал'аи и утопила храм в болотах. На сегодняшний день, затопленные руины храма охраняются зелеными драконами, которые следят за тем, чтобы никто не входил и не выходил оттуда. Однако, есть мнение, что несколько фанатичных Атал'аи могли выжить и сбежать от гнева Изеры - а теперь вновь посвятили себя темному служению Хаккару."
-	Inst28Caption = "Затонувший храм"
-	Inst28QAA = "16 заданий"
-	Inst28QAH = "16 заданий"
-	
-	--Quest 1 Alliance
-	Inst28Quest1 = "1. В Храме Атал'Хаккара" -- 1475
-	Inst28Quest1_Level = "50"
-	Inst28Quest1_Attain = "41"
-	Inst28Quest1_Aim = "Соберите 10 табличек Атал'ай для Брохана Бочкопуза из Штормграда."
-	Inst28Quest1_Location = "Брохан Бочкопуз (Штормград - Квартал дворфов; "..YELLOW.."64,20"..WHITE..")"
-	Inst28Quest1_Note = "Серия предшествующих заданий начинается у того же НИП и имеет несколько этапов.\n\nВы сможете найти таблички по всему Храму, и внутри и снаружи подземелья."
-	Inst28Quest1_Prequest = "В поисках Храма -> Рапсодия о болоте" -- 1448 -> 1469
-	Inst28Quest1_Folgequest = "Нет"
-	--
-	Inst28Quest1name1 = "Guardian Talisman"
-	
-	--Quest 2 Alliance
-	Inst28Quest2 = "2. Во глубине болот" -- 3446
-	Inst28Quest2_Level = "51"
-	Inst28Quest2_Attain = "46"
-	Inst28Quest2_Aim = "Найдите алтарь Хаккара в затонувшем храме на Болоте Печали."
-	Inst28Quest2_Location = "Марвон Клепальщик (Танарис; "..YELLOW.."52,45"..WHITE..")"
-	Inst28Quest2_Note = "Алтарь находится около "..YELLOW.."[1]"..WHITE.."."
-	Inst28Quest2_Prequest = "Круглый камень" -- 3444
-	Inst28Quest2_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst28Quest3 = "3. Тайна камня" -- 3447
-	Inst28Quest3_Level = "51"
-	Inst28Quest3_Attain = "46"
-	Inst28Quest3_Aim = "Отправляйтесь в затонувший храм и узнайте, что скрывается в круге статуй."
-	Inst28Quest3_Location = "Марвон Клепальщик (Танарис; "..YELLOW.."52,45"..WHITE..")"
-	Inst28Quest3_Note = "Вы найдете статуи около "..YELLOW.."[1]"..WHITE..". Смотрите по карте порядок их активации."
-	Inst28Quest3_Prequest = "Круглый камень" -- 3444
-	Inst28Quest3_Folgequest = "Нет"
-	--
-	Inst28Quest3name1 = "Hakkari Urn"
-	
-	--Quest 4 Alliance
-	Inst28Quest4 = "4. Туман зла" -- 4143
-	Inst28Quest4_Level = "52"
-	Inst28Quest4_Attain = "47"
-	Inst28Quest4_Aim = "Соберите 5 образцов тумана Аталаи и принесите их Муиджину в Кратер Ун'Горо."
-	Inst28Quest4_Location = "Греган Пивоплюй (Фералас; "..YELLOW.."45,25"..WHITE..")"
-	Inst28Quest4_Note = "Предшествующее задание 'Майджин и Ларион' начинается у Майджина (Кратер Ун'Горо - Укрытие Маршалла; "..YELLOW.."42,9"..WHITE.."). Вы возьмете образцы тумана с Глубинных скрытней, Мракочервей или слизнюков в Храме."
-	Inst28Quest4_Prequest = "Майджин и Ларион -> Визит к Грегану" -- 4141 -> 4142
-	Inst28Quest4_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst28Quest5 = "5. Бог Хаккар" -- 3528
-	Inst28Quest5_Level = "53"
-	Inst28Quest5_Attain = "40"
-	Inst28Quest5_Aim = "Отнесите заполненное яйцо Хаккара Йе'кинье в Танарис."
-	Inst28Quest5_Location = "Йе'кинья (Танарис - Порт Картеля; "..YELLOW.."66,22"..WHITE..")"
-	Inst28Quest5_Note = "Цепочка заданий начинается с 'Духи крикунов' у того же НИП (См. "..YELLOW.."[Зул'Фаррак]"..WHITE..").\nВы должны задействовать Яйцо около "..YELLOW.."[3]"..WHITE.." чтобы начать призыв. Когда он начнется, появятся враги и атакуют Вас. С некоторых их них добывается Кровь Хаккара. С этой кровью вы можете убрать факелы вокруг круга. После этого появится Аватара Хаккара. Вы убьете ее и получите 'Сущность Хаккара' Которую используете, чтобы наполнить яйцо."
-	Inst28Quest5_Prequest = "Духи крикунов -> Древнее яйцо" -- 3520 -> 4787
-	Inst28Quest5_Folgequest = "Нет"
-	--
-	Inst28Quest5name1 = "Avenguard Helm"
-	Inst28Quest5name2 = "Lifeforce Dirk"
-	Inst28Quest5name3 = "Gemburst Circlet"
-	
-	--Quest 6 Alliance
-	Inst28Quest6 = "6. Джаммал'ан Пророк" -- 1446
-	Inst28Quest6_Level = "53"
-	Inst28Quest6_Attain = "43"
-	Inst28Quest6_Aim = "Принесите изгнаннику Атал'ай из Внутренних земель голову Джаммал'ана."
-	Inst28Quest6_Location = "Изгнанник Атал'ай (Внутренние земли; "..YELLOW.."33,75"..WHITE..")"
-	Inst28Quest6_Note = "Вы найдете Джаммал'ана около "..YELLOW.."[4]"..WHITE.."."
-	Inst28Quest6_Prequest = "Нет"
-	Inst28Quest6_Folgequest = "Нет"
-	--
-	Inst28Quest6name1 = "Rainstrider Leggings"
-	Inst28Quest6name2 = "Helm of Exile"
-	
-	--Quest 7 Alliance
-	Inst28Quest7 = "7. Сущность Эраникуса" -- 3373
-	Inst28Quest7_Level = "55"
-	Inst28Quest7_Attain = "48"
-	Inst28Quest7_Aim = "Поместите сущность Эраникуса в купель сущности в его логове в затонувшем храме."
-	Inst28Quest7_Location = "Сущность Эраникуса (добывается с Тени Эраникуса; "..YELLOW.."[6]"..WHITE..")"
-	Inst28Quest7_Note = "Вы найдете Купель сущности рядом с местом где находится Тень Эраникуса около "..YELLOW.."[6]"..WHITE.."."
-	Inst28Quest7_Prequest = "Нет"
-	Inst28Quest7_Folgequest = "Нет"
-	--
-	Inst28Quest7name1 = "Chained Essence of Eranikus"
-	
-	--Quest 8 Alliance
-	Inst28Quest8 = "8. Тролли Пера" -- 8422
-	Inst28Quest8_Level = "52"
-	Inst28Quest8_Attain = "50"
-	Inst28Quest8_Aim = "Принесите 6 вудуистских перьев троллей из затонувшего храма."
-	Inst28Quest8_Location = "Бесенок (Оскверненный лес; "..YELLOW.."42,45"..WHITE..")"
-	Inst28Quest8_Note = "Задание для чернокнижников: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре."
-	Inst28Quest8_Prequest = "Просьба беса -> Бросовый материал" -- 8419 -> 8421
-	Inst28Quest8_Folgequest = "Нет"
-	--
-	Inst28Quest8name1 = "Soul Harvester"
-	Inst28Quest8name2 = "Abyss Shard"
-	Inst28Quest8name3 = "Robes of Servitude"
-	
-	--Quest 9 Alliance
-	Inst28Quest9 = "9. Вудуистские перья" -- 8425
-	Inst28Quest9_Level = "52"
-	Inst28Quest9_Attain = "50"
-	Inst28Quest9_Aim = "Принесите вудуистские перья павшему герою Орды, забрав их у троллей в Затонувшем Храме."
-	Inst28Quest9_Location = "Павший герой Орды (Болото Печали; "..YELLOW.."34,66"..WHITE..")"
-	Inst28Quest9_Note = "Задание для воинов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре."
-	Inst28Quest9_Prequest = "Неупокоенный дух -> Война против Приверженцев Тени" -- 8417 -> 8424
-	Inst28Quest9_Folgequest = "Нет"
-	--
-	Inst28Quest9name1 = "Fury Visor"
-	Inst28Quest9name2 = "Diamond Flask"
-	Inst28Quest9name3 = "Razorsteel Shoulders"
-	
-	--Quest 10 Alliance
-	Inst28Quest10 = "10. Лучший ингредиент" -- 9053
-	Inst28Quest10_Level = "52"
-	Inst28Quest10_Attain = "50"
-	Inst28Quest10_Aim = "Возьмите гнилую лозу у стража на дне затонувшего храма и вернитесь к Землепроходцу Торве."
-	Inst28Quest10_Location = "Землепроходец Торва (Кратер Ун'Горо; "..YELLOW.."72,76"..WHITE..")"
-	Inst28Quest10_Note = "Задание для друидов: Гнилая лоза добывается с Атал'алариона, который вызывается около "..YELLOW.."[1]"..WHITE.." активизируя статуи в порядке, указанном на карте."
-	Inst28Quest10_Prequest = "Землепроходец Торва -> Испытание яда" -- 9063 -> 9051
-	Inst28Quest10_Folgequest = "Нет"
-	--
-	Inst28Quest10name1 = "Grizzled Pelt"
-	Inst28Quest10name2 = "Forest's Embrace"
-	Inst28Quest10name3 = "Moonshadow Stave"
-	
-	--Quest 11 Alliance
-	Inst28Quest11 = "11. Зеленый дракон" -- 8232
-	Inst28Quest11_Level = "52"
-	Inst28Quest11_Attain = "50"
-	Inst28Quest11_Aim = "Принесите зуб Морфаза Огтинку в Азшару. Огтинк обитает среди скал в северо-востоку от руин Эльдарата."
-	Inst28Quest11_Location = "Огтинк (Азшара; "..YELLOW.."42,43"..WHITE..")"
-	Inst28Quest11_Note = "Задание для охотников: Морфаз около "..YELLOW.."[5]"..WHITE.."."
-	Inst28Quest11_Prequest = "Талисман охотника -> Охота на волношлепа" -- 8151 -> 8231
-	Inst28Quest11_Folgequest = "Нет"
-	--
-	Inst28Quest11name1 = "Hunting Spear"
-	Inst28Quest11name2 = "Devilsaur Eye"
-	Inst28Quest11name3 = "Devilsaur Tooth"
-	
-	--Quest 12 Alliance
-	Inst28Quest12 = "12. Уничтожить Морфаза" -- 8253
-	Inst28Quest12_Level = "52"
-	Inst28Quest12_Attain = "50"
-	Inst28Quest12_Aim = "Добудьте кристалл тайной магии из брюха Морфаза и принесите его верховному магу Ксилему."
-	Inst28Quest12_Location = "Верховный маг Ксилем (Азшара; "..YELLOW.."29,40"..WHITE..")"
-	Inst28Quest12_Note = "Задание для магов: Морфаз около "..YELLOW.."[5]"..WHITE.."."
-	Inst28Quest12_Prequest = "Волшебная пыль -> Кораллы сирен" -- 8251 -> 8252
-	Inst28Quest12_Folgequest = "Нет"
-	--
-	Inst28Quest12name1 = "Glacial Spike"
-	Inst28Quest12name2 = "Arcane Crystal Pendant"
-	Inst28Quest12name3 = "Fire Ruby"
-	
-	--Quest 13 Alliance
-	Inst28Quest13 = "13. Кровь Морфаза" -- 8257
-	Inst28Quest13_Level = "52"
-	Inst28Quest13_Attain = "50"
-	Inst28Quest13_Aim = "Убейте Морфаза в затонувшем Храме Атал'Хаккара и принесите его кровь Грете Замшелому Копыту в Оскверненный лес. Вход в храм сокрыт на Болоте Печали."
-	Inst28Quest13_Location = "Огтинк (Азшара; "..YELLOW.."42,43"..WHITE..")"
-	Inst28Quest13_Note = "Задание для жрецов: Морфаз около "..YELLOW.."[5]"..WHITE..". Грета Замшелое Копыто находится в Оскверненном лесу - Изумрудное святилище ("..YELLOW.."51,82"..WHITE..")."
-	Inst28Quest13_Prequest = "Помощь Кенарию -> Лимфа нежити" -- 8254 -> 8256
-	Inst28Quest13_Folgequest = "Нет"
-	--
-	Inst28Quest13name1 = "Blessed Prayer Beads"
-	Inst28Quest13name2 = "Woestave"
-	Inst28Quest13name3 = "Circle of Hope"
-	
-	--Quest 14 Alliance
-	Inst28Quest14 = "14. Лазурный ключ" -- 8236
-	Inst28Quest14_Level = "52"
-	Inst28Quest14_Attain = "50"
-	Inst28Quest14_Aim = "Принесите лазурный ключ лорду Черному Ворону."
-	Inst28Quest14_Location = "Верховный маг Ксилем (Азшара; "..YELLOW.."29,40"..WHITE..")"
-	Inst28Quest14_Note = "Задание для разбойников: Лазурный ключ добывается с Морфаз около "..YELLOW.."[5]"..WHITE..". Лорд Джорах Черный Ворон находится в Альтеракских горах - Поместье Черного Ворона ("..YELLOW.."86,79"..WHITE..")."
-	Inst28Quest14_Prequest = "Приглашение -> Зашифрованные фрагменты" -- 8233 -> 8235
-	Inst28Quest14_Folgequest = "Нет"
-	--
-	Inst28Quest14name1 = "Ebon Mask"
-	Inst28Quest14name2 = "Whisperwalk Boots"
-	Inst28Quest14name3 = "Duskbat Drape"
-	
-	--Quest 15 Alliance
-	Inst28Quest15 = "15. Создание камня силы" -- 8418
-	Inst28Quest15_Level = "52"
-	Inst28Quest15_Attain = "50"
-	Inst28Quest15_Aim = "Принесите вудуистские перья Ашламу Неутомимому."
-	Inst28Quest15_Location = "Командир Ашлам Неутомимый (Западные Чумные земли - Лагерь Промозглого Ветра; "..YELLOW.."43,85"..WHITE..")"
-	Inst28Quest15_Note = "Задание для паладинов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре."
-	Inst28Quest15_Prequest = "Бездействующие камни Плети" -- 8416
-	Inst28Quest15_Folgequest = "Нет"
-	--
-	Inst28Quest15name1 = "Holy Mightstone"
-	Inst28Quest15name2 = "Lightforged Blade"
-	Inst28Quest15name3 = "Sanctified Orb"
-	Inst28Quest15name4 = "Chivalrous Signet"
-	
-	--Quest 16 Alliance
-	Inst28Quest16 = "16. Эраникус, Тиран Сна" -- 8733
-	Inst28Quest16_Level = "60"
-	Inst28Quest16_Attain = "60"
-	Inst28Quest16_Aim = "Отправляйтесь на континент Тельдрассил и найдите агента Малфуриона у стен Дарнаса."
-	Inst28Quest16_Location = "Малфурион Ярость Бури (Появляется около Тени Эраникуса; "..YELLOW.."[8]"..WHITE..")"
-	Inst28Quest16_Note = "Лесной огонек (Тельдрассил; "..YELLOW.."37,47"..WHITE..")"
-	Inst28Quest16_Prequest = "Создание драконов" -- 8555
-	Inst28Quest16_Folgequest = "Тиранда и Ремул" --8734
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde
-	Inst28Quest1_HORDE = "1. Храм Атал'Хаккара" -- 1445
-	Inst28Quest1_HORDE_Level = "50"
-	Inst28Quest1_HORDE_Attain = "38"
-	Inst28Quest1_HORDE_Aim = "Соберите 20 фетишей Хаккара и принесите их Фел'зерулу в Каменор."
-	Inst28Quest1_HORDE_Location = "Фел'зерул (Болото Печали - Каменор; "..YELLOW.."47,54"..WHITE..")"
-	Inst28Quest1_HORDE_Note = "Фетиши падают со всех врагов."
-	Inst28Quest1_HORDE_Prequest = "Озеро Слез -> Возвращение к Фел'зерулу" -- 1424 -> 1444
-	Inst28Quest1_HORDE_Folgequest = "Нет"
-	--
-	Inst28Quest1name1_HORDE = "Guardian Talisman"
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst28Quest2_HORDE = Inst28Quest2
-	Inst28Quest2_HORDE_Level = Inst28Quest2_Level
-	Inst28Quest2_HORDE_Attain = Inst28Quest2_Attain
-	Inst28Quest2_HORDE_Aim = Inst28Quest2_Aim
-	Inst28Quest2_HORDE_Location = Inst28Quest2_Location
-	Inst28Quest2_HORDE_Note = Inst28Quest2_Note
-	Inst28Quest2_HORDE_Prequest = Inst28Quest2_Prequest
-	Inst28Quest2_HORDE_Folgequest = Inst28Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst28Quest3_HORDE = Inst28Quest3
-	Inst28Quest3_HORDE_Level = Inst28Quest3_Level
-	Inst28Quest3_HORDE_Attain = Inst28Quest3_Attain
-	Inst28Quest3_HORDE_Aim = Inst28Quest3_Aim
-	Inst28Quest3_HORDE_Location = Inst28Quest3_Location
-	Inst28Quest3_HORDE_Note = Inst28Quest3_Note
-	Inst28Quest3_HORDE_Prequest = Inst28Quest3_Prequest
-	Inst28Quest3_HORDE_Folgequest = Inst28Quest3_Folgequest
-	--
-	Inst28Quest3name1_HORDE = Inst28Quest3name1
-	
-	--Quest 4 Horde
-	Inst28Quest4_HORDE = "4. Питание для шокера" -- 4146
-	Inst28Quest4_HORDE_Level = "52"
-	Inst28Quest4_HORDE_Attain = "47"
-	Inst28Quest4_HORDE_Aim = "Доставьте незаряженный шокер и 5 образцов тумана Аталаи Лариону в Укрытие Маршалла."
-	Inst28Quest4_HORDE_Location = "Лив Быстрочин (Степи; "..YELLOW.."62,38"..WHITE..")"
-	Inst28Quest4_HORDE_Note = "Предшествующее задание 'Ларион и Майджин' начинается у Лариона (Кратер Ун'Горо; "..YELLOW.."45,8"..WHITE.."). Вы возьмете образцы тумана с Глубинных скрытней, Мракочервей или слизнюков в Храме."
-	Inst28Quest4_HORDE_Prequest = "Ларион и Майджин -> Мастерская Марвона" -- 4145 -> 4147
-	Inst28Quest4_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst28Quest5_HORDE = Inst28Quest5
-	Inst28Quest5_HORDE_Level = Inst28Quest5_Level
-	Inst28Quest5_HORDE_Attain = Inst28Quest5_Attain
-	Inst28Quest5_HORDE_Aim = Inst28Quest5_Aim
-	Inst28Quest5_HORDE_Location = Inst28Quest5_Location
-	Inst28Quest5_HORDE_Note = Inst28Quest5_Note
-	Inst28Quest5_HORDE_Prequest = Inst28Quest5_Prequest
-	Inst28Quest5_HORDE_Folgequest = Inst28Quest5_Folgequest
-	--
-	Inst28Quest5name1_HORDE = Inst28Quest5name1
-	Inst28Quest5name2_HORDE = Inst28Quest5name2
-	Inst28Quest5name3_HORDE = Inst28Quest5name3
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst28Quest6_HORDE = Inst28Quest6
-	Inst28Quest6_HORDE_Level = Inst28Quest6_Level
-	Inst28Quest6_HORDE_Attain = Inst28Quest6_Attain
-	Inst28Quest6_HORDE_Aim = Inst28Quest6_Aim
-	Inst28Quest6_HORDE_Location = Inst28Quest6_Location
-	Inst28Quest6_HORDE_Note = Inst28Quest6_Note
-	Inst28Quest6_HORDE_Prequest = Inst28Quest6_Prequest
-	Inst28Quest6_HORDE_Folgequest = Inst28Quest6_Folgequest
-	--
-	Inst28Quest6name1_HORDE = Inst28Quest6name1
-	Inst28Quest6name2_HORDE = Inst28Quest6name2
-	
-	--Quest 7 Horde (same as Quest 7 Alliance)
-	Inst28Quest7_HORDE = Inst28Quest7
-	Inst28Quest7_HORDE_Level = Inst28Quest7_Level
-	Inst28Quest7_HORDE_Attain = Inst28Quest7_Attain
-	Inst28Quest7_HORDE_Aim = Inst28Quest7_Aim
-	Inst28Quest7_HORDE_Location = Inst28Quest7_Location
-	Inst28Quest7_HORDE_Note = Inst28Quest7_Note
-	Inst28Quest7_HORDE_Prequest = Inst28Quest7_Prequest
-	Inst28Quest7_HORDE_Folgequest = Inst28Quest7_Folgequest
-	--
-	Inst28Quest7name1_HORDE = Inst28Quest7name1
-	
-	--Quest 8 Horde (same as Quest 8 Alliance)
-	Inst28Quest8_HORDE = Inst28Quest8
-	Inst28Quest8_HORDE_Level = Inst28Quest8_Level
-	Inst28Quest8_HORDE_Attain = Inst28Quest8_Attain
-	Inst28Quest8_HORDE_Aim = Inst28Quest8_Aim
-	Inst28Quest8_HORDE_Location = Inst28Quest8_Location
-	Inst28Quest8_HORDE_Note = Inst28Quest8_Note
-	Inst28Quest8_HORDE_Prequest = Inst28Quest8_Prequest
-	Inst28Quest8_HORDE_Folgequest = Inst28Quest8_Folgequest
-	--
-	Inst28Quest8name1_HORDE = Inst28Quest8name1
-	Inst28Quest8name2_HORDE = Inst28Quest8name2
-	Inst28Quest8name3_HORDE = Inst28Quest8name3
-	
-	--Quest 9 Horde (same as Quest 9 Alliance)
-	Inst28Quest9_HORDE = Inst28Quest9
-	Inst28Quest9_HORDE_Level = Inst28Quest9_Level
-	Inst28Quest9_HORDE_Attain = Inst28Quest9_Attain
-	Inst28Quest9_HORDE_Aim = Inst28Quest9_Aim
-	Inst28Quest9_HORDE_Location = Inst28Quest9_Location
-	Inst28Quest9_HORDE_Note = Inst28Quest9_Note
-	Inst28Quest9_HORDE_Prequest = Inst28Quest9_Prequest
-	Inst28Quest9_HORDE_Folgequest = Inst28Quest9_Folgequest
-	--
-	Inst28Quest9name1_HORDE = Inst28Quest9name1
-	Inst28Quest9name2_HORDE = Inst28Quest9name2
-	Inst28Quest9name3_HORDE = Inst28Quest9name3
-	
-	--Quest 10 Horde (same as Quest 10 Alliance)
-	Inst28Quest10_HORDE = Inst28Quest10
-	Inst28Quest10_HORDE_Level = Inst28Quest10_Level
-	Inst28Quest10_HORDE_Attain = Inst28Quest10_Attain
-	Inst28Quest10_HORDE_Aim = Inst28Quest10_Aim
-	Inst28Quest10_HORDE_Location = Inst28Quest10_Location
-	Inst28Quest10_HORDE_Note = Inst28Quest10_Note
-	Inst28Quest10_HORDE_Prequest = Inst28Quest10_Prequest
-	Inst28Quest10_HORDE_Folgequest = Inst28Quest10_Folgequest
-	--
-	Inst28Quest10name1_HORDE = Inst28Quest10name1
-	Inst28Quest10name2_HORDE = Inst28Quest10name2
-	Inst28Quest10name3_HORDE = Inst28Quest10name3
-	
-	--Quest 11 Horde (same as Quest 11 Alliance)
-	Inst28Quest11_HORDE = Inst28Quest11
-	Inst28Quest11_HORDE_Level = Inst28Quest11_Level
-	Inst28Quest11_HORDE_Attain = Inst28Quest11_Attain
-	Inst28Quest11_HORDE_Aim = Inst28Quest11_Aim
-	Inst28Quest11_HORDE_Location = Inst28Quest11_Location
-	Inst28Quest11_HORDE_Note = Inst28Quest11_Note
-	Inst28Quest11_HORDE_Prequest = Inst28Quest11_Prequest
-	Inst28Quest11_HORDE_Folgequest = Inst28Quest11_Folgequest
-	--
-	Inst28Quest11name1_HORDE = Inst28Quest11name1
-	Inst28Quest11name2_HORDE = Inst28Quest11name2
-	Inst28Quest11name3_HORDE = Inst28Quest11name3
-	
-	--Quest 12 Horde (same as Quest 12 Alliance)
-	Inst28Quest12_HORDE = Inst28Quest12
-	Inst28Quest12_HORDE_Level = Inst28Quest12_Level
-	Inst28Quest12_HORDE_Attain = Inst28Quest12_Attain
-	Inst28Quest12_HORDE_Aim = Inst28Quest12_Aim
-	Inst28Quest12_HORDE_Location = Inst28Quest12_Location
-	Inst28Quest12_HORDE_Note = Inst28Quest12_Note
-	Inst28Quest12_HORDE_Prequest = Inst28Quest12_Prequest
-	Inst28Quest12_HORDE_Folgequest = Inst28Quest12_Folgequest
-	--
-	Inst28Quest12name1_HORDE = Inst28Quest12name1
-	Inst28Quest12name2_HORDE = Inst28Quest12name2
-	Inst28Quest12name3_HORDE = Inst28Quest12name3
-	
-	--Quest 13 Horde (same as Quest 13 Alliance)
-	Inst28Quest13_HORDE = Inst28Quest13
-	Inst28Quest13_HORDE_Level = Inst28Quest13_Level
-	Inst28Quest13_HORDE_Attain = Inst28Quest13_Attain
-	Inst28Quest13_HORDE_Aim = Inst28Quest13_Aim
-	Inst28Quest13_HORDE_Location = Inst28Quest13_Location
-	Inst28Quest13_HORDE_Note = Inst28Quest13_Note
-	Inst28Quest13_HORDE_Prequest = Inst28Quest13_Prequest
-	Inst28Quest13_HORDE_Folgequest = Inst28Quest13_Folgequest
-	--
-	Inst28Quest13name1_HORDE = Inst28Quest13name1
-	Inst28Quest13name2_HORDE = Inst28Quest13name2
-	Inst28Quest13name3_HORDE = Inst28Quest13name3
-	
-	--Quest 14 Horde (same as Quest 14 Alliance)
-	Inst28Quest14_HORDE = Inst28Quest14
-	Inst28Quest14_HORDE_Level = Inst28Quest14_Level
-	Inst28Quest14_HORDE_Attain = Inst28Quest14_Attain
-	Inst28Quest14_HORDE_Aim = Inst28Quest14_Aim
-	Inst28Quest14_HORDE_Location = Inst28Quest14_Location
-	Inst28Quest14_HORDE_Note = Inst28Quest14_Note
-	Inst28Quest14_HORDE_Prequest = Inst28Quest14_Prequest
-	Inst28Quest14_HORDE_Folgequest = Inst28Quest14_Folgequest
-	--
-	Inst28Quest14name1_HORDE = Inst28Quest14name1
-	Inst28Quest14name2_HORDE = Inst28Quest14name2
-	Inst28Quest14name3_HORDE = Inst28Quest14name3
-	
-	--Quest 15 Horde
-	Inst28Quest15_HORDE = "15. Вуду" -- 8413
-	Inst28Quest15_HORDE_Level = "52"
-	Inst28Quest15_HORDE_Attain = "50"
-	Inst28Quest15_HORDE_Aim = "Принесите вудуистские перья Бат'ре Стражу Ветра."
-	Inst28Quest15_HORDE_Location = "Бат'ре Страж Ветра (Альтеракские горы; "..YELLOW.."80,67"..WHITE..")"
-	Inst28Quest15_HORDE_Note = "Задание для шаманов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре."
-	Inst28Quest15_HORDE_Prequest = "Тотем духов" -- 8412
-	Inst28Quest15_HORDE_Folgequest = "Нет"
-	--
-	Inst28Quest15name1_HORDE = "Azurite Fists"
-	Inst28Quest15name2_HORDE = "Enamored Water Spirit"
-	Inst28Quest15name3_HORDE = "Wildstaff"
-	
-	--Quest 16 Horde (same as Quest 16 Alliance)
-	Inst28Quest16_HORDE = Inst28Quest16
-	Inst28Quest16_HORDE_Level = Inst28Quest16_Level
-	Inst28Quest16_HORDE_Attain = Inst28Quest16_Attain
-	Inst28Quest16_HORDE_Aim = Inst28Quest16_Aim
-	Inst28Quest16_HORDE_Location = Inst28Quest16_Location
-	Inst28Quest16_HORDE_Note = Inst28Quest16_Note
-	Inst28Quest16_HORDE_Prequest = Inst28Quest16_Prequest
-	Inst28Quest16_HORDE_Folgequest = Inst28Quest16_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST29 - The Temple of Ahn'Qiraj (AQ40) ---------------
-	Inst29Story = "В сердце Ан'Киража лежит древний храмовый квартал. Построенный в незапамятные времена, он напоминает о неназываемых богах и служит огромным инкубатором для киражской армии. Вот уже тысячу лет, со дня окончания войны Зыбучих Песков, императоры-близнецы заключены в собственном храме. Их едва удерживает магический барьер, воздвигнутый бронзовым драконом Анахроносом и ночными эльфами. Скипетр Зыбучих Песков восстановлен, а печать разбита, и путь во внутреннее святилище Ан'Киража открыт. Среди кишащих силитидов за храмом Ан'Киража, киражские легионы готовятся к вторжению. Их надо остановить любой ценой, прежде чем армии инсектоидов снова обрушатся на Калимдор и начнется вторая война Зыбучих Песков!"
-	Inst29Caption = "Храм Ан'Киража"
-	Inst29QAA = "2 задания"
-	Inst29QAH = "2 задания"
-	
-	--Quest 1 Alliance
-	Inst29Quest1 = "1. Наследие К'Туна" -- 8801
-	Inst29Quest1_Level = "60"
-	Inst29Quest1_Attain = "60"
-	Inst29Quest1_Aim = "Принесите Глаз К'Туна Келестрасу в Храм Ан'Кираж."
-	Inst29Quest1_Location = "Око К'Туна (добывается с К'Туна; "..YELLOW.."[9]"..WHITE..")"
-	Inst29Quest1_Note = "Калестраз (Храм Ан'Кираж; "..YELLOW.."2'"..WHITE..")\nНаграды перечислены для следующего задания."
-	Inst29Quest1_Prequest = "Нет"
-	Inst29Quest1_Folgequest = "Спаситель Калимдора" -- 8802
-	--
-	Inst29Quest1name1 = "Amulet of the Fallen God"
-	Inst29Quest1name2 = "Cloak of the Fallen God"
-	Inst29Quest1name3 = "Ring of the Fallen God"
-	
-	--Quest 2 Alliance
-	Inst29Quest2 = "2. Секреты Киражи" -- 8784
-	Inst29Quest2_Level = "60"
-	Inst29Quest2_Attain = "60"
-	Inst29Quest2_Aim = "Принесите древний киражский артефакт драконам, которые укрылись в храме, недалеко от входа."
-	Inst29Quest2_Location = "Древний киражский артефакт (случайная добыча в Храме Ан'Кираж)"
-	Inst29Quest2_Note = "Отнесите его Андоргосу (Храм Ан'Кираж; "..YELLOW.."1'"..WHITE..")."
-	Inst29Quest2_Prequest = "Нет"
-	Inst29Quest2_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst29Quest1_HORDE = Inst29Quest1
-	Inst29Quest1_HORDE_Level = Inst29Quest1_Level
-	Inst29Quest1_HORDE_Attain = Inst29Quest1_Attain
-	Inst29Quest1_HORDE_Aim = Inst29Quest1_Aim
-	Inst29Quest1_HORDE_Location = Inst29Quest1_Location
-	Inst29Quest1_HORDE_Note = Inst29Quest1_Note
-	Inst29Quest1_HORDE_Prequest = Inst29Quest1_Prequest
-	Inst29Quest1_HORDE_Folgequest = Inst29Quest1_Folgequest
-	--
-	Inst29Quest1name1_HORDE = Inst29Quest1name1
-	Inst29Quest1name2_HORDE = Inst29Quest1name2
-	Inst29Quest1name3_HORDE = Inst29Quest1name3
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst29Quest2_HORDE = Inst29Quest2
-	Inst29Quest2_HORDE_Level = Inst29Quest2_Level
-	Inst29Quest2_HORDE_Attain = Inst29Quest2_Attain
-	Inst29Quest2_HORDE_Aim = Inst29Quest2_Aim
-	Inst29Quest2_HORDE_Location = Inst29Quest2_Location
-	Inst29Quest2_HORDE_Note = Inst29Quest2_Note
-	Inst29Quest2_HORDE_Prequest = Inst29Quest2_Prequest
-	Inst29Quest2_HORDE_Folgequest = Inst29Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST30 - Zul'Farrak (ZF) ---------------
-	Inst30Story = "Этот выжженый солнцем город служит домом троллям из клана Песчаной Ярости, известных своей редкостной безжалостностью и темным мистицизмом. Легенды троллей рассказывают о мощном мече называемом Кара Суль-траза, оружие, способное вселять страх и слабость жаже самым грозным врагам. Давным-давно, оружие было разбито на две части. Однако, ходят слухи, что в где-то стенах Зул'Фаррака можно найти обе половинки. Докладывают также, что банда наемников, бежавших из Прибамбасска забрела в город и попала в ловушку. Их судьба неизвестна. Но возможно самым волнующим из всего - этотихие перешептывания о древнем чудовище, спящим в священном бассейне в самом сердце города. Могучем полубоге, который нанесет неисчислимый ущерб любому авантюристу, имевшему глупость пробудить его."
-	Inst30Caption = "Зул'Фаррак"
-	Inst30QAA = "7 заданий"
-	Inst30QAH = "7 заданий"
-	
-	--Quest 1 Alliance
-	Inst30Quest1 = "1. Медальон Некрума" -- 2991
-	Inst30Quest1_Level = "47"
-	Inst30Quest1_Attain = "40"
-	Inst30Quest1_Aim = "Принесите медальон Некрума Тадиусу Мрачной Тени в Выжженные земли."
-	Inst30Quest1_Location = "Тадиус Мрачная Тень (Выжженные земли - Крепость Стражей Пустоты; "..YELLOW.."66,19"..WHITE..")"
-	Inst30Quest1_Note = "Линейка заданий начинается у укротителя грифонов Разящего Когтя (Внутренние земли - Цитадель Громового Молота; "..YELLOW.."9,44"..WHITE..").\nНекрум появляется около "..YELLOW.."[4]"..WHITE.." с последней волной боя Храмового события."
-	Inst30Quest1_Prequest = "Тролльи клетки -> Тадиус Мрачная Тень" -- 2988 -> 2990
-	Inst30Quest1_Folgequest = "Прорицание" -- 2992
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst30Quest2 = "2. Троллье месиво" -- 3042
-	Inst30Quest2_Level = "45"
-	Inst30Quest2_Attain = "40"
-	Inst30Quest2_Aim = "Принесите 20 фиалов с Тролльим месивом."
-	Inst30Quest2_Location = "Трентон Молот Света (Танарис - Прибамбасск; "..YELLOW.."51,28"..WHITE..")"
-	Inst30Quest2_Note = "Месиво падет со всех троллей."
-	Inst30Quest2_Prequest = "Нет"
-	Inst30Quest2_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst30Quest3 = "3. Панцири скарабеев" -- 2865
-	Inst30Quest3_Level = "45"
-	Inst30Quest3_Attain = "40"
-	Inst30Quest3_Aim = "Принести 5 целых панцирей скарабея Тран'реку в Прибамбасск."
-	Inst30Quest3_Location = "Тран'рек (Танарис - Прибамбасск; "..YELLOW.."51,26"..WHITE..")"
-	Inst30Quest3_Note = "Предшествующее задание начинается у Кразека (Тернистая долина - Пиратская бухта; "..YELLOW.."25,77"..WHITE..").\nПанцири могут упасть с любого скарабея. Множество скарабеев находится около "..YELLOW.."[2]"..WHITE.."."
-	Inst30Quest3_Prequest = "Тран'рек" -- 2864
-	Inst30Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst30Quest4 = "4. Тиара Глубин" -- 2846
-	Inst30Quest4_Level = "46"
-	Inst30Quest4_Attain = "40"
-	Inst30Quest4_Aim = "Принесите Тиару Глубин Табете в Пылевых топях."
-	Inst30Quest4_Location = " Табета (Пылевые топи; "..YELLOW.."46,57"..WHITE..")"
-	Inst30Quest4_Note = "Возьмите предшествующее задание у Бинк (Стальгорн; "..YELLOW.."25,8"..WHITE..").\nТиара глубин добывается с гидроманта Велраты около "..YELLOW.."[6]"..WHITE.."."
-	Inst30Quest4_Prequest = "Миссия Табеты" -- 2861
-	Inst30Quest4_Folgequest = "Нет"
-	--
-	Inst30Quest4name1 = "Spellshifter Rod"
-	Inst30Quest4name2 = "Gemshale Pauldrons"
-	
-	--Quest 5 Alliance
-	Inst30Quest5 = "5. Пророчество Мошару" -- 3527
-	Inst30Quest5_Level = "47"
-	Inst30Quest5_Attain = "40"
-	Inst30Quest5_Aim = "Принесите первую и вторую таблички Мошару Йе'кинье в Танарис."
-	Inst30Quest5_Location = "Йе'кинья (Танарис - Порт Картеля; "..YELLOW.."66,22"..WHITE..")"
-	Inst30Quest5_Note = "Вы возьмете предшествующее задание у того же НИП.\nТаблички падают с Теки Мученика около "..YELLOW.."[2]"..WHITE.." и гидроманта Велраты около "..YELLOW.."[6]"..WHITE.."."
-	Inst30Quest5_Prequest = "Духи крикунов" -- 3520
-	Inst30Quest5_Folgequest = "Древнее яйцо" -- 4787
-	-- No Rewards for this quest
-	
-	--Quest 6 Alliance
-	Inst30Quest6 = "6. Изыскательский жезл" -- 2768
-	Inst30Quest6_Level = "47"
-	Inst30Quest6_Attain = "40"
-	Inst30Quest6_Aim = "Принесите изыскательский жезл главному инженеру Чепухастеру в Прибамбасск."
-	Inst30Quest6_Location = "Главный инженер Чепухастер (Танарис - Прибамбасск; "..YELLOW.."52,28"..WHITE..")"
-	Inst30Quest6_Note = "Вы заберете жезл у сержанта Блая. Вы найдете его около "..YELLOW.."[4]"..WHITE.." после Храмового события."
-	Inst30Quest6_Prequest = "Нет"
-	Inst30Quest6_Folgequest = "Нет"
-	--
-	Inst30Quest6name1 = "Masons Fraternity Ring"
-	Inst30Quest6name2 = "Engineer's Guild Headpiece"
-	
-	--Quest 7 Alliance
-	Inst30Quest7 = "7. Газ'рилла" -- 2770
-	Inst30Quest7_Level = "50"
-	Inst30Quest7_Attain = "40"
-	Inst30Quest7_Aim = "Принесите искрящую чешую Газ'риллы Виззлу Медноштифу на Мерцающую равнину."
-	Inst30Quest7_Location = "Виззл Медноштиф (Тысяча Игл - Миражи на виражах; "..YELLOW.."78,77"..WHITE..")"
-	Inst30Quest7_Note = "Вы возьмете предшествующее задание у Клацморта Гайкокрута (Стальгорн - Город механиков; "..YELLOW.."68,46"..WHITE.."). Чтобы получить задание Газ'рилла, предшествующее задание выполнять необязательно.\nВы вызовете Газ'риллу около "..YELLOW.."[6]"..WHITE.." с помощью Молота Зул'Фаррака.\nСвященный молот добывается с Квиаги Хранительницы (Внутренние земли - Алтарь Зула; "..YELLOW.."49,70"..WHITE..") и должен быть завершен на алтаре в Джинта'Алоре около "..YELLOW.."59,77"..WHITE.." перед тем как его можно будет использовать в Зул'Фарраке."
-	Inst30Quest7_Prequest = "Братья Медноштиф" -- 2769
-	Inst30Quest7_Folgequest = "Нет"
-	--
-	Inst30Quest7name1 = "Carrot on a Stick"
-	
-	
-	--Quest 1 Horde
-	Inst30Quest1_HORDE = "1. Паучья богиня" -- 2936
-	Inst30Quest1_HORDE_Level = "45"
-	Inst30Quest1_HORDE_Attain = "40"
-	Inst30Quest1_HORDE_Aim = "Прочитайте надписи на табличке Теки, узнайте имя паучьей богини, которой поклоняются тролли Сухокожих, а потом возвращайтесь к мастеру Гадрину."
-	Inst30Quest1_HORDE_Location = "Мастер Гадрин (Дуротар - Деревня Сен'джин; "..YELLOW.."55,74"..WHITE..")"
-	Inst30Quest1_HORDE_Note = "Линейка заданий начинается с Бутылки с ядом, которые стоят на столах в деревнях троллей во Внутренних землях.\nВы найдете табличку около "..YELLOW.."[2]"..WHITE.."."
-	Inst30Quest1_HORDE_Prequest = "Бутыли с ядом -> Разговор с мастером Гадрином" -- 2933 -> 2935
-	Inst30Quest1_HORDE_Folgequest = "Призыв Шадры" -- 2937
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst30Quest2_HORDE = Inst30Quest2
-	Inst30Quest2_HORDE_Level = Inst30Quest2_Level
-	Inst30Quest2_HORDE_Attain = Inst30Quest2_Attain
-	Inst30Quest2_HORDE_Aim = Inst30Quest2_Aim
-	Inst30Quest2_HORDE_Location = Inst30Quest2_Location
-	Inst30Quest2_HORDE_Note = Inst30Quest2_Note
-	Inst30Quest2_HORDE_Prequest = Inst30Quest2_Prequest
-	Inst30Quest2_HORDE_Folgequest = Inst30Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst30Quest3_HORDE = Inst30Quest3
-	Inst30Quest3_HORDE_Level = Inst30Quest3_Level
-	Inst30Quest3_HORDE_Attain = Inst30Quest3_Attain
-	Inst30Quest3_HORDE_Aim = Inst30Quest3_Aim
-	Inst30Quest3_HORDE_Location = Inst30Quest3_Location
-	Inst30Quest3_HORDE_Note = Inst30Quest3_Note
-	Inst30Quest3_HORDE_Prequest = Inst30Quest3_Prequest
-	Inst30Quest3_HORDE_Folgequest = Inst30Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst30Quest4_HORDE = Inst30Quest4
-	Inst30Quest4_HORDE_Level = Inst30Quest4_Level
-	Inst30Quest4_HORDE_Attain = Inst30Quest4_Attain
-	Inst30Quest4_HORDE_Aim = Inst30Quest4_Aim
-	Inst30Quest4_HORDE_Location = Inst30Quest4_Location
-	Inst30Quest4_HORDE_Note = Inst30Quest4_Note
-	Inst30Quest4_HORDE_Prequest = Inst30Quest4_Prequest
-	Inst30Quest4_HORDE_Folgequest = Inst30Quest4_Folgequest
-	--
-	Inst30Quest4name1_HORDE = Inst30Quest4name1
-	Inst30Quest4name2_HORDE = Inst30Quest4name2
-	
-	--Quest 5 Horde (same as Quest 5 Alliance)
-	Inst30Quest5_HORDE = Inst30Quest5
-	Inst30Quest5_HORDE_Level = Inst30Quest5_Level
-	Inst30Quest5_HORDE_Attain = Inst30Quest5_Attain
-	Inst30Quest5_HORDE_Aim = Inst30Quest5_Aim
-	Inst30Quest5_HORDE_Location = Inst30Quest5_Location
-	Inst30Quest5_HORDE_Note = Inst30Quest5_Note
-	Inst30Quest5_HORDE_Prequest = Inst30Quest5_Prequest
-	Inst30Quest5_HORDE_Folgequest = Inst30Quest5_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde (same as Quest 6 Alliance)
-	Inst30Quest6_HORDE = Inst30Quest6
-	Inst30Quest6_HORDE_Level = Inst30Quest6_Level
-	Inst30Quest6_HORDE_Attain = Inst30Quest6_Attain
-	Inst30Quest6_HORDE_Aim = Inst30Quest6_Aim
-	Inst30Quest6_HORDE_Location = Inst30Quest6_Location
-	Inst30Quest6_HORDE_Note = Inst30Quest6_Note
-	Inst30Quest6_HORDE_Prequest = Inst30Quest6_Prequest
-	Inst30Quest6_HORDE_Folgequest = Inst30Quest6_Folgequest
-	--
-	Inst30Quest6name1_HORDE = Inst30Quest6name1
-	Inst30Quest6name2_HORDE = Inst30Quest6name2
-	
-	--Quest 7 Horde (same as Quest 7 Alliance)
-	Inst30Quest7_HORDE = Inst30Quest7
-	Inst30Quest7_HORDE_Level = Inst30Quest7_Level
-	Inst30Quest7_HORDE_Attain = Inst30Quest7_Attain
-	Inst30Quest7_HORDE_Aim = Inst30Quest7_Aim
-	Inst30Quest7_HORDE_Location = Inst30Quest7_Location
-	Inst30Quest7_HORDE_Note = Inst30Quest7_Note
-	Inst30Quest7_HORDE_Prequest = Inst30Quest7_Prequest
-	Inst30Quest7_HORDE_Folgequest = Inst30Quest7_Folgequest
-	--
-	Inst30Quest7name1_HORDE = Inst30Quest7name1
-	
-	
-	
-	--------------- INST31 - Zul'Gurub (ZG) ---------------
-	Inst31Story = {
-		[1] = "Свыше тысячи лет назад, могущественная империя Гурбаши была разорвана на части всеобщей гражданской войной. Влиятельная группа жрецов троллей, известная как Атал'аи, предприняла попытку призвать древнего кровавого бога по имени Хаккар Свежеватель душ. Несмотря на то, что жрецы потерпели поражение и были изгнаны навеки, великая империя троллей не смогла сохранить целостность. Изгнанные жрецы бежали далеко на север, в Болота Печали. Там они возвели великий храм в честь Хаккара - где они могли приготовиться к его прибытию в материальный мир.",
-		[2] = "В тоже время, жрецы Атал'аи обнаружили, что материальную форму Хаккара можно вызвать только в пределах древней столицы империи Гурубаши, Зул'Гурубе. К несчастью, жрецы преуспели в своем стремлении призвать Хаккара - донесения подтверждают присутсвие ужасного Свежевателя душ в сердце руин Гурубаши.\n\nДля того, чтобы подавить кровавого бога, тролли страны собрались вместе и послали отряд Высших жрецов в древний город. Каждый жрец был могучим чемпионом Звериных боов - Летучей мыши, Пантеры, Тигра, Паука, и Змеи - но несмотря на все их усилия, они попали под влияние Хаккара. Теперь чемпионы и их воплощения Звериных богов вскормлены ужасающей силой Свежевателя душ. Любой авантюрист, храбрый настолько, чтобы отважиться забраться в проклятые руины, должен победить Высших жрецов, если он надется хотя бы вступить в схватку с могущественным кровавым богом.",
-		
-	};
-	Inst31Caption = "Зул'Гуруб"
-	Inst31QAA = "4 задания"
-	Inst31QAH = "4 задания"
-	
-	--Quest 1 Alliance
-	Inst31Quest1 = "1. Коллекция голов" -- 8201
-	Inst31Quest1_Level = "60"
-	Inst31Quest1_Attain = "58"
-	Inst31Quest1_Aim = "Соберите ожерелье из голов пятерых жрецов и вернитесь с ним к Экзалу на остров Йоджамба."
-	Inst31Quest1_Location = "Экзал (Тернистая долина - Остров Йоджамба; "..YELLOW.."15,15"..WHITE..")"
-	Inst31Quest1_Note = "Убедитесь, что вы осмотрели всех жрецов."
-	Inst31Quest1_Prequest = "Нет"
-	Inst31Quest1_Folgequest = "Нет"
-	--
-	Inst31Quest1name1 = "Belt of Shrunken Heads"
-	Inst31Quest1name2 = "Belt of Shriveled Heads"
-	Inst31Quest1name3 = "Belt of Preserved Heads"
-	Inst31Quest1name4 = "Belt of Tiny Heads"
-	
-	--Quest 2 Alliance
-	Inst31Quest2 = "2. Сердце Хаккара" -- 8183
-	Inst31Quest2_Level = "60"
-	Inst31Quest2_Attain = "58"
-	Inst31Quest2_Aim = "Принесите сердце Хаккара Молтору на остров Йоджамба."
-	Inst31Quest2_Location = "Сердце Хаккара (добывается с Хаккара; "..YELLOW.."[11]"..WHITE..")"
-	Inst31Quest2_Note = "Молтор (Тернистая долина - Остров Йоджамба; "..YELLOW.."15,15"..WHITE..")"
-	Inst31Quest2_Prequest = "Нет"
-	Inst31Quest2_Folgequest = "Нет"
-	--
-	Inst31Quest2name1 = "Zandalarian Hero Badge"
-	Inst31Quest2name2 = "Zandalarian Hero Charm"
-	Inst31Quest2name3 = "Zandalarian Hero Medallion"
-	
-	--Quest 3 Alliance
-	Inst31Quest3 = "3. Измерительная лента Ната" -- 8227
-	Inst31Quest3_Level = "60"
-	Inst31Quest3_Attain = "58"
-	Inst31Quest3_Aim = "Верните измерительную ленту Нату Пэглу. Найти Пэгла можно в Пылевых топях."
-	Inst31Quest3_Location = "Побитый ящик для рыболовной снасти (Зул'Гуруб -  около воды на северо-востоке от острова Хаккара)"
-	Inst31Quest3_Note = "Нат Пэгл в Пылевых топях ("..YELLOW.."59,60"..WHITE.."). Выполнение задания позволяет купить Наживки на грязнотинника у Ната Пэгла для вызова Газ'ранки в Зул'Гурубе."
-	Inst31Quest3_Prequest = "Нет"
-	Inst31Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst31Quest4 = "2. Идеальный яд" -- 9023
-	Inst31Quest4_Level = "60"
-	Inst31Quest4_Attain = "60"
-	Inst31Quest4_Aim = "Дирк Громодрев из Крепости Кенария попросил принести ему ядовитую железу Веноксиса и ядовитую железу Куриннакса."
-	Inst31Quest4_Location = "Дирк Громодрев (Силитус - Крепость Кенария; "..YELLOW.."52,39"..WHITE..")"
-	Inst31Quest4_Note = "Ядовитая железа Веноксиса добывается с Верховного жреца Веноксиса в "..YELLOW.."Зул'Гурубе"..WHITE..". Ядовитая железа Куриннакса добывается в "..YELLOW.."Руинах Ан'Киража"..WHITE.." at "..YELLOW.."[1]"..WHITE.."."
-	Inst31Quest4_Prequest = "Нет"
-	Inst31Quest4_Folgequest = "Нет"
-	--
-	Inst31Quest4name1 = "Ravenholdt Slicer"
-	Inst31Quest4name2 = "Shivsprocket's Shiv"
-	Inst31Quest4name3 = "The Thunderwood Poker"
-	Inst31Quest4name4 = "Doomulus Prime"
-	Inst31Quest4name5 = "Fahrad's Reloading Repeater"
-	Inst31Quest4name6 = "Simone's Cultivating Hammer"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst31Quest1_HORDE = Inst31Quest1
-	Inst31Quest1_HORDE_Level = Inst31Quest1_Level
-	Inst31Quest1_HORDE_Attain = Inst31Quest1_Attain
-	Inst31Quest1_HORDE_Aim = Inst31Quest1_Aim
-	Inst31Quest1_HORDE_Location = Inst31Quest1_Location
-	Inst31Quest1_HORDE_Note = Inst31Quest1_Note
-	Inst31Quest1_HORDE_Prequest = Inst31Quest1_Prequest
-	Inst31Quest1_HORDE_Folgequest = Inst31Quest1_Folgequest
-	--
-	Inst31Quest1name1_HORDE = Inst31Quest1name1
-	Inst31Quest1name2_HORDE = Inst31Quest1name2
-	Inst31Quest1name3_HORDE = Inst31Quest1name3
-	Inst31Quest1name4_HORDE = Inst31Quest1name4
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst31Quest2_HORDE = Inst31Quest2
-	Inst31Quest2_HORDE_Level = Inst31Quest2_Level
-	Inst31Quest2_HORDE_Attain = Inst31Quest2_Attain
-	Inst31Quest2_HORDE_Aim = Inst31Quest2_Aim
-	Inst31Quest2_HORDE_Location = Inst31Quest2_Location
-	Inst31Quest2_HORDE_Note = Inst31Quest2_Note
-	Inst31Quest2_HORDE_Prequest = Inst31Quest2_Prequest
-	Inst31Quest2_HORDE_Folgequest = Inst31Quest2_Folgequest
-	--
-	Inst31Quest2name1_HORDE = Inst31Quest2name1
-	Inst31Quest2name2_HORDE = Inst31Quest2name2
-	Inst31Quest2name3_HORDE = Inst31Quest2name3
-	
-	--Quest 3 Horde (same as Quest 3 Alliance)
-	Inst31Quest3_HORDE = Inst31Quest3
-	Inst31Quest3_HORDE_Level = Inst31Quest3_Level
-	Inst31Quest3_HORDE_Attain = Inst31Quest3_Attain
-	Inst31Quest3_HORDE_Aim = Inst31Quest3_Aim
-	Inst31Quest3_HORDE_Location = Inst31Quest3_Location
-	Inst31Quest3_HORDE_Note = Inst31Quest3_Note
-	Inst31Quest3_HORDE_Prequest = Inst31Quest3_Prequest
-	Inst31Quest3_HORDE_Folgequest = Inst31Quest3_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 4 Horde (same as Quest 4 Alliance)
-	Inst31Quest4_HORDE = Inst31Quest4
-	Inst31Quest4_HORDE_Level = Inst31Quest4_Level
-	Inst31Quest4_HORDE_Attain = Inst31Quest4_Attain
-	Inst31Quest4_HORDE_Aim = Inst31Quest4_Aim
-	Inst31Quest4_HORDE_Location = Inst31Quest4_Location
-	Inst31Quest4_HORDE_Note = Inst31Quest4_Note
-	Inst31Quest4_HORDE_Prequest = Inst31Quest4_Prequest
-	Inst31Quest4_HORDE_Folgequest = Inst31Quest4_Folgequest
-	--
-	Inst31Quest4name1_HORDE = Inst31Quest4name1
-	Inst31Quest4name2_HORDE = Inst31Quest4name2
-	Inst31Quest4name3_HORDE = Inst31Quest4name3
-	Inst31Quest4name4_HORDE = Inst31Quest4name4
-	Inst31Quest4name5_HORDE = Inst31Quest4name5
-	Inst31Quest4name6_HORDE = Inst31Quest4name6
-	
-	
-	
-	--------------- INST32 - Gnomeregan (Gnomer) ---------------
-	Inst32Story = "Находящееся в Дун Мороге, технологическое чудо, известное как Гномреган было столицей гномов на протяжении поколений. В недавнем прошлом, враждебная раса мутантов-троггов захватила некоторые регионы Дун Морога - включая и великий город гномов. В отчаянных попытках уничтожить вторгшихся троггов, Главный механик Меггакрут запустил экстренный слив городских баков с радиоактивными отходами. Некоторые гномы нашли убежище от загрязняющих воздух веществ, так как они ожидали, что трогги умрут или сбегут. К сожалению, не смотря на точто трогги облучились токсичной атакой - их осада продолжилась, не утихая. Те гномы, которых не убили вредные потоки были вынуждены бежать, ища убежище в близлежащем городе дворфов Стальгорне. Там Главный механик Меггакрут начал вербовать храбрецов, чтобы помочь его народу вернуть обратно их любимую столицу. Ходят слухи что когда-то бывший доверенный советник Меггакрута, Мекжинер Термоштепсель, предал свой народ, позволив вторжению произойти. Теперь, когда его рассудок помутился, Термоштепсель остается в Гномрегане - продвигая свои темные планы и действуя как новый техно-правитель города."
-	Inst32Caption = "Гномреган"
-	Inst32QAA = "10 заданий"
-	Inst32QAH = "5 заданий"
-	
-	--Quest 1 Alliance
-	Inst32Quest1 = "1. Промыть мозг Техботу" -- 2922
-	Inst32Quest1_Level = "26"
-	Inst32Quest1_Attain = "20"
-	Inst32Quest1_Aim = "Принесите ядро памяти Техбота мехмастеру Замыкальцу в Стальгорн."
-	Inst32Quest1_Location = "Мехмастер Замыкалец (Стальгорн - Город механиков; "..YELLOW.."69,50"..WHITE..")"
-	Inst32Quest1_Note = "Вы возьмете предшествующее задание у брата Сарно (Штормград - Соборная площадь; "..YELLOW.."40, 30"..WHITE..").\nВы найдете Техбота перед входом в подземелье около черного входа."
-	Inst32Quest1_Prequest = "Мехмастер Замыкалец" -- 2923
-	Inst32Quest1_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst32Quest2 = "2. Новая формула" -- 2926
-	Inst32Quest2_Level = "27"
-	Inst32Quest2_Attain = "20"
-	Inst32Quest2_Aim = "Соберите радиоактивный осадок, оставляемый облученными захватчиками и облученными погромщиками в пустую освинцованную склянку для проб. Принесите наполненную склянку Оззи Триггервольту в Каранос."
-	Inst32Quest2_Location = "Оззи Триггервольт (Дун Морог - Каранос; "..YELLOW.."45,49"..WHITE..")"
-	Inst32Quest2_Note = "Вы возьмете предшествующее задание у Гноарна (Стальгорн - Город механиков; "..YELLOW.."69,50"..WHITE..").\nЧтобы собрать осадок используйте фиал на "..RED.."живых"..WHITE.." Облученный захватчиках или Облученных погромщиках."
-	Inst32Quest2_Prequest = "На другой день" -- 2927
-	Inst32Quest2_Folgequest = "Сильное зеленое свечение" -- 2962
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst32Quest3 = "3. Сильное зеленое свечение" -- 2962
-	Inst32Quest3_Level = "30"
-	Inst32Quest3_Attain = "20"
-	Inst32Quest3_Aim = "Отправляйтесь в Гномреган и принесите высокорадиоактивные образцы. Внимание: отходы нестабильны и довольно быстро разрушаются.\nВерните Оззи тяжелую освинцованную склянку для проб, когда задача будет выполнена."
-	Inst32Quest3_Location = "Оззи Триггервольт (Дун Морог - Каранос; "..YELLOW.."45,49"..WHITE..")"
-	Inst32Quest3_Note = "Чтобы собрать образцы используйте фиал на "..RED.."живых"..WHITE.." Облученных слизях или ужасах."
-	Inst32Quest3_Prequest = "Новая формула" -- 2926
-	Inst32Quest3_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 4 Alliance
-	Inst32Quest4 = "4. Сооружение автогиробуророек" -- 2928
-	Inst32Quest4_Level = "30"
-	Inst32Quest4_Attain = "20"
-	Inst32Quest4_Aim = "Принесите Шони в Штормград 24 горсти механических внутренностей роботов."
-	Inst32Quest4_Location = "Шони Молшунья (Штормград - Квартал дворфов; "..YELLOW.."55, 12"..WHITE..")"
-	Inst32Quest4_Note = "Внутренности падают со всех роботов."
-	Inst32Quest4_Prequest = "Нет"
-	Inst32Quest4_Folgequest = "Нет"
-	--
-	Inst32Quest4name1 = "Shoni's Disarming Tool"
-	Inst32Quest4name2 = "Shilly Mitts"
-	
-	--Quest 5 Alliance
-	Inst32Quest5 = "5. Базовый элемент" -- 2924
-	Inst32Quest5_Level = "30"
-	Inst32Quest5_Attain = "24"
-	Inst32Quest5_Aim = "Принесите 12 базовых элементов Клацморту Гайкокруту в Стальгорн."
-	Inst32Quest5_Location = "Клацморт Гайкокрут (Стальгорн - Город механиков; "..YELLOW.."68,46"..WHITE..")"
-	Inst32Quest5_Note = "Вы возьмете предшествующее задание у Матиля (Дарнасс - Терраса Воинов; "..YELLOW.."59,45"..WHITE.."). Предшествующее задание только указывает на задание и необязательно, чтобы взять это.\nБазовые элементы собираются со всех машин, разбросанных по подземелью."
-	Inst32Quest5_Prequest = "Базовые элементы Клацморта" -- 2925
-	Inst32Quest5_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 6 Alliance
-	Inst32Quest6 = "6. Спасение данных" -- 2930
-	Inst32Quest6_Level = "30"
-	Inst32Quest6_Attain = "25"
-	Inst32Quest6_Aim = "Принесите радужную перфокарту главному механику Чугунотрубзу в Стальгорн."
-	Inst32Quest6_Location = "Главный механик Чугонотрубз (Стальгорн - Город механиков; "..YELLOW.."69,48"..WHITE..")"
-	Inst32Quest6_Note = "Вы получите предшествующее задание у Гаксима Ржавошиппи (Когтистые горы; "..YELLOW.."59,67"..WHITE.."). Предшествующее задание только указывает на задание и необязательно, чтобы взять это.\nПустая карта добывается случайно. Вы найдете первый терминал около черного входа, перед входом в подземелье. 3005-B находится около "..YELLOW.."[3]"..WHITE..", 3005-C около "..YELLOW.."[5]"..WHITE.." и 3005-D находится около "..YELLOW.."[8]"..WHITE.."."
-	Inst32Quest6_Prequest = "Поручение Чугонотрубза" -- 2931
-	Inst32Quest6_Folgequest = "Нет"
-	--
-	Inst32Quest6name1 = "Repairman's Cape"
-	Inst32Quest6name2 = "Mechanic's Pipehammer"
-	
-	--Quest 7 Alliance
-	Inst32Quest7 = "7. Катавасия" -- 2904
-	Inst32Quest7_Level = "30"
-	Inst32Quest7_Attain = "24"
-	Inst32Quest7_Aim = "Отведите Керноби к Часовому ходу. Затем отправляйтесь с донесением к Скути в Пиратскую бухту."
-	Inst32Quest7_Location = "Керноби (Гномреган; "..YELLOW.."[3]"..WHITE..")"
-	Inst32Quest7_Note = "Задание сопровождения! Вы найдете Скути в Тернистой долине - Пиратская бухта ("..YELLOW.."27,77"..WHITE..")."
-	Inst32Quest7_Prequest = "Нет"
-	Inst32Quest7_Folgequest = "Нет"
-	--
-	Inst32Quest7name1 = "Fire-welded Bracers"
-	Inst32Quest7name2 = "Fairywing Mantle"
-	
-	--Quest 8 Alliance
-	Inst32Quest8 = "8. Великое предательство" -- 2929
-	Inst32Quest8_Level = "35"
-	Inst32Quest8_Attain = "25"
-	Inst32Quest8_Aim = "Отправляйтесь в Гномреган и убейте Анжинера Термоштепселя. Вернитесь к главному механику Меггакруту."
-	Inst32Quest8_Location = "Главный Механик Меггакрут (Стальгорн - Город механиков; "..YELLOW.."68,48"..WHITE..")"
-	Inst32Quest8_Note = "Вы найдете Термоштепселя около "..YELLOW.."[6]"..WHITE..". Он - последний босс в Гномрегане.\nВо время боя вы должны обезвредить колонны нажатием кнопок на боковой поверхности."
-	Inst32Quest8_Prequest = "Нет"
-	Inst32Quest8_Folgequest = "Нет"
-	--
-	Inst32Quest8name1 = "Civinad Robes"
-	Inst32Quest8name2 = "Triprunner Dungarees"
-	Inst32Quest8name3 = "Dual Reinforced Leggings"
-	
-	--Quest 9 Alliance
-	Inst32Quest9 = "9. Кольцо, покрытое грязью" -- 2945
-	Inst32Quest9_Level = "34"
-	Inst32Quest9_Attain = "28"
-	Inst32Quest9_Aim = "Придумайте, как отчистить кольцо, покрытое грязью."
-	Inst32Quest9_Location = "Покрытое грязью кольцо (случайная добыча в Гномрегане)"
-	Inst32Quest9_Note = "Кольцо может быть очищено в Чистере 5200 около "..YELLOW.."[2]"..WHITE.."."
-	Inst32Quest9_Prequest = "Нет"
-	Inst32Quest9_Folgequest = "Возвращение кольца" -- 2947
-	-- No Rewards for this quest
-	
-	--Quest 10 Alliance
-	Inst32Quest10 = "10. Возвращение кольца" -- 2947
-	Inst32Quest10_Level = "34"
-	Inst32Quest10_Attain = "28"
-	Inst32Quest10_Aim = "Вы можеть оставить кольцо себе, а можете попытаться найти того, чьи инициалы выгравированы на внутренней стороне кольца."
-	Inst32Quest10_Location = "Сверкающее золотое кольцо (награда за задание 'Кольцо, покрытое грязью')"
-	Inst32Quest10_Note = "Отнесите Талвашу дель Кисселью (Стальгорн - Палаты Магии; "..YELLOW.."36,3"..WHITE.."). Усиление кольца не является обязательным."
-	Inst32Quest10_Prequest = "Кольцо, покрытое грязью" -- 2945
-	Inst32Quest10_Folgequest = "Гномское усовершенствование" -- 2948
-	--
-	Inst32Quest10name1 = "Brilliant Gold Ring"
-	
-	
-	--Quest 1 Horde
-	Inst32Quest1_HORDE = "1. Поехалиии!" -- 2843
-	Inst32Quest1_HORDE_Level = "35"
-	Inst32Quest1_HORDE_Attain = "20"
-	Inst32Quest1_HORDE_Aim = "Дождитесь, пока Скути настроит гоблинский импульсный повторитель."
-	Inst32Quest1_HORDE_Location = "Скути (Тернистая долина - Пиратская бухта; "..YELLOW.."27,77"..WHITE..")"
-	Inst32Quest1_HORDE_Note = "Вы получите предшествующее задание у Совика (Оргриммар - Аллея Чести; "..YELLOW.."75,25"..WHITE..").\nПосле выполнения этого задания вы сможете использовать телепортатор в Пиратской бухте."
-	Inst32Quest1_HORDE_Prequest = "Главный инженер Скути" -- 2842
-	Inst32Quest1_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde (same as Quest 7 Alliance)
-	Inst32Quest2_HORDE = "2. Катавасия"
-	Inst32Quest2_HORDE_Level = Inst32Quest7_Level
-	Inst32Quest2_HORDE_Attain = Inst32Quest7_Attain
-	Inst32Quest2_HORDE_Aim = Inst32Quest7_Aim
-	Inst32Quest2_HORDE_Location = Inst32Quest7_Location
-	Inst32Quest2_HORDE_Note = Inst32Quest7_Note
-	Inst32Quest2_HORDE_Prequest = Inst32Quest7_Prequest
-	Inst32Quest2_HORDE_Folgequest = Inst32Quest7_Folgequest
-	--
-	Inst32Quest2name1_HORDE = Inst32Quest7name1
-	Inst32Quest2name2_HORDE = Inst32Quest7name2
-	
-	--Quest3 Horde
-	Inst32Quest3_HORDE = "3. Техновойны" -- 2841
-	Inst32Quest3_HORDE_Level = "35"
-	Inst32Quest3_HORDE_Attain = "25"
-	Inst32Quest3_HORDE_Aim = "Добудьте в Гномрегане чертежи боевой машины и код от сейфа Термоштепселя в Гномрегане и принесите их Ноггу в Оргриммар."
-	Inst32Quest3_HORDE_Location = "Ногг (Оргриммар - Аллея Чести; "..YELLOW.."75,25"..WHITE..")"
-	Inst32Quest3_HORDE_Note = "Вы найдете Термоштепселя около "..YELLOW.."[6]"..WHITE..". Он - последний босс в Гномрегане.\nВо время боя вы должны обезвредить колонны нажатием кнопок на боковой поверхности."
-	Inst32Quest3_HORDE_Prequest = "Нет"
-	Inst32Quest3_HORDE_Folgequest = "Нет"
-	--
-	Inst32Quest3name1_HORDE = "Civinad Robes"
-	Inst32Quest3name2_HORDE = "Triprunner Dungarees"
-	Inst32Quest3name3_HORDE = "Dual Reinforced Leggings"
-	
-	--Quest 4 Horde (same as Quest 9 Alliance)
-	Inst32Quest4_HORDE = "4. Кольцо, покрытое грязью"
-	Inst32Quest4_HORDE_Level = Inst32Quest9_Level
-	Inst32Quest4_HORDE_Attain = Inst32Quest9_Attain
-	Inst32Quest4_HORDE_Aim = Inst32Quest9_Aim
-	Inst32Quest4_HORDE_Location = Inst32Quest9_Location
-	Inst32Quest4_HORDE_Note = Inst32Quest9_Note
-	Inst32Quest4_HORDE_Prequest = Inst32Quest9_Prequest
-	Inst32Quest4_HORDE_Folgequest = Inst32Quest9_Folgequest
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde (same as Quest 10 Alliance)
-	Inst32Quest5_HORDE = "5. Возвращение кольца" -- 2949
-	Inst32Quest5_HORDE_Level = Inst32Quest10_Level
-	Inst32Quest5_HORDE_Attain = Inst32Quest10_Attain
-	Inst32Quest5_HORDE_Aim = Inst32Quest10_Aim
-	Inst32Quest5_HORDE_Location = Inst32Quest10_Location
-	Inst32Quest5_HORDE_Note = "Отнесите Ноггу (Оргриммар - Аллея Чести; "..YELLOW.."75,25"..WHITE.."). Усиление кольца не является обязательным."
-	Inst32Quest5_HORDE_Prequest = Inst32Quest10_Prequest
-	Inst32Quest5_HORDE_Folgequest = "Переделка кольца" -- 2950
-	--
-	Inst32Quest5name1_HORDE = "Brilliant Gold Ring"
-	
-	
-	
-	---------------------------------------------------
-	---------------- OUTDOOR RAIDS --------------------
-	---------------------------------------------------
-	
-	--------------- INST33 - Dragons of Nightmare ---------------
-	Inst33Story = {
-		[1] = "Вновь всколыхнулись Великие Деревья, предчувствуя новую угрозу, грозящую обрушиться на Ясеневый лес, Сумеречный лес, Фералас и Внутренние земли. Четверо могущественных Хранителей из Стаи Зелёных Драконов покинули Сон, но теперь, некогда гордые Хранители несут лишь разрушение и смерть. Приготовьтесь к битве и войдите в скрытые от непосвящённых взглядов рощи, дабы спасти Азерот от скверны, несомой безумными Драконами. ",
-		[2] = "Изера - великий Грезящий дракон Аспект испокон веков управляет своей Стаей. Её предназначение, хранить фантастическое, мистическое царство Изумрудного Сна. Хранители природы и грёз, её Стая с древнейших времён защищала Великие Деревья по всему миру, используемые друидами для того, что бы погрузиться в Сон. Но не так давно, пользующиеся наибольшим доверием лейтенанты Изеры были извращены новой тёмной силой, проникнувшей в пределы Изумрудного Сна. Теперь, безумные драконы, пройдя через Великие Деревья в Азерот, несут безумие и ужас всему живому, и даже самые могучие воины трижды подумают, прежде чем дерзнуть испытать на себе их всесокрушающий гнев.",
-		[3] = "Извращение Летона в Изумрудном Сне не только свело с ума могущественного дракона, но и наделило его способностью поглощать злобные тени своих врагов. Соединившись со своим господином, эти тени наполняют дракона живительной энергией. Вы должны быть готовы к этому, поскольку Летон всегда был одним из наиболее громадных и своенравных лейтенантов Изеры",
-		[4] = "Проникнувшая в пределы Изумрудного Сна тёмная скверна превратила некогда величественную Эмерисс в зловонное, обезображенное чудовище. По рассказам тех, кто сумел пережить встречу с драконом, трупы поверженных ею смертных извергали тошнотворное гниение. Эмерисс является поистине самым кошмарным и ужасным из Зелёных Драконов Изеры.",
-		[5] = "Таэрар был одним из наиболее пострадавших от скверны лейтенантов Изеры. Его столкновение с тёмной силой в Изумрудном Сне не только разрушило разум, но и материальную сущность Таэрара. Теперь, дракон способен разделяться на множество частей, каждая из которых обладает сокрушительной магической силой. Таэрар - хитрый и беспощадный противник, являющийся самим воплощением безумия для обитателей Азерота.",
-		[6] = "Исондра, некогда пользующаяся особым доверием Изеры, превратилась в убийцу, сея ужас и хаос по всему Азероту. Её прежний дар исцеления уступил место тёмной магии, позволяющей ей поражать врагов испепеляющими молниями и призывать на помощь жестоких друидов. Исондра и её семья также обладают способностью насылать сон, отправляя смертных в царство самых ужасающих кошмаров.",
-		
-	};
-	Inst33Caption = "Драконы Кошмара"
-	Inst33Caption2 = "Изера и ее выводок"
-	Inst33Caption3 = "Летон"
-	Inst33Caption4 = "Эмерисс"
-	Inst33Caption5 = "Таэрар"
-	Inst33Caption6 = "Исондра"
-	Inst33QAA = "1 задание"
-	Inst33QAH = "1 задание"
-	
-	--Quest 1 Alliance
-	Inst33Quest1 = "1. Под покровом кошмара" -- 8446
-	Inst33Quest1_Level = "60"
-	Inst33Quest1_Attain = "60"
-	Inst33Quest1_Aim = "Найдите того, кто сможет осознать значение поглощенного кошмарами предмета.\n\nМожет быть, вам сможет помочь могущественный друид."
-	Inst33Quest1_Location = "Поглощенный кошмарами предмет (добывается с Эмерисс, Таэрара, Летона или Исондры)"
-	Inst33Quest1_Note = "Задание завершается Хранителю Ремулу (Лунная поляна - Святилище Ремула; "..YELLOW.."36,41"..WHITE.."). Награда перечислены для следующего задания.."
-	Inst33Quest1_Prequest = "Нет"
-	Inst33Quest1_Folgequest = "Пробуждение легенд" -- 8447
-	--
-	Inst33Quest1name1 = "Malfurion's Signet Ring"
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst33Quest1_HORDE = Inst33Quest1
-	Inst33Quest1_HORDE_Level = Inst33Quest1_Level
-	Inst33Quest1_HORDE_Attain = Inst33Quest1_Attain
-	Inst33Quest1_HORDE_Aim = Inst33Quest1_Aim
-	Inst33Quest1_HORDE_Location = Inst33Quest1_Location
-	Inst33Quest1_HORDE_Note = Inst33Quest1_Note
-	Inst33Quest1_HORDE_Prequest = Inst33Quest1_Prequest
-	Inst33Quest1_HORDE_Folgequest = Inst33Quest1_Folgequest
-	--
-	Inst33Quest1name1_HORDE = Inst33Quest1name1
-	
-	
-	
-	--------------- INST34 - Азурегос ---------------
-	Inst34Story = "Задолго до Разлома Мира, могущественный город ночных эльфов Элдарат располагался на земле, известной теперь как Азшара. Считается, что среди руин некогда великой цитадели могут быть найдёны множество древних и могучих артефактов Высокорожденных. В течении сотен поколений, Стая Синих Драконов охраняла эти артефакты и волшебные знания, служа гарантией того, что они никогда не попадут в руки смертных. А присутствие самого Азурегоса - синего дракона - явно указывает на то, что где-то здесь в Азшаре сокрыты по настоящему уникальные и могущественнейшие артефакты, и вполне возможно даже виалы с водами Колодца Вечности, которые ему так необходимы. Но не зависимо от того, что именно ищет Азурегос, можно быть твёрдо уверенным в одном - Синий Дракон будет сражаться до смерти, защищая волшебные сокровища Азшары."
-	Inst34Caption = "Азурегос"
-	Inst34QAA = "2 задания"
-	Inst34QAH = "2 задания"
-	
-	--Quest 1 Alliance
-	Inst34Quest1 = "1. Перетянутый жилами лист древня" -- 7634
-	Inst34Quest1_Level = "60"
-	Inst34Quest1_Attain = "60"
-	Inst34Quest1_Aim = "Хастат Древний просит вас принести ему жилу взрослого синего дракона. По выполнении задания возвращайтесь к Хастату в Оскверненный лес."
-	Inst34Quest1_Location = "Хастат Древний (Оскверненный лес - Железнолесье; "..YELLOW.."48,24"..WHITE..")"
-	Inst34Quest1_Note = "Задание для охотников: Убейте Азурегоса, чтобы получить Жилу взрослого синего дракона. Он ходит по середине южного полуострова в Азшаре вблизи "..YELLOW.."[1]"..WHITE.."."
-	Inst34Quest1_Prequest = "Древний лист ("..YELLOW.."Огненные Недра"..WHITE..")" -- 7632
-	Inst34Quest1_Folgequest = "Нет"
-	--
-	Inst34Quest1name1 = "Ancient Sinew Wrapped Lamina"
-	
-	--Quest 2 Alliance
-	Inst34Quest2 = "2. Магическая книга Азурегоса" -- 8575
-	Inst34Quest2_Level = "60"
-	Inst34Quest2_Attain = "60"
-	Inst34Quest2_Aim = "Принесите магическую книгу Азурегоса Нарайну Причуденю в Танарис."
-	Inst34Quest2_Location = "Дух Азурегоса (Азшара; "..YELLOW.."56,83"..WHITE..")"
-	Inst34Quest2_Note = "Вы можете найти Нарайна Причудня в Танарисе около "..YELLOW.."65.17"..WHITE.."."
-	Inst34Quest2_Prequest = "Создание драконов" -- 8555
-	Inst34Quest2_Folgequest = "Перевод книги" -- 8576
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde (same as Quest 1 Alliance)
-	Inst34Quest1_HORDE = Inst34Quest1
-	Inst34Quest1_HORDE_Level = Inst34Quest1_Level
-	Inst34Quest1_HORDE_Attain = Inst34Quest1_Attain
-	Inst34Quest1_HORDE_Aim = Inst34Quest1_Aim
-	Inst34Quest1_HORDE_Location = Inst34Quest1_Location
-	Inst34Quest1_HORDE_Note = Inst34Quest1_Note
-	Inst34Quest1_HORDE_Prequest = Inst34Quest1_Prequest
-	Inst34Quest1_HORDE_Folgequest = Inst34Quest1_Folgequest
-	--
-	Inst34Quest1name1_HORDE = Inst34Quest1name1
-	
-	
-	--Quest 2 Horde (same as Quest 2 Alliance)
-	Inst34Quest2_HORDE = Inst34Quest2
-	Inst34Quest2_HORDE_Level = Inst34Quest2_Level
-	Inst34Quest2_HORDE_Attain = Inst34Quest2_Attain
-	Inst34Quest2_HORDE_Aim = Inst34Quest2_Aim
-	Inst34Quest2_HORDE_Location = Inst34Quest2_Location
-	Inst34Quest2_HORDE_Note = Inst34Quest2_Note
-	Inst34Quest2_HORDE_Prequest = Inst34Quest2_Prequest
-	Inst34Quest2_HORDE_Folgequest = Inst34Quest2_Folgequest
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST35 - Lord Kazzak ---------------
-	Inst35Story = "После поражения Пылающего Легиона в конце Третьей Войны, его оставшиеся силы во главе с гигантским демоном Лордом Каззаком обосновались в Выжженных Землях. И до сих пор они остаются там в области, названной Гниющим Шрамом, в ожидании повторного открытия Темного Портала. По слухам, как только Портал будет вновь открыт, Каззак и его армия отправятся в Запределье - бывшую родину орков мир Дренора, разорванный на части множеством порталов, открытых шаманом Нер`зулом и теперь оккупированный демоническими силами, ведомыми предателей ночным эльфом Иллиданом."
-	Inst35Caption = "Владыка Каззак"
-	Inst35QAA = "Нет заданий"
-	Inst35QAH = "Нет заданий"
-	
-	
-	
-	---------------------------------------------------
-	---------------- BATTLEGROUNDS --------------------
-	---------------------------------------------------
-	
-	--------------- INST36 - Alterac Valley (AV) ---------------
-	Inst36Story = "Давным-давно, еще до начала Первой Войны, злой колдун Гул'дан выслал клан орков, который назывался Северные Волки в неизведанную долину, скрывающуюся глубоко в горах Альтерака. Вот на юге этой долины и жили Северные Волки до появления Тралла.\nПосле триумфального объединения кланов Траллом, клан Северные Волки, возглавляемый орком-шаманом Дрек'Таром, решил остаться в долине, которая так долго была их домом. Но недавно спокойствие Северные Волков было нарушено прибытием Дворфской Экспедицией из Грозовой Вершины.\nЭта экспедиция остановилась в долине, что бы искать полезные ископаемые и древние реликвии. Несмотря на мирные цели экспедиции, само присутсвие дворфов в долине породило жаркий конфликт со Северными Волками, которые поклялись выдворить их за пределы своей земли. "
-	Inst36Caption = "Альтеракская долина"
-	Inst36QAA = "17 заданий"
-	Inst36QAH = "17 заданий"
-	
-	--Quest 1 Alliance
-	Inst36Quest1 = "1. Королевское право" -- 7261
-	Inst36Quest1_Level = "60"
-	Inst36Quest1_Attain = "51"
-	Inst36Quest1_Aim = "Отправляйтесь в Альтеракскую долину, к предгорьям Хилсбрада. Найдите лейтенанта Мурпа рядом со входом в туннель и поговорите с ним."
-	Inst36Quest1_Location = "Лейтенант Ротимер (Стальгорн - Общий зал; "..YELLOW.."30,62"..WHITE..")"
-	Inst36Quest1_Note = "Лейтенант Мурп (Альтеракские горы; "..YELLOW.."39,81"..WHITE..")."
-	Inst36Quest1_Prequest = "Нет"
-	Inst36Quest1_Folgequest = "Испытательные земли" -- 7162
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst36Quest2 = "2. Испытательные земли" -- 7162
-	Inst36Quest2_Level = "60"
-	Inst36Quest2_Attain = "51"
-	Inst36Quest2_Aim = "Отправляйтесь в пещеру Ледяного Крыла, которая расположена в Альтеракской долине, на юго-западе от Дун Болдара, и добудьте знамя Грозовой Вершины. Отдайте знамя лейтенанту Мурпу в Альтеракских горах."
-	Inst36Quest2_Location = "Лейтенант Мурп (Альтеракские горы; "..YELLOW.."39,81"..WHITE..")"
-	Inst36Quest2_Note = "Знамя Грозовой Вершины находится в Пещере Ледяного Крыла около "..YELLOW.."[11]"..WHITE.." на северной карте Альтеракской долины. Говорите с лейтенантом каждый раз, когда вы получаете новый уровень репутации для обновления Знака отличия."
-	Inst36Quest2_Prequest = "Королевское право" -- 7261
-	Inst36Quest2_Folgequest = "Награда найдет героя -> Око Командования" -- 7168 -> 7172
-	--
-	Inst36Quest2name1 = "Stormpike Insignia Rank 1"
-	Inst36Quest2name2 = "The Frostwolf Artichoke"
-	
-	--Quest 3 Alliance
-	Inst36Quest3 = "3. Битва за Альтерак" -- 7141
-	Inst36Quest3_Level = "60"
-	Inst36Quest3_Attain = "51"
-	Inst36Quest3_Aim = "Отправляйтесь в Альтеракскую долину, сразитесь с генералом Орды Дрек'Таром и возвращайтесь к геологу Камнетерке в Альтеракские горы."
-	Inst36Quest3_Location = "Геолог Камнетерка (Альтеракские горы; "..YELLOW.."41,80"..WHITE..") и\n(Альтеракские горы - Север; "..YELLOW.."[B]"..WHITE..")"
-	Inst36Quest3_Note = "Дрек'Тар (Альтеракские горы - Юг; "..YELLOW.."[B]"..WHITE.."). На самом деле его убивать не нужно, чтобы завершить задание. Достаточно выиграть поле боя каким-либо образом.\nПосле завершения этого задания, поговорите с Дрек'Таром снова для получения вознаграждения."
-	Inst36Quest3_Prequest = "Нет"
-	Inst36Quest3_Folgequest = "Герой Грозовой Вершины" -- 8271
-	--
-	Inst36Quest3name1 = "Bloodseeker"
-	Inst36Quest3name2 = "Ice Barbed Spear"
-	Inst36Quest3name3 = "Wand of Biting Cold"
-	Inst36Quest3name4 = "Cold Forged Hammer"
-	
-	--Quest 4 Alliance
-	Inst36Quest4 = "4. Интендант" -- 7121
-	Inst36Quest4_Level = "60"
-	Inst36Quest4_Attain = "51"
-	Inst36Quest4_Aim = "Поговорите с интендантом клана Грозовой Вершины."
-	Inst36Quest4_Location = "Горный пехотинец Гулкий Крик (Альтеракские горы - Север; "..YELLOW.."возле [3] перед мостом"..WHITE..")"
-	Inst36Quest4_Note = "Интендант клана Грозовой Вершины (Альтеракские горы - Север; "..YELLOW.."[7]"..WHITE..") и предоставляет больше заданий."
-	Inst36Quest4_Prequest = "Нет"
-	Inst36Quest4_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 5 Alliance
-	Inst36Quest5 = "5. Припасы Ледяного Зуба" -- 6982
-	Inst36Quest5_Level = "60"
-	Inst36Quest5_Attain = "51"
-	Inst36Quest5_Aim = "Принесите 10 ящиков с припасами Ледяного Зуба интенданту Альянса в Дун Болдар."
-	Inst36Quest5_Location = "Интендант клана Грозовой Вершины (Альтеракские горы - Север; "..YELLOW.."[7]"..WHITE..")"
-	Inst36Quest5_Note = "Припасы могут быть найдены в Руднике Ледяного Зуба около (Альтеракские горы - Юг; "..YELLOW.."[6]"..WHITE..")."
-	Inst36Quest5_Prequest = "Нет"
-	Inst36Quest5_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 6 Alliance
-	Inst36Quest6 = "6. Припасы Железного рудника" -- 5892
-	Inst36Quest6_Level = "60"
-	Inst36Quest6_Attain = "51"
-	Inst36Quest6_Aim = "Принесите 10 припасов Железного рудника интенданту Альянса в Дун Болдар."
-	Inst36Quest6_Location = "Интендант клана Грозовой Вершины (Альтеракские горы - Север; "..YELLOW.."[7]"..WHITE..")"
-	Inst36Quest6_Note = "Припасы могут быть найдены в Железном руднике около (Альтеракские горы - Север; "..YELLOW.."[1]"..WHITE..")."
-	Inst36Quest6_Prequest = "Нет"
-	Inst36Quest6_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 7 Alliance
-	Inst36Quest7 = "7. Обломки брони" -- 7223
-	Inst36Quest7_Level = "60"
-	Inst36Quest7_Attain = "51"
-	Inst36Quest7_Aim = "Принесите 20 обломков брони Мурготу Подземной Кузне в Дун Болдар."
-	Inst36Quest7_Location = "Мургот Подземная Кузня (Альтеракские горы - Север; "..YELLOW.."[4]"..WHITE..")"
-	Inst36Quest7_Note = "Для получения брони осматривайте трупы вражеских игроков. Последующее задание аналогичное, но повторяемое."
-	Inst36Quest7_Prequest = "Нет"
-	Inst36Quest7_Folgequest = "Больше обломков брони" -- 6781
-	-- No Rewards for this quest
-	
-	--Quest 8 Alliance
-	Inst36Quest8 = "8. Захват рудника" -- 7122
-	Inst36Quest8_Level = "60"
-	Inst36Quest8_Attain = "51"
-	Inst36Quest8_Aim = "Захватите рудник, который не принадлежит Грозовой Вершине, и возвращайтесь к сержанту Даргену Грозовой Вершине в Альтеракские горы."
-	Inst36Quest8_Location = "Сержант Дарген Грозовая Вершина (Альтеракские горы; "..YELLOW.."37,77"..WHITE..")"
-	Inst36Quest8_Note = "Чтобы выполнить задание, вы должны убить либо Морлоха в Железном руднике около (Альтеракские горы - Север; "..YELLOW.."[1]"..WHITE.."), либо Надсмотрщика Хныкса в Руднике Ледяного Зуба около (Альтеракские горы - Юг; "..YELLOW.."[6]"..WHITE.."), пока Орда контролирует."
-	Inst36Quest8_Prequest = "Нет"
-	Inst36Quest8_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 9 Alliance
-	Inst36Quest9 = "9. Башни и бункеры" -- 7102
-	Inst36Quest9_Level = "60"
-	Inst36Quest9_Attain = "51"
-	Inst36Quest9_Aim = "Уничтожьте вымпел на вражеской башне или бункере и возвращайтесь к сержанту Даргену Грозовой Вершине в Альтеракские горы."
-	Inst36Quest9_Location = "Сержант Дарген Грозовая Вершина (Альтеракские горы; "..YELLOW.."37,77"..WHITE..")"
-	Inst36Quest9_Note = "Башню или бункер не нужно уничтожать, чтобы завершить задание, достаточно напасть."
-	Inst36Quest9_Prequest = "Нет"
-	Inst36Quest9_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 10 Alliance
-	Inst36Quest10 = "10. Кладбища Альтеракской долины" -- 7081
-	Inst36Quest10_Level = "60"
-	Inst36Quest10_Attain = "51"
-	Inst36Quest10_Aim = "Захватите кладбище, затем возвращайтесь к сержанту Даргену Грозовой Вершине в Альтеракские горы."
-	Inst36Quest10_Location = "Сержант Дарген Грозовая Вершина (Альтеракские горы; "..YELLOW.."37,77"..WHITE..")"
-	Inst36Quest10_Note = "Вам не нужно ничего делать, но быть рядом с кладбищем, когда Альянс атакует его. Для этого не нужно захватывать, достаточно напасть."
-	Inst36Quest10_Prequest = "Нет"
-	Inst36Quest10_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 11 Alliance
-	Inst36Quest11 = "11. Пустые стойла" -- 7027
-	Inst36Quest11_Level = "60"
-	Inst36Quest11_Attain = "51"
-	Inst36Quest11_Aim = "Найдите в Альтеракской долине альтеракского барана. Чтобы приручить барана, используйте учебный ошейник Грозовой Вершины. Для этого надо подойти в барану поближе. Пойманный баран проследует за вами к смотрителю стойл. Поговорите со смотрителем стойл, чтобы получить вознаграждение за пойманных баранов."
-	Inst36Quest11_Location = "Смотритель стойл из клана Грозовой Вершины (Альтеракские горы - Север; "..YELLOW.."[6]"..WHITE..")"
-	Inst36Quest11_Note = "Вы можете найти баранов вне базы. Задание повторяемое до 25 раз за текущую битву. После того, как 25 баранов было приручено кавалеристы клана грозовой вершины прибудут, чтобы помочь в бою."
-	Inst36Quest11_Prequest = "Нет"
-	Inst36Quest11_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 12 Alliance
-	Inst36Quest12 = "12. Упряжь ездовых баранов" -- 7026
-	Inst36Quest12_Level = "60"
-	Inst36Quest12_Attain = "51"
-	Inst36Quest12_Aim = "Убей волка и принеси его мне его шкуру."
-	Inst36Quest12_Location = "Командир наездников на баранах клана Грозовой Вершины (Альтеракские горы - Север; "..YELLOW.."[6]"..WHITE..")"
-	Inst36Quest12_Note = "Северных волков можно найти в южной части Альтеракской долины."
-	Inst36Quest12_Prequest = "Нет"
-	Inst36Quest12_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 13 Alliance
-	Inst36Quest13 = "13. Гроздь кристаллов" -- 7386
-	Inst36Quest13_Level = "60"
-	Inst36Quest13_Attain = "51"
-	Inst36Quest13_Aim = "Есть времена, когда битва может идти день, неделю... В течении этого времени, можно собрать много кристаллов Бури.\nПринеси мне немного кристаллов Бури."
-	Inst36Quest13_Location = "Верховный друид Дикая Лань (Альтеракские горы - Север; "..YELLOW.."[2]"..WHITE..")"
-	Inst36Quest13_Note = "После сдачи около 200 кристаллов, друид Дикая Лань начнет идти к (Альтеракские горы - Север; "..YELLOW.."[19]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Ивус Лесной Властелин будет вызван, чтобы помочь в битве."
-	Inst36Quest13_Prequest = "Нет"
-	Inst36Quest13_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 14 Alliance
-	Inst36Quest14 = "14. Ивус Лесной Властелин" -- 6881
-	Inst36Quest14_Level = "60"
-	Inst36Quest14_Attain = "51"
-	Inst36Quest14_Aim = "Солдаты Северного Волка носят талисманы стихий, которые называются кристаллами бури. Мы можем использовать их, чтобы связаться с Ивусом. Ступай и добудь эти кристаллы!"
-	Inst36Quest14_Location = "Верховный друид Дикая Лань (Альтеракские горы - Север; "..YELLOW.."[2]"..WHITE..")"
-	Inst36Quest14_Note = "После сдачи около 200 кристаллов, друид Дикая Лань начнет идти к (Альтеракские горы - Север; "..YELLOW.."[19]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Ивус Лесной Властелин будет вызван, чтобы помочь в битве."
-	Inst36Quest14_Prequest = "Нет"
-	Inst36Quest14_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 15 Alliance
-	Inst36Quest15 = "15. Небо зовет – флот Макарча" -- 6942
-	Inst36Quest15_Level = "60"
-	Inst36Quest15_Attain = "51"
-	Inst36Quest15_Aim = "Мы готовы нанести удар по линии фронта, но мы не сможем нанести удар, пока их ряды не поредеют. Принеси мне жетон солдата Северного Волка.\nКак только их ряды поредеют, мы вызовем поддержку с воздуха!"
-	Inst36Quest15_Location = "Командир звена Макарча (Альтеракские горы - Север; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest15_Note = "Убивайте NPC Орды, чтобы получить Жетон солдата Северного Волка."
-	Inst36Quest15_Prequest = "Нет"
-	Inst36Quest15_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 16 Alliance
-	Inst36Quest16 = "16. Небо зовет – флот Сквороца" -- 6941
-	Inst36Quest16_Level = "60"
-	Inst36Quest16_Attain = "51"
-	Inst36Quest16_Aim = "Элитное подразделение Северного Волка, которые охраняют линии, должны быть уничтожены! Принеси мне жетон лейтенанта Северного Волка. Когда я узнаю что было повержено достаточно негодников, я нанесу воздушный удар."
-	Inst36Quest16_Location = "Командир звена Сквороц (Альтеракские горы - Север; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest16_Note = "Убивайте NPC Орды, чтобы получить Жетон лейтенанта Северного Волка."
-	Inst36Quest16_Prequest = "Нет"
-	Inst36Quest16_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 17 Alliance
-	Inst36Quest17 = "17. Небо зовет – флот Ромеона" -- 6943
-	Inst36Quest17_Level = "60"
-	Inst36Quest17_Attain = "51"
-	Inst36Quest17_Aim = "Возвращайся на поле битвы и лиши клан Северного Волка командования. Сокруши всех стражей и командиров! Все они носят медали. Собери с трупов столько их медалей, сколько сможешь унести, и возвращайся ко мне."
-	Inst36Quest17_Location = "Командир звена Ромеон (Альтеракские горы - Север; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest17_Note = "Убивайте NPC Орды, чтобы получить Жетон командира Северного Волка. После сдачи 50 раз, Командир звена Ромеон либо отправит грифона, чтобы напасть на базу Орды, либо даст вам маяк, чтобы поставить в кладбище Снегопада. Если маяк защищен достаточно долго грифон придет, чтобы защищать его."
-	Inst36Quest17_Prequest = "Нет"
-	Inst36Quest17_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	--Quest 1 Horde
-	Inst36Quest1_HORDE = "1. Защита клана Северного Волка" -- 7241
-	Inst36Quest1_HORDE_Level = "60"
-	Inst36Quest1_HORDE_Attain = "51"
-	Inst36Quest1_HORDE_Aim = "Отправляйтесь в Альтеракскую долину, расположенную в Альтеракских горах. Найдите воеводу Лаггронда у входа в тоннель и поговорите с ним, чтобы начать свою военную карьеру в клане Северного Волка. Альтеракская долина находится к северу от деревни Мельница Таррен у подножия Альтеракских гор."
-	Inst36Quest1_HORDE_Location = "Посол клана Северного Волка Рокстром (Оргриммар - Аллея Силы; "..YELLOW.."50,71"..WHITE..")"
-	Inst36Quest1_HORDE_Note = "Воевода Лаггронд (Альтеракские горы; "..YELLOW.."62,59"..WHITE..")."
-	Inst36Quest1_HORDE_Prequest = "Нет"
-	Inst36Quest1_HORDE_Folgequest = "Испытательные земли" -- 7161
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst36Quest2_HORDE = "2. Испытательные земли" -- 7161
-	Inst36Quest2_HORDE_Level = "60"
-	Inst36Quest2_HORDE_Attain = "51"
-	Inst36Quest2_HORDE_Aim = "Отправляйтесь в пещеру Дикой Лапы, расположенную на юго-востоке от основной базы в Альтеракской долине, и добудьте знамя Северного Волка. Отнесите знамя Северного Волка воеводе Лаггронду."
-	Inst36Quest2_HORDE_Location = "Воевода Лаггронд (Альтеракские горы; "..YELLOW.."62,59"..WHITE..")"
-	Inst36Quest2_HORDE_Note = "Знамя Северного Волка находится в пещере Дикой Лапы около (Альтеракские горы - Юг; "..YELLOW.."[9]"..WHITE.."). Говорите с лейтенантом каждый раз, когда вы получаете новый уровень репутации для обновления Знака отличия."
-	Inst36Quest2_HORDE_Prequest = "Защита клана Северного Волка" -- 7241
-	Inst36Quest2_HORDE_Folgequest = "Награда найдет героя -> Око Командования" -- 7168 -> 7172
-	--
-	Inst36Quest2name1_HORDE = "Frostwolf Insignia Rank 1"
-	Inst36Quest2name2_HORDE = "Peeling the Onion"
-	
-	--Quest 3 Horde
-	Inst36Quest3_HORDE = "3. Битва за Альтерак" -- 7142
-	Inst36Quest3_HORDE_Level = "60"
-	Inst36Quest3_HORDE_Attain = "51"
-	Inst36Quest3_HORDE_Aim = "Отправляйтесь в Альтеракскую долину и убейте генерала дворфов, Вандара Грозовую Вершину. После этого возвращайтесь к Вогге Смертобою в Альтеракские горы."
-	Inst36Quest3_HORDE_Location = "Вогга Смертобой (Альтеракские горы; "..YELLOW.."64,60"..WHITE..")"
-	Inst36Quest3_HORDE_Note = "Вандар Грозовая Вершина (Альтеракские горы - Север; "..YELLOW.."[B]"..WHITE.."). He does not actually need to be killed to complete the quest. The battleground just has to be won by your side in any manner.\nAfter turning this quest in, talk to the NPC again for the reward."
-	Inst36Quest3_HORDE_Prequest = "Нет"
-	Inst36Quest3_HORDE_Folgequest = "Герой Северного Волка" -- 8272
-	--
-	Inst36Quest3name1_HORDE = "Bloodseeker"
-	Inst36Quest3name2_HORDE = "Ice Barbed Spear"
-	Inst36Quest3name3_HORDE = "Wand of Biting Cold"
-	Inst36Quest3name4_HORDE = "Cold Forged Hammer"
-	
-	--Quest 4 Horde
-	Inst36Quest4_HORDE = "4. Разговор с интендантом" -- 7123
-	Inst36Quest4_HORDE_Level = "60"
-	Inst36Quest4_HORDE_Attain = "51"
-	Inst36Quest4_HORDE_Aim = "Поговорите с интендантом клана Северного Волка."
-	Inst36Quest4_HORDE_Location = "Джотек (Альтеракские горы - Юг; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest4_HORDE_Note = "Интендант клана Северного Волка "..YELLOW.."[10]"..WHITE.." и предоставляет больше заданий."
-	Inst36Quest4_HORDE_Prequest = "Нет"
-	Inst36Quest4_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 5 Horde
-	Inst36Quest5_HORDE = "5. Припасы Ледяного Зуба" -- 5893
-	Inst36Quest5_HORDE_Level = "60"
-	Inst36Quest5_HORDE_Attain = "51"
-	Inst36Quest5_HORDE_Aim = "Доставьте 10 припасов Ледяного Зуба интенданту Орды в крепость Северного Волка."
-	Inst36Quest5_HORDE_Location = "Интендант клана Северного Волка (Альтеракские горы - Юг; "..YELLOW.."[10]"..WHITE..")"
-	Inst36Quest5_HORDE_Note = "Припасы могут быть найдены в Руднике Ледяного Зуба около (Альтеракские горы - Юг; "..YELLOW.."[6]"..WHITE..")."
-	Inst36Quest5_HORDE_Prequest = "Нет"
-	Inst36Quest5_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 6 Horde
-	Inst36Quest6_HORDE = "6. Припасы Железного рудника" -- 6985
-	Inst36Quest6_HORDE_Level = "60"
-	Inst36Quest6_HORDE_Attain = "51"
-	Inst36Quest6_HORDE_Aim = "Доставьте 10 ящиков припасов Железного рудника интенданту Орды в крепость Северного Волка."
-	Inst36Quest6_HORDE_Location = "Интендант клана Северного Волка (Альтеракские горы - Юг; "..YELLOW.."[10]"..WHITE..")"
-	Inst36Quest6_HORDE_Note = "Припасы могут быть найдены в Железном руднике около (Альтеракские горы - Север; "..YELLOW.."[1]"..WHITE..")."
-	Inst36Quest6_HORDE_Prequest = "Нет"
-	Inst36Quest6_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 7 Horde
-	Inst36Quest7_HORDE = "7. Вражеский трофей" -- 7224
-	Inst36Quest7_HORDE_Level = "60"
-	Inst36Quest7_HORDE_Attain = "51"
-	Inst36Quest7_HORDE_Aim = "Принесите 20 обломков брони кузнецу Регзару в деревню Северного Волка."
-	Inst36Quest7_HORDE_Location = "Кузнец Регзар (Альтеракские горы - Юг; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest7_HORDE_Note = "Для получения брони осматривайте трупы вражеских игроков. Последующее задание аналогичное, но повторяемое."
-	Inst36Quest7_HORDE_Prequest = "Нет"
-	Inst36Quest7_HORDE_Folgequest = "Больше добычи!" -- 6741
-	-- No Rewards for this quest
-	
-	--Quest 8 Horde
-	Inst36Quest8_HORDE = "8. Захват рудника" -- 7124
-	Inst36Quest8_HORDE_Level = "60"
-	Inst36Quest8_HORDE_Attain = "51"
-	Inst36Quest8_HORDE_Aim = "Захватите рудник и возвращайтесь к капралу Тике Кровавому Рыку в Альтеракские горы."
-	Inst36Quest8_HORDE_Location = "Капрал Тика Кровавый Рык (Альтеракские горы; "..YELLOW.."66,55"..WHITE..")"
-	Inst36Quest8_HORDE_Note = "Чтобы выполнить задание, вы должны убить либо Морлоха в Железном руднике около (Альтеракские горы - Север; "..YELLOW.."[1]"..WHITE.."), либо Надсмотрщика Хныкса в Руднике Ледяного Зуба около (Альтеракские горы - Юг; "..YELLOW.."[6]"..WHITE.."), пока Альянс контролирует."
-	Inst36Quest8_HORDE_Prequest = "Нет"
-	Inst36Quest8_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 9 Horde
-	Inst36Quest9_HORDE = "9. Башни и бункеры" -- 7101
-	Inst36Quest9_HORDE_Level = "60"
-	Inst36Quest9_HORDE_Attain = "51"
-	Inst36Quest9_HORDE_Aim = "Захватите башню врага и возвращайтесь к капралу Тике Кровавому Рыку в Альтеракские горы."
-	Inst36Quest9_HORDE_Location = "Капрал Тика Кровавый Рык (Альтеракские горы; "..YELLOW.."66,55"..WHITE..")"
-	Inst36Quest9_HORDE_Note = "Башню или бункер не нужно уничтожать, чтобы завершить задание, достаточно напасть."
-	Inst36Quest9_HORDE_Prequest = "Нет"
-	Inst36Quest9_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 10 Horde
-	Inst36Quest10_HORDE = "10. Кладбища долины Альтерака" -- 7082
-	Inst36Quest10_HORDE_Level = "60"
-	Inst36Quest10_HORDE_Attain = "51"
-	Inst36Quest10_HORDE_Aim = "Захватите кладбище, затем возвращайтесь к капралу Тике Кровавому Рыку в Альтеракские горы."
-	Inst36Quest10_HORDE_Location = "Капрал Тика Кровавый Рык (Альтеракские горы; "..YELLOW.."66,55"..WHITE..")"
-	Inst36Quest10_HORDE_Note = "Вам не нужно ничего делать, но быть рядом с кладбищем, когда Орда атакует его. Для этого не нужно захватывать, достаточно напасть."
-	Inst36Quest10_HORDE_Prequest = "Нет"
-	Inst36Quest10_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 11 Horde
-	Inst36Quest11_HORDE = "11. Пустые стойла" -- 7001
-	Inst36Quest11_HORDE_Level = "60"
-	Inst36Quest11_HORDE_Attain = "51"
-	Inst36Quest11_HORDE_Aim = "Найдите северного волка в Альтеракской долине. Подойдите к нему на достаточное расстояние, чтобы его 'приручить', и используйте намордник Северного Волка. После приручения северный волк проследует за вами к смотрителю стойл из клана Северного Волка. Поговорите со смотрителем, чтобы получить награду за пойманных волков."
-	Inst36Quest11_HORDE_Location = "Смотритель стойл из клана Северного Волка (Альтеракские горы - Юг; "..YELLOW.."[9]"..WHITE..")"
-	Inst36Quest11_HORDE_Note = "Вы можете найти волков вне базы. Задание повторяемое до 25 раз за текущую битву. После того, как 25 волков было приручено кавалеристы клана северного волка прибудут, чтобы помочь в бою."
-	Inst36Quest11_HORDE_Prequest = "Нет"
-	Inst36Quest11_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 12 Horde
-	Inst36Quest12_HORDE = "12. Упряжь из бараньей кожи" -- 7002
-	Inst36Quest12_HORDE_Level = "60"
-	Inst36Quest12_HORDE_Attain = "51"
-	Inst36Quest12_HORDE_Aim = "Тебе нужно нанести удар по местным баранам, которых использует Грозовая кавалерия."
-	Inst36Quest12_HORDE_Location = "Командир всадников на волках клана Северного Волка (Альтеракские горы - Юг; "..YELLOW.."[9]"..WHITE..")"
-	Inst36Quest12_HORDE_Note = "Бараны могут быть найдены на севере Альтеракской долины."
-	Inst36Quest12_HORDE_Prequest = "Нет"
-	Inst36Quest12_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 13 Horde
-	Inst36Quest13_HORDE = "13. Галлон крови" -- 7385
-	Inst36Quest13_HORDE_Level = "60"
-	Inst36Quest13_HORDE_Attain = "51"
-	Inst36Quest13_HORDE_Aim = "Вы должны нанести удар по нашим врагам и принести мне их кровь."
-	Inst36Quest13_HORDE_Location = "Шаманка стихий Турлога (Альтеракские горы - Юг; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest13_HORDE_Note = "После сдачи около 150 крови, Шаманка стихий Турлога начнет идти к (Альтеракские горы - Юг; "..YELLOW.."[14]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Локолар Владыка Льда будет вызван, чтобы помочь в битве."
-	Inst36Quest13_HORDE_Prequest = "Нет"
-	Inst36Quest13_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 14 Horde
-	Inst36Quest14_HORDE = "14. Локолар Владыка Льда" -- 6801
-	Inst36Quest14_HORDE_Level = "60"
-	Inst36Quest14_HORDE_Attain = "51"
-	Inst36Quest14_HORDE_Aim = "Убивайте наших врагов и несите мне их кровь. Как только наберется достаточно крови, можно будет начать ритуал призыва.\nКогда могучий элементаль обрушится на армию Грозовой Вершины, победа будет наша!"
-	Inst36Quest14_HORDE_Location = "Шаманка стихий Турлога (Альтеракские горы - Юг; "..YELLOW.."[8]"..WHITE..")"
-	Inst36Quest14_HORDE_Note = "После сдачи около 150 крови, Шаманка стихий Турлога начнет идти к (Альтеракские горы - Юг; "..YELLOW.."[14]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Локолар Владыка Льда будет вызван, чтобы помочь в битве."
-	Inst36Quest14_HORDE_Prequest = "Нет"
-	Inst36Quest14_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 15 Horde
-	Inst36Quest15_HORDE = "15. Небо зовет – флот Смуггла" -- 6825
-	Inst36Quest15_HORDE_Level = "60"
-	Inst36Quest15_HORDE_Attain = "51"
-	Inst36Quest15_HORDE_Aim = "Мы должны подготовить новый флот! Мои всадники намерены нанести удар по центру боя. Но в начале нужно утолить их голод.\nМне нужно достаточно мяса, чтобы прокормить солдат, целый флот! Сотни килограмм! Ты же сможешь добыть мяса?"
-	Inst36Quest15_HORDE_Location = "Командир звена Смуггл (Альтеракские горы - Юг; "..YELLOW.."[13]"..WHITE..")"
-	Inst36Quest15_HORDE_Note = "Убивайте NPC Альянса, чтобы получить Плоть солдата Грозовой Вершины."
-	Inst36Quest15_HORDE_Prequest = "Нет"
-	Inst36Quest15_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 16 Horde
-	Inst36Quest16_HORDE = "16. Небо зовет – флот Мааши" -- 6826
-	Inst36Quest16_HORDE_Level = "60"
-	Inst36Quest16_HORDE_Attain = "51"
-	Inst36Quest16_HORDE_Aim = "Вы много работали, но мы только начали!\nМой флот второй самый мощьный флот из всех. Мы будем стрелять по самым сильным нашим противникам. Но нам нужна Плоть лейтенанта Грозовой Вершины.$B$BПоспеши солдат!"
-	Inst36Quest16_HORDE_Location = "Командир звена Мааша (Альтеракские горы - Юг; "..YELLOW.."[13]"..WHITE..")"
-	Inst36Quest16_HORDE_Note = "Убивайте NPC Альянса, чтобы получить Плоть лейтенанта Грозовой Вершины."
-	Inst36Quest16_HORDE_Prequest = "Нет"
-	Inst36Quest16_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 17 Horde
-	Inst36Quest17_HORDE = "17. Небо зовет – флот Маэстра" -- 6827
-	Inst36Quest17_HORDE_Level = "60"
-	Inst36Quest17_HORDE_Attain = "51"
-	Inst36Quest17_HORDE_Aim = "Я был несколько дней заперт в дворфийской дыре! Тебе лучше поверить, я хочу мести!\nМы должны все тщательно спланировать.\nНам нужна плоть командира Грозовой Вершины, но эти жуки прячутся в тылу нашего врага."
-	Inst36Quest17_HORDE_Location = "Командир звена Маэстр (Альтеракские горы - Юг; "..YELLOW.."[13]"..WHITE..")"
-	Inst36Quest17_HORDE_Note = "Убивайте NPC Альянса, чтобы получить Плоть командира Грозовой Вершины."
-	Inst36Quest17_HORDE_Prequest = "Нет"
-	Inst36Quest17_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	
-	
-	--------------- INST37 - Arathi Basin (AB) ---------------
-	Inst37Story = "Низина Арати, расположенная в Нагорье Арати, это быстрое и захватывающее Поле сражений. Низина богата ресурсами и ею жаждут обладать и Орда, и Альянс. Отрекшиеся осквернители и Лига Аратора прибыли в низину Арати, чтобы побороться за природные ресурсы и заявить на них права от лица представляемых ими сторон."
-	Inst37Caption = "Низина Арати"
-	Inst37QAA = "3 задания"
-	Inst37QAH = "3 задания"
-	
-	--Quest 1 Alliance
-	Inst37Quest1 = "1. Битва за Низину Арати" -- 8105
-	Inst37Quest1_Level = "55"
-	Inst37Quest1_Attain = "50"
-	Inst37Quest1_Aim = "Нападите на рудник, лесопилку, кузницу и ферму и возвращайтесь к фельдмаршалу Освету в Опорный пункт."
-	Inst37Quest1_Location = "Фельдмаршал Освет (Нагорье Арати - Опорный пункт; "..YELLOW.."46,45"..WHITE..")"
-	Inst37Quest1_Note = "Места для нападения отмечены на карте с 2 по 5."
-	Inst37Quest1_Prequest = "Нет"
-	Inst37Quest1_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Alliance
-	Inst37Quest2 = "2. Контроль над четырьмя базами" -- 8114
-	Inst37Quest2_Level = "60"
-	Inst37Quest2_Attain = "60"
-	Inst37Quest2_Aim = "Отправляйтесь в Низину Арати, захватите и удержите контроль над четырьмя базами одновременно, затем возвращайтесь к фельдмаршалу Освету в Опорный пункт."
-	Inst37Quest2_Location = "Фельдмаршал Освет (Нагорье Арати - Опорный пункт; "..YELLOW.."46,45"..WHITE..")"
-	Inst37Quest2_Note = "Вам нужно дружелюбие с Лигой Аратора, чтобы получить это задание"
-	Inst37Quest2_Prequest = "Нет"
-	Inst37Quest2_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 3 Alliance
-	Inst37Quest3 = "3. Контроль над пятью базами" -- 8115
-	Inst37Quest3_Level = "60"
-	Inst37Quest3_Attain = "60"
-	Inst37Quest3_Aim = "Возьмите под контроль одновременно все 5 баз в Низине Арати, а затем возвращайтесь к фельдмаршалу Освету в Опорный пункт."
-	Inst37Quest3_Location = "Фельдмаршал Освет (Нагорье Арати - Опорный пункт; "..YELLOW.."46,45"..WHITE..")"
-	Inst37Quest3_Note = "Вам нужно превознесение с Лигой Аратора, чтобы получить это задание"
-	Inst37Quest3_Prequest = "Нет"
-	Inst37Quest3_Folgequest = "Нет"
-	--
-	Inst37Quest3name1 = "Arathor Battle Tabard"
-	
-	
-	--Quest 1 Horde
-	Inst37Quest1_HORDE = "1. Битва за Низину Арати"
-	Inst37Quest1_HORDE_Level = "25"
-	Inst37Quest1_HORDE_Attain = "25"
-	Inst37Quest1_HORDE_Aim = "Нападите на рудник, лесопилку, кузницу и стойла в Низине Арати и возвращайтесь к повелительнице смерти Двайр в Павший Молот."
-	Inst37Quest1_HORDE_Location = "Повелительница смерти Двайр (Нагорье Арати - Павший Молот; "..YELLOW.."74,35"..WHITE..")"
-	Inst37Quest1_HORDE_Note = "Места для нападения отмечены на карте с 1 по 4."
-	Inst37Quest1_HORDE_Prequest = "Нет"
-	Inst37Quest1_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 2 Horde
-	Inst37Quest2_HORDE = "2. Захват четырех баз" -- 8121
-	Inst37Quest2_HORDE_Level = "60"
-	Inst37Quest2_HORDE_Attain = "60"
-	Inst37Quest2_HORDE_Aim = "Удерживайте одновременно четыре базы в Низине Арати, а затем возвращайтесь к повелительнице смерти Двайр в Павший Молот."
-	Inst37Quest2_HORDE_Location = "Повелительница смерти Двайр (Нагорье Арати - Павший Молот; "..YELLOW.."74,35"..WHITE..")"
-	Inst37Quest3_HORDE_Note = "Вам нужно превознесение с Осквернителями, чтобы получить это задание"
-	Inst37Quest2_HORDE_Prequest = "Нет"
-	Inst37Quest2_HORDE_Folgequest = "Нет"
-	-- No Rewards for this quest
-	
-	--Quest 3 Horde
-	Inst37Quest3_HORDE = "3. Занять пять баз" -- 8122
-	Inst37Quest3_HORDE_Level = "60"
-	Inst37Quest3_HORDE_Attain = "60"
-	Inst37Quest3_HORDE_Aim = "Захватите и удерживайте все пять баз в Низине Арати, затем возвращайтесь к повелительнице смерти Двайр в Павший Молот."
-	Inst37Quest3_HORDE_Location = "Повелительница смерти Двайр (Нагорье Арати - Павший Молот; "..YELLOW.."74,35"..WHITE..")"
-	Inst37Quest3_HORDE_Note = "Вам нужно превознесение с Осквернителями, чтобы получить это задание"
-	Inst37Quest3_HORDE_Prequest = "Нет"
-	Inst37Quest3_HORDE_Folgequest = "Нет"
-	--
-	Inst37Quest3name1_HORDE = "Battle Tabard of the Defilers"
-	
-	
-	
-	--------------- INST38 - Warsong Gulch (WSG) ---------------
-	Inst38Story = "Ущелье Песни Войны располагается в южной области Ясеневого Леса, на границе со Степями – около местности, где Гром Адский Крик и его Орки вырубали огромные просеки в лесах во время событий Третьей войны. Некоторые Орки так и остались в тех местах, продолжая вырубать леса, чтобы снабжать древесиной растущую Орду.\nНочные эльфы, которые начали массированную военную компанию, чтобы вернуть себе Ясеневый Лес, теперь сосредоточили свое внимание на избавлении своих земель от оставшихся орков раз и навсегда. Серебряные Стражи, откликнулись на зов и поклялись, что они не успокоятся, пока все Орки до единого не будут побеждены и выкинуты из Ущелья Песни Войны."
-	Inst38Caption = "Ущелье Песни Войны"
-	Inst38QAA = "Нет заданий"
-	Inst38QAH = "Нет заданий"
-	
-	
-	
-	
-	---------------------------
-	--- AQ Instance Numbers ---
-	---------------------------
-	
-	-- 1  = Deadmines (VC)
-	-- 2  = Wailing Caverns (WC)
-	-- 3  = Ragefire Chasm (RFC)
-	-- 4  = Uldaman (ULD)
-	-- 5  = Blackrock Depths (BRD)
-	-- 6  = Blackwing Lair (BWL)
-	-- 7  = Blackfathom Deeps (BFD)
-	-- 8  = Lower Blackrock Spire (LBRS)
-	-- 9  = Upper Blackrock Spire (UBRS)
-	-- 10 = Dire Maul East (DM)
-	-- 11 = Dire Maul North (DM)
-	-- 12 = Dire Maul West (DM)
-	-- 13 = Maraudon (Mara)
-	-- 14 = Molten Core (MC)
-	-- 15 = Naxxramas (Naxx)
-	-- 16 = Onyxia's Lair (Ony)
-	-- 17 = Razorfen Downs (RFD)
-	-- 18 = Razorfen Kraul (RFK)
-	-- 19 = SM: Library (SM Lib)
-	-- 20 = SM: Armory (SM Arm)
-	-- 21 = SM: Cathedral (SM Cath)
-	-- 22 = SM: Graveyard (SM GY)
-	-- 23 = Scholomance (Scholo)
-	-- 24 = Shadowfang Keep (SFK)
-	-- 25 = Stratholme (Strat)
-	-- 26 = The Ruins of Ahn'Qiraj (AQ20)
-	-- 27 = The Stockade (Stocks)
-	-- 28 = Sunken Temple (ST)
-	-- 29 = The Temple of Ahn'Qiraj (AQ40)
-	-- 30 = Zul'Farrak (ZF)
-	-- 31 = Zul'Gurub (ZG)
-	-- 32 = Gnomeregan (Gnomer)
-	-- 33 = Four Dragons
-	-- 34 = Azuregos
-	-- 35 = Lord Kazzak
-	-- 36 = Alterac Valley (AV)
-	-- 37 = Arathi Basin (AB)
-	-- 38 = Warsong Gulch (WSG)
-	-- 99 =  default "rest"
--- end
+	Russian localization by Lichery
+	
+	AtlasQuest, a World of Warcraft addon.
+	Email me at m4r3lk4@gmail.com
+	
+	This file is part of AtlasQuest.
+	
+	AtlasQuest is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+	
+	AtlasQuest is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with AtlasQuest; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+	классовые квесты
+--]]
+
+if ( GetLocale() ~= "ruRU" ) then
+	return
+end
+
+local GREY = "|cff999999";
+local RED = "|cffFF0000";
+local REDA = "|cffcc6666";
+local WHITE = "|cffFFFFFF";
+local GREEN = "|cff1eff00";
+local PURPLE = "|cff9F3FFF";
+local BLUE = "|cff0070dd";
+local ORANGE = "|cffFF8400";
+local NORMAL = "|cffFFd200";
+
+local MAGE = "|cff69ccf0";
+local PALADIN = "|cfff58cba";
+local WARRIOR = "|cffc79c6e";
+local ROGUE = "|cfffff569";
+local DRUID = "|cffff7d0a";
+local HUNTER = "|cffabd473";
+local SHAMAN = "|cff0070de";
+local WARLOCK = "|cff9482c9";
+
+local L = AtlasQuest.L
+
+L.OPTIONS = "Настройки AtlasQuest"
+L.AUTOSHOW = "Показывать панель AtlasQuest вместе с Атласом."
+L.SHOW_ON_LEFT = "Показать панель AtlasQuest "..WHITE.."слева."
+L.SHOW_ON_RIGHT = "Показать панель AtlasQuest "..WHITE.."справа."
+
+L["Options"] = "Настройки"
+L["Story"] = "История"
+L["No Rewards"] = "Нет наград"
+L["Reward: "] = "Награда: "
+L["Attain: "] = "Доступно: "
+L["Level: "] = "Уровень: "
+L["Starts at:\n"] = "Начинается у:\n"
+L["Objective:\n"] = "Цель:\n"
+L["Note:\n"] = "Заметка:\n"
+L["Prequest: "]= "Предыдущее задание: "
+L["Quest follows: "] = "Следующее задание: "
+L["Quest finished:"] = "Задание сделано:"
+
+L.DAGGER = " Кинжал"
+L.POLEARM = " Древковое"
+L.SWORD = " Меч"
+L.AXE = " Топор"
+L.WAND = "Жезл"
+L.STAFF = "Посох"
+L.MACE = " Дробящее"
+L.SHIELD = "Щит"
+L.GUN = "Огнестрельное"
+L.BOW = "Лук"
+L.CROSSBOW = "Арбалет"
+L.THROWN = "Метательное"
+
+L.WAIST = "Пояс"
+L.SHOULDER = "Плечо"
+L.CHEST = "Грудь"
+L.LEGS = "Ноги"
+L.HANDS = "Кисти рук"
+L.FEET = "Ступни"
+L.WRIST = "Запястья"
+L.HEAD = "Голова"
+L.BACK = "Спина"
+L.TABARD = "Гербовая накидка"
+
+L.CLOTH = " Ткань"
+L.LEATHER = " Кожа"
+L.MAIL = " Кольчуга"
+L.PLATE = " Латы"
+
+L.OFFHAND = "Левая рука"
+L.MAINHAND = "Правая рука"
+L.ONEHAND = "Одноручное"
+L.TWOHAND = "Двуручное"
+
+L.ITEM = "Предмет" -- Use this for those oddball rewards which aren't really anything else.
+L.TRINKET = "Аксессуар"
+L.RELIC = "Реликвия"
+L.POTION = "Зелье"
+L.HELD_IN_OFFHAND = "Левая рука"
+L.NECK = "Шея"
+L.PATTERN = "Выкройка"
+L.BAG = "Сумка"
+L.RING = "Палец"
+L.KEY = "Ключ"
+L.QUIVER = "Колчан"
+L.AMMOPOUCH = "Подсумок"
+L.ENCHANT = "Чары"
+
+-- 1 - Deadmines
+-- 2 - Wailing Caverns
+-- 3 - Ragefire Chasm
+-- 4 - Uldaman
+-- 5 - Blackrock Depths
+-- 6 - Blackwing Lair
+-- 7 - Blackfathom Deeps
+-- 8 - Lower Blackrock Spire
+-- 9 - Upper Blackrock Spire
+-- 10 - Dire Maul East
+-- 11 - Dire Maul North
+-- 12 - Dire Maul West
+-- 13 - Maraudon
+-- 14 - Molten Core
+-- 15 - Naxxramas
+-- 16 - Onyxia's Lair
+-- 17 - Razorfen Downs
+-- 18 - Razorfen Kraul
+-- 19 - SM: Library
+-- 20 - SM: Armory
+-- 21 - SM: Cathedral
+-- 22 - SM: Graveyard
+-- 23 - Scholomance
+-- 24 - Shadowfang Keep
+-- 25 - Stratholme
+-- 26 - The Ruins of Ahn'Qiraj
+-- 27 - The Stockade
+-- 28 - Sunken Temple
+-- 29 - The Temple of Ahn'Qiraj
+-- 30 - Zul'Farrak
+-- 31 - Zul'Gurub
+-- 32 - Gnomeregan
+-- 33 - Dragons of Nightmare
+-- 34 - Azuregos
+-- 35 - Lord Kazzak
+-- 36 - Alterac Valley
+-- 37 - Arathi Basin
+-- 38 - Warsong Gulch
+
+-- TODO TRANSLATE
+-- 39 - The Crescent Grove
+-- 40 - Hateforge Quarry
+-- 41 - Karazhan Crypt
+-- 42 - Black Morass
+-- 43 - Stormwind Vault
+-- 44 - Gilneas City
+-- 45 - Lower Karazhan Halls
+-- 46 - Emerald Sanctum
+-- 47 - Ostarius of Uldum
+
+-- TODO ADD
+-- 48 - Dragonmaw Retreat
+-- 49 - Stormwrought Ruins
+
+AtlasQuest.data = {
+	[1] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы можете получить красные шелковые банданы с шахтеров в Мертвых копях или в городе, где находится подземелье. Задание становится доступным после выполнения цепочки заданий Братства Справедливости до стадии когда вам нужно убить Эдвина Ван Клифа.",
+				["id"] = 214,
+				["attain"] = 14,
+				["aim"] = "Принесите 10 красных шелковых бандан разведчице Риэле к башне на Сторожевом холме.",
+				["prequest"] = "Братство Справедливости (id = 155)",
+				["title"] = "Красные шелковые банданы",
+				["location"] = "Разведчица Риэла (Западный Край - Сторожевой холм; |cffffff0056, 47"..WHITE..")",
+				["level"] = 17,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Solid Shortblade",
+						["id"] = 2074,
+						["icon"] = "INV_Sword_23",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Scrimshaw Dagger",
+						["id"] = 2089,
+						["icon"] = "INV_Weapon_ShortBlade_01",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Piercing Axe",
+						["id"] = 6094,
+						["icon"] = "INV_ThrowingAxe_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Карточки падают с нежити снаружи подземелья в зоне около |cffffff00[3]"..WHITE.." на карте входа.",
+				["id"] = 168,
+				["attain"] = 14,
+				["aim"] = "Добудьте 4 карточки Союза шахтеров и верните их Дикому Чертополохху в Штормград.",
+				["title"] = "Сбор воспоминаний",
+				["location"] = "Чертополох Дикий (Штормград - Квартал дворфов; |cffffff0065, 21"..WHITE.." )",
+				["level"] = 18,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.MAIL,
+						["name"] = "Tunneler's Boots",
+						["id"] = 2037,
+						["icon"] = "INV_Boots_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Dusty Mining Gloves",
+						["id"] = 2036,
+						["icon"] = "INV_Gauntlets_05",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вилдер Крапивец находится снаружи подземелья",
+				["id"] = 167,
+				["attain"] = 15,
+				["aim"] = "Принесите значок Лиги Исследователей, принадлежавший штейгеру Чертополоху в Штормград.",
+				["title"] = "О, брат мой...",
+				["location"] = "Вилдер Крапивец (Штормград - Квартал дворфов; |cffffff0065,21"..WHITE.." )",
+				["level"] = 20,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Miner's Revenge",
+						["id"] = 1893,
+						["icon"] = "INV_Pick_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Предшествующее задание можно взять у Гноарна (Стальгорн - Город механиков; |cffffff0069,50"..WHITE..").\nЗубчатый спрек-механизм гномов добывается с Крошшера Снида |cffffff00[3]"..WHITE..".",
+				["id"] = 2040,
+				["attain"] = 15,
+				["aim"] = "Принесите Шони Молшунье в Штормград зубчатый спрек-механизм гномов из Мертвых копей.",
+				["prequest"] = "Разговор с Шони",
+				["title"] = "Битва под землей",
+				["location"] = "Шони Молшунья (Штормград - Квартал дворфов; |cffffff0055,12"..WHITE.." )",
+				["level"] = 20,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Polar Gauntlets",
+						["id"] = 7606,
+						["icon"] = "INV_Gauntlets_04",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAND,
+						["name"] = "Sable Wand",
+						["id"] = 7607,
+						["icon"] = "INV_Staff_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы начинаете линейку у Гриана Камнегрива (Западный Край - Сторожевой холм; |cffffff0056,47"..WHITE..").\nЭдвин Ван Клиф это последний босс в Мертвых копях. Вы найдете его на верхней палубе корабля |cffffff00[6]"..WHITE..".",
+				["id"] = 166,
+				["attain"] = 14,
+				["aim"] = "Убейте Эдвина ван Клифа и принесите его голову Гриану Камнегриву.",
+				["prequest"] = "Братство справедливости",
+				["title"] = "Братство Справедливости",
+				["location"] = "Гриан Камнегрив (Западный край - Сторожевой холм; |cffffff0056,47"..WHITE..")",
+				["level"] = 22,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Chausses of Westfall",
+						["id"] = 6087,
+						["icon"] = "INV_Pants_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Tunic of Westfall",
+						["id"] = 2041,
+						["icon"] = "INV_Chest_Leather_07",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of Westfall",
+						["id"] = 2042,
+						["icon"] = "INV_Staff_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Задание для паладинов: Чтобы увидеть заметки щелкните на |cffffff00[Информация: Испытание доблести]"..WHITE..".",
+				["id"] = 1654,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Verigan's Fist",
+						["id"] = 6953,
+						["icon"] = "INV_Hammer_05",
+						["quality"] = 3,
+					},
+				},
+				["aim"] = "Возьмите список Джордана, добудьте немного древесины белокаменного дуба, партию очищенной руды Бэйлора, кузнечный молот Джордана и самоцвет Кора и отдайте их Джордану Стилвеллу в Стальгорне.",
+				["attain"] = 20,
+				["followup"] = "Испытание доблести",
+				["title"] = "Испытание доблести",
+				["location"] = "Джордан Стилвелл (Дун Морог - Вход в Стальгорн; |cffffff0052,36"..WHITE..")",
+				["level"] = 22,
+				["pages"] = {
+					[1] = "Только паладины могут получить это задание!\n1. Вы получите древесину белокаменного дуба у гоблинов-лесорубов в |cffffff00[Мертвые копи]"..WHITE..".\n2. Для получения партии очищенной руды Бэйлора вы должны поговорить с Бэйлором Каменной Дланью (Озеро Модан - Телсамар; 35,44 ). Он даст вам задание 'Партия руды Бэйлора'. Вы найдете руду Джордана за деревом около 71,21\n3. Вы получите кузнечный молот Джордана в |cffffff00[Крепость Темного Клыка]"..WHITE.." около |cffffff00[3]"..WHITE..".\n4. Для получения самоцвета Кора Вам нужно пойти к Тандрису Ветропряду (Темные берега - Аубердин; 37,40) и выполнить задание 'Поиск самоцвета Кора'. Для этого задания, вам нужно убивать Провидзев и Жриц Непроглядной пучины перед |cffffff00[Непроглядная пучина]"..WHITE..". С них добывается Оскверненный самоцвет Кора. Тандрис Ветропряд очистит его для Вас.",
+				},
+				["prequest"] = "Фолиант Отваги -> Испытание доблести",
+			},
+			[7] = {
+				["note"] = "Барос Алекстон находится в Штормград, рядом с Соборной площадью около |cffffff0049,30"..WHITE..".",
+				["id"] = 373,
+				["attain"] = 16,
+				["aim"] = "Доставьте письмо городскому архитектору Баросу Алекстону в Штормград.",
+				["title"] = "Неотправленное письмо",
+				["location"] = "Неотосланное письмо (добывается с Эдвин ван Клиф; |cffffff00[6]"..WHITE..")",
+				["level"] = 22,
+				["followup"] = "Базиль Тредд",
+			},
+			[8] = {
+				["note"] = "You start this Questline on the northwest island in Westfall; red book on the ground "..NORMAL.."26.1,16.5"..WHITE..").\n",
+				["id"] = 40396,
+				["attain"] = 15,
+				["aim"] = "Готовое печенье.",
+				["title"] = "Месть капитана Грейсона",
+				["location"] = "Captain Grayson (Westfall - Lighthouse; "..NORMAL.."30,86"..WHITE..")",
+				["level"] = 22,
+				["prequest"] = "Food for Sailing Thoughts?",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Grayson’s Hat",
+						["id"] = 70070,
+						["icon"] = "INV_Helmet_30",
+						["quality"] = 2,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "You start this Questline at Christopher Hewen (Westfall - Sentinel Hill Inn; "..NORMAL.."52.3,52.8"..WHITE..").\nGilnid is at "..NORMAL.."[4]"..WHITE..".",
+				["id"] = 40478,
+				["attain"] = 15,
+				["aim"] = "Отправляйтесь в Мертвые шахты и убейте Гилнида, после чего возвращайтесь к Малтимору Гарсайду на участок Гарсайда в Вестфолле.",
+				["title"] = "Тайна IX голема урожая",
+				["prequest"] = "The Harvest Golem Mystery VIII",
+				["location"] = "Maltimor Gartside (Westfall - north from Gold Coast Quarry; "..NORMAL.."31.3,37.6"..WHITE..")",
+				["level"] = 19,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Tinkering Belt",
+						["id"] = 60684,
+						["icon"] = "INV_Belt_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Safety Wraps",
+						["id"] = 60685,
+						["icon"] = "INV_Bracer_10",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Harvest Golem Arm",
+						["id"] = 60686,
+						["icon"] = "INV_Mace_04",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "The Harvest Golem Mystery X",
+			},
+			[10] = {
+				["note"] = "You start this Questline at Renzik \"The Shiv\" (Stormwind City - Old Town; "..NORMAL.."75.8,60.3"..WHITE..").\nJared Voss is at "..NORMAL.."[1]"..WHITE..".",
+				["id"] = 41392,
+				["attain"] = 14,
+				["aim"] = "Infiltrate the Deadmines in Westfall and acquire Voss' Sizzling Brew.",
+				["title"] = "Turning Off The Tap",
+				["location"] = "Renzik \"The Shiv\" (Stormwind City - Old Town; "..NORMAL.."75.8,60.3"..WHITE..")",
+				["level"] = 20,
+				["prequest"] = "Drones In Westfall -> Venture Delivery",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Operative Cloak",
+						["id"] = 70239,
+						["icon"] = "INV_Misc_Cape_07",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Cuffs of Integrity",
+						["id"] = 70240,
+						["icon"] = "INV_Bracer_11",
+						["quality"] = 2,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = WHITE.."Sneed "..NORMAL.."[4]"..WHITE.." drops the Prototype Shredder X0-1 Schematic.",
+				["id"] = 55005,
+				["attain"] = 16,
+				["aim"] = "Перенесите схему прототипа измельчителя X0-1 в Wrix Ozzlenut.",
+				["title"] = "Прототип воровства",
+				["location"] = "Wrix Ozzlenut (Durotar - Sparkwater Port; "..NORMAL.."58.3,25.7"..WHITE..")",
+				["level"] = 18,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Foe Chopper",
+						["id"] = 81316,
+						["icon"] = "INV_Axe_21",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Shining Electro-lantern",
+						["id"] = 81317,
+						["icon"] = "INV_Misc_Lantern_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "You start this Questline on the northwest island in Westfall; red book on the ground "..NORMAL.."26.1,16.5"..WHITE..").\n",
+				["id"] = 40396,
+				["attain"] = 15,
+				["aim"] = "Готовое печенье.",
+				["title"] = "Месть капитана Грейсона",
+				["location"] = "Captain Grayson (Westfall - Lighthouse; "..NORMAL.."30,86"..WHITE..")",
+				["level"] = 22,
+				["prequest"] = "Food for Sailing Thoughts?",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Grayson’s Hat",
+						["id"] = 70070,
+						["icon"] = "INV_Helmet_30",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "You start this Questline at Nargal Deatheye (Crossroads "..NORMAL.."51.2,29.1"..WHITE..").\nThis quest "..RED.."JUST TELEPORTS you to WESTFALL"..WHITE..". You can either finish this quest and get the reward after completing questline or use it as westfall teleport retaking the quest.",
+				["id"] = 39998,
+				["attain"] = 15,
+				["aim"] = "Bring a Stolen Tombstone to Nargal Deatheye at the Crossroads",
+				["title"] = "Horde Defender's Axe",
+				["prequest"] = "Horde Defender's Axe",
+				["location"] = "Birgitte Cranston <Portal Trainer> (Thunder Bluff)",
+				["level"] = 18,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Horde Defender's Axe",
+						["id"] = 40065,
+						["icon"] = "INV_Axe_04",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Horde Defender's Axe",
+			},
+		},
+		["story"] = "Когда-то величайший золотодобывающий центр в землях людей, Мертвые Копи были заброшены когда Орда не оставила камня на камне от Штормграда во время Первой Войны. Сейчас их заняло Братство Справедливости и превратило темные тоннели и в их собственное святилище. Ходят слухи что воры призвали умных гоблинов, чтобы те помогли им построить что-то ужасное в глубине копей - но что это может быть до сих пор не ясно. По слухам путь в Мертвые Копи лежит через тихую, скромную деревушку Луноречье.",
+		["name"] = "Мертвые копи",
+	},
+	[2] = {
+		[1] = {
+			[1] = {
+				["note"] = "Со всех существ внутри и перед подземельем можно подобрать шкуры.\nНаплака можно найти в тайной пещере над входом в Пещеры стенаний. Простейший путь увидеть его - забраться на гору позади входа и спрыгнуть на небольшой выступ слева над входом в пещеру.",
+				["id"] = 1486,
+				["attain"] = 13,
+				["aim"] = "Принесите 20 искаженных шкур Налпаку в Пещерах Стенаний.",
+				["title"] = "Шкуры загадочных существ",
+				["location"] = "Наплак (Степи - Пещеры стенаний; |cffffff0047,36 "..WHITE..")",
+				["level"] = 17,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Slick Deviate Leggings",
+						["id"] = 6480,
+						["icon"] = "INV_Pants_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.BAG,
+						["name"] = "Deviate Hide Pack",
+						["id"] = 918,
+						["icon"] = "INV_Misc_Bag_07_Black",
+						["quality"] = 1,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Получить бутылку можно прямо перед тем как вы войдете в подземелье, убив Безумного Магглиша. Когда вы только вошли в пещеру идите направо и найдете его в конце прохода. Он скрывается у стены.",
+				["id"] = 959,
+				["attain"] = 14,
+				["aim"] = "Оператор крана Биггльфузз из Кабестана попросил вас отнять бутылку портвейна 99-летней выдержки у Безумного Магглиша, который прячется в Пещерах Стенаний.",
+				["title"] = "Неприятности в порту",
+				["location"] = "Оператор крана Биггльфузз (Степи - Кабестан; |cffffff0063,37 "..WHITE..")",
+				["level"] = 18,
+			},
+			[3] = {
+				["note"] = "Предшествующее задание также можно взять у Мебока Миззрикса.\nИз всех врагов-эктоплазмы внутри и перед подземельем можно достать субстанцию.",
+				["id"] = 1491,
+				["attain"] = 13,
+				["aim"] = "Принесите 6 порций воющей субстанции Мебоку Миззриксу в Кабестан.",
+				["title"] = "Умный напиток",
+				["location"] = "Мебок Миззрикс (Степи - Кабестан; |cffffff0062,37 "..WHITE..")",
+				["level"] = 18,
+				["prequest"] = "Рога ящеров",
+			},
+			[4] = {
+				["note"] = "Эбру находится в тайной пещере над входом в Пещеры стенаний. Простейший путь увидеть его - забраться на гору позади входа и спрыгнуть на небольшой выступ слева над входом в пещеру.",
+				["id"] = 1487,
+				["attain"] = 15,
+				["aim"] = "Убейте для Эбру 7 загадочных опустошителей, 7 загадочных гадюк, 7 загадочных шаркунов и 7 загадочных страхозубов.",
+				["title"] = "Искоренение Скверны",
+				["location"] = "Эбру (Степи; |cffffff0047,36 "..WHITE..")",
+				["level"] = 21,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Pattern: Deviate Scale Belt",
+						["id"] = 6476,
+						["icon"] = "INV_Scroll_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAND,
+						["name"] = "Sizzle Stick",
+						["id"] = 8071,
+						["icon"] = "INV_Staff_02",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Dagmire Gauntlets",
+						["id"] = 6481,
+						["icon"] = "INV_Gauntlets_05",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Мутанус Пожиратель появляется только если вы убили всех 4 повелителей змей и проводили таурена-друда от входа.\nКогда вы возьмете осколок, вам нужно принести его к гоблину-пилоту около банка в Кабестане, а потом на вершину горы над Пещерами стенаний к Фалле Мудрости Ветра.",
+				["id"] = 6981,
+				["attain"] = 15,
+				["aim"] = "Отправляйтесь в Кабестан и найдите там кого-нибудь, кто сможет вам рассказать об этом светящемся осколке.$B$BЗатем отнесите осколок туда, куда вас направят.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Talbar Mantle",
+						["id"] = 10657,
+						["icon"] = "INV_Shoulder_09",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.MAIL,
+						["name"] = "Quagmire Galoshes",
+						["id"] = 10658,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "Кошмары",
+				["location"] = "Светящийся осколок (добывается с Мутануса Пожирателя; (Пещеры стенаний)",
+				["level"] = 26,
+				["title"] = "Светящийся осколок",
+			},
+			[6] = {
+				["note"] = "You get the Serpentbloom inside the cave in front of the instance and inside the instance. Players with Herbalism can see the plants on their minimap.",
+				["id"] = 60125,
+				["attain"] = 16,
+				["aim"] = "Alanndarian Nightsong в Auberdine поручил вам собрать коллекцию из 10 Серпентблумов.",
+				["title"] = "Змеиный цвет",
+				["location"] = "Alanndarian Nightsong (Auberdine - Darkshore; "..NORMAL.."37.7,40.7"..WHITE..")",
+				["level"] = 18,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Greenweave Sash",
+						["id"] = 51850,
+						["icon"] = "INV_Belt_25",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.MAIL,
+						["name"] = "Verdant Boots",
+						["id"] = 51851,
+						["icon"] = "INV_Boots_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Mutanus the Devourer will only appear if you kill the four leader druids of the fang and escort the tauren druid at the entrance.",
+				["id"] = 60124,
+				["attain"] = 16,
+				["aim"] = "Аландарианская Ночная песня хочет, чтобы вы отправились в Пещеры Плача в Северных пустошах и освободили Наралекса от Кошмара. Найди его ученика в пещерах, чтобы узнать, как это делается. Возвращайся к ней, когда освободишь Наралекса.",
+				["title"] = "Пойманный в ловушку кошмара",
+				["location"] = "Alanndarian Nightsong (Auberdine - Darkshore; "..NORMAL.."37.7,40.7"..WHITE..")",
+				["level"] = 19,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Ancient Elven Robes",
+						["id"] = 51848,
+						["icon"] = "INV_Chest_Cloth_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Thunderhorn",
+						["id"] = 51849,
+						["icon"] = "INV_Sword_17",
+						["quality"] = 3,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "Kill Unnatural Overgrowth near "..NORMAL.."[9]"..WHITE.." to collect Overgrowth Samples",
+				["id"] = 41363,
+				["attain"] = 16,
+				["aim"] = "Thundris Windweaver in Auberdine needs samples of the Unnatural Overgrowths in the Wailing Caverns.",
+				["title"] = "Rampant Weeds",
+				["location"] = "Thundris Windweaver (Darkshore - Auberdine; "..NORMAL.."37,40"..WHITE..")",
+				["level"] = 20,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Mana Potion",
+						["id"] = 3827,
+						["icon"] = "INV_Potion_72",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Greater Healing Potion",
+						["id"] = 1710,
+						["icon"] = "INV_Potion_52",
+						["quality"] = 1,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Со всех существ внутри и перед подземельем можно подобрать шкуры.\nНаплака можно найти в тайной пещере над входом в Пещеры стенаний. Простейший путь увидеть его - забраться на гору позади входа и спрыгнуть на небольшой выступ слева над входом в пещеру.",
+				["id"] = 1486,
+				["attain"] = 13,
+				["aim"] = "Принесите 20 искаженных шкур Налпаку в Пещерах Стенаний.",
+				["title"] = "Шкуры загадочных существ",
+				["location"] = "Наплак (Степи - Пещеры стенаний; |cffffff0047,36 "..WHITE..")",
+				["level"] = 17,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Slick Deviate Leggings",
+						["id"] = 6480,
+						["icon"] = "INV_Pants_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.BAG,
+						["name"] = "Deviate Hide Pack",
+						["id"] = 918,
+						["icon"] = "INV_Misc_Bag_07_Black",
+						["quality"] = 1,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Получить бутылку можно прямо перед тем как вы войдете в подземелье, убив Безумного Магглиша. Когда вы только вошли в пещеру идите направо и найдете его в конце прохода. Он скрывается у стены.",
+				["id"] = 959,
+				["attain"] = 14,
+				["aim"] = "Оператор крана Биггльфузз из Кабестана попросил вас отнять бутылку портвейна 99-летней выдержки у Безумного Магглиша, который прячется в Пещерах Стенаний.",
+				["title"] = "Неприятности в порту",
+				["location"] = "Оператор крана Биггльфузз (Степи - Кабестан; |cffffff0063,37 "..WHITE..")",
+				["level"] = 18,
+			},
+			[3] = {
+				["note"] = "Аптекарь Зама находится в пещере под Вершиной Духов.\nСобрать Змеецвет можно внутри пещеры перед подземельем и внутри него. Игроки с навыком травничества могут видеть Змеецвет на миникарте.",
+				["id"] = 962,
+				["attain"] = 14,
+				["aim"] = "Аптекарша Зама из Громового Утеса просит вас принести ей 10 змеецветов.",
+				["prequest"] = "Споры грибов -> Аптекарь Зама",
+				["title"] = "Змеецвет",
+				["location"] = "Аптекарь Зама (Громовой Утес - Вершина Духов; |cffffff0022,20 "..WHITE..")",
+				["level"] = 18,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.CLOTH,
+						["name"] = "Apothecary Gloves",
+						["id"] = 10919,
+						["icon"] = "INV_Gauntlets_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Предшествующее задание также можно взять у Мебока Миззрикса.\nИз всех врагов-эктоплазмы внутри и перед подземельем можно достать субстанцию.",
+				["id"] = 1491,
+				["attain"] = 13,
+				["aim"] = "Принесите 6 порций воющей субстанции Мебоку Миззриксу в Кабестан.",
+				["title"] = "Умный напиток",
+				["location"] = "Мебок Миззрикс (Степи - Кабестан; |cffffff0062,37 "..WHITE..")",
+				["level"] = 18,
+				["prequest"] = "Рога ящеров",
+			},
+			[5] = {
+				["note"] = "Эбру находится в тайной пещере над входом в Пещеры стенаний. Простейший путь увидеть его - забраться на гору позади входа и спрыгнуть на небольшой выступ слева над входом в пещеру.",
+				["id"] = 1487,
+				["attain"] = 15,
+				["aim"] = "Убейте для Эбру 7 загадочных опустошителей, 7 загадочных гадюк, 7 загадочных шаркунов и 7 загадочных страхозубов.",
+				["title"] = "Искоренение Скверны",
+				["location"] = "Эбру (Степи; |cffffff0047,36 "..WHITE..")",
+				["level"] = 21,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Pattern: Deviate Scale Belt",
+						["id"] = 6476,
+						["icon"] = "INV_Scroll_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAND,
+						["name"] = "Sizzle Stick",
+						["id"] = 8071,
+						["icon"] = "INV_Staff_02",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Dagmire Gauntlets",
+						["id"] = 6481,
+						["icon"] = "INV_Gauntlets_05",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Серия заданий начинается у Хамуула Рунного Тотема. (Громовой Утес - Вершина старейшин; |cffffff0078,28"..WHITE..")\nКамни падают с 4 друидов |cffffff00[2]"..WHITE..", |cffffff00[3]"..WHITE..", |cffffff00[5]"..WHITE..", |cffffff00[7]"..WHITE..".",
+				["id"] = 914,
+				["attain"] = 11,
+				["aim"] = "Принесите камни Кобрана, Анакондры, Пифаса и Серпентиса Наре Буйногривой, на Громовой Утес.",
+				["prequest"] = "Оазисы Степей -> Нара Буйногривая",
+				["title"] = "Повелители Змей",
+				["location"] = "Нара Буйногривая (Громовой Утес - Вершина старейшин; |cffffff0075,31"..WHITE..")",
+				["level"] = 22,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Crescent Staff",
+						["id"] = 6505,
+						["icon"] = "INV_Staff_04",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.SWORD,
+						["name"] = "Wingblade",
+						["id"] = 6504,
+						["icon"] = "INV_Sword_16",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Мутанус Пожиратель появляется только если вы убили всех 4 повелителей змей и проводили таурена-друда от входа.\nКогда вы возьмете осколок, вам нужно принести его к гоблину-пилоту около банка в Кабестане, а потом на вершину горы над Пещерами стенаний к Фалле Мудрости Ветра.",
+				["id"] = 6981,
+				["attain"] = 15,
+				["aim"] = "Отправляйтесь в Кабестан и найдите там кого-нибудь, кто сможет вам рассказать об этом светящемся осколке.$B$BЗатем отнесите осколок туда, куда вас направят.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Talbar Mantle",
+						["id"] = 10657,
+						["icon"] = "INV_Shoulder_09",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.MAIL,
+						["name"] = "Quagmire Galoshes",
+						["id"] = 10658,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "Кошмары",
+				["location"] = "Светящийся осколок (добывается с Мутануса Пожирателя; (Пещеры стенаний)",
+				["level"] = 26,
+				["title"] = "Светящийся осколок",
+			},
+			[8] = {
+				["note"] = MAGE.."(Mage only)"..WHITE.." The Questline starts at Ureda <Mage Trainer> (Orgrimar) with quest 'Mastering the Arcane'.\nMoontouched Wood you get from "..NORMAL.."trash mobs"..WHITE..", a Crystal of the Serpent from Lord Serpentis <Fanglord>"..NORMAL.."[10]"..WHITE..", and an Everchanging Essence from Lord Pythas <Fanglord> "..NORMAL.."[7]"..WHITE..".",
+				["id"] = 80312,
+				["attain"] = 14,
+				["aim"] = "Принесите Чок'Гароку 5 кусков дерева с лунным оттенком, Кристалл Змеи и Вечно меняющуюся эссенцию из Пещер Плача.",
+				["title"] = "Тайное оружие",
+				["location"] = "Chok'Garok <Stonemaul Clan> (on a bank of Southfury River in the Barrens; "..NORMAL.."62.4,10.8"..WHITE..")",
+				["level"] = 18,
+				["prequest"] = "Mastering the Arcane",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..",Staff",
+						["name"] = "Staff of the Arcane Path",
+						["id"] = 80860,
+						["icon"] = "INV_Staff_06",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Spellweaving Dagger",
+						["id"] = 80861,
+						["icon"] = "INV_Weapon_ShortBlade_05",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Zandara Windhoof is at "..NORMAL.."[6]"..WHITE..".",
+				["id"] = 41367,
+				["attain"] = 17,
+				["aim"] = "Slay Zandara Windhoof within Wailing Caverns, and bring her head back to Nalpak in the Barrens.",
+				["title"] = "Against the Kolkar Dream",
+				["location"] = "Nalpak (Barrens - Wailing Caverns; "..NORMAL.."47,36"..WHITE..")",
+				["level"] = 23,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Kolkar Drape",
+						["id"] = 70224,
+						["icon"] = "INV_Misc_Cape_08",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Не так давно друид ночных эльфов по имени Наралекс обнаружил сеть подземных пещер прямо в сердце Степей. Названные 'Пещерами стенаний', эти естественные пещеры были наполнены трещинами, которые производили долгие жалобные стоны когда пар вырывался из них. Наралекс верил, что он сможет использовать подземные источники пещер для восстановления буйства красок и изобилия Степей - но для исполнения этого потребовалоь перекачивание энергий из сказочного Изумрудного Сна. Однако однажды соединившись со Сном, видения друида превратились в кошмар.  Вскоре Пещеры стенаний начали меняться - воды наполнились грязью и некогда послушные существа внутри превратились в порочных, смертоносных хищников. Поговоривают что сам Наралекс все еще находится где-то в сердце лабиринта, попавший в капкан пределов Изумрудного Сна. Даже его бывшие ученики были испорчены ожившим кошмаром учителя - они превратились в злобных Друидов Клыка.",
+		["name"] = "Пещеры стенаний",
+	},
+	[3] = {
+		[1] = {
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы найдете троггов в самом начале подземелья.",
+				["id"] = 5723,
+				["attain"] = 9,
+				["aim"] = "Найдите в Оргриммаре Огненную пропасть, убейте 8 троггов и 8 шаманов Огненной пропасти и возвращайтесь к Рахауро в Громовой Утес.",
+				["title"] = "Испытание силы врага",
+				["location"] = "Рахауро (Громовой Утес - Вершина Старейшин; |cffffff0070,29"..WHITE..")",
+				["level"] = 15,
+			},
+			[2] = {
+				["note"] = "Книги падают с Сектантов и Чернокнижников из клана Пылающего клинка",
+				["id"] = 5725,
+				["attain"] = 9,
+				["aim"] = "Принесите книги \"Заклинания Тьмы\" и \"Заклятия Пустоты\" Вариматрасу в Подгород.",
+				["title"] = "Силы разрушения...",
+				["location"] = "Вариматас (Подгород - Королевский квартал; |cffffff0056,92"..WHITE..")",
+				["level"] = 16,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Ghastly Trousers",
+						["id"] = 15449,
+						["icon"] = "INV_Pants_14",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Dredgemire Leggings",
+						["id"] = 15450,
+						["icon"] = "INV_Pants_07",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Gargoyle Leggings",
+						["id"] = 15451,
+						["icon"] = "INV_Pants_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете Маура Зловещего Тотема около |cffffff00[1]"..WHITE..". После того как найдете рюкзак, вы должны вернуть его Рахауро в Громовой Утес",
+				["id"] = 5722,
+				["attain"] = 9,
+				["aim"] = "Обыщите Огненную пропасть в поисках тела Маура Зловещего Тотема и найдите все необычные предметы.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Featherbead Bracers",
+						["id"] = 15452,
+						["icon"] = "INV_Bracer_08",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.LEATHER,
+						["name"] = "Savannah Bracers",
+						["id"] = 15453,
+						["icon"] = "INV_Bracer_07",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "Возвращение Потеряного ранца",
+				["location"] = "Рахауро (Громовой Утес - Вершина Старейшин; |cffffff0070,29"..WHITE..")",
+				["level"] = 16,
+				["title"] = "В поисках потерянного ранца",
+			},
+			[4] = {
+				["note"] = "Вы найдете Баззалана около  |cffffff00[4]"..WHITE.." и Джергоша около |cffffff00[3]"..WHITE..". Линейка заданий начинается у Военного вождя Тралла в Оргриммаре.",
+				["id"] = 5728,
+				["attain"] = 9,
+				["aim"] = "Убейте Баззалана и Жергоша Призывателя Духов и вернитесь в Оргриммар к Траллу.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Kris of Orgrimmar",
+						["id"] = 15443,
+						["icon"] = "INV_Weapon_ShortBlade_05",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Hammer of Orgrimmar",
+						["id"] = 15445,
+						["icon"] = "INV_Hammer_23",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Axe of Orgrimmar",
+						["id"] = 15424,
+						["icon"] = "INV_Axe_04",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of Orgrimmar",
+						["id"] = 15444,
+						["icon"] = "INV_Staff_Goldfeathered_01",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Тайные враги",
+				["prequest"] = "Тайные враги",
+				["location"] = "Тралл (Оргриммар - Аллея Мудрости; |cffffff0031,37"..WHITE..")",
+				["level"] = 16,
+				["followup"] = "Тайные враги",
+			},
+			[5] = {
+				["note"] = "Вы найдете Тарагамана около |cffffff00[2]"..WHITE..".",
+				["id"] = 5761,
+				["attain"] = 9,
+				["aim"] = "Спуститесь в Огненную пропасть, убейте Тарагамана Ненасытного и принесите его сердце Нииру Огненному Клинку в Оргриммаре.",
+				["title"] = "Убить тварь",
+				["location"] = "Ниру Огненный Клинок (Оргриммар - Расселина Теней; |cffffff0049,50"..WHITE..")",
+				["level"] = 16,
+			},
+		},
+		["story"] = "Огненная пропасть представляет из себя сеть вулканических пещер которые пролегают под новой столицей орков - Оргриммаром. Недавно, прошел слух, что приверженцы демонического культа Совета Теней устроили логово в пламенных глубинах Пропасти. Этот культ, именуемый Пылающий Клинок, угрожает самой независимости Дуротара. Многие верят что Военный Вождь орков, Тралл, знает о существовании Клинка и не стал уничтожать его в надежде на то, что его члены приведут его прямо к Совету Теней. Так или иначе, всплески тёмных сил из Огненной пропасти могут унижтожить все, чего орки пытались достичь.",
+		["name"] = "Огненная пропасть",
+	},
+	[4] = {
+		[1] = {
+			[1] = {
+				["note"] = "Предшествующее задание начинается с Мятой карты (Бесплодные земли; |cffffff0053,33"..WHITE..").\nВы найдете Тяжелоступа Греза перед тем как вы войдете в подземелье.",
+				["id"] = 721,
+				["attain"] = 33,
+				["aim"] = "Найдите Греза Тяжелоступа в Ульдамане.",
+				["followup"] = "Амулет Тайн",
+				["prequest"] = "Предвестник надежды",
+				["location"] = "Геолог Ржанец (Бесплодные земли; |cffffff0053,43"..WHITE..")",
+				["level"] = 35,
+				["title"] = "Предвестник надежды",
+			},
+			[2] = {
+				["note"] = "Амулет добывается из Магрегана Чернотени.",
+				["id"] = 722,
+				["attain"] = 35,
+				["aim"] = "Найдите амулет Тяжелоступа и верните его ему в Ульдаман.",
+				["followup"] = "Клятва верности",
+				["prequest"] = "Предвестник надежды",
+				["location"] = "Тяжелоступ Грез (Ульдаман).",
+				["level"] = 40,
+				["title"] = "Амулет тайн",
+			},
+			[3] = {
+				["note"] = "Табличка находится около |cffffff00[8]"..WHITE..".",
+				["id"] = 1139,
+				["attain"] = 35,
+				["aim"] = "Найдите табличку воли и принесите ее советнику Белграму в Стальгорн.",
+				["prequest"] = "Амулет Тайн -> Посланник Зла",
+				["title"] = "Утерянные таблички Воли",
+				["location"] = "Советник Белгрум (Стальгорн - Зал исследователей; |cffffff0077,10"..WHITE..")",
+				["level"] = 45,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Medal of Courage",
+						["id"] = 6723,
+						["icon"] = "INV_Jewelry_Amulet_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Камни можно найти на любом враге из клана Тенегорна перед и внутри подземелья.",
+				["id"] = 2418,
+				["attain"] = 30,
+				["aim"] = "Принесите 8 дентриевых камней Силы и 8 энелиевых камней Силы Ригглфаззу в Бесплодные земли.",
+				["title"] = "Камни Силы",
+				["location"] = "Ригглфазз (Бесплодные земли; |cffffff0042,52"..WHITE..")",
+				["level"] = 36,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Energized Stone Circle",
+						["id"] = 9522,
+						["icon"] = "INV_Shield_10",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Duracin Bracers",
+						["id"] = 10358,
+						["icon"] = "INV_Bracer_04",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.FEET..", "..L.CLOTH,
+						["name"] = "Everlast Boots",
+						["id"] = 10359,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Предшествующее задание начинается у геолога Грозовой Вершины (Стальгорн - Зал исследователей; |cffffff0074,12"..WHITE..").\nУрны расбросаны по пещерам перед подземельем.",
+				["id"] = 704,
+				["attain"] = 30,
+				["aim"] = "Принесите 4 резные каменные урны геологу Сталекруту в Лок Модан.",
+				["prequest"] = "Вы нужны Сталекруту! -> Мурдалок",
+				["title"] = "Судьба Эгмонда",
+				["location"] = "Геолог Сталекрут (Лок Модан - Раскопки Сталекрута; |cffffff0065,65"..WHITE..")",
+				["level"] = 38,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Prospector Gloves",
+						["id"] = 4980,
+						["icon"] = "INV_Gauntlets_04",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Табличка находится на севере пещер, в восточном конце туннеля, перед подземельем.",
+				["id"] = 709,
+				["attain"] = 30,
+				["aim"] = "Принесите табличку Рьюн'эха Тельдарину Заблудшему.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Doomsayer's Robe",
+						["id"] = 4746,
+						["icon"] = "INV_Chest_Cloth_19",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "В Стальгорн за книгой Йагина",
+				["location"] = "Тельдарин Заблудший (Бесплодные земли; |cffffff0051,76"..WHITE..")",
+				["level"] = 40,
+				["title"] = "Лекарство от судьбы",
+			},
+			[7] = {
+				["note"] = "Бейлог находится около |cffffff00[1]"..WHITE..".",
+				["id"] = 2398,
+				["attain"] = 35,
+				["aim"] = "Найдите Бейлога в Ульдамане.",
+				["title"] = "Потерянные дворфы",
+				["location"] = "Геолог Грозовая Вершина (Стальгорн - Зал исследователей; |cffffff0075,12"..WHITE..")",
+				["level"] = 40,
+				["followup"] = "Потайной чертог",
+			},
+			[8] = {
+				["note"] = "Тайная комната находится около |cffffff00[4]"..WHITE..". Чтобы открыть тайную комнату вам понадобится Стержень Тсола с Ревелоша |cffffff00[3]"..WHITE.." и Медальон Гни'кив из сундука Баэлога |cffffff00[1]"..WHITE..". Соберите из этих предметов Доисторический посох. Посох используется в Комнате Карты между |cffffff00[3] и [4]"..WHITE.." для вызова Иронаи. После того как убьете её, забегите в комнату откуда она пришла, чтобы выполнить задание.",
+				["id"] = 2240,
+				["attain"] = 35,
+				["aim"] = "Прочитайте журнал Бейлога, исследуйте, потайной чертог и потом доложите об увиденном геологу Грозовой Вершине.",
+				["prequest"] = "Потерянные дворфы",
+				["title"] = "Потайной чертог",
+				["location"] = "Бейлог (Ульдаман; |cffffff00[1]"..WHITE..")",
+				["level"] = 40,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Dwarven Charge",
+						["id"] = 9626,
+						["icon"] = "INV_Axe_09",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Explorer's League Lodestar",
+						["id"] = 9627,
+						["icon"] = "INV_Misc_Lantern_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Принесите ожерелье Талвашу де Кисселю (Стальгорн - Палаты Магии; |cffffff0036,3"..WHITE..").",
+				["id"] = 2198,
+				["attain"] = 37,
+				["aim"] = "Найдите создателя ожерелья, чтобы узнать, чего оно стоит.",
+				["title"] = "Порванное ожерелье",
+				["location"] = "Рассыпавшееся ожерелье (добывается случайно в Ульдамане)",
+				["level"] = 41,
+				["followup"] = "Мудрость за деньги",
+			},
+			[10] = {
+				["note"] = "Паладин находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 2200,
+				["attain"] = 37,
+				["aim"] = "Выясните, где именно в Ульдамане находится ожерелье Талваша. Убитый паладин, о котором он упоминал, был последним владельцем этого ожерелья.",
+				["followup"] = "Время собирать камни",
+				["prequest"] = "Мудрость за деньги",
+				["location"] = "Талваш дель Киссель (Стальгорн - Палаты магии; |cffffff0036,3"..WHITE..")",
+				["level"] = 42,
+				["title"] = "Назад в Ульдаман",
+			},
+			[11] = {
+				["note"] = "Камни находятся около |cffffff00[1]"..WHITE.." в урне, |cffffff00[8]"..WHITE.." из тайника клана Теневого горна, и |cffffff00[9]"..WHITE.." с Гримлока. Обратите внимание, что когда вы откроете тайник, появятся несколько мобов и атакуют Вас.\nИспользуйте Чашу прорицания Талваша, чтобы сдать задание и продожить дальше.",
+				["id"] = 2201,
+				["attain"] = 40,
+				["aim"] = "Найдите рубин, сапфир, и топаз, которые спрятаны в разных местах Ульдамана. Когда найдете, свяжитесь с Талвашем де Кисселем, используя фиал Видения, который он предоставил.$B$BИз дневника вы узнали следующее:$B*Рубин укрыт в забаррикадированной Кузне Теней.$B*Топаз спрятан в урне в одной из областей, занятых троггами, недалеко от расположения дворфов Альянса.$B$B*Сапфир присвоил себе Гримлок, лидер троггов.",
+				["followup"] = "Восстановление ожерелья",
+				["prequest"] = "Назад в Ульдаман",
+				["location"] = "Останки паладина (Ульдаман; |cffffff00[2]"..WHITE..")",
+				["level"] = 43,
+				["title"] = "Время собирать камни",
+			},
+			[12] = {
+				["note"] = "Источник силы сломанного ожерелья добывается с Архедаса |cffffff00[10]"..WHITE..".",
+				["id"] = 2204,
+				["attain"] = 37,
+				["aim"] = "Добудьте источник энергии из самого мощного волшебного создания, которое найдете в Ульдамане и доставьте его Талвашу де Кисселю в Стальгорн.",
+				["prequest"] = "Время собирать камни",
+				["title"] = "Восстановление ожерелье",
+				["location"] = "Гадальная чаша Талваша",
+				["level"] = 44,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Talvash's Enhancing Necklace",
+						["id"] = 7673,
+						["icon"] = "INV_Jewelry_Necklace_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Грибы есть по всему подземелью. Травники могут видеть их на миникарте, если включен Поиск трав и они взяли задание.",
+				["id"] = 17,
+				["attain"] = 36,
+				["aim"] = "Принесите 12 грибов-малиновиков Гхаку Целителю в Телcамар.",
+				["prequest"] = "Пробежка по Бесплодным землям",
+				["title"] = "В Ульдаман за реагентами",
+				["location"] = "Гхак Целитель (Лок Модан - Телсамар; |cffffff0037,49"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Restorative Potion",
+						["id"] = 9030,
+						["count"] = 5,
+						["icon"] = "INV_Potion_118",
+						["quality"] = 1,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Вы найдете сокровище перед тем как войдете в подземелье. Оно на севере пещер, в юговосточном конце тоннеля.",
+				["id"] = 1360,
+				["attain"] = 33,
+				["aim"] = "Достаньте сокровище Крома Крепкорука из сундука в северном зале Ульдамана и принесите ему в Стальгорн.",
+				["title"] = "Возвращенное сокровище",
+				["location"] = "Кром Крепкорук (Стальгорн - Зал исследователей; |cffffff0074,9"..WHITE..")",
+				["level"] = 43,
+			},
+			[15] = {
+				["note"] = "После получения задания, поговорите с каменным стражем слева от дисков.  Потом снова используйте платиновые диски, чтобы получить миниатюрную копию, которую вы должны принести старшему исследователю Магелласу в Стальгорн - Зал исследователей (|cffffff0069,18"..WHITE.."). Здесь есть другая линейка, которая называется Посмотрим что произойдет и начинается у историка Карника Стальгорн - Зал исследователей.",
+				["id"] = 2278,
+				["attain"] = 40,
+				["aim"] = "Поговорите с каменным Стражем и запомните все, что он передаст вам. Когда он закончит свой пересказ событий древности, активируйте диски Норганнона.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BAG,
+						["name"] = "Thawpelt Sack",
+						["id"] = 9587,
+						["icon"] = "INV_Misc_Bag_17",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Superior Healing Potion",
+						["id"] = 3928,
+						["count"] = 5,
+						["icon"] = "INV_Potion_53",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.POTION,
+						["name"] = "Greater Mana Potion",
+						["id"] = 6149,
+						["count"] = 5,
+						["icon"] = "INV_Potion_73",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "Ульдумские чудеса",
+				["location"] = "Диски Нограннона (Ульдаман; |cffffff00[11]"..WHITE..")",
+				["level"] = 47,
+				["title"] = "Платиновые диски",
+			},
+			[16] = {
+				["note"] = "Задание для магов: \nОбсидиановый источник силы добывается из Обсидианового стража около |cffffff00[5]"..WHITE..".",
+				["id"] = 1956,
+				["attain"] = 35,
+				["aim"] = "Добудьте обсидиановый источник силы и принесите его Табете в Пыльную трясину.",
+				["followup"] = "Волнолов маны",
+				["prequest"] = "Поединок с демоном",
+				["location"] = "Табета (Пылевые топи; |cffffff0046,57"..WHITE..")",
+				["level"] = 40,
+				["title"] = "Сила Ульдамана",
+			},
+			[17] = {
+				["note"] = "Intact Power Core "..NORMAL.."[11]"..WHITE..", in the room with platinum disc behind the last boss in the chest behind the right pillar.\nQuestline starts in Southern Barrens -> Bael Modan -> a little north from the path to Bael'dun Keep under the tent. First quest can be attain at lvl 18, last at lvl 53",
+				["id"] = 40129,
+				["attain"] = 45,
+				["aim"] = "Добудьте неповрежденное энергетическое ядро из Древнего сокровища Ульдамана.",
+				["title"] = "Кража ядра",
+				["prequest"] = "An Ancient Acquisition",
+				["location"] = "Torble Sparksprocket (The Barrens; "..NORMAL.."48.6,83"..WHITE.." gnome with purple goggles under the tent, next to the dwarf)",
+				["level"] = 45,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Broken Core Pendant",
+						["id"] = 60518,
+						["icon"] = "item_azereansphere",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "The Activation",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Камни можно найти на любом враге из клана Тенегорна перед и внутри подземелья.",
+				["id"] = 2418,
+				["attain"] = 30,
+				["aim"] = "Принесите 8 дентриевых камней Силы и 8 энелиевых камней Силы Ригглфаззу в Бесплодные земли.",
+				["title"] = "Камни Силы",
+				["location"] = "Ригглфазз (Бесплодные земли; |cffffff0042,52"..WHITE..")",
+				["level"] = 36,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Energized Stone Circle",
+						["id"] = 9522,
+						["icon"] = "INV_Shield_10",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Duracin Bracers",
+						["id"] = 10358,
+						["icon"] = "INV_Bracer_04",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.FEET..", "..L.CLOTH,
+						["name"] = "Everlast Boots",
+						["id"] = 10359,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Табличка находится на севере пещер, в восточном конце туннеля, перед подземельем.",
+				["id"] = 709,
+				["attain"] = 30,
+				["aim"] = "Принесите табличку Рьюн'эха Тельдарину Заблудшему.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Doomsayer's Robe",
+						["id"] = 4746,
+						["icon"] = "INV_Chest_Cloth_19",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "В Стальгорн за книгой Йагина",
+				["location"] = "Тельдарин Заблудший (Бесплодные земли; |cffffff0051,76"..WHITE..")",
+				["level"] = 40,
+				["title"] = "Лекарство от судьбы",
+			},
+			[3] = {
+				["note"] = "Ожерелье добывается в подземелье случайно.",
+				["id"] = 2283,
+				["attain"] = 37,
+				["aim"] = "Найдите на раскопках Ульдамана драгоценное ожерелье (возможно, поврежденное) и принесите его в Оргриммар Драну Дрофферсу.",
+				["title"] = "Пропавшее ожерелье",
+				["location"] = "Дран Дрофферс (Оргриммар - Волок; |cffffff0059,36"..WHITE..")",
+				["level"] = 41,
+				["followup"] = "Пропавшее ожерелье, этап 2",
+			},
+			[4] = {
+				["note"] = "Паладин находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 2284,
+				["attain"] = 37,
+				["aim"] = "Разыщите ключ к местонахождению самоцветов в глубинах Ульдамана.",
+				["followup"] = "Трудности перевода",
+				["prequest"] = "Пропавшее ожерелье",
+				["location"] = "Дран Дрофферс (Оргриммар - Волок; |cffffff0059,36"..WHITE..")",
+				["level"] = 41,
+				["title"] = "Пропавшее ожерелье, этап 2",
+			},
+			[5] = {
+				["note"] = "Переводчик Джаркал Замшелый Клык находится в Каргате (Бесплодные земли; |cffffff002,46"..WHITE..").",
+				["id"] = 2318,
+				["attain"] = 37,
+				["aim"] = "Найдите кого-нибудь, кто сможет перевести для вас дневник паладина. Ближайший к вам такой умелец, скорее всего, найдется в Каргате, форпосте в Бесплодных Землях.",
+				["followup"] = "Найти самоцветы и источник энергии",
+				["prequest"] = "Пропавшее ожерелье, этап 2",
+				["location"] = "Останки паладина (Ульдаман; |cffffff00[2]"..WHITE..")",
+				["level"] = 42,
+				["title"] = "Трудности перевода",
+			},
+			[6] = {
+				["note"] = "Самоцветы находятся около |cffffff00[1]"..WHITE.." в урне, |cffffff00[8]"..WHITE.." из тайника клана Тенегорна, и |cffffff00[9]"..WHITE.." с Гримлока. Обратите внимание, что когда вы откроете тайник, появятся несколько мобов и атакуют Вас. Источник энергии сломанного ожерелья добывается с Архедаса |cffffff00[10]"..WHITE..".",
+				["id"] = 2339,
+				["attain"] = 37,
+				["aim"] = "Добудьте все три самоцвета и источник энергии для ожерелья из Ульдамана и принесите их Джаркалу Замшелому Клыку в Каргат. Джаркал считает, что источник энергии можно найти у самой сильной твари в Ульдамане. $B$BИз дневника следует... $B* Рубин спрятан на огражденной завалами территории Кузни Теней. $B*Топаз спрятан в урне на территорях троггов под боком у дворфов Альянса.$B*Сапфир забрал Гримлок, старейшина троггов.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Jarkal's Enhancing Necklace",
+						["id"] = 7888,
+						["icon"] = "INV_Jewelry_Necklace_02",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Найти самоцветы и источник энергии",
+				["prequest"] = "Трудности перевода",
+				["location"] = "Джаркал Замшелый Клык (Бесплодные земли - Каргат; |cffffff002,46"..WHITE..")",
+				["level"] = 44,
+				["followup"] = "Принести самоцветы",
+			},
+			[7] = {
+				["note"] = "Предшествующее задание вы также возьмете в Каргате.\nШляпки есть по всему подземелью. Травники могут видеть их на миникарте, если включен Поиск трав и они взяли задание. Предыдущее задание дает этот же NPC.",
+				["id"] = 2202,
+				["attain"] = 36,
+				["aim"] = "Принести 12 грибов-малиновиков Джаркалу Замшелому Клыку в Каргат.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Restorative Potion",
+						["id"] = 9030,
+						["count"] = 5,
+						["icon"] = "INV_Potion_118",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "В Ульдаман за реактивом",
+				["prequest"] = "Пробежка по Бесплодным землям",
+				["location"] = "Джаркал Замшелый Клык (Бесплодные земли - Каргат; |cffffff002,69"..WHITE..")",
+				["level"] = 42,
+				["followup"] = "Пробежка по Бесплодным землям-2",
+			},
+			[8] = {
+				["note"] = "Вы найдете сокровище перед тем как войдете в подземелье. Оно на севере пещер, в юговосточном конце тоннеля.",
+				["id"] = 2342,
+				["attain"] = 33,
+				["aim"] = "Принесите Патрику Гарретту в Подгород фамильное сокровище из сундука в Южном зале Ульдамана.",
+				["title"] = "Возвращенные сокровища",
+				["location"] = "Патрик Гаррет (Подгород; |cffffff0072,48"..WHITE..")",
+				["level"] = 43,
+			},
+			[9] = {
+				["note"] = "После получения задания, поговорите с каменным стражем слева от дисков.  Потом снова используйте платиновые диски, чтобы получить миниатюрную копию, которую вы должны принести ведуну Искателю Истины в Громовой Утес (|cffffff0034,46"..WHITE..")",
+				["id"] = 2278,
+				["attain"] = 40,
+				["aim"] = "Поговорите с каменным Стражем и запомните все, что он передаст вам. Когда он закончит свой пересказ событий древности, активируйте диски Норганнона.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BAG,
+						["name"] = "Thawpelt Sack",
+						["id"] = 9587,
+						["icon"] = "INV_Misc_Bag_17",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Superior Healing Potion",
+						["id"] = 3928,
+						["count"] = 5,
+						["icon"] = "INV_Potion_53",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.POTION,
+						["name"] = "Greater Mana Potion",
+						["id"] = 6149,
+						["count"] = 5,
+						["icon"] = "INV_Potion_73",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "Ульдумские чудеса",
+				["location"] = "Диски Нограннона (Ульдаман; |cffffff00[11]"..WHITE..")",
+				["level"] = 47,
+				["title"] = "Платиновые диски",
+			},
+			[10] = {
+				["note"] = "Задание для магов: \nОбсидиановый источник силы добывается из Обсидианового стража около |cffffff00[5]"..WHITE..".",
+				["id"] = 1956,
+				["attain"] = 35,
+				["aim"] = "Добудьте обсидиановый источник силы и принесите его Табете в Пыльную трясину.",
+				["followup"] = "Волнолов маны",
+				["prequest"] = "Поединок с демоном",
+				["location"] = "Табета (Пылевые топи; |cffffff0046,57"..WHITE..")",
+				["level"] = 40,
+				["title"] = "Сила Ульдамана",
+			},
+			[11] = {
+				["note"] = "Intact Power Core "..NORMAL.."[11]"..WHITE..", in the room with platinum disc behind the last boss in the chest behind the right pillar.\nQuestline starts in Southern Barrens -> Bael Modan -> west side of the road to The Thousand Needles, accros Bael Modan Excavation. first quest can be taken at lvl 18. last at lvl 53.",
+				["id"] = 40131,
+				["attain"] = 45,
+				["aim"] = "Добудьте неповрежденное энергетическое ядро из Древнего сокровища Ульдамана.",
+				["title"] = "Запрашиваю ядро",
+				["prequest"] = "A Profitable Acquisition",
+				["location"] = "Kex Blowmaster (The Barrens; "..NORMAL.."45.7,83.6"..WHITE.." goblin under the tent.",
+				["level"] = 45,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Broken Core Pendant",
+						["id"] = 60518,
+						["icon"] = "item_azereansphere",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "The Profitable Activation",
+			},
+		},
+		["story"] = "Ульдаман - это древний чертог Титанов, построеный глубоко в толще земли с самого сотворения мира. В недалеком прошлом археологи дворфов проникли в этот забытый город, выпустив первых нейдачных творений Титанов: троггов. Легенды гласят, что титаны создали троггов из камня. Когда они посчитали эксперимент провалившимся, Титаны изолировали троггов и попробовали снова - результатом стало создание расы дворфов. Тайны создания дворфов записаны на мифических Дисках Норганнона - массивных артефактах Титанов, находящихся в глубине древнего города. Недавно, дворфы Темного Железа начали серию набегов в Ульдаман, в надежде захватить диски для их несдержанного мастера, Рагнароса. Однако, подземный город защищало несколько стражей - гигантские големы из живого камня, что сокрушат любого несчастливого нарушителя, которого найдут. Сами Диски охраняйтся массивным, разумным Каменным хранителем по имени Архедас. Некоторые слухи даже предполагают, что каменнокожие предки дворфов, Подземники, все еще обитают в глубоко скрытых переходах города.",
+		["name"] = "Ульдаман",
+	},
+	[5] = {
+		[1] = {
+			[1] = {
+				["note"] = "Франклорн находится в средине горы, над своей могилой, в здании около камня призыва. Вы должны быть мертвы, чтобы увидеть его! Он также дает предыдущее задание в цепочке.\nФиний Темнострой находится около |cffffff00[9]"..WHITE..". Вы найдете Святилище рядом с ареной |cffffff00[7]"..WHITE..".",
+				["id"] = 3802,
+				["attain"] = 48,
+				["aim"] = "Убейте Точеня Темностроя и добудьте великий молот, Железный Друг. Отнесите Железного Друга в святилище Тауриссана и вложите его в руки статуи Франклорна Искусника.",
+				["prequest"] = "Наследие Черного Железа",
+				["title"] = "Наследие Черного Железа",
+				["location"] = "Франклорн Искусник (Черная гора)",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.KEY,
+						["name"] = "Shadowforge Key",
+						["id"] = 11000,
+						["icon"] = "INV_Misc_Key_08",
+						["quality"] = 1,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы получите предшествующее задание у Юрбы Крутипроба (Танарис - Порт Картеля; |cffffff0067,23"..WHITE..").\nРиббли находится около |cffffff00[15]"..WHITE..".",
+				["id"] = 4136,
+				["attain"] = 48,
+				["aim"] = "Принесите голову Риббли Юке Крутипроб в Пылающие степи.",
+				["prequest"] = "Юка Крутипроб",
+				["title"] = "Риббли Крутипроб",
+				["location"] = "Юка Крутипроб (Пылающие степи - Пламенеющий стяг; |cffffff0065,22"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.CLOTH,
+						["name"] = "Rancor Boots",
+						["id"] = 11865,
+						["icon"] = "INV_Boots_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Penance Spaulders",
+						["id"] = 11963,
+						["icon"] = "INV_Shoulder_25",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Splintsteel Armor",
+						["id"] = 12049,
+						["icon"] = "INV_Chest_Chain_16",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Получить огромные серебряные слитки можно с Гигантов в Азшаре. Листки крови Грома легко можно найти у травников или на Аукционе. И последнее, сосуд можно наполнить в кратере Го-Лакка (Кратер Ун'Горо; |cffffff0031,50"..WHITE..").\nПосле выполнения задания, вы можете использоать черный ход вместо сражения с Фалангой.",
+				["id"] = 4201,
+				["attain"] = 50,
+				["aim"] = "Принесите 4 листа крови Грома, 10 огромных серебряных слитков и наполненный сосуд Нагмары госпоже Нагмаре в Глубины Черной горы.",
+				["title"] = "Приворотное зелье",
+				["location"] = "Госпожа Нагмара (Глубины Черной горы, таверна)",
+				["level"] = 54,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Manacle Cuffs",
+						["id"] = 11962,
+						["icon"] = "INV_Bracer_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Nagmara's Whipping Belt",
+						["id"] = 11866,
+						["icon"] = "INV_Belt_11",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Вы возьмете предшествующее задание у Енохи Грозовара (Выжженные земли - Крепость стражей Пустоты; |cffffff0061,18"..WHITE..").\nВы получите рецепт с охранников, которые появятся, если вы уничтожите эль |cffffff00[15]"..WHITE..".",
+				["id"] = 4126,
+				["attain"] = 50,
+				["aim"] = "Найдите украденный рецепт громоварского и верните его Рагнару Громовару в Каранос.",
+				["prequest"] = "Рагнар Грозовар",
+				["title"] = "Харли Пьянодых",
+				["location"] = "Рагнар Грозовар  (Дун Морог - Каранос; |cffffff0046,52"..WHITE..")",
+				["level"] = 55,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Dark Dwarven Lager",
+						["id"] = 12003,
+						["count"] = 10,
+						["icon"] = "INV_Drink_05",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Swiftstrike Cudgel",
+						["id"] = 11964,
+						["icon"] = "INV_Mace_08",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Limb Cleaver",
+						["id"] = 12000,
+						["icon"] = "INV_Axe_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы возьмете предшествующее задание также у Джалинды Тирлипуньки. Вы найдете лорда Опалителя около |cffffff00[10]"..WHITE..".",
+				["id"] = 4263,
+				["attain"] = 48,
+				["aim"] = "Отыщите и уничтожьте лорда Опалителя в глубинах Черной горы!",
+				["prequest"] = "Подчинитель Пирон",
+				["title"] = "Опалитель!",
+				["location"] = "Джалинда Тирлипунька (Пылающие степи - Дозор Моргана; |cffffff0085,69"..WHITE..")",
+				["level"] = 56,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Sunborne Cape",
+						["id"] = 12113,
+						["icon"] = "INV_Misc_Cape_08",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Nightfall Gloves",
+						["id"] = 12114,
+						["icon"] = "INV_Gauntlets_17",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Crypt Demon Bracers",
+						["id"] = 12112,
+						["icon"] = "INV_Bracer_17",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.PLATE,
+						["name"] = "Stalwart Clutch",
+						["id"] = 12115,
+						["icon"] = "INV_Belt_34",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Вы найдете Сердце около |cffffff00[8]"..WHITE.." в сейфе. Вы возьмете ключ от сейфа у сторожа Стиллгисс. Он появляется после открытия всех маленьких сейфов.",
+				["id"] = 4123,
+				["attain"] = 50,
+				["aim"] = "Принесите сердце горы Максворту Суперблеску в Пылающие степи.",
+				["title"] = "Сердце горы",
+				["location"] = "Максворт Суперблеск (Пылающие степи - Пламенеющий стяг; |cffffff0065,23"..WHITE..")",
+				["level"] = 55,
+			},
+			[7] = {
+				["note"] = "Сумки падают со всех дворфов.",
+				["id"] = 4286,
+				["attain"] = 50,
+				["aim"] = "Отправьтесь в глубины Черной горы и принесите 20 поясных сумок дворфов Черного Железа. По выполнении задания вернуться к Орелиусу. Предположительно поясные сумки можно отобрать у дворфов Черного Железа в глубинах Черной горы.",
+				["title"] = "Хороший товар",
+				["location"] = "Орелиус (Пылающие степи - Дозор Моргана; |cffffff0084,68"..WHITE..")",
+				["level"] = 56,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "A Dingy Fanny Pack",
+						["id"] = 11883,
+						["icon"] = "INV_Misc_Bag_09_Black",
+						["quality"] = 1,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "Заданиче начинается с Хелендис Речной мыс (Пылающие степи |cffffff0085,68"..WHITE..").\nМаршал Винздор находится около |cffffff00[4]"..WHITE..". После выполнения этого задания, вы должны вернуться к Маршал Максвелл.",
+				["id"] = 4241,
+				["attain"] = 48,
+				["aim"] = "Отправляйтесь на Черную гору на северо-западе и войдите в ее глубины. Узнайте, что сталось с маршалом Виндзором.$B$BКажется, Джон-Оборванец говорил о том, что Виндзора утащили в темницу.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "Conservator Helm",
+						["id"] = 12018,
+						["icon"] = "INV_Helmet_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.PLATE,
+						["name"] = "Shieldplate Sabatons",
+						["id"] = 12021,
+						["icon"] = "INV_Boots_Plate_01",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Windshear Leggings",
+						["id"] = 12041,
+						["icon"] = "INV_Pants_13",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Маршал Винздор",
+				["prequest"] = "Драконья угроза -> Подлинные хозяева",
+				["location"] = "Маршал Максвелл (Пылающие степи |cffffff0084,68"..WHITE..")",
+				["level"] = 54,
+				["followup"] = "Утраченная надежда",
+			},
+			[9] = {
+				["note"] = "Маршал Виндзор около |cffffff00[4]"..WHITE..".",
+				["id"] = 4264,
+				["attain"] = 50,
+				["aim"] = "Не исключено, что ваша находка заинтересует маршала Виндзора. Может быть, все не так плохо, и надежда еще жива.",
+				["followup"] = "Проблеск надежды",
+				["prequest"] = "Утраченная надежда",
+				["location"] = "Измятая записка (добывается в Глубинах Черной горы)",
+				["level"] = 58,
+				["title"] = "Измятая записка",
+			},
+			[10] = {
+				["note"] = "Маршал Виндзор около |cffffff00[4]"..WHITE..".\nПовелитель големов Аргелмах |cffffff00[14]"..WHITE..", Генерал Кузня Гнева |cffffff00[13]"..WHITE..".",
+				["id"] = 4282,
+				["attain"] = 50,
+				["aim"] = "Верните маршалу Виндзору утерянную информацию.$B$BМаршал уверен, что информацией завладели повелитель големов Аргелмах и генерал Кузня Гнева.",
+				["followup"] = "Побег!",
+				["prequest"] = "Измятая записка",
+				["location"] = "Маршал Виндзор (Глубины Черной горы |cffffff00|cffffff00[4]"..WHITE..""..WHITE..")",
+				["level"] = 58,
+				["title"] = "Проблеск надежды",
+			},
+			[11] = {
+				["note"] = "Маршал Виндзор около |cffffff00[4]"..WHITE..".\nВы найдете маршала Максвелла в Пылающих Степях (|cffffff0084,68"..WHITE..")",
+				["id"] = 4322,
+				["attain"] = 50,
+				["aim"] = "Помогите маршалу Виндзору забрать вещи и освободить его друзей, после чего вернитесь к маршалу Максвеллу и получите дальнейшие инструкции.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Ward of the Elements",
+						["id"] = 12065,
+						["icon"] = "INV_Jewelry_Talisman_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Blade of Reckoning",
+						["id"] = 12061,
+						["icon"] = "INV_Sword_26",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Skilled Fighting Blade",
+						["id"] = 12062,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Побег!",
+				["prequest"] = "Проблеск надежды",
+				["location"] = "Маршал Виндзор (Глубины Черной горы |cffffff00|cffffff00[4]"..WHITE..""..WHITE..")",
+				["level"] = 58,
+				["followup"] = "Встреча в Штормграде",
+			},
+			[12] = {
+				["note"] = "Задание начинает Каларан Ветрорез (Тлеющее ущелье; 39,38).\nБейл'Гор |cffffff00[11]"..WHITE..".",
+				["id"] = 4024,
+				["attain"] = 52,
+				["aim"] = "Отправьтесь в глубины Черной горы и убейте Бейл'Гора.$B$BИзвестно лишь то, что великан живет в глубинах. Воспользуйтесь измененной сброшенной шкурой черного дракона и возьмите из останков Бейл'Гора сущность Огня.$B$BОтнесите пойманную сущность Огня Цирусу Раскаивателю.",
+				["prequest"] = "Неугасимое пламя -> Вкус пламени",
+				["title"] = "Вкус пламени",
+				["location"] = "Цирус Раскаиватель (Пылающие Степи |cffffff0094,31"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Shaleskin Cape",
+						["id"] = 12066,
+						["icon"] = "INV_Misc_Cape_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Wyrmhide Spaulders",
+						["id"] = 12082,
+						["icon"] = "INV_Shoulder_16",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Valconian Sash",
+						["id"] = 12083,
+						["icon"] = "INV_Belt_11",
+						["quality"] = 2,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Предшествующее задание начинается у Королевского историка Аркессонуса (Стальгорн; |cffffff0038,55"..WHITE.."). Каран Могучий Молот находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 4341,
+				["attain"] = 50,
+				["aim"] = "Пойдите в Глубины Черной горы и найдите Карана Могучего Молота.$B$BКороль упомянул, что Каран сидит там в плену – может, стоит поискать темницу.",
+				["followup"] = "Недобрые вести",
+				["prequest"] = "Дымящиеся руины Тауриссана",
+				["location"] = "Король Магни Бронзобород (Стальгорн; |cffffff0039,55"..WHITE..")",
+				["level"] = 59,
+				["title"] = "Каран Могучий Молот",
+			},
+			[14] = {
+				["note"] = "Принцесса Мойра Бронзобород находится около |cffffff00[21]"..WHITE..". Во время боя она может лечить Даграна. Постарайтесь по возможности сбивать ей заклинание, но торопитесь, так она не должна умереть или вы провалите задание! После того как поговорите с ней, вы должны вернуться к Магни Бронзобороду.",
+				["id"] = 4362,
+				["attain"] = 50,
+				["aim"] = "Вернитесь в Глубины Черной горы и освободите принцессу Мойру Бронзобород от злобного императора Даграна Тауриссана.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Magni's Will",
+						["id"] = 12548,
+						["icon"] = "INV_Jewelry_Ring_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Songstone of Ironforge",
+						["id"] = 12543,
+						["icon"] = "INV_Jewelry_Ring_05",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Судьба королевства",
+				["prequest"] = "Недобрые вести",
+				["location"] = "Король Магни Бронзобород (Стальгорн; |cffffff0039,55"..WHITE..")",
+				["level"] = 59,
+				["followup"] = "Королевский сюрприз",
+			},
+			[15] = {
+				["note"] = "После выполнения задания вы сможете использовать камень ряом с Лотосом Хранителем Портала, чтобы войти в Расплавленные недра.\nВы найдете фрагмент ядра около |cffffff00[23]"..WHITE..", сосем близко от портала в Расплавленные недра.",
+				["id"] = 7848,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь через портал, ведущий к Огненным Недрам в Глубинах Черной горы и добудьте фрагмент ядра. Принесите его Лотосу Хранителю Портала к Черной горе.",
+				["title"] = "Сродство с недрами",
+				["location"] = "Лотос Хранитель Портала (Черная гора; |cffffff00[2] на карте Входа"..WHITE..")",
+				["level"] = 60,
+			},
+			[16] = {
+				["note"] = "Предыдущие задания отличаются для каждого класса.",
+				["id"] = 9015,
+				["attain"] = 58,
+				["aim"] = "Войдите в Зал Правосудия в Глубинах Черной горы, выслушайте приговор верховного судьи Мрачнокамня и вонзите знамя Вызова в центр круга. Убейте Телдрена и его гладиаторов, после чего вернитесь к Антиону Хармону в Восточные Чумные земли с первой частью амулета Лорда Вальтхалака.",
+				["followup"] = "(Классовые задания)",
+				["prequest"] = "Чары подстрекателя",
+				["location"] = "Фалрин Садовник (Забытый город (Запад); |cffffff00[1] Бибилиотека"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Вызов",
+			},
+			[17] = {
+				["note"] = "Только шахтеры с навыком 230 или выше могут получить это задание, чтобы научиться выплавлять черное железо. Материалы для чаши: 2 [Звездный Рубин], 20 [Золотой слиток], 10 [Слиток истинного серебра]. После этого, если у Вас есть [Руда черного железа] Вы можете отнести ее к Черной Кузни |cffffff00[22]"..WHITE.." и выплавить ее.",
+				["id"] = 4083,
+				["attain"] = 40,
+				["aim"] = "",
+				["title"] = "Призрачный кубок",
+				["location"] = "Gloom'rel (Глубины Черной горы; |cffffff00[18]"..WHITE..")",
+				["level"] = 55,
+			},
+			[18] = {
+				["note"] = "Questline starts at Bixxle Screwfuse north of Tel'Abim Island "..NORMAL.."51.3,34.3"..WHITE.." east from Tanaris.\nDarneg Darkbeard is in the right room as you enter the Domicile from the bridge.",
+				["id"] = 40757,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь в глубины Черной Скалы и добудьте \"Чрезвычайно крепкий нюхательный табак\" у Дарнега Темной Бороды неподалеку от места жительства для Джабби в порту Стимуидл в Танарисе.",
+				["followup"] = "Operation Help Jabbey 2 -> Operation Return to Screwfuse -> Operation Final Repairs -> Secrets of the Dark Iron Desecrator -> The Dark Iron Desecrator",
+				["location"] = "Jabbey (Tanaris, Steamwheedle Port; "..NORMAL.."67,24"..WHITE..")",
+				["level"] = 58,
+				["prequest"] = "Operation Screwfuse 1000 -> Operation FIX Screwfuse 1000",
+				["title"] = "Операция \"Помоги Джабби\"",
+			},
+			[19] = {
+				["note"] = "This quest requires to collect 4 items.\n1) Magma Condensor (Blackrock Depths in Magma Condensor Crate) "..NORMAL.."[14]"..WHITE.." north west corner of the room.\n2) Intricate Arcanite Barrel (Blackrock Spire in Intricate Arcanite Barrels container)\n3) Molten Fragment (Molten Core from Molten Destroyer).\n4) Dark Iron Rifle (crafted by Engineers).\nTo finish the construction, I will also need Fiery Core(x3) found in Molten Core, and Enchanted Thorium Bars(x10).",
+				["id"] = 40762,
+				["attain"] = 55,
+				["aim"] = "Соберите винтовку из темного железа, Магматический конденсатор, замысловатый арканитовый бочонок, расплавленный фрагмент, 3 огненных стержня и 10 зачарованных брусков тория для Bixxle Screwfuse на складе Bixxle в Тел'Абиме.",
+				["title"] = "Осквернитель темного железа",
+				["location"] = "Bixxle Screwfuse (Tel'Abim Island east from Tanaris)",
+				["level"] = 60,
+				["prequest"] = "Secrets of the Dark Iron Desecrator",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.GUN,
+						["name"] = "Dark Iron Desecrator",
+						["id"] = 61068,
+						["icon"] = "Spell_frost_fireresistancetotem",
+						["quality"] = 4,
+					},
+				},
+			},
+			[20] = {
+				["note"] = "This questline starts at Radgan Deepblaze next to Orvak Sternrock with quest 'Gaining Orvak's Trust'",
+				["id"] = 40464,
+				["attain"] = 45,
+				["aim"] = "Убейте 25 сенаторов Горна Теней глубоко в недрах Черной горы ради Орвака Стернрока на перевале Черной горы в Пылающих степях.",
+				["title"] = "Месть сенатора",
+				["location"] = "Orvak Sternrock (after Redridge Mountains - Burning Steppes pass "..NORMAL.."76,68"..WHITE..", west from alliance camp)",
+				["level"] = 56,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Badge of Shadowforge",
+						["id"] = 60668,
+						["icon"] = "BTN_cr_GCOIN",
+						["quality"] = 2,
+					},
+				},
+			},
+			[21] = {
+				["note"] = "This questline starts at Radgan Deepblaze next to Orvak Sternrock with quest 'Gaining Orvak's Trust'",
+				["id"] = 40467,
+				["attain"] = 45,
+				["aim"] = "Найдите и заберите тайное ядро голема у повелителя големов Аргельмаха в глубинах Черной скалы и вернитесь к Радгану Дипблейзу на перевале Черной скалы в Пылающих степях.",
+				["title"] = "Тайное ядро голема",
+				["location"] = " Radgan Deepblaze (after Redridge Mountains - Burning Steppes pass "..NORMAL.."76,68"..WHITE..", west from alliance camp)",
+				["level"] = 55,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash -> Discovering Golem Secrets -> To Purchase Secret Information",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Energized Golem Core",
+						["id"] = 60672,
+						["icon"] = "INV_Misc_Gem_Pearl_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[22] = {
+				["note"] = "\"Crowd Pummeler 9-60\" in Gnomeregan drops Intact Pounder Mainframe that starts the PreQuest \"A Pounding Brain\".\nThorium Tuned Servo drops from Scarlet Myrmidons.\nPerfect Golem Core drops from Golem Lord Argelmach.\nAdamantite Rod drops from Crimson Hammersmith.",
+				["id"] = 80401,
+				["attain"] = 30,
+				["aim"] = "Приобретите настроенный на торий сервопривод в Оружейной Алого монастыря, получите Идеальное ядро голема в глубинах Черных Скал у повелителя големов Аргельмаха, найдите Адамантитовый стержень в Стратхольме. Возвращайтесь в Оглторп-Обнотикус.",
+				["title"] = "Чтобы построить фунтовую машину",
+				["location"] = "Oglethorpe Obnoticus (Stranglethorn Vale - Booty Bay "..NORMAL.."28.4,76.3"..WHITE..").",
+				["level"] = 60,
+				["prequest"] = "A Pounding Brain "..NORMAL.."(Engineers only)",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Red Pounder",
+						["id"] = 81253,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Green Pounder",
+						["id"] = 81252,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Blue Pounder",
+						["id"] = 81251,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Black Pounder",
+						["id"] = 81250,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[23] = {
+				["note"] = "AVAILABLE ONLY while Winter Veil Holiday Event is active!\nThose dastardly Dark Irons stole it, no doubt hidden away in their tavern "..NORMAL.."[15]"..WHITE.." deep within the Blackrock Depths.",
+				["id"] = 40748,
+				["attain"] = 45,
+				["aim"] = "Добудьте бочонок \"Зимней вуали\" в пещерах глубин Черной скалы для Бомарна Огненного топора в долине Зимней вуали.",
+				["title"] = "Варево \"Зимняя вуаль\"",
+				["location"] = "Bomarn Fireaxe at Winter Veil Vale",
+				["level"] = 55,
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Франклорн находится в средине горы, над своей могилой, в здании около камня призыва. Вы должны быть мертвы, чтобы увидеть его! Он также дает предыдущее задание в цепочке.\nФиний Темнострой находится около |cffffff00[9]"..WHITE..". Вы найдете Святилище рядом с ареной |cffffff00[7]"..WHITE..".",
+				["id"] = 3802,
+				["attain"] = 48,
+				["aim"] = "Убейте Точеня Темностроя и добудьте великий молот, Железный Друг. Отнесите Железного Друга в святилище Тауриссана и вложите его в руки статуи Франклорна Искусника.",
+				["prequest"] = "Наследие Черного Железа",
+				["title"] = "Наследие Черного Железа",
+				["location"] = "Франклорн Искусник (Черная гора)",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.KEY,
+						["name"] = "Shadowforge Key",
+						["id"] = 11000,
+						["icon"] = "INV_Misc_Key_08",
+						["quality"] = 1,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы получите предшествующее задание у Юрбы Крутипроба (Танарис - Порт Картеля; |cffffff0067,23"..WHITE..").\nРиббли находится около |cffffff00[15]"..WHITE..".",
+				["id"] = 4136,
+				["attain"] = 48,
+				["aim"] = "Принесите голову Риббли Юке Крутипроб в Пылающие степи.",
+				["prequest"] = "Юка Крутипроб",
+				["title"] = "Риббли Крутипроб",
+				["location"] = "Юка Крутипроб (Пылающие степи - Пламенеющий стяг; |cffffff0065,22"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.CLOTH,
+						["name"] = "Rancor Boots",
+						["id"] = 11865,
+						["icon"] = "INV_Boots_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Penance Spaulders",
+						["id"] = 11963,
+						["icon"] = "INV_Shoulder_25",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Splintsteel Armor",
+						["id"] = 12049,
+						["icon"] = "INV_Chest_Chain_16",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Получить огромные серебряные слитки можно с Гигантов в Азшаре. Листки крови Грома легко можно найти у травников или на Аукционе. И последнее, сосуд можно наполнить в кратере Го-Лакка (Кратер Ун'Горо; |cffffff0031,50"..WHITE..").\nПосле выполнения задания, вы можете использоать черный ход вместо сражения с Фалангой.",
+				["id"] = 4201,
+				["attain"] = 50,
+				["aim"] = "Принесите 4 листа крови Грома, 10 огромных серебряных слитков и наполненный сосуд Нагмары госпоже Нагмаре в Глубины Черной горы.",
+				["title"] = "Приворотное зелье",
+				["location"] = "Госпожа Нагмара (Глубины Черной горы, таверна)",
+				["level"] = 54,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Manacle Cuffs",
+						["id"] = 11962,
+						["icon"] = "INV_Bracer_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Nagmara's Whipping Belt",
+						["id"] = 11866,
+						["icon"] = "INV_Belt_11",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Вы получите предшествующее задание у аптекаря Зинга в Подгороде - Район Фармацевтов (|cffffff0050,68"..WHITE..").\nВы получите рецепт у одного из охранников, которые появятся, если вы уничтожите эль |cffffff00[15]"..WHITE..".",
+				["id"] = 4134,
+				["attain"] = 50,
+				["aim"] = "Принесите рецепт громоварского светлого Вивиан Лягроб в Каргат.",
+				["prequest"] = "Вивиан Лягроб",
+				["title"] = "Украденный рецепт громоварского",
+				["location"] = "Темный маг Вивиан Лягроб (Бесплодные земли - Каргат; |cffffff002,47"..WHITE..")",
+				["level"] = 55,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Superior Healing Potion",
+						["id"] = 3928,
+						["count"] = 5,
+						["icon"] = "INV_Potion_53",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Greater Mana Potion",
+						["id"] = 6149,
+						["count"] = 5,
+						["icon"] = "INV_Potion_73",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Swiftstrike Cudgel",
+						["id"] = 11964,
+						["icon"] = "INV_Mace_08",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Limb Cleaver",
+						["id"] = 12000,
+						["icon"] = "INV_Axe_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы найдете Сердце около |cffffff00[8]"..WHITE.." в сейфе. Вы возьмете ключ от сейфа у сторожа Стиллгисс. Он появляется после открытия всех маленьких сейфов.",
+				["id"] = 4123,
+				["attain"] = 50,
+				["aim"] = "Принесите сердце горы Максворту Суперблеску в Пылающие степи.",
+				["title"] = "Сердце горы",
+				["location"] = "Максворт Суперблеск (Пылающие степи - Пламенеющий стяг; |cffffff0065,23"..WHITE..")",
+				["level"] = 55,
+			},
+			[6] = {
+				["note"] = "Вы найдете дворфов в первой части Глубин Черной горы.\nВы найдете полководца Клинозуба в Каргате на вершине башни (Бесплодные земли, |cffffff005,47"..WHITE..").",
+				["id"] = 4081,
+				["attain"] = 48,
+				["aim"] = "Отправляйтесь в Глубины Черной горы и уничтожьте подлых агрессоров! $B$BПо приказу полководца Клинозуба уничтожьте 15 охранников, 10 надсмотрщиков и 5 пехотинцев из клана Ярости Горна. Вернитесь сразу по выполнении задания.",
+				["title"] = "УНИЧТОЖИТЬ НА МЕСТЕ: Дворфы Черного Железа",
+				["location"] = "Доска объявлений (Бесплодные земли - Каргат; |cffffff003,47"..WHITE..")",
+				["level"] = 52,
+				["followup"] = "УНИЧТОЖИТЬ НА МЕСТЕ: Высокопоставленные чины Черного Железа",
+			},
+			[7] = {
+				["note"] = "Вы найдете дворфов около Бейл'Гор |cffffff00[11]"..WHITE..". Вы найдете полководца Клинозуба в Каргате на вершине башни (Бесплодные земли, |cffffff005,47"..WHITE..").\n Последующее задание начинается у Лекслорта (Бесплодные земли - Каргат; |cffffff005,47"..WHITE.."). Вы найдете Грарка в Пылающих степях (|cffffff0038,35"..WHITE.."). Вы должны опустить его ХП ниже 50%, чтобы начать задание сопровождения.",
+				["id"] = 4082,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь в Глубины Черной горы и уничтожьте подлых агрессоров! $B$BПо приказу полководца Клинозуба уничтожьте 10 медиков, 10 солдат и 10 офицеров из клана Ярости Горна. Вернитесь сразу по выполнении задания.",
+				["followup"] = "Грарк Лоркруб -> Опасное положение (Задание сопровождения)",
+				["prequest"] = "УНИЧТОЖИТЬ НА МЕСТЕ: Дворфы Черного Железа",
+				["location"] = "Доска объявлений (Бесплодные земли - Каргат; |cffffff003,47"..WHITE..")",
+				["level"] = 54,
+				["title"] = "УНИЧТОЖИТЬ НА МЕСТЕ: Высокопоставленные чины Черного Железа",
+			},
+			[8] = {
+				["note"] = "Вы найдете генерала Кузню Гнева около |cffffff00[13]"..WHITE..". Он зовет подкрепление когда ХП ниже 30%!",
+				["id"] = 4132,
+				["attain"] = 52,
+				["aim"] = "Отправляйтесь в Глубины Черной горы и убейте генерала Кузню Гнева. Вернитесь к полководцу Клинозубу по выполнении задания.",
+				["prequest"] = "Опасное положение",
+				["title"] = "Операция:смерть Кузне Гнева",
+				["location"] = "Полководец Клинозуб (Бесплодные земли - Каргат; |cffffff005,47"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Conqueror's Medallion",
+						["id"] = 12059,
+						["icon"] = "INV_Jewelry_Amulet_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Вы возьмете предшествуещее задание у  Верховной Жрицы Теодоры Мальвадании (Бесплодные земли - Каргат; |cffffff003,47"..WHITE..").\nВы найдете Аргелмаха около |cffffff00[14]"..WHITE..".",
+				["id"] = 4063,
+				["attain"] = 52,
+				["aim"] = "Найдите и убейте повелителя големов Аргелмаха. Принесите его голову Лотвилу. Также соберите 10 невредимых ядер стихий с беспощадных големов и созданий-завоевателей, охраняющих Аргелмаха. Информация передана посредством телепатии.",
+				["prequest"] = "Восстание машин",
+				["title"] = "Восстание машин",
+				["location"] = "Лотвиль Вериатус (Бесплодные земли; |cffffff0025,44"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Azure Moon Amice",
+						["id"] = 12109,
+						["icon"] = "INV_Shoulder_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Raincaster Drape",
+						["id"] = 12110,
+						["icon"] = "INV_Misc_Cape_16",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Basaltscale Armor",
+						["id"] = 12108,
+						["icon"] = "INV_Chest_Chain_16",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Lavaplate Gauntlets",
+						["id"] = 12111,
+						["icon"] = "INV_Gauntlets_26",
+						["quality"] = 2,
+					},
+				},
+			},
+			[10] = {
+				["note"] = "Задание начинает Каларан Ветрорез (Тлеющее ущелье; 39,38).\nБейл'Гор |cffffff00[11]"..WHITE..".",
+				["id"] = 4024,
+				["attain"] = 52,
+				["aim"] = "Отправьтесь в глубины Черной горы и убейте Бейл'Гора.$B$BИзвестно лишь то, что великан живет в глубинах. Воспользуйтесь измененной сброшенной шкурой черного дракона и возьмите из останков Бейл'Гора сущность Огня.$B$BОтнесите пойманную сущность Огня Цирусу Раскаивателю.",
+				["prequest"] = "Неугасимое пламя -> Вкус пламени",
+				["title"] = "Вкус пламени",
+				["location"] = "Цирус Раскаиватель (Пылающие Степи |cffffff0094,31"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Shaleskin Cape",
+						["id"] = 12066,
+						["icon"] = "INV_Misc_Cape_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Wyrmhide Spaulders",
+						["id"] = 12082,
+						["icon"] = "INV_Shoulder_16",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Valconian Sash",
+						["id"] = 12083,
+						["icon"] = "INV_Belt_11",
+						["quality"] = 2,
+					},
+				},
+			},
+			[11] = {
+				["note"] = "Вы получите предыдущее задание у Громосерда тоже.\nВы найдете Лорда Опалителя около |cffffff00[10]"..WHITE..".",
+				["id"] = 3907,
+				["attain"] = 48,
+				["aim"] = "Ступайте в глубины Черной горы и выследите лорда Опалителя. Убейте его и принесите Громосерду все, что может дать какую-то информацию.",
+				["prequest"] = "Дисгармония пламени",
+				["title"] = "Дисгармония пламени",
+				["location"] = "Громосерд (Бесплодные земли - Каргат; |cffffff003,48"..WHITE..")",
+				["level"] = 56,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Sunborne Cape",
+						["id"] = 12113,
+						["icon"] = "INV_Misc_Cape_08",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Nightfall Gloves",
+						["id"] = 12114,
+						["icon"] = "INV_Gauntlets_17",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Crypt Demon Bracers",
+						["id"] = 12112,
+						["icon"] = "INV_Bracer_17",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.PLATE,
+						["name"] = "Stalwart Clutch",
+						["id"] = 12115,
+						["icon"] = "INV_Belt_34",
+						["quality"] = 2,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Вы получите предшествующее задание у Громосерда (Бесплодные земли - Каргат; |cffffff003,48"..WHITE..").\n С каждого элементаля может выпасть сущность стихий",
+				["id"] = 7201,
+				["attain"] = 48,
+				["aim"] = "Отправляйтесь в Глубины Черной горы и добудьте 10 мер сущности Стихий. Стоит начать поиски с големов и их создателей. Вивиан Лаграв также бормотала что-то про элементалей.",
+				["prequest"] = "Disharmony of Flame",
+				["title"] = "Последняя Стихия",
+				["location"] = "Темный маг Вивиана Лягроб (Бесплодные земли - Каргат; |cffffff002,47"..WHITE..")",
+				["level"] = 54,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Lagrave's Seal",
+						["id"] = 12038,
+						["icon"] = "INV_Jewelry_Ring_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Вы получите предшествующее задание у Громосерда (Бесплодные земли - Каргат; |cffffff003,48"..WHITE..").\nВы найдете командира Гор'шака около |cffffff00[3]"..WHITE..". Ключ, чтобы открыть камеру, пдает с Веровного Дознавателя Герштаны |cffffff00[5]"..WHITE..". Если вы поговорите с ним, начнется следующее задание и появятся враги.",
+				["id"] = 3981,
+				["attain"] = 48,
+				["aim"] = "Найдите командира Гор'шака в Глубинах Черной горы. $B$BСудя по рисунку в записке, искать следует в темнице где-то вроде того.",
+				["followup"] = "Что происходит?",
+				["prequest"] = "Дисгармония пламени",
+				["location"] = "Гамалав Стрелок (Бесплодные земли - Каргат; |cffffff005,47"..WHITE..")",
+				["level"] = 52,
+				["title"] = "Командир Гор'шак",
+			},
+			[14] = {
+				["note"] = "После того, как вы поговорите с Караном Могучим Молотом и Траллом, вы получите это задание.\nВы найдете императора Даграна Тауриссана около |cffffff00[21]"..WHITE..". Во время боя принцесса может лечить Даграна. Постарайтесь по возможности сбивать ей заклинание, но торопитесь, так она не должна умереть или вы провалите задание! (Награда за Спасенная принцесса)",
+				["id"] = 4003,
+				["attain"] = 48,
+				["aim"] = "Убейте императора Даграна Тауриссана и освободите принцессу Мойру Бронзобород от его черного заклятия.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Thrall's Resolve",
+						["id"] = 12544,
+						["icon"] = "INV_Jewelry_Ring_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Eye of Orgrimmar",
+						["id"] = 12545,
+						["icon"] = "INV_Jewelry_Ring_05",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Спасение принцессы",
+				["prequest"] = "Командир Гор'шак -> Восточные королевства",
+				["location"] = "Тралл (Оргриммар; |cffffff0031,37"..WHITE..")",
+				["level"] = 59,
+				["followup"] = "Спасенная принцесса",
+			},
+			[15] = {
+				["note"] = "После выполнения задания вы сможете использовать камень ряом с Лотосом Хранителем Портала, чтобы войти в Расплавленные недра.\nВы найдете фрагмент ядра около |cffffff00[23]"..WHITE..", сосем близко от портала в Расплавленные недра.",
+				["id"] = 7848,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь через портал, ведущий к Огненным Недрам в Глубинах Черной горы и добудьте фрагмент ядра. Принесите его Лотосу Хранителю Портала к Черной горе.",
+				["title"] = "Сродство с недрами",
+				["location"] = "Лотос Хранитель Портала (Черная гора; |cffffff00[2] на карте Входа"..WHITE..")",
+				["level"] = 60,
+			},
+			[16] = {
+				["note"] = "Предыдущие задания отличаются для каждого класса.",
+				["id"] = 9015,
+				["attain"] = 58,
+				["aim"] = "Войдите в Зал Правосудия в Глубинах Черной горы, выслушайте приговор верховного судьи Мрачнокамня и вонзите знамя Вызова в центр круга. Убейте Телдрена и его гладиаторов, после чего вернитесь к Антиону Хармону в Восточные Чумные земли с первой частью амулета Лорда Вальтхалака.",
+				["followup"] = "(Классовые задания)",
+				["prequest"] = "Чары подстрекателя",
+				["location"] = "Фалрин Садовник (Забытый город (Запад); |cffffff00[1] Бибилиотека"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Вызов",
+			},
+			[17] = {
+				["note"] = "Только шахтеры с навыком 230 или выше могут получить это задание, чтобы научиться выплавлять черное железо. Материалы для чаши: 2 [Звездный Рубин], 20 [Золотой слиток], 10 [Слиток истинного серебра]. После этого, если у Вас есть [Руда черного железа] Вы можете отнести ее к Черной Кузни |cffffff00[22]"..WHITE.." и выплавить ее.",
+				["id"] = 4083,
+				["attain"] = 40,
+				["aim"] = "",
+				["title"] = "Призрачный кубок",
+				["location"] = "Gloom'rel (Глубины Черной горы; |cffffff00[18]"..WHITE..")",
+				["level"] = 55,
+			},
+			[18] = {
+				["note"] = "Questline starts at Bixxle Screwfuse north of Tel'Abim Island "..NORMAL.."51.3,34.3"..WHITE.." east from Tanaris.\nDarneg Darkbeard is in the right room as you enter the Domicile from the bridge.",
+				["id"] = 40757,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь в глубины Черной Скалы и добудьте \"Чрезвычайно крепкий нюхательный табак\" у Дарнега Темной Бороды неподалеку от места жительства для Джабби в порту Стимуидл в Танарисе.",
+				["followup"] = "Operation Help Jabbey 2 -> Operation Return to Screwfuse -> Operation Final Repairs -> Secrets of the Dark Iron Desecrator -> The Dark Iron Desecrator",
+				["location"] = "Jabbey (Tanaris, Steamwheedle Port; "..NORMAL.."67,24"..WHITE..")",
+				["level"] = 58,
+				["prequest"] = "Operation Screwfuse 1000 -> Operation FIX Screwfuse 1000",
+				["title"] = "Операция \"Помоги Джабби\"",
+			},
+			[19] = {
+				["note"] = "This quest requires to collect 4 items.\n1) Magma Condensor (Blackrock Depths in Magma Condensor Crate) "..NORMAL.."[14]"..WHITE.." north west corner of the room.\n2) Intricate Arcanite Barrel (Blackrock Spire in Intricate Arcanite Barrels container)\n3) Molten Fragment (Molten Core from Molten Destroyer).\n4) Dark Iron Rifle (crafted by Engineers).\nTo finish the construction, I will also need Fiery Core(x3) found in Molten Core, and Enchanted Thorium Bars(x10).",
+				["id"] = 40762,
+				["attain"] = 55,
+				["aim"] = "Соберите винтовку из темного железа, Магматический конденсатор, замысловатый арканитовый бочонок, расплавленный фрагмент, 3 огненных стержня и 10 зачарованных брусков тория для Bixxle Screwfuse на складе Bixxle в Тел'Абиме.",
+				["title"] = "Осквернитель темного железа",
+				["location"] = "Bixxle Screwfuse (Tel'Abim Island east from Tanaris)",
+				["level"] = 60,
+				["prequest"] = "Secrets of the Dark Iron Desecrator",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.GUN,
+						["name"] = "Dark Iron Desecrator",
+						["id"] = 61068,
+						["icon"] = "Spell_frost_fireresistancetotem",
+						["quality"] = 4,
+					},
+				},
+			},
+			[20] = {
+				["note"] = "This questline starts at Radgan Deepblaze next to Orvak Sternrock with quest 'Gaining Orvak's Trust'",
+				["id"] = 40464,
+				["attain"] = 45,
+				["aim"] = "Убейте 25 сенаторов Горна Теней глубоко в недрах Черной горы ради Орвака Стернрока на перевале Черной горы в Пылающих степях.",
+				["title"] = "Месть сенатора",
+				["location"] = "Orvak Sternrock (after Redridge Mountains - Burning Steppes pass "..NORMAL.."76,68"..WHITE..", west from alliance camp)",
+				["level"] = 56,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Badge of Shadowforge",
+						["id"] = 60668,
+						["icon"] = "BTN_cr_GCOIN",
+						["quality"] = 2,
+					},
+				},
+			},
+			[21] = {
+				["note"] = "This questline starts at Radgan Deepblaze next to Orvak Sternrock with quest 'Gaining Orvak's Trust'",
+				["id"] = 40467,
+				["attain"] = 45,
+				["aim"] = "Найдите и заберите тайное ядро голема у повелителя големов Аргельмаха в глубинах Черной скалы и вернитесь к Радгану Дипблейзу на перевале Черной скалы в Пылающих степях.",
+				["title"] = "Тайное ядро голема",
+				["location"] = " Radgan Deepblaze (after Redridge Mountains - Burning Steppes pass "..NORMAL.."76,68"..WHITE..", west from alliance camp)",
+				["level"] = 55,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash -> Discovering Golem Secrets -> To Purchase Secret Information",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Energized Golem Core",
+						["id"] = 60672,
+						["icon"] = "INV_Misc_Gem_Pearl_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[22] = {
+				["note"] = "\"Crowd Pummeler 9-60\" in Gnomeregan drops Intact Pounder Mainframe that starts the PreQuest \"A Pounding Brain\".\nThorium Tuned Servo drops from Scarlet Myrmidons.\nPerfect Golem Core drops from Golem Lord Argelmach.\nAdamantite Rod drops from Crimson Hammersmith.",
+				["id"] = 80401,
+				["attain"] = 30,
+				["aim"] = "Приобретите настроенный на торий сервопривод в Оружейной Алого монастыря, получите Идеальное ядро голема в глубинах Черных Скал у повелителя големов Аргельмаха, найдите Адамантитовый стержень в Стратхольме. Возвращайтесь в Оглторп-Обнотикус.",
+				["title"] = "Чтобы построить фунтовую машину",
+				["location"] = "Oglethorpe Obnoticus (Stranglethorn Vale - Booty Bay "..NORMAL.."28.4,76.3"..WHITE..").",
+				["level"] = 60,
+				["prequest"] = "A Pounding Brain "..NORMAL.."(Engineers only)",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Red Pounder",
+						["id"] = 81253,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Green Pounder",
+						["id"] = 81252,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Blue Pounder",
+						["id"] = 81251,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Black Pounder",
+						["id"] = 81250,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[23] = {
+				["note"] = "AVAILABLE ONLY while Winter Veil Holiday Event is active!\nThose dastardly Dark Irons stole it, no doubt hidden away in their tavern "..NORMAL.."[15]"..WHITE.." deep within the Blackrock Depths.",
+				["id"] = 40748,
+				["attain"] = 45,
+				["aim"] = "Добудьте бочонок \"Зимней вуали\" в пещерах глубин Черной скалы для Бомарна Огненного топора в долине Зимней вуали.",
+				["title"] = "Варево \"Зимняя вуаль\"",
+				["location"] = "Bomarn Fireaxe at Winter Veil Vale",
+				["level"] = 55,
+			},
+		},
+		["story"] = "Когда-то будучи столицей дворфов клана Темного Железа, этот вулканический лабиринт теперь является безраздельными владениями Огненого лорда Рагнароса. Рагнорос открыл секрет создания жизни из камня и собирается построить армию неудержимых големов, чтобы те помогли ему завоевать всю Черную гору целиком. Помешавшись на мысли победить Нефариана и его драконьих прислужников, Рагнарос пойдет на любую крайность чтобы достичь окончательной победы.",
+		["name"] = "Глубины Черной горы",
+	},
+	[6] = {
+		[1] = {
+			[1] = {
+				["note"] = "Только один игрок может получить осколок. Анахронос (Танарис - Пещеры Времени; |cffffff0065,49"..WHITE..")",
+				["id"] = 8730,
+				["attain"] = 60,
+				["aim"] = "Убейте Нефариана и добудьте осколок красного скипетра. Верните осколок красного скипетра Анахроносу в Пещеры Времени в Танарис. На выполнение задания у вас есть 1.5 часов.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Onyx Embedded Leggings",
+						["id"] = 21530,
+						["icon"] = "INV_Pants_Mail_04",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amulet of Shadow Shielding",
+						["id"] = 21529,
+						["icon"] = "INV_Jewelry_Necklace_17",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Нефариус, пораженный порчей",
+				["prequest"] = "Создание драконов",
+				["location"] = "Валестраз Порочный (Логово Крыла Тьмы; |cffffff00[2]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Армия Калимдора (Необходимо выполнить цепочки заданий Зеленого и Голубого скипетра)",
+			},
+			[2] = {
+				["note"] = "Верховный лорд Болвар Фордрагон находится (Штормград - Крепость Штормграда; |cffffff0078,20"..WHITE.."). Далее Вас посылают к Фельдмаршалу Афрасиаби (Штормград - Аллея героев; |cffffff0067,72"..WHITE..") для получения награды.",
+				["id"] = 7781,
+				["attain"] = 60,
+				["aim"] = "Отнесите голову Нефариана Верховному лорду Болвару Фордрагону в Штормград.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Master Dragonslayer's Medallion",
+						["id"] = 19383,
+						["icon"] = "INV_Jewelry_Necklace_18",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Master Dragonslayer's Orb",
+						["id"] = 19366,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Master Dragonslayer's Ring",
+						["id"] = 19384,
+						["icon"] = "INV_Jewelry_Ring_41",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Владыка Черной горы",
+				["location"] = "Голова Нефариана (добывается с Нефариана; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Владыка Черной горы",
+			},
+			[3] = {
+				["note"] = "Только один игрок может получить голову.",
+				["id"] = 8288,
+				["attain"] = 60,
+				["aim"] = "Принесите голову предводителя драконов Разящего Бича Баристольфу из Зыбучих Песков в Крепость Кенария в Силитусе.",
+				["followup"] = "Путь праведника",
+				["prequest"] = "Что ждет нас завтра",
+				["location"] = "Голова предводителя драконидов Разящего Бича (добывается с Предводителя драконов Разящего Бича; |cffffff00[3]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Кто будет избран?",
+			},
+			[4] = {
+				["note"] = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")",
+				["id"] = 8620,
+				["attain"] = 60,
+				["aim"] = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gnomish Turban of Psychic Might",
+						["id"] = 21517,
+						["icon"] = "INV_Helmet_63",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Единственный способ",
+				["prequest"] = "Утка!",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+			[5] = {
+				["note"] = "Book 'Treatise on Magical Locks and Keys' is in the last boss room "..NORMAL.."[9]"..WHITE..", next to the throne.",
+				["id"] = 40828,
+				["attain"] = 58,
+				["aim"] = "Find \"Treatise on Magical Locks and Keys\" and bring it back to Vandol. It is rumored to be kept in Blackwing Lair.",
+				["title"] = "The Key to Karazhan IX",
+				["prequest"] = "The Key to Karazhan VIII",
+				["location"] = "Dolvan Bracewind (Dustwallow Marsh - ; "..NORMAL.."[71.1,73.2]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "The Key to Karazhan X",
+			},
+			[6] = {
+				["note"] = "Nefarian "..NORMAL.."[9]"..WHITE.." drops 'Burnt Copy of Vorgendor'.\nQuestline starts with rare drop legendary item 'The Scythe of Elune' from boss Lord Blackwald II in "..NORMAL.."[Karazhan]"..WHITE..".",
+				["id"] = 41067,
+				["attain"] = 58,
+				["aim"] = "Retrieve a copy of 'Vorgendor: Myths from the Blood Dimension' from Lord Victor Nefarius.",
+				["title"] = "Scythe of the Goddess",
+				["prequest"] = "Scythe of the Goddess",
+				["location"] = "Arch Druid Dreamwind (Hyjal - Nordanaar; "..NORMAL.."84.8,29.3"..WHITE.." top floor of the big tree)",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "Scythe of the Goddess "..NORMAL.."[Upper Karazhan]"..WHITE.." ",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Только один игрок может получить осколок. Анахронос (Танарис - Пещеры Времени; |cffffff0065,49"..WHITE..")",
+				["id"] = 8730,
+				["attain"] = 60,
+				["aim"] = "Убейте Нефариана и добудьте осколок красного скипетра. Верните осколок красного скипетра Анахроносу в Пещеры Времени в Танарис. На выполнение задания у вас есть 1.5 часов.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Onyx Embedded Leggings",
+						["id"] = 21530,
+						["icon"] = "INV_Pants_Mail_04",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amulet of Shadow Shielding",
+						["id"] = 21529,
+						["icon"] = "INV_Jewelry_Necklace_17",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Нефариус, пораженный порчей",
+				["prequest"] = "Создание драконов",
+				["location"] = "Валестраз Порочный (Логово Крыла Тьмы; |cffffff00[2]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Армия Калимдора (Необходимо выполнить цепочки заданий Зеленого и Голубого скипетра)",
+			},
+			[2] = {
+				["note"] = "Далее Вас посылают к Верховному правителю Саурфангу (Оргриммар - Аллея Силы; |cffffff0051,76"..WHITE..") для получения награды.",
+				["id"] = 7783,
+				["attain"] = 60,
+				["aim"] = "Отнесите голову Нефариана Траллу в Оргриммар.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Master Dragonslayer's Medallion",
+						["id"] = 19383,
+						["icon"] = "INV_Jewelry_Necklace_18",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Master Dragonslayer's Orb",
+						["id"] = 19366,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Master Dragonslayer's Ring",
+						["id"] = 19384,
+						["icon"] = "INV_Jewelry_Ring_41",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Владыка Черной горы",
+				["location"] = "Голова Нефариана (добывается с Нефариана; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Владыка Черной горы",
+			},
+			[3] = {
+				["note"] = "Только один игрок может получить голову.",
+				["id"] = 8288,
+				["attain"] = 60,
+				["aim"] = "Принесите голову предводителя драконов Разящего Бича Баристольфу из Зыбучих Песков в Крепость Кенария в Силитусе.",
+				["followup"] = "Путь праведника",
+				["prequest"] = "Что ждет нас завтра",
+				["location"] = "Голова предводителя драконидов Разящего Бича (добывается с Предводителя драконов Разящего Бича; |cffffff00[3]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Кто будет избран?",
+			},
+			[4] = {
+				["note"] = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")",
+				["id"] = 8620,
+				["attain"] = 60,
+				["aim"] = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gnomish Turban of Psychic Might",
+						["id"] = 21517,
+						["icon"] = "INV_Helmet_63",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Единственный способ",
+				["prequest"] = "Утка!",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+			[5] = {
+				["note"] = "Book 'Treatise on Magical Locks and Keys' is in the last boss room "..NORMAL.."[9]"..WHITE..", next to the throne.",
+				["id"] = 40828,
+				["attain"] = 58,
+				["aim"] = "Find \"Treatise on Magical Locks and Keys\" and bring it back to Vandol. It is rumored to be kept in Blackwing Lair.",
+				["title"] = "The Key to Karazhan IX",
+				["prequest"] = "The Key to Karazhan VIII",
+				["location"] = "Dolvan Bracewind (Dustwallow Marsh - ; "..NORMAL.."[71.1,73.2]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "The Key to Karazhan X",
+			},
+			[6] = {
+				["note"] = "Nefarian "..NORMAL.."[9]"..WHITE.." drops 'Burnt Copy of Vorgendor'.\nQuestline starts with rare drop legendary item 'The Scythe of Elune' from boss Lord Blackwald II in "..NORMAL.."[Karazhan]"..WHITE..".",
+				["id"] = 41067,
+				["attain"] = 58,
+				["aim"] = "Retrieve a copy of 'Vorgendor: Myths from the Blood Dimension' from Lord Victor Nefarius.",
+				["title"] = "Scythe of the Goddess",
+				["prequest"] = "Scythe of the Goddess",
+				["location"] = "Arch Druid Dreamwind (Hyjal - Nordanaar; "..NORMAL.."84.8,29.3"..WHITE.." top floor of the big tree)",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "Scythe of the Goddess "..NORMAL.."[Upper Karazhan]"..WHITE.." ",
+			},
+		},
+		["story"] = {
+			[1] = "Логово Крыла Тьмы можно найти на самом пике Вершины Черной Горы. Именно там, в темных залах, Нефариан начал разворачивать заключительные этапы своего плана, чтобы раз и навсегда уничтожить Рагнароса, возглавить его армию и прийти к бесспорному превосходству над всеми расами Азерота.",
+			[2] = "Могущественная крепость, высеченная в огненных недрах Черной горы, была спроектирована мастером-каменщиком дварфом Франкларном Форгрейтом. Предназначенная, чтобы быть символом власти клана Темного Железа, крепость удерживалась зловещими дварфами в течение многих столетий. Однако у Нефариана - хитрого сына дракона Смертокрыла - были другие планы на великую крепость. Он и его драконьи миньоны взяли верх над Вершиной Черной Горы и вступили в войну во владениях дварфов в вулканических глубинах горы, которые служат местом силы для Рагнароса Повелителя Огня. Рагнарос раскрыл секрет создания жизни из камня и планирует построить армию неукротимых големов, чтобы помочь ему захватить всю Черную Гору.",
+			[3] = "Нефариан поклялся раздавить Рагнароса. И как и его отец Смертокрыл пытался делать в прошлом, он приступил к укреплению своих сил. Однако теперь кажется что интрига Нефариана может преуспеть там, где Смертокрыл потерпел неудачу. Безумная заявка Нефариана на господство  привлекла даже Огонь Рода Красных Драконов, которые всегда были самым большими врагами Рода Черных Драконов. Хотя намерения Нефариана известны, методы, которые он использует для их достижения, остаются загадкой. Считается, однако, что Нефариан экспериментировал с кровью всех Родов Драконов, чтобы произвести неукротимых воинов.\n Результаты его трудов ужасают, и если он добьется успеха, он сможет воплотить в жизнь еще более зловещие планы. Но владыка Черной горы – не простой исследователь, а могучий дракон, обосновавшийся в хорошо укрепленном логове. Могут ли смертные бросить ему вызов?",
+		},
+		["name"] = "Логово Крыла Тьмы",
+	},
+	[7] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы найдете манускрипт около |cffffff00[2]"..WHITE.." в воде.",
+				["id"] = 971,
+				["attain"] = 10,
+				["aim"] = "Принесите манускрипт Лоргалиса Геррику Костохвату в Заброшенный грот в Стальгорне.",
+				["title"] = "Знание в пучине",
+				["location"] = "Геррик Костохват (Стальгорн - Заброшеный Грот; |cffffff0050,5"..WHITE..")",
+				["level"] = 23,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Sustaining Ring",
+						["id"] = 6743,
+						["icon"] = "INV_Jewelry_Ring_08",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Предшествующее задание выполняется по желанию. Вы получите его от Аргоса Шепот Ночи (Штормград - Парк; |cffffff0021,55"..WHITE.."). \n\nСо всех наг перед и внутри Непроглядной пучины можно получить сволы мозга.",
+				["id"] = 1275,
+				["attain"] = 19,
+				["aim"] = "Гершал Шепот Ночи в Аубердине хочет, чтобы вы принесли ему 8 оскверненных стволов мозга.",
+				["prequest"] = "Проблема за морем",
+				["title"] = "Исследование порчи",
+				["location"] = "Гершал Шепот Ночи (Темные Берега - Аубердин; |cffffff0038,43"..WHITE..")",
+				["level"] = 24,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Beetle Clasps",
+						["id"] = 7003,
+						["icon"] = "INV_Bracer_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Prelacy Cape",
+						["id"] = 7004,
+						["icon"] = "INV_Misc_Cape_18",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете стража Талрида из ордена Серебряного Рассвета около |cffffff00[4]"..WHITE..".",
+				["id"] = 1198,
+				["attain"] = 18,
+				["aim"] = "Найдите стража Талрида из ордена Серебряного Рассвета в Непроглядной Пучине.",
+				["title"] = "В поисках Талрида",
+				["location"] = "Рассветный дозорный Шедласс (Дарнасс - Терраса ремесленников; |cffffff0055,24"..WHITE..")",
+				["level"] = 24,
+				["followup"] = "Злодейство в Непроглядной Пучине",
+			},
+			[4] = {
+				["note"] = "Лорд Сумерек Келрис находится около |cffffff00[8]"..WHITE..". Вы найдете Рассветного дозорного Селгорма в Дарнассе - Терраса Ремесленников (|cffffff0055,24"..WHITE.."). \n\nВНИМАНИЕ! Если вы включите огни позади Лорда Келриса, появятся враги и атакуют Вас.",
+				["id"] = 1200,
+				["attain"] = 18,
+				["aim"] = "Принесите голову Повелителя сумрака Келриса Рассветному дозорному Селгорму в Дарнасс.",
+				["prequest"] = "В поисках Талрида",
+				["title"] = "Злодейство в Непроглядной Пучине",
+				["location"] = "Страж Талрид из ордена Серебряного Рассвета (Непроглядная пучина; |cffffff00[4]"..WHITE..")",
+				["level"] = 27,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAND,
+						["name"] = "Gravestone Scepter",
+						["id"] = 7001,
+						["icon"] = "INV_Wand_04",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Arctic Buckler",
+						["id"] = 7002,
+						["icon"] = "INV_Shield_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Из любого сумеречного противника падают подвески.",
+				["id"] = 1199,
+				["attain"] = 20,
+				["aim"] = "Принесите 10 подвесок Сумерек стражу Менадосу из ордена Серебряного Рассвета в Дарнасс.",
+				["title"] = "Наступление сумерек",
+				["location"] = "Страж Менадос из ордена Серебряного рассвета (Дарнасс - Терраса ремесленников; |cffffff0055,23"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.CLOTH,
+						["name"] = "Nimbus Boots",
+						["id"] = 6998,
+						["icon"] = "INV_Boots_05",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Heartwood Girdle",
+						["id"] = 7000,
+						["icon"] = "INV_Belt_04",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Задание для чернокнижников: Вы возьмете 3 фрагмента Соран'рука с Сумеречных Прислужников в |cffffff00[Непроглядная пучина]"..WHITE..". Вы возьмете большой фрагмент Соран'рука в |cffffff00[Крепость Темного Клыка]"..WHITE.." у Темных Душ Темного Клыка.",
+				["id"] = 1740,
+				["attain"] = 20,
+				["aim"] = "Соберите 3 фрагмента Соран'рука и 1 большой фрагмент Соран'рука и принесите их Доану Кархану в Степи.",
+				["title"] = "Шар Соран'рука",
+				["location"] = "Доан Кархан (Степи; |cffffff0049,57"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Soran'ruk",
+						["id"] = 6898,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of Soran'ruk",
+						["id"] = 15109,
+						["icon"] = "INV_Staff_09",
+						["quality"] = 2,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы получите предшествующее задание 'Угроза из Глубин' у Цунамана (Когтистые горы - Приют у Солнечного камня; |cffffff0047,64"..WHITE.."). Сапфиры можно найти в пещерах перед подземельем.",
+				["id"] = 6563,
+				["attain"] = 17,
+				["aim"] = "Принесите 20 сапфиров Аку'май Дже'неу Санкри в Ясеневый лес.",
+				["followup"] = "Amongst the Ruins",
+				["prequest"] = "Угроза из Глубин",
+				["location"] = "Дже'неу Санкри (Ясеневый лес - Застава Зорам'гар; |cffffff0011,33"..WHITE..")",
+				["level"] = 22,
+				["title"] = "Сущность Аку'май",
+			},
+			[2] = {
+				["note"] = "Вы получите Отсыревшую записку с Жриц прилива из Непроглядной Пучины (5% шанс выпадения). Потом принесите ее Дже'неу Санкри (Ясеневый лес - Застава Зорам'гар; |cffffff0011,33"..WHITE.."). Лоргус Джетт находится около |cffffff00[6]"..WHITE..".",
+				["id"] = 6564,
+				["attain"] = 17,
+				["aim"] = "Принесите отсыревшую записку Дже'неу Санкри в Ясеневый лес.",
+				["title"] = "Верность Древним богам",
+				["location"] = "Отсыревшая записка (добывается - см. заметки)",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Band of the Fist",
+						["id"] = 17694,
+						["icon"] = "INV_Jewelry_Ring_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Chestnut Mantle",
+						["id"] = 17695,
+						["icon"] = "INV_Shoulder_09",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете глубинный сердечник около |cffffff00[7]"..WHITE.." под водой. Когда вы поднимите сердечник появится барон Акванис и атакует Вас. С него добывается предмет, который вы должны принести Дже'неу Санкри.",
+				["id"] = 6921,
+				["attain"] = 21,
+				["aim"] = "Принесите глубинный сердечник Дже'неу Санкри в форт Зорам'гар в Ясеневый лес.",
+				["title"] = "Среди руин",
+				["location"] = "Дже'неу Санкри (Ясеневый лес - Застава Зорам'гар; |cffffff0011,33"..WHITE..")",
+				["level"] = 27,
+			},
+			[4] = {
+				["note"] = "Лорд Сумерек Келрис находится около |cffffff00[8]"..WHITE..". Вы найдете Башана Рунического Тотема в Громовом Утесе - Вершина Старейшин (|cffffff0055,24"..WHITE.."). \n\nВНИМАНИЕ! Если вы включите огни позади Лорда Келриса, появятся враги и атакуют Вас.",
+				["id"] = 6561,
+				["attain"] = 18,
+				["aim"] = "Принесите голову Повелителя сумрака Келриса Башане Руническому Тотему в Громовой Утес.",
+				["title"] = "Жестокость Черных Глубин",
+				["location"] = "Страж Талрид из ордена Серебряного Рассвета (Непроглядная пучина; |cffffff00[4]"..WHITE..")",
+				["level"] = 27,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAND,
+						["name"] = "Gravestone Scepter",
+						["id"] = 7001,
+						["icon"] = "INV_Wand_04",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Arctic Buckler",
+						["id"] = 7002,
+						["icon"] = "INV_Shield_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Задание для чернокнижников: Вы возьмете 3 фрагмента Соран'рука с Сумеречных Прислужников в |cffffff00[Непроглядная пучина]"..WHITE..". Вы возьмете большой фрагмент Соран'рука в |cffffff00[Крепость Темного Клыка]"..WHITE.." у Темных Душ Темного Клыка.",
+				["id"] = 1740,
+				["attain"] = 20,
+				["aim"] = "Соберите 3 фрагмента Соран'рука и 1 большой фрагмент Соран'рука и принесите их Доану Кархану в Степи.",
+				["title"] = "Шар Соран'рука",
+				["location"] = "Доан Кархан (Степи; |cffffff0049,57"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Soran'ruk",
+						["id"] = 6898,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of Soran'ruk",
+						["id"] = 15109,
+						["icon"] = "INV_Staff_09",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Using Fathom Stone "..NORMAL.."[7]"..WHITE.." for the quest #3 summons Baron Aquanis. He drops Strange Water Globe that starts the quest.",
+				["id"] = 6922,
+				["attain"] = 21,
+				["aim"] = "Принесите странную водяную сферу Дже'неу Санкри в форт Зорам'гар в Ясеневом лесу.",
+				["title"] = "Барон Акванис",
+				["location"] = "Strange Water Globe (Blackfathom Deeps; "..NORMAL.."[7]"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Outlaw Sabre",
+						["id"] = 16886,
+						["icon"] = "INV_Sword_33",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Witch's Finger",
+						["id"] = 16887,
+						["icon"] = "INV_Wand_12",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Расположенная вдоль побережья Зорам Ясеневого леса, Непроглядная пучина когда-то была знаменитым храмом посвященным богине Луны ночных эльфов, Элуне. Однако, великий Разлом разбил храм - опустив под волны Сокрытого моря. Он оставался нетронутым - пока, привлеченные древней силой - наги и сатиры не приплыли, чтобы раскрыт его секреты. Легенды утверждают что древнее чудовище, Аку'маи, поселилось в руинах храма. Аку'маи, любимый питомец изначальных Старых Богов, теперь охотится на его территории. Привлеченный Аку'маи, культ, известный как Молот Сумерек также пришел чтобы поживиться злым присутствием Старых Богов.",
+		["name"] = "Непроглядная пучина",
+	},
+	[8] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы найдете таблички около |cffffff00[4]"..WHITE.." и |cffffff00[5]"..WHITE..".\nНаграда переводит на 'Сопротивление Йекинье'. вы найдете Йе'кинья около геолога Железного Башмака.",
+				["id"] = 4788,
+				["attain"] = 40,
+				["aim"] = "Принесите пятую и шестую таблички Мошару геологу Железному Башмаку в Танарисе.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Faded Hakkari Cloak",
+						["id"] = 20218,
+						["icon"] = "INV_Misc_Cape_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Tattered Hakkari Cape",
+						["id"] = 20219,
+						["icon"] = "INV_Misc_Cape_14",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Последние таблички",
+				["prequest"] = "Утраченные таблички Мошару",
+				["location"] = "Геолог Железный Башмак (Танарис - Порт Картеля; |cffffff0066,23"..WHITE..")",
+				["level"] = 58,
+				["followup"] = "Сопротивление Йекинье",
+			},
+			[2] = {
+				["note"] = "Вы найдете щенков ворга около |cffffff00[10]"..WHITE..".",
+				["id"] = 4729,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь на пик Черной горы и отыщите там щенков воргов легиона Кровавого Топора. Посадите маленьких тварей в клетку и отнесите Киблеру.",
+				["title"] = "Редкие звери Киблера",
+				["location"] = "Киблер (Пылающие степи - Пламенеющий стяг; |cffffff0065,22"..WHITE..")",
+				["level"] = 59,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Worg Pup",
+						["id"] = 12264,
+						["icon"] = "INV_Box_PetCarrier_01",
+						["quality"] = 1,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете яйца пауков около |cffffff00[6]"..WHITE..".",
+				["id"] = 4862,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь на пик Черной горы и принесите Киблеру 15 яиц скального паука.$B$BСудя по всему, яйца надо искать недалеко от пауков.",
+				["title"] = "Товар на любителя",
+				["location"] = "Киблер (Пылающие степи - Пламенеющий стяг; |cffffff0065,22"..WHITE..")",
+				["level"] = 59,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Smolderweb Hatchling",
+						["id"] = 12529,
+						["icon"] = "INV_Box_Birdcage_01",
+						["quality"] = 1,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Мать Дымная Паутина находится около |cffffff00[6]"..WHITE..". Яд также поражает ближаиших игроков. Если яд вылечить, вы провалите задание.",
+				["id"] = 4866,
+				["attain"] = 55,
+				["aim"] = "В самом сердце шпиля Черной Скалы вы найдете Мать Тлеющую паутину. Свяжись с ней и заставь ее отравить тебя. Велика вероятность, что вам придется убить и ее тоже. Возвращайся к Оборванному Джону, когда тебя отравят, чтобы он мог \"подоить\" тебя.",
+				["title"] = "Материнское молоко",
+				["location"] = "Джон-Оборванец (Пылающие степи - Пламенеющий стяг; |cffffff0065,23"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Ragged John's Neverending Cup",
+						["id"] = 15873,
+						["icon"] = "INV_Drink_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы найдете Халикон около |cffffff00[10]"..WHITE..".",
+				["id"] = 4701,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь на пик Черной горы и уничтожьте источник опасности. Хелендис кричит вам вслед одно имя: Халикон. Именно его упоминали орки в связи с воргами.",
+				["title"] = "Устранение опасности",
+				["location"] = "Хелендис Речной Мыс (Пылающие степи - Дозор Моргана; |cffffff005,47"..WHITE..")",
+				["level"] = 59,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Astoria Robes",
+						["id"] = 15824,
+						["icon"] = "INV_Chest_Cloth_07",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Traphook Jerkin",
+						["id"] = 15825,
+						["icon"] = "INV_Chest_Plate06",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Jadescale Breastplate",
+						["id"] = 15827,
+						["icon"] = "inv_misc_desecrated_mailchest",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Чтобы получить амулет Вароша нужно вызвать и убить Аррока Смертного Вопля |cffffff00[8]"..WHITE..". Для Вызова понадобится Копье и голова вождя Омокка |cffffff00[3]"..WHITE..". Копье находится около |cffffff00[2]"..WHITE..". Во время Вызова появляется несколько волн огров, перед тем как Вас атакует Аррок Смертный Вопль. Вы можете использовать Копье в бою, чтобы наносить урон ограм.",
+				["id"] = 4867,
+				["attain"] = 55,
+				["aim"] = "Прочитайте записку Вароша. Принесите Варошу его амулет.",
+				["title"] = "Аррок Смертный Вопль",
+				["location"] = "Варош (Вершина Черной горы; |cffffff00[2]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Prismcharm",
+						["id"] = 15867,
+						["icon"] = "INV_Misc_Gem_Variety_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете вещи Блестяшки по пути к Матери Дымной Паутине около |cffffff00[10]"..WHITE..".\nМаксвелл находится около (Пылающие степи - Дозор Моргана; |cffffff0084,58"..WHITE..").",
+				["id"] = 5001,
+				["attain"] = 55,
+				["aim"] = "Найдите вещи Блестяшки и верните их владелице. Удачи!",
+				["title"] = "Вещи Блестяшки",
+				["location"] = "Блестяшка (Вершина Черной горы; |cffffff00[1] "..WHITE.."и|cffffff00 [2]"..WHITE..")",
+				["level"] = 59,
+				["followup"] = "Донесение Максвелла",
+			},
+			[8] = {
+				["note"] = "Вы найдете воеводу Вуна около |cffffff00[5]"..WHITE..", вождя Омокка около |cffffff00[3]"..WHITE.." и повелителя Змейталака около |cffffff00[11]"..WHITE..".",
+				["id"] = 5081,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь на пик Черной горы и устраните воеводу Вуна, вождя Омокка и повелителя Змейталака. По выполнении задания вернитесь к маршалу Максвеллу.",
+				["prequest"] = "Донесение Максвелла",
+				["title"] = "Миссия Максвелла",
+				["location"] = "Маршал Максвелл (Пылающие степи - Дозор Моргана; |cffffff0084,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Wyrmthalak's Shackles",
+						["id"] = 13958,
+						["icon"] = "INV_Bracer_04",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.PLATE,
+						["name"] = "Omokk's Girth Restrainer",
+						["id"] = 13959,
+						["icon"] = "INV_Belt_13",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Halycon's Muzzle",
+						["id"] = 13961,
+						["icon"] = "INV_Shoulder_24",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Vosh'gajin's Strand",
+						["id"] = 13962,
+						["icon"] = "INV_Belt_15",
+						["quality"] = 3,
+					},
+					[5] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Voone's Vice Grips",
+						["id"] = 13963,
+						["icon"] = "INV_Gauntlets_15",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Вы получите самоцвет Черной вершины с вождя Омокка |cffffff00[3]"..WHITE..", самоцвет Тлеющего Терновника с воеводы Вуна около |cffffff00[5]"..WHITE.." самоцвет Кровавого Топора с повелителя Змейталака около |cffffff00[11]"..WHITE..". Простая печать Вознесения может упасть с любого врага в Низине Черной горы. Если вы закончите эту цепочку заданий, то получите ключ к Вершине Черной горы.",
+				["id"] = 4742,
+				["attain"] = 57,
+				["aim"] = "Найдите самоцвет Тлеющего Терновника, самоцвет Черной Вершины и самоцвет Кровавого Топора. Верните их Ваелану вместе с простой печатью Вознесения.$B$BКамни могут быть у трех генералов: у воеводы Вуна из клана Тлеющего Терновника, у вождя Омокка из клана Черной Вершины и у повелителя Змейталака из клана Кровавого Топора.",
+				["title"] = "Печать Вознесения",
+				["location"] = "Ваелан (Вершина Черной горы; |cffffff00[1]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Печать Вознесения",
+			},
+			[10] = {
+				["note"] = "Маршал Максвелл находится в Пылающие степи - Дозор Моргана; (|cffffff0084,58"..WHITE..").",
+				["id"] = 5089,
+				["attain"] = 55,
+				["aim"] = "Отнесите приказ генерала Драккисата маршалу Максвеллу в Пылающие степи.",
+				["title"] = "Приказ генерала Драккисата",
+				["location"] = "Приказ генерала Драккисата (добывается с повелителя Змейталака; |cffffff00[11]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Кончина генерала Драккисата (|cffffff00Вершина Черной горы"..WHITE..")",
+			},
+			[11] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nМор Серое Копыто призывается около |cffffff00[9]"..WHITE..".",
+				["id"] = 8966,
+				["attain"] = 58,
+				["aim"] = "Вызвать дух Мора Серого Копыта с помощью жаровни Призыва, прикончить его и забрать недостающую часть амулета Лорда Вальтхалака. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[12] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nМор Серое Копыто призывается около |cffffff00[9]"..WHITE..".",
+				["id"] = 8989,
+				["attain"] = 58,
+				["aim"] = "Вызвать дух Мора Серого Копыта с помощью жаровни Призыва, прикончить его и забрать недостающую часть амулета Лорда Вальтхалака. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[13] = {
+				["note"] = "Задание для кузнецов. Темная охотница Вос'гаджин около |cffffff00[7]"..WHITE..".",
+				["id"] = 5306,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь на Пик Черной горы, убейте Темную охотницу Вос'гаджин. Заберите у нее змеекамень и принесите Килраму.",
+				["title"] = "Змеекамень Пленяющей Духов",
+				["location"] = "Килрам (Зимние Ключи - Круговзор; |cffffff0061,37"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Dawn's Edge",
+						["id"] = 12821,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Задание для кузнецов. Обязательно возьмите Неопалимые латные рукавицы вблизи с Человеческими останками около |cffffff00[11]"..WHITE..". Отнесите их Малифою Черномолоту (Зимние Ключи - Круговзор; |cffffff0061,39"..WHITE.."). Награды перечислены для следующего задания.",
+				["id"] = 5103,
+				["attain"] = 60,
+				["aim"] = "Наверняка в этом мире есть кто-то, кто знает, что делать с этими рукавицами.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Fiery Plate Gauntlets",
+						["id"] = 12699,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Fiery Plate Gauntlets",
+						["id"] = 12631,
+						["icon"] = "INV_Gauntlets_03",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Огненные латные рукавицы",
+				["location"] = "Человеческие останки (Низина Черной горы; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Смерть в огне",
+			},
+			[15] = {
+				["note"] = "This quest requires to collect 4 items.\n1) Magma Condensor (Blackrock Depths in Magma Condensor Crate) \n2) Intricate Arcanite Barrel (Blackrock Spire in Intricate Arcanite Barrels container) its a little box on a big box in the middle of the room.\n3) Molten Fragment (Molten Core from Molten Destroyer).\n4) Dark Iron Rifle (crafted by Engineers).\nFiery Core(x3) found in Molten Core, and Enchanted Thorium Bars(x10).",
+				["id"] = 40762,
+				["attain"] = 55,
+				["aim"] = "Соберите винтовку из темного железа, Магматический конденсатор, замысловатый арканитовый бочонок, расплавленный фрагмент, 3 огненных стержня и 10 зачарованных брусков тория для Bixxle Screwfuse на складе Bixxle в Тел'Абиме.",
+				["title"] = "Осквернитель темного железа",
+				["location"] = "Bixxle Screwfuse (Tel'Abim Island east from Tanaris)",
+				["level"] = 60,
+				["prequest"] = "Secrets of the Dark Iron Desecrator",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.GUN,
+						["name"] = "Dark Iron Desecrator",
+						["id"] = 61068,
+						["icon"] = "Spell_frost_fireresistancetotem",
+						["quality"] = 4,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы найдете таблички около |cffffff00[4]"..WHITE.." и |cffffff00[5]"..WHITE..".\nНаграда переводит на 'Сопротивление Йекинье'. вы найдете Йе'кинья около геолога Железного Башмака.",
+				["id"] = 4788,
+				["attain"] = 40,
+				["aim"] = "Принесите пятую и шестую таблички Мошару геологу Железному Башмаку в Танарисе.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Faded Hakkari Cloak",
+						["id"] = 20218,
+						["icon"] = "INV_Misc_Cape_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Tattered Hakkari Cape",
+						["id"] = 20219,
+						["icon"] = "INV_Misc_Cape_14",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Последние таблички",
+				["prequest"] = "Утраченные таблички Мошару",
+				["location"] = "Геолог Железный Башмак (Танарис - Порт Картеля; |cffffff0066,23"..WHITE..")",
+				["level"] = 58,
+				["followup"] = "Сопротивление Йекинье",
+			},
+			[2] = {
+				["note"] = "Вы найдете щенков ворга около |cffffff00[10]"..WHITE..".",
+				["id"] = 4729,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь на пик Черной горы и отыщите там щенков воргов легиона Кровавого Топора. Посадите маленьких тварей в клетку и отнесите Киблеру.",
+				["title"] = "Редкие звери Киблера",
+				["location"] = "Киблер (Пылающие степи - Пламенеющий стяг; |cffffff0065,22"..WHITE..")",
+				["level"] = 59,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Worg Pup",
+						["id"] = 12264,
+						["icon"] = "INV_Box_PetCarrier_01",
+						["quality"] = 1,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете яйца пауков около |cffffff00[6]"..WHITE..".",
+				["id"] = 4862,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь на пик Черной горы и принесите Киблеру 15 яиц скального паука.$B$BСудя по всему, яйца надо искать недалеко от пауков.",
+				["title"] = "Товар на любителя",
+				["location"] = "Киблер (Пылающие степи - Пламенеющий стяг; |cffffff0065,22"..WHITE..")",
+				["level"] = 59,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Smolderweb Hatchling",
+						["id"] = 12529,
+						["icon"] = "INV_Box_Birdcage_01",
+						["quality"] = 1,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Мать Дымная Паутина находится около |cffffff00[6]"..WHITE..". Яд также поражает ближаиших игроков. Если яд вылечить, вы провалите задание.",
+				["id"] = 4866,
+				["attain"] = 55,
+				["aim"] = "В самом сердце шпиля Черной Скалы вы найдете Мать Тлеющую паутину. Свяжись с ней и заставь ее отравить тебя. Велика вероятность, что вам придется убить и ее тоже. Возвращайся к Оборванному Джону, когда тебя отравят, чтобы он мог \"подоить\" тебя.",
+				["title"] = "Материнское молоко",
+				["location"] = "Джон-Оборванец (Пылающие степи - Пламенеющий стяг; |cffffff0065,23"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Ragged John's Neverending Cup",
+						["id"] = 15873,
+						["icon"] = "INV_Drink_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы найдете Халикон около |cffffff00[10]"..WHITE..".",
+				["id"] = 4724,
+				["attain"] = 55,
+				["aim"] = "Убейте Халикон, праматерь стаи воргов Кровавого Топора.",
+				["title"] = "Праматерь стаи",
+				["location"] = "Галамав Стрелок (Бесплодные земли - Каргат; |cffffff005,47"..WHITE..")",
+				["level"] = 59,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Astoria Robes",
+						["id"] = 15824,
+						["icon"] = "INV_Chest_Cloth_07",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Traphook Jerkin",
+						["id"] = 15825,
+						["icon"] = "INV_Chest_Plate06",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Jadescale Breastplate",
+						["id"] = 15827,
+						["icon"] = "inv_misc_desecrated_mailchest",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Чтобы получить амулет Вароша нужно вызвать и убить Аррока Смертного Вопля |cffffff00[8]"..WHITE..". Для Вызова понадобится Копье и голова вождя Омокка |cffffff00[3]"..WHITE..". Копье находится около |cffffff00[2]"..WHITE..". Во время Вызова появляется несколько волн огров, перед тем как Вас атакует Аррок Смертный Вопль. Вы можете использовать Копье в бою, чтобы наносить урон ограм.",
+				["id"] = 4867,
+				["attain"] = 55,
+				["aim"] = "Прочитайте записку Вароша. Принесите Варошу его амулет.",
+				["title"] = "Аррок Смертный Вопль",
+				["location"] = "Варош (Вершина Черной горы; |cffffff00[2]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Prismcharm",
+						["id"] = 15867,
+						["icon"] = "INV_Misc_Gem_Variety_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете Блестяшку около |cffffff00[1] "..WHITE.."и |cffffff00[2]"..WHITE..".",
+				["id"] = 4981,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь к пику Черной горы и выясните, что сталось с Блестяшкой.",
+				["title"] = "Агент Блестяшка",
+				["location"] = "Лекслорт (Бесплодные земли - Каргат; |cffffff005,47"..WHITE..")",
+				["level"] = 59,
+				["followup"] = "Вещи Блестяшки",
+			},
+			[8] = {
+				["note"] = "Вы найдете вещи Блестяшки по пути к Матери Дымной Паутине около |cffffff00[6]"..WHITE..".\nНаграда отправляет к 'По данным разведки'.",
+				["id"] = 4982,
+				["attain"] = 55,
+				["aim"] = "Найдите вещи Блестяшки и верните их владелице. Блестяшка сказала, что она спрятала свое оборудование где-то на нижнем ярусе подземелья.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.CLOTH,
+						["name"] = "Freewind Gloves",
+						["id"] = 15858,
+						["icon"] = "INV_Gauntlets_16",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Seapost Girdle",
+						["id"] = 15859,
+						["icon"] = "INV_Belt_23",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Вещи Блестяшки",
+				["prequest"] = "Агент Блестяшка",
+				["location"] = "Блестяшка (Вершина Черной горы; |cffffff00[3]"..WHITE..")",
+				["level"] = 59,
+				["followup"] = "По данным разведки",
+			},
+			[9] = {
+				["note"] = "Вы получите самоцвет Черной вершины с вождя Омокка |cffffff00[3]"..WHITE..", самоцвет Тлеющего Терновника с воеводы Вуна около |cffffff00[5]"..WHITE.." самоцвет Кровавого Топора с повелителя Змейталака около |cffffff00[11]"..WHITE..". Простая печать Вознесения может упасть с любого врага в Низине Черной горы. Если вы закончите эту цепочку заданий, то получите ключ к Вершине Черной горы.",
+				["id"] = 4742,
+				["attain"] = 57,
+				["aim"] = "Найдите самоцвет Тлеющего Терновника, самоцвет Черной Вершины и самоцвет Кровавого Топора. Верните их Ваелану вместе с простой печатью Вознесения.$B$BКамни могут быть у трех генералов: у воеводы Вуна из клана Тлеющего Терновника, у вождя Омокка из клана Черной Вершины и у повелителя Змейталака из клана Кровавого Топора.",
+				["title"] = "Печать Вознесения",
+				["location"] = "Ваелан (Вершина Черной горы; |cffffff00[1]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Печать Вознесения",
+			},
+			[10] = {
+				["note"] = "Подготовка к Ониксии.\nВождь Омокк находится около |cffffff00[3]"..WHITE..", воевода Вун находится около |cffffff00[5]"..WHITE.." и повелитель Змейталака |cffffff00[11]"..WHITE..". Важные бумаги Черной горы могут остаться после одного из этих 3 боссов.",
+				["id"] = 4903,
+				["attain"] = 55,
+				["aim"] = "Убейте вождя Омокка, воеводу Вуна и повелителя Змейталака. Найденные при них важные бумаги Черной горы доставьте полководцу Клинозубу в Каргат.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.CLOTH,
+						["name"] = "Wyrmthalak's Shackles",
+						["id"] = 13958,
+						["icon"] = "INV_Bracer_04",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.PLATE,
+						["name"] = "Omokk's Girth Restrainer",
+						["id"] = 13959,
+						["icon"] = "INV_Belt_13",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Halycon's Muzzle",
+						["id"] = 13961,
+						["icon"] = "INV_Shoulder_24",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Vosh'gajin's Strand",
+						["id"] = 13962,
+						["icon"] = "INV_Belt_15",
+						["quality"] = 3,
+					},
+					[5] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Voone's Vice Grips",
+						["id"] = 13963,
+						["icon"] = "INV_Gauntlets_15",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Мудрость Эйтригга -> За Орду! (|cffffff00Вершина Черной горы"..WHITE..")",
+				["location"] = "Полководец Клинозуб (Бесплодные земли - Каргат; |cffffff0065,22"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Приказ полководца",
+			},
+			[11] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nМор Серое Копыто призывается около |cffffff00[9]"..WHITE..".",
+				["id"] = 8966,
+				["attain"] = 58,
+				["aim"] = "Вызвать дух Мора Серого Копыта с помощью жаровни Призыва, прикончить его и забрать недостающую часть амулета Лорда Вальтхалака. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[12] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nМор Серое Копыто призывается около |cffffff00[9]"..WHITE..".",
+				["id"] = 8989,
+				["attain"] = 58,
+				["aim"] = "Вызвать дух Мора Серого Копыта с помощью жаровни Призыва, прикончить его и забрать недостающую часть амулета Лорда Вальтхалака. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[13] = {
+				["note"] = "Задание для кузнецов. Темная охотница Вос'гаджин около |cffffff00[7]"..WHITE..".",
+				["id"] = 5306,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь на Пик Черной горы, убейте Темную охотницу Вос'гаджин. Заберите у нее змеекамень и принесите Килраму.",
+				["title"] = "Змеекамень Пленяющей Духов",
+				["location"] = "Килрам (Зимние Ключи - Круговзор; |cffffff0061,37"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Dawn's Edge",
+						["id"] = 12821,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Задание для кузнецов. Обязательно возьмите Неопалимые латные рукавицы вблизи с Человеческими останками около |cffffff00[11]"..WHITE..". Отнесите их Малифою Черномолоту (Зимние Ключи - Круговзор; |cffffff0061,39"..WHITE.."). Награды перечислены для следующего задания.",
+				["id"] = 5103,
+				["attain"] = 60,
+				["aim"] = "Наверняка в этом мире есть кто-то, кто знает, что делать с этими рукавицами.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Fiery Plate Gauntlets",
+						["id"] = 12699,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Fiery Plate Gauntlets",
+						["id"] = 12631,
+						["icon"] = "INV_Gauntlets_03",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Огненные латные рукавицы",
+				["location"] = "Человеческие останки (Низина Черной горы; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Смерть в огне",
+			},
+			[15] = {
+				["note"] = "This quest requires to collect 4 items.\n1) Magma Condensor (Blackrock Depths in Magma Condensor Crate) \n2) Intricate Arcanite Barrel (Blackrock Spire in Intricate Arcanite Barrels container) its a little box on a big box in the middle of the room.\n3) Molten Fragment (Molten Core from Molten Destroyer).\n4) Dark Iron Rifle (crafted by Engineers).\nFiery Core(x3) found in Molten Core, and Enchanted Thorium Bars(x10).",
+				["id"] = 40762,
+				["attain"] = 55,
+				["aim"] = "Соберите винтовку из темного железа, Магматический конденсатор, замысловатый арканитовый бочонок, расплавленный фрагмент, 3 огненных стержня и 10 зачарованных брусков тория для Bixxle Screwfuse на складе Bixxle в Тел'Абиме.",
+				["title"] = "Осквернитель темного железа",
+				["location"] = "Bixxle Screwfuse (Tel'Abim Island east from Tanaris)",
+				["level"] = 60,
+				["prequest"] = "Secrets of the Dark Iron Desecrator",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.GUN,
+						["name"] = "Dark Iron Desecrator",
+						["id"] = 61068,
+						["icon"] = "Spell_frost_fireresistancetotem",
+						["quality"] = 4,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "",
+				["id"] = 40495,
+				["attain"] = 48,
+				["aim"] = "Убейте Мастера войны Вуна в Нижнем шпиле Черной скалы и верните его бивни надсмотрщику Ок'Гогу в крепости Карфанг в Пылающих степях.",
+				["title"] = "Отбросы лесного тролля",
+				["location"] = "Taskmaster Ok'gog (Burning Steppes - Karfang Hold; "..NORMAL.."dont have any clue where it is, turtle wow database shows north-east corner of Burning Steppes 95.1,22.8"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "The Firegut Task",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Taskmaster Whip",
+						["id"] = 60715,
+						["icon"] = "INV_Misc_Bandage_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[17] = {
+				["note"] = "Gizrul the Slavener appears after you kill boss Halycon "..NORMAL.."[17]"..WHITE..".",
+				["id"] = 40498,
+				["attain"] = 50,
+				["aim"] = "Убейте работорговца Гизрула в шпиле Черной Скалы, затем явитесь к рейдеру Фаргошу в крепость Карфанг.",
+				["title"] = "Рейд рейдера",
+				["location"] = "Raider Fargosh (Burning Steppes - Karfang Hold; "..NORMAL.."dont have any clue where it is, turtle wow database shows north-east corner of Burning Steppes 95.1,22.8"..WHITE..")",
+				["level"] = 58,
+				["prequest"] = "Raider's Revenge -> Raider's New Mount",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Worg Rider Sash",
+						["id"] = 60717,
+						["icon"] = "INV_Belt_12",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.CLOTH,
+						["name"] = "Sootwalker Sandals",
+						["id"] = 60718,
+						["icon"] = "INV_Boots_Fabric_01",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.MAINHAND..", "..L.AXE,
+						["name"] = "Axe of Fargosh",
+						["id"] = 60719,
+						["icon"] = "INV_Axe_24",
+						["quality"] = 2,
+					},
+				},
+			},
+			[18] = {
+				["note"] = "",
+				["id"] = 40509,
+				["attain"] = 50,
+				["aim"] = "Убейте квартирмейстера Зигриса глубоко в Шпиле Черной скалы ради Карфанга в крепости Карфанг в Пылающих степях.",
+				["title"] = "Последняя трещина",
+				["location"] = "Karfang (Burning Steppes - Karfang Hold; "..NORMAL.."dont have any clue where it is, turtle wow database shows north-east corner of Burning Steppes 95.1,22.8"..WHITE..")",
+				["level"] = 59,
+				["prequest"] = "Protecting Fresh Blood -> Report to Molk -> Destroy All Traces... -> Take No Chances",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Tarnished Lancelot Ring",
+						["id"] = 60739,
+						["icon"] = "BTNLancelot_Ring",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Эта величественная крепость, возведенная в пылающих недрах Черной горы, была спроектирована талантливым дворфом-каменщиком Франклорном Искусником как символ могущества клана Черного Железа. Многие столетия злобные дворфы безраздельно правили в крепости, пока на нее не положил глаз Нефариан – коварный сын дракона-аспекта Смертокрыла. Вместе со своими прислужниками Нефариан захватил шпиль крепости и объявил войну дворфам, скрывающимся в вулканических глубинах. Пока дракон проводит свои зловещие эксперименты в своем логове, генералы его огромной армии, включая вождя черной Орды Ренда Чернорука, охраняют подступы к шпилю. Зловещие порождения Нефариана расползаются повсюду от пика Черной горы, и так будет продолжаться, пока крепость не падет.",
+		["name"] = "Низина Черной горы",
+	},
+	[9] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы найдете Ауби в комнате за Ареной около |cffffff00[6]"..WHITE..".\nХалех находится в Зимних Ключах (|cffffff0054,51"..WHITE.."). Используйте знак-портал в конце пещеры, чтобы добраться до нее.",
+				["id"] = 5160,
+				["attain"] = 57,
+				["aim"] = "Дойдите до Зимних Ключей и найдите Халех. Отдайте ей пластину чешуи Ауби.",
+				["title"] = "Матрона-защитница",
+				["location"] = "Ауби (Вершина Черной горы; |cffffff00[6]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Гнев синих драконов",
+			},
+			[2] = {
+				["note"] = "Айс Вентурон появляется после свежевания Зверя. Вы найдете Малифоя в (Зимние Ключи - Круговзор; |cffffff0061,38"..WHITE..").",
+				["id"] = 5047,
+				["attain"] = 55,
+				["aim"] = "Переговорите с Малифоем Черномолотом в Круговзоре.",
+				["title"] = "Айс Вентурон, к вашим услугам!",
+				["location"] = "Айс Вентурон (Вершина Черной горы; |cffffff00[7]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Поножи Тайны, Шапка Алого Ученого и Кираса кровавой жажды",
+			},
+			[3] = {
+				["note"] = "Вы найдете яйца в комнате Отца Пламени около |cffffff00[2]"..WHITE..".",
+				["id"] = 4734,
+				["attain"] = 57,
+				["aim"] = "Испытайте прототип яйцехладоскопа на одном из яиц в Гнездовье.",
+				["followup"] = "Сбор яиц и Леонид Барталомей -> Рассветный гамбит (|cffffff00Некроситет"..WHITE..")",
+				["prequest"] = "Сущность детеныша дракона -> Тинки Кипеллер",
+				["location"] = "Тинки Кипеллер (Пылающие степи - Пламенеющий стяг; |cffffff0065,24"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Заморозка яйца",
+			},
+			[4] = {
+				["note"] = "Вы найдете Пиростража Углевзора около |cffffff00[1]"..WHITE..".",
+				["id"] = 6821,
+				["attain"] = 56,
+				["aim"] = "Принесите глаз Созерцателя Углей герцогу Гидраксису в Азшару.",
+				["followup"] = "Огненные Недра",
+				["prequest"] = "Отравленная вода, Буря в пустыне",
+				["location"] = "Герцог Гидраксис (Азшара; |cffffff0079,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Око Углеглаза",
+			},
+			[5] = {
+				["note"] = "Вы найдете генерала Драккисата около |cffffff00[8]"..WHITE..".",
+				["id"] = 5102,
+				["attain"] = 55,
+				["aim"] = "Отправьтесь на пик Черной горы и устраните генерала Драккисата. По выполнении задания вернитесь к маршалу Максвеллу.",
+				["prequest"] = "Приказ генерала Драккисата (|cffffff00Низина Черной горы"..WHITE..")",
+				["title"] = "Кончина генерала Драккисата",
+				["location"] = "Маршал Максвелл (Пылающие степи - Дозор Моргана; |cffffff0082,68"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of Tyranny",
+						["id"] = 13966,
+						["icon"] = "INV_Jewelry_Talisman_09",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Eye of the Beast",
+						["id"] = 13968,
+						["icon"] = "INV_Jewelry_Talisman_08",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Blackhand's Breadth",
+						["id"] = 13965,
+						["icon"] = "INV_Misc_ArmorKit_09",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Вы возьмете предшествующее задание у графа Ремингтона Риджвелла (Штормград - Крепость Штормграда; |cffffff0076.9, 47.4"..WHITE..").\n\nПряжка Роковой оснастки находится около |cffffff00[2]"..WHITE.." с сундуке.",
+				["id"] = 4764,
+				["attain"] = 57,
+				["aim"] = "Принесите пряжку Роковой оснастки Майре Светлое Крыло в Пылающие степи.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Swiftfoot Treads",
+						["id"] = 15861,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.PLATE,
+						["name"] = "Blinkstrike Armguards",
+						["id"] = 15860,
+						["icon"] = "INV_Bracer_17",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Пряжка Роковой оснастки",
+				["prequest"] = "Майра Светлое Крыло",
+				["location"] = "Майра Светлое Крыло (Пылающие степи - Дозор Моргана; |cffffff0084,69"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Доставить Риджвеллу",
+			},
+			[7] = {
+				["note"] = "Последний из цепочки заданий на доступ к Логову Ониксии для Альянса\nГенерал Драккисат |cffffff00[8]"..WHITE..".",
+				["id"] = 6502,
+				["attain"] = 50,
+				["aim"] = "Добудьте кровь могучего черного дракона генерала Драккисата, которого можно найти сидящим на троне в залах Вознесения в Пике Черной горы.",
+				["prequest"] = "Око дракона",
+				["title"] = "Амулет Пламени дракона",
+				["location"] = "Хале (Зимние Ключи; |cffffff0054,51"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Drakefire Amulet",
+						["id"] = 16309,
+						["icon"] = "INV_Jewelry_Talisman_11",
+						["quality"] = 3,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "Задание для подготовки к Логову Крыла Тьмы. Интенданта из легиона Изрубленного Щита можно найти если повернуть направо перед порталом в LBRS/UBRS.\n\nГенерал Драккисат находится около |cffffff00[8]"..WHITE..". Печать за ним.",
+				["id"] = 7761,
+				["attain"] = 55,
+				["aim"] = "Вот уж действительно идиот... Похоже, вам нужно найти это клеймо и выжечь на руке метку Драккисата, чтобы получить доступ к сфере Приказа.$B$BВ письме ясно сказано, что генерал Драккисат охраняет клеймо. Наверное, стоит проверить.",
+				["title"] = "Приказ Чернорука",
+				["location"] = "Приказ Чернорука (добывается с Интенданта из легиона Изрубленного Щита)",
+				["level"] = 60,
+			},
+			[9] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'. Боевые наручи Черной горы добываются с противников, у которых написано Чернорук в имени. Настой великой силы создается алхимиками.",
+				["id"] = 8994,
+				["attain"] = 58,
+				["aim"] = "Соберите 40 наручей Черной горы и разыщите склянку великой силы. Отнесите все это Бодли в Черную Скалу.",
+				["followup"] = "Mea Culpa, Лорд Вальтхалак",
+				["prequest"] = "Правая часть амулета Лорда Вальтхалака (|cffffff00Вершина Черной горы"..WHITE..")",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Последние приготовления",
+			},
+			[10] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'. Лорд Вальтхалак вызывается около |cffffff00[8]"..WHITE..". Награды перечислены для 'Возвращение к Бодли'.",
+				["id"] = 8995,
+				["attain"] = 58,
+				["aim"] = "Вызвать Лорда Вальтхалака с помощью жаровни Призыва. Убить его и использовать амулет. Потом вернуть амулет духу Вальтхалака.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Brazier of Invocation",
+						["id"] = 22057,
+						["icon"] = "INV_Misc_EngGizmos_23",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Brazier of Invocation: User's Manual",
+						["id"] = 22344,
+						["icon"] = "INV_Misc_Book_09",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "Mea Culpa, Лорд Вальтхалак",
+				["prequest"] = "Последние приготовления",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Возвращение к Бодли",
+			},
+			[11] = {
+				["note"] = "Задание для кузнецов. Горалук Треснувшая Наковальня около |cffffff00[5]"..WHITE..".",
+				["id"] = 5127,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь на пик Черной горы и найдите Горалука Треснувшую Наковальню. Убейте его, а потом воткните в труп окровавленную пику. Таким образом пика вытянет его душу и окрасится ей.$B$BКроме того, вам нужно найти заготовку рунической кирасы.$B$BОтнесите пику и кирасу Лораксу в Зимних Ключах.",
+				["prequest"] = "Lorax's Tale",
+				["title"] = "Демонова кузня",
+				["location"] = "Лоракс (Зимние Ключи; |cffffff0064,74"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Demon Forged Breastplate",
+						["id"] = 12696,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Elixir of Demonslaying",
+						["id"] = 9224,
+						["count"] = 5,
+						["icon"] = "INV_Potion_27",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Demon Kissed Sack",
+						["id"] = 12849,
+						["icon"] = "INV_Misc_Bag_13",
+						["quality"] = 2,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Highly recommend to take prequest 'The Binding of Xanthar' from Hanvar the Righteous (Deadwind Pass in the small church outside of Karazhan "..NORMAL.."[40.9,79.3]"..WHITE..").\nReward for the last quest of The Upper Binding quest chain will be quest item 'The Upper Binding of Xanthar' for quest 'The Binding of Xanthar'.",
+				["id"] = 41011,
+				["attain"] = 55,
+				["aim"] = "Gather a Dragonkin Charge from the Black Dragonkin within Blackrock Spire for Parnabus in Gilneas.",
+				["title"] = "The Upper Binding I",
+				["prequest"] = "The Binding of Xanthar",
+				["location"] = "Parnabus <Wandering Wizard> (Gilneas; "..NORMAL.."[22.9,74.4]"..WHITE..", very south of Gilneas City, west of river. inside of a lonely hose).",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "The Upper Binding of Xanthar",
+						["id"] = 61696,
+						["icon"] = "INV_Misc_ArmorKit_10",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "The Upper Binding II -> The Upper Binding III "..NORMAL.."[Dire Maul West]"..WHITE.." -> The Upper Binding IV",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы найдете Ауби в комнате за Ареной около |cffffff00[6]"..WHITE..".\nХалех находится в Зимних Ключах (|cffffff0054,51"..WHITE.."). Используйте знак-портал в конце пещеры, чтобы добраться до нее.",
+				["id"] = 5160,
+				["attain"] = 57,
+				["aim"] = "Дойдите до Зимних Ключей и найдите Халех. Отдайте ей пластину чешуи Ауби.",
+				["title"] = "Матрона-защитница",
+				["location"] = "Ауби (Вершина Черной горы; |cffffff00[6]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Гнев синих драконов",
+			},
+			[2] = {
+				["note"] = "Айс Вентурон появляется после свежевания Зверя. Вы найдете Малифоя в (Зимние Ключи - Круговзор; |cffffff0061,38"..WHITE..").",
+				["id"] = 5047,
+				["attain"] = 55,
+				["aim"] = "Переговорите с Малифоем Черномолотом в Круговзоре.",
+				["title"] = "Айс Вентурон, к вашим услугам!",
+				["location"] = "Айс Вентурон (Вершина Черной горы; |cffffff00[7]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Поножи Тайны, Шапка Алого Ученого и Кираса кровавой жажды",
+			},
+			[3] = {
+				["note"] = "Вы найдете яйца в комнате Отца Пламени около |cffffff00[2]"..WHITE..".",
+				["id"] = 4734,
+				["attain"] = 57,
+				["aim"] = "Испытайте прототип яйцехладоскопа на одном из яиц в Гнездовье.",
+				["followup"] = "Сбор яиц и Леонид Барталомей -> Рассветный гамбит (|cffffff00Некроситет"..WHITE..")",
+				["prequest"] = "Сущность детеныша дракона -> Тинки Кипеллер",
+				["location"] = "Тинки Кипеллер (Пылающие степи - Пламенеющий стяг; |cffffff0065,24"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Заморозка яйца",
+			},
+			[4] = {
+				["note"] = "Вы найдете Пиростража Углевзора около |cffffff00[1]"..WHITE..".",
+				["id"] = 6821,
+				["attain"] = 56,
+				["aim"] = "Принесите глаз Созерцателя Углей герцогу Гидраксису в Азшару.",
+				["followup"] = "Огненные Недра",
+				["prequest"] = "Отравленная вода, Буря в пустыне",
+				["location"] = "Герцог Гидраксис (Азшара; |cffffff0079,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Око Углеглаза",
+			},
+			[5] = {
+				["note"] = "Вы получите предшествующее задание у аптекаря Зинга в Подгороде - Район Фармацевтов (|cffffff0050,68"..WHITE..").\n\nThe Табличка Темнокамня находится около |cffffff00[2]"..WHITE.." в сундуке.",
+				["id"] = 4768,
+				["attain"] = 57,
+				["aim"] = "Принесите табличку Темного Камня тенемагу Вивиан Лаграв в Каргат.",
+				["prequest"] = "Вивиан Лягроб и табличка Темнокамня",
+				["title"] = "Табличка Темнокамня",
+				["location"] = "Темный маг Вивиана Лягроб (Бесплодные земли - Каргат; |cffffff002,47"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Swiftfoot Treads",
+						["id"] = 15861,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.PLATE,
+						["name"] = "Blinkstrike Armguards",
+						["id"] = 15860,
+						["icon"] = "INV_Bracer_17",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Задание для подготовки к Ониксии. Вы найдете вождя Ренда Чернорука около |cffffff00[5]"..WHITE..".",
+				["id"] = 4974,
+				["attain"] = 55,
+				["aim"] = "Пойдите в Пик Черной горы и убейте вождя Ренда Чернорука. Принесите его голову в Оргриммар.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of Tyranny",
+						["id"] = 13966,
+						["icon"] = "INV_Jewelry_Talisman_09",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Eye of the Beast",
+						["id"] = 13968,
+						["icon"] = "INV_Jewelry_Talisman_08",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Blackhand's Breadth",
+						["id"] = 13965,
+						["icon"] = "INV_Misc_ArmorKit_09",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "За Орду!",
+				["prequest"] = "Приказ полководца -> Мудрость Эйтригга",
+				["location"] = "Тралл (Оргриммар; |cffffff0031,38"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Что принес ветер",
+			},
+			[7] = {
+				["note"] = "Глаза падают с драконидов.",
+				["id"] = 6569,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь на пик Черной горы и добудьте 20 глаз черных драконидов. По выполнении задания вернитесь к Миранде Колдунье.",
+				["followup"] = "Огнебор",
+				["prequest"] = "Что принес ветер -> Мастерица обмана",
+				["location"] = "Миранда Колдунья (Западные Чумные земли; |cffffff0050,77"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Иллюзии ока",
+			},
+			[8] = {
+				["note"] = "Последняя часть на пути к Ониксии. Вы найдете генерала Драккисата около |cffffff00[8]"..WHITE..".",
+				["id"] = 6602,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь к пику Черной горы и убейте генерала Драккисата. Соберите его кровь и вернитесь к Рокаро.",
+				["prequest"] = "Огнебор -> Вознесение",
+				["title"] = "Кровь могучего черного дракона",
+				["location"] = "Рексар (Пустоши - Деревня Ночных охотников; |cffffff0025,71"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Drakefire Amulet",
+						["id"] = 16309,
+						["icon"] = "INV_Jewelry_Talisman_11",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для подготовки к Логову Крыла Тьмы. Интенданта из легиона Изрубленного Щита можно найти если повернуть направо перед порталом в LBRS/UBRS.\n\nГенерал Драккисат находится около |cffffff00[8]"..WHITE..". Печать за ним.",
+				["id"] = 7761,
+				["attain"] = 55,
+				["aim"] = "Вот уж действительно идиот... Похоже, вам нужно найти это клеймо и выжечь на руке метку Драккисата, чтобы получить доступ к сфере Приказа.$B$BВ письме ясно сказано, что генерал Драккисат охраняет клеймо. Наверное, стоит проверить.",
+				["title"] = "Приказ Чернорука",
+				["location"] = "Приказ Чернорука (добывается с Интенданта из легиона Изрубленного Щита)",
+				["level"] = 60,
+			},
+			[10] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'. Боевые наручи Черной горы добываются с противников, у которых написано Чернорук в имени. Настой великой силы создается алхимиками.",
+				["id"] = 8994,
+				["attain"] = 58,
+				["aim"] = "Соберите 40 наручей Черной горы и разыщите склянку великой силы. Отнесите все это Бодли в Черную Скалу.",
+				["followup"] = "Mea Culpa, Лорд Вальтхалак",
+				["prequest"] = "Правая часть амулета Лорда Вальтхалака (|cffffff00Вершина Черной горы"..WHITE..")",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Последние приготовления",
+			},
+			[11] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'. Лорд Вальтхалак вызывается около |cffffff00[8]"..WHITE..". Награды перечислены для 'Возвращение к Бодли'.",
+				["id"] = 8995,
+				["attain"] = 58,
+				["aim"] = "Вызвать Лорда Вальтхалака с помощью жаровни Призыва. Убить его и использовать амулет. Потом вернуть амулет духу Вальтхалака.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Brazier of Invocation",
+						["id"] = 22057,
+						["icon"] = "INV_Misc_EngGizmos_23",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Brazier of Invocation: User's Manual",
+						["id"] = 22344,
+						["icon"] = "INV_Misc_Book_09",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "Mea Culpa, Лорд Вальтхалак",
+				["prequest"] = "Последние приготовления",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Возвращение к Бодли",
+			},
+			[12] = {
+				["note"] = "Задание для кузнецов. Горалук Треснувшая Наковальня около |cffffff00[5]"..WHITE..".",
+				["id"] = 5127,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь на пик Черной горы и найдите Горалука Треснувшую Наковальню. Убейте его, а потом воткните в труп окровавленную пику. Таким образом пика вытянет его душу и окрасится ей.$B$BКроме того, вам нужно найти заготовку рунической кирасы.$B$BОтнесите пику и кирасу Лораксу в Зимних Ключах.",
+				["prequest"] = "Lorax's Tale",
+				["title"] = "Демонова кузня",
+				["location"] = "Лоракс (Зимние Ключи; |cffffff0064,74"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Demon Forged Breastplate",
+						["id"] = 12696,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Elixir of Demonslaying",
+						["id"] = 9224,
+						["count"] = 5,
+						["icon"] = "INV_Potion_27",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Demon Kissed Sack",
+						["id"] = 12849,
+						["icon"] = "INV_Misc_Bag_13",
+						["quality"] = 2,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Highly recommend to take prequest 'The Binding of Xanthar' from Hanvar the Righteous (Deadwind Pass in the small church outside of Karazhan "..NORMAL.."[40.9,79.3]"..WHITE..").\nReward for the last quest of The Upper Binding quest chain will be quest item 'The Upper Binding of Xanthar' for quest 'The Binding of Xanthar'.",
+				["id"] = 41011,
+				["attain"] = 55,
+				["aim"] = "Gather a Dragonkin Charge from the Black Dragonkin within Blackrock Spire for Parnabus in Gilneas.",
+				["title"] = "The Upper Binding I",
+				["prequest"] = "The Binding of Xanthar",
+				["location"] = "Parnabus <Wandering Wizard> (Gilneas; "..NORMAL.."[22.9,74.4]"..WHITE..", very south of Gilneas City, west of river. inside of a lonely hose).",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "The Upper Binding of Xanthar",
+						["id"] = 61696,
+						["icon"] = "INV_Misc_ArmorKit_10",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "The Upper Binding II -> The Upper Binding III "..NORMAL.."[Dire Maul West]"..WHITE.." -> The Upper Binding IV",
+			},
+		},
+		["story"] = "Эта величественная крепость, возведенная в пылающих недрах Черной горы, была спроектирована талантливым дворфом-каменщиком Франклорном Искусником как символ могущества клана Черного Железа. Многие столетия злобные дворфы безраздельно правили в крепости, пока на нее не положил глаз Нефариан – коварный сын дракона-аспекта Смертокрыла. Вместе со своими прислужниками Нефариан захватил шпиль крепости и объявил войну дворфам, скрывающимся в вулканических глубинах. Пока дракон проводит свои зловещие эксперименты в своем логове, генералы его огромной армии, включая вождя черной Орды Ренда Чернорука, охраняют подступы к шпилю. Зловещие порождения Нефариана расползаются повсюду от пика Черной горы, и так будет продолжаться, пока крепость не падет.",
+		["name"] = "Вершина Черной горы",
+	},
+	[10] = {
+		[1] = {
+			[1] = {
+				["note"] = "Пузиллин находится в Забытом городе |cffffff00(Восток)"..WHITE.." около |cffffff00[1]"..WHITE..". Он убегает когда вы поговорите с ним, но останавливается и сражается около |cffffff00[2]"..WHITE..". С него добывается Ключ Полумесяца, используемый в Забытом городе Север и Запад.",
+				["id"] = 7441,
+				["attain"] = 54,
+				["aim"] = "Отправляйтесь в Забытый Город и отыщите беса Пузиллина. Любыми доступными средствами убедите Пузиллина отдать вам книгу заклинаний Аж'Тордина.$B$BЕсли добудете книгу, вернитесь к Аж'Тордину в павильон Лорисс в Фераласе.",
+				["title"] = "Пузиллин и старейшина Аж'Тордин",
+				["location"] = "Аж'Тордин (Фералас; |cffffff0076,37"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Spry Boots",
+						["id"] = 18411,
+						["icon"] = "INV_Boots_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Sprinter's Sword",
+						["id"] = 18410,
+						["icon"] = "INV_Sword_28",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Лефтендрис находится в Забытом городе |cffffff00(Восток)"..WHITE.." около |cffffff00[3]"..WHITE..". Предшествующее задание идет от Курьера Удар Молота в Стальгорне. Он бродит по всему городу.",
+				["id"] = 7488,
+				["attain"] = 54,
+				["aim"] = "Принесите сеть Лефтендрис Латроникусу Лунному Копью в Крепость Оперенной Луны в Фераласе.",
+				["prequest"] = "Крепость Оперенной Луны",
+				["title"] = "Сеть Лефтендрис",
+				["location"] = "Латроникус Лунное Копье (Фералас - Крепость Оперенной Луны; |cffffff0030,46"..WHITE..")",
+				["level"] = 57,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.DAGGER,
+						["name"] = "Lorespinner",
+						["id"] = 18491,
+						["icon"] = "INV_Weapon_ShortBlade_21",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете Алззина Вертоградаря в |cffffff00Восточной"..WHITE.." части Забытого города около |cffffff00[5]"..WHITE..". Реликварий находится в Силитусе около |cffffff0062,54"..WHITE..". Предществующее задание также идет от Рабина Сатурна.",
+				["id"] = 5526,
+				["attain"] = 56,
+				["aim"] = "Отыщите Сквернит в Забытом Городе и подберите его осколок. Есть шанс, что вам удастся его добыть, только убив Алззина Вертоградаря. Крепко заприте осколок в реликварии Чистоты, затем верните его Рабину Сатурне в Ночную Гавань в Лунной поляне.",
+				["prequest"] = "Реликварий Чистоты",
+				["title"] = "Осколки сквернита",
+				["location"] = "Рабин Сатурна (Лунная поляна - Ночная гавань; |cffffff0051,44"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Milli's Shield",
+						["id"] = 18535,
+						["icon"] = "INV_Shield_12",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Milli's Lexicon",
+						["id"] = 18536,
+						["icon"] = "INV_Misc_Book_06",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nИзалиен вызывается около |cffffff00[5]"..WHITE..".",
+				["id"] = 8967,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Изалиен и убить ее. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[5] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nИзалиен вызывается около |cffffff00[5]"..WHITE..".",
+				["id"] = 8990,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Изалиен и убить ее. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[6] = {
+				["note"] = "Задание для чернокнижников: Это вместе с другими заданиями для чернокнижников начинает Дайо Дряхлый на заклинание Ритуал Рока. Самый простой способ добраться до 'Сатиров из племени Буйного Нрава' это войти в Забытый Город (Восток) через 'заднюю дверь' в Павильон Лорисс (Фералас; |cffffff0077,37"..WHITE.."). Вам понадобится Серповидный ключ.",
+				["id"] = 7581,
+				["attain"] = 60,
+				["aim"] = "Отправляйтесь в Забытый Город, что в Фераласе и добудьте 15 порций крови сатиров из племени Буйного Нрава, что живут в Квартале Криводревов. Вернитесь к Дайо из Гниющего шрама по выполнении поручения.",
+				["title"] = "Тюремные кандалы",
+				["location"] = "Дайо Дряхлый (Выжженные земли - Гниющий шрам; |cffffff0034,50"..WHITE..")",
+				["level"] = 60,
+			},
+			[7] = {
+				["note"] = "You find Alliz the Wildshaper at "..NORMAL.."[5]"..WHITE..".",
+				["id"] = 41016,
+				["attain"] = 55,
+				["aim"] = "Bring the Head of Alzzin the Wildshaper for Arch Druid Dreamwind at Nordanaar in Hyjal.",
+				["title"] = "The Wildshaper",
+				["location"] = "Arch Druid Dreamwind (Hyjal - Nordanaar; "..NORMAL.."84.8,29.3"..WHITE.." top floor of the big tree)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Bright Dream Shard",
+						["id"] = 61199,
+						["icon"] = "INV_Misc_Gem_Stone_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Talisman of the Dreamshaper",
+						["id"] = 61703,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Пузиллин находится в Забытом городе |cffffff00(Восток)"..WHITE.." около |cffffff00[1]"..WHITE..". Он убегает когда вы поговорите с ним, но останавливается и сражается около |cffffff00[2]"..WHITE..". С него добывается Ключ Полумесяца, используемый в Забытом городе Север и Запад.",
+				["id"] = 7441,
+				["attain"] = 54,
+				["aim"] = "Отправляйтесь в Забытый Город и отыщите беса Пузиллина. Любыми доступными средствами убедите Пузиллина отдать вам книгу заклинаний Аж'Тордина.$B$BЕсли добудете книгу, вернитесь к Аж'Тордину в павильон Лорисс в Фераласе.",
+				["title"] = "Пузиллин и старейшина Аж'Тордин",
+				["location"] = "Аж'Тордин (Фералас; |cffffff0076,37"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Spry Boots",
+						["id"] = 18411,
+						["icon"] = "INV_Boots_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Sprinter's Sword",
+						["id"] = 18410,
+						["icon"] = "INV_Sword_28",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Лефтендрис находится в Забытом городе |cffffff00(Восток)"..WHITE.." около |cffffff00[3]"..WHITE..". Предшествеющее задание идет от Военного глашатая Горлача в Оргриммаре. Он бродит по всему городу.",
+				["id"] = 7489,
+				["attain"] = 54,
+				["aim"] = "Принесите сеть Лефтендрис Тало Терновому Копыту в Лагере Мохаче в Фераласе.",
+				["prequest"] = "Лагерь Мохаче",
+				["title"] = "Сеть Лефтендрис",
+				["location"] = "Тало Терновое Копыто (Фералас - Лагерь Мохаче; |cffffff0076,43"..WHITE..")",
+				["level"] = 57,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.DAGGER,
+						["name"] = "Lorespinner",
+						["id"] = 18491,
+						["icon"] = "INV_Weapon_ShortBlade_21",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете Алззина Вертоградаря в |cffffff00Восточной"..WHITE.." части Забытого города около |cffffff00[5]"..WHITE..". Реликварий находится в Силитусе около |cffffff0062,54"..WHITE..". Предществующее задание также идет от Рабина Сатурна.",
+				["id"] = 5526,
+				["attain"] = 56,
+				["aim"] = "Отыщите Сквернит в Забытом Городе и подберите его осколок. Есть шанс, что вам удастся его добыть, только убив Алззина Вертоградаря. Крепко заприте осколок в реликварии Чистоты, затем верните его Рабину Сатурне в Ночную Гавань в Лунной поляне.",
+				["prequest"] = "Реликварий Чистоты",
+				["title"] = "Осколки сквернита",
+				["location"] = "Рабин Сатурна (Лунная поляна - Ночная гавань; |cffffff0051,44"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Milli's Shield",
+						["id"] = 18535,
+						["icon"] = "INV_Shield_12",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Milli's Lexicon",
+						["id"] = 18536,
+						["icon"] = "INV_Misc_Book_06",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nИзалиен вызывается около |cffffff00[5]"..WHITE..".",
+				["id"] = 8967,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Изалиен и убить ее. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[5] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nИзалиен вызывается около |cffffff00[5]"..WHITE..".",
+				["id"] = 8990,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Изалиен и убить ее. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[6] = {
+				["note"] = "Задание для чернокнижников: Это вместе с другими заданиями для чернокнижников начинает Дайо Дряхлый на заклинание Ритуал Рока. Самый простой способ добраться до 'Сатиров из племени Буйного Нрава' это войти в Забытый Город (Восток) через 'заднюю дверь' в Павильон Лорисс (Фералас; |cffffff0077,37"..WHITE.."). Вам понадобится Серповидный ключ.",
+				["id"] = 7581,
+				["attain"] = 60,
+				["aim"] = "Отправляйтесь в Забытый Город, что в Фераласе и добудьте 15 порций крови сатиров из племени Буйного Нрава, что живут в Квартале Криводревов. Вернитесь к Дайо из Гниющего шрама по выполнении поручения.",
+				["title"] = "Тюремные кандалы",
+				["location"] = "Дайо Дряхлый (Выжженные земли - Гниющий шрам; |cffffff0034,50"..WHITE..")",
+				["level"] = 60,
+			},
+			[7] = {
+				["note"] = "You find Alliz the Wildshaper at "..NORMAL.."[5]"..WHITE..".",
+				["id"] = 41016,
+				["attain"] = 55,
+				["aim"] = "Bring the Head of Alzzin the Wildshaper for Arch Druid Dreamwind at Nordanaar in Hyjal.",
+				["title"] = "The Wildshaper",
+				["location"] = "Arch Druid Dreamwind (Hyjal - Nordanaar; "..NORMAL.."84.8,29.3"..WHITE.." top floor of the big tree)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Bright Dream Shard",
+						["id"] = 61199,
+						["icon"] = "INV_Misc_Gem_Stone_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Talisman of the Dreamshaper",
+						["id"] = 61703,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Построенный двенадцать тысяч лет назад тайной сектой волшебников ночных эльфов, древний город Эльдре'Талас использовали, чтобы защитить самые ценные секреты королевы Азшары. Несмотря на то, что он был уничтожен Великим Расколом мира, большая часть изумительного города еще существует как грандиозный Ужасный Кулак. Три самобытных района руин населили всевозможные твари - в основном призрачными высокорожденными, грязными сатирами и безмозглыми ограми. Только группа самых отважных искателей приключений может войти в разрушенный город и встретиться лицом к лицу с древним злом, заключенным в его древних подвалах.",
+		["name"] = "Забытый город (Восток)",
+	},
+	[11] = {
+		[1] = {
+			[1] = {
+				["note"] = "Повторяемое задание. Для ремонта западни нужно использовать [Ториевое устройство] и [Масло льда].",
+				["id"] = 1193,
+				["attain"] = 56,
+				["aim"] = "",
+				["title"] = "Сломанная западня",
+				["location"] = "Сломанная западня (Забытый город; |cffffff00Север"..WHITE..")",
+				["level"] = 60,
+			},
+			[2] = {
+				["note"] = "Повторяемое задание. Вы найдете огрскую дубильную кислоту около |cffffff00[4] (сверху)"..WHITE..".",
+				["id"] = 5519,
+				["attain"] = 56,
+				["aim"] = "",
+				["title"] = "Броня огров Гордока",
+				["location"] = "Уззл Наперстяк (Забытый город; |cffffff00Север, [4]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Gordok Ogre Suit",
+						["id"] = 18258,
+						["icon"] = "INV_Chest_Chain_14",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Повторяемое задание. Ключ может выпасть из любого охранника.",
+				["id"] = 7429,
+				["attain"] = 57,
+				["aim"] = "",
+				["title"] = "Освободите Нотта!",
+				["location"] = "Уззл Наперстяк (Забытый город; |cffffff00Север, [4]"..WHITE..")",
+				["level"] = 60,
+			},
+			[4] = {
+				["note"] = "Принц находится в Забытом городе |cffffff00Запад"..WHITE.." около |cffffff00[7]"..WHITE..". Рукавица в сундуке прямо рядом с ним. Вы можете взять это задание только после Захода почести и с баффом 'Король Гордока'.",
+				["id"] = 7703,
+				["attain"] = 56,
+				["aim"] = "Добудьте латную рукавицу Мощи Гордока и вернитесь с ней к капитану Давигрому в Забытом Городе.$B$BПо словам Давигрома, в \"старых байках\" говорится, что Тортелдрин – \"страшный эльф\", называющий себя принцем, – похитил эту рукавицу у одного из королей Гордоков.",
+				["title"] = "Неоконченное дело Гордоков",
+				["location"] = "Капитан Давигром (Забытый город; |cffffff00Север, [5]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.CLOTH,
+						["name"] = "Gordok's Handwraps",
+						["id"] = 18369,
+						["icon"] = "INV_Gauntlets_06",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Gordok's Gloves",
+						["id"] = 18368,
+						["icon"] = "INV_Gauntlets_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Gordok's Gauntlets",
+						["id"] = 18367,
+						["icon"] = "INV_Gauntlets_09",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Gordok's Handguards",
+						["id"] = 18366,
+						["icon"] = "INV_Gauntlets_09",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Повторяемое задание. Для ремонта западни нужно использовать [Ториевое устройство] и [Масло льда].",
+				["id"] = 1193,
+				["attain"] = 56,
+				["aim"] = "",
+				["title"] = "Сломанная западня",
+				["location"] = "Сломанная западня (Забытый город; |cffffff00Север"..WHITE..")",
+				["level"] = 60,
+			},
+			[2] = {
+				["note"] = "Повторяемое задание. Вы найдете огрскую дубильную кислоту около |cffffff00[4] (сверху)"..WHITE..".",
+				["id"] = 5519,
+				["attain"] = 56,
+				["aim"] = "",
+				["title"] = "Броня огров Гордока",
+				["location"] = "Уззл Наперстяк (Забытый город; |cffffff00Север, [4]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Gordok Ogre Suit",
+						["id"] = 18258,
+						["icon"] = "INV_Chest_Chain_14",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Повторяемое задание. Ключ может выпасть из любого охранника.",
+				["id"] = 7429,
+				["attain"] = 57,
+				["aim"] = "",
+				["title"] = "Освободите Нотта!",
+				["location"] = "Уззл Наперстяк (Забытый город; |cffffff00Север, [4]"..WHITE..")",
+				["level"] = 60,
+			},
+			[4] = {
+				["note"] = "Принц находится в Забытом городе |cffffff00Запад"..WHITE.." около |cffffff00[7]"..WHITE..". Рукавица в сундуке прямо рядом с ним. Вы можете взять это задание только после Захода почести и с баффом 'Король Гордока'.",
+				["id"] = 7703,
+				["attain"] = 56,
+				["aim"] = "Добудьте латную рукавицу Мощи Гордока и вернитесь с ней к капитану Давигрому в Забытом Городе.$B$BПо словам Давигрома, в \"старых байках\" говорится, что Тортелдрин – \"страшный эльф\", называющий себя принцем, – похитил эту рукавицу у одного из королей Гордоков.",
+				["title"] = "Неоконченное дело Гордоков",
+				["location"] = "Капитан Давигром (Забытый город; |cffffff00Север, [5]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.CLOTH,
+						["name"] = "Gordok's Handwraps",
+						["id"] = 18369,
+						["icon"] = "INV_Gauntlets_06",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Gordok's Gloves",
+						["id"] = 18368,
+						["icon"] = "INV_Gauntlets_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Gordok's Gauntlets",
+						["id"] = 18367,
+						["icon"] = "INV_Gauntlets_09",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Gordok's Handguards",
+						["id"] = 18366,
+						["icon"] = "INV_Gauntlets_09",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Построенный двенадцать тысяч лет назад тайной сектой волшебников ночных эльфов, древний город Эльдре'Талас использовали, чтобы защитить самые ценные секреты королевы Азшары. Несмотря на то, что он был уничтожен Великим Расколом мира, большая часть изумительного города еще существует как грандиозный Ужасный Кулак. Три самобытных района руин населили всевозможные твари - в основном призрачными высокорожденными, грязными сатирами и безмозглыми ограми. Только группа самых отважных искателей приключений может войти в разрушенный город и встретиться лицом к лицу с древним злом, заключенным в его древних подвалах.",
+		["name"] = "Забытый город (Север)",
+	},
+	[12] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы найдете Кариэля Винтхалуса в |cffffff00Библиотека (Запад)"..WHITE..".",
+				["id"] = 7482,
+				["attain"] = 54,
+				["aim"] = "Попытайтесь найти в Забытом Городе Кариэля Винтхалуса. Вернитесь в крепость Оперенной Луны к школяру Рунному Шипу и сообщите ей все, что вам удалось узнать.",
+				["title"] = "Эльфийские легенды",
+				["location"] = "Школяр Рунный Шип (Фералас - Крепость Оперенной Луны; |cffffff0031,43"..WHITE..")",
+				["level"] = 60,
+			},
+			[2] = {
+				["note"] = "Столпы помечены как "..BLUE.."[B]"..WHITE..". Бессмер'тер находится около |cffffff00[6]"..WHITE..", Принц Тортелдрин находится около |cffffff00[7]"..WHITE..".",
+				["id"] = 7461,
+				["attain"] = 56,
+				["aim"] = "Перебейте стражей, которые охраняют 5 столпов, снабжающих энергией Тюрьму Бессмер'тера. После того как столпы угаснут, силовое поле, удерживающее Бессмер'тера, рассеется.$B$BВойдите в Тюрьму Бессмер'тера и уничтожьте злого демона, который находится внутри. И, наконец, сразитесь с принцем Тортелдрином в Читальне.$B$BЕсли задание будет выполнено успешно, вернитесь во двор, к прародительнице Шен'дралар.",
+				["title"] = "Древнее безумие",
+				["location"] = "Прародительница Шен'дралар (Забытый город; |cffffff00Запад, [1] (сверху)"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Сокровище Шен'дралар",
+			},
+			[3] = {
+				["note"] = "Вы найдете Сокровище под ступеньками |cffffff00[7]"..WHITE..".",
+				["id"] = 7462,
+				["attain"] = 56,
+				["aim"] = "Вернитесь в Читальню и найдите сокровище Шен'дралар. Получите свою награду!",
+				["prequest"] = "Древнее безумие",
+				["title"] = "Сокровище Шен'дралар",
+				["location"] = "Прародительница Шен'дралар (Забытый город; |cffffff00Запад, [1]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Sedge Boots",
+						["id"] = 18424,
+						["icon"] = "INV_Boots_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "Backwood Helm",
+						["id"] = 18421,
+						["icon"] = "INV_Helmet_19",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Bonecrusher",
+						["id"] = 18420,
+						["icon"] = "INV_Mace_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Задание для чернокнижников: Окончательное задание на эпического коня чернокнижников. Сначала вы должны отключить все Пилоны, отмеченные "..BLUE.."[B]"..WHITE.." и убить Бессмер'тера около |cffffff00[6]"..WHITE..". После этого, вы можете начать ритуал призыва. Обязательно иметь свыше 20 готовых Осколков душ и одного чернокнижника специально назначенного для поддержания колокола, свечи и колеса. Стражники ужаса могу быть подчинены. После завершения ритуала, поговорите с Духом коня погибели, чтобы закончить задание.",
+				["id"] = 7631,
+				["attain"] = 60,
+				["aim"] = "Прочтите инструкции Мор'зула. Призовите зоротианского коня погибели, одолейте его и подчините его дух.",
+				["title"] = "Зоротианский конь погибели",
+				["location"] = "Мор'зул Вестник Крови (Пылающие степи; |cffffff0012,31"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "Доставка беса (|cffffff00Некроситет"..WHITE..")",
+			},
+			[5] = {
+				["note"] = "Задание для друидов: Вы относите книгу Сказителю Явону к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7506,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Изумрудный Сон",
+				["location"] = "Изумрудный Сон (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18470,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Задание для охотников: Вы относите книгу Сказительнице Микос к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7503,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Величайшая гонка охотников",
+				["location"] = "Величайшая гонка охотников (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18473,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Задание для магов: Вы относите книгу Сказителю Килдрату к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7500,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Поваренная книга чародея",
+				["location"] = "Поваренная книга чародея (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18468,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "Задание для паладинов: Вы относите книгу Сказительнице Микос к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7501,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Свет и как его раскачать",
+				["location"] = "Свет и как его раскачать (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18472,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для жрецов: Вы относите книгу Сказителю Явону к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7504,
+				["attain"] = 56,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Святая Болонья: О чем не говорит Свет",
+				["location"] = "Святая Болонья: О чем не говорит Свет (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18469,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[10] = {
+				["note"] = "Задание для разбойников: Вы относите книгу Сказителю Килдрату к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7498,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Гарона: Исследование уловок и предательства",
+				["location"] = "Гарона: Исследование уловок и предательства (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18465,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[11] = {
+				["note"] = "Задание для шаманов: Вы относите книгу Сказителю Явону к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7505,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Ледяной шок и вы",
+				["location"] = "Ледяной шок и вы (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18471,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Задание для чернокнижников: Вы относите книгу Сказительнице Микос к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7502,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Укрощая тени",
+				["location"] = "Укрощая тени (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18467,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Задание для воинов: Вы относите книгу Сказителю Килдрату к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7499,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Кодекс Обороны",
+				["location"] = "Кодекс Обороны (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18466,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это.",
+				["id"] = 7479,
+				["attain"] = 58,
+				["aim"] = "Принесите Libram of Focus, 1 Чистый черный бриллиант, 4 больших блестящих осколка и 2 Шкуры Тени Хранителю знаний Лидросу в Dire Maul, чтобы получить Аркан Фокуса.",
+				["title"] = "Диаграмма направленности",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["pages"] = {
+					[1] = "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Шкура тени\" персональная и может выпасть с нескольких боссов, Восставших созданий и Восставших костостражей в |cffffff00Некроситете"..WHITE..".",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Arcanum of Focus",
+						["id"] = 18330,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[15] = {
+				["note"] = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это.",
+				["id"] = 7485,
+				["attain"] = 58,
+				["aim"] = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Защиты\", 1 безупречный черный алмаз, 2 больших сверкающих осколка и 1 истлевшую шовную нить поганища, чтобы получить магический знак защиты.",
+				["title"] = "Манускрипт Защиты",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["pages"] = {
+					[1] = "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Истлевшая шовная нить поганища\" персональная и может выпасть с Рамштайна Ненасытного, Изрыгателя яда, Желчеплюя и Лоскутного ужаса в |cffffff00Стратхольме"..WHITE..".",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Arcanum of Protection",
+						["id"] = 18331,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это.",
+				["id"] = 7483,
+				["attain"] = 58,
+				["aim"] = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Скорости\", 1 безупречный черный алмаз, 2 больших сверкающих осколка и 2 образца крови героев, чтобы получить магический знак стремительности.",
+				["title"] = "Манускрипт Скорости",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["pages"] = {
+					[1] = "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Кровь героев\" персональная и может быть найдена на земле в случайных местах Западных и Восточных Чумных землях.",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Arcanum of Rapidity",
+						["id"] = 18329,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[17] = {
+				["note"] = "Задание для воинов или паладинов. Вы относите книгу Сказителю Лидросу в (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE.."). Завершение этого позволяет начать задание на Кель'Серрар.",
+				["id"] = 7507,
+				["attain"] = 60,
+				["aim"] = "Верните \"Справочник Форора по убийству драконов\" в Читальню.",
+				["title"] = "Справочник Форора",
+				["location"] = "Справочник Форора по истреблению драконов (случайная добыча с боссов в |cffffff00Забытом городе"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Ковка Кель'Серрара",
+			},
+			[18] = {
+				["note"] = "Immol'thar "..NORMAL.."[6]"..WHITE.." drops Pure Ley Essence.\nQuestline starts with quest 'The Keepers Charge' at Keeper Iselus "..NORMAL.."89,8,33.8"..WHITE.." Azshara, north-east coast corner.",
+				["id"] = 40254,
+				["attain"] = 45,
+				["aim"] = "Отправляйтесь в Страшный Молот и убейте великое злое существо, из которого Высокорожденные высасывают энергию, соберите из него Чистую Лей-эссенцию и вернитесь к Хранительнице Лейне в Азшаре.",
+				["title"] = "Хранить секреты",
+				["location"] = "Keeper Laena (Azshara; "..NORMAL.."44,45.4"..WHITE..")",
+				["level"] = 58,
+				["prequest"] = "Restoring the Ley Lines",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..",Staff",
+						["name"] = "Azshara Keeper's Staff",
+						["id"] = 60333,
+						["icon"] = "INV_Staff_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Eldara",
+						["id"] = 60334,
+						["icon"] = "INV_Jewelry_Ring_34",
+						["quality"] = 3,
+					},
+				},
+			},
+			[19] = {
+				["note"] = "Highly recommend to take prequest 'The Binding of Xanthar' from Hanvar the Righteous (Deadwind Pass in the small church outside of Karazhan "..NORMAL.."[40.9,79.3]"..WHITE..").\nArcane Torrents in the circle around "..NORMAL.."[6]"..WHITE.." drop Supercharged Arcane Resonation.",
+				["id"] = 41013,
+				["attain"] = 55,
+				["aim"] = "Gather a Supercharged Arcane Resonation from the arcane elementals of Dire Maul for Parnabus in Gilneas.",
+				["title"] = "The Upper Binding III",
+				["prequest"] = "The Binding of Xanthar -> The Upper Binding I "..NORMAL.."[Upper Blackrock Spire]"..WHITE.." -> The Upper Binding II",
+				["location"] = "Parnabus <Wandering Wizard> (Gilneas; "..NORMAL.."[22.9,74.4]"..WHITE..", very south of Gilneas City, west of river. inside of a lonely hose).",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "The Upper Binding of Xanthar",
+						["id"] = 61696,
+						["icon"] = "INV_Misc_ArmorKit_10",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "The Upper Binding IV",
+			},
+			[20] = {
+				["note"] = "",
+				["id"] = 40827,
+				["attain"] = 58,
+				["aim"] = "Slay Immol'thar in Dire Maul, retrieve gems from his skin, and return to Vandol.",
+				["followup"] = "The Key to Karazhan IX -> The Key to Karazhan X",
+				["location"] = "Dolvan Bracewind (Dustwallow Marsh - ; "..NORMAL.."[71.1,73.2]"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "The Key to Karazhan I - VI -> The Key to Karazhan VII "..NORMAL.."[Stratholme]"..WHITE.." ",
+				["title"] = "The Key to Karazhan VIII",
+			},
+			[21] = {
+				["note"] = "Arcane Torrents in the circle around "..NORMAL.."[6]"..WHITE.." drop Overloaded Arcane Prism.\nFinishing this questline you get the necklace and you will be able to enter Hyjal raid instance Emerald Sanctum.",
+				["id"] = 40959,
+				["attain"] = 58,
+				["aim"] = "Gather a Binding Fragment from Cliff Breakers in Azshara, Overloaded Arcane Prism from Arcane Torrents in the Western wing of Dire Maul and a Slumberer's Shard from Weaver in the Sunken Temple. Report to Itharius in the Swamp of Sorrows with the collected items.",
+				["title"] = "Into the Dream III",
+				["prequest"] = "Into the Dream I -> Into the Dream II",
+				["location"] = "Ralathius (Hyjal - Nordanaar; "..NORMAL.."[81.6,27.7]"..WHITE.." a green dragonkin)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Gemstone of Ysera",
+						["id"] = 50545,
+						["icon"] = "INV_Misc_Gem_Emerald_02",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Into the Dream IV - VI",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы найдете Кариэля Винтхалуса в |cffffff00Библиотеке (Запад)"..WHITE..".",
+				["id"] = 7481,
+				["attain"] = 54,
+				["aim"] = "Попытайтесь найти в Забытом Городе Кариэля Винтхалуса. Вернитесь в Лагерь Мохаче к ведуну Королуску и сообщите ему все, что вам удалось узнать.",
+				["title"] = "Эльфийские легенды",
+				["location"] = "Ведун Королуск (Фералас - Лагерь Мохаче; |cffffff0074,43"..WHITE..")",
+				["level"] = 60,
+			},
+			[2] = {
+				["note"] = "Столпы помечены как "..BLUE.."[B]"..WHITE..". Бессмер'тер находится около |cffffff00[6]"..WHITE..", Принц Тортелдрин находится около |cffffff00[7]"..WHITE..".",
+				["id"] = 7461,
+				["attain"] = 56,
+				["aim"] = "Перебейте стражей, которые охраняют 5 столпов, снабжающих энергией Тюрьму Бессмер'тера. После того как столпы угаснут, силовое поле, удерживающее Бессмер'тера, рассеется.$B$BВойдите в Тюрьму Бессмер'тера и уничтожьте злого демона, который находится внутри. И, наконец, сразитесь с принцем Тортелдрином в Читальне.$B$BЕсли задание будет выполнено успешно, вернитесь во двор, к прародительнице Шен'дралар.",
+				["title"] = "Древнее безумие",
+				["location"] = "Прародительница Шен'дралар (Забытый город; |cffffff00Запад, [1] (сверху)"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Сокровище Шен'дралар",
+			},
+			[3] = {
+				["note"] = "Вы найдете Сокровище под ступеньками |cffffff00[7]"..WHITE..".",
+				["id"] = 7462,
+				["attain"] = 56,
+				["aim"] = "Вернитесь в Читальню и найдите сокровище Шен'дралар. Получите свою награду!",
+				["prequest"] = "Древнее безумие",
+				["title"] = "Сокровище Шен'дралар",
+				["location"] = "Прародительница Шен'дралар (Забытый город; |cffffff00Запад, [1]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Sedge Boots",
+						["id"] = 18424,
+						["icon"] = "INV_Boots_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "Backwood Helm",
+						["id"] = 18421,
+						["icon"] = "INV_Helmet_19",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Bonecrusher",
+						["id"] = 18420,
+						["icon"] = "INV_Mace_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Задание для чернокнижников: Окончательное задание на эпического коня чернокнижников. Сначала вы должны отключить все Пилоны, отмеченные "..BLUE.."[B]"..WHITE.." и убить Бессмер'тера около |cffffff00[6]"..WHITE..". После этого, вы можете начать ритуал призыва. Обязательно иметь свыше 20 готовых Осколков душ и одного чернокнижника специально назначенного для поддержания колокола, свечи и колеса. Стражники ужаса могу быть подчинены. После завершения ритуала, поговорите с Духом коня погибели, чтобы закончить задание.",
+				["id"] = 7631,
+				["attain"] = 60,
+				["aim"] = "Прочтите инструкции Мор'зула. Призовите зоротианского коня погибели, одолейте его и подчините его дух.",
+				["title"] = "Зоротианский конь погибели",
+				["location"] = "Мор'зул Вестник Крови (Пылающие степи; |cffffff0012,31"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "Доставка беса (|cffffff00Некроситет"..WHITE..")",
+			},
+			[5] = {
+				["note"] = "Задание для друидов: Вы относите книгу Сказителю Явону к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7506,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Изумрудный Сон",
+				["location"] = "Изумрудный Сон (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18470,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Задание для охотников: Вы относите книгу Сказительнице Микос к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7503,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Величайшая гонка охотников",
+				["location"] = "Величайшая гонка охотников (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18473,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Задание для магов: Вы относите книгу Сказителю Килдрату к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7500,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Поваренная книга чародея",
+				["location"] = "Поваренная книга чародея (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18468,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "Задание для паладинов: Вы относите книгу Сказительнице Микос к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7501,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Свет и как его раскачать",
+				["location"] = "Свет и как его раскачать (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18472,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для жрецов: Вы относите книгу Сказителю Явону к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7504,
+				["attain"] = 56,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Святая Болонья: О чем не говорит Свет",
+				["location"] = "Святая Болонья: О чем не говорит Свет (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18469,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[10] = {
+				["note"] = "Задание для разбойников: Вы относите книгу Сказителю Килдрату к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7498,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Гарона: Исследование уловок и предательства",
+				["location"] = "Гарона: Исследование уловок и предательства (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18465,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[11] = {
+				["note"] = "Задание для шаманов: Вы относите книгу Сказителю Явону к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7505,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Ледяной шок и вы",
+				["location"] = "Ледяной шок и вы (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18471,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Задание для чернокнижников: Вы относите книгу Сказительнице Микос к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7502,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Укрощая тени",
+				["location"] = "Укрощая тени (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18467,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Задание для воинов: Вы относите книгу Сказителю Килдрату к |cffffff001' Библиотеке"..WHITE..".",
+				["id"] = 7499,
+				["attain"] = 54,
+				["aim"] = "Верните книгу законным владельцам.",
+				["title"] = "Кодекс Обороны",
+				["location"] = "Кодекс Обороны (случайная добыча с боссов во всех частях Забытого города)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Royal Seal of Eldre'Thalas",
+						["id"] = 18466,
+						["icon"] = "INV_Jewelry_Talisman_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это.",
+				["id"] = 7479,
+				["attain"] = 58,
+				["aim"] = "Принесите Libram of Focus, 1 Чистый черный бриллиант, 4 больших блестящих осколка и 2 Шкуры Тени Хранителю знаний Лидросу в Dire Maul, чтобы получить Аркан Фокуса.",
+				["title"] = "Диаграмма направленности",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["pages"] = {
+					[1] = "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Шкура тени\" персональная и может выпасть с нескольких боссов, Восставших созданий и Восставших костостражей в |cffffff00Некроситете"..WHITE..".",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Arcanum of Focus",
+						["id"] = 18330,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[15] = {
+				["note"] = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это.",
+				["id"] = 7485,
+				["attain"] = 58,
+				["aim"] = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Защиты\", 1 безупречный черный алмаз, 2 больших сверкающих осколка и 1 истлевшую шовную нить поганища, чтобы получить магический знак защиты.",
+				["title"] = "Манускрипт Защиты",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["pages"] = {
+					[1] = "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Истлевшая шовная нить поганища\" персональная и может выпасть с Рамштайна Ненасытного, Изрыгателя яда, Желчеплюя и Лоскутного ужаса в |cffffff00Стратхольме"..WHITE..".",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Arcanum of Protection",
+						["id"] = 18331,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "Задание Эльфийские легенды должно быть завершено, прежде чем вы сможете получить это.",
+				["id"] = 7483,
+				["attain"] = 58,
+				["aim"] = "Принесите сказителю Лидросу в Забытом Городе \"Манускрипт Скорости\", 1 безупречный черный алмаз, 2 больших сверкающих осколка и 2 образца крови героев, чтобы получить магический знак стремительности.",
+				["title"] = "Манускрипт Скорости",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["pages"] = {
+					[1] = "Манускрипт случайно добывается в Забытом городе и передается, так что он может быть найден  на аукционе. \"Кровь героев\" персональная и может быть найдена на земле в случайных местах Западных и Восточных Чумных землях.",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Arcanum of Rapidity",
+						["id"] = 18329,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[17] = {
+				["note"] = "Задание для воинов или паладинов. Вы относите книгу Сказителю Лидросу в (Забытый город (Запад); |cffffff00[1'] Библиотека"..WHITE.."). Завершение этого позволяет начать задание на Кель'Серрар.",
+				["id"] = 7507,
+				["attain"] = 60,
+				["aim"] = "Верните \"Справочник Форора по убийству драконов\" в Читальню.",
+				["title"] = "Справочник Форора",
+				["location"] = "Справочник Форора по истреблению драконов (случайная добыча с боссов в |cffffff00Забытом городе"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Ковка Кель'Серрара",
+			},
+			[18] = {
+				["note"] = "Immol'thar "..NORMAL.."[6]"..WHITE.." drops Pure Ley Essence.\nQuestline starts with quest 'The Keepers Charge' at Keeper Iselus "..NORMAL.."89,8,33.8"..WHITE.." Azshara, north-east coast corner.",
+				["id"] = 40254,
+				["attain"] = 45,
+				["aim"] = "Отправляйтесь в Страшный Молот и убейте великое злое существо, из которого Высокорожденные высасывают энергию, соберите из него Чистую Лей-эссенцию и вернитесь к Хранительнице Лейне в Азшаре.",
+				["title"] = "Хранить секреты",
+				["location"] = "Keeper Laena (Azshara; "..NORMAL.."44,45.4"..WHITE..")",
+				["level"] = 58,
+				["prequest"] = "Restoring the Ley Lines",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..",Staff",
+						["name"] = "Azshara Keeper's Staff",
+						["id"] = 60333,
+						["icon"] = "INV_Staff_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Eldara",
+						["id"] = 60334,
+						["icon"] = "INV_Jewelry_Ring_34",
+						["quality"] = 3,
+					},
+				},
+			},
+			[19] = {
+				["note"] = "Highly recommend to take prequest 'The Binding of Xanthar' from Hanvar the Righteous (Deadwind Pass in the small church outside of Karazhan "..NORMAL.."[40.9,79.3]"..WHITE..").\nArcane Torrents in the circle around "..NORMAL.."[6]"..WHITE.." drop Supercharged Arcane Resonation.",
+				["id"] = 41013,
+				["attain"] = 55,
+				["aim"] = "Gather a Supercharged Arcane Resonation from the arcane elementals of Dire Maul for Parnabus in Gilneas.",
+				["title"] = "The Upper Binding III",
+				["prequest"] = "The Binding of Xanthar -> The Upper Binding I "..NORMAL.."[Upper Blackrock Spire]"..WHITE.." -> The Upper Binding II",
+				["location"] = "Parnabus <Wandering Wizard> (Gilneas; "..NORMAL.."[22.9,74.4]"..WHITE..", very south of Gilneas City, west of river. inside of a lonely hose).",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "The Upper Binding of Xanthar",
+						["id"] = 61696,
+						["icon"] = "INV_Misc_ArmorKit_10",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "The Upper Binding IV",
+			},
+			[20] = {
+				["note"] = "",
+				["id"] = 40827,
+				["attain"] = 58,
+				["aim"] = "Slay Immol'thar in Dire Maul, retrieve gems from his skin, and return to Vandol.",
+				["followup"] = "The Key to Karazhan IX -> The Key to Karazhan X",
+				["location"] = "Dolvan Bracewind (Dustwallow Marsh - ; "..NORMAL.."[71.1,73.2]"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "The Key to Karazhan I - VI -> The Key to Karazhan VII "..NORMAL.."[Stratholme]"..WHITE.." ",
+				["title"] = "The Key to Karazhan VIII",
+			},
+			[21] = {
+				["note"] = "Arcane Torrents in the circle around "..NORMAL.."[6]"..WHITE.." drop Overloaded Arcane Prism.\nFinishing this questline you get the necklace and you will be able to enter Hyjal raid instance Emerald Sanctum.",
+				["id"] = 40959,
+				["attain"] = 58,
+				["aim"] = "Gather a Binding Fragment from Cliff Breakers in Azshara, Overloaded Arcane Prism from Arcane Torrents in the Western wing of Dire Maul and a Slumberer's Shard from Weaver in the Sunken Temple. Report to Itharius in the Swamp of Sorrows with the collected items.",
+				["title"] = "Into the Dream III",
+				["prequest"] = "Into the Dream I -> Into the Dream II",
+				["location"] = "Ralathius (Hyjal - Nordanaar; "..NORMAL.."[81.6,27.7]"..WHITE.." a green dragonkin)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Gemstone of Ysera",
+						["id"] = 50545,
+						["icon"] = "INV_Misc_Gem_Emerald_02",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Into the Dream IV - VI",
+			},
+		},
+		["story"] = "Построенный двенадцать тысяч лет назад тайной сектой волшебников ночных эльфов, древний город Эльдре'Талас использовали, чтобы защитить самые ценные секреты королевы Азшары. Несмотря на то, что он был уничтожен Великим Расколом мира, большая часть изумительного города еще существует как грандиозный Ужасный Кулак. Три самобытных района руин населили всевозможные твари - в основном призрачными высокорожденными, грязными сатирами и безмозглыми ограми. Только группа самых отважных искателей приключений может войти в разрушенный город и встретиться лицом к лицу с древним злом, заключенным в его древних подвалах.",
+		["name"] = "Забытый город (Запад)",
+	},
+	[13] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы получите фрагменты осколка сумрака с 'Темнокаменных грохотунов' или 'Темнокаменных крушителей' снаружи подземелья на Фиолетовой стороне.",
+				["id"] = 7070,
+				["attain"] = 38,
+				["aim"] = "Соберите в Мародоне 10 фрагментов осколков сумрака и отнесите их верховному магу Тервошу в Терамор на побережье Пылевых топей.",
+				["title"] = "Фрагменты осколка сумрака",
+				["location"] = "Верховный маг Тервош (Пылевые топи - Остров Терамор; |cffffff0066,49"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Zealous Shadowshard Pendant",
+						["id"] = 17772,
+						["icon"] = "INV_Jewelry_Necklace_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Prodigious Shadowshard Pendant",
+						["id"] = 17773,
+						["icon"] = "INV_Jewelry_Necklace_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы можете наполнить фиал в любом бассейне снаружи подземелья на Оранжевой стороне. Растения находятся в фиолетовой и оранжевой зонах внутри подземелья.",
+				["id"] = 7041,
+				["attain"] = 41,
+				["aim"] = "Наполните церуленовый фиал с покрытием в оранжевом пруду Мародона.$B$BПолейте гнусь-лозу из полного церуленового фиала, выгнав ядовитую лозу.$B$BИсцелите 8 растений, убивая ядовитые лозы, и вернитесь к Талендрии из Высоты Найджела.",
+				["title"] = "Порча Злоязыкого",
+				["location"] = "Талендрия (Пустоши - Высота Найджела; |cffffff0068,8"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Woodseed Hoop",
+						["id"] = 17768,
+						["icon"] = "INV_Jewelry_Ring_18",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Sagebrush Girdle",
+						["id"] = 17778,
+						["icon"] = "INV_Belt_25",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Branchclaw Gauntlets",
+						["id"] = 17770,
+						["icon"] = "INV_Gauntlets_30",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "С большинства существ в Мародоне падают орнаменты.",
+				["id"] = 7028,
+				["attain"] = 41,
+				["aim"] = "Соберите 25 терадрических хрустальных орнаментов для Ивы из Пустошей.",
+				["title"] = "Хрустальные орнаменты",
+				["location"] = "Ива (Пустоши; |cffffff0062,39"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Acumen Robes",
+						["id"] = 17775,
+						["icon"] = "INV_Chest_Cloth_49",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Sprightring Helm",
+						["id"] = 17776,
+						["icon"] = "INV_Helmet_35",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Relentless Chain",
+						["id"] = 17777,
+						["icon"] = "INV_Chest_Chain_07",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Hulkstone Pauldrons",
+						["id"] = 17779,
+						["icon"] = "INV_Shoulder_23",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "5 Ханов (Описание для инструкций парии)",
+				["id"] = 7067,
+				["attain"] = 39,
+				["aim"] = "Прочтите инструкции кентавра-парии, добудьте из Мародона амулет Соединения и верните его кентавру-парии из южной части Пустошей.",
+				["title"] = "Инструкции кентавра-парии",
+				["location"] = "Кентавр-пария (Пустоши; |cffffff0045,86"..WHITE..")",
+				["level"] = 48,
+				["pages"] = {
+					[1] = "Вы найдете кентавра-парию в южных Пустошах. Он бродит между |cffffff0044,85"..WHITE.." и |cffffff0050,87"..WHITE..".\nСначала, Вам нужно убить Безымянного пророка. Вы найдете его перед тем, как войти в подземелье, перед точкой, где придется выбрать идти к Оранжевому или Фиолетовому входу. После него нужно убить 5 ханов. Второй - в Фиолетовой части Мародона, но перед входом в подземелье. Третий находится на Оранжевой стороне перед подземельем.",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of the Chosen",
+						["id"] = 17774,
+						["icon"] = "INV_Jewelry_Talisman_08",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы найдете Кавиндру в начале Оранжевой части перед подземельем.\nВы получите Келебрийский жезл с Ноксиона около |cffffff00[2]"..WHITE..", а Келебрийский бриллиант с Лорда Злоязыкого  |cffffff00[5]"..WHITE..". Келебрас находится около |cffffff00[7]"..WHITE..". Вы должны победить его, чтобы поговорить.",
+				["id"] = 7044,
+				["attain"] = 41,
+				["aim"] = "Добудьте две части скипетра Келебраса – жезл Келебраса и бриллиант Келебраса.$B$BНайдите способ поговорить с Келебрасом.",
+				["title"] = "Легенды Мародона",
+				["location"] = "Кавиндра (Пустоши - Мародон; |cffffff00[4] на карте входа"..WHITE..")",
+				["level"] = 49,
+				["followup"] = "Скипетр Келебраса",
+			},
+			[6] = {
+				["note"] = "Келебрас создает Скипетр. Поговорите с ним, когда он закончит.",
+				["id"] = 7046,
+				["attain"] = 41,
+				["aim"] = "Помогите Селебрасу Искупленному воссоздать скипетр Селебраса.$b$bПо завершении ритуала снова обратитесь к нему.",
+				["prequest"] = "Легенды Мародона",
+				["title"] = "Скипетр Келебраса",
+				["location"] = "Келебрас Освобожденный (Мародон; |cffffff00[7]"..WHITE..")",
+				["level"] = 49,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Scepter of Celebras",
+						["id"] = 17191,
+						["icon"] = "INV_Staff_16",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете принцессу Терадрас около |cffffff00[11]"..WHITE..".",
+				["id"] = 7065,
+				["attain"] = 45,
+				["aim"] = "Убейте принцессу Терадрас и вернитесь к хранителю Марандису на Высоту Найджела в Пустоши.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Thrash Blade",
+						["id"] = 17705,
+						["icon"] = "INV_Sword_36",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Resurgence Rod",
+						["id"] = 17743,
+						["icon"] = "INV_Staff_Goldfeathered_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.BOW,
+						["name"] = "Verdant Keeper's Aim",
+						["id"] = 17753,
+						["icon"] = "INV_Weapon_Bow_03",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Семя Жизни",
+				["location"] = "Хранитель Марандис (Пустоши - Высота Найджела; |cffffff0063,10"..WHITE..")",
+				["level"] = 51,
+				["title"] = "Яблочко от яблоньки...",
+			},
+			[8] = {
+				["note"] = "Дух Зейтара появляется после убийства принцессы Терадрас |cffffff00[11]"..WHITE..". Вы найдете хранителя Ремулоса около (Лунная поляна - Святилище Ремулоса; |cffffff0036,41"..WHITE..").",
+				["id"] = 7066,
+				["attain"] = 45,
+				["aim"] = "Найдите в Лунной поляне Ремулоса и отдайте ему Семя Жизни.",
+				["title"] = "Семя Жизни",
+				["location"] = "Дух Зейтара (Мародон; |cffffff00[11]"..WHITE..")",
+				["level"] = 51,
+				["prequest"] = "Яблочко от яблоньки...",
+			},
+			[9] = {
+				["note"] = "Purple Maraudon satir boss Lord Vyletongue "..NORMAL.."[5]"..WHITE.." drops Harness of Chimaeran.",
+				["id"] = 41052,
+				["attain"] = 38,
+				["aim"] = "Retrieve the Harness of Chimaeran from Maraudon and bring it back to Velos Sharpstrike at Chimaera Roost Vale in Feralas.",
+				["title"] = "Harness of Chimaeran",
+				["location"] = "Velos Sharpstrike (Feralas - Chimaera Roost Vale; "..NORMAL.."[82.0, 62.3]"..WHITE.." southeastern corner of Feralas)",
+				["level"] = 48,
+				["prequest"] = "Cleansing the Roost -> Feeding the Younglings",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Chimaera's Eye",
+						["id"] = 61517,
+						["icon"] = "INV_Misc_Gem_Emerald_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[10] = {
+				["note"] = "Landslide is at "..NORMAL.."[8]"..WHITE..".",
+				["id"] = 41142,
+				["attain"] = 40,
+				["aim"] = "Obtain the Heart of Landslide from the depths of Maraudon, and the Essence of Corrosis from Hateforge Quarry for Frig Thunderforge at Aerie Peak",
+				["title"] = "Why Not Both?",
+				["prequest"] = "Proving A Point -> I've Read It In A Book Once",
+				["location"] = "Frig Thunderforge (Hinterlands - Aerie Peak; "..NORMAL.."[10.0, 49.3]"..WHITE..").",
+				["level"] = 50,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POLEARM,
+						["name"] = "Thunderforge Lance",
+						["id"] = 40080,
+						["icon"] = "inv_spear_02",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Thunderforge Mastery",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы получите фрагменты осколка сумрака с 'Темнокаменных грохотунов' или 'Темнокаменных крушителей' снаружи подземелья на Фиолетовой стороне.",
+				["id"] = 7068,
+				["attain"] = 38,
+				["aim"] = "Соберите в Мародоне 10 фрагментов осколков сумрака и отнесите их Утель'наю в Оргриммар.",
+				["title"] = "Фрагменты осколка сумрака",
+				["location"] = "Утель'най (Оргриммар - Аллея духов; |cffffff0038,68"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Zealous Shadowshard Pendant",
+						["id"] = 17772,
+						["icon"] = "INV_Jewelry_Necklace_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Prodigious Shadowshard Pendant",
+						["id"] = 17773,
+						["icon"] = "INV_Jewelry_Necklace_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы можете наполнить фиал в любом бассейне снаружи подземелья на Оранжевой стороне. Растения находятся в фиолетовой и оранжевой зонах внутри подземелья.",
+				["id"] = 7029,
+				["attain"] = 41,
+				["aim"] = "Наполните церуленовый фиал с покрытием в оранжевом пруду Мародона.$B$BПолейте гнусь-лозу из полного церуленового фиала, выгнав ядовитую лозу.$B$BИсцелите 8 растений, убивая ядовитые лозы, и вернитесь к Варку Боевому Шраму в Деревню Ночных Охотников.",
+				["title"] = "Скверна Злоязыкого",
+				["location"] = "Варк Боевой Шрам (Пустоши - Деревня Ночных охотников; |cffffff0023,70"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Woodseed Hoop",
+						["id"] = 17768,
+						["icon"] = "INV_Jewelry_Ring_18",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Sagebrush Girdle",
+						["id"] = 17778,
+						["icon"] = "INV_Belt_25",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Branchclaw Gauntlets",
+						["id"] = 17770,
+						["icon"] = "INV_Gauntlets_30",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "С большинства существ в Мародоне падают орнаменты.",
+				["id"] = 7028,
+				["attain"] = 41,
+				["aim"] = "Соберите 25 терадрических хрустальных орнаментов для Ивы из Пустошей.",
+				["title"] = "Хрустальные орнаменты",
+				["location"] = "Ива (Пустоши; |cffffff0062,39"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Acumen Robes",
+						["id"] = 17775,
+						["icon"] = "INV_Chest_Cloth_49",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Sprightring Helm",
+						["id"] = 17776,
+						["icon"] = "INV_Helmet_35",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Relentless Chain",
+						["id"] = 17777,
+						["icon"] = "INV_Chest_Chain_07",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Hulkstone Pauldrons",
+						["id"] = 17779,
+						["icon"] = "INV_Shoulder_23",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "5 Ханов (Описание для инструкций парии)",
+				["id"] = 7067,
+				["attain"] = 39,
+				["aim"] = "Прочтите инструкции кентавра-парии, добудьте из Мародона амулет Соединения и верните его кентавру-парии из южной части Пустошей.",
+				["title"] = "Инструкции кентавра-парии",
+				["location"] = "Кентавр-пария (Пустоши; |cffffff0045,86"..WHITE..")",
+				["level"] = 48,
+				["pages"] = {
+					[1] = "Вы найдете кентавра-парию в южных Пустошах. Он бродит между |cffffff0044,85"..WHITE.." и |cffffff0050,87"..WHITE..".\nСначала, Вам нужно убить Безымянного пророка. Вы найдете его перед тем, как войти в подземелье, перед точкой, где придется выбрать идти к Оранжевому или Фиолетовому входу. После него нужно убить 5 ханов. Второй - в Фиолетовой части Мародона, но перед входом в подземелье. Третий находится на Оранжевой стороне перед подземельем.",
+				},
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of the Chosen",
+						["id"] = 17774,
+						["icon"] = "INV_Jewelry_Talisman_08",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы найдете Кавиндру в начале Оранжевой части перед подземельем.\nВы получите Келебрийский жезл с Ноксиона около |cffffff00[2]"..WHITE..", а Келебрийский бриллиант с Лорда Злоязыкого  |cffffff00[5]"..WHITE..". Келебрас находится около |cffffff00[7]"..WHITE..". Вы должны победить его, чтобы поговорить.",
+				["id"] = 7044,
+				["attain"] = 41,
+				["aim"] = "Добудьте две части скипетра Келебраса – жезл Келебраса и бриллиант Келебраса.$B$BНайдите способ поговорить с Келебрасом.",
+				["title"] = "Легенды Мародона",
+				["location"] = "Кавиндра (Пустоши - Мародон; |cffffff00[4] на карте входа"..WHITE..")",
+				["level"] = 49,
+				["followup"] = "Скипетр Келебраса",
+			},
+			[6] = {
+				["note"] = "Келебрас создает Скипетр. Поговорите с ним, когда он закончит.",
+				["id"] = 7046,
+				["attain"] = 41,
+				["aim"] = "Помогите Селебрасу Искупленному воссоздать скипетр Селебраса.$b$bПо завершении ритуала снова обратитесь к нему.",
+				["prequest"] = "Легенды Мародона",
+				["title"] = "Скипетр Келебраса",
+				["location"] = "Келебрас Освобожденный (Мародон; |cffffff00[7]"..WHITE..")",
+				["level"] = 49,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Scepter of Celebras",
+						["id"] = 17191,
+						["icon"] = "INV_Staff_16",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете принцессу Терадрас около |cffffff00[11]"..WHITE..".",
+				["id"] = 7064,
+				["attain"] = 45,
+				["aim"] = "Убейте принцессу Терадрас и вернитесь к Селендре неподалеку от Деревни Ночных Охотников в Пустошах.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Thrash Blade",
+						["id"] = 17705,
+						["icon"] = "INV_Sword_36",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Resurgence Rod",
+						["id"] = 17743,
+						["icon"] = "INV_Staff_Goldfeathered_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.BOW,
+						["name"] = "Verdant Keeper's Aim",
+						["id"] = 17753,
+						["icon"] = "INV_Weapon_Bow_03",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Семя Жизни",
+				["location"] = "Селендра (Пустоши; |cffffff0027,77"..WHITE..")",
+				["level"] = 51,
+				["title"] = "Яблочко от яблоньки...",
+			},
+			[8] = {
+				["note"] = "Дух Зейтара появляется после убийства принцессы Терадрас |cffffff00[11]"..WHITE..". Вы найдете хранителя Ремулоса около (Лунная поляна - Святилище Ремулоса; |cffffff0036,41"..WHITE..").",
+				["id"] = 7066,
+				["attain"] = 45,
+				["aim"] = "Найдите в Лунной поляне Ремулоса и отдайте ему Семя Жизни.",
+				["title"] = "Семя Жизни",
+				["location"] = "Дух Зейтара (Мародон; |cffffff00[11]"..WHITE..")",
+				["level"] = 51,
+				["prequest"] = "Яблочко от яблоньки...",
+			},
+		},
+		["story"] = "Защищаемый свирепыми мародонскими кентаврами, Мародон является одим из самых священных мест в Пустошах. Великий храм-пещера служит местом последнего упокоения Зейтара, одного из двух бессмертных сыновей полубога Кенариуса. Легенда гласит, что Зейтар и принцесса духов стихии земли, Терадрас,  зачали незаконорожденную расу кентавров. Она также рассказывает о том, что появившись на свет, варвары-кентавры восстали против своего отца и убили его. Кое-кто верит, что Терадрас, полная скорби, заточила дух Зейтара в извилистых пещерах - используя его энергию для злых целей. Подземные тоннели, населенные злобными призраками давно умерших Ханов кентавров, а также яростными духами стихии, слугами Терадрас.",
+		["name"] = "Мародон",
+	},
+	[14] = {
+		[1] = {
+			[1] = {
+				["note"] = "Это не боссы в Огненных Недрах.",
+				["id"] = 6822,
+				["attain"] = 57,
+				["aim"] = "Убейте 1 Повелителя огня, 1 лавового гиганта, 1 древнюю гончую бездны и 1 лавового волноплеска и возвращайтесь к герцогу Гидраксису в Азшару.",
+				["followup"] = "Агент Гидраксиса",
+				["prequest"] = "Око Углевзора (|cffffff00Вершина Черной горы"..WHITE..")",
+				["location"] = "Герцог Гидраксис (Азшара; |cffffff0079,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Огненные Недра",
+			},
+			[2] = {
+				["note"] = "Люцифрон около|cffffff00[1]"..WHITE..", Сульфурон около|cffffff00[8]"..WHITE..", Гееннас около|cffffff00[3]"..WHITE.." и Шаззрах около|cffffff00[5]"..WHITE..".",
+				["id"] = 6824,
+				["attain"] = 60,
+				["aim"] = "Принесите руки Люцифрона, Сульфурона, Гееннаса и Шаззраха герцогу Гидраксису в Азшару.",
+				["followup"] = "Награда для героя",
+				["prequest"] = "Агент Гидраксиса",
+				["location"] = "Герцог Гидраксис (Азшара; |cffffff0079,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Руки врага",
+			},
+			[3] = {
+				["note"] = "Часть цепочки заданий на получение Громовой Ярости, благословенного клинка Искателя Ветра. Оно начинается после получения левого или правого Наручника Искателя Ветра с Гарра около |cffffff00[4]"..WHITE.." или Барона Геддона около |cffffff00[6]"..WHITE..". Затем поговорите с Верховным лордом Демитрианом, чтобы начать цепочку заданий. Сущность повелителя огня добывается с Рагнароса около |cffffff00[10]"..WHITE..". После завершения этого задания призывается Принц Громораан и вы должны убить его. Это босс для 40 игроков.",
+				["id"] = 7786,
+				["attain"] = 60,
+				["aim"] = "Чтобы освободить Громораана Искателя Ветра из тюрьмы, отнесите правый и левый наручник Ветроносца, 10 слитков элементия и сущность Повелителя огня верховному лорду Демитриану.",
+				["followup"] = "Громовая ярость",
+				["prequest"] = "Сосуд Возрождения",
+				["location"] = "Верховный лорд Демитриан (Силитус; |cffffff0022,9"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Громораан Искатель Ветра",
+			},
+			[4] = {
+				["note"] = "Вам нужен Сульфуронский слиток, чтобы получить контракт у Локтоса. Слитки падают с Големагга Испепелителя в Огненных Недрах около |cffffff00[7]"..WHITE..".",
+				["id"] = 7604,
+				["attain"] = 60,
+				["aim"] = "Подпишите договор с представителем братства Тория Локтосом Недобрым Торговцем, если вам нужен чертеж сульфуронского молота.",
+				["title"] = "Заключение договора",
+				["location"] = "Локтос Зловещий Торговец (Глубины Черной горы; |cffffff00[15]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Sulfuron Hammer",
+						["id"] = 18592,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 4,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Отнесите Вартусу Древнему около (Оскверненный лес - Железнолесье; |cffffff0049,24"..WHITE..").",
+				["id"] = 7632,
+				["attain"] = 60,
+				["aim"] = "Найдите хозяина древнего окаменелого древесного листа. Удачи, $N, мир велик.",
+				["title"] = "Древний лист",
+				["location"] = "Древний окаменелый древесный лист (содержится в Тайнике повелителя огня; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Перетянутый жилами лист древня (|cffffff00Азурегос"..WHITE..")",
+			},
+			[6] = {
+				["note"] = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")",
+				["id"] = 8620,
+				["attain"] = 60,
+				["aim"] = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gnomish Turban of Psychic Might",
+						["id"] = 21517,
+						["icon"] = "INV_Helmet_63",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Единственный способ",
+				["prequest"] = "Утка!",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+			[7] = {
+				["note"] = "Добываются с боссов в Огненных Недрах.",
+				["id"] = 8578,
+				["attain"] = 60,
+				["aim"] = "Найдите гадальные очки Нарайна и отнесите их Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Major Rejuvenation Potion",
+						["id"] = 18253,
+						["count"] = 3,
+						["icon"] = "INV_Potion_47",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "Гадальные очки? Без проблем!",
+				["prequest"] = "Тушеный Лис, БЛД",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Это не боссы в Огненных Недрах.",
+				["id"] = 6822,
+				["attain"] = 57,
+				["aim"] = "Убейте 1 Повелителя огня, 1 лавового гиганта, 1 древнюю гончую бездны и 1 лавового волноплеска и возвращайтесь к герцогу Гидраксису в Азшару.",
+				["followup"] = "Агент Гидраксиса",
+				["prequest"] = "Око Углевзора (|cffffff00Вершина Черной горы"..WHITE..")",
+				["location"] = "Герцог Гидраксис (Азшара; |cffffff0079,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Огненные Недра",
+			},
+			[2] = {
+				["note"] = "Люцифрон около|cffffff00[1]"..WHITE..", Сульфурон около|cffffff00[8]"..WHITE..", Гееннас около|cffffff00[3]"..WHITE.." и Шаззрах около|cffffff00[5]"..WHITE..".",
+				["id"] = 6824,
+				["attain"] = 60,
+				["aim"] = "Принесите руки Люцифрона, Сульфурона, Гееннаса и Шаззраха герцогу Гидраксису в Азшару.",
+				["followup"] = "Награда для героя",
+				["prequest"] = "Агент Гидраксиса",
+				["location"] = "Герцог Гидраксис (Азшара; |cffffff0079,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Руки врага",
+			},
+			[3] = {
+				["note"] = "Часть цепочки заданий на получение Громовой Ярости, благословенного клинка Искателя Ветра. Оно начинается после получения левого или правого Наручника Искателя Ветра с Гарра около |cffffff00[4]"..WHITE.." или Барона Геддона около |cffffff00[6]"..WHITE..". Затем поговорите с Верховным лордом Демитрианом, чтобы начать цепочку заданий. Сущность повелителя огня добывается с Рагнароса около |cffffff00[10]"..WHITE..". После завершения этого задания призывается Принц Громораан и вы должны убить его. Это босс для 40 игроков.",
+				["id"] = 7786,
+				["attain"] = 60,
+				["aim"] = "Чтобы освободить Громораана Искателя Ветра из тюрьмы, отнесите правый и левый наручник Ветроносца, 10 слитков элементия и сущность Повелителя огня верховному лорду Демитриану.",
+				["followup"] = "Громовая ярость",
+				["prequest"] = "Сосуд Возрождения",
+				["location"] = "Верховный лорд Демитриан (Силитус; |cffffff0022,9"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Громораан Искатель Ветра",
+			},
+			[4] = {
+				["note"] = "Вам нужен Сульфуронский слиток, чтобы получить контракт у Локтоса. Слитки падают с Големагга Испепелителя в Огненных Недрах около |cffffff00[7]"..WHITE..".",
+				["id"] = 7604,
+				["attain"] = 60,
+				["aim"] = "Подпишите договор с представителем братства Тория Локтосом Недобрым Торговцем, если вам нужен чертеж сульфуронского молота.",
+				["title"] = "Заключение договора",
+				["location"] = "Локтос Зловещий Торговец (Глубины Черной горы; |cffffff00[15]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Sulfuron Hammer",
+						["id"] = 18592,
+						["icon"] = "INV_Scroll_03",
+						["quality"] = 4,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Отнесите Вартусу Древнему около (Оскверненный лес - Железнолесье; |cffffff0049,24"..WHITE..").",
+				["id"] = 7632,
+				["attain"] = 60,
+				["aim"] = "Найдите хозяина древнего окаменелого древесного листа. Удачи, $N, мир велик.",
+				["title"] = "Древний лист",
+				["location"] = "Древний окаменелый древесный лист (содержится в Тайнике повелителя огня; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Перетянутый жилами лист древня (|cffffff00Азурегос"..WHITE..")",
+			},
+			[6] = {
+				["note"] = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")",
+				["id"] = 8620,
+				["attain"] = 60,
+				["aim"] = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gnomish Turban of Psychic Might",
+						["id"] = 21517,
+						["icon"] = "INV_Helmet_63",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Единственный способ",
+				["prequest"] = "Утка!",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+			[7] = {
+				["note"] = "Добываются с боссов в Огненных Недрах.",
+				["id"] = 8578,
+				["attain"] = 60,
+				["aim"] = "Найдите гадальные очки Нарайна и отнесите их Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Major Rejuvenation Potion",
+						["id"] = 18253,
+						["count"] = 3,
+						["icon"] = "INV_Potion_47",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "Гадальные очки? Без проблем!",
+				["prequest"] = "Тушеный Лис, БЛД",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+		},
+		["story"] = "В глубинах Черной горы лежат Огненные Недра. Именно здесь, в сердце Черной горы, не в силах совладать с гражданской войной среди дворфов, император Таурисан привел в наш мир Повелителя Огня, Рагнароса. Хотя Повелитель Огня не может удалиться от пылающих Недр, говорят, что дворфы из клана Темной Стали находятся под властью его духов-приспешников, собирающих армию созданий из ожившего камня. Пылающее озеро, в котором спит Рагнарос, служит вратами в обитель стихий огня, через которые и пробираются в наш мир зловредные духи стихий. Первый среди прислужников Рагнароса — Мажордом Экзекутус. Этот коварный гуманоид — единственный, кто может пробудить Повелителя Огня от сна.",
+		["name"] = "Огненные Недра",
+	},
+	[15] = {
+		[1] = {
+			[1] = {
+				["note"] = "Отец Иниго Монтой (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,58"..WHITE..")",
+				["id"] = 9120,
+				["attain"] = 60,
+				["aim"] = "Отнесите талисман Кел'Тузада в Часовню Последней Надежды в Восточных Чумных землях.",
+				["title"] = "Падение Кел'Тузада",
+				["location"] = " Кел'Тузад (Наксрамас; |cffffff00Зеленая 2"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of the Champion",
+						["id"] = 23206,
+						["icon"] = "INV_Misc_Token_ArgentDawn2",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of the Champion",
+						["id"] = 23207,
+						["icon"] = "INV_Misc_Token_ArgentDawn3",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Морозные руны появляются из Нечестивых топоров в Наксрамасе.",
+				["id"] = 9232,
+				["attain"] = 60,
+				["aim"] = "Принесите 2 морозных руны, 2 субстанции Воды, 2 синих сапфира и 30 золотых ремесленнику Вильгельму в часовню Последней Надежды в Восточные Чумные земли.",
+				["title"] = "Не разгуляешься...",
+				["location"] = "Ремесленник Вильгельм (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,60"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Glacial Leggings",
+						["id"] = 22700,
+						["icon"] = "INV_Pants_06",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.PLATE,
+						["name"] = "Icebane Leggings",
+						["id"] = 22699,
+						["icon"] = "INV_Pants_04",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Icy Scale Leggings",
+						["id"] = 22702,
+						["icon"] = "INV_Pants_Mail_15",
+						["quality"] = 4,
+					},
+					[4] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Polar Leggings",
+						["id"] = 22701,
+						["icon"] = "INV_Pants_Leather_21",
+						["quality"] = 4,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Существа для этого задания находятся в начале каждого крыла Наксрамаса. Это задание является предварительным условием для заданий на компклекты Тир 3.",
+				["id"] = 9033,
+				["attain"] = 60,
+				["aim"] = "Командир Элигор Вестник Рассвета из часовни Последней Надежды, что в Восточных Чумных землях просит убить 5 ходячих ужасов, 5 каменных горгулий, 8 капитанов рыцарей Смерти и 3 ядовитых пауков-скакунов.",
+				["title"] = "Отголоски войны",
+				["location"] = "Командир Элигор Вестник Рассвета (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0082,58"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "Цитадель ужаса – Наксрамас",
+			},
+			[4] = {
+				["note"] = "Кольцо для этого задания добывается со случайных противников в Наксрамасе. Каждый, кто имеет задание может забрать его.",
+				["id"] = 9229,
+				["attain"] = 60,
+				["aim"] = "Идите в Наксрамас и найдите кольцо Судьбы Рамаладни.",
+				["title"] = "Кольцо Судьбы Рамаладни",
+				["location"] = "Корфакс, Воитель Света (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0082,58"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Ледяная хватка Рамаладни",
+			},
+			[5] = {
+				["note"] = "Морозные руны появляются из Нечестивых топоров в Наксрамасе.",
+				["id"] = 9230,
+				["attain"] = 60,
+				["aim"] = "Принесите 1 морозную руну, 1 синий сапфир и 1 арканитовый слиток Корфаксу в Часовню Последней Надежды в Восточные Чумные земли.",
+				["prequest"] = "Кольцо Судьбы Рамаладни",
+				["title"] = "Ледяная хватка Рамаладни",
+				["location"] = "Корфакс, Воитель Света (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0082,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Ramaladni's Icy Grasp",
+						["id"] = 22707,
+						["icon"] = "INV_Jewelry_Ring_35",
+						["quality"] = 4,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Отец Иниго Монтой (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,58"..WHITE..")",
+				["id"] = 9120,
+				["attain"] = 60,
+				["aim"] = "Отнесите талисман Кел'Тузада в Часовню Последней Надежды в Восточных Чумных землях.",
+				["title"] = "Падение Кел'Тузада",
+				["location"] = " Кел'Тузад (Наксрамас; |cffffff00Зеленая 2"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of the Champion",
+						["id"] = 23206,
+						["icon"] = "INV_Misc_Token_ArgentDawn2",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Mark of the Champion",
+						["id"] = 23207,
+						["icon"] = "INV_Misc_Token_ArgentDawn3",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Морозные руны появляются из Нечестивых топоров в Наксрамасе.",
+				["id"] = 9232,
+				["attain"] = 60,
+				["aim"] = "Принесите 2 морозных руны, 2 субстанции Воды, 2 синих сапфира и 30 золотых ремесленнику Вильгельму в часовню Последней Надежды в Восточные Чумные земли.",
+				["title"] = "Не разгуляешься...",
+				["location"] = "Ремесленник Вильгельм (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,60"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Glacial Leggings",
+						["id"] = 22700,
+						["icon"] = "INV_Pants_06",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.PLATE,
+						["name"] = "Icebane Leggings",
+						["id"] = 22699,
+						["icon"] = "INV_Pants_04",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Icy Scale Leggings",
+						["id"] = 22702,
+						["icon"] = "INV_Pants_Mail_15",
+						["quality"] = 4,
+					},
+					[4] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Polar Leggings",
+						["id"] = 22701,
+						["icon"] = "INV_Pants_Leather_21",
+						["quality"] = 4,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Существа для этого задания находятся в начале каждого крыла Наксрамаса. Это задание является предварительным условием для заданий на компклекты Тир 3.",
+				["id"] = 9033,
+				["attain"] = 60,
+				["aim"] = "Командир Элигор Вестник Рассвета из часовни Последней Надежды, что в Восточных Чумных землях просит убить 5 ходячих ужасов, 5 каменных горгулий, 8 капитанов рыцарей Смерти и 3 ядовитых пауков-скакунов.",
+				["title"] = "Отголоски войны",
+				["location"] = "Командир Элигор Вестник Рассвета (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0082,58"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "Цитадель ужаса – Наксрамас",
+			},
+			[4] = {
+				["note"] = "Кольцо для этого задания добывается со случайных противников в Наксрамасе. Каждый, кто имеет задание может забрать его.",
+				["id"] = 9229,
+				["attain"] = 60,
+				["aim"] = "Идите в Наксрамас и найдите кольцо Судьбы Рамаладни.",
+				["title"] = "Кольцо Судьбы Рамаладни",
+				["location"] = "Корфакс, Воитель Света (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0082,58"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Ледяная хватка Рамаладни",
+			},
+			[5] = {
+				["note"] = "Морозные руны появляются из Нечестивых топоров в Наксрамасе.",
+				["id"] = 9230,
+				["attain"] = 60,
+				["aim"] = "Принесите 1 морозную руну, 1 синий сапфир и 1 арканитовый слиток Корфаксу в Часовню Последней Надежды в Восточные Чумные земли.",
+				["prequest"] = "Кольцо Судьбы Рамаладни",
+				["title"] = "Ледяная хватка Рамаладни",
+				["location"] = "Корфакс, Воитель Света (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0082,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Ramaladni's Icy Grasp",
+						["id"] = 22707,
+						["icon"] = "INV_Jewelry_Ring_35",
+						["quality"] = 4,
+					},
+				},
+			},
+		},
+		["story"] = "Над Чумными землями парит некрополь Наксрамас — цитадель одного из самых могущественных сподручных Короля-лича, страшного лича Кел'Тузада. Подданные Короля-лича готовят нападение, и в стенах мертвого города собираются страшные призраки прошлого и новые ужасы…",
+		["name"] = "Наксрамас",
+	},
+	[16] = {
+		[1] = {
+			[1] = {
+				["note"] = "Бросьте меч перед Ониксией, когда у нее останется от 10% до 15% здоровья. Она должна будет дышать и нагревать его. Когда Ониксия умрет, заберите меч, нажмите на ее труп и используйте меч. Тогда вы будете готовы, чтобы завершить задание.",
+				["id"] = 7509,
+				["attain"] = 60,
+				["aim"] = "Заставьте Ониксию дохнуть своим огненным дыханием на потускневший древний клинок. После этого схватите раскаленный древний клинок. Имейте в виду, что раскаленным он останется ненадолго, так что медлить не следует!$B$BПоследнее, что нужно сделать – это убить драконицу и вонзить раскаленный древний клинок в ее труп.$B$BСделайте это – и Кель'Серрар навеки станет вашим!",
+				["prequest"] = "Справочник Форора (|cffffff00Забытый город (Запад)"..WHITE..") -> Ковка Кель'Серрара",
+				["title"] = "Ковка Кель'Серрара",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SWORD,
+						["name"] = "Quel'Serrar",
+						["id"] = 18348,
+						["icon"] = "INV_Sword_01",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Верховный лорд Болвар Фордрагон (Штормград - Крепость Штормграда; |cffffff0078,20"..WHITE.."). Только один человек в рейде может получить этот предмет и задание может быть сделано только один раз.\n\nНаграды перечислены для следующего задания.",
+				["id"] = 7495,
+				["attain"] = 60,
+				["aim"] = "Отнесите голову Ониксии Верховному лорду Болвару Фордрагону в Штормград.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Onyxia Blood Talisman",
+						["id"] = 18406,
+						["icon"] = "Spell_Shadow_LifeDrain",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Dragonslayer's Signet",
+						["id"] = 18403,
+						["icon"] = "INV_Jewelry_Ring_27",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Onyxia Tooth Pendant",
+						["id"] = 18404,
+						["icon"] = "INV_Jewelry_Necklace_09",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Праздник добрых времен",
+				["location"] = "Голова Ониксии (добывается с Ониксии; |cffffff00[3]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Славная победа Альянса",
+			},
+			[3] = {
+				["note"] = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")",
+				["id"] = 8620,
+				["attain"] = 60,
+				["aim"] = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gnomish Turban of Psychic Might",
+						["id"] = 21517,
+						["icon"] = "INV_Helmet_63",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Единственный способ",
+				["prequest"] = "Утка!",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Бросьте меч перед Ониксией, когда у нее останется от 10% до 15% здоровья. Она должна будет дышать и нагревать его. Когда Ониксия умрет, заберите меч, нажмите на ее труп и используйте меч. Тогда вы будете готовы, чтобы завершить задание.",
+				["id"] = 7509,
+				["attain"] = 60,
+				["aim"] = "Заставьте Ониксию дохнуть своим огненным дыханием на потускневший древний клинок. После этого схватите раскаленный древний клинок. Имейте в виду, что раскаленным он останется ненадолго, так что медлить не следует!$B$BПоследнее, что нужно сделать – это убить драконицу и вонзить раскаленный древний клинок в ее труп.$B$BСделайте это – и Кель'Серрар навеки станет вашим!",
+				["prequest"] = "Справочник Форора (|cffffff00Забытый город (Запад)"..WHITE..") -> Ковка Кель'Серрара",
+				["title"] = "Ковка Кель'Серрара",
+				["location"] = "Сказитель Лидрос (Забытый город (Запад); |cffffff00[1] Библиотека"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SWORD,
+						["name"] = "Quel'Serrar",
+						["id"] = 18348,
+						["icon"] = "INV_Sword_01",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Тралл (Оргриммар - Аллея Мудрости; |cffffff0031,37"..WHITE.."). Только один человек в рейде может получить этот предмет и задание может быть сделано только один раз.\n\nНаграды перечислены для следующего задания.",
+				["id"] = 7490,
+				["attain"] = 60,
+				["aim"] = "Отнесите голову Ониксии Траллу в Оргриммар.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Onyxia Blood Talisman",
+						["id"] = 18406,
+						["icon"] = "Spell_Shadow_LifeDrain",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Dragonslayer's Signet",
+						["id"] = 18403,
+						["icon"] = "INV_Jewelry_Ring_27",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Onyxia Tooth Pendant",
+						["id"] = 18404,
+						["icon"] = "INV_Jewelry_Necklace_09",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "На виду у всех",
+				["location"] = "Голова Ониксии (добывается с Ониксии; |cffffff00[3]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Победа Орды",
+			},
+			[3] = {
+				["note"] = "Главы могут быть получены несколькими игроками. \"Драконий язык для чайников\" (лежит на столе; "..GREEN.."[2']"..WHITE..")",
+				["id"] = 8620,
+				["attain"] = 60,
+				["aim"] = "Найдите 8 утраченных глав из книги \"Драконий язык для чайников\" и соберите их при помощи магического книжного переплета. Принесите полную книгу \"Драконий язык для дураков: том II\" Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gnomish Turban of Psychic Might",
+						["id"] = 21517,
+						["icon"] = "INV_Helmet_63",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Единственный способ",
+				["prequest"] = "Утка!",
+				["location"] = "Нарайн Причудень (Танарис; |cffffff0065,18"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Хорошая новость и плохая новость (Должны быть выполнены цепочки заданий \"Тушеный Лис, БЛД\" и \"Никогда не расспрашивай меня о моем бизнесе!\")",
+			},
+		},
+		["story"] = "Ониксия — дочь могущественного дракона Смертокрыла и сестра злокозненного Нефариана, который властвует над Пиком Черной горы. Об Ониксии известно, что ничто ей так не мило, как совращать смертных, вмешиваясь в их политические дела. Поэтому существует поверие, что она часто принимает человеческий облик и появляется там, где решается какая-нибудь запутанная ситуация между расами: она туманит собеседникам разум и понуждает их действовать по своей указке. Иногда говорят даже, что Ониксии как-то раз случилось выдавать себя за представительницу рода Престор, — как в свое время и ее отцу. Когда Ониксии не до дел смертных, она укрывается в огненном подземном логове в Земле Драконов, в мертвенного вида болоте в Пылевых топях. Там ее охраняют соплеменники — те, кто уцелел из клана коварных черных драконов.",
+		["name"] = "Логово Ониксии",
+	},
+	[17] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы сможете найти мобов и Мириам в зоне перед самым входом в подземелье.",
+				["id"] = 6626,
+				["attain"] = 30,
+				["aim"] = "Убейте 8 боевых стражей и 8 терноплетов из племени Иглошкурых, а также 8 сектанток из племени Мертвой Головы и возвращайтесь к Мириам Лунной Певице на Курганы Иглошкурых.",
+				["title"] = "Воинство зла",
+				["location"] = "Мириам Лунная Певица (Степи; |cffffff0049,94"..WHITE..")",
+				["level"] = 35,
+			},
+			[2] = {
+				["note"] = "Предшествующее задание заключается просто в согласии помочь ему. Несколько мобов появятся и атакуют Белнистраза когда он попытается сломать идол. После выполнения, вы можете сдать задание у жаровни перед идолом.",
+				["id"] = 3525,
+				["attain"] = 32,
+				["aim"] = "Сопроводите Белнистраза к идолу свинобразов на Курганах Иглошкурых. $B$BЗащищайте Белнистраза, пока он будет проводить ритуал, чтобы разрушить идола.",
+				["prequest"] = "Плеть в холмах",
+				["title"] = "Уничтожить идола",
+				["location"] = "Белнистраз (Курганы Иглошкурых; |cffffff00[2]"..WHITE..")",
+				["level"] = 37,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Dragonclaw Ring",
+						["id"] = 10710,
+						["icon"] = "INV_Jewelry_Ring_04",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Амненнар Хладовей это последний босс в Курганах Иглошкурых. Вы найдете его около |cffffff00[6]"..WHITE..".",
+				["id"] = 3636,
+				["attain"] = 39,
+				["aim"] = "Убейте Амненнара Хладовея на Курганах Иглошкурых.",
+				["title"] = "Нести свет",
+				["location"] = "Архиепископ Бенедикт (Штормград - Собор Света; |cffffff0039,27"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Vanquisher's Sword",
+						["id"] = 10823,
+						["icon"] = "INV_Sword_35",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amberglow Talisman",
+						["id"] = 10824,
+						["icon"] = "INV_Jewelry_Necklace_07",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы сможете найти мобов и Мириам в зоне перед самым входом в подземелье.",
+				["id"] = 6626,
+				["attain"] = 30,
+				["aim"] = "Убейте 8 боевых стражей и 8 терноплетов из племени Иглошкурых, а также 8 сектанток из племени Мертвой Головы и возвращайтесь к Мириам Лунной Певице на Курганы Иглошкурых.",
+				["title"] = "Воинство зла",
+				["location"] = "Мириам Лунная Певица (Степи; |cffffff0049,94"..WHITE..")",
+				["level"] = 35,
+			},
+			[2] = {
+				["note"] = "Предшествующее задание можно подобрать с последнего босса в Лабиринтах Иглошкурых. Вы найдете Малкина снаружи (Степи; |cffffff0048,92"..WHITE..").",
+				["id"] = 6521,
+				["attain"] = 28,
+				["aim"] = "Принести голову посла Малкина Вариматрасу в Подгород.",
+				["prequest"] = "Нечестивый союз",
+				["title"] = "Нечестивый союз",
+				["location"] = "Вариматас (Подгород - Королевский квартал; |cffffff0056,92"..WHITE..")",
+				["level"] = 36,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Skullbreaker",
+						["id"] = 17039,
+						["icon"] = "INV_Misc_Bone_DwarfSkull_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.GUN,
+						["name"] = "Nail Spitter",
+						["id"] = 17042,
+						["icon"] = "INV_Weapon_Rifle_01",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Zealot's Robe",
+						["id"] = 17043,
+						["icon"] = "INV_Chest_Cloth_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Предшествующее задание заключается просто в согласии помочь ему. Несколько мобов появятся и атакуют Белнистраза когда он попытается сломать идол. После выполнения, вы можете сдать задание у жаровни перед идолом.",
+				["id"] = 3525,
+				["attain"] = 32,
+				["aim"] = "Сопроводите Белнистраза к идолу свинобразов на Курганах Иглошкурых. $B$BЗащищайте Белнистраза, пока он будет проводить ритуал, чтобы разрушить идола.",
+				["prequest"] = "Плеть в холмах",
+				["title"] = "Уничтожить идола",
+				["location"] = "Белнистраз (Курганы Иглошкурых; |cffffff00[2]"..WHITE..")",
+				["level"] = 37,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Dragonclaw Ring",
+						["id"] = 10710,
+						["icon"] = "INV_Jewelry_Ring_04",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Амненнар Хладовей это последний босс в Курганах Иглошкурых. Вы найдете его около |cffffff00[6]"..WHITE..".",
+				["id"] = 3341,
+				["attain"] = 37,
+				["aim"] = "Эндрю Браунелл поручил вам убить Амненнара Хладовея и принести его череп.",
+				["title"] = "Да сгинет Хладовей",
+				["location"] = "Эндрю Браунелл (Подгород - Квартал магов; |cffffff0072,32"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Vanquisher's Sword",
+						["id"] = 10823,
+						["icon"] = "INV_Sword_35",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amberglow Talisman",
+						["id"] = 10824,
+						["icon"] = "INV_Jewelry_Necklace_07",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Questline starts with quest 'Through Greater Magic' at Dark Bishop Mordren.\n"..RED.."Description in the questlog is wrong. at least it was for me."..WHITE.."\nAmnennar the Coldbringer "..NORMAL.."[6]"..WHITE.." drops Obsidian Phylactery.\nYou will get the reward finishing the last quest in the chain.",
+				["id"] = 40995,
+				["attain"] = 38,
+				["aim"] = "Venture into Razorfen Downs, slay Amnennar the Coldbringer and retrieve his phylactery for Dark Bishop Mordren at Stillward Church in Gilneas.",
+				["title"] = "The Powers Beyond",
+				["prequest"] = "Through Greater Magic -> The Ravenwood Scepter",
+				["location"] = "Dark Bishop Mordren (Gilneas - Stillward Church "..NORMAL.."57.7,39.6"..WHITE..")",
+				["level"] = 44,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Garalon's Might",
+						["id"] = 61660,
+						["icon"] = "INV_Sword_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..",Staff",
+						["name"] = "Varimathras' Cunning",
+						["id"] = 61661,
+						["icon"] = "INV_Staff_13",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Stillward Amulet",
+						["id"] = 61662,
+						["icon"] = "INV_Jewelry_Talisman_12",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "The Greymane Stone "..NORMAL.."[Gilneas City]"..WHITE.."-> Gift of the Dark Bishop",
+			},
+		},
+		["story"] = "Курганы Иглошкурых – столица расы свинобразов, построенная по образцу лабиринтов. В них живет племя Мертвой Головы – целая армия преданных свинобразов, возглавляемых верховными жрецами. Однако сейчас над их обителью сгустилась тьма. Армия Плети под предводительством лича Амненнара Хладовея подчинила иглогривов своей воле и превратила их город в цитадель нежити. Теперь свинобразы сражаются из последних сил, чтобы отвоевать любимый город, пока Амненнар не покорил все Степи.",
+		["name"] = "Курганы Иглошкурых",
+	},
+	[18] = {
+		[1] = {
+			[1] = {
+				["note"] = "Ящик, Стек и инструкцию можно найти рядом с Мебоком Миззриксом.",
+				["id"] = 1221,
+				["attain"] = 20,
+				["aim"] = "Возьмите ящик с дырками.$BВозьмите палочку-погонялочку для шмыгуносов.$BВозьмите справочник по шмыгуносам. $B$BВ Лабиринтах Иглошкурых выпустите шмыгуноса и воспользуйтесь стеком, чтобы он начал искать корни. $B$BПринесите 6 корней синелиста, стек и ящик с дырками Мебоку Миззриксу в Кабестан.",
+				["title"] = "Корни Синелиста",
+				["location"] = "Мебок Миззрикс (Степи - Кабестан; |cffffff0062,37"..WHITE..")",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "A Small Container of Gems",
+						["id"] = 6755,
+						["icon"] = "INV_Misc_OrnateBox",
+						["quality"] = 1,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Подвеска добывается случайно. Вы должны вернуть подвеску Трешале Бурый Ручей в Дарнасс - Терраса торговцев (|cffffff0069,67"..WHITE..").",
+				["id"] = 1142,
+				["attain"] = 25,
+				["aim"] = "Найдите подвеску Трешалы и верните ее Трешале Бурый Ручей в Дарнасс.",
+				["title"] = "Последнее желание",
+				["location"] = "Гералат Бурый Ручей (Лабиринты Иглошкурых; |cffffff00[8]"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Mourning Shawl",
+						["id"] = 6751,
+						["icon"] = "INV_Misc_Cape_11",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Lancer Boots",
+						["id"] = 6752,
+						["icon"] = "INV_Boots_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Импортера Вилликса нужно проводить к выходу из подземелья. Задание можно сдать ему после выполнения.",
+				["id"] = 1144,
+				["attain"] = 23,
+				["aim"] = "Сопроводите Вилликса из Лабиринтов Иглошкурых.",
+				["title"] = "Импортер Вилликс",
+				["location"] = "Импортер Вилликс (Лабиринты Иглошкурых; |cffffff00[8]"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Monkey Ring",
+						["id"] = 6748,
+						["icon"] = "INV_Jewelry_Ring_14",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Snake Hoop",
+						["id"] = 6750,
+						["icon"] = "INV_Jewelry_Ring_06",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Tiger Band",
+						["id"] = 6749,
+						["icon"] = "INV_Jewelry_Ring_13",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Медальон, нужный для задания, добывается с Чарлги Остробок  |cffffff00[7]"..WHITE..".",
+				["id"] = 1101,
+				["attain"] = 29,
+				["aim"] = "Принесите медальон Чарлги Остробок Фалфиндеру Хранителю Путей в Таланааре.",
+				["prequest"] = "Дневник Хмурня",
+				["title"] = "Хозяйка Лабиринтов",
+				["location"] = "Хранитель дорог Фалфиндел (Фералас - Таланаар; |cffffff0089,46"..WHITE..")",
+				["level"] = 34,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Berylline Pads",
+						["id"] = 4197,
+						["icon"] = "INV_Shoulder_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Stonefist Girdle",
+						["id"] = 6742,
+						["icon"] = "INV_Belt_35",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Marbled Buckler",
+						["id"] = 6725,
+						["icon"] = "INV_Shield_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Задание для воинов. Вы заберете Сосуд флогистона у Ругуга около |cffffff00[1]"..WHITE..".\n\nПоследующее задание отличается для каждой расы. Пылающая кровь для людей, Железный Коралл для дворфов и гномов и Высохшая скорлупа для ночных эльфов.",
+				["id"] = 1701,
+				["attain"] = 20,
+				["aim"] = "Соберите все необходимые материалы для Фьюрена Длинноборода и отнесите их в Штормград.",
+				["followup"] = "(См. заметку)",
+				["prequest"] = "Щитник",
+				["location"] = "Фьюрен Длиннобород (Штормград - Квартал дворфов; |cffffff0057,16"..WHITE..")",
+				["level"] = 28,
+				["title"] = "Закаленный доспех",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Ящик, Стек и инструкцию можно найти рядом с Мебоком Миззриксом.",
+				["id"] = 1221,
+				["attain"] = 20,
+				["aim"] = "Возьмите ящик с дырками.$BВозьмите палочку-погонялочку для шмыгуносов.$BВозьмите справочник по шмыгуносам. $B$BВ Лабиринтах Иглошкурых выпустите шмыгуноса и воспользуйтесь стеком, чтобы он начал искать корни. $B$BПринесите 6 корней синелиста, стек и ящик с дырками Мебоку Миззриксу в Кабестан.",
+				["title"] = "Корни Синелиста",
+				["location"] = "Мебок Миззрикс (Степи - Кабестан; |cffffff0062,37"..WHITE..")",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "A Small Container of Gems",
+						["id"] = 6755,
+						["icon"] = "INV_Misc_OrnateBox",
+						["quality"] = 1,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Импортера Вилликса нужно проводить к выходу из подземелья. Задание можно сдать ему после выполнения.",
+				["id"] = 1144,
+				["attain"] = 23,
+				["aim"] = "Сопроводите Вилликса из Лабиринтов Иглошкурых.",
+				["title"] = "Импортер Вилликс",
+				["location"] = "Импортер Вилликс (Лабиринты Иглошкурых; |cffffff00[8]"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Monkey Ring",
+						["id"] = 6748,
+						["icon"] = "INV_Jewelry_Ring_14",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Snake Hoop",
+						["id"] = 6750,
+						["icon"] = "INV_Jewelry_Ring_06",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Tiger Band",
+						["id"] = 6749,
+						["icon"] = "INV_Jewelry_Ring_13",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Гуано добывается с любой летучей мыши внутри подземелья.",
+				["id"] = 1109,
+				["attain"] = 30,
+				["aim"] = "Принесите 1 кучку гуано летучей мыши Лабиринтов мастеру-аптекарю Фаранеллу в Подгород.",
+				["title"] = "Груды гуано",
+				["location"] = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; |cffffff0048,69 "..WHITE..")",
+				["level"] = 33,
+				["followup"] = "Сердца Доблести (|cffffff00[Монастырь Алого Ордена]"..WHITE..")",
+			},
+			[4] = {
+				["note"] = "Вы найдете Чарглу Остробок около |cffffff00[7]"..WHITE..".",
+				["id"] = 1102,
+				["attain"] = 29,
+				["aim"] = "Принесите сердце Чарлги Остробок Ольду Каменному Копью в Громовой Утес.",
+				["title"] = "Отмщение грядет!",
+				["location"] = "Ольд Каменное Копье (Громовой Утес; |cffffff0036,59"..WHITE..")",
+				["level"] = 34,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Berylline Pads",
+						["id"] = 4197,
+						["icon"] = "INV_Shoulder_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Stonefist Girdle",
+						["id"] = 6742,
+						["icon"] = "INV_Belt_35",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Marbled Buckler",
+						["id"] = 6725,
+						["icon"] = "INV_Shield_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Задание для воинов. Вы заберете Сосуд флогистона у Ругуга около |cffffff00[1]"..WHITE..".\n\nВыполнение задания позволит вам начать еще 4 новых задания у того же персонажа.",
+				["id"] = 1838,
+				["attain"] = 20,
+				["aim"] = "Принесите Тун'гриму Огневзору 15 закопченных железных слитков, 10 мер толченого азурита, 10 железных слитков и сосуд флогистона.",
+				["followup"] = "(см. заметки)",
+				["prequest"] = "Поговорить с Тун'гримом",
+				["location"] = "Тун'грим Огневзор (Степи; |cffffff0057,30"..WHITE..")",
+				["level"] = 30,
+				["title"] = "Доспехи Жестокости",
+			},
+		},
+		["story"] = "Десять тысяч лет назад - во времена Войны Древних, могущественный полубог, Агамагган, вступил в битву против Пылающего Легиона. Огромный крепкий кабан пал в битве, но его действия помогли спасти Азерот от превращения в руины. Спустя некоторое время, в том, месте куда пролилась его кровь, из-под земли выросли толстые, покрытые шипами плети. Иглогривы - верившие, что они являются смертными потомками могучего бога, пришли занять эти места и охранять как святыню. Сердце этих шипастых колоний известно как Иглошкур. Огромные пространства Лабиринтов Иглошкурых были завоеваны старой каргой, Чарлгой Бритый Бок. Под ее рукой, иглогривы-шаманы начали атаковать племена соперников, также как и поселенцев Орды. Некоторые полагают, что Чарлга даже вела переговоры с агентами Плети - приравняв неожиданно ее племя к рангу нежити по каким-то коварным причинам.",
+		["name"] = "Лабиринты Иглошкурых",
+	},
+	[19] = {
+		[1] = {
+			[1] = {
+				["note"] = "Эта цепочка заданий начинается у брата Кроули в Штормграде - Собор Света (|cffffff0046,36"..WHITE..").",
+				["id"] = 1053,
+				["attain"] = 34,
+				["aim"] = "Убейте Верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Герода из Алого ордена и псаря Локси, после этого вернитесь с докладом к Ролею Благочестивому в Южнобережье.",
+				["prequest"] = "Брат Антон -> Путями Алого ордена",
+				["title"] = "Во имя Света!",
+				["location"] = "Ролей Благочестивый (Предгорья Хилсбрада - Южнобережье; |cffffff0051,58"..WHITE..")",
+				["level"] = 40,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Sword of Serenity",
+						["id"] = 6829,
+						["icon"] = "INV_Sword_27",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Bonebiter",
+						["id"] = 6830,
+						["icon"] = "INV_Axe_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Black Menace",
+						["id"] = 6831,
+						["icon"] = "INV_Sword_13",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Lorica",
+						["id"] = 11262,
+						["icon"] = "INV_Misc_Orb_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Книга лежит на полу на левой стороне коридоров, ведущих к Чародею Доану (|cffffff00[2]"..WHITE..").",
+				["id"] = 1050,
+				["attain"] = 28,
+				["aim"] = "Добудьте \"Мифологию Титанов\" из монастыря и принесите ее библиотекарю Мае Белокожке в Стальгорн.",
+				["title"] = "\"Мифология Титанов\"",
+				["location"] = "Библиотекарь Мае Белокожка (Стальгорн - Зал исследователей; |cffffff0074,12"..WHITE..")",
+				["level"] = 38,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Explorers' League Commendation",
+						["id"] = 7746,
+						["icon"] = "INV_Jewelry_Talisman_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Задание для магов. Вы найдете книгу в последнем коридоре ведущему к чародею Доану (|cffffff00[2]"..WHITE..").",
+				["id"] = 1951,
+				["attain"] = 30,
+				["aim"] = "Принесите книгу \"Обряды силы\" Табете в Пыльную трясину.",
+				["followup"] = "Магический жезл",
+				["prequest"] = "Волшебное слово",
+				["location"] = "Табета (Пылевые топи; |cffffff0046,57"..WHITE..")",
+				["level"] = 40,
+				["title"] = "Обряды силы",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Сердца Доблести можно выбить со всех мобов в Алом Монастыре, включая людей вне подземелья.",
+				["id"] = 1113,
+				["attain"] = 30,
+				["aim"] = "Мастер-аптекарь Фаранелл из Подгорода просит принести ему 20 сердец Доблести.",
+				["title"] = "Сердца Доблести",
+				["location"] = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; |cffffff0048,69"..WHITE..")",
+				["level"] = 33,
+				["prequest"] = "Груды гуано (|cffffff00[Лабиринты Иглошкурых]"..WHITE..")",
+			},
+			[2] = {
+				["note"] = "Вы найдете Верховного инквизитора Вайтмейн и Командира Могрейна из Алого ордена около |cffffff00[5]"..WHITE..", Герода около |cffffff00[3]"..WHITE.." и псаря Локси около |cffffff00[1]"..WHITE..".",
+				["id"] = 1048,
+				["attain"] = 33,
+				["aim"] = "Убейте Верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Герода из Алого ордена  и псаря Локси. Затем возвращайтесь к Вариматрасу в Подгород.",
+				["title"] = "В монастырь Алого ордена",
+				["location"] = "Вариматас (Подгород - Королевский квартал; |cffffff0056,92"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Sword of Omen",
+						["id"] = 6802,
+						["icon"] = "INV_Sword_19",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Prophetic Cane",
+						["id"] = 6803,
+						["icon"] = "INV_Staff_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Dragon's Blood Necklace",
+						["id"] = 10711,
+						["icon"] = "INV_Jewelry_Necklace_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете книгу в библиотечной секции Алого Монастыря. ВНИМАНИЕ! Нежить не может взять это задание.",
+				["id"] = 1049,
+				["attain"] = 28,
+				["aim"] = "Добудьте \"Компендиум павших\" из монастыря в Тирисфальских лесах и возвращайтесь к Ведуну Искателю Истины в Громовой Утес.",
+				["title"] = "\"Компендиум павших\"",
+				["location"] = "Ведун Искатель Истины (Громовой утес; |cffffff0034,47"..WHITE..")",
+				["level"] = 38,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Vile Protector",
+						["id"] = 7747,
+						["icon"] = "INV_Shield_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Forcestone Buckler",
+						["id"] = 17508,
+						["icon"] = "INV_Shield_02",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Omega Orb",
+						["id"] = 7749,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Цепочка начинается у Дорна Вольного Ловчего (Тысяча Игл; |cffffff0053,41"..WHITE.."). Вы можете найти книгу в Библиотеке Алого Монастыря.",
+				["id"] = 1160,
+				["attain"] = 25,
+				["aim"] = "Найдите книгу \"Истоки угрозы нежити\" и отнесите ее Парквелу Финталласу в Подгород.",
+				["followup"] = "Испытание знаний",
+				["prequest"] = "Испытание веры -> Испытание знаний",
+				["location"] = "Парквел Финталлас (Подгород - Район Фармацевтов; |cffffff0057,65"..WHITE..")",
+				["level"] = 36,
+				["title"] = "Испытание знаний",
+			},
+			[5] = {
+				["note"] = "Задание для магов. Вы найдете книгу в последнем коридоре ведущему к чародею Доану (|cffffff00[2]"..WHITE..").",
+				["id"] = 1951,
+				["attain"] = 30,
+				["aim"] = "Принесите книгу \"Обряды силы\" Табете в Пыльную трясину.",
+				["followup"] = "Магический жезл",
+				["prequest"] = "Волшебное слово",
+				["location"] = "Табета (Пылевые топи; |cffffff0046,57"..WHITE..")",
+				["level"] = 40,
+				["title"] = "Обряды силы",
+			},
+		},
+		["story"] = "Монастырь когда-то был гордым оплотом жречества Лордерона - центром обучения и просвящения. С появлением нежити Плети во время Третьей войны, мирный монастырь превратился в цитадель фанатичного Алого ордена. Рыцари ордена нетерпимы ко всем нечеловеческим расам, невзирая на союзы и принадлежности. Они верят что любой чужак - потенциальный носитель чумы нежити - и должны быть уничтожены. Судя по донесениям, любителям приключений, которые ходили в монастырь пришлось сражаться с командиром Алого ордена Могрейном, под рукой которого находится большой гарнизон фанатично преданных воинов. Онако настоящая хозяйка монастыря - это Верховный инквизитор Вайтмейн - грозная жрица, обладающая способностью воскрешать павших воинов для сражения во имя нее.",
+		["name"] = "SM: Библиотека",
+	},
+	[20] = {
+		[1] = {
+			[1] = {
+				["note"] = "Эта цепочка заданий начинается у брата Кроули в Штормграде - Собор Света (|cffffff0046,36"..WHITE..").",
+				["id"] = 1053,
+				["attain"] = 34,
+				["aim"] = "Убейте Верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Герода из Алого ордена и псаря Локси, после этого вернитесь с докладом к Ролею Благочестивому в Южнобережье.",
+				["prequest"] = "Брат Антон -> Путями Алого ордена",
+				["title"] = "Во имя Света!",
+				["location"] = "Ролей Благочестивый (Предгорья Хилсбрада - Южнобережье; |cffffff0051,58"..WHITE..")",
+				["level"] = 40,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Sword of Serenity",
+						["id"] = 6829,
+						["icon"] = "INV_Sword_27",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Bonebiter",
+						["id"] = 6830,
+						["icon"] = "INV_Axe_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Black Menace",
+						["id"] = 6831,
+						["icon"] = "INV_Sword_13",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Lorica",
+						["id"] = 11262,
+						["icon"] = "INV_Misc_Orb_01",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Сердца Доблести можно выбить со всех мобов в Алом Монастыре, включая людей вне подземелья.",
+				["id"] = 1113,
+				["attain"] = 30,
+				["aim"] = "Мастер-аптекарь Фаранелл из Подгорода просит принести ему 20 сердец Доблести.",
+				["title"] = "Сердца Доблести",
+				["location"] = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; |cffffff0048,69"..WHITE..")",
+				["level"] = 33,
+				["prequest"] = "Груды гуано (|cffffff00[Лабиринты Иглошкурых]"..WHITE..")",
+			},
+			[2] = {
+				["note"] = "Вы найдете Верховного инквизитора Вайтмейн и Командира Могрейна из Алого ордена около |cffffff00[5]"..WHITE..", Герода около |cffffff00[3]"..WHITE.." и псаря Локси около |cffffff00[1]"..WHITE..".",
+				["id"] = 1048,
+				["attain"] = 33,
+				["aim"] = "Убейте Верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Герода из Алого ордена  и псаря Локси. Затем возвращайтесь к Вариматрасу в Подгород.",
+				["title"] = "В монастырь Алого ордена",
+				["location"] = "Вариматас (Подгород - Королевский квартал; |cffffff0056,92"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Sword of Omen",
+						["id"] = 6802,
+						["icon"] = "INV_Sword_19",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Prophetic Cane",
+						["id"] = 6803,
+						["icon"] = "INV_Staff_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Dragon's Blood Necklace",
+						["id"] = 10711,
+						["icon"] = "INV_Jewelry_Necklace_02",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Монастырь когда-то был гордым оплотом жречества Лордерона - центром обучения и просвящения. С появлением нежити Плети во время Третьей войны, мирный монастырь превратился в цитадель фанатичного Алого ордена. Рыцари ордена нетерпимы ко всем нечеловеческим расам, невзирая на союзы и принадлежности. Они верят что любой чужак - потенциальный носитель чумы нежити - и должны быть уничтожены. Судя по донесениям, любителям приключений, которые ходили в монастырь пришлось сражаться с командиром Алого ордена Могрейном, под рукой которого находится большой гарнизон фанатично преданных воинов. Онако настоящая хозяйка монастыря - это Верховный инквизитор Вайтмейн - грозная жрица, обладающая способностью воскрешать павших воинов для сражения во имя нее.",
+		["name"] = "SM: Оружейная",
+	},
+	[21] = {
+		[1] = {
+			[1] = {
+				["note"] = "Эта цепочка заданий начинается у брата Кроули в Штормграде - Собор Света (|cffffff0046,36"..WHITE..").",
+				["id"] = 1053,
+				["attain"] = 34,
+				["aim"] = "Убейте Верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Герода из Алого ордена и псаря Локси, после этого вернитесь с докладом к Ролею Благочестивому в Южнобережье.",
+				["prequest"] = "Брат Антон -> Путями Алого ордена",
+				["title"] = "Во имя Света!",
+				["location"] = "Ролей Благочестивый (Предгорья Хилсбрада - Южнобережье; |cffffff0051,58"..WHITE..")",
+				["level"] = 40,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Sword of Serenity",
+						["id"] = 6829,
+						["icon"] = "INV_Sword_27",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.AXE,
+						["name"] = "Bonebiter",
+						["id"] = 6830,
+						["icon"] = "INV_Axe_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Black Menace",
+						["id"] = 6831,
+						["icon"] = "INV_Sword_13",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Lorica",
+						["id"] = 11262,
+						["icon"] = "INV_Misc_Orb_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "You can find Orb of Kaladus inside the second chamber, left from "..NORMAL.."[2]"..WHITE..".",
+				["id"] = 40233,
+				["attain"] = 30,
+				["aim"] = "Отправляйтесь в Алый монастырь и найдите Шар Каладуса, верните его и возвращайтесь, чтобы наблюдать за паладином Джанатосом в крепости Стража Скорби.",
+				["title"] = "Сфера Каладуса",
+				["location"] = "Watch Paladin Janathos (west of Swamp of Sorrows - Sorrowguard Keep)",
+				["level"] = 38,
+				["prequest"] = "Tales of the Past -> The Forgotten Tome -> Returning to Janathos",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Truthkeeper Mantle",
+						["id"] = 60316,
+						["icon"] = "INV_Shoulder_28",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Lightgraced Mallet",
+						["id"] = 60317,
+						["icon"] = "INV_Mace_06",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Sorrowguard Clutch",
+						["id"] = 60318,
+						["icon"] = "INV_Belt_11",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "",
+				["id"] = 40935,
+				["attain"] = 35,
+				["aim"] = "Discover the truth about the fate of High Inquisitor Fairbanks for Brother Elias at Shademore Tavern in Gilneas.",
+				["title"] = "Scarlet Corruption",
+				["location"] = "Brother Elias <Scarlet Crusade Emissary> (Gilneas - Ruins of Greyshire - Shademore Tavern "..NORMAL.."[33.6,54.1]"..WHITE..", 2nd floor.)",
+				["level"] = 44,
+				["prequest"] = "Allies Against Undeath",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Holy Sacrament",
+						["id"] = 61478,
+						["icon"] = "INV_Jewelry_Ring_23",
+						["quality"] = 2,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Сердца Доблести можно выбить со всех мобов в Алом Монастыре, включая людей вне подземелья.",
+				["id"] = 1113,
+				["attain"] = 30,
+				["aim"] = "Мастер-аптекарь Фаранелл из Подгорода просит принести ему 20 сердец Доблести.",
+				["title"] = "Сердца Доблести",
+				["location"] = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; |cffffff0048,69"..WHITE..")",
+				["level"] = 33,
+				["prequest"] = "Груды гуано (|cffffff00[Лабиринты Иглошкурых]"..WHITE..")",
+			},
+			[2] = {
+				["note"] = "Вы найдете Верховного инквизитора Вайтмейн и Командира Могрейна из Алого ордена около |cffffff00[5]"..WHITE..", Герода около |cffffff00[3]"..WHITE.." и псаря Локси около |cffffff00[1]"..WHITE..".",
+				["id"] = 1048,
+				["attain"] = 33,
+				["aim"] = "Убейте Верховного инквизитора Вайтмейн, командира Могрейна из Алого ордена, воителя Герода из Алого ордена  и псаря Локси. Затем возвращайтесь к Вариматрасу в Подгород.",
+				["title"] = "В монастырь Алого ордена",
+				["location"] = "Вариматас (Подгород - Королевский квартал; |cffffff0056,92"..WHITE..")",
+				["level"] = 42,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Sword of Omen",
+						["id"] = 6802,
+						["icon"] = "INV_Sword_19",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Prophetic Cane",
+						["id"] = 6803,
+						["icon"] = "INV_Staff_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Dragon's Blood Necklace",
+						["id"] = 10711,
+						["icon"] = "INV_Jewelry_Necklace_02",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Монастырь когда-то был гордым оплотом жречества Лордерона - центром обучения и просвящения. С появлением нежити Плети во время Третьей войны, мирный монастырь превратился в цитадель фанатичного Алого ордена. Рыцари ордена нетерпимы ко всем нечеловеческим расам, невзирая на союзы и принадлежности. Они верят что любой чужак - потенциальный носитель чумы нежити - и должны быть уничтожены. Судя по донесениям, любителям приключений, которые ходили в монастырь пришлось сражаться с командиром Алого ордена Могрейном, под рукой которого находится большой гарнизон фанатично преданных воинов. Онако настоящая хозяйка монастыря - это Верховный инквизитор Вайтмейн - грозная жрица, обладающая способностью воскрешать павших воинов для сражения во имя нее.",
+		["name"] = "SM: Собор",
+	},
+	[22] = {
+		[1] = {
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Сердца Доблести можно выбить со всех мобов в Алом Монастыре, включая людей вне подземелья.",
+				["id"] = 1113,
+				["attain"] = 30,
+				["aim"] = "Мастер-аптекарь Фаранелл из Подгорода просит принести ему 20 сердец Доблести.",
+				["title"] = "Сердца Доблести",
+				["location"] = "Опытный аптекарь Фаранелл (Подгород - Район Фармацевтов; |cffffff0048,69"..WHITE..")",
+				["level"] = 33,
+				["prequest"] = "Груды гуано (|cffffff00[Лабиринты Иглошкурых]"..WHITE..")",
+			},
+			[2] = {
+				["note"] = "You can find Vorrel Sengutz at the beginning of the Graveyard section of the Scarlet Monastery. Nancy Vishas, who drops the ring needed for this quest, can be found in a house in the Альтеракские горы (|cffffff0031,32"..WHITE..").",
+				["id"] = 1051,
+				["attain"] = 25,
+				["aim"] = "Верните обручальное кольцо Воррела Сенгутца Монике Сенгутц в Мельнице Таррен.",
+				["title"] = "Месть Воррела",
+				["location"] = "Vorrel Sengutz (Scarlet Monastery - Graveyard; |cffffff00[1]"..WHITE..")",
+				["level"] = 33,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Vorrel's Boots",
+						["id"] = 7751,
+						["icon"] = "INV_Boots_03",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Mantle of Woe",
+						["id"] = 7750,
+						["icon"] = "INV_Shoulder_23",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.BACK,
+						["name"] = "Grimsteel Cape",
+						["id"] = 4643,
+						["icon"] = "INV_Misc_Cape_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "You can finish this quest outside.\nQuestline starts at Innkeeper Norman <Innkeeper> in Undercity with quest 'Scarlet with Rage'.",
+				["id"] = 60116,
+				["attain"] = 27,
+				["aim"] = "Уничтожьте Алые силы за пределами монастыря.",
+				["title"] = "Покрась розы в красный цвет",
+				["location"] = "Deathguard Burgess (Tirisfal Glades - Brill; "..NORMAL.."61,52"..WHITE..")",
+				["level"] = 29,
+				["prequest"] = "Scarlet with Rage",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.AXE,
+						["name"] = "Nathrezim Wedge",
+						["id"] = 51832,
+						["icon"] = "INV_Axe_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..",Staff",
+						["name"] = "Femur Staff",
+						["id"] = 51833,
+						["icon"] = "INV_Staff_22",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Scarlet Pillar",
+						["id"] = 51834,
+						["icon"] = "INV_Hammer_07",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Монастырь когда-то был гордым оплотом жречества Лордерона - центром обучения и просвящения. С появлением нежити Плети во время Третьей войны, мирный монастырь превратился в цитадель фанатичного Алого ордена. Рыцари ордена нетерпимы ко всем нечеловеческим расам, невзирая на союзы и принадлежности. Они верят что любой чужак - потенциальный носитель чумы нежити - и должны быть уничтожены. Судя по донесениям, любителям приключений, которые ходили в монастырь пришлось сражаться с командиром Алого ордена Могрейном, под рукой которого находится большой гарнизон фанатично преданных воинов. Онако настоящая хозяйка монастыря - это Верховный инквизитор Вайтмейн - грозная жрица, обладающая способностью воскрешать павших воинов для сражения во имя нее.",
+		["name"] = "SM: Кладбище",
+	},
+	[23] = {
+		[1] = {
+			[1] = {
+				["note"] = "Зачумленные детеныши дракона находятся по пути к Громоклину в большой комнате.",
+				["id"] = 5529,
+				["attain"] = 55,
+				["aim"] = "Убейте 20 зачумленных детенышей дракона, затем возвращайтесь к Бетине Биггльцинк в Часовню Последней Надежды.",
+				["title"] = "Зачумленные детеныши дракона",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 58,
+				["followup"] = "Здоровая чешуя дракона",
+			},
+			[2] = {
+				["note"] = "Здоровая чешуя дракона добывается с зачумленных детенышей дракона (8% шанс). Вы найдете Бетину Биггльцинк в Восточные Чумные земли - Часовня Последней Надежды (|cffffff0081,59"..WHITE..").",
+				["id"] = 5582,
+				["attain"] = 55,
+				["aim"] = "Отнесите здоровую чешую дракона Бетине Биггльцинк в Часовню Последней Надежды в Восточные Чумные земли.",
+				["title"] = "Здоровая чешуя дракона",
+				["location"] = "Здоровая чешуя дракона (случайно добывается в Некроситете)",
+				["level"] = 58,
+				["prequest"] = "Зачумленные детеныши дракона",
+			},
+			[3] = {
+				["note"] = "Вы найдете доктора Теолена Крастинова, останки Евы и останки Люсьена Саркофф около |cffffff00[9]"..WHITE..".",
+				["id"] = 5382,
+				["attain"] = 55,
+				["aim"] = "Найдите в Некроситете доктора Теолена Крастинова. Убейте его, затем сожгите останки Евы и Люсьена Саркофф. Выполнив задание, возвращайтесь к Еве Саркофф.",
+				["title"] = "Доктор Теолен Крастинов – Мясник",
+				["location"] = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Мешок ужасов Крастинова",
+			},
+			[4] = {
+				["note"] = "Вы найдете Джандис Баров около |cffffff00[3]"..WHITE..".",
+				["id"] = 5515,
+				["attain"] = 55,
+				["aim"] = "Найдите в Некроситете Джандис Баров и уничтожьте ее. Заберите мешок ужасов Крастинова. Отнесите мешок Еве Саркофф.",
+				["followup"] = "Киртонос Глашатай",
+				["prequest"] = "Доктор Теолен Крастинов – Мясник",
+				["location"] = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Мешок ужасов Крастинова",
+			},
+			[5] = {
+				["note"] = "Жаровня находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 5384,
+				["attain"] = 55,
+				["aim"] = "Вернитесь в Некроситет с кровью невинных. Найдите балкон и вылейте кровь в жаровню. На зов явится Киртонос.$B$BСражайтесь как герой, не сдавайтесь! Уничтожьте Киртоноса и возвращайтесь к Еве Саркофф.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Spectral Essence",
+						["id"] = 13544,
+						["icon"] = "INV_Misc_Orb_05",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Penelope's Rose",
+						["id"] = 15805,
+						["icon"] = "INV_Misc_Flower_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Mirah's Song",
+						["id"] = 15806,
+						["icon"] = "INV_Sword_34",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Киртонос Глашатай",
+				["prequest"] = "Мешок ужасов Крастинова",
+				["location"] = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Рас Ледяной Шепот – человек",
+			},
+			[6] = {
+				["note"] = "Вы сможете найти Раса Леденой Шепот около |cffffff00[7]"..WHITE..".",
+				["id"] = 5466,
+				["attain"] = 57,
+				["aim"] = "Отыщите в Некроситете Раса Снегошепота. Найдя его, воспользуйтесь Книгой Души против его посмертного облика. Если удастся превратить Раса в смертного, убейте его и заберите человеческую голову Раса Снегошепота. Отнесите голову мировому судье Мардуку.",
+				["prequest"] = "Рас Ледяной Шепот – человек - >  Книга Души",
+				["title"] = "Рас Снегошепот – лич",
+				["location"] = "Мировой судья Мардук (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Darrowshire Strongguard",
+						["id"] = 14002,
+						["icon"] = "INV_Shield_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Warblade of Caer Darrow",
+						["id"] = 13982,
+						["icon"] = "INV_Sword_39",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Crown of Caer Darrow",
+						["id"] = 13986,
+						["icon"] = "INV_Crown_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Darrowspike",
+						["id"] = 13984,
+						["icon"] = "INV_Weapon_ShortBlade_21",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете Документы на Каэр Дарроу около |cffffff00[12]"..WHITE..", Документы на Брилл около |cffffff00[7]"..WHITE..", Документы на мельницу Таррен около |cffffff00[4]"..WHITE.." и Документы на Южнобережье около |cffffff00[1]"..WHITE..".",
+				["id"] = 5343,
+				["attain"] = 52,
+				["aim"] = "Отправляйтесь в Некроситет и добудьте сокровище семьи Баровых. Оно состоит из четырех документов: на Каэр Дарроу, на Брилл, на Мельницу Таррен и на Южнобережье. После выполнения задания вернитесь к Велдону Барову.",
+				["title"] = "Сокровище Баровых",
+				["location"] = "Велдон Баров (Западные Чумные земли - Лагерь Промозглого Ветра; |cffffff0043,83"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Последний из Баровых",
+			},
+			[8] = {
+				["note"] = "Сущность детеныша дракона начинается у Тинки Кипеллера (Пылающие степи - Пламенеющий стяг; |cffffff0065,23"..WHITE.."). Демонстрационная комната находится около |cffffff00[6]"..WHITE..".",
+				["id"] = 4771,
+				["attain"] = 57,
+				["aim"] = "Отнесите \"Рассветный гамбит\" в Демонстрационную комнату в Некроситете. Уничтожьте Вектуса и возвращайтесь к Бетине Биггльцинк.",
+				["prequest"] = "Сущность детеныша дракона - > Бетина Биггльцинк",
+				["title"] = "Рассветный гамбит",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.AXE,
+						["name"] = "Windreaper",
+						["id"] = 15853,
+						["icon"] = "INV_Axe_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Dancing Sliver",
+						["id"] = 15854,
+						["icon"] = "INV_Staff_07",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для чернокнижников: Вы найдете алхимическую лабораторию около |cffffff00[7]"..WHITE..".",
+				["id"] = 7629,
+				["attain"] = 60,
+				["aim"] = "Отнесите беса в бутылке в алхимическую лабораторию Некроситета. После создания пергамента верните бутылку Горзиеки Дикоглазу.",
+				["followup"] = "Зоротианский конь погибели (|cffffff00Забытый город (Запад)"..WHITE..")",
+				["prequest"] = "Мор'зул Вестник Крови - > Зоротианская звездная пыль",
+				["location"] = "Горзиеки Дикоглаз (Пылающие степи; |cffffff0012,31"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Доставка беса",
+			},
+			[10] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nКормок вызывается около |cffffff00[7]"..WHITE..".",
+				["id"] = 8969,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Кормока и убить его. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[11] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nКормок вызывается около |cffffff00[7]"..WHITE..".",
+				["id"] = 8992,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Кормока и убить его. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[12] = {
+				["note"] = "Questline starts at Craftsman Wilhelm (Eastern Plaguelands - Light's Hope Chapel) with quest 'A New Rune-Frontier'.\nYou will get this reward after finishing the last quest in the questline.",
+				["id"] = 40237,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Схоломанс и найдите книгу \"Призыв огня и повелевание\" для Страхада Фарсана в \"Рэтчете\".",
+				["title"] = "Одолжение для Фарсана",
+				["prequest"] = "A New Rune-Frontier -> The Secrets of Darkforging -> The Secrets of Darkforging",
+				["location"] = "Strahad Farsan (The Barrens - Ratchet; "..NORMAL.."62.6,35.5"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Tempered Runeblade",
+						["id"] = 81060,
+						["icon"] = "INV_Sword_02",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "A Meeting With The Dreadlord",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Зачумленные детеныши дракона находятся по пути к Громоклину в большой комнате.",
+				["id"] = 5529,
+				["attain"] = 55,
+				["aim"] = "Убейте 20 зачумленных детенышей дракона, затем возвращайтесь к Бетине Биггльцинк в Часовню Последней Надежды.",
+				["title"] = "Зачумленные детеныши дракона",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 58,
+				["followup"] = "Здоровая чешуя дракона",
+			},
+			[2] = {
+				["note"] = "Здоровая чешуя дракона добывается с зачумленных детенышей дракона (8% шанс). Вы найдете Бетину Биггльцинк в Восточные Чумные земли - Часовня Последней Надежды (|cffffff0081,59"..WHITE..").",
+				["id"] = 5582,
+				["attain"] = 55,
+				["aim"] = "Отнесите здоровую чешую дракона Бетине Биггльцинк в Часовню Последней Надежды в Восточные Чумные земли.",
+				["title"] = "Здоровая чешуя дракона",
+				["location"] = "Здоровая чешуя дракона (случайно добывается в Некроситете)",
+				["level"] = 58,
+				["prequest"] = "Зачумленные детеныши дракона",
+			},
+			[3] = {
+				["note"] = "Вы найдете доктора Теолена Крастинова, останки Евы и останки Люсьена Саркофф около |cffffff00[9]"..WHITE..".",
+				["id"] = 5382,
+				["attain"] = 55,
+				["aim"] = "Найдите в Некроситете доктора Теолена Крастинова. Убейте его, затем сожгите останки Евы и Люсьена Саркофф. Выполнив задание, возвращайтесь к Еве Саркофф.",
+				["title"] = "Доктор Теолен Крастинов – Мясник",
+				["location"] = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Мешок ужасов Крастинова",
+			},
+			[4] = {
+				["note"] = "Вы найдете Джандис Баров около |cffffff00[3]"..WHITE..".",
+				["id"] = 5515,
+				["attain"] = 55,
+				["aim"] = "Найдите в Некроситете Джандис Баров и уничтожьте ее. Заберите мешок ужасов Крастинова. Отнесите мешок Еве Саркофф.",
+				["followup"] = "Киртонос Глашатай",
+				["prequest"] = "Доктор Теолен Крастинов – Мясник",
+				["location"] = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Мешок ужасов Крастинова",
+			},
+			[5] = {
+				["note"] = "Жаровня находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 5384,
+				["attain"] = 55,
+				["aim"] = "Вернитесь в Некроситет с кровью невинных. Найдите балкон и вылейте кровь в жаровню. На зов явится Киртонос.$B$BСражайтесь как герой, не сдавайтесь! Уничтожьте Киртоноса и возвращайтесь к Еве Саркофф.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Spectral Essence",
+						["id"] = 13544,
+						["icon"] = "INV_Misc_Orb_05",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Penelope's Rose",
+						["id"] = 15805,
+						["icon"] = "INV_Misc_Flower_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Mirah's Song",
+						["id"] = 15806,
+						["icon"] = "INV_Sword_34",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Киртонос Глашатай",
+				["prequest"] = "Мешок ужасов Крастинова",
+				["location"] = "Ева Саркофф (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Рас Ледяной Шепот – человек",
+			},
+			[6] = {
+				["note"] = "Вы сможете найти Раса Леденой Шепот около |cffffff00[7]"..WHITE..".",
+				["id"] = 5466,
+				["attain"] = 57,
+				["aim"] = "Отыщите в Некроситете Раса Снегошепота. Найдя его, воспользуйтесь Книгой Души против его посмертного облика. Если удастся превратить Раса в смертного, убейте его и заберите человеческую голову Раса Снегошепота. Отнесите голову мировому судье Мардуку.",
+				["prequest"] = "Рас Ледяной Шепот – человек - >  Книга Души",
+				["title"] = "Рас Снегошепот – лич",
+				["location"] = "Мировой судья Мардук (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Darrowshire Strongguard",
+						["id"] = 14002,
+						["icon"] = "INV_Shield_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Warblade of Caer Darrow",
+						["id"] = 13982,
+						["icon"] = "INV_Sword_39",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Crown of Caer Darrow",
+						["id"] = 13986,
+						["icon"] = "INV_Crown_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Darrowspike",
+						["id"] = 13984,
+						["icon"] = "INV_Weapon_ShortBlade_21",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете Документы на Каэр Дарроу около |cffffff00[12]"..WHITE..", Документы на Брилл около |cffffff00[7]"..WHITE..", Документы на мельницу Таррен около |cffffff00[4]"..WHITE.." и Документы на Южнобережье около |cffffff00[1]"..WHITE..".",
+				["id"] = 5341,
+				["attain"] = 52,
+				["aim"] = "Отправляйтесь в Некроситет и добудьте сокровище семьи Баровых. Оно состоит из четырех документов: на Каэр Дарроу, на Брилл, на Мельницу Таррен и на Южнобережье. После выполнения задания вернитесь к Алексию Барову.",
+				["title"] = "Сокровище Баровых",
+				["location"] = "Алексий Баров (Западные Чумные земли; |cffffff0028,57"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Последний из Баровых",
+			},
+			[8] = {
+				["note"] = "Сущность детеныша дракона начинается у Тинки Кипеллера (Пылающие степи - Пламенеющий стяг; |cffffff0065,23"..WHITE.."). Демонстрационная комната находится около |cffffff00[6]"..WHITE..".",
+				["id"] = 4771,
+				["attain"] = 57,
+				["aim"] = "Отнесите \"Рассветный гамбит\" в Демонстрационную комнату в Некроситете. Уничтожьте Вектуса и возвращайтесь к Бетине Биггльцинк.",
+				["prequest"] = "Сущность детеныша дракона - > Бетина Биггльцинк",
+				["title"] = "Рассветный гамбит",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.AXE,
+						["name"] = "Windreaper",
+						["id"] = 15853,
+						["icon"] = "INV_Axe_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Dancing Sliver",
+						["id"] = 15854,
+						["icon"] = "INV_Staff_07",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для чернокнижников: Вы найдете алхимическую лабораторию около |cffffff00[7]"..WHITE..".",
+				["id"] = 7629,
+				["attain"] = 60,
+				["aim"] = "Отнесите беса в бутылке в алхимическую лабораторию Некроситета. После создания пергамента верните бутылку Горзиеки Дикоглазу.",
+				["followup"] = "Зоротианский конь погибели (|cffffff00Забытый город (Запад)"..WHITE..")",
+				["prequest"] = "Мор'зул Вестник Крови - > Зоротианская звездная пыль",
+				["location"] = "Горзиеки Дикоглаз (Пылающие степи; |cffffff0012,31"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Доставка беса",
+			},
+			[10] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nКормок вызывается около |cffffff00[7]"..WHITE..".",
+				["id"] = 8969,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Кормока и убить его. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[11] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nКормок вызывается около |cffffff00[7]"..WHITE..".",
+				["id"] = 8992,
+				["attain"] = 58,
+				["aim"] = "С помощью жаровни Призыва вызвать дух Кормока и убить его. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[12] = {
+				["note"] = "Questline starts at Craftsman Wilhelm (Eastern Plaguelands - Light's Hope Chapel) with quest 'A New Rune-Frontier'.\nYou will get this reward after finishing the last quest in the questline.",
+				["id"] = 40237,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Схоломанс и найдите книгу \"Призыв огня и повелевание\" для Страхада Фарсана в \"Рэтчете\".",
+				["title"] = "Одолжение для Фарсана",
+				["prequest"] = "A New Rune-Frontier -> The Secrets of Darkforging -> The Secrets of Darkforging",
+				["location"] = "Strahad Farsan (The Barrens - Ratchet; "..NORMAL.."62.6,35.5"..WHITE..")",
+				["level"] = 58,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Tempered Runeblade",
+						["id"] = 81060,
+						["icon"] = "INV_Sword_02",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "A Meeting With The Dreadlord",
+			},
+		},
+		["story"] = "Некроситет разместился в серии гробниц, лежащих под развалинами крепости Каэр Дарроу. Когда-то принадлежавший знатной семье Баровых, Каэр Дарроу превратился в руины во время Второй войны. Так как колдун Кель'тузед вербовал последователей своего Культа Проклятых, он часто обещал бессмертие в обмен на служение Королю-личу. Семья Баровых поддалась харизматичному влиянию Кель'тузеда и подарила крепость и ее гробницы Плети. После этого культисты убили Баровых и превратили древние гробницы в школу некромантов, известную как Некроситет. Хотя Кель'тузеда больше нет в гробницах, преданные культисты и преподаватели все еще там. Могущественный лич, Рас Снегошепот, руководит охраной и следит за территорией во имя Плети - а смертный некромант, Темный магистр Гандлинг, выступает в роли коварного главы школы.",
+		["name"] = "Некроситет",
+	},
+	[24] = {
+		[1] = {
+			[1] = {
+				["note"] = "Задание для паладинов: Чтобы увидеть заметки щелкните на |cffffff00[Информация: Испытание доблести]"..WHITE..".",
+				["id"] = 1654,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Verigan's Fist",
+						["id"] = 6953,
+						["icon"] = "INV_Hammer_05",
+						["quality"] = 3,
+					},
+				},
+				["aim"] = "Возьмите список Джордана, добудьте немного древесины белокаменного дуба, партию очищенной руды Бэйлора, кузнечный молот Джордана и самоцвет Кора и отдайте их Джордану Стилвеллу в Стальгорне.",
+				["attain"] = 20,
+				["followup"] = "Испытание доблести",
+				["title"] = "Испытание доблести",
+				["location"] = "Джордан Стилвелл (Дун Морог - Вход в Стальгорн; |cffffff0052,36"..WHITE..")",
+				["level"] = 22,
+				["pages"] = {
+					[1] = "Только паладины могут получить это задание!\n\n1. Вы получите древесину белокаменного дуба у гоблинов-лесорубов в |cffffff00[Мертвые копи]"..WHITE.." около |cffffff00[3]"..WHITE..".\n\n2. Для получения партии очищенной руды Бэйлора вы должны поговорить с Бэйлором Каменной Дланью (Озеро Модан - Телсамар; |cffffff0035,44"..WHITE.."). Он даст вам задание 'Партия руды Бэйлора'. Вы найдете руду Джордана за деревом около |cffffff0071,21"..WHITE.."\n\n3. Вы получите кузнечный молот Джордана в |cffffff00[Крепость Темного Клыка]"..WHITE.." около |cffffff00[3]"..WHITE..".\n\n4. Для получения самоцвета Кора Вам нужно пойти к Тандрису Ветропряду (Темные берега - Аубердин; |cffffff0037,40"..WHITE..") и выполнить задание 'Поиск самоцвета Кора'. Для этого задания, вам нужно убивать Провидзев и Жриц Непроглядной пучины перед |cffffff00[Непроглядная пучина]"..WHITE..". С них добывается Оскверненный самоцвет Кора. Тандрис Ветропряд очистит его для Вас.",
+				},
+				["prequest"] = "Фолиант Отваги -> Испытание доблести",
+			},
+			[2] = {
+				["note"] = "Задание для чернокнижников: Вы возьмете 3 фрагмента Соран'рука с Сумеречных Прислужников в |cffffff00[Непроглядная пучина]"..WHITE..". Вы возьмете большой фрагмент Соран'рука в |cffffff00[Крепость Темного Клыка]"..WHITE.." у Темных Душ Темного Клыка.",
+				["id"] = 1740,
+				["attain"] = 20,
+				["aim"] = "Соберите 3 фрагмента Соран'рука и 1 большой фрагмент Соран'рука и принесите их Доану Кархану в Степи.",
+				["title"] = "Шар Соран'рука",
+				["location"] = "Доан Кархан (Степи; |cffffff0049,57"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Soran'ruk",
+						["id"] = 6898,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of Soran'ruk",
+						["id"] = 15109,
+						["icon"] = "INV_Staff_09",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "",
+				["id"] = 60108,
+				["attain"] = 22,
+				["aim"] = "Верховный чародей Андромат поручил вам убить архимага Аругала. Вернитесь к нему, когда закончите.",
+				["title"] = "Безумие Аругала",
+				["location"] = "High Sorcerer Andromath (Stormwind - The Mage Quarter, Mage Tower)",
+				["level"] = 27,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Signet of Arugal",
+						["id"] = 51805,
+						["icon"] = "INV_Jewelry_Ring_24",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Sorcerer Ashcrombe is in the cage "..NORMAL.."[1]"..WHITE..".",
+				["id"] = 60109,
+				["attain"] = 22,
+				["aim"] = "Верховный чародей Андромат хочет, чтобы вы отправились в крепость Теневого Клыка в Серебряно-Сосновом лесу и выяснили, что случилось с чародеем Эшкромбом.",
+				["title"] = "Пропавший колдун",
+				["location"] = "High Sorcerer Andromath (Stormwind - The Mage Quarter, Mage Tower)",
+				["level"] = 24,
+			},
+			[5] = {
+				["note"] = "Shadowfang Blood drops from worgens inside the dungeon.",
+				["id"] = 41378,
+				["attain"] = 60,
+				["aim"] = "Gather worgen blood for Fandral Staghelm. He requires blood samples from Karazhan, Gilneas City and Shadowfang Keep.",
+				["title"] = "Blood of Vorgendor",
+				["prequest"] = "Scythe of the Goddess",
+				["location"] = "Arch Druid Fandral Staghelm (Darnassus - Cenarion Enclave "..NORMAL.."35,10"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "Wolfblood",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы найдете стража смерти Адаманта около |cffffff00[1]"..WHITE..". Страж смерти Винсент находится справа когда вы войдете во внутренний двор около |cffffff00[3]"..WHITE..".",
+				["id"] = 1098,
+				["attain"] = 18,
+				["aim"] = "Найдите стражей смерти Адаманта и Винсента.",
+				["title"] = "Пропавшие стражи смерти",
+				["location"] = "Верховный палач Хадрек (Серебряный бор - Гробница; |cffffff0043,40"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Ghostly Mantle",
+						["id"] = 3324,
+						["icon"] = "INV_Shoulder_09",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы найдете книгу около |cffffff00[11]"..WHITE.." слева, когда вы войдете в комнату.",
+				["id"] = 1013,
+				["attain"] = 16,
+				["aim"] = "Принесите книгу Ура хранителю Бел'дугуру в Район Фармацевтов в Подгород.",
+				["title"] = "Книга Ура",
+				["location"] = "Хранитель Бел'дугур (Подгород - Район Фармацевтов; |cffffff0053,54"..WHITE..")",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Grizzled Boots",
+						["id"] = 6335,
+						["icon"] = "INV_Boots_03",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Steel-clasped Bracers",
+						["id"] = 4534,
+						["icon"] = "INV_Bracer_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете Архимага Аругала около |cffffff00[13]"..WHITE..".",
+				["id"] = 1014,
+				["attain"] = 18,
+				["aim"] = "Убейте Аругала и принесите его голову Далару Ткачу Рассвета в Гробницу.",
+				["title"] = "Смерть Аругалу!",
+				["location"] = "Далар Ткач Рассвета (Серебряный бор - Гробница; |cffffff0044,39"..WHITE..")",
+				["level"] = 27,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Seal of Sylvanas",
+						["id"] = 6414,
+						["icon"] = "INV_Jewelry_Ring_15",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Задание для чернокнижников: Вы возьмете 3 фрагмента Соран'рука с Сумеречных Прислужников в |cffffff00[Непроглядная пучина]"..WHITE..". Вы возьмете большой фрагмент Соран'рука в |cffffff00[Крепость Темного Клыка]"..WHITE.." у Темных Душ Темного Клыка.",
+				["id"] = 1740,
+				["attain"] = 20,
+				["aim"] = "Соберите 3 фрагмента Соран'рука и 1 большой фрагмент Соран'рука и принесите их Доану Кархану в Степи.",
+				["title"] = "Шар Соран'рука",
+				["location"] = "Доан Кархан (Степи; |cffffff0049,57"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Orb of Soran'ruk",
+						["id"] = 6898,
+						["icon"] = "INV_Misc_Orb_03",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of Soran'ruk",
+						["id"] = 15109,
+						["icon"] = "INV_Staff_09",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "You find Melenas' Belongings at "..NORMAL.."[10]"..WHITE..", a box on the floor between two left book shelves .\nQuestline starts at Duke Nargelas (Tirisfal Glades - Glenshire, west of Tirisfal Glades).\nQuest reward you will get after finishing next quest.",
+				["id"] = 40281,
+				["attain"] = 15,
+				["aim"] = "Найдите вещи Меленас в библиотеке замка Теневого Клыка и верните их Пирсу Шеклтону в Подземном городе.",
+				["title"] = "В Пасть",
+				["prequest"] = "Darlthos Heritage -> A Different Type of Lock -> Ways of Magic",
+				["location"] = "Pierce Shackleton (Undercity - Magic Quarter "..NORMAL.."85.4,13.6"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Sword of Laneron",
+						["id"] = 60392,
+						["icon"] = "INV_Sword_23",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Shield of Mathela",
+						["id"] = 60393,
+						["icon"] = "INV_Shield_05",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Darlthos Legacy",
+			},
+			[6] = {
+				["note"] = "Prelate Ironmane is at "..NORMAL.."[13]"..WHITE..".",
+				["id"] = 41366,
+				["attain"] = 16,
+				["aim"] = "Slay Prelate Ironmane and return to Father Brightcopf in Glenshire.",
+				["title"] = "Too Late to Prelate",
+				["location"] = "Father Brightcopf (Tirisfal Glades - Glenshire "..NORMAL.."20.9,68.7"..WHITE..")",
+				["level"] = 22,
+				["prequest"] = "To Guard the Undead -> To Aid Brightcopf",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Necklace of Redemption",
+						["id"] = 70225,
+						["icon"] = "INV_Belt_18",
+						["quality"] = 2,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Shadowfang Blood drops from worgens inside the dungeon.",
+				["id"] = 41381,
+				["attain"] = 60,
+				["aim"] = "Gather worgen blood for Magatha Grimtotem. She requires blood samples from Karazhan, Gilneas City and Shadowfang Keep.",
+				["title"] = "The Wolf, the Crone and the Scythe",
+				["prequest"] = "Scythe of the Goddess",
+				["location"] = "Magatha Grimtotem (Thunder Bluff - Elder Rise "..NORMAL.."70,31"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "Wolfblood",
+			},
+		},
+		["story"] = "Во время Третьей Войны, волшебники Кирин Тора сражались против армии нежити Плети. Когда волшебники Даларана погибли в бою, они смогли возродиться после - прибавив свою былую мощь к растущей Плети. Недовольный недостатком прогресса (и вопреки советам его соратников) Архимаг выбрал Аругала для призыва внемировых сущностей, чтобы подкрепить уменьшающиеся силы Даларана. Призыв Аругала привел изголодавшихся воргенов в мир Азерота. Дикие зверолюди устроили резню не только Плети, но быстро принялись и за самих волшебников. Воргены осадили крепость дворянина, барона Сребролена. Расположенная на небольшой деревушкой Погребальных костров, крепость быстро была ввергнута во тьму и разруху. Помешавшись из-за чувства вины, Аругал усыновил воргенов как детей и уединился в заново окрещенной 'Крепости Темного Клыка'. Говорят, он все еще живет там, защищаемый своим огромным питомцем, Фенрусом - и преследуемый мстительным духом барона Сребролена.",
+		["name"] = "Крепость Темного Клыка",
+	},
+	[25] = {
+		[1] = {
+			[1] = {
+				["note"] = "Сбольшинства существ в Стратхольме падают препараты чумной плоти, но шанс очень мал.",
+				["id"] = 5212,
+				["attain"] = 55,
+				["aim"] = "Принесите 20 препаратов чумной плоти из Стратхольма Бетине Биггльцинк. Предположительно, любая тварь из Стратхольма сойдет за препарат.",
+				["title"] = "Плоть не лжет",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Вирус чумы",
+			},
+			[2] = {
+				["note"] = "Сведения о плети находятся в одной из 3 Башен, которые вы найдете около |cffffff00[15]"..WHITE..", |cffffff00[16]"..WHITE.." и |cffffff00[17]"..WHITE..".",
+				["id"] = 5213,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Стратхольм и исследуйте зиккураты. Доставьте сведения о Плети Бетине Биггльцинк.",
+				["prequest"] = "Плоть не лжет",
+				["title"] = "Вирус чумы",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Seal of the Dawn",
+						["id"] = 13209,
+						["icon"] = "INV_Misc_ArmorKit_18",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Rune of the Dawn",
+						["id"] = 19812,
+						["icon"] = "INV_Misc_Rune_06",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете святую воду в ящиках по всему Стратхольму. При открытии некоторых появятся насекомые и атакуют Вас.",
+				["id"] = 5243,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь на север, в Стратхольм. Обыщите брошенные ящики с припасами и соберите 5 мер святой воды Стратхольма. Возвращайтесь к Леониду Бартоломею Чтимому, как только воды будет достаточно.",
+				["title"] = "Святая вода",
+				["location"] = "Леонид Барталомей Чтимый (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0080,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Superior Healing Potion",
+						["id"] = 3928,
+						["count"] = 5,
+						["icon"] = "INV_Potion_53",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Greater Mana Potion",
+						["id"] = 6149,
+						["count"] = 5,
+						["icon"] = "INV_Potion_73",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Crown of the Penitent",
+						["id"] = 13216,
+						["icon"] = "INV_Helmet_06",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.RING,
+						["name"] = "Band of the Penitent",
+						["id"] = 13217,
+						["icon"] = "INV_Jewelry_Ring_30",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Вы найдете табачную лавку около |cffffff00[1]"..WHITE..". Фрас Сиаби появится когда вы откроете коробку.",
+				["id"] = 5214,
+				["attain"] = 55,
+				["aim"] = "Найдите табачную лавку Фраса Сиаби в Стратхольме, отыщите в ней пачку лучшего табака Сиаби и принесите ее Дымку ЛаРу.",
+				["title"] = "Великий Фрас Сиаби",
+				["location"] = "Дымок ЛаРу (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0080,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Smokey's Lighter",
+						["id"] = 13171,
+						["icon"] = "Spell_Fire_SearingTotem",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы возьмете предшествующее задание у управляющего Алена (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0079,63"..WHITE.."). Призраки и неупокоенные бродят по улицам Стратхольма.",
+				["id"] = 5282,
+				["attain"] = 55,
+				["aim"] = "Стреляйте в призраков и неупокоенных на улицах Стратхольма из излучателя Эгана. Когда душа вырвется из призрачной оболочки, выстрелите в нее еще раз, и она обретет свободу.$B$BОсвободите 15 неупокоенных душ и возвращайтесь к Эгану.",
+				["prequest"] = "Мятущиеся души",
+				["title"] = "Мятущиеся души",
+				["location"] = "Эган (Восточные Чумные земли; |cffffff0014,33"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Testament of Hope",
+						["id"] = 13315,
+						["icon"] = "INV_Misc_Book_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Вы возьмете предшествующее задание у Тириона Фордринга (Западные Чумные земли; |cffffff007,43"..WHITE.."). Вы сможете найти картину около |cffffff00[10]"..WHITE..".",
+				["id"] = 5848,
+				["attain"] = 52,
+				["aim"] = "Отправляйтесь в Статхольм в северную часть Чумных земель. Найдите в Бастионе Алого ордена картину \"Символ семейной любви\", спрятанную за другой, изображающей две луны нашего мира.$b$bОтнесите картину Тириону Фордрингу.",
+				["followup"] = "Найти Миранду",
+				["prequest"] = "Искупление - > Символ семейной любви",
+				["location"] = "Художница Ренфри (Западные Чумные земли - Каэр Дарроу; |cffffff0065,75"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Символ семейной любви",
+			},
+			[7] = {
+				["note"] = "Вы возьмете предшествующее задание у мирового судьи Мардука (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE.."). Вы найдете знак около |cffffff00[19]"..WHITE..". Смотрите также: |cffffff00[Рас Снегошепот – лич]"..WHITE.." в Некроситете.",
+				["id"] = 5463,
+				["attain"] = 57,
+				["aim"] = "Отправляйтесь в Стратхольм и отыщите Дар Менетила. Положите книгу Воспоминаний на оскверненную землю.",
+				["followup"] = "Дар Менетила",
+				["prequest"] = "Рас Ледяной Шепот – человек - > Рас Ледяной Шепот – гибель",
+				["location"] = "Леонид Барталомей Чтимый (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0080,58"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Дар Менетила",
+			},
+			[8] = {
+				["note"] = "Чтобы начать выполнение задания вы должны отдать Аурию [Медальон Веры]. Вы получите медальон из сундука. В первой комнате крепости (до того как дороги разойдутся). После того, как вы отдадите Аурию медальон, он поможет вашей группе сражаться против Барона |cffffff00[15]"..WHITE..". После убийства Барона вы должны снова поговорить с Аурием, чтобы получить награду.",
+				["id"] = 5125,
+				["attain"] = 55,
+				["aim"] = "",
+				["title"] = "Слова Аурия",
+				["location"] = "Аурий (Стратхольм; |cffffff00[13]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Will of the Martyr",
+						["id"] = 17044,
+						["icon"] = "INV_Jewelry_Talisman_07",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Blood of the Martyr",
+						["id"] = 17045,
+						["icon"] = "INV_Jewelry_Ring_25",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Вы найдете архив и архивариуса около |cffffff00[10]"..WHITE..".",
+				["id"] = 5251,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Стратхольм и отыщите архивариуса Галфорда из Алого ордена. Убейте его и сожгите архив Алых.",
+				["title"] = "Архивариус",
+				["location"] = "Герцог Николас Зверенхофф (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Ошеломляющая истина",
+			},
+			[10] = {
+				["note"] = "Вы найдете герцога Николаса Зверенхоффа в Восточные Чумные земли - Часовня Последней Надежды (|cffffff0081,59"..WHITE..").",
+				["id"] = 5262,
+				["attain"] = 55,
+				["aim"] = "Отнесите голову Бальназара герцогу Николасу Зверенхоффу в Восточные Чумные земли.",
+				["followup"] = "Быстрее, выше, сильнее",
+				["prequest"] = "Архивариус",
+				["location"] = "Бальназар (Стратхольм; |cffffff00[11]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Ошеломляющая истина",
+			},
+			[11] = {
+				["note"] = "Вы можете найти барона около |cffffff00[19]"..WHITE..".",
+				["id"] = 5263,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Стратхольм и убейте барона Ривендера. Принесите его голову герцогу Николасу Зверенхоффу.",
+				["prequest"] = "Ошеломляющая истина",
+				["title"] = "Быстрее, выше, сильнее",
+				["location"] = "Герцог Николас Зверенхофф (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Argent Defender",
+						["id"] = 13243,
+						["icon"] = "INV_Shield_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Argent Crusader",
+						["id"] = 13249,
+						["icon"] = "INV_Staff_13",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Argent Avenger",
+						["id"] = 13246,
+						["icon"] = "INV_Sword_05",
+						["quality"] = 3,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Антион стоит перед порталом в Стратхольм. Вам нужен Спектральный сканер иных измерений, чтобы увидеть его. Он дается за предыдущее задание. Цепочка заданий начинается со Справедливого вознаграждения. Делиана в Стальгорне (|cffffff0043,52"..WHITE..") для Альянса, Моквар в Оргриммаре (|cffffff0038,37"..WHITE..") для Орды.\nЭто печальный '45-ти минутный' забег на Барона.",
+				["id"] = 8945,
+				["attain"] = 58,
+				["aim"] = "Отправляйтесь в Стратхольм и спасите Исиду Хармон от Барона Ривендера.",
+				["followup"] = "Доказательство жизни",
+				["prequest"] = "В поисках Антиона",
+				["location"] = "Антион Хармон (Восточные Чумные земли - Стратхольм)",
+				["level"] = 60,
+				["title"] = "Просьба мертвеца",
+			},
+			[13] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nДжариен и Сотос вызываются около |cffffff00[11]"..WHITE..".",
+				["id"] = 8968,
+				["attain"] = 58,
+				["aim"] = "Вызвать духов Джариен и Сотоса с помощью жаровни Призыва и убить их обоих. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[14] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nДжариен и Сотос вызываются около |cffffff00[11]"..WHITE..".",
+				["id"] = 8991,
+				["attain"] = 58,
+				["aim"] = "Вызвать духов Джариен и Сотоса с помощью жаровни Призыва и убить их обоих. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[15] = {
+				["note"] = "Атиеш вызывается около |cffffff00[2]"..WHITE..".",
+				["id"] = 9269,
+				["attain"] = 60,
+				["aim"] = "Анахронос из Пещер Времени, что в Танарисе, просит вас отнести Атиеш, большой посох Стража, в Стратхольм и установить его на освященную землю. Одолейте силу, которая исторгнется из посоха, и вернитесь к Анахроносу.",
+				["prequest"] = "Основа Атиеша -> Атиеш, оскверненный посох",
+				["title"] = "Атиеш, большой посох Стража",
+				["location"] = "Анахронос (Танарис - Пещеры Времени; |cffffff0065,49"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22589,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22630,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+					[3] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22631,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+					[4] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22632,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "Задание для кузнецов: Оружейник Черной Стражи вызывается около |cffffff00[15]"..WHITE..".",
+				["id"] = 5307,
+				["attain"] = 50,
+				["aim"] = "Найдите в Стратхольме оружейника Черной Стражи и уничтожьте его. Возьмите его Знак Черной Стражи и принесите Сирилу Плетебою.",
+				["title"] = "Скверна",
+				["location"] = "Сирил Плетебой (Зимние Ключи - Круговзор; |cffffff0061,37"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Blazing Rapier",
+						["id"] = 12825,
+						["icon"] = "INV_Scroll_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[17] = {
+				["note"] = "Задание для кузнецов: Молотобоец из Багрового Легиона вызывается около |cffffff00[8]"..WHITE..".",
+				["id"] = 5305,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь в Стратхольм и убейте Молотобойца из Багрового легиона. Возьмите его фартук и возвращайтесь к Лилит.",
+				["title"] = "Секрет безмятежности",
+				["location"] = "Лилит Гибкая (Зимние Ключи - Круговзор; |cffffff0061,37"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Enchanted Battlehammer",
+						["id"] = 12824,
+						["icon"] = "INV_Scroll_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[18] = {
+				["note"] = "\"Crowd Pummeler 9-60\" in Gnomeregan drops Intact Pounder Mainframe that starts the PreQuest \"A Pounding Brain\".\nThorium Tuned Servo drops from Scarlet Myrmidons.\nPerfect Golem Core drops from Golem Lord Argelmach.\nAdamantite Rod drops from Crimson Hammersmith.",
+				["id"] = 80401,
+				["attain"] = 30,
+				["aim"] = "Приобретите настроенный на торий сервопривод в Оружейной Алого монастыря, получите Идеальное ядро голема в глубинах Черных Скал у повелителя големов Аргельмаха, найдите Адамантитовый стержень в Стратхольме. Возвращайтесь в Оглторп-Обнотикус.",
+				["title"] = "Чтобы построить фунтовую машину",
+				["location"] = "Oglethorpe Obnoticus (Stranglethorn Vale - Booty Bay "..NORMAL.."28.4,76.3"..WHITE..").",
+				["level"] = 60,
+				["prequest"] = "A Pounding Brain "..NORMAL.."(Engineers only)",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Red Pounder",
+						["id"] = 81253,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Green Pounder",
+						["id"] = 81252,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Blue Pounder",
+						["id"] = 81251,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Black Pounder",
+						["id"] = 81250,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[19] = {
+				["note"] = "Rothlen Family Brooch next to boss The Unforgiven "..NORMAL.."[4]"..WHITE.." in the chest.\nQuest chain starts with epic item random drop 'Scribbled Cooking Notes' "..NORMAL.."[Karazhan]"..WHITE..".",
+				["id"] = 41000,
+				["attain"] = 55,
+				["aim"] = "Recover the Rothlen Family Brooch from Stratholme for Duke Rothlen in Karazhan.",
+				["title"] = "Rothlen Family Brooch",
+				["prequest"] = "Scribbled Cooking Notes "..NORMAL.."[Karazhan]"..WHITE.." -> Lost and Found "..NORMAL.."[Karazhan]"..WHITE.."",
+				["location"] = "Duke Rothlen (Karazhan; "..NORMAL.."[Karazhan - f]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "The Secret Recipe ("..NORMAL.."[Karazhan]"..WHITE..")",
+			},
+			[20] = {
+				["note"] = "Second Feather of Medivh on the ground in the place where Elder Farwhisper (Lunar Festival) "..NORMAL.."[5]"..WHITE.." is.\nFirst Feather of Medivh "..NORMAL.."[Undercity]"..WHITE.." behind the entrance throne.\nThird Feather of Medivh "..NORMAL.."[Alterac Mountain]"..WHITE.." on the end of first(western) cliff "..NORMAL.."[30.8,87.4]"..WHITE..".\nFourth Feather of Medivh "..NORMAL.."[Hyjal]"..WHITE.." on the end of the cliff "..NORMAL.."[31.8,70.5]"..WHITE..".",
+				["id"] = 40826,
+				["attain"] = 58,
+				["aim"] = "Find four Echoes of Medivh. They might be found in places of great significance for the mage. Then return to Dolvan with the key.",
+				["title"] = "The Key to Karazhan VII",
+				["prequest"] = "The Key to Karazhan VI",
+				["location"] = "Dolvan Bracewind (Dustwallow Marsh - ; "..NORMAL.."[71.1,73.2]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "The Key to Karazhan VIII ("..NORMAL.."Dire Maul West"..WHITE..")",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Сбольшинства существ в Стратхольме падают препараты чумной плоти, но шанс очень мал.",
+				["id"] = 5212,
+				["attain"] = 55,
+				["aim"] = "Принесите 20 препаратов чумной плоти из Стратхольма Бетине Биггльцинк. Предположительно, любая тварь из Стратхольма сойдет за препарат.",
+				["title"] = "Плоть не лжет",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Вирус чумы",
+			},
+			[2] = {
+				["note"] = "Сведения о плети находятся в одной из 3 Башен, которые вы найдете около |cffffff00[15]"..WHITE..", |cffffff00[16]"..WHITE.." и |cffffff00[17]"..WHITE..".",
+				["id"] = 5213,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Стратхольм и исследуйте зиккураты. Доставьте сведения о Плети Бетине Биггльцинк.",
+				["prequest"] = "Плоть не лжет",
+				["title"] = "Вирус чумы",
+				["location"] = "Бетина Биггльцинк (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Seal of the Dawn",
+						["id"] = 13209,
+						["icon"] = "INV_Misc_ArmorKit_18",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Rune of the Dawn",
+						["id"] = 19812,
+						["icon"] = "INV_Misc_Rune_06",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете святую воду в ящиках по всему Стратхольму. При открытии некоторых появятся насекомые и атакуют Вас.",
+				["id"] = 5243,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь на север, в Стратхольм. Обыщите брошенные ящики с припасами и соберите 5 мер святой воды Стратхольма. Возвращайтесь к Леониду Бартоломею Чтимому, как только воды будет достаточно.",
+				["title"] = "Святая вода",
+				["location"] = "Леонид Барталомей Чтимый (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0080,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POTION,
+						["name"] = "Superior Healing Potion",
+						["id"] = 3928,
+						["count"] = 5,
+						["icon"] = "INV_Potion_53",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.POTION,
+						["name"] = "Greater Mana Potion",
+						["id"] = 6149,
+						["count"] = 5,
+						["icon"] = "INV_Potion_73",
+						["quality"] = 1,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Crown of the Penitent",
+						["id"] = 13216,
+						["icon"] = "INV_Helmet_06",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.RING,
+						["name"] = "Band of the Penitent",
+						["id"] = 13217,
+						["icon"] = "INV_Jewelry_Ring_30",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Вы найдете табачную лавку около |cffffff00[1]"..WHITE..". Фрас Сиаби появится когда вы откроете коробку.",
+				["id"] = 5214,
+				["attain"] = 55,
+				["aim"] = "Найдите табачную лавку Фраса Сиаби в Стратхольме, отыщите в ней пачку лучшего табака Сиаби и принесите ее Дымку ЛаРу.",
+				["title"] = "Великий Фрас Сиаби",
+				["location"] = "Дымок ЛаРу (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0080,58"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Smokey's Lighter",
+						["id"] = 13171,
+						["icon"] = "Spell_Fire_SearingTotem",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы возьмете предшествующее задание у управляющего Алена (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0079,63"..WHITE.."). Призраки и неупокоенные бродят по улицам Стратхольма.",
+				["id"] = 5282,
+				["attain"] = 55,
+				["aim"] = "Стреляйте в призраков и неупокоенных на улицах Стратхольма из излучателя Эгана. Когда душа вырвется из призрачной оболочки, выстрелите в нее еще раз, и она обретет свободу.$B$BОсвободите 15 неупокоенных душ и возвращайтесь к Эгану.",
+				["prequest"] = "Мятущиеся души",
+				["title"] = "Мятущиеся души",
+				["location"] = "Эган (Восточные Чумные земли; |cffffff0014,33"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HELD_IN_OFFHAND,
+						["name"] = "Testament of Hope",
+						["id"] = 13315,
+						["icon"] = "INV_Misc_Book_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Вы возьмете предшествующее задание у Тириона Фордринга (Западные Чумные земли; |cffffff007,43"..WHITE.."). Вы сможете найти картину около |cffffff00[10]"..WHITE..".",
+				["id"] = 5848,
+				["attain"] = 52,
+				["aim"] = "Отправляйтесь в Статхольм в северную часть Чумных земель. Найдите в Бастионе Алого ордена картину \"Символ семейной любви\", спрятанную за другой, изображающей две луны нашего мира.$b$bОтнесите картину Тириону Фордрингу.",
+				["followup"] = "Найти Миранду",
+				["prequest"] = "Искупление - > Символ семейной любви",
+				["location"] = "Художница Ренфри (Западные Чумные земли - Каэр Дарроу; |cffffff0065,75"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Символ семейной любви",
+			},
+			[7] = {
+				["note"] = "Вы возьмете предшествующее задание у мирового судьи Мардука (Западные Чумные земли - Каэр Дарроу; |cffffff0070,73"..WHITE.."). Вы найдете знак около |cffffff00[19]"..WHITE..". Смотрите также: |cffffff00[Рас Снегошепот – лич]"..WHITE.." в Некроситете.",
+				["id"] = 5463,
+				["attain"] = 57,
+				["aim"] = "Отправляйтесь в Стратхольм и отыщите Дар Менетила. Положите книгу Воспоминаний на оскверненную землю.",
+				["followup"] = "Дар Менетила",
+				["prequest"] = "Рас Ледяной Шепот – человек - > Рас Ледяной Шепот – гибель",
+				["location"] = "Леонид Барталомей Чтимый (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0080,58"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Дар Менетила",
+			},
+			[8] = {
+				["note"] = "Чтобы начать выполнение задания вы должны отдать Аурию [Медальон Веры]. Вы получите медальон из сундука. В первой комнате крепости (до того как дороги разойдутся). После того, как вы отдадите Аурию медальон, он поможет вашей группе сражаться против Барона |cffffff00[15]"..WHITE..". После убийства Барона вы должны снова поговорить с Аурием, чтобы получить награду.",
+				["id"] = 5125,
+				["attain"] = 55,
+				["aim"] = "",
+				["title"] = "Слова Аурия",
+				["location"] = "Аурий (Стратхольм; |cffffff00[13]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Will of the Martyr",
+						["id"] = 17044,
+						["icon"] = "INV_Jewelry_Talisman_07",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Blood of the Martyr",
+						["id"] = 17045,
+						["icon"] = "INV_Jewelry_Ring_25",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Вы найдете архив и архивариуса около |cffffff00[10]"..WHITE..".",
+				["id"] = 5251,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Стратхольм и отыщите архивариуса Галфорда из Алого ордена. Убейте его и сожгите архив Алых.",
+				["title"] = "Архивариус",
+				["location"] = "Герцог Николас Зверенхофф (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Ошеломляющая истина",
+			},
+			[10] = {
+				["note"] = "Вы найдете герцога Николаса Зверенхоффа в Восточные Чумные земли - Часовня Последней Надежды (|cffffff0081,59"..WHITE..").",
+				["id"] = 5262,
+				["attain"] = 55,
+				["aim"] = "Отнесите голову Бальназара герцогу Николасу Зверенхоффу в Восточные Чумные земли.",
+				["followup"] = "Быстрее, выше, сильнее",
+				["prequest"] = "Архивариус",
+				["location"] = "Бальназар (Стратхольм; |cffffff00[11]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Ошеломляющая истина",
+			},
+			[11] = {
+				["note"] = "Вы можете найти барона около |cffffff00[19]"..WHITE..".",
+				["id"] = 5263,
+				["attain"] = 55,
+				["aim"] = "Отправляйтесь в Стратхольм и убейте барона Ривендера. Принесите его голову герцогу Николасу Зверенхоффу.",
+				["prequest"] = "Ошеломляющая истина",
+				["title"] = "Быстрее, выше, сильнее",
+				["location"] = "Герцог Николас Зверенхофф (Восточные Чумные земли - Часовня Последней Надежды; |cffffff0081,59"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Argent Defender",
+						["id"] = 13243,
+						["icon"] = "INV_Shield_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Argent Crusader",
+						["id"] = 13249,
+						["icon"] = "INV_Staff_13",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Argent Avenger",
+						["id"] = 13246,
+						["icon"] = "INV_Sword_05",
+						["quality"] = 3,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Антион стоит перед порталом в Стратхольм. Вам нужен Спектральный сканер иных измерений, чтобы увидеть его. Он дается за предыдущее задание. Цепочка заданий начинается со Справедливого вознаграждения. Делиана в Стальгорне (|cffffff0043,52"..WHITE..") для Альянса, Моквар в Оргриммаре (|cffffff0038,37"..WHITE..") для Орды.\nЭто печальный '45-ти минутный' забег на Барона.",
+				["id"] = 8945,
+				["attain"] = 58,
+				["aim"] = "Отправляйтесь в Стратхольм и спасите Исиду Хармон от Барона Ривендера.",
+				["followup"] = "Доказательство жизни",
+				["prequest"] = "В поисках Антиона",
+				["location"] = "Антион Хармон (Восточные Чумные земли - Стратхольм)",
+				["level"] = 60,
+				["title"] = "Просьба мертвеца",
+			},
+			[13] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nДжариен и Сотос вызываются около |cffffff00[11]"..WHITE..".",
+				["id"] = 8968,
+				["attain"] = 58,
+				["aim"] = "Вызвать духов Джариен и Сотоса с помощью жаровни Призыва и убить их обоих. Вернуться к Бодли в Черную гору, отдать ему левую часть амулета Лорда Вальтхалака и жаровню Призыва.",
+				["followup"] = "Я вижу в твоем будущем остров Алькац...",
+				["prequest"] = "Важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Левая часть амулета Лорда Вальтхалака",
+			},
+			[14] = {
+				["note"] = "Чтобы увидеть Бодли нужен Спектральный сканер иных измерений. Вы получите его за задание 'В поисках Антиона'.\n\nДжариен и Сотос вызываются около |cffffff00[11]"..WHITE..".",
+				["id"] = 8991,
+				["attain"] = 58,
+				["aim"] = "Вызвать духов Джариен и Сотоса с помощью жаровни Призыва и убить их обоих. Вернуться к Бодли в Черную гору, отдать ему восстановленный амулет и жаровню Призыва.",
+				["followup"] = "Последние приготовления (|cffffff00Вершина Черной горы"..WHITE..")",
+				["prequest"] = "Еще одна важная составляющая заклинания",
+				["location"] = "Бодли (Черная гора; |cffffff00[D] на карте входа"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Правая часть амулета Лорда Вальтхалака",
+			},
+			[15] = {
+				["note"] = "Атиеш вызывается около |cffffff00[2]"..WHITE..".",
+				["id"] = 9269,
+				["attain"] = 60,
+				["aim"] = "Анахронос из Пещер Времени, что в Танарисе, просит вас отнести Атиеш, большой посох Стража, в Стратхольм и установить его на освященную землю. Одолейте силу, которая исторгнется из посоха, и вернитесь к Анахроносу.",
+				["prequest"] = "Основа Атиеша -> Атиеш, оскверненный посох",
+				["title"] = "Атиеш, большой посох Стража",
+				["location"] = "Анахронос (Танарис - Пещеры Времени; |cffffff0065,49"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22589,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22630,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+					[3] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22631,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+					[4] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Atiesh, Greatstaff of the Guardian",
+						["id"] = 22632,
+						["icon"] = "INV_Staff_Medivh",
+						["quality"] = 5,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "Задание для кузнецов: Оружейник Черной Стражи вызывается около |cffffff00[15]"..WHITE..".",
+				["id"] = 5307,
+				["attain"] = 50,
+				["aim"] = "Найдите в Стратхольме оружейника Черной Стражи и уничтожьте его. Возьмите его Знак Черной Стражи и принесите Сирилу Плетебою.",
+				["title"] = "Скверна",
+				["location"] = "Сирил Плетебой (Зимние Ключи - Круговзор; |cffffff0061,37"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Blazing Rapier",
+						["id"] = 12825,
+						["icon"] = "INV_Scroll_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[17] = {
+				["note"] = "Задание для кузнецов: Молотобоец из Багрового Легиона вызывается около |cffffff00[8]"..WHITE..".",
+				["id"] = 5305,
+				["attain"] = 50,
+				["aim"] = "Отправляйтесь в Стратхольм и убейте Молотобойца из Багрового легиона. Возьмите его фартук и возвращайтесь к Лилит.",
+				["title"] = "Секрет безмятежности",
+				["location"] = "Лилит Гибкая (Зимние Ключи - Круговзор; |cffffff0061,37"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Plans: Enchanted Battlehammer",
+						["id"] = 12824,
+						["icon"] = "INV_Scroll_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[18] = {
+				["note"] = "Вы возьмете предшествующее задание также у Натаноса Гнили. Вы найдете Рамштайна около |cffffff00[18]"..WHITE..".",
+				["id"] = 6163,
+				["attain"] = 56,
+				["aim"] = "Отправляйтесь в Стратхольм и убейте Рамштайна Ненасытного. Принесите его голову Натаносу в качестве сувенира.",
+				["prequest"] = "Охота на cледопытов -> Проклятый Тенекрыл",
+				["title"] = "Рамштейн",
+				["location"] = "Натанос Гниль (Восточные Чумные земли; |cffffff0026,74"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Royal Seal of Alexis",
+						["id"] = 18022,
+						["icon"] = "INV_Jewelry_Ring_30",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Elemental Circle",
+						["id"] = 17001,
+						["icon"] = "INV_Jewelry_Ring_29",
+						["quality"] = 2,
+					},
+				},
+			},
+			[19] = {
+				["note"] = "\"Crowd Pummeler 9-60\" in Gnomeregan drops Intact Pounder Mainframe that starts the PreQuest \"A Pounding Brain\".\nThorium Tuned Servo drops from Scarlet Myrmidons.\nPerfect Golem Core drops from Golem Lord Argelmach.\nAdamantite Rod drops from Crimson Hammersmith.",
+				["id"] = 80401,
+				["attain"] = 30,
+				["aim"] = "Приобретите настроенный на торий сервопривод в Оружейной Алого монастыря, получите Идеальное ядро голема в глубинах Черных Скал у повелителя големов Аргельмаха, найдите Адамантитовый стержень в Стратхольме. Возвращайтесь в Оглторп-Обнотикус.",
+				["title"] = "Чтобы построить фунтовую машину",
+				["location"] = "Oglethorpe Obnoticus (Stranglethorn Vale - Booty Bay "..NORMAL.."28.4,76.3"..WHITE..").",
+				["level"] = 60,
+				["prequest"] = "A Pounding Brain "..NORMAL.."(Engineers only)",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Red Pounder",
+						["id"] = 81253,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Green Pounder",
+						["id"] = 81252,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Blue Pounder",
+						["id"] = 81251,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Reinforced Black Pounder",
+						["id"] = 81250,
+						["icon"] = "INV_Gizmo_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[20] = {
+				["note"] = "Rothlen Family Brooch next to boss The Unforgiven "..NORMAL.."[4]"..WHITE.." in the chest.\nQuest chain starts with epic item random drop 'Scribbled Cooking Notes' "..NORMAL.."[Karazhan]"..WHITE..".",
+				["id"] = 41000,
+				["attain"] = 55,
+				["aim"] = "Recover the Rothlen Family Brooch from Stratholme for Duke Rothlen in Karazhan.",
+				["title"] = "Rothlen Family Brooch",
+				["prequest"] = "Scribbled Cooking Notes "..NORMAL.."[Karazhan]"..WHITE.." -> Lost and Found "..NORMAL.."[Karazhan]"..WHITE.."",
+				["location"] = "Duke Rothlen (Karazhan; "..NORMAL.."[Karazhan - f]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "The Secret Recipe ("..NORMAL.."[Karazhan]"..WHITE..")",
+			},
+			[21] = {
+				["note"] = "Second Feather of Medivh on the ground in the place where Elder Farwhisper (Lunar Festival) "..NORMAL.."[5]"..WHITE.." is.\nFirst Feather of Medivh "..NORMAL.."[Undercity]"..WHITE.." behind the entrance throne.\nThird Feather of Medivh "..NORMAL.."[Alterac Mountain]"..WHITE.." on the end of first(western) cliff "..NORMAL.."[30.8,87.4]"..WHITE..".\nFourth Feather of Medivh "..NORMAL.."[Hyjal]"..WHITE.." on the end of the cliff "..NORMAL.."[31.8,70.5]"..WHITE..".",
+				["id"] = 40826,
+				["attain"] = 58,
+				["aim"] = "Find four Echoes of Medivh. They might be found in places of great significance for the mage. Then return to Dolvan with the key.",
+				["title"] = "The Key to Karazhan VII",
+				["prequest"] = "The Key to Karazhan VI",
+				["location"] = "Dolvan Bracewind (Dustwallow Marsh - ; "..NORMAL.."[71.1,73.2]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+				},
+				["followup"] = "The Key to Karazhan VIII ("..NORMAL.."Dire Maul West"..WHITE..")",
+			},
+		},
+		["story"] = "Когда-то он был жемчужиной северного Лордерона, город Стратхольм, именно тут принц Артес пошел против своего наставника, Утера Несущего Свет, и устроил бойню сотен своих собственных подданных, зараженных ,как он верил, ужасносной чумой нежити. Стремительное падение Артеса и окончательный переход на сторону Короля-лича последовали потом. В разрушенном городе теперь обитает нежить Плети - ведомая могущественным личем, Кель'тузедом. Личный состав Алого ордена, под руководством Grand Crusader Dathrohan, также захватил часть уничтоженного города. Две стороны увязли в непрекращающейся, ожесточенной битве. Искатели приключений, достаточно отважные (или безмозглые), чтобы войти в Стратхольм, столкнуться с противодействием и тех, и других. Поговаривают, что город охраняется тремя огромными смотровыми башнями, а также сильными некромантами, баньши и мерзостями. Также есть свидетельства того, что пагубный рыцарь смерти разъезжает по дьявольской конюшне - без разбору обрушивая свой гнев на головы тех, кто вторгся во владения Плети.",
+		["name"] = "Стратхольм",
+	},
+	[26] = {
+		[1] = {
+			[1] = {
+				["note"] = "Командир Мар'алит (Силитус - Крепость Кенария; |cffffff0049,34"..WHITE..")",
+				["id"] = 8791,
+				["attain"] = 60,
+				["aim"] = "Принесите голову Оссириана Неуязвимого командиру Мар'алиту в Крепость Кенария.",
+				["title"] = "Повергнутый Оссириан",
+				["location"] = "Голова Оссириана Неуязвимого (добывается с Оссириана Неуязвимого; |cffffff00[6]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Charm of the Shifting Sands",
+						["id"] = 21504,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amulet of the Shifting Sands",
+						["id"] = 21507,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Choker of the Shifting Sands",
+						["id"] = 21505,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+					[4] = {
+						["subtext"] = L.NECK,
+						["name"] = "Pendant of the Shifting Sands",
+						["id"] = 21506,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Ядовитая железа Веноксиса добывается с Верховного жреца Веноксиса в |cffffff00Зул'Гурубе"..WHITE..". Ядовитая железа Куриннакса добывается в |cffffff00Руинах Ан'Киража"..WHITE.." at |cffffff00[1]"..WHITE..".",
+				["id"] = 9023,
+				["attain"] = 60,
+				["aim"] = "Дирк Громодрев из Крепости Кенария попросил принести ему ядовитую железу Веноксиса и ядовитую железу Куриннакса.",
+				["title"] = "Идеальный яд",
+				["location"] = "Дирк Громодрев (Силитус - Крепость Кенария; |cffffff0052,39"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Ravenholdt Slicer",
+						["id"] = 22378,
+						["icon"] = "INV_Sword_38",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.DAGGER,
+						["name"] = "Shivsprocket's Shiv",
+						["id"] = 22379,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "The Thunderwood Poker",
+						["id"] = 22377,
+						["icon"] = "INV_Sword_17",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Doomulus Prime",
+						["id"] = 22348,
+						["icon"] = "INV_Hammer_10",
+						["quality"] = 3,
+					},
+					[5] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Fahrad's Reloading Repeater",
+						["id"] = 22347,
+						["icon"] = "INV_Weapon_Crossbow_04",
+						["quality"] = 3,
+					},
+					[6] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Simone's Cultivating Hammer",
+						["id"] = 22380,
+						["icon"] = "INV_Hammer_05",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Командир Мар'алит (Силитус - Крепость Кенария; |cffffff0049,34"..WHITE..")",
+				["id"] = 8791,
+				["attain"] = 60,
+				["aim"] = "Принесите голову Оссириана Неуязвимого командиру Мар'алиту в Крепость Кенария.",
+				["title"] = "Повергнутый Оссириан",
+				["location"] = "Голова Оссириана Неуязвимого (добывается с Оссириана Неуязвимого; |cffffff00[6]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Charm of the Shifting Sands",
+						["id"] = 21504,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amulet of the Shifting Sands",
+						["id"] = 21507,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Choker of the Shifting Sands",
+						["id"] = 21505,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+					[4] = {
+						["subtext"] = L.NECK,
+						["name"] = "Pendant of the Shifting Sands",
+						["id"] = 21506,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_03",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Ядовитая железа Веноксиса добывается с Верховного жреца Веноксиса в |cffffff00Зул'Гурубе"..WHITE..". Ядовитая железа Куриннакса добывается в |cffffff00Руинах Ан'Киража"..WHITE.." at |cffffff00[1]"..WHITE..".",
+				["id"] = 9023,
+				["attain"] = 60,
+				["aim"] = "Дирк Громодрев из Крепости Кенария попросил принести ему ядовитую железу Веноксиса и ядовитую железу Куриннакса.",
+				["title"] = "Идеальный яд",
+				["location"] = "Дирк Громодрев (Силитус - Крепость Кенария; |cffffff0052,39"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Ravenholdt Slicer",
+						["id"] = 22378,
+						["icon"] = "INV_Sword_38",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.DAGGER,
+						["name"] = "Shivsprocket's Shiv",
+						["id"] = 22379,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "The Thunderwood Poker",
+						["id"] = 22377,
+						["icon"] = "INV_Sword_17",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Doomulus Prime",
+						["id"] = 22348,
+						["icon"] = "INV_Hammer_10",
+						["quality"] = 3,
+					},
+					[5] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Fahrad's Reloading Repeater",
+						["id"] = 22347,
+						["icon"] = "INV_Weapon_Crossbow_04",
+						["quality"] = 3,
+					},
+					[6] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Simone's Cultivating Hammer",
+						["id"] = 22380,
+						["icon"] = "INV_Hammer_05",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "В последние часы Войны зыбучих песков, объединенные силы ночных эльфов и четырех драконьих стай довели битву до самого сердца империи кираджи, в город-крепость Ан'Кираж. Еще у городских ворот, армии Калимдора встретились с концентрацией боевых трутней силитидов, намного превосходившей виденую когда-либо ранее. В конечном счете силитиды и их хозяева-кираджи так и не были побеждены, а только изолированы внутри магического барьера. Война оставила проклятый город в руинах. Тысяча лет прошла с того дня, но силы кираджи не сидели без дела. Новая ужасная армия родилась в ульях, и руины Ан'Киража снова кишат роями силитидов и кираджи. Эта угроза должна быть уничтожена, иначе весь Азерот может пасть перед ужасающей мощью новой армии кираджи.",
+		["name"] = "Руины Ан'Киража",
+	},
+	[27] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы найдете Таргорра около |cffffff00[1]"..WHITE..".",
+				["id"] = 386,
+				["attain"] = 22,
+				["aim"] = "Принесите голову Таргорра Ужасного стражнику Бертону в Приозерье.",
+				["title"] = "Что происходит?",
+				["location"] = "Стражник Бертон (Красногорье - Приозерье; |cffffff0026,46"..WHITE..")",
+				["level"] = 25,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.SWORD,
+						["name"] = "Lucine Longsword",
+						["id"] = 3400,
+						["icon"] = "INV_Sword_20",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Hardened Root Staff",
+						["id"] = 1317,
+						["icon"] = "INV_Staff_16",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы найдете Декстрена около |cffffff00[5]"..WHITE..".",
+				["id"] = 377,
+				["attain"] = 22,
+				["aim"] = "Принесите советнику Миллстайпу руку Декстрена Варда.",
+				["title"] = "Преступление и наказание",
+				["location"] = "Миллстайп (Сумеречный лес - Темнолесье; |cffffff0072,47"..WHITE..")",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Ambassador's Boots",
+						["id"] = 2033,
+						["icon"] = "INV_Boots_08",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Darkshire Mail Leggings",
+						["id"] = 2906,
+						["icon"] = "INV_Pants_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "",
+				["id"] = 387,
+				["attain"] = 22,
+				["aim"] = "Тюремщик Телвотер просит вас убить в тюрьме 10 узников из Братства Справедливости, 8 каторжников из Братства Справедливости и 8 мятежников из Братства Справедливости.",
+				["title"] = "Подавление бунта",
+				["location"] = "Тюремщик Телвотер (Штормград - Тюрьма Штормграда; |cffffff0041,58"..WHITE..")",
+				["level"] = 26,
+			},
+			[4] = {
+				["note"] = "Со всех бандитов внутри Тюрьмы могут упасть красные шерстяные банданы.",
+				["id"] = 388,
+				["attain"] = 22,
+				["aim"] = "Принесите Никове Раскол 10 красных шерстяных бандан.",
+				["title"] = "Цвет крови",
+				["location"] = "Никовия Раскол (Штормград - Старый город; |cffffff0073,46"..WHITE..")",
+				["level"] = 26,
+			},
+			[5] = {
+				["note"] = "Предшествующее задание также можно взять у Мотли. Вы найдете Кама Гневливого около |cffffff00[2]"..WHITE..".",
+				["id"] = 378,
+				["attain"] = 22,
+				["aim"] = "Принесите голову Кама Гневливого Мотли Каменщику в Дун Модр.",
+				["prequest"] = "Война с Черным Железом",
+				["title"] = "Успокоить Гневливого",
+				["location"] = "Мотли Каменщик (Болотина - Дун Модр; |cffffff0049,18"..WHITE..")",
+				["level"] = 27,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Belt of Vindication",
+						["id"] = 3562,
+						["icon"] = "INV_Belt_05",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Headbasher",
+						["id"] = 1264,
+						["icon"] = "INV_Mace_07",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Для более детальной информации о предшествующем задании смотрите |cffffff00[Мертвые копи, Братство справедливости]"..WHITE..".\nВы найдете Базиля Тредда около |cffffff00[4]"..WHITE..".",
+				["id"] = 391,
+				["attain"] = 16,
+				["aim"] = "Убейте Базиля Тредда и принесите его голову Телвотеру в тюрьму Штормграда.",
+				["followup"] = "Таинственный посетитель",
+				["prequest"] = "Братство Справедливости -> Базиль Тредд",
+				["location"] = "Тюремщик Телвотер (Штормград - Тюрьма Штормграда; |cffffff0041,58"..WHITE..")",
+				["level"] = 29,
+				["title"] = "Бунтовщики в тюрьме",
+			},
+			[7] = {
+				["note"] = "You can find Martin Corinth's Information inside Sealed Documents Crate "..NORMAL.."[1]"..WHITE.." in the room across the dungeon entrance.\nQuestline starts with quest 'Uncovering Mystery' at Lord Commander Ryke (Wetlands - Hawk's Vigil "..NORMAL.."36.4,67.3"..WHITE.." under the tent)\nYou will get reward after you finish the last quest of the questline.",
+				["id"] = 55221,
+				["attain"] = 18,
+				["aim"] = "Покопайтесь в частоколах и найдите информацию о Мартине Коринфе.",
+				["title"] = "Поиски частокола",
+				["prequest"] = "Robb's Report",
+				["location"] = "Master Mathias Shaw <Leader of SI:7> (Stormwind - Old Town, Rogue district; "..NORMAL.."75.8,59.8"..WHITE..")",
+				["level"] = 24,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Valiant Medallion",
+						["id"] = 81416,
+						["icon"] = "INV_Jewelry_Amulet_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Ambient Talisman",
+						["id"] = 81417,
+						["icon"] = "INV_Jewelry_Necklace_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Magnificent Necklace",
+						["id"] = 81418,
+						["icon"] = "INV_Jewelry_Necklace_04",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Investigating Corinth",
+			},
+		},
+		[2] = {
+		},
+		["story"] = "Тюрьма - это хорошо защищенный тюремный комплекс, скрытый под районом каналов Штормграда. Под руководством тюремщика Телвотера, Тюрьма стала домом мелких жуликов, мятежников, убийц и пары десятков самых опасных преступников в стране. Недавно, поднятое заключенными восстание превратило Тюрьму бог знает во что - охранников выгнали, а осужденные разгуливают на свободе. Тюремщик Телвотер умудрился выбраться из зоны и теперь вербует отважных экстремалов совершить вылазку в тюрьму и убить вдохновителя восстания - опасного уголовника, Базиля Тредда.",
+		["name"] = "Тюрьма Штормграда",
+	},
+	[28] = {
+		[1] = {
+			[1] = {
+				["note"] = "Серия предшествующих заданий начинается у того же НИП и имеет несколько этапов.\n\nВы сможете найти таблички по всему Храму, и внутри и снаружи подземелья.",
+				["id"] = 1475,
+				["attain"] = 41,
+				["aim"] = "Соберите 10 табличек Атал'ай для Брохана Бочкопуза из Штормграда.",
+				["prequest"] = "В поисках Храма -> Рапсодия о болоте",
+				["title"] = "В Храме Атал'Хаккара",
+				["location"] = "Брохан Бочкопуз (Штормград - Квартал дворфов; |cffffff0064,20"..WHITE..")",
+				["level"] = 50,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Guardian Talisman",
+						["id"] = 1490,
+						["icon"] = "INV_Jewelry_Talisman_05",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Алтарь находится около |cffffff00[1]"..WHITE..".",
+				["id"] = 3446,
+				["attain"] = 46,
+				["aim"] = "Найдите алтарь Хаккара в затонувшем храме на Болоте Печали.",
+				["followup"] = "Secret of the Circle",
+				["prequest"] = "Круглый камень",
+				["location"] = "Марвон Клепальщик (Танарис; |cffffff0052,45"..WHITE..")",
+				["level"] = 51,
+				["title"] = "Во глубине болот",
+			},
+			[3] = {
+				["note"] = "Вы найдете статуи около |cffffff00[1]"..WHITE..". Смотрите по карте порядок их активации.",
+				["id"] = 3447,
+				["attain"] = 46,
+				["aim"] = "Отправляйтесь в затонувший храм и узнайте, что скрывается в круге статуй.",
+				["prequest"] = "Круглый камень",
+				["title"] = "Тайна камня",
+				["location"] = "Марвон Клепальщик (Танарис; |cffffff0052,45"..WHITE..")",
+				["level"] = 51,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Hakkari Urn",
+						["id"] = 10773,
+						["icon"] = "INV_Box_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Предшествующее задание 'Майджин и Ларион' начинается у Майджина (Кратер Ун'Горо - Укрытие Маршалла; |cffffff0042,9"..WHITE.."). Вы возьмете образцы тумана с Глубинных скрытней, Мракочервей или слизнюков в Храме.",
+				["id"] = 4143,
+				["attain"] = 47,
+				["aim"] = "Соберите 5 образцов тумана Аталаи и принесите их Майджину в Кратер Ун'Горо.",
+				["prequest"] = "Майджин и Ларион -> Визит к Грегану",
+				["title"] = "Туман зла",
+				["location"] = "Греган Пивоплюй (Фералас; |cffffff0045,25"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+				},
+			},
+			[5] = {
+				["note"] = "Цепочка заданий начинается с 'Духи крикунов' у того же НИП (См. |cffffff00[Зул'Фаррак]"..WHITE..").\nВы должны задействовать Яйцо около |cffffff00[3]"..WHITE.." чтобы начать призыв. Когда он начнется, появятся враги и атакуют Вас. С некоторых их них добывается Кровь Хаккара. С этой кровью вы можете убрать факелы вокруг круга. После этого появится Аватара Хаккара. Вы убьете ее и получите 'Сущность Хаккара' Которую используете, чтобы наполнить яйцо.",
+				["id"] = 3528,
+				["attain"] = 40,
+				["aim"] = "Отнесите заполненное яйцо Хаккара Йе'кинье в Танарис.",
+				["prequest"] = "Духи крикунов -> Древнее яйцо",
+				["title"] = "Бог Хаккар",
+				["location"] = "Йе'кинья (Танарис - Порт Картеля; |cffffff0066,22"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "Avenguard Helm",
+						["id"] = 10749,
+						["icon"] = "INV_Helmet_22",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Lifeforce Dirk",
+						["id"] = 10750,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gemburst Circlet",
+						["id"] = 10751,
+						["icon"] = "INV_Crown_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Вы найдете Джаммал'ана около |cffffff00[4]"..WHITE..".",
+				["id"] = 1446,
+				["attain"] = 43,
+				["aim"] = "Принесите изгнаннику Атал'ай из Внутренних земель голову Джаммал'ана.",
+				["title"] = "Джаммал'ан Пророк",
+				["location"] = "Изгнанник Атал'ай (Внутренние земли; |cffffff0033,75"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Rainstrider Leggings",
+						["id"] = 11123,
+						["icon"] = "INV_Pants_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "Helm of Exile",
+						["id"] = 11124,
+						["icon"] = "INV_Helmet_21",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете Купель сущности рядом с местом где находится Тень Эраникуса около |cffffff00[6]"..WHITE..".",
+				["id"] = 3373,
+				["attain"] = 48,
+				["aim"] = "Поместите сущность Эраникуса в купель сущности в его логове в затонувшем храме.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Chained Essence of Eranikus",
+						["id"] = 10455,
+						["icon"] = "INV_Stone_03",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "The Essence of Eranikus",
+				["location"] = "Сущность Эраникуса (добывается с Тени Эраникуса; |cffffff00[6]"..WHITE..")",
+				["level"] = 55,
+				["title"] = "Сущность Эраникуса",
+			},
+			[8] = {
+				["note"] = "Задание для чернокнижников: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре.",
+				["id"] = 8422,
+				["attain"] = 50,
+				["aim"] = "Принесите 6 вудуистских перьев троллей из затонувшего храма.",
+				["prequest"] = "Просьба беса -> Бросовый материал",
+				["title"] = "Тролли Пера",
+				["location"] = "Бесенок (Оскверненный лес; |cffffff0042,45"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Soul Harvester",
+						["id"] = 20536,
+						["icon"] = "INV_Sword_48",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Abyss Shard",
+						["id"] = 20534,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Robes of Servitude",
+						["id"] = 20530,
+						["icon"] = "INV_Chest_Cloth_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для воинов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре.",
+				["id"] = 8425,
+				["attain"] = 50,
+				["aim"] = "Принесите вудуистские перья павшему герою Орды, забрав их у троллей в Затонувшем Храме.",
+				["prequest"] = "Неупокоенный дух -> Война против Приверженцев Тени",
+				["title"] = "Вудуистские перья",
+				["location"] = "Павший герой Орды (Болото Печали; |cffffff0034,66"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "Fury Visor",
+						["id"] = 20521,
+						["icon"] = "INV_Helmet_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Diamond Flask",
+						["id"] = 20130,
+						["icon"] = "INV_Drink_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Razorsteel Shoulders",
+						["id"] = 20517,
+						["icon"] = "INV_Shoulder_16",
+						["quality"] = 3,
+					},
+				},
+			},
+			[10] = {
+				["note"] = "Задание для друидов: Гнилая лоза добывается с Атал'алариона, который вызывается около |cffffff00[1]"..WHITE.." активизируя статуи в порядке, указанном на карте.",
+				["id"] = 9053,
+				["attain"] = 50,
+				["aim"] = "Возьмите гнилую лозу у стража на дне затонувшего храма и вернитесь к Землепроходцу Торве.",
+				["prequest"] = "Землепроходец Торва -> Испытание яда",
+				["title"] = "Лучший ингредиент",
+				["location"] = "Землепроходец Торва (Кратер Ун'Горо; |cffffff0072,76"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Grizzled Pelt",
+						["id"] = 22274,
+						["icon"] = "INV_Chest_Leather_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Forest's Embrace",
+						["id"] = 22272,
+						["icon"] = "INV_Chest_Leather_08",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Moonshadow Stave",
+						["id"] = 22458,
+						["icon"] = "INV_Staff_28",
+						["quality"] = 3,
+					},
+				},
+			},
+			[11] = {
+				["note"] = "Задание для охотников: Морфаз около |cffffff00[5]"..WHITE..".",
+				["id"] = 8232,
+				["attain"] = 50,
+				["aim"] = "Принесите зуб Морфаза Огтинку в Азшару. Огтинк обитает среди скал в северо-востоку от руин Эльдарата.",
+				["prequest"] = "Талисман охотника -> Охота на волношлепа",
+				["title"] = "Зеленый дракон",
+				["location"] = "Огтинк (Азшара; |cffffff0042,43"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POLEARM,
+						["name"] = "Hunting Spear",
+						["id"] = 20083,
+						["icon"] = "INV_Spear_02",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Devilsaur Eye",
+						["id"] = 19991,
+						["icon"] = "INV_Misc_Eye_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Devilsaur Tooth",
+						["id"] = 19992,
+						["icon"] = "INV_Misc_Bone_07",
+						["quality"] = 3,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Задание для магов: Морфаз около |cffffff00[5]"..WHITE..".",
+				["id"] = 8253,
+				["attain"] = 50,
+				["aim"] = "Добудьте кристалл тайной магии из брюха Морфаза и принесите его верховному магу Ксилему.",
+				["prequest"] = "Волшебная пыль -> Кораллы сирен",
+				["title"] = "Уничтожить Морфаза",
+				["location"] = "Верховный маг Ксилем (Азшара; |cffffff0029,40"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.DAGGER,
+						["name"] = "Glacial Spike",
+						["id"] = 20035,
+						["icon"] = "INV_Weapon_ShortBlade_06",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Arcane Crystal Pendant",
+						["id"] = 20037,
+						["icon"] = "INV_Misc_Gem_Topaz_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Fire Ruby",
+						["id"] = 20036,
+						["icon"] = "INV_Misc_Gem_Bloodstone_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Задание для жрецов: Морфаз около |cffffff00[5]"..WHITE..". Грета Замшелое Копыто находится в Оскверненном лесу - Изумрудное святилище (|cffffff0051,82"..WHITE..").",
+				["id"] = 8257,
+				["attain"] = 50,
+				["aim"] = "Убейте Морфаза в затонувшем Храме Атал'Хаккара и принесите его кровь Грете Замшелому Копыту в Оскверненный лес. Вход в храм сокрыт на Болоте Печали.",
+				["prequest"] = "Помощь Кенарию -> Лимфа нежити",
+				["title"] = "Кровь Морфаза",
+				["location"] = "Огтинк (Азшара; |cffffff0042,43"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Blessed Prayer Beads",
+						["id"] = 19990,
+						["icon"] = "INV_Jewelry_Necklace_11",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAND,
+						["name"] = "Woestave",
+						["id"] = 20082,
+						["icon"] = "INV_Wand_09",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Circle of Hope",
+						["id"] = 20006,
+						["icon"] = "INV_Jewelry_Ring_32",
+						["quality"] = 3,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Задание для разбойников: Лазурный ключ добывается с Морфаз около |cffffff00[5]"..WHITE..". Лорд Джорах Черный Ворон находится в Альтеракских горах - Поместье Черного Ворона (|cffffff0086,79"..WHITE..").",
+				["id"] = 8236,
+				["attain"] = 50,
+				["aim"] = "Принесите лазурный ключ лорду Черному Ворону.",
+				["prequest"] = "Приглашение -> Зашифрованные фрагменты",
+				["title"] = "Лазурный ключ",
+				["location"] = "Верховный маг Ксилем (Азшара; |cffffff0029,40"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Ebon Mask",
+						["id"] = 19984,
+						["icon"] = "INV_Helmet_30",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Whisperwalk Boots",
+						["id"] = 20255,
+						["icon"] = "INV_Boots_Cloth_05",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.BACK,
+						["name"] = "Duskbat Drape",
+						["id"] = 19982,
+						["icon"] = "INV_Misc_Cape_20",
+						["quality"] = 3,
+					},
+				},
+			},
+			[15] = {
+				["note"] = "Задание для паладинов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре.",
+				["id"] = 8418,
+				["attain"] = 50,
+				["aim"] = "Принесите вудуистские перья Ашламу Неутомимому.",
+				["prequest"] = "Бездействующие камни Плети",
+				["title"] = "Создание камня силы",
+				["location"] = "Командир Ашлам Неутомимый (Западные Чумные земли - Лагерь Промозглого Ветра; |cffffff0043,85"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Holy Mightstone",
+						["id"] = 20620,
+						["icon"] = "INV_Stone_15",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.SWORD,
+						["name"] = "Lightforged Blade",
+						["id"] = 20504,
+						["icon"] = "INV_Sword_39",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Sanctified Orb",
+						["id"] = 20512,
+						["icon"] = "INV_Misc_Gem_Pearl_04",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.RING,
+						["name"] = "Chivalrous Signet",
+						["id"] = 20505,
+						["icon"] = "INV_Jewelry_Ring_43",
+						["quality"] = 3,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "Лесной огонек (Тельдрассил; |cffffff0037,47"..WHITE..")",
+				["id"] = 8733,
+				["attain"] = 60,
+				["aim"] = "Отправляйтесь на континент Тельдрассил и найдите агента Малфуриона у стен Дарнаса.",
+				["followup"] = "Тиранда и Ремул",
+				["prequest"] = "Создание драконов",
+				["location"] = "Малфурион Ярость Бури (Появляется около Тени Эраникуса; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Эраникус, Тиран Сна",
+			},
+			[17] = {
+				["note"] = "Hazzas is the dragon boss flying in the room "..NORMAL.."[7]"..WHITE.." before the last boss.\nYou will get the reward finishing next quest.",
+				["id"] = 40400,
+				["attain"] = 47,
+				["aim"] = "Отправляйтесь в Затонувший храм, найдите Драконьего Хаззаса, убейте его и верните Сердце Хаззаса Ниремиусу Темному Ветру.",
+				["title"] = "Любыми необходимыми средствами IV",
+				["prequest"] = "By Any Means Necessary III",
+				["location"] = "Niremius Darkwind <Demon Hunter> (Felwood; "..NORMAL.."39.8,29.6"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Darkwind Glaive",
+						["id"] = 60536,
+						["icon"] = "INV_Spear_08",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "By Any Means Necessary V",
+			},
+			[18] = {
+				["note"] = "Weaver "..NORMAL.."[6]"..WHITE.." 1 of 4 dragons  drop Slumberer's Shard, will appear after killing Jammal'an the Prophet "..NORMAL.."[4]"..WHITE..". Barrier to the Prophet will disappear after clearing 6 balcons "..BLUE.."[C]"..WHITE.."\nFinishing this questline you get the necklace and you will be able to enter Hyjal raid instance Emerald Sanctum.",
+				["id"] = 40959,
+				["attain"] = 58,
+				["aim"] = "Gather a Binding Fragment from Cliff Breakers in Azshara, Overloaded Arcane Prism from Arcane Torrents in the Western wing of Dire Maul and a Slumberer's Shard from Weaver in the Sunken Temple. Report to Itharius in the Swamp of Sorrows with the collected items.",
+				["title"] = "Into the Dream III",
+				["prequest"] = "Into the Dream I -> Into the Dream II",
+				["location"] = "Ralathius (Hyjal - Nordanaar; "..NORMAL.."[81.6,27.7]"..WHITE.." a green dragonkin)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Gemstone of Ysera",
+						["id"] = 50545,
+						["icon"] = "INV_Misc_Gem_Emerald_02",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Into the Dream IV - VI",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Фетиши падают со всех врагов.",
+				["id"] = 1445,
+				["attain"] = 38,
+				["aim"] = "Соберите 20 фетишей Хаккара и принесите их  Фел'зерулу в Каменор.",
+				["prequest"] = "Озеро Слез -> Возвращение к Фел'зерулу",
+				["title"] = "Храм Атал'Хаккара",
+				["location"] = "Фел'зерул (Болото Печали - Каменор; |cffffff0047,54"..WHITE..")",
+				["level"] = 50,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Guardian Talisman",
+						["id"] = 1490,
+						["icon"] = "INV_Jewelry_Talisman_05",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Алтарь находится около |cffffff00[1]"..WHITE..".",
+				["id"] = 3446,
+				["attain"] = 46,
+				["aim"] = "Найдите алтарь Хаккара в затонувшем храме на Болоте Печали.",
+				["followup"] = "Secret of the Circle",
+				["prequest"] = "Круглый камень",
+				["location"] = "Марвон Клепальщик (Танарис; |cffffff0052,45"..WHITE..")",
+				["level"] = 51,
+				["title"] = "Во глубине болот",
+			},
+			[3] = {
+				["note"] = "Вы найдете статуи около |cffffff00[1]"..WHITE..". Смотрите по карте порядок их активации.",
+				["id"] = 3447,
+				["attain"] = 46,
+				["aim"] = "Отправляйтесь в затонувший храм и узнайте, что скрывается в круге статуй.",
+				["prequest"] = "Круглый камень",
+				["title"] = "Тайна камня",
+				["location"] = "Марвон Клепальщик (Танарис; |cffffff0052,45"..WHITE..")",
+				["level"] = 51,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Hakkari Urn",
+						["id"] = 10773,
+						["icon"] = "INV_Box_01",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Предшествующее задание 'Ларион и Майджин' начинается у Лариона (Кратер Ун'Горо; |cffffff0045,8"..WHITE.."). Вы возьмете образцы тумана с Глубинных скрытней, Мракочервей или слизнюков в Храме.",
+				["id"] = 4146,
+				["attain"] = 47,
+				["aim"] = "Доставьте незаряженный шокер и 5 образцов тумана Аталаи Лариону в Укрытие Маршалла.",
+				["title"] = "Питание для шокера",
+				["location"] = "Лив Быстрочин (Степи; |cffffff0062,38"..WHITE..")",
+				["level"] = 52,
+				["prequest"] = "Ларион и Майджин -> Мастерская Марвона",
+			},
+			[5] = {
+				["note"] = "Цепочка заданий начинается с 'Духи крикунов' у того же НИП (См. |cffffff00[Зул'Фаррак]"..WHITE..").\nВы должны задействовать Яйцо около |cffffff00[3]"..WHITE.." чтобы начать призыв. Когда он начнется, появятся враги и атакуют Вас. С некоторых их них добывается Кровь Хаккара. С этой кровью вы можете убрать факелы вокруг круга. После этого появится Аватара Хаккара. Вы убьете ее и получите 'Сущность Хаккара' Которую используете, чтобы наполнить яйцо.",
+				["id"] = 3528,
+				["attain"] = 40,
+				["aim"] = "Отнесите заполненное яйцо Хаккара Йе'кинье в Танарис.",
+				["prequest"] = "Духи крикунов -> Древнее яйцо",
+				["title"] = "Бог Хаккар",
+				["location"] = "Йе'кинья (Танарис - Порт Картеля; |cffffff0066,22"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "Avenguard Helm",
+						["id"] = 10749,
+						["icon"] = "INV_Helmet_22",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "Lifeforce Dirk",
+						["id"] = 10750,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Gemburst Circlet",
+						["id"] = 10751,
+						["icon"] = "INV_Crown_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Вы найдете Джаммал'ана около |cffffff00[4]"..WHITE..".",
+				["id"] = 1446,
+				["attain"] = 43,
+				["aim"] = "Принесите изгнаннику Атал'ай из Внутренних земель голову Джаммал'ана.",
+				["title"] = "Джаммал'ан Пророк",
+				["location"] = "Изгнанник Атал'ай (Внутренние земли; |cffffff0033,75"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Rainstrider Leggings",
+						["id"] = 11123,
+						["icon"] = "INV_Pants_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "Helm of Exile",
+						["id"] = 11124,
+						["icon"] = "INV_Helmet_21",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы найдете Купель сущности рядом с местом где находится Тень Эраникуса около |cffffff00[6]"..WHITE..".",
+				["id"] = 3373,
+				["attain"] = 48,
+				["aim"] = "Поместите сущность Эраникуса в купель сущности в его логове в затонувшем храме.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Chained Essence of Eranikus",
+						["id"] = 10455,
+						["icon"] = "INV_Stone_03",
+						["quality"] = 2,
+					},
+				},
+				["followup"] = "The Essence of Eranikus",
+				["location"] = "Сущность Эраникуса (добывается с Тени Эраникуса; |cffffff00[6]"..WHITE..")",
+				["level"] = 55,
+				["title"] = "Сущность Эраникуса",
+			},
+			[8] = {
+				["note"] = "Задание для чернокнижников: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре.",
+				["id"] = 8422,
+				["attain"] = 50,
+				["aim"] = "Принесите 6 вудуистских перьев троллей из затонувшего храма.",
+				["prequest"] = "Просьба беса -> Бросовый материал",
+				["title"] = "Тролли Пера",
+				["location"] = "Бесенок (Оскверненный лес; |cffffff0042,45"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Soul Harvester",
+						["id"] = 20536,
+						["icon"] = "INV_Sword_48",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Abyss Shard",
+						["id"] = 20534,
+						["icon"] = "INV_Misc_Gem_02",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Robes of Servitude",
+						["id"] = 20530,
+						["icon"] = "INV_Chest_Cloth_10",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Задание для воинов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре.",
+				["id"] = 8425,
+				["attain"] = 50,
+				["aim"] = "Принесите вудуистские перья павшему герою Орды, забрав их у троллей в Затонувшем Храме.",
+				["prequest"] = "Неупокоенный дух -> Война против Приверженцев Тени",
+				["title"] = "Вудуистские перья",
+				["location"] = "Павший герой Орды (Болото Печали; |cffffff0034,66"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "Fury Visor",
+						["id"] = 20521,
+						["icon"] = "INV_Helmet_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Diamond Flask",
+						["id"] = 20130,
+						["icon"] = "INV_Drink_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Razorsteel Shoulders",
+						["id"] = 20517,
+						["icon"] = "INV_Shoulder_16",
+						["quality"] = 3,
+					},
+				},
+			},
+			[10] = {
+				["note"] = "Задание для друидов: Гнилая лоза добывается с Атал'алариона, который вызывается около |cffffff00[1]"..WHITE.." активизируя статуи в порядке, указанном на карте.",
+				["id"] = 9053,
+				["attain"] = 50,
+				["aim"] = "Возьмите гнилую лозу у стража на дне затонувшего храма и вернитесь к Землепроходцу Торве.",
+				["prequest"] = "Землепроходец Торва -> Испытание яда",
+				["title"] = "Лучший ингредиент",
+				["location"] = "Землепроходец Торва (Кратер Ун'Горо; |cffffff0072,76"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Grizzled Pelt",
+						["id"] = 22274,
+						["icon"] = "INV_Chest_Leather_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.CHEST..", "..L.LEATHER,
+						["name"] = "Forest's Embrace",
+						["id"] = 22272,
+						["icon"] = "INV_Chest_Leather_08",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Moonshadow Stave",
+						["id"] = 22458,
+						["icon"] = "INV_Staff_28",
+						["quality"] = 3,
+					},
+				},
+			},
+			[11] = {
+				["note"] = "Задание для охотников: Морфаз около |cffffff00[5]"..WHITE..".",
+				["id"] = 8232,
+				["attain"] = 50,
+				["aim"] = "Принесите зуб Морфаза Огтинку в Азшару. Огтинк обитает среди скал в северо-востоку от руин Эльдарата.",
+				["prequest"] = "Талисман охотника -> Охота на волношлепа",
+				["title"] = "Зеленый дракон",
+				["location"] = "Огтинк (Азшара; |cffffff0042,43"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POLEARM,
+						["name"] = "Hunting Spear",
+						["id"] = 20083,
+						["icon"] = "INV_Spear_02",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Devilsaur Eye",
+						["id"] = 19991,
+						["icon"] = "INV_Misc_Eye_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Devilsaur Tooth",
+						["id"] = 19992,
+						["icon"] = "INV_Misc_Bone_07",
+						["quality"] = 3,
+					},
+				},
+			},
+			[12] = {
+				["note"] = "Задание для магов: Морфаз около |cffffff00[5]"..WHITE..".",
+				["id"] = 8253,
+				["attain"] = 50,
+				["aim"] = "Добудьте кристалл тайной магии из брюха Морфаза и принесите его верховному магу Ксилему.",
+				["prequest"] = "Волшебная пыль -> Кораллы сирен",
+				["title"] = "Уничтожить Морфаза",
+				["location"] = "Верховный маг Ксилем (Азшара; |cffffff0029,40"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.DAGGER,
+						["name"] = "Glacial Spike",
+						["id"] = 20035,
+						["icon"] = "INV_Weapon_ShortBlade_06",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Arcane Crystal Pendant",
+						["id"] = 20037,
+						["icon"] = "INV_Misc_Gem_Topaz_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Fire Ruby",
+						["id"] = 20036,
+						["icon"] = "INV_Misc_Gem_Bloodstone_02",
+						["quality"] = 3,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Задание для жрецов: Морфаз около |cffffff00[5]"..WHITE..". Грета Замшелое Копыто находится в Оскверненном лесу - Изумрудное святилище (|cffffff0051,82"..WHITE..").",
+				["id"] = 8257,
+				["attain"] = 50,
+				["aim"] = "Убейте Морфаза в затонувшем Храме Атал'Хаккара и принесите его кровь Грете Замшелому Копыту в Оскверненный лес. Вход в храм сокрыт на Болоте Печали.",
+				["prequest"] = "Помощь Кенарию -> Лимфа нежити",
+				["title"] = "Кровь Морфаза",
+				["location"] = "Огтинк (Азшара; |cffffff0042,43"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Blessed Prayer Beads",
+						["id"] = 19990,
+						["icon"] = "INV_Jewelry_Necklace_11",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAND,
+						["name"] = "Woestave",
+						["id"] = 20082,
+						["icon"] = "INV_Wand_09",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Circle of Hope",
+						["id"] = 20006,
+						["icon"] = "INV_Jewelry_Ring_32",
+						["quality"] = 3,
+					},
+				},
+			},
+			[14] = {
+				["note"] = "Задание для разбойников: Лазурный ключ добывается с Морфаз около |cffffff00[5]"..WHITE..". Лорд Джорах Черный Ворон находится в Альтеракских горах - Поместье Черного Ворона (|cffffff0086,79"..WHITE..").",
+				["id"] = 8236,
+				["attain"] = 50,
+				["aim"] = "Принесите лазурный ключ лорду Черному Ворону.",
+				["prequest"] = "Приглашение -> Зашифрованные фрагменты",
+				["title"] = "Лазурный ключ",
+				["location"] = "Верховный маг Ксилем (Азшара; |cffffff0029,40"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Ebon Mask",
+						["id"] = 19984,
+						["icon"] = "INV_Helmet_30",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Whisperwalk Boots",
+						["id"] = 20255,
+						["icon"] = "INV_Boots_Cloth_05",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.BACK,
+						["name"] = "Duskbat Drape",
+						["id"] = 19982,
+						["icon"] = "INV_Misc_Cape_20",
+						["quality"] = 3,
+					},
+				},
+			},
+			[15] = {
+				["note"] = "Задание для шаманов: Перо добывается с каждого из названных троллей на выступах с видом на большую комнату с отверстием в центре.",
+				["id"] = 8413,
+				["attain"] = 50,
+				["aim"] = "Принесите вудуистские перья Бат'ре Стражу Ветра.",
+				["prequest"] = "Тотем духов",
+				["title"] = "Вуду",
+				["location"] = "Бат'ре Страж Ветра (Альтеракские горы; |cffffff0080,67"..WHITE..")",
+				["level"] = 52,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Azurite Fists",
+						["id"] = 20369,
+						["icon"] = "INV_Gauntlets_30",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Enamored Water Spirit",
+						["id"] = 20503,
+						["icon"] = "INV_Wand_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Wildstaff",
+						["id"] = 20556,
+						["icon"] = "INV_Staff_Goldfeathered_01",
+						["quality"] = 3,
+					},
+				},
+			},
+			[16] = {
+				["note"] = "Лесной огонек (Тельдрассил; |cffffff0037,47"..WHITE..")",
+				["id"] = 8733,
+				["attain"] = 60,
+				["aim"] = "Отправляйтесь на континент Тельдрассил и найдите агента Малфуриона у стен Дарнаса.",
+				["followup"] = "Тиранда и Ремул",
+				["prequest"] = "Создание драконов",
+				["location"] = "Малфурион Ярость Бури (Появляется около Тени Эраникуса; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Эраникус, Тиран Сна",
+			},
+			[17] = {
+				["note"] = "Hazzas is the dragon boss flying in the room "..NORMAL.."[7]"..WHITE.." before the last boss.\nYou will get the reward finishing next quest.",
+				["id"] = 40400,
+				["attain"] = 47,
+				["aim"] = "Отправляйтесь в Затонувший храм, найдите Драконьего Хаззаса, убейте его и верните Сердце Хаззаса Ниремиусу Темному Ветру.",
+				["title"] = "Любыми необходимыми средствами IV",
+				["prequest"] = "By Any Means Necessary III",
+				["location"] = "Niremius Darkwind <Demon Hunter> (Felwood; "..NORMAL.."39.8,29.6"..WHITE..")",
+				["level"] = 53,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Darkwind Glaive",
+						["id"] = 60536,
+						["icon"] = "INV_Spear_08",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "By Any Means Necessary V",
+			},
+			[18] = {
+				["note"] = "Atal'ai Rod from the little green wooden chest on the floor behind Jammal'an the Prophet "..NORMAL.."[4]"..WHITE..".\nQuestline starts at Haz'gorg the Great Seer (Stranglethorn Vale - Gillijim's Isle(west from Booty Bay) - Maul'Ogg Refuge, inside of the southeast cave "..NORMAL.."78.1,81"..WHITE..".)\nYou will get the reward finishing last quest in the questline.",
+				["id"] = 40270,
+				["attain"] = 45,
+				["aim"] = "Отправляйтесь в глубины храма Атал'Хаккар и соберите жезл Атал'ай, принесите его Инсом'ни, чтобы завершить заклинание.",
+				["title"] = "Кризис Маул'Огга VII",
+				["prequest"] = "The Maul'ogg Crisis VI",
+				["location"] = "Insom'ni <The Great Hermit> (Kazon Island, north of Gillijim Isle "..NORMAL.."57.2,10.1"..WHITE..")",
+				["level"] = 54,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "The Ogre Mantle",
+						["id"] = 60346,
+						["icon"] = "INV_Shoulder_23",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Staff of the Ogre Seer",
+						["id"] = 60347,
+						["icon"] = "INV_Staff_06",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Favor of Cruk'Zogg",
+						["id"] = 60348,
+						["icon"] = "INV_Jewelry_Necklace_05",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "The Maul'ogg Crisis VIII",
+			},
+			[19] = {
+				["note"] = "Weaver "..NORMAL.."[6]"..WHITE.." 1 of 4 dragons  drop Slumberer's Shard, will appear after killing Jammal'an the Prophet "..NORMAL.."[4]"..WHITE..". Barrier to the Prophet will disappear after clearing 6 balcons "..BLUE.."[C]"..WHITE.."\nFinishing this questline you get the necklace and you will be able to enter Hyjal raid instance Emerald Sanctum.",
+				["id"] = 40959,
+				["attain"] = 58,
+				["aim"] = "Gather a Binding Fragment from Cliff Breakers in Azshara, Overloaded Arcane Prism from Arcane Torrents in the Western wing of Dire Maul and a Slumberer's Shard from Weaver in the Sunken Temple. Report to Itharius in the Swamp of Sorrows with the collected items.",
+				["title"] = "Into the Dream III",
+				["prequest"] = "Into the Dream I -> Into the Dream II",
+				["location"] = "Ralathius (Hyjal - Nordanaar; "..NORMAL.."[81.6,27.7]"..WHITE.." a green dragonkin)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Gemstone of Ysera",
+						["id"] = 50545,
+						["icon"] = "INV_Misc_Gem_Emerald_02",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Into the Dream IV - VI",
+			},
+		},
+		["story"] = "Свыше тысячи лет назад, могущественная империя Гурбаши была разорвана на части всеобщей гражданской войной. Влиятельная группа жрецов троллей, известная как Атал'аи, предприняла попытку призвать древнего кровавого бога по имени Хаккар Свежеватель Душ. Несмотря на то, что жрецы потерпели поражение и были изгнаны навеки, великая империя троллей не смогла сохранить целостность. Изгнанные жрецы бежали далеко на север, в Болота Печали. Там они возвели великий храм в честь Хаккара - где они могли приготовиться к его прибытию в материальный мир. Великий дракон Аспект, Изера, узнала о планах Атал'аи и утопила храм в болотах. На сегодняшний день, затопленные руины храма охраняются зелеными драконами, которые следят за тем, чтобы никто не входил и не выходил оттуда. Однако, есть мнение, что несколько фанатичных Атал'аи могли выжить и сбежать от гнева Изеры - а теперь вновь посвятили себя темному служению Хаккару.",
+		["name"] = "Затонувший храм",
+	},
+	[29] = {
+		[1] = {
+			[1] = {
+				["note"] = "Калестраз (Храм Ан'Кираж; |cffffff002'"..WHITE..")\nНаграды перечислены для следующего задания.",
+				["id"] = 8801,
+				["attain"] = 60,
+				["aim"] = "Принесите Глаз К'Туна Келестрасу в Храм Ан'Кирая.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amulet of the Fallen God",
+						["id"] = 21712,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_02",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Cloak of the Fallen God",
+						["id"] = 21710,
+						["icon"] = "INV_Misc_Cape_10",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of the Fallen God",
+						["id"] = 21709,
+						["icon"] = "INV_Jewelry_Ring_AhnQiraj_02",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Спаситель Калимдора",
+				["location"] = "Око К'Туна (добывается с К'Туна; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Наследие К'Туна",
+			},
+			[2] = {
+				["note"] = "Отнесите его Андоргосу (Храм Ан'Кираж; |cffffff001'"..WHITE..").",
+				["id"] = 8784,
+				["attain"] = 60,
+				["aim"] = "Принесите древний киражский артефакт драконам, которые укрылись в храме, недалеко от входа.",
+				["title"] = "Секреты Кираи",
+				["location"] = "Древний киражский артефакт (случайная добыча в Храме Ан'Кираж)",
+				["level"] = 60,
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Калестраз (Храм Ан'Кираж; |cffffff002'"..WHITE..")\nНаграды перечислены для следующего задания.",
+				["id"] = 8801,
+				["attain"] = 60,
+				["aim"] = "Принесите Глаз К'Туна Келестрасу в Храм Ан'Кирая.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Amulet of the Fallen God",
+						["id"] = 21712,
+						["icon"] = "INV_Jewelry_Necklace_AhnQiraj_02",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Cloak of the Fallen God",
+						["id"] = 21710,
+						["icon"] = "INV_Misc_Cape_10",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of the Fallen God",
+						["id"] = 21709,
+						["icon"] = "INV_Jewelry_Ring_AhnQiraj_02",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Спаситель Калимдора",
+				["location"] = "Око К'Туна (добывается с К'Туна; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Наследие К'Туна",
+			},
+			[2] = {
+				["note"] = "Отнесите его Андоргосу (Храм Ан'Кираж; |cffffff001'"..WHITE..").",
+				["id"] = 8784,
+				["attain"] = 60,
+				["aim"] = "Принесите древний киражский артефакт драконам, которые укрылись в храме, недалеко от входа.",
+				["title"] = "Секреты Кираи",
+				["location"] = "Древний киражский артефакт (случайная добыча в Храме Ан'Кираж)",
+				["level"] = 60,
+			},
+		},
+		["story"] = "В сердце Ан'Киража лежит древний храмовый квартал. Построенный в незапамятные времена, он напоминает о неназываемых богах и служит огромным инкубатором для киражской армии. Вот уже тысячу лет, со дня окончания войны Зыбучих Песков, императоры-близнецы заключены в собственном храме. Их едва удерживает магический барьер, воздвигнутый бронзовым драконом Анахроносом и ночными эльфами. Скипетр Зыбучих Песков восстановлен, а печать разбита, и путь во внутреннее святилище Ан'Киража открыт. Среди кишащих силитидов за храмом Ан'Киража, киражские легионы готовятся к вторжению. Их надо остановить любой ценой, прежде чем армии инсектоидов снова обрушатся на Калимдор и начнется вторая война Зыбучих Песков!",
+		["name"] = "Храм Ан'Киража",
+	},
+	[30] = {
+		[1] = {
+			[1] = {
+				["note"] = "Линейка заданий начинается у укротителя грифонов Разящего Когтя (Внутренние земли - Цитадель Громового Молота; |cffffff009,44"..WHITE..").\nНекрум появляется около |cffffff00[4]"..WHITE.." с последней волной боя Храмового события.",
+				["id"] = 2991,
+				["attain"] = 40,
+				["aim"] = "Отнесите медальон Некрума Тадиусу Мрачной Тени в Выжженные земли.",
+				["followup"] = "Прорицание",
+				["prequest"] = "Тролльи клетки -> Тадиус Мрачная Тень",
+				["location"] = "Тадиус Мрачная Тень (Выжженные земли - Крепость Стражей Пустоты; |cffffff0066,19"..WHITE..")",
+				["level"] = 47,
+				["title"] = "Медальон Некрума",
+			},
+			[2] = {
+				["note"] = "Месиво падет со всех троллей.",
+				["id"] = 3042,
+				["attain"] = 40,
+				["aim"] = "Принесите 20 фиалов с Тролльим месивом.",
+				["title"] = "Троллье месиво",
+				["location"] = "Трентон Молот Света (Танарис - Прибамбасск; |cffffff0051,28"..WHITE..")",
+				["level"] = 45,
+			},
+			[3] = {
+				["note"] = "Предшествующее задание начинается у Кразека (Тернистая долина - Пиратская бухта; |cffffff0025,77"..WHITE..").\nПанцири могут упасть с любого скарабея. Множество скарабеев находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 2865,
+				["attain"] = 40,
+				["aim"] = "Принесите Транреку в Гаджетзане 5 нерасколотых раковин скарабея.",
+				["title"] = "Раковины скарабеев",
+				["location"] = "Тран'рек (Танарис - Прибамбасск; |cffffff0051,26"..WHITE..")",
+				["level"] = 45,
+				["prequest"] = "Тран'рек",
+			},
+			[4] = {
+				["note"] = "Возьмите предшествующее задание у Бинк (Стальгорн; |cffffff0025,8"..WHITE..").\nТиара глубин добывается с гидроманта Велраты около |cffffff00[6]"..WHITE..".",
+				["id"] = 2846,
+				["attain"] = 40,
+				["aim"] = "Принесите Тиару Глубин Табете в Пыльную Трясину.",
+				["prequest"] = "Миссия Табеты",
+				["title"] = "Тиара Глубин",
+				["location"] = " Табета (Пылевые топи; |cffffff0046,57"..WHITE..")",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Spellshifter Rod",
+						["id"] = 9527,
+						["icon"] = "INV_Wand_11",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Gemshale Pauldrons",
+						["id"] = 9531,
+						["icon"] = "INV_Shoulder_23",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы возьмете предшествующее задание у того же НИП.\nТаблички падают с Теки Мученика около |cffffff00[2]"..WHITE.." и гидроманта Велраты около |cffffff00[6]"..WHITE..".",
+				["id"] = 3527,
+				["attain"] = 40,
+				["aim"] = "Принесите первую и вторую таблички Мошару Йе'кинье в Танарис.",
+				["followup"] = "Древнее яйцо",
+				["prequest"] = "Духи крикунов",
+				["location"] = "Йе'кинья (Танарис - Порт Картеля; |cffffff0066,22"..WHITE..")",
+				["level"] = 47,
+				["title"] = "Пророчество Мошару",
+			},
+			[6] = {
+				["note"] = "Вы заберете жезл у сержанта Блая. Вы найдете его около |cffffff00[4]"..WHITE.." после Храмового события.",
+				["id"] = 2768,
+				["attain"] = 40,
+				["aim"] = "Принесите изыскательский cтержень главному инженеру Чепухастеру в Прибамбасск.",
+				["title"] = "Изыскательский стержень",
+				["location"] = "Главный инженер Чепухастер (Танарис - Прибамбасск; |cffffff0052,28"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Masons Fraternity Ring",
+						["id"] = 9533,
+						["icon"] = "INV_Jewelry_Ring_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Engineer's Guild Headpiece",
+						["id"] = 9534,
+						["icon"] = "INV_Helmet_33",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы возьмете предшествующее задание у Клацморта Гайкокрута (Стальгорн - Город механиков; |cffffff0068,46"..WHITE.."). Чтобы получить задание Газ'рилла, предшествующее задание выполнять необязательно.\nВы вызовете Газ'риллу около |cffffff00[6]"..WHITE.." с помощью Молота Зул'Фаррака.\nСвященный молот добывается с Квиаги Хранительницы (Внутренние земли - Алтарь Зула; |cffffff0049,70"..WHITE..") и должен быть завершен на алтаре в Джинта'Алоре около |cffffff0059,77"..WHITE.." перед тем как его можно будет использовать в Зул'Фарраке.",
+				["id"] = 2770,
+				["attain"] = 40,
+				["aim"] = "Принесите искрящую чешую Газ'риллы Виззлу Медноштифу на Мерцающую равнину.",
+				["prequest"] = "Братья Медноштиф",
+				["title"] = "Газ'рилла",
+				["location"] = "Виззл Медноштиф (Тысяча Игл - Миражи на виражах; |cffffff0078,77"..WHITE..")",
+				["level"] = 50,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Carrot on a Stick",
+						["id"] = 11122,
+						["icon"] = "INV_Misc_Food_54",
+						["quality"] = 2,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "In the room with Witch Doctor Zum'Rah "..NORMAL.."[3]"..WHITE.." Ancient Burial Container (little green wooden box).",
+				["id"] = 40519,
+				["attain"] = 40,
+				["aim"] = "Отправляйтесь в Зул'Фаррак и найдите останки Древних троллей, верните их Хансу Го'ша, который бродит по руинам Южной Луны в Танарисе.",
+				["title"] = "Дрейфующий по песку",
+				["location"] = "Hansu Go'sha (Tanaris - Ogre camp near Uldum; "..NORMAL.."40.6,71.5"..WHITE.." or wandering around the ruins).",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Southmoon Pendant",
+						["id"] = 60759,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 2,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Линейка заданий начинается с Бутылки с ядом, которые стоят на столах в деревнях троллей во Внутренних землях.\nВы найдете табличку около |cffffff00[2]"..WHITE..".",
+				["id"] = 2936,
+				["attain"] = 40,
+				["aim"] = "Прочитайте надписи на табличке Теки, узнайте имя паучьей богини, которой поклоняются тролли Сухокожих, а потом возвращайтесь к мастеру Гадрину.",
+				["followup"] = "Призыв Шадры",
+				["prequest"] = "Бутыли с ядом -> Разговор с мастером Гадрином",
+				["location"] = "Мастер Гадрин (Дуротар - Деревня Сен'джин; |cffffff0055,74"..WHITE..")",
+				["level"] = 45,
+				["title"] = "Паучья богиня",
+			},
+			[2] = {
+				["note"] = "Месиво падет со всех троллей.",
+				["id"] = 3042,
+				["attain"] = 40,
+				["aim"] = "Принесите 20 фиалов с Тролльим месивом.",
+				["title"] = "Троллье месиво",
+				["location"] = "Трентон Молот Света (Танарис - Прибамбасск; |cffffff0051,28"..WHITE..")",
+				["level"] = 45,
+			},
+			[3] = {
+				["note"] = "Предшествующее задание начинается у Кразека (Тернистая долина - Пиратская бухта; |cffffff0025,77"..WHITE..").\nПанцири могут упасть с любого скарабея. Множество скарабеев находится около |cffffff00[2]"..WHITE..".",
+				["id"] = 2865,
+				["attain"] = 40,
+				["aim"] = "Принесите Транреку в Гаджетзане 5 нерасколотых раковин скарабея.",
+				["title"] = "Раковины скарабеев",
+				["location"] = "Тран'рек (Танарис - Прибамбасск; |cffffff0051,26"..WHITE..")",
+				["level"] = 45,
+				["prequest"] = "Тран'рек",
+			},
+			[4] = {
+				["note"] = "Возьмите предшествующее задание у Бинк (Стальгорн; |cffffff0025,8"..WHITE..").\nТиара глубин добывается с гидроманта Велраты около |cffffff00[6]"..WHITE..".",
+				["id"] = 2846,
+				["attain"] = 40,
+				["aim"] = "Принесите Тиару Глубин Табете в Пыльную Трясину.",
+				["prequest"] = "Миссия Табеты",
+				["title"] = "Тиара Глубин",
+				["location"] = " Табета (Пылевые топи; |cffffff0046,57"..WHITE..")",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.STAFF,
+						["name"] = "Spellshifter Rod",
+						["id"] = 9527,
+						["icon"] = "INV_Wand_11",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.PLATE,
+						["name"] = "Gemshale Pauldrons",
+						["id"] = 9531,
+						["icon"] = "INV_Shoulder_23",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы возьмете предшествующее задание у того же НИП.\nТаблички падают с Теки Мученика около |cffffff00[2]"..WHITE.." и гидроманта Велраты около |cffffff00[6]"..WHITE..".",
+				["id"] = 3527,
+				["attain"] = 40,
+				["aim"] = "Принесите первую и вторую таблички Мошару Йе'кинье в Танарис.",
+				["followup"] = "Древнее яйцо",
+				["prequest"] = "Духи крикунов",
+				["location"] = "Йе'кинья (Танарис - Порт Картеля; |cffffff0066,22"..WHITE..")",
+				["level"] = 47,
+				["title"] = "Пророчество Мошару",
+			},
+			[6] = {
+				["note"] = "Вы заберете жезл у сержанта Блая. Вы найдете его около |cffffff00[4]"..WHITE.." после Храмового события.",
+				["id"] = 2768,
+				["attain"] = 40,
+				["aim"] = "Принесите изыскательский cтержень главному инженеру Чепухастеру в Прибамбасск.",
+				["title"] = "Изыскательский стержень",
+				["location"] = "Главный инженер Чепухастер (Танарис - Прибамбасск; |cffffff0052,28"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Masons Fraternity Ring",
+						["id"] = 9533,
+						["icon"] = "INV_Jewelry_Ring_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Engineer's Guild Headpiece",
+						["id"] = 9534,
+						["icon"] = "INV_Helmet_33",
+						["quality"] = 3,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Вы возьмете предшествующее задание у Клацморта Гайкокрута (Стальгорн - Город механиков; |cffffff0068,46"..WHITE.."). Чтобы получить задание Газ'рилла, предшествующее задание выполнять необязательно.\nВы вызовете Газ'риллу около |cffffff00[6]"..WHITE.." с помощью Молота Зул'Фаррака.\nСвященный молот добывается с Квиаги Хранительницы (Внутренние земли - Алтарь Зула; |cffffff0049,70"..WHITE..") и должен быть завершен на алтаре в Джинта'Алоре около |cffffff0059,77"..WHITE.." перед тем как его можно будет использовать в Зул'Фарраке.",
+				["id"] = 2770,
+				["attain"] = 40,
+				["aim"] = "Принесите искрящую чешую Газ'риллы Виззлу Медноштифу на Мерцающую равнину.",
+				["prequest"] = "Братья Медноштиф",
+				["title"] = "Газ'рилла",
+				["location"] = "Виззл Медноштиф (Тысяча Игл - Миражи на виражах; |cffffff0078,77"..WHITE..")",
+				["level"] = 50,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Carrot on a Stick",
+						["id"] = 11122,
+						["icon"] = "INV_Misc_Food_54",
+						["quality"] = 2,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "In the room with Witch Doctor Zum'Rah "..NORMAL.."[3]"..WHITE.." Ancient Burial Container (little green wooden box).",
+				["id"] = 40519,
+				["attain"] = 40,
+				["aim"] = "Отправляйтесь в Зул'Фаррак и найдите останки Древних троллей, верните их Хансу Го'ша, который бродит по руинам Южной Луны в Танарисе.",
+				["title"] = "Дрейфующий по песку",
+				["location"] = "Hansu Go'sha (Tanaris - Ogre camp near Uldum; "..NORMAL.."40.6,71.5"..WHITE.." or wandering around the ruins).",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Southmoon Pendant",
+						["id"] = 60759,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 2,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "The Questline starts with quest 'Sandfury Redemption I' at Seer Maz'ek in Sandmoon Village(Tanaris) "..NORMAL.."59.1,17.1"..WHITE..".",
+				["id"] = 40527,
+				["attain"] = 40,
+				["aim"] = "Убейте Укорза Сэндскалпа и Руузлу в Зул'Фарраке за титул чемпиона Таза'го в деревне Сандмун в Танарисе.",
+				["title"] = "Конец Укорз Пескоструйный",
+				["location"] = "Champion Taza'go (Tanaris - Sandmoon Village; northeast corner of Tanaris, northwest from Steamwheedle Port)",
+				["level"] = 48,
+				["prequest"] = "Plight of the Sandfury",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.SWORD,
+						["name"] = "The Dune Blade",
+						["id"] = 60764,
+						["icon"] = "INV_Sword_36",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Sandmoon Greaves",
+						["id"] = 60765,
+						["icon"] = "INV_Pants_03",
+						["quality"] = 2,
+					},
+				},
+			},
+		},
+		["story"] = "Этот выжженый солнцем город служит домом троллям из клана Песчаной Ярости, известных своей редкостной безжалостностью и темным мистицизмом. Легенды троллей рассказывают о мощном мече называемом Кара Суль-траза, оружие, способное вселять страх и слабость жаже самым грозным врагам. Давным-давно, оружие было разбито на две части. Однако, ходят слухи, что в где-то стенах Зул'Фаррака можно найти обе половинки. Докладывают также, что банда наемников, бежавших из Прибамбасска забрела в город и попала в ловушку. Их судьба неизвестна. Но возможно самым волнующим из всего - этотихие перешептывания о древнем чудовище, спящим в священном бассейне в самом сердце города. Могучем полубоге, который нанесет неисчислимый ущерб любому авантюристу, имевшему глупость пробудить его.",
+		["name"] = "Зул'Фаррак",
+	},
+	[31] = {
+		[1] = {
+			[1] = {
+				["note"] = "Убедитесь, что вы осмотрели всех жрецов.",
+				["id"] = 8201,
+				["attain"] = 58,
+				["aim"] = "Нанизайте 5 голов Ченнелера, затем верните коллекцию голов троллей Эксжалу на острове Йоджамба.",
+				["title"] = "Коллекция голов",
+				["location"] = "Экзал (Тернистая долина - Остров Йоджамба; |cffffff0015,15"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.PLATE,
+						["name"] = "Belt of Shrunken Heads",
+						["id"] = 20213,
+						["icon"] = "INV_Belt_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Belt of Shriveled Heads",
+						["id"] = 20215,
+						["icon"] = "INV_Belt_12",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Belt of Preserved Heads",
+						["id"] = 20216,
+						["icon"] = "INV_Belt_14",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Belt of Tiny Heads",
+						["id"] = 20217,
+						["icon"] = "INV_Belt_13",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Молтор (Тернистая долина - Остров Йоджамба; |cffffff0015,15"..WHITE..")",
+				["id"] = 8183,
+				["attain"] = 58,
+				["aim"] = "Принесите сердце Хаккара Молтору на остров Йоджамба.",
+				["title"] = "Сердце Хаккара",
+				["location"] = "Сердце Хаккара (добывается с Хаккара; |cffffff00[11]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Zandalarian Hero Badge",
+						["id"] = 19948,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Zandalarian Hero Charm",
+						["id"] = 19950,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Zandalarian Hero Medallion",
+						["id"] = 19949,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 4,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Нат Пэгл в Пылевых топях (|cffffff0059,60"..WHITE.."). Выполнение задания позволяет купить Наживки на грязнотинника у Ната Пэгла для вызова Газ'ранки в Зул'Гурубе.",
+				["id"] = 8227,
+				["attain"] = 58,
+				["aim"] = "Верните измерительную ленту Нату Пэглу. Найти Пэгла можно в Пылевых топях.",
+				["title"] = "Измерительная лента Ната",
+				["location"] = "Побитый ящик для рыболовной снасти (Зул'Гуруб -  около воды на северо-востоке от острова Хаккара)",
+				["level"] = 60,
+			},
+			[4] = {
+				["note"] = "Ядовитая железа Веноксиса добывается с Верховного жреца Веноксиса в |cffffff00Зул'Гурубе"..WHITE..". Ядовитая железа Куриннакса добывается в |cffffff00Руинах Ан'Киража"..WHITE.." at |cffffff00[1]"..WHITE..".",
+				["id"] = 9023,
+				["attain"] = 60,
+				["aim"] = "Дирк Громодрев из Крепости Кенария попросил принести ему ядовитую железу Веноксиса и ядовитую железу Куриннакса.",
+				["title"] = "Идеальный яд",
+				["location"] = "Дирк Громодрев (Силитус - Крепость Кенария; |cffffff0052,39"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Ravenholdt Slicer",
+						["id"] = 22378,
+						["icon"] = "INV_Sword_38",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.DAGGER,
+						["name"] = "Shivsprocket's Shiv",
+						["id"] = 22379,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "The Thunderwood Poker",
+						["id"] = 22377,
+						["icon"] = "INV_Sword_17",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Doomulus Prime",
+						["id"] = 22348,
+						["icon"] = "INV_Hammer_10",
+						["quality"] = 3,
+					},
+					[5] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Fahrad's Reloading Repeater",
+						["id"] = 22347,
+						["icon"] = "INV_Weapon_Crossbow_04",
+						["quality"] = 3,
+					},
+					[6] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Simone's Cultivating Hammer",
+						["id"] = 22380,
+						["icon"] = "INV_Hammer_05",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Убедитесь, что вы осмотрели всех жрецов.",
+				["id"] = 8201,
+				["attain"] = 58,
+				["aim"] = "Нанизайте 5 голов Ченнелера, затем верните коллекцию голов троллей Эксжалу на острове Йоджамба.",
+				["title"] = "Коллекция голов",
+				["location"] = "Экзал (Тернистая долина - Остров Йоджамба; |cffffff0015,15"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.PLATE,
+						["name"] = "Belt of Shrunken Heads",
+						["id"] = 20213,
+						["icon"] = "INV_Belt_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Belt of Shriveled Heads",
+						["id"] = 20215,
+						["icon"] = "INV_Belt_12",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.LEATHER,
+						["name"] = "Belt of Preserved Heads",
+						["id"] = 20216,
+						["icon"] = "INV_Belt_14",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Belt of Tiny Heads",
+						["id"] = 20217,
+						["icon"] = "INV_Belt_13",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Молтор (Тернистая долина - Остров Йоджамба; |cffffff0015,15"..WHITE..")",
+				["id"] = 8183,
+				["attain"] = 58,
+				["aim"] = "Принесите сердце Хаккара Молтору на остров Йоджамба.",
+				["title"] = "Сердце Хаккара",
+				["location"] = "Сердце Хаккара (добывается с Хаккара; |cffffff00[11]"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Zandalarian Hero Badge",
+						["id"] = 19948,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Zandalarian Hero Charm",
+						["id"] = 19950,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Zandalarian Hero Medallion",
+						["id"] = 19949,
+						["icon"] = "INV_Jewelry_Necklace_13",
+						["quality"] = 4,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Нат Пэгл в Пылевых топях (|cffffff0059,60"..WHITE.."). Выполнение задания позволяет купить Наживки на грязнотинника у Ната Пэгла для вызова Газ'ранки в Зул'Гурубе.",
+				["id"] = 8227,
+				["attain"] = 58,
+				["aim"] = "Верните измерительную ленту Нату Пэглу. Найти Пэгла можно в Пылевых топях.",
+				["title"] = "Измерительная лента Ната",
+				["location"] = "Побитый ящик для рыболовной снасти (Зул'Гуруб -  около воды на северо-востоке от острова Хаккара)",
+				["level"] = 60,
+			},
+			[4] = {
+				["note"] = "Ядовитая железа Веноксиса добывается с Верховного жреца Веноксиса в |cffffff00Зул'Гурубе"..WHITE..". Ядовитая железа Куриннакса добывается в |cffffff00Руинах Ан'Киража"..WHITE.." at |cffffff00[1]"..WHITE..".",
+				["id"] = 9023,
+				["attain"] = 60,
+				["aim"] = "Дирк Громодрев из Крепости Кенария попросил принести ему ядовитую железу Веноксиса и ядовитую железу Куриннакса.",
+				["title"] = "Идеальный яд",
+				["location"] = "Дирк Громодрев (Силитус - Крепость Кенария; |cffffff0052,39"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.SWORD,
+						["name"] = "Ravenholdt Slicer",
+						["id"] = 22378,
+						["icon"] = "INV_Sword_38",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.DAGGER,
+						["name"] = "Shivsprocket's Shiv",
+						["id"] = 22379,
+						["icon"] = "INV_Sword_21",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.DAGGER,
+						["name"] = "The Thunderwood Poker",
+						["id"] = 22377,
+						["icon"] = "INV_Sword_17",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Doomulus Prime",
+						["id"] = 22348,
+						["icon"] = "INV_Hammer_10",
+						["quality"] = 3,
+					},
+					[5] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Fahrad's Reloading Repeater",
+						["id"] = 22347,
+						["icon"] = "INV_Weapon_Crossbow_04",
+						["quality"] = 3,
+					},
+					[6] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Simone's Cultivating Hammer",
+						["id"] = 22380,
+						["icon"] = "INV_Hammer_05",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = {
+			[1] = "Свыше тысячи лет назад, могущественная империя Гурбаши была разорвана на части всеобщей гражданской войной. Влиятельная группа жрецов троллей, известная как Атал'аи, предприняла попытку призвать древнего кровавого бога по имени Хаккар Свежеватель душ. Несмотря на то, что жрецы потерпели поражение и были изгнаны навеки, великая империя троллей не смогла сохранить целостность. Изгнанные жрецы бежали далеко на север, в Болота Печали. Там они возвели великий храм в честь Хаккара - где они могли приготовиться к его прибытию в материальный мир.",
+			[2] = "В тоже время, жрецы Атал'аи обнаружили, что материальную форму Хаккара можно вызвать только в пределах древней столицы империи Гурубаши, Зул'Гурубе. К несчастью, жрецы преуспели в своем стремлении призвать Хаккара - донесения подтверждают присутсвие ужасного Свежевателя душ в сердце руин Гурубаши.\n\nДля того, чтобы подавить кровавого бога, тролли страны собрались вместе и послали отряд Высших жрецов в древний город. Каждый жрец был могучим чемпионом Звериных боов - Летучей мыши, Пантеры, Тигра, Паука, и Змеи - но несмотря на все их усилия, они попали под влияние Хаккара. Теперь чемпионы и их воплощения Звериных богов вскормлены ужасающей силой Свежевателя душ. Любой авантюрист, храбрый настолько, чтобы отважиться забраться в проклятые руины, должен победить Высших жрецов, если он надется хотя бы вступить в схватку с могущественным кровавым богом.",
+		},
+		["name"] = "Зул'Гуруб",
+	},
+	[32] = {
+		[1] = {
+			[1] = {
+				["note"] = "Вы возьмете предшествующее задание у брата Сарно (Штормград - Соборная площадь; |cffffff0040, 30"..WHITE..").\nВы найдете Техбота перед входом в подземелье около черного входа.",
+				["id"] = 2922,
+				["attain"] = 20,
+				["aim"] = "Принесите ядро памяти Техбота мехмастеру Замыкальцу в Стальгорн.",
+				["title"] = "Промыть мозг Техботу",
+				["location"] = "Мехмастер Замыкалец (Стальгорн - Город механиков; |cffffff0069,50"..WHITE..")",
+				["level"] = 26,
+				["prequest"] = "Мехмастер Замыкалец",
+			},
+			[2] = {
+				["note"] = "Вы возьмете предшествующее задание у Гноарна (Стальгорн - Город механиков; |cffffff0069,50"..WHITE..").\nЧтобы собрать осадок используйте фиал на "..RED.."живых"..WHITE.." Облученный захватчиках или Облученных погромщиках.",
+				["id"] = 2926,
+				["attain"] = 20,
+				["aim"] = "Соберите радиоактивный осадок, оставляемый облученными захватчиками и облученными погромщиками в пустой свинцовый фиал для образцов. Принесите полный фиал Оззи Триггервольту в Каранос.",
+				["followup"] = "Сильное зеленое свечение",
+				["prequest"] = "На другой день",
+				["location"] = "Оззи Триггервольт (Дун Морог - Каранос; |cffffff0045,49"..WHITE..")",
+				["level"] = 27,
+				["title"] = "Новая формула",
+			},
+			[3] = {
+				["note"] = "Чтобы собрать образцы используйте фиал на "..RED.."живых"..WHITE.." Облученных слизях или ужасах.",
+				["id"] = 2962,
+				["attain"] = 20,
+				["aim"] = "Отправляйтесь в Гномреган и принесите высокорадиоактивные образцы. Внимание: отходы нестабильны и довольно быстро разрушаются.$B$BВерните Оззи тяжелую освинцованную склянку для проб, когда задача будет выполнена.",
+				["title"] = "Сильное зеленое свечение",
+				["location"] = "Оззи Триггервольт (Дун Морог - Каранос; |cffffff0045,49"..WHITE..")",
+				["level"] = 30,
+				["prequest"] = "Новая формула",
+			},
+			[4] = {
+				["note"] = "Внутренности падают со всех роботов.",
+				["id"] = 2928,
+				["attain"] = 20,
+				["aim"] = "Принесите Шони в Штормград 24 горсти механических внутренностей роботов.",
+				["title"] = "Сооружение автогиробуророек",
+				["location"] = "Шони Молшунья (Штормград - Квартал дворфов; |cffffff0055, 12"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.OFFHAND..", "..L.AXE,
+						["name"] = "Shoni's Disarming Tool",
+						["id"] = 9608,
+						["icon"] = "INV_Misc_Wrench_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.CLOTH,
+						["name"] = "Shilly Mitts",
+						["id"] = 9609,
+						["icon"] = "INV_Gauntlets_27",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Вы возьмете предшествующее задание у Матиля (Дарнасс - Терраса Воинов; |cffffff0059,45"..WHITE.."). Предшествующее задание только указывает на задание и необязательно, чтобы взять это.\nБазовые элементы собираются со всех машин, разбросанных по подземелью.",
+				["id"] = 2924,
+				["attain"] = 24,
+				["aim"] = "Принесите 12 базовых элементов Клацморту Гайкокруту в Стальгорн.",
+				["title"] = "Базовый элемент",
+				["location"] = "Клацморт Гайкокрут (Стальгорн - Город механиков; |cffffff0068,46"..WHITE..")",
+				["level"] = 30,
+				["prequest"] = "Базовые элементы Клацморта",
+			},
+			[6] = {
+				["note"] = "Вы получите предшествующее задание у Гаксима Ржавошиппи (Когтистые горы; |cffffff0059,67"..WHITE.."). Предшествующее задание только указывает на задание и необязательно, чтобы взять это.\nПустая карта добывается случайно. Вы найдете первый терминал около черного входа, перед входом в подземелье. 3005-B находится около |cffffff00[3]"..WHITE..", 3005-C около |cffffff00[5]"..WHITE.." и 3005-D находится около |cffffff00[8]"..WHITE..".",
+				["id"] = 2930,
+				["attain"] = 25,
+				["aim"] = "Принесите призматическую перфокарту главному механику Чугунотрубзу в Стальгорн.",
+				["prequest"] = "Поручение Чугонотрубза",
+				["title"] = "Спасение данных",
+				["location"] = "Главный механик Чугонотрубз (Стальгорн - Город механиков; |cffffff0069,48"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.BACK,
+						["name"] = "Repairman's Cape",
+						["id"] = 9605,
+						["icon"] = "INV_Misc_Cape_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.MACE,
+						["name"] = "Mechanic's Pipehammer",
+						["id"] = 9604,
+						["icon"] = "INV_Mace_04",
+						["quality"] = 2,
+					},
+				},
+			},
+			[7] = {
+				["note"] = "Задание сопровождения! Вы найдете Скути в Тернистой долине - Пиратская бухта (|cffffff0027,77"..WHITE..").",
+				["id"] = 2904,
+				["attain"] = 24,
+				["aim"] = "Отведите Керноби к Часовому ходу. Затем отправляйтесь с донесением к Скути в Пиратскую бухту.",
+				["title"] = "Катавасия",
+				["location"] = "Керноби (Гномреган; |cffffff00[3]"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Fire-welded Bracers",
+						["id"] = 9535,
+						["icon"] = "INV_Bracer_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Fairywing Mantle",
+						["id"] = 9536,
+						["icon"] = "INV_Shoulder_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[8] = {
+				["note"] = "Вы найдете Термоштепселя около |cffffff00[6]"..WHITE..". Он - последний босс в Гномрегане.\nВо время боя вы должны обезвредить колонны нажатием кнопок на боковой поверхности.",
+				["id"] = 2929,
+				["attain"] = 25,
+				["aim"] = "Отправляйтесь в Гномреган и убейте Мекжинера Термоштепселя. Вернитесь к Главному Механику Меггакруту.",
+				["title"] = "Великое предательство",
+				["location"] = "Главный Механик Меггакрут (Стальгорн - Город механиков; |cffffff0068,48"..WHITE..")",
+				["level"] = 35,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Civinad Robes",
+						["id"] = 9623,
+						["icon"] = "INV_Chest_Cloth_18",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Triprunner Dungarees",
+						["id"] = 9624,
+						["icon"] = "INV_Pants_08",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Dual Reinforced Leggings",
+						["id"] = 9625,
+						["icon"] = "INV_Pants_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[9] = {
+				["note"] = "Кольцо может быть очищено в Чистере 5200 около |cffffff00[2]"..WHITE..".",
+				["id"] = 2945,
+				["attain"] = 28,
+				["aim"] = "Придумайте, как отчистить кольцо, покрытое грязью.",
+				["title"] = "Кольцо, покрытое грязью",
+				["location"] = "Покрытое грязью кольцо (случайная добыча в Гномрегане)",
+				["level"] = 34,
+				["followup"] = "Возвращение кольца",
+			},
+			[10] = {
+				["note"] = "Отнесите Талвашу дель Кисселью (Стальгорн - Палаты Магии; |cffffff0036,3"..WHITE.."). Усиление кольца не является обязательным.",
+				["id"] = 2949,
+				["attain"] = 28,
+				["aim"] = "Вы можеть оставить кольцо себе, а можете попытаться найти того, чьи инициалы выгравированы на внутренней стороне кольца.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Brilliant Gold Ring",
+						["id"] = 9362,
+						["icon"] = "INV_Jewelry_Ring_03",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Возвращение кольца",
+				["prequest"] = "Кольцо, покрытое грязью",
+				["location"] = "Сверкающее золотое кольцо (награда за задание 'Кольцо, покрытое грязью')",
+				["level"] = 34,
+				["followup"] = "Гномское усовершенствование",
+			},
+			[11] = {
+				["note"] = "Intact Pounder Mainframe that starts the quest can drop from Crowd Pummeler 9-60 "..NORMAL.."[6]"..WHITE.." (low chance).\nAvailable for Engineers with 125+ skill.",
+				["id"] = 80398,
+				["attain"] = 30,
+				["aim"] = "Найдите кого-нибудь, кто сможет разобраться, что делать с мэйнфреймом.",
+				["title"] = "Пульсирующий мозг",
+				["location"] = "Intact Pounder Mainframe",
+				["level"] = 30,
+				["followup"] = "To Build a Pounder",
+			},
+			[12] = {
+				["note"] = "Schematic: High Energy Regulator is on the table at "..NORMAL.."[3]"..WHITE.." southeastern corner lower south chamber "..NORMAL.."[a]"..WHITE..".",
+				["id"] = 40861,
+				["attain"] = 25,
+				["aim"] = "Find the Schematic: High Energy Regulator within Gnomeregan and bring it to Weezan Littlegear at the Gnomeregan Reclamation Facility in Dun Morogh.",
+				["title"] = "High Energy Regulator",
+				["location"] = "Weezan Littlegear (Dun Morogh - Gnomeregan Reclamation Facility "..NORMAL.."[25.2,31.6]"..WHITE..")",
+				["level"] = 33,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Low Energy Regulator",
+						["id"] = 61393,
+						["icon"] = "INV_Gizmo_06",
+						["quality"] = 2,
+					},
+				},
+			},
+			[13] = {
+				["note"] = "Alpha Channel Valve is at "..NORMAL.."[6]"..WHITE..", use elevetaor to go down. south side of the central mechanism.\nReserve Pump Channel Lever is at "..NORMAL.."[b]"..WHITE.." on the floor.",
+				["id"] = 40856,
+				["attain"] = 25,
+				["aim"] = "Activate the Alpha Channel Valve and the Reserve Pump Channel Lever deep within Gnomeregan for Master Technician Wirespanner in Dun Morogh.",
+				["title"] = "Backup System Activation",
+				["location"] = "Master Technician Wirespanner (Dun Morogh - Gnomeregan Reclamation Facility "..NORMAL.."[26.8,31.1]"..WHITE..")",
+				["level"] = 33,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.GUN,
+						["name"] = "Intricate Gnomish Blunderbuss",
+						["id"] = 61383,
+						["icon"] = "INV_Weapon_Rifle_TWoW_01_Gold_Noglow",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Ionized Metal Grips",
+						["id"] = 61384,
+						["icon"] = "INV_Gauntlets_29",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Magnetic Band",
+						["id"] = 61385,
+						["icon"] = "INV_Belt_27",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Вы получите предшествующее задание у Совика (Оргриммар - Аллея Чести; |cffffff0075,25"..WHITE..").\nПосле выполнения этого задания вы сможете использовать телепортатор в Пиратской бухте.",
+				["id"] = 2843,
+				["attain"] = 20,
+				["aim"] = "Дождитесь, пока Скути настроит гоблинский импульсный повторитель.",
+				["title"] = "Поехалиии!",
+				["location"] = "Скути (Тернистая долина - Пиратская бухта; |cffffff0027,77"..WHITE..")",
+				["level"] = 35,
+				["prequest"] = "Главный инженер Скути",
+			},
+			[2] = {
+				["note"] = "Задание сопровождения! Вы найдете Скути в Тернистой долине - Пиратская бухта (|cffffff0027,77"..WHITE..").",
+				["id"] = 2904,
+				["attain"] = 24,
+				["aim"] = "Отведите Керноби к Часовому ходу. Затем отправляйтесь с донесением к Скути в Пиратскую бухту.",
+				["title"] = "Катавасия",
+				["location"] = "Керноби (Гномреган; |cffffff00[3]"..WHITE..")",
+				["level"] = 30,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.MAIL,
+						["name"] = "Fire-welded Bracers",
+						["id"] = 9535,
+						["icon"] = "INV_Bracer_02",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Fairywing Mantle",
+						["id"] = 9536,
+						["icon"] = "INV_Shoulder_02",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Вы найдете Термоштепселя около |cffffff00[6]"..WHITE..". Он - последний босс в Гномрегане.\nВо время боя вы должны обезвредить колонны нажатием кнопок на боковой поверхности.",
+				["id"] = 2841,
+				["attain"] = 25,
+				["aim"] = "Добудьте в Гномрегане чертежи боевой машины и код от сейфа Термоштепселя в Гномрегане и принесите их Ноггу в Оргриммар.",
+				["title"] = "Техновойны",
+				["location"] = "Ногг (Оргриммар - Аллея Чести; |cffffff0075,25"..WHITE..")",
+				["level"] = 35,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Civinad Robes",
+						["id"] = 9623,
+						["icon"] = "INV_Chest_Cloth_18",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.LEGS..", "..L.LEATHER,
+						["name"] = "Triprunner Dungarees",
+						["id"] = 9624,
+						["icon"] = "INV_Pants_08",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.MAIL,
+						["name"] = "Dual Reinforced Leggings",
+						["id"] = 9625,
+						["icon"] = "INV_Pants_03",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Кольцо может быть очищено в Чистере 5200 около |cffffff00[2]"..WHITE..".",
+				["id"] = 2945,
+				["attain"] = 28,
+				["aim"] = "Придумайте, как отчистить кольцо, покрытое грязью.",
+				["title"] = "Кольцо, покрытое грязью",
+				["location"] = "Покрытое грязью кольцо (случайная добыча в Гномрегане)",
+				["level"] = 34,
+				["followup"] = "Возвращение кольца",
+			},
+			[5] = {
+				["note"] = "Отнесите Ноггу (Оргриммар - Аллея Чести; |cffffff0075,25"..WHITE.."). Усиление кольца не является обязательным.",
+				["id"] = 2949,
+				["attain"] = 28,
+				["aim"] = "Вы можеть оставить кольцо себе, а можете попытаться найти того, чьи инициалы выгравированы на внутренней стороне кольца.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Brilliant Gold Ring",
+						["id"] = 9362,
+						["icon"] = "INV_Jewelry_Ring_03",
+						["quality"] = 2,
+					},
+				},
+				["title"] = "Возвращение кольца",
+				["prequest"] = "Кольцо, покрытое грязью",
+				["location"] = "Сверкающее золотое кольцо (награда за задание 'Кольцо, покрытое грязью')",
+				["level"] = 34,
+				["followup"] = "Переделка кольца",
+			},
+			[6] = {
+				["note"] = "Intact Pounder Mainframe that starts the quest can drop from Crowd Pummeler 9-60 "..NORMAL.."[6]"..WHITE.." (low chance).\nAvailable for Engineers with 125+ skill.",
+				["id"] = 80398,
+				["attain"] = 30,
+				["aim"] = "Найдите кого-нибудь, кто сможет разобраться, что делать с мэйнфреймом.",
+				["title"] = "Пульсирующий мозг",
+				["location"] = "Intact Pounder Mainframe",
+				["level"] = 30,
+				["followup"] = "To Build a Pounder",
+			},
+			[7] = {
+				["note"] = "Prequest 'A New Power Source' starts at Technician Spuzzle(Durotar - Sparkwater Port "..NORMAL.."57.4,25.8"..WHITE..") at level 7 .\nMegaflux Capacitor drops from Mekgineer Thermaplugg. You find Mekgineer Thermaplugg at "..NORMAL.."[8]"..WHITE..". He is the last boss in Gnomeregan.\nDuring the fight you have to disable the columns through pushing the button on the side.",
+				["id"] = 55006,
+				["attain"] = 29,
+				["aim"] = "Отнесите конденсатор Megaflux технику Гримзлоу.",
+				["title"] = "Резервный конденсатор",
+				["location"] = "Technician Grimzlow (Durotar - Sparkwater Port "..NORMAL.."57.4,25.7"..WHITE..").",
+				["level"] = 34,
+				["prequest"] = "A New Power Source",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.SHIELD,
+						["name"] = "Razorblade Buckler",
+						["id"] = 81319,
+						["icon"] = "INV_Shield_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.WAND,
+						["name"] = "Crackling Zapper",
+						["id"] = 81320,
+						["icon"] = "INV_Wand_04",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Находящееся в Дун Мороге, технологическое чудо, известное как Гномреган было столицей гномов на протяжении поколений. В недавнем прошлом, враждебная раса мутантов-троггов захватила некоторые регионы Дун Морога - включая и великий город гномов. В отчаянных попытках уничтожить вторгшихся троггов, Главный механик Меггакрут запустил экстренный слив городских баков с радиоактивными отходами. Некоторые гномы нашли убежище от загрязняющих воздух веществ, так как они ожидали, что трогги умрут или сбегут. К сожалению, не смотря на точто трогги облучились токсичной атакой - их осада продолжилась, не утихая. Те гномы, которых не убили вредные потоки были вынуждены бежать, ища убежище в близлежащем городе дворфов Стальгорне. Там Главный механик Меггакрут начал вербовать храбрецов, чтобы помочь его народу вернуть обратно их любимую столицу. Ходят слухи что когда-то бывший доверенный советник Меггакрута, Мекжинер Термоштепсель, предал свой народ, позволив вторжению произойти. Теперь, когда его рассудок помутился, Термоштепсель остается в Гномрегане - продвигая свои темные планы и действуя как новый техно-правитель города.",
+		["name"] = "Гномреган",
+	},
+	[33] = {
+		[1] = {
+			[1] = {
+				["note"] = "Задание завершается Хранителю Ремулу (Лунная поляна - Святилище Ремула; |cffffff0036,41"..WHITE.."). Награда перечислены для следующего задания..",
+				["id"] = 8446,
+				["attain"] = 60,
+				["aim"] = "Найдите того, кто сможет осознать значение поглощенного кошмарами предмета.$B$BМожет быть, вам сможет помочь могущественный друид.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Malfurion's Signet Ring",
+						["id"] = 20600,
+						["icon"] = "INV_Jewelry_Ring_37",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Пробуждение легенд",
+				["location"] = "Поглощенный кошмарами предмет (добывается с Эмерисс, Таэрара, Летона или Исондры)",
+				["level"] = 60,
+				["title"] = "Под покровом кошмара",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Задание завершается Хранителю Ремулу (Лунная поляна - Святилище Ремула; |cffffff0036,41"..WHITE.."). Награда перечислены для следующего задания..",
+				["id"] = 8446,
+				["attain"] = 60,
+				["aim"] = "Найдите того, кто сможет осознать значение поглощенного кошмарами предмета.$B$BМожет быть, вам сможет помочь могущественный друид.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Malfurion's Signet Ring",
+						["id"] = 20600,
+						["icon"] = "INV_Jewelry_Ring_37",
+						["quality"] = 4,
+					},
+				},
+				["followup"] = "Пробуждение легенд",
+				["location"] = "Поглощенный кошмарами предмет (добывается с Эмерисс, Таэрара, Летона или Исондры)",
+				["level"] = 60,
+				["title"] = "Под покровом кошмара",
+			},
+		},
+		["story"] = {
+			[1] = "Вновь всколыхнулись Великие Деревья, предчувствуя новую угрозу, грозящую обрушиться на Ясеневый лес, Сумеречный лес, Фералас и Внутренние земли. Четверо могущественных Хранителей из Стаи Зелёных Драконов покинули Сон, но теперь, некогда гордые Хранители несут лишь разрушение и смерть. Приготовьтесь к битве и войдите в скрытые от непосвящённых взглядов рощи, дабы спасти Азерот от скверны, несомой безумными Драконами. ",
+			[2] = "Изера - великий Грезящий дракон Аспект испокон веков управляет своей Стаей. Её предназначение, хранить фантастическое, мистическое царство Изумрудного Сна. Хранители природы и грёз, её Стая с древнейших времён защищала Великие Деревья по всему миру, используемые друидами для того, что бы погрузиться в Сон. Но не так давно, пользующиеся наибольшим доверием лейтенанты Изеры были извращены новой тёмной силой, проникнувшей в пределы Изумрудного Сна. Теперь, безумные драконы, пройдя через Великие Деревья в Азерот, несут безумие и ужас всему живому, и даже самые могучие воины трижды подумают, прежде чем дерзнуть испытать на себе их всесокрушающий гнев.",
+			[3] = "Извращение Летона в Изумрудном Сне не только свело с ума могущественного дракона, но и наделило его способностью поглощать злобные тени своих врагов. Соединившись со своим господином, эти тени наполняют дракона живительной энергией. Вы должны быть готовы к этому, поскольку Летон всегда был одним из наиболее громадных и своенравных лейтенантов Изеры",
+			[4] = "Проникнувшая в пределы Изумрудного Сна тёмная скверна превратила некогда величественную Эмерисс в зловонное, обезображенное чудовище. По рассказам тех, кто сумел пережить встречу с драконом, трупы поверженных ею смертных извергали тошнотворное гниение. Эмерисс является поистине самым кошмарным и ужасным из Зелёных Драконов Изеры.",
+			[5] = "Таэрар был одним из наиболее пострадавших от скверны лейтенантов Изеры. Его столкновение с тёмной силой в Изумрудном Сне не только разрушило разум, но и материальную сущность Таэрара. Теперь, дракон способен разделяться на множество частей, каждая из которых обладает сокрушительной магической силой. Таэрар - хитрый и беспощадный противник, являющийся самим воплощением безумия для обитателей Азерота.",
+			[6] = "Исондра, некогда пользующаяся особым доверием Изеры, превратилась в убийцу, сея ужас и хаос по всему Азероту. Её прежний дар исцеления уступил место тёмной магии, позволяющей ей поражать врагов испепеляющими молниями и призывать на помощь жестоких друидов. Исондра и её семья также обладают способностью насылать сон, отправляя смертных в царство самых ужасающих кошмаров.",
+		},
+		["name"] = "Драконы Кошмара",
+	},
+	[34] = {
+		[1] = {
+			[1] = {
+				["note"] = "Задание для охотников: Убейте Азурегоса, чтобы получить Жилу взрослого синего дракона. Он ходит по середине южного полуострова в Азшаре вблизи |cffffff00[1]"..WHITE..".",
+				["id"] = 7634,
+				["attain"] = 60,
+				["aim"] = "Хастат Древний просит вас принести ему жилу взрослого синего дракона. По выполнении задания возвращайтесь к Хастату в Оскверненный лес.",
+				["prequest"] = "Древний лист (|cffffff00Огненные Недра"..WHITE..")",
+				["title"] = "Перетянутый жилами лист древня",
+				["location"] = "Хастат Древний (Оскверненный лес - Железнолесье; |cffffff0048,24"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.QUIVER,
+						["name"] = "Ancient Sinew Wrapped Lamina",
+						["id"] = 18714,
+						["icon"] = "INV_Misc_Quiver_03",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы можете найти Нарайна Причудня в Танарисе около |cffffff0065.17"..WHITE..".",
+				["id"] = 8575,
+				["attain"] = 60,
+				["aim"] = "Принесите магическую книгу Азурегоса Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+				},
+				["title"] = "Магическая книга Азурегоса",
+				["prequest"] = "Создание драконов",
+				["location"] = "Дух Азурегоса (Азшара; |cffffff0056,83"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Перевод книги",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Задание для охотников: Убейте Азурегоса, чтобы получить Жилу взрослого синего дракона. Он ходит по середине южного полуострова в Азшаре вблизи |cffffff00[1]"..WHITE..".",
+				["id"] = 7634,
+				["attain"] = 60,
+				["aim"] = "Хастат Древний просит вас принести ему жилу взрослого синего дракона. По выполнении задания возвращайтесь к Хастату в Оскверненный лес.",
+				["prequest"] = "Древний лист (|cffffff00Огненные Недра"..WHITE..")",
+				["title"] = "Перетянутый жилами лист древня",
+				["location"] = "Хастат Древний (Оскверненный лес - Железнолесье; |cffffff0048,24"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.QUIVER,
+						["name"] = "Ancient Sinew Wrapped Lamina",
+						["id"] = 18714,
+						["icon"] = "INV_Misc_Quiver_03",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Вы можете найти Нарайна Причудня в Танарисе около |cffffff0065.17"..WHITE..".",
+				["id"] = 8575,
+				["attain"] = 60,
+				["aim"] = "Принесите магическую книгу Азурегоса Нарайну Причуденю в Танарис.",
+				["rewards"] = {
+				},
+				["title"] = "Магическая книга Азурегоса",
+				["prequest"] = "Создание драконов",
+				["location"] = "Дух Азурегоса (Азшара; |cffffff0056,83"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Перевод книги",
+			},
+		},
+		["story"] = "Задолго до Разлома Мира, могущественный город ночных эльфов Элдарат располагался на земле, известной теперь как Азшара. Считается, что среди руин некогда великой цитадели могут быть найдёны множество древних и могучих артефактов Высокорожденных. В течении сотен поколений, Стая Синих Драконов охраняла эти артефакты и волшебные знания, служа гарантией того, что они никогда не попадут в руки смертных. А присутствие самого Азурегоса - синего дракона - явно указывает на то, что где-то здесь в Азшаре сокрыты по настоящему уникальные и могущественнейшие артефакты, и вполне возможно даже виалы с водами Колодца Вечности, которые ему так необходимы. Но не зависимо от того, что именно ищет Азурегос, можно быть твёрдо уверенным в одном - Синий Дракон будет сражаться до смерти, защищая волшебные сокровища Азшары.",
+		["name"] = "Азурегос",
+	},
+	[35] = {
+		[1] = {
+		},
+		[2] = {
+		},
+		["story"] = "После поражения Пылающего Легиона в конце Третьей Войны, его оставшиеся силы во главе с гигантским демоном Лордом Каззаком обосновались в Выжженных Землях. И до сих пор они остаются там в области, названной Гниющим Шрамом, в ожидании повторного открытия Темного Портала. По слухам, как только Портал будет вновь открыт, Каззак и его армия отправятся в Запределье - бывшую родину орков мир Дренора, разорванный на части множеством порталов, открытых шаманом Нер`зулом и теперь оккупированный демоническими силами, ведомыми предателей ночным эльфом Иллиданом.",
+		["name"] = "Владыка Каззак",
+	},
+	[36] = {
+		[1] = {
+			[1] = {
+				["note"] = "Лейтенант Мурп (Альтеракские горы; |cffffff0039,81"..WHITE..").",
+				["id"] = 7261,
+				["attain"] = 51,
+				["aim"] = "Отправляйтесь в Альтеракскую долину, к предгорьям Хилсбрада. Найдите лейтенанта Мурпа рядом со входом в туннель и поговорите с ним.$B$BВо славу Бронзоборода!",
+				["title"] = "Королевское право",
+				["location"] = "Лейтенант Ротимер (Стальгорн - Общий зал; |cffffff0030,62"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Испытательные земли",
+			},
+			[2] = {
+				["note"] = "Знамя Грозовой Вершины находится в Пещере Ледяного Крыла около |cffffff00[11]"..WHITE.." на северной карте Альтеракской долины. Говорите с лейтенантом каждый раз, когда вы получаете новый уровень репутации для обновления Знака отличия.",
+				["id"] = 7162,
+				["attain"] = 51,
+				["aim"] = "Отправляйтесь в пещеру Ледяного Крыла, которая расположена в Альтеракской долине, на юго-западе от Дун Болдара, и добудьте знамя Грозовой Вершины. Отдайте знамя лейтенанту Мурпу в Альтеракских горах.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Stormpike Insignia Rank 1",
+						["id"] = 17691,
+						["icon"] = "INV_Jewelry_StormPikeTrinket_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "The Frostwolf Artichoke",
+						["id"] = 19484,
+						["icon"] = "INV_Misc_Book_04",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "Испытательные земли",
+				["prequest"] = "Королевское право",
+				["location"] = "Лейтенант Мурп (Альтеракские горы; |cffffff0039,81"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Награда найдет героя -> Око Командования",
+			},
+			[3] = {
+				["note"] = "Дрек'Тар (Альтеракские горы - Юг; |cffffff00[B]"..WHITE.."). На самом деле его убивать не нужно, чтобы завершить задание. Достаточно выиграть поле боя каким-либо образом.\nПосле завершения этого задания, поговорите с Дрек'Таром снова для получения вознаграждения.",
+				["id"] = 7141,
+				["attain"] = 51,
+				["aim"] = "Отправляйтесь в Альтеракскую долину, сразитесь с генералом Орды Дрек'Таром и возвращайтесь к геологу Камнетерке в Альтеракские горы.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Bloodseeker",
+						["id"] = 19107,
+						["icon"] = "INV_Weapon_Crossbow_07",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.POLEARM,
+						["name"] = "Ice Barbed Spear",
+						["id"] = 19106,
+						["icon"] = "INV_Spear_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAND,
+						["name"] = "Wand of Biting Cold",
+						["id"] = 19108,
+						["icon"] = "INV_Wand_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Cold Forged Hammer",
+						["id"] = 20648,
+						["icon"] = "INV_Hammer_22",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Герой Грозовой Вершины",
+				["location"] = "Геолог Камнетерка (Альтеракские горы; |cffffff0041,80"..WHITE..") и\n(Альтеракские горы - Север; |cffffff00[B]"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Битва за Альтерак",
+			},
+			[4] = {
+				["note"] = "Интендант клана Грозовой Вершины (Альтеракские горы - Север; |cffffff00[7]"..WHITE..") и предоставляет больше заданий.",
+				["id"] = 7121,
+				["attain"] = 51,
+				["aim"] = "Поговорите с интендантом клана Грозовой Вершины.",
+				["title"] = "Интендант",
+				["location"] = "Горный пехотинец Гулкий Крик (Альтеракские горы - Север; |cffffff00возле [3] перед мостом"..WHITE..")",
+				["level"] = 60,
+			},
+			[5] = {
+				["note"] = "Припасы могут быть найдены в Руднике Ледяного Зуба около (Альтеракские горы - Юг; |cffffff00[6]"..WHITE..").",
+				["id"] = 6982,
+				["attain"] = 51,
+				["aim"] = "Принесите 10 ящиков с припасами Ледяного Зуба интенданту Альянса в Дун Болдар.",
+				["title"] = "Припасы Ледяного Зуба",
+				["location"] = "Интендант клана Грозовой Вершины (Альтеракские горы - Север; |cffffff00[7]"..WHITE..")",
+				["level"] = 60,
+			},
+			[6] = {
+				["note"] = "Припасы могут быть найдены в Железном руднике около (Альтеракские горы - Север; |cffffff00[1]"..WHITE..").",
+				["id"] = 5892,
+				["attain"] = 51,
+				["aim"] = "Принесите 10 припасов Железного рудника интенданту Альянса в Дун Болдар.",
+				["title"] = "Припасы Железного рудника",
+				["location"] = "Интендант клана Грозовой Вершины (Альтеракские горы - Север; |cffffff00[7]"..WHITE..")",
+				["level"] = 60,
+			},
+			[7] = {
+				["note"] = "Для получения брони осматривайте трупы вражеских игроков. Последующее задание аналогичное, но повторяемое.",
+				["id"] = 7223,
+				["attain"] = 51,
+				["aim"] = "Принесите 20 обломков брони Мурготу Подземной Кузне в Дун Болдар.",
+				["title"] = "Обломки брони",
+				["location"] = "Мургот Подземная Кузня (Альтеракские горы - Север; |cffffff00[4]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Больше обломков брони",
+			},
+			[8] = {
+				["note"] = "Чтобы выполнить задание, вы должны убить либо Морлоха в Железном руднике около (Альтеракские горы - Север; |cffffff00[1]"..WHITE.."), либо Надсмотрщика Хныкса в Руднике Ледяного Зуба около (Альтеракские горы - Юг; |cffffff00[6]"..WHITE.."), пока Орда контролирует.",
+				["id"] = 7122,
+				["attain"] = 51,
+				["aim"] = "Захватите рудник, который не принадлежит Грозовой Вершине, и возвращайтесь к сержанту Даргену Грозовой Вершине в Альтеракские горы.",
+				["title"] = "Захват рудника",
+				["location"] = "Сержант Дарген Грозовая Вершина (Альтеракские горы; |cffffff0037,77"..WHITE..")",
+				["level"] = 60,
+			},
+			[9] = {
+				["note"] = "Башню или бункер не нужно уничтожать, чтобы завершить задание, достаточно напасть.",
+				["id"] = 7102,
+				["attain"] = 51,
+				["aim"] = "Уничтожьте вымпел на вражеской башне или бункере и возвращайтесь к сержанту Даргену Грозовой Вершине в Альтеракские горы.",
+				["title"] = "Башни и бункеры",
+				["location"] = "Сержант Дарген Грозовая Вершина (Альтеракские горы; |cffffff0037,77"..WHITE..")",
+				["level"] = 60,
+			},
+			[10] = {
+				["note"] = "Вам не нужно ничего делать, но быть рядом с кладбищем, когда Альянс атакует его. Для этого не нужно захватывать, достаточно напасть.",
+				["id"] = 7081,
+				["attain"] = 51,
+				["aim"] = "Захватите кладбище, затем возвращайтесь к сержанту Даргену Грозовой Вершине в Альтеракские горы.",
+				["title"] = "Кладбища Альтеракской долины",
+				["location"] = "Сержант Дарген Грозовая Вершина (Альтеракские горы; |cffffff0037,77"..WHITE..")",
+				["level"] = 60,
+			},
+			[11] = {
+				["note"] = "Вы можете найти баранов вне базы. Задание повторяемое до 25 раз за текущую битву. После того, как 25 баранов было приручено кавалеристы клана грозовой вершины прибудут, чтобы помочь в бою.",
+				["id"] = 7027,
+				["attain"] = 51,
+				["aim"] = "Найдите в Альтеракской долине альтеракского барана. Чтобы приручить барана, используйте учебный ошейник Грозовой Вершины. Для этого надо подойти в барану поближе. Пойманный баран проследует за вами к смотрителю стойл. Поговорите со смотрителем стойл, чтобы получить вознаграждение за пойманных баранов.",
+				["title"] = "Пустые стойла",
+				["location"] = "Смотритель стойл из клана Грозовой Вершины (Альтеракские горы - Север; |cffffff00[6]"..WHITE..")",
+				["level"] = 60,
+			},
+			[12] = {
+				["note"] = "Северных волков можно найти в южной части Альтеракской долины.",
+				["id"] = 7026,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Упряжь ездовых баранов",
+				["location"] = "Командир наездников на баранах клана Грозовой Вершины (Альтеракские горы - Север; |cffffff00[6]"..WHITE..")",
+				["level"] = 60,
+			},
+			[13] = {
+				["note"] = "После сдачи около 200 кристаллов, друид Дикая Лань начнет идти к (Альтеракские горы - Север; |cffffff00[19]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Ивус Лесной Властелин будет вызван, чтобы помочь в битве.",
+				["id"] = 7386,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Гроздь кристаллов",
+				["location"] = "Верховный друид Дикая Лань (Альтеракские горы - Север; |cffffff00[2]"..WHITE..")",
+				["level"] = 60,
+			},
+			[14] = {
+				["note"] = "После сдачи около 200 кристаллов, друид Дикая Лань начнет идти к (Альтеракские горы - Север; |cffffff00[19]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Ивус Лесной Властелин будет вызван, чтобы помочь в битве.",
+				["id"] = 6881,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Ивус Лесной Властелин",
+				["location"] = "Верховный друид Дикая Лань (Альтеракские горы - Север; |cffffff00[2]"..WHITE..")",
+				["level"] = 60,
+			},
+			[15] = {
+				["note"] = "Убивайте NPC Орды, чтобы получить Жетон солдата Северного Волка.",
+				["id"] = 6942,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Небо зовет – флот Слидора",
+				["location"] = "Командир звена Макарча (Альтеракские горы - Север; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+			},
+			[16] = {
+				["note"] = "Убивайте NPC Орды, чтобы получить Жетон лейтенанта Северного Волка.",
+				["id"] = 6941,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Небо зовет – флот Змейера",
+				["location"] = "Командир звена Сквороц (Альтеракские горы - Север; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+			},
+			[17] = {
+				["note"] = "Убивайте NPC Орды, чтобы получить Жетон командира Северного Волка. После сдачи 50 раз, Командир звена Ромеон либо отправит грифона, чтобы напасть на базу Орды, либо даст вам маяк, чтобы поставить в кладбище Снегопада. Если маяк защищен достаточно долго грифон придет, чтобы защищать его.",
+				["id"] = 6943,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Небо зовет – флот Ромеона",
+				["location"] = "Командир звена Ромеон (Альтеракские горы - Север; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Воевода Лаггронд (Альтеракские горы; |cffffff0062,59"..WHITE..").",
+				["id"] = 7241,
+				["attain"] = 51,
+				["aim"] = "Отправляйтесь в Альтеракскую долину, расположенную в Альтеракских горах. Найдите воеводу Лаггронда у входа в тоннель и поговорите с ним, чтобы начать свою военную карьеру в клане Северного Волка. Альтеракская долина находится к северу от деревни Мельница Таррен у подножия Альтеракских гор.",
+				["title"] = "Защита клана Северного Волка",
+				["location"] = "Посол клана Северного Волка Рокстром (Оргриммар - Аллея Силы; |cffffff0050,71"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Испытательные земли",
+			},
+			[2] = {
+				["note"] = "Знамя Северного Волка находится в пещере Дикой Лапы около (Альтеракские горы - Юг; |cffffff00[9]"..WHITE.."). Говорите с лейтенантом каждый раз, когда вы получаете новый уровень репутации для обновления Знака отличия.",
+				["id"] = 7161,
+				["attain"] = 51,
+				["aim"] = "Отправляйтесь в пещеру Дикой Лапы, расположенную на юго-востоке от основной базы в Альтеракской долине, и добудьте знамя Северного Волка. Отнесите знамя Северного Волка воеводе Лаггронду.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Frostwolf Insignia Rank 1",
+						["id"] = 17690,
+						["icon"] = "INV_Jewelry_FrostwolfTrinket_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Peeling the Onion",
+						["id"] = 19483,
+						["icon"] = "INV_Misc_Book_07",
+						["quality"] = 1,
+					},
+				},
+				["title"] = "Испытательные земли",
+				["prequest"] = "Защита клана Северного Волка",
+				["location"] = "Воевода Лаггронд (Альтеракские горы; |cffffff0062,59"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Награда найдет героя -> Око Командования",
+			},
+			[3] = {
+				["note"] = "Вандар Грозовая Вершина (Альтеракские горы - Север; |cffffff00[B]"..WHITE.."). He does not actually need to be killed to complete the quest. The battleground just has to be won by your side in any manner.\nAfter turning this quest in, talk to the NPC again for the reward.",
+				["id"] = 7142,
+				["attain"] = 51,
+				["aim"] = "Отправляйтесь в Альтеракскую долину и убейте генерала дворфов, Вандара Грозовую Вершину. После этого возвращайтесь к Вогге Смертобою в Альтеракские горы.",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Bloodseeker",
+						["id"] = 19107,
+						["icon"] = "INV_Weapon_Crossbow_07",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.POLEARM,
+						["name"] = "Ice Barbed Spear",
+						["id"] = 19106,
+						["icon"] = "INV_Spear_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAND,
+						["name"] = "Wand of Biting Cold",
+						["id"] = 19108,
+						["icon"] = "INV_Wand_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Cold Forged Hammer",
+						["id"] = 20648,
+						["icon"] = "INV_Hammer_22",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Герой Северного Волка",
+				["location"] = "Вогга Смертобой (Альтеракские горы; |cffffff0064,60"..WHITE..")",
+				["level"] = 60,
+				["title"] = "Битва за Альтерак",
+			},
+			[4] = {
+				["note"] = "Интендант клана Северного Волка |cffffff00[10]"..WHITE.." и предоставляет больше заданий.",
+				["id"] = 7123,
+				["attain"] = 51,
+				["aim"] = "Поговорите с интендантом клана Северного Волка.",
+				["title"] = "Разговор с интендантом",
+				["location"] = "Джотек (Альтеракские горы - Юг; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+			},
+			[5] = {
+				["note"] = "Припасы могут быть найдены в Руднике Ледяного Зуба около (Альтеракские горы - Юг; |cffffff00[6]"..WHITE..").",
+				["id"] = 5893,
+				["attain"] = 51,
+				["aim"] = "Доставьте 10 припасов Ледяного Зуба интенданту Орды в крепость Северного Волка.",
+				["title"] = "Припасы Ледяного Зуба",
+				["location"] = "Интендант клана Северного Волка (Альтеракские горы - Юг; |cffffff00[10]"..WHITE..")",
+				["level"] = 60,
+			},
+			[6] = {
+				["note"] = "Припасы могут быть найдены в Железном руднике около (Альтеракские горы - Север; |cffffff00[1]"..WHITE..").",
+				["id"] = 6985,
+				["attain"] = 51,
+				["aim"] = "Доставьте 10 ящиков припасов Железного рудника интенданту Орды в крепость Северного Волка.",
+				["title"] = "Припасы Железного рудника",
+				["location"] = "Интендант клана Северного Волка (Альтеракские горы - Юг; |cffffff00[10]"..WHITE..")",
+				["level"] = 60,
+			},
+			[7] = {
+				["note"] = "Для получения брони осматривайте трупы вражеских игроков. Последующее задание аналогичное, но повторяемое.",
+				["id"] = 7224,
+				["attain"] = 51,
+				["aim"] = "Принесите 20 обломков брони кузнецу Регзару в деревню Северного Волка.",
+				["title"] = "Вражеский трофей",
+				["location"] = "Кузнец Регзар (Альтеракские горы - Юг; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+				["followup"] = "Больше добычи!",
+			},
+			[8] = {
+				["note"] = "Чтобы выполнить задание, вы должны убить либо Морлоха в Железном руднике около (Альтеракские горы - Север; |cffffff00[1]"..WHITE.."), либо Надсмотрщика Хныкса в Руднике Ледяного Зуба около (Альтеракские горы - Юг; |cffffff00[6]"..WHITE.."), пока Альянс контролирует.",
+				["id"] = 7124,
+				["attain"] = 51,
+				["aim"] = "Захватите рудник и возвращайтесь к капралу Тике Кровавому Рыку в Альтеракские горы.",
+				["title"] = "Захват рудника",
+				["location"] = "Капрал Тика Кровавый Рык (Альтеракские горы; |cffffff0066,55"..WHITE..")",
+				["level"] = 60,
+			},
+			[9] = {
+				["note"] = "Башню или бункер не нужно уничтожать, чтобы завершить задание, достаточно напасть.",
+				["id"] = 7101,
+				["attain"] = 51,
+				["aim"] = "Захватите башню врага и возвращайтесь к капралу Тике Кровавому Рыку в Альтеракские горы.",
+				["title"] = "Башни и бункеры",
+				["location"] = "Капрал Тика Кровавый Рык (Альтеракские горы; |cffffff0066,55"..WHITE..")",
+				["level"] = 60,
+			},
+			[10] = {
+				["note"] = "Вам не нужно ничего делать, но быть рядом с кладбищем, когда Орда атакует его. Для этого не нужно захватывать, достаточно напасть.",
+				["id"] = 7082,
+				["attain"] = 51,
+				["aim"] = "Захватите кладбище, затем возвращайтесь к капралу Тике Кровавому Рыку в Альтеракские горы.",
+				["title"] = "Кладбища долины Альтерака",
+				["location"] = "Капрал Тика Кровавый Рык (Альтеракские горы; |cffffff0066,55"..WHITE..")",
+				["level"] = 60,
+			},
+			[11] = {
+				["note"] = "Вы можете найти волков вне базы. Задание повторяемое до 25 раз за текущую битву. После того, как 25 волков было приручено кавалеристы клана северного волка прибудут, чтобы помочь в бою.",
+				["id"] = 7001,
+				["attain"] = 51,
+				["aim"] = "Найдите северного волка в Альтеракской долине. Подойдите к нему на достаточное расстояние, чтобы его \"приручить\", и используйте намордник Северного Волка. После приручения северный волк проследует за вами к смотрителю стойл из клана Северного Волка. Поговорите со смотрителем, чтобы получить награду за пойманных волков.",
+				["title"] = "Пустые стойла",
+				["location"] = "Смотритель стойл из клана Северного Волка (Альтеракские горы - Юг; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+			},
+			[12] = {
+				["note"] = "Бараны могут быть найдены на севере Альтеракской долины.",
+				["id"] = 7002,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Упряжь из бараньей кожи",
+				["location"] = "Командир всадников на волках клана Северного Волка (Альтеракские горы - Юг; |cffffff00[9]"..WHITE..")",
+				["level"] = 60,
+			},
+			[13] = {
+				["note"] = "После сдачи около 150 крови, Шаманка стихий Турлога начнет идти к (Альтеракские горы - Юг; |cffffff00[14]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Локолар Владыка Льда будет вызван, чтобы помочь в битве.",
+				["id"] = 7385,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Галлон крови",
+				["location"] = "Шаманка стихий Турлога (Альтеракские горы - Юг; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+			},
+			[14] = {
+				["note"] = "После сдачи около 150 крови, Шаманка стихий Турлога начнет идти к (Альтеракские горы - Юг; |cffffff00[14]"..WHITE.."). Оказавшись там, она начнет ритуал призыва, для которого потребуется 10 игроков. В случае успеха, Локолар Владыка Льда будет вызван, чтобы помочь в битве.",
+				["id"] = 6801,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Локолар Владыка Льда",
+				["location"] = "Шаманка стихий Турлога (Альтеракские горы - Юг; |cffffff00[8]"..WHITE..")",
+				["level"] = 60,
+			},
+			[15] = {
+				["note"] = "Убивайте NPC Альянса, чтобы получить Плоть солдата Грозовой Вершины.",
+				["id"] = 6825,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Небо зовет – флот Смуггла",
+				["location"] = "Командир звена Смуггл (Альтеракские горы - Юг; |cffffff00[13]"..WHITE..")",
+				["level"] = 60,
+			},
+			[16] = {
+				["note"] = "Убивайте NPC Альянса, чтобы получить Плоть лейтенанта Грозовой Вершины.",
+				["id"] = 6826,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Небо зовет – флот Мааши",
+				["location"] = "Командир звена Мааша (Альтеракские горы - Юг; |cffffff00[13]"..WHITE..")",
+				["level"] = 60,
+			},
+			[17] = {
+				["note"] = "Убивайте NPC Альянса, чтобы получить Плоть командира Грозовой Вершины.",
+				["id"] = 6827,
+				["attain"] = 51,
+				["aim"] = "",
+				["title"] = "Небо зовет – флот Маэстра",
+				["location"] = "Командир звена Маэстр (Альтеракские горы - Юг; |cffffff00[13]"..WHITE..")",
+				["level"] = 60,
+			},
+		},
+		["story"] = "Давным-давно, еще до начала Первой Войны, злой колдун Гул'дан выслал клан орков, который назывался Северные Волки в неизведанную долину, скрывающуюся глубоко в горах Альтерака. Вот на юге этой долины и жили Северные Волки до появления Тралла.\nПосле триумфального объединения кланов Траллом, клан Северные Волки, возглавляемый орком-шаманом Дрек'Таром, решил остаться в долине, которая так долго была их домом. Но недавно спокойствие Северные Волков было нарушено прибытием Дворфской Экспедицией из Грозовой Вершины.\nЭта экспедиция остановилась в долине, что бы искать полезные ископаемые и древние реликвии. Несмотря на мирные цели экспедиции, само присутсвие дворфов в долине породило жаркий конфликт со Северными Волками, которые поклялись выдворить их за пределы своей земли. ",
+		["name"] = "Альтеракская долина",
+	},
+	[37] = {
+		[1] = {
+			[1] = {
+				["note"] = "Места для нападения отмечены на карте с 2 по 5.",
+				["id"] = 8105,
+				["attain"] = 50,
+				["aim"] = "Нападите на рудник, лесопилку, кузницу и ферму и возвращайтесь к фельдмаршалу Освету в Опорный пункт.",
+				["title"] = "Битва за Низину Арати",
+				["location"] = "Фельдмаршал Освет (Нагорье Арати - Опорный пункт; |cffffff0046,45"..WHITE..")",
+				["level"] = 55,
+			},
+			[2] = {
+				["note"] = "Вам нужно дружелюбие с Лигой Аратора, чтобы получить это задание",
+				["id"] = 8114,
+				["attain"] = 60,
+				["aim"] = "Отправляйтесь в Низину Арати, захватите и удержите контроль над четырьмя базами одновременно, затем возвращайтесь к фельдмаршалу Освету в Опорный пункт.",
+				["title"] = "Контроль над четырьмя базами",
+				["location"] = "Фельдмаршал Освет (Нагорье Арати - Опорный пункт; |cffffff0046,45"..WHITE..")",
+				["level"] = 60,
+			},
+			[3] = {
+				["note"] = "Вам нужно превознесение с Лигой Аратора, чтобы получить это задание",
+				["id"] = 8115,
+				["attain"] = 60,
+				["aim"] = "Возьмите под контроль одновременно все 5 баз в Низине Арати, а затем возвращайтесь к фельдмаршалу Освету в Опорный пункт.",
+				["title"] = "Контроль над пятью базами",
+				["location"] = "Фельдмаршал Освет (Нагорье Арати - Опорный пункт; |cffffff0046,45"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TABARD,
+						["name"] = "Arathor Battle Tabard",
+						["id"] = 20132,
+						["icon"] = "INV_Shirt_GuildTabard_01",
+						["quality"] = 1,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Места для нападения отмечены на карте с 1 по 4.",
+				["id"] = 8169,
+				["attain"] = 25,
+				["aim"] = "Захватите рудник, лесопилку, кузницу и стойла и возвращайтесь к повелительнице смерти Двайр в Павший Молот.",
+				["title"] = "Битва за Низину Арати",
+				["location"] = "Повелительница смерти Двайр (Нагорье Арати - Павший Молот; |cffffff0074,35"..WHITE..")",
+				["level"] = 25,
+			},
+			[2] = {
+				["note"] = "You need to be Friendly with The Defilers to get this quest.",
+				["id"] = 8121,
+				["attain"] = 60,
+				["aim"] = "Удерживайте одновременно четыре базы в Низине Арати, а затем возвращайтесь к повелительнице смерти Двайр в Павший Молот.",
+				["title"] = "Захват четырех баз",
+				["location"] = "Повелительница смерти Двайр (Нагорье Арати - Павший Молот; |cffffff0074,35"..WHITE..")",
+				["level"] = 60,
+			},
+			[3] = {
+				["note"] = "Вам нужно превознесение с Осквернителями, чтобы получить это задание",
+				["id"] = 8122,
+				["attain"] = 60,
+				["aim"] = "Захватите и удерживайте все пять баз в Низине Арати, затем возвращайтесь к повелительнице смерти Двайр в Павший Молот.",
+				["title"] = "Занять пять баз",
+				["location"] = "Повелительница смерти Двайр (Нагорье Арати - Павший Молот; |cffffff0074,35"..WHITE..")",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TABARD,
+						["name"] = "Battle Tabard of the Defilers",
+						["id"] = 20131,
+						["icon"] = "INV_Shirt_GuildTabard_01",
+						["quality"] = 1,
+					},
+				},
+			},
+		},
+		["story"] = "Низина Арати, расположенная в Нагорье Арати, это быстрое и захватывающее Поле сражений. Низина богата ресурсами и ею жаждут обладать и Орда, и Альянс. Отрекшиеся осквернители и Лига Аратора прибыли в низину Арати, чтобы побороться за природные ресурсы и заявить на них права от лица представляемых ими сторон.",
+		["name"] = "Низина Арати",
+	},
+	[38] = {
+		[1] = {
+		},
+		[2] = {
+		},
+		["story"] = "Ущелье Песни Войны располагается в южной области Ясеневого Леса, на границе со Степями – около местности, где Гром Адский Крик и его Орки вырубали огромные просеки в лесах во время событий Третьей войны. Некоторые Орки так и остались в тех местах, продолжая вырубать леса, чтобы снабжать древесиной растущую Орду.\nНочные эльфы, которые начали массированную военную компанию, чтобы вернуть себе Ясеневый Лес, теперь сосредоточили свое внимание на избавлении своих земель от оставшихся орков раз и навсегда. Серебряные Стражи, откликнулись на зов и поклялись, что они не успокоятся, пока все Орки до единого не будут побеждены и выкинуты из Ущелья Песни Войны.",
+		["name"] = "Ущелье Песни Войны",
+	},
+	[39] = {
+		[1] = {
+			[1] = {
+				["note"] = "Paw of Elder 'One Eye' and Paw of Elder Blackmaw drops from minions of the first boss Grovetender Engryss "..NORMAL.."[1]"..WHITE.." .",
+				["id"] = 40090,
+				["attain"] = 32,
+				["aim"] = "Принесите лапы Старейшины Одноглазого и Старейшины Черной Пасти из Рощи Полумесяца Гролу Изгнаннику.",
+				["title"] = "Неразумные старейшины",
+				["location"] = "Grol the Exile (Ashenvale, a bit north side the road between Astranaar and Felwood road T-Intersection, north from the furbolg camp; "..NORMAL.."56.1,59.2"..WHITE..").",
+				["level"] = 34,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Grol's Band",
+						["id"] = 60179,
+						["icon"] = "INV_Jewelry_Ring_12",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Groveweald Badge dropes from any elite furbolg inside dungeon and in front of the entrance outside of dungeon.",
+				["id"] = 40089,
+				["attain"] = 32,
+				["aim"] = "Отправляйтесь в Рощу Полумесяца и соберите 8 значков Гроввилда у фурболгов внутри для Грола Изгнанника.",
+				["title"] = "Необузданный лесничий",
+				["location"] = "Grol the Exile (Ashenvale, a bit north side the road between Astranaar and Felwood road T-Intersection, north from the furbolg camp; "..NORMAL.."56.1,59.2"..WHITE..").",
+				["level"] = 33,
+			},
+			[3] = {
+				["note"] = "Kalanar's Mallet is in the box "..NORMAL.."[a]"..WHITE.." behind burned down house.",
+				["id"] = 40326,
+				["attain"] = 32,
+				["aim"] = "Отправляйтесь в рощу Полумесяца и найдите сгоревший дотла дом Каланара Брайтшайн. Затем достаньте молоток Каланара и верните его ему в Астранааре.",
+				["title"] = "Молоток Каланара",
+				["location"] = "Kalanar Brightshine (Ashenvale - Astranaar; "..NORMAL.."35.9,51.6"..WHITE.." ).",
+				["level"] = 33,
+			},
+			[4] = {
+				["note"] = "Kill the final boss Master Raxxieth "..NORMAL.."[5]"..WHITE..".",
+				["id"] = 40091,
+				["attain"] = 32,
+				["aim"] = "Уничтожьте источник коррупции в Кресент-Гроув и возвращайтесь в Денатарион в Тельдрассиле.",
+				["title"] = "Роща полумесяца",
+				["location"] = "Denatharion <Druid Trainer> (Darnassus - Cenarion Enclave "..NORMAL.."34.6,7.5"..WHITE..")",
+				["level"] = 37,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Sentinel Chain",
+						["id"] = 60180,
+						["icon"] = "INV_Chest_Chain_12",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Groveweave Cloak",
+						["id"] = 60181,
+						["icon"] = "INV_Misc_Cape_09",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHOULDER..", "..L.CLOTH,
+						["name"] = "Epaulets of Forest Wisdom",
+						["id"] = 60182,
+						["icon"] = "INV_Shoulder_05",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "Bushstalker Mask",
+						["id"] = 60183,
+						["icon"] = "INV_Helmet_32",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Paw of Elder 'One Eye' and Paw of Elder Blackmaw drops from minions of the first boss Grovetender Engryss "..NORMAL.."[1]"..WHITE.." .",
+				["id"] = 40090,
+				["attain"] = 32,
+				["aim"] = "Принесите лапы Старейшины Одноглазого и Старейшины Черной Пасти из Рощи Полумесяца Гролу Изгнаннику.",
+				["title"] = "Неразумные старейшины",
+				["location"] = "Grol the Exile (Ashenvale, a bit north side the road between Astranaar and Felwood road T-Intersection, north from the furbolg camp; "..NORMAL.."56.1,59.2"..WHITE..").",
+				["level"] = 34,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Grol's Band",
+						["id"] = 60179,
+						["icon"] = "INV_Jewelry_Ring_12",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Groveweald Badge dropes from any elite furbolg inside dungeon and in front of the entrance outside of dungeon.",
+				["id"] = 40089,
+				["attain"] = 32,
+				["aim"] = "Отправляйтесь в Рощу Полумесяца и соберите 8 значков Гроввилда у фурболгов внутри для Грола Изгнанника.",
+				["title"] = "Необузданный лесничий",
+				["location"] = "Grol the Exile (Ashenvale, a bit north side the road between Astranaar and Felwood road T-Intersection, north from the furbolg camp; "..NORMAL.."56.1,59.2"..WHITE..").",
+				["level"] = 33,
+			},
+			[3] = {
+				["note"] = "Kill the final boss Master Raxxieth "..NORMAL.."[5]"..WHITE..".\nQuestline starts at Loruk Foreststrider with quest 'Mysteries of the Grove'.",
+				["id"] = 40147,
+				["attain"] = 26,
+				["aim"] = "Отправляйтесь в рощу Полумесяца и искорените зло внутри.",
+				["title"] = "Искоренение зла",
+				["location"] = "Loruk Foreststrider (Ashenvale - Splintertree Post "..NORMAL.."73.3,59.3"..WHITE..")",
+				["level"] = 37,
+				["prequest"] = "Mysteries of the Grove -> Feran's Report",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Outrider Chain",
+						["id"] = 60213,
+						["icon"] = "INV_Chest_Chain_07",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Strongwind Cloak",
+						["id"] = 60214,
+						["icon"] = "INV_Misc_Cape_18",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Foreststrider Spaulders",
+						["id"] = 60215,
+						["icon"] = "INV_Shoulder_04",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "Hat of Forest Medicine",
+						["id"] = 60216,
+						["icon"] = "INV_Helmet_15",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "A hidden grove in southern Ashenvale overlooking Mystral Lake that was once a retreat for druids for several years, an evil presence has taken root in the region.\nOriginally a hidden grove that served as a calm retreat for druids, in recent times the Groveweald tribe has moved in while fleeing the madness of the Foulweald tribe, expelling several of the original inhabitants in the process. However, in spite of their attempts to escape the madness, they succumbed to it in time.\nKalanar Brightshine once lived here, before he was expelled from the Grove by the Groveweald furbolgs and his home was burned down.\nDemonic forces of the Burning Legion led by the doomguard Master Raxxieth have established themselves within the grove, beginning to corrupt the glade. Already, the Legion has left their mark in the form of the Vilethorn Scar, upsetting the balance and disturbing spirits.",
+		["name"] = "The Crescent Grove",
+	},
+	[40] = {
+		[1] = {
+			[1] = {
+				["note"] = "Hateforge Chemist mobs drop Hateforge Brew Filled Flask for quest.",
+				["id"] = 40458,
+				["attain"] = 47,
+				["aim"] = "Узнай, что добывают в карьере Хейтфордж.",
+				["title"] = "Присутствие соперника",
+				["location"] = "Overseer Oilfist <The Thorium Brotherhood> (Searing Gorge - Thorium Point; "..NORMAL.."38.1,27.0"..WHITE..").",
+				["level"] = 54,
+			},
+			[2] = {
+				["note"] = "Questline starts at Radgan Deepblaze with quest 'Gaining Orvak's Trust' (Burning Steppes - Blackrock Pass; "..NORMAL.."76.1,67.6"..WHITE..").",
+				["id"] = 40468,
+				["attain"] = 45,
+				["aim"] = "Убейте 20 горняков Хейтфорджа в карьере Хейтфордж и вернитесь к Моргриму Файрпайку на перевале Блэкрок в Пылающих степях.",
+				["title"] = "Мятеж профсоюза шахтеров II",
+				["location"] = "Morgrim Firepike (Burning Steppes - Blackrock Pass; "..NORMAL.."75.6,68.3"..WHITE..").",
+				["level"] = 50,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash -> Miners Union Mutiny",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.PLATE,
+						["name"] = "Cuffs of Justice",
+						["id"] = 60673,
+						["icon"] = "INV_Bracer_14",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Questline starts at Radgan Deepblaze with quest 'Gaining Orvak's Trust' (Burning Steppes - Blackrock Pass; "..NORMAL.."76.1,67.6"..WHITE..").\nKill Bargul Blackhammer and take Senate's Orders on the table next to the boss.",
+				["id"] = 40463,
+				["attain"] = 45,
+				["aim"] = "Убейте Баргула Черного Молота и верните приказ Сената для Орвака Стернрока на перевале Черная скала в Пылающих степях.",
+				["title"] = "Истинный Верховный мастер",
+				["location"] = "Orvak Sternrock (Burning Steppes - Blackrock Pass; "..NORMAL.."75.9,68.2"..WHITE..").",
+				["level"] = 51,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Deepblaze Signet",
+						["id"] = 60665,
+						["icon"] = "BTNHarbingerRing",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Sternrock Trudgers",
+						["id"] = 60666,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Firepike's Lucky Trousers",
+						["id"] = 60667,
+						["icon"] = "INV_Pants_12",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "Hateforge Chemist mobs drop Dark Iron Vial for quest, Hateforge Chemistry Documents is in the box at "..NORMAL.."[a]"..WHITE..".",
+				["id"] = 40490,
+				["attain"] = 45,
+				["aim"] = "Отправляйтесь в каменоломню Хейтфордж и заберите флакон из Темного железа и документы по химии Хейтфордж, затем вернитесь к Варлагу Сумеречной Бороде во время бдения Моргана в Пылающих степях.",
+				["title"] = "Слухи о зелье Горна ненависти",
+				["location"] = "Varlag Duskbeard (Burning Steppes - Morgan's Vigil; "..NORMAL.."85.1,67.6"..WHITE..").",
+				["level"] = 54,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Thunder Ale",
+						["id"] = 2686,
+						["icon"] = "INV_Drink_13",
+						["quality"] = 1,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Varlag's Clutches",
+						["id"] = 60699,
+						["icon"] = "INV_Gauntlets_15",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Kill the last boss Har'gesh Doomcaller "..NORMAL.."[5]"..WHITE..".\nQuestline starts with quest 'Investigating Hateforge' at the same questgiver.",
+				["id"] = 40489,
+				["attain"] = 45,
+				["aim"] = "Отправляйтесь в каменоломню Ненавистного Горна и устраните присутствие Сумеречного Молота из глубины, а когда закончите, вернитесь к королю Магни Бронзобороду в Стальгорн.",
+				["title"] = "Нападение на Горн ненависти",
+				["location"] = "Senator Granitebelt (Burning Steppes - Morgan's Vigil; "..NORMAL.."85.2,67.9"..WHITE..").",
+				["level"] = 57,
+				["prequest"] = "Investigating Hateforge -> The Hateforge Report -> The King's Response",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "Crown of Grobi",
+						["id"] = 60694,
+						["icon"] = "INV_Crown_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Sigil of Heritage",
+						["id"] = 60695,
+						["icon"] = "INV_Jewelry_Ring_43",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.MACE,
+						["name"] = "Rubyheart Mallet",
+						["id"] = 60696,
+						["icon"] = "INV_Hammer_04",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Corrosis is at "..NORMAL.."[3]"..WHITE..".",
+				["id"] = 41142,
+				["attain"] = 40,
+				["aim"] = "Obtain the Heart of Landslide from the depths of Maraudon, and the Essence of Corrosis from Hateforge Quarry for Frig Thunderforge at Aerie Peak",
+				["title"] = "Why Not Both?",
+				["prequest"] = "Proving A Point -> I've Read It In A Book Once",
+				["location"] = "Frig Thunderforge (Hinterlands - Aerie Peak; "..NORMAL.."[10.0, 49.3]"..WHITE..").",
+				["level"] = 50,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.POLEARM,
+						["name"] = "Thunderforge Lance",
+						["id"] = 40080,
+						["icon"] = "inv_spear_02",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Thunderforge Mastery",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Hateforge Chemist mobs drop Hateforge Brew Filled Flask for quest.",
+				["id"] = 40458,
+				["attain"] = 47,
+				["aim"] = "Узнай, что добывают в карьере Хейтфордж.",
+				["title"] = "Присутствие соперника",
+				["location"] = "Overseer Oilfist <The Thorium Brotherhood> (Searing Gorge - Thorium Point; "..NORMAL.."38.1,27.0"..WHITE..").",
+				["level"] = 54,
+			},
+			[2] = {
+				["note"] = "Questline starts at Radgan Deepblaze with quest 'Gaining Orvak's Trust' (Burning Steppes - Blackrock Pass; "..NORMAL.."76.1,67.6"..WHITE..").",
+				["id"] = 40468,
+				["attain"] = 45,
+				["aim"] = "Убейте 20 горняков Хейтфорджа в карьере Хейтфордж и вернитесь к Моргриму Файрпайку на перевале Блэкрок в Пылающих степях.",
+				["title"] = "Мятеж профсоюза шахтеров II",
+				["location"] = "Morgrim Firepike (Burning Steppes - Blackrock Pass; "..NORMAL.."75.6,68.3"..WHITE..").",
+				["level"] = 50,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash -> Miners Union Mutiny",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WRIST..", "..L.PLATE,
+						["name"] = "Cuffs of Justice",
+						["id"] = 60673,
+						["icon"] = "INV_Bracer_14",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Questline starts at Radgan Deepblaze with quest 'Gaining Orvak's Trust' (Burning Steppes - Blackrock Pass; "..NORMAL.."76.1,67.6"..WHITE..").\nKill Bargul Blackhammer and take Senate's Orders on the table next to the boss.",
+				["id"] = 40463,
+				["attain"] = 45,
+				["aim"] = "Убейте Баргула Черного Молота и верните приказ Сената для Орвака Стернрока на перевале Черная скала в Пылающих степях.",
+				["title"] = "Истинный Верховный мастер",
+				["location"] = "Orvak Sternrock (Burning Steppes - Blackrock Pass; "..NORMAL.."75.9,68.2"..WHITE..").",
+				["level"] = 51,
+				["prequest"] = "Gaining Orvak's Trust -> Hearing Orvak's Story -> The Sternrock Stash",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Deepblaze Signet",
+						["id"] = 60665,
+						["icon"] = "BTNHarbingerRing",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.FEET..", "..L.LEATHER,
+						["name"] = "Sternrock Trudgers",
+						["id"] = 60666,
+						["icon"] = "INV_Boots_07",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["name"] = "Firepike's Lucky Trousers",
+						["id"] = 60667,
+						["icon"] = "INV_Pants_12",
+						["quality"] = 3,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "",
+				["id"] = 40539,
+				["attain"] = 48,
+				["aim"] = "Убейте инженера Фигглса в каменоломне Горна ненависти для госпожи воргов Каталлы.",
+				["title"] = "Инженер-охотник Фигглз",
+				["location"] = "Mistress Katalla (Burning Steppes - Karfang Hold; "..NORMAL.."89.4,24.5"..WHITE.." northeast corner of Burning Steppes).",
+				["level"] = 55,
+				["prequest"] = "Peculiar Won't Even Cut It",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.CLOTH,
+						["name"] = "Pyrehand Gloves",
+						["id"] = 60771,
+						["icon"] = "INV_Gauntlets_18",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.BACK,
+						["name"] = "Fur of Navakesh",
+						["id"] = 60772,
+						["icon"] = "INV_Misc_Cape_04",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.ONEHAND..", "..L.MACE,
+						["name"] = "Blackrock Authority",
+						["id"] = 60773,
+						["icon"] = "INV_Mace_12",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Girdle of Galron",
+						["id"] = 60774,
+						["icon"] = "INV_Belt_03",
+						["quality"] = 2,
+					},
+				},
+			},
+			[5] = {
+				["note"] = "Kill the last boss Har'gesh Doomcaller "..NORMAL.."[5]"..WHITE..".\nQuestline starts at Councilor Vargek (Burning Steppes - Karfang Hold; "..NORMAL.."90.0,22.7"..WHITE.." northeast corner of Burning Steppes) with quest 'Of New and Old'.",
+				["id"] = 40504,
+				["attain"] = 45,
+				["aim"] = "Отправляйтесь в каменоломню Горна ненависти и устраните присутствие Сумеречного молота внутри для Карфанга в крепости Карфанг.",
+				["title"] = "Из Нового и старого IV",
+				["location"] = "Karfang (Burning Steppes - Karfang Hold; "..NORMAL.."90.1,22.5"..WHITE.." northeast corner of Burning Steppes).",
+				["level"] = 57,
+				["prequest"] = "Of New and Old -> Of New and Old II -> Of New and Old III",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.MAINHAND..", "..L.SWORD,
+						["name"] = "Blade of the Warleader",
+						["id"] = 60734,
+						["icon"] = "INV_Weapon_ShortBlade_05",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Obsidian Gem Choker",
+						["id"] = 60735,
+						["icon"] = "BTNEmptyAmulet",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "Battlemaster Helm",
+						["id"] = 60736,
+						["icon"] = "INV_Helmet_10",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Hateforge Quarry is an instance dungeon located in the Burning Steppes. Hidden away at the southeastern walls of the Burning Steppes, the Hateforge Quarry is the Dark Iron dwarves' newest effort to find of a new weapon to use against their adversaries. The innocent-looking quarry hides an insidious cavern, where the Shadowforge dwarves plot new schemes against all those that oppose them.",
+		["name"] = "Hateforge Quarry",
+	},
+	[41] = {
+		[1] = {
+			[1] = {
+				["note"] = "Kill the last boss Alarus "..NORMAL.."[7]"..WHITE..".\nQuestline starts at the same NPC Magus Ariden Dusktower in Deadwind Pass. You will get the key to open the entrance door finishing part 6 of the questline.",
+				["id"] = 40317,
+				["attain"] = 58,
+				["aim"] = "Отправляйтесь в склепы Каражана, оказавшись внутри, убейте Аларуса, хранителя склепов мага Аридена Сумеречной башни на перевале Мертвого ветра.",
+				["title"] = "Тайна Каражана VII",
+				["location"] = "Magus Ariden Dusktower (Deadwind Pass "..NORMAL.."52.4,34.3"..WHITE..", northeast part of Deadwind Pass, north from eastern T-Intersection).",
+				["level"] = 60,
+				["prequest"] = "The Mystery of Karazhan VI",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Arcane Charged Pendant",
+						["id"] = 60463,
+						["icon"] = "INV_Misc_Rune_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Orb of Kaladoon",
+						["id"] = 60464,
+						["icon"] = "INV_Misc_Orb_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Arcane Strengthened Band",
+						["id"] = 60465,
+						["icon"] = "INV_Jewelry_Ring_51Naxxramas",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Kill the last boss Alarus "..NORMAL.."[7]"..WHITE..".\nQuestline starts at the same NPC Kor'gan in Stonard. You will get the key to open the entrance door finishing part 6 of the questline.",
+				["id"] = 40310,
+				["attain"] = 58,
+				["aim"] = "Отправляйтесь в склепы Каражана, оказавшись внутри, убейте Аларуса, хранителя склепов Кор'гана в Стонарде.",
+				["title"] = "Глубины Каражана VII",
+				["location"] = "Kor'gan (Swamp of Sorrows - Stonard; "..NORMAL.."44,4,54.6"..WHITE..").",
+				["level"] = 60,
+				["prequest"] = "The Depths of Karazhan VI",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Charged Arcane Ring",
+						["id"] = 60459,
+						["icon"] = "INV_Jewelry_Ring_35",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.NECK,
+						["name"] = "Tusk of Gardon",
+						["id"] = 60460,
+						["icon"] = "INV_Misc_Bone_05",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "Blackfire Orb",
+						["id"] = 60461,
+						["icon"] = "INV_Misc_Orb_05",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Karazhan Crypt is an instance dungeon located in the Burning Steppes. Something is twisting the dead back to life in the forlorn catacombs, find the source so the dead may rest again.",
+		["name"] = "Karazhan Crypt",
+	},
+	[42] = {
+		[1] = {
+			[1] = {
+				["note"] = "Antnormi is the last boss in Black Morass.\n1st questline starts at Lizzarik 'A Glittering Opportunity' (The Barrens. Goblin walks between Ratchet and Crossroads) you need to be level 13 to attain this quest.",
+				["id"] = 80605,
+				["attain"] = 60,
+				["aim"] = "Пройдите по временным путям в прошлое Черного Болота и убейте Антнорми. Принеси ее голову Хейне.",
+				["title"] = "Первое открытие Темного портала",
+				["location"] = "Chromie (Tanaris - Caverns of Time)",
+				["level"] = 60,
+				["prequest"] = "A Glittering Opportunity -> A Bloody Good Deed ->> A Letter From a Friend -> A Slaughter for Brains-> Return to Kheyna ->> A Timely Situation -> An Infinite Hunt -> A Journey Into The Caverns",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "X-51 Arcane Ocular Implants",
+						["id"] = 82950,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "X-52 Stealth Ocular Implants",
+						["id"] = 82951,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "X-53 Ranger Ocular Implants",
+						["id"] = 82952,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "X-54 Guardian Ocular Implants",
+						["id"] = 82953,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Chronar "..NORMAL..""..WHITE.." is the first boss in Black Morass",
+				["id"] = 40342,
+				["attain"] = 58,
+				["aim"] = "Убей Хронара и принеси его голову Тайвадриусу в Пещеры времени.",
+				["title"] = "Бронзовое предательство",
+				["location"] = "Tyvadrius (Tanaris - Caverns of Time)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Pendant of Tyvadrius",
+						["id"] = 60497,
+						["icon"] = "INV_Jewelry_Necklace_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.POLEARM,
+						["name"] = "Halberd of the Bronze Defender",
+						["id"] = 60498,
+						["icon"] = "INV_Spear_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Tyvadrius",
+						["id"] = 60499,
+						["icon"] = "INV_Jewelry_Ring_14",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "",
+				["id"] = 40340,
+				["attain"] = 58,
+				["aim"] = "Соберите испорченный песок для Дронорму в Пещерах времени.",
+				["title"] = "Испорченный песок",
+				["location"] = "Dronormu (Tanaris - Caverns of Time)",
+				["level"] = 60,
+			},
+			[4] = {
+				["note"] = "",
+				["id"] = 40341,
+				["attain"] = 58,
+				["aim"] = "Соберите 10 оскверненных песчинок для Дронорму в Пещерах времени.",
+				["title"] = "Песок насыпью",
+				["location"] = "Dronormu (Tanaris - Caverns of Time)",
+				["level"] = 60,
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Antnormi is the last boss in Black Morass.\n1st questline starts at Lizzarik 'A Glittering Opportunity' (The Barrens. Goblin walks between Ratchet and Crossroads) you need to be level 13 to attain this quest.",
+				["id"] = 80605,
+				["attain"] = 60,
+				["aim"] = "Пройдите по временным путям в прошлое Черного Болота и убейте Антнорми. Принеси ее голову Хейне.",
+				["title"] = "Первое открытие Темного портала",
+				["location"] = "Chromie (Tanaris - Caverns of Time)",
+				["level"] = 60,
+				["prequest"] = "A Glittering Opportunity -> A Bloody Good Deed ->> A Letter From a Friend -> A Slaughter for Brains-> Return to Kheyna ->> A Timely Situation -> An Infinite Hunt -> A Journey Into The Caverns",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HEAD..", "..L.CLOTH,
+						["name"] = "X-51 Arcane Ocular Implants",
+						["id"] = 82950,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.LEATHER,
+						["name"] = "X-52 Stealth Ocular Implants",
+						["id"] = 82951,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HEAD..", "..L.MAIL,
+						["name"] = "X-53 Ranger Ocular Implants",
+						["id"] = 82952,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "X-54 Guardian Ocular Implants",
+						["id"] = 82953,
+						["icon"] = "inv_gizmo_newgoggles",
+						["quality"] = 3,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Chronar "..NORMAL..""..WHITE.." is the first boss in Black Morass",
+				["id"] = 40342,
+				["attain"] = 58,
+				["aim"] = "Убей Хронара и принеси его голову Тайвадриусу в Пещеры времени.",
+				["title"] = "Бронзовое предательство",
+				["location"] = "Tyvadrius (Tanaris - Caverns of Time)",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Pendant of Tyvadrius",
+						["id"] = 60497,
+						["icon"] = "INV_Jewelry_Necklace_08",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.POLEARM,
+						["name"] = "Halberd of the Bronze Defender",
+						["id"] = 60498,
+						["icon"] = "INV_Spear_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Tyvadrius",
+						["id"] = 60499,
+						["icon"] = "INV_Jewelry_Ring_14",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "",
+				["id"] = 40340,
+				["attain"] = 58,
+				["aim"] = "Соберите испорченный песок для Дронорму в Пещерах времени.",
+				["title"] = "Испорченный песок",
+				["location"] = "Dronormu (Tanaris - Caverns of Time)",
+				["level"] = 60,
+			},
+			[4] = {
+				["note"] = "",
+				["id"] = 40341,
+				["attain"] = 58,
+				["aim"] = "Соберите 10 оскверненных песчинок для Дронорму в Пещерах времени.",
+				["title"] = "Песок насыпью",
+				["location"] = "Dronormu (Tanaris - Caverns of Time)",
+				["level"] = 60,
+			},
+		},
+		["story"] = "Black Morass is an instance dungeon located in Tanaris. Move through the timeways to stop the Infinite Dragonflight from changing the Opening of the Dark Portal and the past itself. ",
+		["name"] = "Black Morass",
+	},
+	[43] = {
+		[1] = {
+			[1] = {
+				["note"] = "You can find Koli Steamheart staying on the street of Stormwind in front of the dungeon.",
+				["id"] = 40426,
+				["attain"] = 58,
+				["aim"] = "В подземелье Штормграда уничтожьте рунические конструкции для получения 2 рунических кандалов, верните их Коли Паровому Сердцу.",
+				["title"] = "Восстановление оков хранилища",
+				["location"] = "Koli Steamheart (Stormwind City "..NORMAL.."54.5,47.1"..WHITE..")",
+				["level"] = 63,
+			},
+			[2] = {
+				["note"] = "You can find Pepin Ainsworth staying on the street of Stormwind in front of the dungeon.\nArc'Tiras "..NORMAL.."[6]"..WHITE.." is the last fight in the dungeon with big blue crystal.",
+				["id"] = 40427,
+				["attain"] = 58,
+				["aim"] = "Отправляйтесь глубоко в подземелье Штормграда, найдите Арк'Тираса и убейте его на благо Штормграда. Когда закончите, вернитесь к Пепину Эйнсворту.",
+				["title"] = "Окончание Арк'Тираса",
+				["location"] = "Pepin Ainsworth (Stormwind City "..NORMAL.."54.5,47.2"..WHITE..")",
+				["level"] = 63,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Goldplated Royal Crossbow",
+						["id"] = 60624,
+						["icon"] = "INV_Weapon_Crossbow_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Golden Gauntlets of Stormwind",
+						["id"] = 60625,
+						["icon"] = "INV_Gauntlets_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Regal Goldthreaded Sash",
+						["id"] = 60626,
+						["icon"] = "INV_Belt_07",
+						["quality"] = 3,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "Tome of the Arcane Intricacies and Magical Phenomenon is at "..NORMAL.."[3]"..WHITE..".\nMazen Mac'Nadir is in the southwestern building from Stockades entrance.",
+				["id"] = 40425,
+				["attain"] = 58,
+				["aim"] = "Верните Том тайных хитросплетений и магический феномен IX для Мазена Мак'Надира в Штормграде.",
+				["title"] = "Том тайных хитросплетений и магических феноменов IX",
+				["location"] = "Mazen Mac'Nadir (Stormwind City "..NORMAL.."41.6,64.3"..WHITE..")",
+				["level"] = 63,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of the Academy",
+						["id"] = 60622,
+						["icon"] = "INV_Jewelry_Ring_48Naxxramas",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "You can find Koli Steamheart staying on the street of Stormwind in front of the dungeon.",
+				["id"] = 40426,
+				["attain"] = 58,
+				["aim"] = "В подземелье Штормграда уничтожьте рунические конструкции для получения 2 рунических кандалов, верните их Коли Паровому Сердцу.",
+				["title"] = "Восстановление оков хранилища",
+				["location"] = "Koli Steamheart (Stormwind City "..NORMAL.."54.5,47.1"..WHITE..")",
+				["level"] = 63,
+			},
+			[2] = {
+				["note"] = "You can find Pepin Ainsworth staying on the street of Stormwind in front of the dungeon.\nArc'Tiras "..NORMAL.."[6]"..WHITE.." is the last fight in the dungeon with big blue crystal.",
+				["id"] = 40427,
+				["attain"] = 58,
+				["aim"] = "Отправляйтесь глубоко в подземелье Штормграда, найдите Арк'Тираса и убейте его на благо Штормграда. Когда закончите, вернитесь к Пепину Эйнсворту.",
+				["title"] = "Окончание Арк'Тираса",
+				["location"] = "Pepin Ainsworth (Stormwind City "..NORMAL.."54.5,47.2"..WHITE..")",
+				["level"] = 63,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CROSSBOW,
+						["name"] = "Goldplated Royal Crossbow",
+						["id"] = 60624,
+						["icon"] = "INV_Weapon_Crossbow_03",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.PLATE,
+						["name"] = "Golden Gauntlets of Stormwind",
+						["id"] = 60625,
+						["icon"] = "INV_Gauntlets_04",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Regal Goldthreaded Sash",
+						["id"] = 60626,
+						["icon"] = "INV_Belt_07",
+						["quality"] = 3,
+					},
+				},
+			},
+		},
+		["story"] = "Stormwind Vault is an instance dungeon located in Stormwind. The Vault's runes of warding are weakening as the horrors within threaten Azeroth once again, you must venture down and stop these fiends once and for all.",
+		["name"] = "Stormwind Vault",
+	},
+	[44] = {
+		[1] = {
+			[1] = {
+				["note"] = "You can find Angered Phantom inside building on the mountain. Entering Gilneas gates follow the mountain on your left(east), passing a field with windmills you will find a path to the sea, almost at the edge turn north follow the path(barely noticable).",
+				["id"] = 40975,
+				["attain"] = 35,
+				["aim"] = "Slay Judge Sutherland within Gilneas City for the Angered Phantom at the Glaymore Stead in Gilneas.",
+				["title"] = "The Judge and the Phantom",
+				["location"] = "Angered Phantom (Gilneas -Glaymore Stead "..NORMAL.."52.9,27.9"..WHITE..")",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Glaymore Family Breastplate",
+						["id"] = 61620,
+						["icon"] = "INV_Misc_MonsterSpiderCarapace_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.POLEARM,
+						["name"] = "Ceremonial Gilnean Pike",
+						["id"] = 61621,
+						["icon"] = "INV_Spear_06",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.BACK,
+						["name"] = "Glaymore Shawl",
+						["id"] = 61622,
+						["icon"] = "INV_Chest_Cloth_15",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "The Dawnstone Plans in the building "..NORMAL.."[a]"..WHITE.." on the box.",
+				["id"] = 40841,
+				["attain"] = 36,
+				["aim"] = "Venture into Gilneas City and recover the Dawnstone Plans for Therum Deepforge in Stormwind.",
+				["title"] = "Behind The Wall",
+				["location"] = "Therum Deepforge <Expert Blacksmith> (Stormwind - Dwarven District"..NORMAL.."63.3,37"..WHITE..", can be walking around there)",
+				["level"] = 41,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.FEET..", "..L.PLATE,
+						["name"] = "Inlaid Plate Boots",
+						["id"] = 61348,
+						["icon"] = "INV_Boots_Plate_08",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.MAINHAND..", "..L.MACE,
+						["name"] = "Dwarven Battle Bludgeon",
+						["id"] = 61349,
+						["icon"] = "INV_Mace_11",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "The Deed to Ravenshire on the table behind Regent-Lady Celia Harlow and Regent-Lord Mortimer Harlow, next to the Harlow Family Chest"..NORMAL.."[7]"..WHITE..".",
+				["id"] = 40966,
+				["attain"] = 38,
+				["aim"] = "Find the Deed to Ravenshire in Gilneas City and bring it back to Caliban Silverlaine.",
+				["title"] = "The Deed to Ravenshire",
+				["location"] = "Baron Caliban Silverlaine (Gilneas - Ravenshire (main building) "..NORMAL.."58.4,67.8"..WHITE..")",
+				["level"] = 45,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.AXE,
+						["name"] = "Ebonmere Axe",
+						["id"] = 61601,
+						["icon"] = "INV_Axe_20",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.HEAD..", "..L.PLATE,
+						["name"] = "Gilneas Brigade Helmet",
+						["id"] = 61602,
+						["icon"] = "inv_helmet_02",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.CHEST..", "..L.CLOTH,
+						["name"] = "Robes of Ravenshire",
+						["id"] = 61603,
+						["icon"] = "INV_Chest_Cloth_48",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.SHOULDER..", "..L.LEATHER,
+						["name"] = "Greyshire Pauldrons",
+						["id"] = 61604,
+						["icon"] = "INV_Shoulder_07",
+						["quality"] = 2,
+					},
+				},
+			},
+			[4] = {
+				["note"] = "The Book of Ur in the building "..NORMAL.."[b]"..WHITE..", go right, on the table (south side).",
+				["id"] = 41112,
+				["attain"] = 40,
+				["aim"] = "Recover the Book of Ur : Volume Two from the library in Gilneas City and return to Ethan Ravencroft.",
+				["title"] = "Ravencroft's Ambition",
+				["location"] = "Ethan Ravencroft (Gilneas - Hollow Web Cemetery - Crypt(southwest corner of Gilneas, east from the river)"..NORMAL.."33,76"..WHITE..")",
+				["level"] = 45,
+			},
+			[5] = {
+				["note"] = "Bring 1 Large Glowing Shard you will need 1 for prequest. enchanters have them or auction house can help. it should be cheap.",
+				["id"] = 40943,
+				["attain"] = 35,
+				["aim"] = "End the Draconic Influence over Gilneas by slaying Regent-Lady Celia Harlow, and Regent-Lord Mortimer Harlow for Magus Orelius at Ravenshire in Gilneas.",
+				["title"] = "Undoing Draconic Presence",
+				["location"] = "Magus Orelius <Kirin Tor> (Gilneas - Ravenshire (main building) "..NORMAL.."57.7,68.5"..WHITE..")",
+				["level"] = 47,
+				["prequest"] = "Font of Arcana -> Magical Presence -> Draconic Presence?",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Violet Sash",
+						["id"] = 61486,
+						["icon"] = "INV_Belt_10",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.HANDS..", "..L.MAIL,
+						["name"] = "Gauntlets of Insight",
+						["id"] = 61487,
+						["icon"] = "INV_Gauntlets_05",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Questline starts with quest 'Wolf Amongst Sheep' at Baron Caliban Silverlaine (Gilneas - Ravenshire (main building) "..NORMAL.."58.4,67.8"..WHITE..")\nThe Greymane Crown drops from Genn Greymane "..NORMAL.."[8]"..WHITE..", last boss on the top of the tower.",
+				["id"] = 40956,
+				["attain"] = 35,
+				["aim"] = "'Save' Genn, and recover the Greymane Crown for Lord Darius Ravenwood at Ravenshire in Gilneas.",
+				["title"] = "The Fall and Rise of Greymane",
+				["location"] = "Lord Darius Ravenwood (Gilneas - Ravenshire (main building) "..NORMAL.."58.4,67.6"..WHITE..")",
+				["level"] = 46,
+				["prequest"] = "Wolf Amongst Sheep -> One Chain at a Time -> On Legend's Trail -> Back to Ravenshire -> Dim Light in the Darkness -> Vilest of Men -> A Crossroads Deal -> Assaulting Freyshear Keep ",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Ravenwood Belt",
+						["id"] = 61497,
+						["icon"] = "INV_Belt_26",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Signet of Gilneas",
+						["id"] = 61498,
+						["icon"] = "INV_Jewelry_Ring_22",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Ravenshire Gloves",
+						["id"] = 61499,
+						["icon"] = "INV_Gauntlets_15",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.TABARD,
+						["name"] = "Ravenshire Tabard",
+						["id"] = 61369,
+						["icon"] = "INV_Shirt_GuildTabard_01",
+						["quality"] = 1,
+					},
+				},
+			},
+			[7] = {
+				["note"] = MAGE.."(Mage only)"..WHITE.." The Manuscript on Hydromancy II in the building "..NORMAL.."[b]"..WHITE..", go right, on the dresser (south side).",
+				["id"] = 41114,
+				["attain"] = 38,
+				["aim"] = "Recover the Manuscript on Hydromancy II for Magus Hallister at Theramore Isle in Dustwallow Marsh.",
+				["title"] = "Manuscript on Hydromancy II",
+				["location"] = "Magus Hallister (Dustwallow Marsh - Theramore, central Tower)",
+				["level"] = 45,
+				["prequest"] = "Mannoroc Demonic Sigil",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Tome of Teleportation: Theramore",
+						["id"] = 92001,
+						["icon"] = "INV_Misc_Book_07",
+						["quality"] = 2,
+					},
+				},
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "You can find Angered Phantom inside building on the mountain. Entering Gilneas gates follow the mountain on your left(east), passing a field with windmills you will find a path to the sea, almost at the edge turn north follow the path(barely noticable).",
+				["id"] = 40975,
+				["attain"] = 35,
+				["aim"] = "Slay Judge Sutherland within Gilneas City for the Angered Phantom at the Glaymore Stead in Gilneas.",
+				["title"] = "The Judge and the Phantom",
+				["location"] = "Angered Phantom (Gilneas -Glaymore Stead "..NORMAL.."52.9,27.9"..WHITE..")",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["name"] = "Glaymore Family Breastplate",
+						["id"] = 61620,
+						["icon"] = "INV_Misc_MonsterSpiderCarapace_01",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..", "..L.POLEARM,
+						["name"] = "Ceremonial Gilnean Pike",
+						["id"] = 61621,
+						["icon"] = "INV_Spear_06",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.BACK,
+						["name"] = "Glaymore Shawl",
+						["id"] = 61622,
+						["icon"] = "INV_Chest_Cloth_15",
+						["quality"] = 2,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "Prequest 'Ebonmere Bat Infestation' and 'Ebonmere Worgen Infestation'.\nDustivan Blackcowl "..NORMAL.."[4]"..WHITE.." drops the Ebonmere Deed",
+				["id"] = 40979,
+				["attain"] = 35,
+				["aim"] = "Slay Dustivan Blackcowl and recover the Ebonmere Deed for Joshua Ebonmere at Ebonmere Farm in Gilneas.",
+				["title"] = "Ebonmere Affairs",
+				["location"] = "Joshua Ebonmere (Gilneas - Ebonmere Farm "..NORMAL.."[49.5,31.1]"..WHITE.."). Entering Gilneas gates follow the mountain on your left(east), in the field with windmills you will find Joshua Ebonmere.",
+				["level"] = 45,
+				["prequest"] = "Ebonmere Bat Infestation -> Ebonmere Worgen Infestation",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ONEHAND..", "..L.AXE,
+						["name"] = "Ebonmere Reaver",
+						["id"] = 61627,
+						["icon"] = "INV_Axe_11",
+						["quality"] = 2,
+					},
+					[2] = {
+						["subtext"] = L.WAIST..", "..L.CLOTH,
+						["name"] = "Clutch of Joshua",
+						["id"] = 61628,
+						["icon"] = "INV_Belt_12",
+						["quality"] = 2,
+					},
+					[3] = {
+						["subtext"] = L.GUN,
+						["name"] = "Farmer's Musket",
+						["id"] = 61629,
+						["icon"] = "INV_Weapon_Rifle_TWoW_02_Purple",
+						["quality"] = 2,
+					},
+					[4] = {
+						["subtext"] = L.WRIST..", "..L.PLATE,
+						["name"] = "Ebonmere Vambraces",
+						["id"] = 61630,
+						["icon"] = "INV_Bracer_17",
+						["quality"] = 2,
+					},
+				},
+			},
+			[3] = {
+				["note"] = "The portrait of Mia Greymane in the building "..NORMAL.."[b]"..WHITE..", go left, on the wall (northwest corner).",
+				["id"] = 41113,
+				["attain"] = 40,
+				["aim"] = "Steal the painting from the library in Gilneas City and return to Luke Agamand at Blackthorn's Camp in Gilneas.",
+				["title"] = "A Royal Heist",
+				["location"] = "Luke Agamand (Gilneas - Blackthorn's Camp "..NORMAL.."[14.1,33.7]"..WHITE..", camp at northwest corner shore.)",
+				["level"] = 45,
+			},
+			[4] = {
+				["note"] = "Questline starts at Deathstalker Alynna (Gilneas Stillward Church "..NORMAL.."[57.3,39.6]"..WHITE..", inside) with quest 'Dead Until Dark'.\n'On the Powers of Blood' book on the table behind Regent-Lady Celia Harlow and Regent-Lord Mortimer Harlow, next to the Harlow Family Chest"..NORMAL.."[7]"..WHITE..".\nYou will get the reward finishing the next quest.",
+				["id"] = 40881,
+				["attain"] = 35,
+				["aim"] = "Find 'On the Powers of Blood' in Gilneas City, then return to Orvan Darkeye at the Ruins of Greyshire in Gilneas.",
+				["title"] = "The Evil Made Me Do It",
+				["prequest"] = "Dead Until Dark -> All We Need is Blood -> Last of the Living Dead -> We Take It From The Living",
+				["location"] = "Orvan Darkeye (Gilneas - ruins of Greyshire "..NORMAL.."[31.3,47.0]"..WHITE..")",
+				["level"] = 46,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.NECK,
+						["name"] = "Pure Bloodvial Pendant",
+						["id"] = 61422,
+						["icon"] = "INV_Jewelry_Amulet_05",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Blood for Blood",
+			},
+			[5] = {
+				["note"] = "2 Questlines need to be finished to start this quest 'Report to Luke Agamand' and 'Report to Livia Strongarm' at Blackthorn.\n",
+				["id"] = 40849,
+				["attain"] = 40,
+				["aim"] = "Enter Gilneas City and slay Genn Greymane, then bring his head to Blackthorn at Blackthorn's Camp in Gilneas.",
+				["title"] = "Genn Greymane Must Die!",
+				["location"] = "Blackthorn (Gilneas - Blackthorn's Camp "..NORMAL.."[14.1,33.7]"..WHITE..", camp at northwest corner shore.)",
+				["level"] = 49,
+				["prequest"] = "'Report to Luke Agamand'-> Heist in Dryrock Mine ->> Report to Livia Strongarm -> Rendezvous with the Infiltrator ->> Quality Time with Blackthorn",
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.HANDS..", "..L.LEATHER,
+						["name"] = "Blackthorn Gauntlets",
+						["id"] = 61353,
+						["icon"] = "INV_Gauntlets_15",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.RING,
+						["name"] = "Banshee's Tear",
+						["id"] = 61354,
+						["icon"] = "INV_Jewelry_Ring_27",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.WAIST..", "..L.MAIL,
+						["name"] = "Dark Footpad Belt",
+						["id"] = 61355,
+						["icon"] = "INV_Belt_26",
+						["quality"] = 3,
+					},
+				},
+			},
+			[6] = {
+				["note"] = "Questline starts with quest 'Through Greater Magic' at Dark Bishop Mordren.\nShard of Midnight is behind the last boss Genn Greymane "..NORMAL.."[8]"..WHITE.."\nYou will get the reward finishing the next quest.",
+				["id"] = 40996,
+				["attain"] = 38,
+				["aim"] = "Recover the Shard of Midnight for Dark Bishop Mordren in Stillward Church.",
+				["title"] = "The Greymane Stone",
+				["prequest"] = "Through Greater Magic -> The Ravenwood Scepter -> The Powers Beyond "..NORMAL.."[Razorfen Downs]"..WHITE..".",
+				["location"] = "Dark Bishop Mordren (Gilneas - Stillward Church "..NORMAL.."57.7,39.6"..WHITE..")",
+				["level"] = 47,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.TWOHAND..", "..L.SWORD,
+						["name"] = "Garalon's Might",
+						["id"] = 61660,
+						["icon"] = "INV_Sword_13",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.TWOHAND..",Staff",
+						["name"] = "Varimathras' Cunning",
+						["id"] = 61661,
+						["icon"] = "INV_Staff_13",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Stillward Amulet",
+						["id"] = 61662,
+						["icon"] = "INV_Jewelry_Talisman_12",
+						["quality"] = 3,
+					},
+				},
+				["followup"] = "Gift of the Dark Bishop",
+			},
+		},
+		["story"] = "Gilneas City is an instance dungeon located in Gilneas. Located at the heart of this once-isolated land, Gilneas City was once a bastion of hope for its people. Established after breaking free from the rule of the Arathorian lords, it stood as a symbol of resilience and prosperity. However, it is now a mere shell of its former beauty, with a dark presence casting a gripping shadow over Gilneas and serving as a reminder of its once glorious past. Distant howls echo through the city, haunting reminders of its new occupants. Yet, there is a possibility that not everyone is gone and that their accursed king may still live.",
+		["name"] = "Gilneas City",
+	},
+	[45] = {
+		[1] = {
+			[1] = {
+				["note"] = "You can find Comfortable Pillow at "..NORMAL.."[b]"..WHITE.." in the boxes.",
+				["id"] = 41083,
+				["attain"] = 55,
+				["aim"] = "Find a Comfortable Pillow for Councilman Kyleson in Karazhan.",
+				["title"] = "Suitable Accomodations",
+				["location"] = "Councilman Kyleson "..NORMAL.."[c]"..WHITE..".",
+				["level"] = 60,
+				["followup"] = "A Drink to Sleep",
+			},
+			[2] = {
+				["note"] = "Turn the quest in to The Cook at "..NORMAL.."[d]"..WHITE..".",
+				["id"] = 41084,
+				["attain"] = 55,
+				["aim"] = "Speak with someone who may know how to acquire wine for Councilman Kyleson.",
+				["followup"] = "Spectral Wine",
+				["location"] = "Councilman Kyleson "..NORMAL.."[c]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Suitable Accomodations",
+				["title"] = "A Drink to Sleep",
+			},
+			[3] = {
+				["note"] = "Flask of Port sold by alcohol vendors. All items can be bought from Auction House.",
+				["id"] = 41085,
+				["attain"] = 55,
+				["aim"] = "Gather 3 Essence of Death, 5 Flask of Port, and a Ghost Mushroom for The Cook in Karazhan.",
+				["followup"] = "Wine for Kyleson",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "A Drink to Sleep",
+				["title"] = "Spectral Wine",
+			},
+			[4] = {
+				["note"] = "",
+				["id"] = 41086,
+				["attain"] = 55,
+				["aim"] = "Deliver the Spectral Wine to Councilman Kyleson in Karazhan.",
+				["title"] = "Wine for Kyleson",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Spectral Wine",
+			},
+			[5] = {
+				["note"] = "",
+				["id"] = 40817,
+				["attain"] = 58,
+				["aim"] = "Listen to the story of Lord Ebonlocke.",
+				["title"] = "The Key to Karazhan I",
+				["location"] = "Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["followup"] = "The Key to Karazhan II",
+			},
+			[6] = {
+				["note"] = "",
+				["id"] = 40818,
+				["attain"] = 58,
+				["aim"] = "Kill Moroes and retrieve the Key to the Upper Chambers. Moroes resides in Lower Karazhan Halls. Bring back the key to Lord Ebonlocke.",
+				["followup"] = "The Key to Karazhan III",
+				["location"] = "Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Key to Karazhan I",
+				["title"] = "The Key to Karazhan II",
+			},
+			[7] = {
+				["note"] = "Turn in the quest to Archmage Ansirem Runeweaver <Kirin Tor> (Alterac Mountains - Dalaran "..NORMAL.."[18.9,78.5]"..WHITE..")",
+				["id"] = 40819,
+				["attain"] = 58,
+				["aim"] = "Find someone from the Kirin Tor who might know something about Vandol. Dalaran could be a good place to start your search.",
+				["followup"] = "The Key to Karazhan IV",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Key to Karazhan II",
+				["title"] = "The Key to Karazhan III",
+			},
+			[8] = {
+				["note"] = "Turn in the quest to Duke Rothlen "..NORMAL.."[f]"..WHITE.." on the balkon next to Clawlord Howlfang "..NORMAL.."[4]"..WHITE..".",
+				["id"] = 40998,
+				["attain"] = 55,
+				["aim"] = "Find someone that may be know something about the Scribbled Cooking Notes.",
+				["title"] = "Scribbled Cooking Notes",
+				["location"] = "Scribbled Cooking Notes",
+				["level"] = 60,
+				["followup"] = "Lost and Found",
+			},
+			[9] = {
+				["note"] = "You can find Engraved Golden Bracelet in the chest at "..NORMAL.."[a]"..WHITE..".",
+				["id"] = 40999,
+				["attain"] = 55,
+				["aim"] = "Recover the Engraved Golden Bracelet for Duke Rothlen in Karazhan.",
+				["followup"] = "Rothlen Family Brooch",
+				["location"] = "Duke Rothlen "..NORMAL.."[f]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Scribbled Cooking Notes",
+				["title"] = "Lost and Found",
+			},
+			[10] = {
+				["note"] = "Rothlen Family Brooch is in the chest next to "..NORMAL.."[Stratholme]"..WHITE.." boss The Unforgiven.",
+				["id"] = 41000,
+				["attain"] = 55,
+				["aim"] = "Recover the Rothlen Family Brooch from Stratholme for Duke Rothlen in Karazhan.",
+				["followup"] = "The Secret Recipe",
+				["location"] = "Duke Rothlen "..NORMAL.."[f]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Lost and Found",
+				["title"] = "Rothlen Family Brooch",
+			},
+			[11] = {
+				["note"] = "",
+				["id"] = 41001,
+				["attain"] = 55,
+				["aim"] = "Speak with 'The Cook' in Karazhan.",
+				["followup"] = "The Doorman of Karazhan",
+				["location"] = "Duke Rothlen "..NORMAL.."[f]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Rothlen Family Brooch",
+				["title"] = "The Secret Recipe",
+			},
+			[12] = {
+				["note"] = "Doorman Montigue "..BLUE.."[A]"..WHITE.." at the beginning of the dungeon in front of the stairs.",
+				["id"] = 41002,
+				["attain"] = 55,
+				["aim"] = "Speak with Doorman Montigue in Karazhan.",
+				["followup"] = "Charge of Karazhan",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Secret Recipe",
+				["title"] = "The Doorman of Karazhan",
+			},
+			[13] = {
+				["note"] = "All can be bought from Auction House.",
+				["id"] = 41003,
+				["attain"] = 55,
+				["aim"] = "Bring 10 Essence of Undeath, 10 Living Essence, and 25 Gold to Doorman Montique in Karazhan.",
+				["followup"] = "Le Fishe Au Chocolat",
+				["location"] = "Doorman Montigue "..BLUE.."[A]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Doorman of Karazhan",
+				["title"] = "Charge of Karazhan",
+			},
+			[14] = {
+				["note"] = "",
+				["id"] = 41004,
+				["attain"] = 55,
+				["aim"] = "Bring the Charge of Karazhan to The Cook in Karazhan.",
+				["title"] = "Le Fishe Au Chocolat",
+				["prequest"] = "Charge of Karazhan",
+				["location"] = "Doorman Montigue "..BLUE.."[A]"..WHITE..".",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Recipe: Le Fishe Au Chocolat",
+						["id"] = 61666,
+						["icon"] = "INV_Scroll_04",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Le Fishe Au Chocolat",
+						["id"] = 84040,
+						["icon"] = "INV_Misc_Fishe_Au_Chocolate",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "",
+			},
+			[15] = {
+				["note"] = "Questline starts with legendary item 'The Scythe of Elune' that drops from Lord Blackwald II "..NORMAL.."[5]"..WHITE..".",
+				["id"] = 41062,
+				["attain"] = 60,
+				["aim"] = "Slay Clawlord Howlfang "..NORMAL.."[4]"..WHITE.." and report to Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["title"] = "Scythe of the Goddess",
+				["location"] = "The Scythe of Elune",
+				["level"] = 60,
+				["followup"] = "Scythe of the Goddess",
+			},
+			[16] = {
+				["note"] = "Turn it in to Jitters (Duskwood - Raven Hill"..NORMAL.." [18.4,56.4]"..WHITE..").",
+				["id"] = 41063,
+				["attain"] = 60,
+				["aim"] = "Find someone in Duskwood who might know more about the Scythe of Elune.",
+				["followup"] = "Scythe of the Goddess",
+				["location"] = "Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Scythe of the Goddess",
+				["title"] = "Scythe of the Goddess",
+			},
+			[17] = {
+				["note"] = "After finishing this quest you will be able to get a quest for head/leg enchants. For each of them you will need:\n1x Overcharged Ley Energy - random rare item loot from trash/boss in Karazhan\n6x Arcane Essence - random trash loot.",
+				["id"] = 41078,
+				["attain"] = 55,
+				["aim"] = "Gather 15 Arcane Essence, 20 Illusion Dust, and 10 Greater Eternal Essence for Heirophant Nerseus at the church outside Karazhan.",
+				["followup"] = "Invocation of Shattering, Invocation of Greater Protection, Invocation of Expansive Mind, Invocation of Greater Arcane Fortitude",
+				["location"] = "Heirophant Nerseus (Deadwind Pass, in front of the church next to Karazhan"..NORMAL.." [40.3,77.2]"..WHITE..").",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Shattering",
+						["id"] = 92005,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Greater Protection",
+						["id"] = 92006,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Expansive Mind",
+						["id"] = 92007,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Greater Arcane Fortitude",
+						["id"] = 92008,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Contribution to the Church",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "You can find Comfortable Pillow at "..NORMAL.."[b]"..WHITE.." in the boxes.",
+				["id"] = 41083,
+				["attain"] = 55,
+				["aim"] = "Find a Comfortable Pillow for Councilman Kyleson in Karazhan.",
+				["title"] = "Suitable Accomodations",
+				["location"] = "Councilman Kyleson "..NORMAL.."[c]"..WHITE..".",
+				["level"] = 60,
+				["followup"] = "A Drink to Sleep",
+			},
+			[2] = {
+				["note"] = "Turn the quest in to The Cook at "..NORMAL.."[d]"..WHITE..".",
+				["id"] = 41084,
+				["attain"] = 55,
+				["aim"] = "Speak with someone who may know how to acquire wine for Councilman Kyleson.",
+				["followup"] = "Spectral Wine",
+				["location"] = "Councilman Kyleson "..NORMAL.."[c]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Suitable Accomodations",
+				["title"] = "A Drink to Sleep",
+			},
+			[3] = {
+				["note"] = "Flask of Port sold by alcohol vendors. All items can be bought from Auction House.",
+				["id"] = 41085,
+				["attain"] = 55,
+				["aim"] = "Gather 3 Essence of Death, 5 Flask of Port, and a Ghost Mushroom for The Cook in Karazhan.",
+				["followup"] = "Wine for Kyleson",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "A Drink to Sleep",
+				["title"] = "Spectral Wine",
+			},
+			[4] = {
+				["note"] = "",
+				["id"] = 41086,
+				["attain"] = 55,
+				["aim"] = "Deliver the Spectral Wine to Councilman Kyleson in Karazhan.",
+				["title"] = "Wine for Kyleson",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Spectral Wine",
+			},
+			[5] = {
+				["note"] = "",
+				["id"] = 40817,
+				["attain"] = 58,
+				["aim"] = "Listen to the story of Lord Ebonlocke.",
+				["title"] = "The Key to Karazhan I",
+				["location"] = "Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["followup"] = "The Key to Karazhan II",
+			},
+			[6] = {
+				["note"] = "",
+				["id"] = 40818,
+				["attain"] = 58,
+				["aim"] = "Kill Moroes and retrieve the Key to the Upper Chambers. Moroes resides in Lower Karazhan Halls. Bring back the key to Lord Ebonlocke.",
+				["followup"] = "The Key to Karazhan III",
+				["location"] = "Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Key to Karazhan I",
+				["title"] = "The Key to Karazhan II",
+			},
+			[7] = {
+				["note"] = "Turn in the quest to Bethor Iceshard (Undercity - The Magic Quarter"..NORMAL.."[84.1,17.5]"..WHITE..", mage trainer zone.)",
+				["id"] = 40822,
+				["attain"] = 58,
+				["aim"] = "Find someone from Kirin Tor who might know something about Vandol. Undercity could be a good place to start your search.",
+				["followup"] = "The Key to Karazhan IV",
+				["location"] = "The Cook ("..NORMAL.."[Karazhan - d]"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "The Key to Karazhan II",
+				["title"] = "The Key to Karazhan III",
+			},
+			[8] = {
+				["note"] = "Turn in the quest to Duke Rothlen "..NORMAL.."[f]"..WHITE.." on the balkon next to Clawlord Howlfang "..NORMAL.."[4]"..WHITE..".",
+				["id"] = 40998,
+				["attain"] = 55,
+				["aim"] = "Find someone that may be know something about the Scribbled Cooking Notes.",
+				["title"] = "Scribbled Cooking Notes",
+				["location"] = "Scribbled Cooking Notes",
+				["level"] = 60,
+				["followup"] = "Lost and Found",
+			},
+			[9] = {
+				["note"] = "You can find Engraved Golden Bracelet in the chest at "..NORMAL.."[a]"..WHITE..".",
+				["id"] = 40999,
+				["attain"] = 55,
+				["aim"] = "Recover the Engraved Golden Bracelet for Duke Rothlen in Karazhan.",
+				["followup"] = "Rothlen Family Brooch",
+				["location"] = "Duke Rothlen "..NORMAL.."[f]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Scribbled Cooking Notes",
+				["title"] = "Lost and Found",
+			},
+			[10] = {
+				["note"] = "Rothlen Family Brooch is in the chest next to "..NORMAL.."[Stratholme]"..WHITE.." boss The Unforgiven.",
+				["id"] = 41000,
+				["attain"] = 55,
+				["aim"] = "Recover the Rothlen Family Brooch from Stratholme for Duke Rothlen in Karazhan.",
+				["followup"] = "The Secret Recipe",
+				["location"] = "Duke Rothlen "..NORMAL.."[f]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Lost and Found",
+				["title"] = "Rothlen Family Brooch",
+			},
+			[11] = {
+				["note"] = "",
+				["id"] = 41001,
+				["attain"] = 55,
+				["aim"] = "Speak with 'The Cook' in Karazhan.",
+				["followup"] = "The Doorman of Karazhan",
+				["location"] = "Duke Rothlen "..NORMAL.."[f]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Rothlen Family Brooch",
+				["title"] = "The Secret Recipe",
+			},
+			[12] = {
+				["note"] = "Doorman Montigue "..BLUE.."[A]"..WHITE.." at the beginning of the dungeon in front of the stairs.",
+				["id"] = 41002,
+				["attain"] = 55,
+				["aim"] = "Speak with Doorman Montigue in Karazhan.",
+				["followup"] = "Charge of Karazhan",
+				["location"] = "The Cook "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Secret Recipe",
+				["title"] = "The Doorman of Karazhan",
+			},
+			[13] = {
+				["note"] = "All can be bought from Auction House.",
+				["id"] = 41003,
+				["attain"] = 55,
+				["aim"] = "Bring 10 Essence of Undeath, 10 Living Essence, and 25 Gold to Doorman Montique in Karazhan.",
+				["followup"] = "Le Fishe Au Chocolat",
+				["location"] = "Doorman Montigue "..BLUE.."[A]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "The Doorman of Karazhan",
+				["title"] = "Charge of Karazhan",
+			},
+			[14] = {
+				["note"] = "",
+				["id"] = 41004,
+				["attain"] = 55,
+				["aim"] = "Bring the Charge of Karazhan to The Cook in Karazhan.",
+				["title"] = "Le Fishe Au Chocolat",
+				["prequest"] = "Charge of Karazhan",
+				["location"] = "Doorman Montigue "..BLUE.."[A]"..WHITE..".",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.PATTERN,
+						["name"] = "Recipe: Le Fishe Au Chocolat",
+						["id"] = 61666,
+						["icon"] = "INV_Scroll_04",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Le Fishe Au Chocolat",
+						["id"] = 84040,
+						["icon"] = "INV_Misc_Fishe_Au_Chocolate",
+						["quality"] = 1,
+					},
+				},
+				["followup"] = "",
+			},
+			[15] = {
+				["note"] = "Questline starts with legendary item 'The Scythe of Elune' that drops from Lord Blackwald II "..NORMAL.."[5]"..WHITE..".",
+				["id"] = 41062,
+				["attain"] = 60,
+				["aim"] = "Slay Clawlord Howlfang "..NORMAL.."[4]"..WHITE.." and report to Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["title"] = "Scythe of the Goddess",
+				["location"] = "The Scythe of Elune",
+				["level"] = 60,
+				["followup"] = "Scythe of the Goddess",
+			},
+			[16] = {
+				["note"] = "Turn it in to Jitters (Duskwood - Raven Hill"..NORMAL.." [18.4,56.4]"..WHITE..").",
+				["id"] = 41063,
+				["attain"] = 60,
+				["aim"] = "Find someone in Duskwood who might know more about the Scythe of Elune.",
+				["followup"] = "Scythe of the Goddess",
+				["location"] = "Lord Ebonlocke "..NORMAL.."[d]"..WHITE..".",
+				["level"] = 60,
+				["prequest"] = "Scythe of the Goddess",
+				["title"] = "Scythe of the Goddess",
+			},
+			[17] = {
+				["note"] = "After finishing this quest you will be able to get a quest for head/leg enchants. For each of them you will need:\n1x Overcharged Ley Energy - random rare item loot from trash/boss in Karazhan\n6x Arcane Essence - random trash loot.",
+				["id"] = 41078,
+				["attain"] = 55,
+				["aim"] = "Gather 15 Arcane Essence, 20 Illusion Dust, and 10 Greater Eternal Essence for Heirophant Nerseus at the church outside Karazhan.",
+				["followup"] = "Invocation of Shattering, Invocation of Greater Protection, Invocation of Expansive Mind, Invocation of Greater Arcane Fortitude",
+				["location"] = "Heirophant Nerseus (Deadwind Pass, in front of the church next to Karazhan"..NORMAL.." [40.3,77.2]"..WHITE..").",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Shattering",
+						["id"] = 92005,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+					[2] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Greater Protection",
+						["id"] = 92006,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+					[3] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Expansive Mind",
+						["id"] = 92007,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+					[4] = {
+						["subtext"] = L.ENCHANT,
+						["name"] = "Invocation of Greater Arcane Fortitude",
+						["id"] = 92008,
+						["icon"] = "Ability_Creature_Cursed_01",
+						["quality"] = 3,
+					},
+				},
+				["title"] = "Contribution to the Church",
+			},
+		},
+		["story"] = "",
+		["name"] = "Lower Karazhan Halls",
+	},
+	[46] = {
+		[1] = {
+			[1] = {
+				["note"] = "",
+				["id"] = 40963,
+				["attain"] = 58,
+				["aim"] = "Bring the Head of Solnius to Ralathius at Nordanaar in Hyjal.",
+				["title"] = "Head of Solnius",
+				["location"] = "Head of Solnius drops from Solnius <The Awakener>",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Nordrassil",
+						["id"] = 61195,
+						["icon"] = "BTNWoodenRingUPG1",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "The Heart of Dreams",
+						["id"] = 61194,
+						["icon"] = "BTNOrbOfDepths",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Verdant Eye Necklace",
+						["id"] = 61193,
+						["icon"] = "BTNEnchantedNecklace",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "You will get the reward finishing follow up quest.",
+				["id"] = 40905,
+				["attain"] = 55,
+				["aim"] = "Bring the Smoldering Dream Essence to Arch Druid Dreamwind at Nordanaar in Hyjal.",
+				["followup"] = "Purified Dream Essence",
+				["location"] = "Smoldering Dream Essence drops from Solnius <The Awakener>",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Purified Emerald Essence",
+						["id"] = 61445,
+						["icon"] = "INV_Enchant_EssenceNetherLarge",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Smoldering Dream Essence",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "",
+				["id"] = 40963,
+				["attain"] = 58,
+				["aim"] = "Bring the Head of Solnius to Ralathius at Nordanaar in Hyjal.",
+				["title"] = "Head of Solnius",
+				["location"] = "Head of Solnius drops from Solnius <The Awakener>",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Ring of Nordrassil",
+						["id"] = 61195,
+						["icon"] = "BTNWoodenRingUPG1",
+						["quality"] = 4,
+					},
+					[2] = {
+						["subtext"] = L.TRINKET,
+						["name"] = "The Heart of Dreams",
+						["id"] = 61194,
+						["icon"] = "BTNOrbOfDepths",
+						["quality"] = 4,
+					},
+					[3] = {
+						["subtext"] = L.NECK,
+						["name"] = "Verdant Eye Necklace",
+						["id"] = 61193,
+						["icon"] = "BTNEnchantedNecklace",
+						["quality"] = 4,
+					},
+				},
+			},
+			[2] = {
+				["note"] = "You will get the reward finishing follow up quest.",
+				["id"] = 40905,
+				["attain"] = 55,
+				["aim"] = "Bring the Smoldering Dream Essence to Arch Druid Dreamwind at Nordanaar in Hyjal.",
+				["followup"] = "Purified Dream Essence",
+				["location"] = "Smoldering Dream Essence drops from Solnius <The Awakener>",
+				["level"] = 60,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.ITEM,
+						["name"] = "Purified Emerald Essence",
+						["id"] = 61445,
+						["icon"] = "INV_Enchant_EssenceNetherLarge",
+						["quality"] = 4,
+					},
+				},
+				["title"] = "Smoldering Dream Essence",
+			},
+		},
+		["story"] = "Emerald Sanctum is an instance raid located in Hyjal. A fog of corruption has descended upon the Emerald Dream, twisting the morals and intentions of even the noblest and purest. The corrupted Wakener is preparing to send a premature call of awakening; if not stopped, his kin will arise and go on a frenzied rampage across Azeroth.",
+		["name"] = "Emerald Sanctum",
+	},
+	[47] = {
+		[1] = {
+			[1] = {
+				["note"] = "Questline starts with quest 'Unusual Partnership' at High Explorer Magellas <Explorers' League> (Ironforge - Hall of Explorers; "..NORMAL.."[69.9,18.5]"..WHITE..").",
+				["id"] = 40107,
+				["attain"] = 58,
+				["aim"] = "Победи Остария. Возвращайтесь в Зал исследователей и сообщите Верховному исследователю Магелласу о событиях, произошедших у врат.",
+				["title"] = "Страж ворот",
+				["location"] = "Uldum Pedestal (Tanaris - Uldum "..NORMAL.."[37.6,81.4]"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "Unusual Partnership -> Original Owner -> What Lurks in the Dark -> The Race -> The Missing Expedition -> Pride of the Dwarves -> Gates of Uldum",
+			},
+		},
+		[2] = {
+			[1] = {
+				["note"] = "Questline starts with quest 'The Lone Wolf' at Sage Truthseeker (Thunder Bluff "..NORMAL.."[34.5,47.2]"..WHITE..") in the brdige building next to auctioneers.",
+				["id"] = 40115,
+				["attain"] = 58,
+				["aim"] = "Победи Остария. Возвращайтесь на Громовой утес и сообщите Мудрецу Правдоискателю о событиях, произошедших у врат.",
+				["title"] = "Страж врат",
+				["location"] = "Uldum Pedestal (Tanaris - Uldum "..NORMAL.."[37.6,81.4]"..WHITE..")",
+				["level"] = 60,
+				["prequest"] = "The Lone Wolf -> Scars of the Past -> Unseen Enemy -> In a Rush-> Disturbing Silence -> Might of the Horde -> Uldum Awaits",
+			},
+		},
+		["story"] = "",
+		["name"] = "Ostarius of Uldum",
+	},
+}

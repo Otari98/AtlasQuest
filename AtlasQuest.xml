@@ -111,7 +111,7 @@
 	</Button>
 
 	<!-- AtlasQuest Inside Atlas/AlphaMap frame -->
-	<Frame name="AtlasQuestInsideFrame" toplevel="true" enableMouse="true" parent="AtlasFrame" hidden="false">
+	<Frame name="AtlasQuestInsideFrame" toplevel="true" enableMouse="true" parent="AtlasFrame">
 		<Size x="510" y="510"/>
 		<Anchors>
 			<Anchor point="TOPLEFT">
@@ -280,11 +280,11 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentFinishedText" inherits="QuestFont" justifyH="LEFT" justifyV="TOP" text="Quest finished:">
+				<FontString name="$parentFinishedText" inherits="QuestFont" justifyH="RIGHT" justifyV="TOP">
 					<Size x="150" y="12"/>
 					<Anchors>
 						<Anchor point="TOPRIGHT">
-							<Offset x="-10" y="-50"/>
+							<Offset x="-50" y="-50"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
@@ -360,9 +360,6 @@
 						AQAutoshowOption_OnClick();
 						PlayClickSound()
 					</OnClick>
-					<OnShow>
-						getglobal(this:GetName().."Text"):SetText(AQOptionsAutoshowTEXT)
-					</OnShow>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="AQLEFTOption" inherits="OptionsCheckButtonTemplate">
@@ -378,9 +375,6 @@
 						AQLEFTOption_OnClick();
 						PlayClickSound()
 					</OnClick>
-					<OnShow>
-						getglobal(this:GetName().."Text"):SetText(AQOptionsLEFTTEXT)
-					</OnShow>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="AQRIGHTOption" inherits="OptionsCheckButtonTemplate" checked="true">
@@ -396,9 +390,6 @@
 						AQRIGHTOption_OnClick();
 						PlayClickSound()
 					</OnClick>
-					<OnShow>
-						getglobal(this:GetName().."Text"):SetText(AQOptionsRIGHTTEXT)
-					</OnShow>
 				</Scripts>
 			</CheckButton>
 			<Button name="AQOptionCloseButton" inherits="OptionsButtonTemplate" text="OKAY">
@@ -419,18 +410,15 @@
 			<OnLoad>
 				this:RegisterForDrag("LeftButton");
 				this:SetMovable(1);
-				getglobal("AtlasQuestOptionFrame_Title"):SetText(AQOptionsCaptionTEXT);
 			</OnLoad>
 			<OnShow>
 				AtlasQuestOptionFrame_OnShow()
 			</OnShow>
 			<OnDragStart>
 				this:StartMoving();
-				this.isMoving = true;
 			</OnDragStart>
 			<OnDragStop>
 				this:StopMovingOrSizing();
-				this.isMoving = false;
 			</OnDragStop>
 		</Scripts>
 	</Frame>
@@ -457,7 +445,7 @@
 					</Anchor>
 				</Anchors>
 			</Button>
-			<Button name="$parentOptionsButton" inherits="OptionsButtonTemplate" text="Options">
+			<Button name="$parentOptionsButton" inherits="OptionsButtonTemplate">
 				<Size x="80" y="20"/>
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT">
@@ -470,7 +458,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parentStoryButton" inherits="OptionsButtonTemplate" text="Story">
+			<Button name="$parentStoryButton" inherits="OptionsButtonTemplate">
 				<Size x="70" y="20"/>
 				<Anchors>
 					<Anchor point="BOTTOMLEFT">
@@ -750,7 +738,7 @@
 	
 	<!-- Added for AlphaMap Compatibility -->
 	
-	<Button name="AQ_AMCloseButton" inherits="OptionsButtonTemplate" text="AQ" parent="AlphaMapAlphaMapFrame">
+	<Button name="AQ_AMCloseButton" inherits="OptionsButtonTemplate" parent="AlphaMapAlphaMapFrame">
 		<Size x="45" y="35"/>
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="AlphaMapAlphaMapFrame">

@@ -21,14 +21,16 @@
 
 --]]
 local _G = _G or getfenv(0)
+local L = AtlasQuest.L
+
 local RED = "|cffcc6666";
 local WHITE = "|cffFFFFFF";
 local BLUE = "|cff0070dd";
 
-local MAX_INSTANCES = getn(AtlasQuest_Data)
+local MAX_INSTANCES = getn(AtlasQuest.data)
 local MAX_QUEST_BUTTONS = 23
 local CurrentFaction = 1;
-local CurrentDungeon = 1;
+local CurrentDungeon = -1;
 local PrevDungeon;
 local Side = "Left"
 local AutoShow = true;
@@ -54,9 +56,13 @@ local AtlasQuest_Defaults = {
 function AQ_OnLoad()
 	this:RegisterEvent("VARIABLES_LOADED");
 	this:RegisterEvent("CHAT_MSG_SYSTEM") -- ERR_QUEST_COMPLETE_S = "%s completed."
-	AtlasQuestFrameStoryButton:SetText(AQStoryB);
-	AtlasQuestFrameOptionsButton:SetText(AQOptionB);
-	AtlasQuestInsideFrameFinishedText:SetText(AQFinishedTEXT);
+	AtlasQuestFrameStoryButton:SetText(L["Story"]);
+	AtlasQuestFrameOptionsButton:SetText(L["Options"]);
+	AtlasQuestInsideFrameFinishedText:SetText(L["Quest finished:"]);
+	AQAutoshowOptionText:SetText(L.AUTOSHOW)
+	AQLEFTOptionText:SetText(L.SHOW_ON_LEFT)
+	AQRIGHTOptionText:SetText(L.SHOW_ON_RIGHT)
+	AtlasQuestOptionFrame_Title:SetText(L.OPTIONS);
 	AQUpdateNOW = true;
 	AtlasQuestFrame_Title:SetText("AtlasQuest");
 	this:SetFrameLevel(this:GetParent():GetFrameLevel() - 1)
@@ -95,11 +101,11 @@ function AtlasQuest_OnEvent()
 	elseif ( event == "CHAT_MSG_SYSTEM" ) then
 		if ( strfind(arg1, SearchPattern ) ) then
 			local _, _, questName = strfind(arg1, SearchPattern)
-			for k, v in pairs(AtlasQuest_Data) do
-				for k2, v2 in pairs(AtlasQuest_Data[k]) do
+			for k, v in pairs(AtlasQuest.data) do
+				for k2, v2 in pairs(AtlasQuest.data[k]) do
 					if ( k2 == PlayerFaction ) then
-						for i = 1, getn(AtlasQuest_Data[k][k2]) do
-							if ( AtlasQuest_Data[k][k2][i].title == questName ) then
+						for i = 1, getn(AtlasQuest.data[k][k2]) do
+							if ( AtlasQuest.data[k][k2][i].title == questName ) then
 								AtlasQuest_CharData[k][k2][i] = true
 								return
 							end
@@ -113,9 +119,9 @@ end
 
 -----------------------------------------------------------------------------
 -- Check which program is used (Atlas or AlphaMap)
--- hide panel if instance is 99 (nothing)
+-- hide panel if instance is -1 (nothing)
 -----------------------------------------------------------------------------
-function AQ_OnUpdate(arg1)
+function AQ_OnUpdate()
 	local previousValue = CurrentDungeon;
 
 	-- Show whether atlas or am is shown atm
@@ -126,21 +132,21 @@ function AQ_OnUpdate(arg1)
 	end
 
 	if ( AtlasORAlphaMap == "Atlas" ) then
-		AtlasQuest_Instanzenchecken();
+		CurrentDungeon = AtlasQuest_GetDungeonIndex();
 	elseif ( AtlasORAlphaMap == "AlphaMap" ) then
 		AtlasQuest_InstanzencheckAM();
 	end
 
-	-- Hides the panel if the map which is shown no quests have (map = 99)
-	if ( CurrentDungeon == 99 ) then
+	-- Hides the panel if the map which is shown no quests have (map = -1)
+	if ( CurrentDungeon == -1 ) then
 		AtlasQuestFrame:Hide();
 		AtlasQuestInsideFrame:Hide();
 	elseif ( (CurrentDungeon ~= previousValue) or AQUpdateNOW ) then
 		AtlasQuest_UpdateButtons();
 		AQUpdateNOW = false
 		AtlasQuestFrameZoneName:SetText();
-		if ( AtlasQuest_Data[CurrentDungeon] ) then
-			AtlasQuestFrameZoneName:SetText(AtlasQuest_Data[CurrentDungeon].name)
+		if ( AtlasQuest.data[CurrentDungeon] ) then
+			AtlasQuestFrameZoneName:SetText(AtlasQuest.data[CurrentDungeon].name)
 		end
 	elseif ( AtlasORAlphaMap == "AlphaMap" and not AlphaMapAlphaMapFrame:IsVisible() ) then
 		AtlasQuestFrame:Hide();
@@ -182,27 +188,27 @@ function AQ_AtlasOrAlphamap()
 end
 
 function AtlasQuest_UpdateButtons()
-	if ( CurrentDungeon == 99 ) then
+	if ( CurrentDungeon == -1 ) then
 		return
 	end
 	if ( PrevDungeon ~= CurrentDungeon ) then
 		AtlasQuestInsideFrame:Hide();
 	end
 	PrevDungeon = CurrentDungeon;
-	if ( AtlasQuest_Data[CurrentDungeon] ) then
-		AtlasQuestFrameNumQuests:SetText(QUESTS_COLON.." "..getn(AtlasQuest_Data[CurrentDungeon][CurrentFaction]));
+	if ( AtlasQuest.data[CurrentDungeon] ) then
+		AtlasQuestFrameNumQuests:SetText(QUESTS_COLON.." "..getn(AtlasQuest.data[CurrentDungeon][CurrentFaction]));
 	end
 	for i = 1, MAX_QUEST_BUTTONS do
 		_G["AQQuestButton"..i]:Hide()
 	end
 	for i = 1, MAX_QUEST_BUTTONS do
-		if ( AtlasQuest_Data[CurrentDungeon][CurrentFaction][i] ) then
+		if ( AtlasQuest.data[CurrentDungeon][CurrentFaction][i] ) then
 			local button = _G["AQQuestButton"..i]
 			local icon = _G["AQQuestButton"..i.."Icon"]
-			local text = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].title
+			local text = AtlasQuest.data[CurrentDungeon][CurrentFaction][i].title
 			local isFinished = AtlasQuest_CharData[CurrentDungeon][CurrentFaction][i]
-			local questLevel = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].level
-			local rewards = AtlasQuest_Data[CurrentDungeon][CurrentFaction][i].rewards
+			local questLevel = AtlasQuest.data[CurrentDungeon][CurrentFaction][i].level
+			local rewards = AtlasQuest.data[CurrentDungeon][CurrentFaction][i].rewards
 			local hasQuest = AtlasQuest_HasQuest(text)
 			if ( text ) then
 				if ( hasQuest ) then
@@ -285,8 +291,8 @@ end
 -----------------------------------------------------------------------------
 function AtlasQuestItem_OnEnter()
 	local itemID
-	if ( AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()] ) then
-		itemID = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()].id
+	if ( AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()] ) then
+		itemID = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()].id
 	end
 	if ( itemID ) then
 		GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
@@ -303,8 +309,8 @@ end
 -----------------------------------------------------------------------------
 function AtlasQuestItem_OnClick(arg1)
 	local itemID
-	if ( AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()] ) then
-		itemID = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()].id
+	if ( AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()] ) then
+		itemID = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()].id
 	end
 	if ( itemID ) then
 		if ( arg1 == "RightButton" ) then
@@ -342,114 +348,70 @@ end
 -- This functions returns AQINSTANZ with a number
 -- that tells which instance is shown atm for Atlas or AlphaMap
 -----------------------------------------------------------------------------
-local pathAtlas = "Interface\\AddOns\\Atlas\\Images\\Maps\\"
+AtlasQuest.AtlasMapToDungeon = {
+	["TheDeadmines"] = 1,
+	["TheDeadminesEnt"] = 1,
+	["WailingCaverns"] = 2,
+	["WailingCavernsEnt"] = 2,
+	["RagefireChasm"] = 3,
+	["Uldaman"] = 4,
+	["UldamanEnt"] = 4,
+	["BlackrockDepths"] = 5,
+	["BlackwingLair"] = 6,
+	["BlackfathomDeeps"] = 7,
+	["BlackfathomDeepsEnt"] = 7,
+	["BlackrockSpireLower"] = 8,
+	["BlackrockSpireUpper"] = 9,
+	["DireMaulEast"] = 10,
+	["DireMaulNorth"] = 11,
+	["DireMaulWest"] = 12,
+	["Maraudon"] = 13,
+	["MaraudonEnt"] = 13,
+	["MoltenCore"] = 14,
+	["Naxxramas"] = 15,
+	["OnyxiasLair"] = 16,
+	["RazorfenDowns"] = 17,
+	["RazorfenKraul"] = 18,
+	["SMLibrary"] = 19,
+	["SMArmory"] = 20,
+	["SMCathedral"] = 21,
+	["SMGraveyard"] = 22,
+	["Scholomance"] = 23,
+	["ShadowfangKeep"] = 24,
+	["Stratholme"] = 25,
+	["TheRuinsofAhnQiraj"] = 26,
+	["TheStockade"] = 27,
+	["TheSunkenTemple"] = 28,
+	["TheSunkenTempleEnt"] = 28,
+	["TheTempleofAhnQiraj"] = 29,
+	["ZulFarrak"] = 30,
+	["ZulGurub"] = 31,
+	["Gnomeregan"] = 32,
+	["GnomereganEnt"] = 32,
+	["FourDragons"] = 33,
+	["Azuregos"] = 34,
+	["LordKazzak"] = 35,
+	["AlteracValleyNorth"] = 36,
+	["AlteracValleySouth"] = 36,
+	["ArathiBasin"] = 37,
+	["WarsongGulch"] = 38,
 
-function AtlasQuest_Instanzenchecken()
-	local map = AtlasMap:GetTexture()
-	-- Original Instances
-	if ( map == pathAtlas.."TheDeadmines" or map == pathAtlas.."TheDeadminesEnt" ) then
-		CurrentDungeon = 1;
-	elseif ( map == pathAtlas.."WailingCaverns" or map == pathAtlas.."WailingCavernsEnt" ) then
-		CurrentDungeon = 2;
-	elseif ( map == pathAtlas.."RagefireChasm" ) then
-		CurrentDungeon = 3;
-	elseif ( map == pathAtlas.."Uldaman" or map == pathAtlas.."UldamanEnt" ) then
-		CurrentDungeon = 4;
-	elseif ( map == pathAtlas.."BlackrockDepths" ) then
-		CurrentDungeon = 5;
-	elseif ( map == pathAtlas.."BlackwingLair" ) then
-		CurrentDungeon = 6;
-	elseif ( map == pathAtlas.."BlackfathomDeeps" or map == pathAtlas.."BlackfathomDeepsEnt" ) then
-		CurrentDungeon = 7;
-	elseif ( map == pathAtlas.."BlackrockSpireLower" ) then
-		CurrentDungeon = 8;
-	elseif ( map == pathAtlas.."BlackrockSpireUpper" ) then
-		CurrentDungeon = 9;
-	elseif ( map == pathAtlas.."DireMaulEast" ) then
-		CurrentDungeon = 10;
-	elseif ( map == pathAtlas.."DireMaulNorth" ) then
-		CurrentDungeon = 11;
-	elseif ( map == pathAtlas.."DireMaulWest" ) then
-		CurrentDungeon = 12;
-	elseif ( map == pathAtlas.."Maraudon" or map == pathAtlas.."MaraudonEnt" ) then
-		CurrentDungeon = 13;
-	elseif ( map == pathAtlas.."MoltenCore" ) then
-		CurrentDungeon = 14;
-	elseif ( map == pathAtlas.."Naxxramas" ) then
-		CurrentDungeon = 15;
-	elseif ( map == pathAtlas.."OnyxiasLair" ) then
-		CurrentDungeon = 16;
-	elseif ( map == pathAtlas.."RazorfenDowns" ) then
-		CurrentDungeon = 17;
-	elseif ( map == pathAtlas.."RazorfenKraul" ) then
-		CurrentDungeon = 18;
-	elseif ( map == pathAtlas.."SMLibrary" ) then
-		CurrentDungeon = 19;
-	elseif ( map == pathAtlas.."SMArmory" ) then
-		CurrentDungeon = 20;
-	elseif ( map == pathAtlas.."SMCathedral" ) then
-		CurrentDungeon = 21;
-	elseif ( map == pathAtlas.."SMGraveyard" ) then
-		CurrentDungeon = 22;
-	elseif ( map == pathAtlas.."Scholomance" ) then
-		CurrentDungeon = 23;
-	elseif ( map == pathAtlas.."ShadowfangKeep" ) then
-		CurrentDungeon = 24;
-	elseif ( map == pathAtlas.."Stratholme" ) then
-		CurrentDungeon = 25;
-	elseif ( map == pathAtlas.."TheRuinsofAhnQiraj" ) then
-		CurrentDungeon = 26;
-	elseif ( map == pathAtlas.."TheStockade" ) then
-		CurrentDungeon = 27;
-	elseif ( map == pathAtlas.."TheSunkenTemple" or map == pathAtlas.."TheSunkenTempleEnt" ) then
-		CurrentDungeon = 28;
-	elseif ( map == pathAtlas.."TheTempleofAhnQiraj" ) then
-		CurrentDungeon = 29;
-	elseif ( map == pathAtlas.."ZulFarrak" ) then
-		CurrentDungeon = 30;
-	elseif ( map == pathAtlas.."ZulGurub" ) then
-		CurrentDungeon = 31;
-	elseif ( map == pathAtlas.."Gnomeregan" or map == pathAtlas.."GnomereganEnt" ) then
-		CurrentDungeon = 32;
-	-- Outdoor Raids
-	elseif ( map == pathAtlas.."FourDragons" ) then
-		CurrentDungeon = 33;
-	elseif ( map == pathAtlas.."Azuregos" ) then
-		CurrentDungeon = 34;
-	elseif ( map == pathAtlas.."LordKazzak" ) then
-		CurrentDungeon = 35;
-	-- Battlegrounds
-	elseif ( map == pathAtlas.."AlteracValleyNorth" ) then
-		CurrentDungeon = 36;
-	elseif ( map == pathAtlas.."AlteracValleySouth" ) then
-		CurrentDungeon = 36;
-	elseif ( map == pathAtlas.."ArathiBasin" ) then
-		CurrentDungeon = 37;
-	elseif ( map == pathAtlas.."WarsongGulch" ) then
-		CurrentDungeon = 38;
-	-- TurtleWOW Dungeons
-	elseif ( map == pathAtlas.."TheCrescentGrove" ) then
-		CurrentDungeon = 39;
-	elseif ( map == pathAtlas.."HateforgeQuarry" ) then
-		CurrentDungeon = 40;
-	elseif ( map == pathAtlas.."KarazhanCrypt" ) then
-		CurrentDungeon = 41;
-	elseif ( map == pathAtlas.."CavernsOfTimeBlackMorass" ) then
-		CurrentDungeon = 42;
-	elseif ( map == pathAtlas.."StormwindVault" ) then
-		CurrentDungeon = 43;
-	elseif ( map == pathAtlas.."GilneasCity" ) then
-		CurrentDungeon = 44;
-	elseif ( map == pathAtlas.."LowerKara" ) then
-		CurrentDungeon = 45;
-	elseif ( map == pathAtlas.."EmeraldSanctum" ) then
-		CurrentDungeon = 46;
-	elseif ( map == pathAtlas.."Ostarius" ) then
-		CurrentDungeon = 47;
-		-- Default
-	else --added for newer atlas version until i update atlasquest and for the flight pass maps
-		CurrentDungeon = 99;
-	end
+	["TheCrescentGrove"] = 39,
+	["HateforgeQuarry"] = 40,
+	["KarazhanCrypt"] = 41,
+	["CavernsOfTimeBlackMorass"] = 42,
+	["StormwindVault"] = 43,
+	["GilneasCity"] = 44,
+	["LowerKara"] = 45,
+	["EmeraldSanctum"] = 46,
+	["Ostarius"] = 47,
+	-- ["DragonmawRetreat"] = 48,
+	-- ["StormwroughtRuins"] = 49,
+}
+
+function AtlasQuest_GetDungeonIndex()
+	local map = gsub(AtlasMap:GetTexture() or "", "Interface\\AddOns\\Atlas\\Images\\Maps\\", "")
+	return AtlasQuest.AtlasMapToDungeon[map] or -1
 end
 
 -----------------------------------------------------------------------------
@@ -529,7 +491,7 @@ function AtlasQuest_InstanzencheckAM()
 		CurrentDungeon = 38;
 	-- Default
 	else
-		CurrentDungeon = 99;
+		CurrentDungeon = -1;
 	end
 	-----------------------------------------------------------------------------
 	-- function to work with outdoor boss @ alphamap
@@ -550,7 +512,7 @@ function AtlasQuest_InstanzencheckAM()
 				elseif ( GamAlphaMapMap.filename == "AM_Dragon_Ashenvale_Map" ) then
 					CurrentDungeon = 33;
 				else
-					CurrentDungeon = 99;
+					CurrentDungeon = -1;
 				end
 			end
 		end
@@ -754,8 +716,8 @@ end
 -- Insert Quest Information into the chat box
 -----------------------------------------------------------------------------
 function AQInsertQuestInformation()
-	local questName = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].title
-	local questLevel = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].level
+	local questName = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title
+	local questLevel = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
 	ChatFrameEditBox:Insert("["..questName.."] ["..questLevel.."]");
 end
 
@@ -766,45 +728,45 @@ end
 function AtlasQuest_SetQuestText()
 	AQClearALL();
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameFinishedText:SetText(factionColor..AQFinishedTEXT);
+	AtlasQuestInsideFrameFinishedText:SetText(factionColor..L["Quest finished:"]);
 	AtlasQuestInsideFrameFinishedButton:Show();
 
-	local level = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].level
-	local attain = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].attain
-	local prequest = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].prequest or NO
-	local followup = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].followup or NO
-	local location = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].location
-	local aim = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].aim
-	local note = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].note
-	local rewards = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards
+	local level = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
+	local attain = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].attain
+	local prequest = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].prequest or NOT_APPLICABLE
+	local followup = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].followup or NOT_APPLICABLE
+	local location = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].location
+	local aim = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].aim
+	local note = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].note
+	local rewards = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards
 	if ( level ) then
 		local color = GetDifficultyColor(level, true)
 		AtlasQuestInsideFrameQuestName:SetTextColor(color.r, color.g, color.b)
 	end
-	AtlasQuestInsideFrameQuestName:SetText(AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].title);
-	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..AQDiscription_LEVEL..WHITE..level);
-	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..AQDiscription_ATTAIN..WHITE..attain);
-	AtlasQuestInsideFrameQuestInfo:SetText(factionColor..AQDiscription_PREQUEST..WHITE..prequest.."\n\n"
-		..factionColor..AQDiscription_FOLGEQUEST..WHITE..followup.."\n\n"
-		..factionColor..AQDiscription_START..WHITE..location.."\n\n"
-		..factionColor..AQDiscription_AIM..WHITE..aim.."\n\n"
-		..factionColor..AQDiscription_NOTE..WHITE..note);
+	AtlasQuestInsideFrameQuestName:SetText(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title);
+	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..L["Level: "]..WHITE..level);
+	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..L["Attain: "]..WHITE..attain);
+	AtlasQuestInsideFrameQuestInfo:SetText(factionColor..L["Prequest: "]..WHITE..prequest.."\n\n"
+		..factionColor..L["Quest follows: "]..WHITE..followup.."\n\n"
+		..factionColor..L["Starts at:\n"]..WHITE..location.."\n\n"
+		..factionColor..L["Objective:\n"]..WHITE..aim.."\n\n"
+		..factionColor..L["Note:\n"]..WHITE..note);
 
-	local numRewards = rewards and getn(AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards) or 0
+	local numRewards = rewards and getn(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards) or 0
 	
 	if ( numRewards > 0 ) then
-		AtlasQuestInsideFrameRewardText:SetText(factionColor..AQDiscription_REWARD)
+		AtlasQuestInsideFrameRewardText:SetText(factionColor..L["Reward: "])
 		for i = 1, numRewards do
-			local itemID = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].id
+			local itemID = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].id
 			local itemName, itemLink, itemQuality, itemLevel, itemType, itemSubType, itemCount, itemEquipLoc, itemTexture = GetItemInfo(itemID)
 			if ( not itemName ) then
 				GameTooltip:SetHyperlink("item:"..itemID);
 			end
-			local name = itemName or AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].name
-			local quality = itemQuality or AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].quality
-			local icon = itemTexture or ("Interface\\Icons\\"..AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].icon)
-			local subtext = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].subtext
-			local count = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].count
+			local name = itemName or AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].name
+			local quality = itemQuality or AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].quality
+			local icon = itemTexture or ("Interface\\Icons\\"..AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].icon)
+			local subtext = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].subtext
+			local count = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].count
 			local r, g, b = GetItemQualityColor(quality)
 			_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexture(icon);
 			_G["AtlasQuestItemframe"..i.."_Name"]:SetText(name);
@@ -819,10 +781,10 @@ function AtlasQuest_SetQuestText()
 			_G["AtlasQuestItemframe"..i]:Show();
 		end
 	else
-		AtlasQuestInsideFrameRewardText:SetText(factionColor..AQNoReward)
+		AtlasQuestInsideFrameRewardText:SetText(factionColor..L["No Rewards"])
 	end
 
-	local pages = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
+	local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
 
 	if ( AtlasQuest_CharData[CurrentDungeon][CurrentFaction][CurrentQuest] ) then
 		AtlasQuestInsideFrameFinishedButton:SetChecked(true);
@@ -844,8 +806,8 @@ end
 function AQButtonSTORY_SetText()
 	AQClearALL();
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest_Data[CurrentDungeon].name)
-	local story = AtlasQuest_Data[CurrentDungeon].story
+	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name)
+	local story = AtlasQuest.data[CurrentDungeon].story
 	if ( type(story) == "string" ) then
 		AtlasQuestInsideFrameStoryText:SetText(WHITE..story);
 	elseif ( type(story) == "table" ) then
@@ -863,11 +825,11 @@ end
 function AQNextPage_OnClick()
 	AQClearALL();
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest_Data[CurrentDungeon].name);
+	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name);
 	
 	if ( AQ_PageType == "Story" ) then
 		CurrentPage = CurrentPage + 1;
-		local story = AtlasQuest_Data[CurrentDungeon].story
+		local story = AtlasQuest.data[CurrentDungeon].story
 		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[CurrentPage]);
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..getn(story))
 		if ( story[CurrentPage + 1] ) then
@@ -876,7 +838,7 @@ function AQNextPage_OnClick()
 			AtlasQuestInsideFrameNextPage:Hide();
 		end
 	elseif ( AQ_PageType == "Quest" ) then
-		local pages = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
+		local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
 		AtlasQuestInsideFrameStoryText:SetText(WHITE..pages[CurrentPage])
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..(getn(pages) + 1))
 		if ( pages[CurrentPage + 1] ) then
@@ -896,17 +858,17 @@ end
 function AQPrevPage_OnClick()
 	CurrentPage = CurrentPage - 1;
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest_Data[CurrentDungeon].name);
+	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name);
 
 	if ( AQ_PageType == "Story" ) then
-		local story = AtlasQuest_Data[CurrentDungeon].story
+		local story = AtlasQuest.data[CurrentDungeon].story
 		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[CurrentPage]);
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..getn(story))
 		if ( CurrentPage == 1 ) then
 			AtlasQuestInsideFramePrevPage:Hide();
 		end
 	elseif ( AQ_PageType == "Quest" ) then
-		local pages = AtlasQuest_Data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
+		local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..(getn(pages) + 1))
 		if ( CurrentPage == 1 ) then
 			AtlasQuest_SetQuestText()
