@@ -240,7 +240,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentQuestLevel" inherits="QuestFont" justifyH="LEFT" justifyV="TOP">
+				<FontString name="$parentQuestLevel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP">
 					<Size x="400" y="12"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -248,7 +248,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentAttainLevel" inherits="QuestFont" justifyH="LEFT" justifyV="TOP">
+				<FontString name="$parentAttainLevel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP">
 					<Size x="400" y="12"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -256,15 +256,15 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentQuestInfo" inherits="QuestFont" maxLines="20" justifyH="LEFT" justifyV="TOP">
-					<Size x="450" y="500"/>
+				<FontString name="$parentQuestInfo" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP">
+					<Size x="470" y="500"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
 							<Offset x="20" y="-75"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentStoryText" inherits="QuestFont" justifyH="LEFT" justifyV="TOP">
+				<FontString name="$parentStoryText" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP">
 					<Size x="410" y="450"/>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -272,7 +272,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentRewardText" inherits="QuestFont" justifyH="LEFT" justifyV="TOP" >
+				<FontString name="$parentRewardText" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP" >
 					<Size x="400" y="12"/>
 					<Anchors>
 						<Anchor point="BOTTOMLEFT">
@@ -280,7 +280,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentFinishedText" inherits="QuestFont" justifyH="RIGHT" justifyV="TOP">
+				<FontString name="$parentFinishedText" inherits="GameFontHighlight" justifyH="RIGHT" justifyV="TOP">
 					<Size x="150" y="12"/>
 					<Anchors>
 						<Anchor point="TOPRIGHT">

@@ -253,7 +253,7 @@ function AtlasQuest_HasQuest(questName)
 	questName = gsub(questName, "^[%(%)T*W*%d%.]+ ", "")
 	for i = 1, GetNumQuestLogEntries() do
 		questLogTitle, level, questTag, isHeader, isCollapsed, isComplete = GetQuestLogTitle(i)
-		if ( not isHeader and strfind(questLogTitle or "", questName ) ) then
+		if ( not isHeader and questLogTitle == questName ) then
 			return true
 		end
 	end
@@ -406,7 +406,7 @@ AtlasQuest.AtlasMapToDungeon = {
 	["EmeraldSanctum"] = 46,
 	["Ostarius"] = 47,
 	["DragonmawRetreat"] = 48,
-	-- ["StormwroughtRuins"] = 49,
+	["StormwroughtRuins"] = 49,
 }
 
 function AtlasQuest_GetDungeonIndex()
@@ -744,13 +744,13 @@ function AtlasQuest_SetQuestText()
 		AtlasQuestInsideFrameQuestName:SetTextColor(color.r, color.g, color.b)
 	end
 	AtlasQuestInsideFrameQuestName:SetText(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title);
-	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..L["Level: "]..WHITE..level);
-	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..L["Attain: "]..WHITE..attain);
-	AtlasQuestInsideFrameQuestInfo:SetText(factionColor..L["Prequest: "]..WHITE..prequest.."\n\n"
-		..factionColor..L["Quest follows: "]..WHITE..followup.."\n\n"
-		..factionColor..L["Starts at:\n"]..WHITE..location.."\n\n"
-		..factionColor..L["Objective:\n"]..WHITE..aim.."\n\n"
-		..factionColor..L["Note:\n"]..WHITE..note);
+	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..L["Level: "].."|r"..level);
+	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..L["Attain: "].."|r"..attain);
+	AtlasQuestInsideFrameQuestInfo:SetText(factionColor..L["Prequest: "].."|r"..prequest.."\n\n"
+		..factionColor..L["Quest follows: "].."|r"..followup.."\n\n"
+		..factionColor..L["Starts at:\n"].."|r"..location.."\n\n"
+		..factionColor..L["Objective:\n"].."|r"..aim.."\n\n"
+		..factionColor..L["Note:\n"].."|r"..note);
 
 	local numRewards = rewards and getn(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards) or 0
 	
