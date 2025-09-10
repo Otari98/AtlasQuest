@@ -435,7 +435,7 @@
 			<EdgeSize val="32"/>
 			<TileSize val="32"/>
 			<BackgroundInsets left="5" right="5" top="5" bottom="5"/>
-			<Color r="0" g="0" b="0" a="0.8"/>
+			<Color r="0" g="0" b="0" a="0.7"/>
 		</Backdrop>
 		<Frames>
 			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">

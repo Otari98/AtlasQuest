@@ -193,7 +193,7 @@ function AtlasQuest_UpdateButtons()
 				if ( isFinished ) then
 					icon:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
 					icon:Show()
-					button:SetAlpha(0.6)
+					button:SetAlpha(0.7)
 				end
 				if ( questLevel ) then
 					local color = GetDifficultyColor(questLevel, true)
@@ -378,6 +378,7 @@ AtlasQuest.AtlasMapToDungeon = {
 	["Ostarius"] = 47,
 	["DragonmawRetreat"] = 48,
 	["StormwroughtRuins"] = 49,
+	-- ["UpperKara"] = 50,
 }
 
 local pathAtlas = "Interface\\AddOns\\Atlas\\Images\\Maps\\"
