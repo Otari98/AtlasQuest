@@ -2798,7 +2798,7 @@ AtlasQuest.data = {
 				["followup"] = "Blackfathom Villainy",
 			},
 			[4] = {
-				["note"] = "Twilight Lord Kelris is at "..NORMAL.."[8]"..WHITE..". You find Dawnwatcher Selgorm in Darnassus - Craftsmen's Terrace ("..NORMAL.."55,24"..WHITE.."). \n\nATTENTION! If you turn on the flames beside Lord Kelris, enemies appear and attack you.",
+				["note"] = "Twilight Lord Kelris is at "..NORMAL.."[9]"..WHITE..". You find Dawnwatcher Selgorm in Darnassus - Craftsmen's Terrace ("..NORMAL.."55,24"..WHITE.."). \n\nATTENTION! If you turn on the flames beside Lord Kelris, enemies appear and attack you.",
 				["id"] = 1200,
 				["attain"] = 18,
 				["aim"] = "Bring the head of Twilight Lord Kelris to Dawnwatcher Selgorm in Darnassus.",
@@ -2849,6 +2849,24 @@ AtlasQuest.data = {
 				},
 			},
 			[6] = {
+				["note"] = "The Seed of Bloom are found around the tree next to Velthelaxx the Defiler, located at "..NORMAL.."[8]"..WHITE..".",
+				["id"] = 41812,
+				["attain"] = 18,
+				["aim"] = "Traverse into the depths of Blackfathom Deeps and recover a 'Seed of Bloom' from within the Moonshrine Ruins. Once acquired, return to Aelennia Starbloom east of The Zoram Strand in Ashenvale.",
+				["title"] = "The Moonshrine Ruins",
+				["location"] = "Aelennia Starbloom (Ashenvale; "..NORMAL.."[17.3,26.0]"..WHITE..")",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Starbloom Ring",
+						["id"] = 41919,
+						["icon"] = "INV_Jewelry_Ring_12",
+						["quality"] = 2,
+					},
+				},
+			},
+			[7] = {
 				["note"] = WARLOCK.."(Warlock only)"..WHITE.." You get the 3 Soran'ruk Fragments from Twilight Accolytes in "..NORMAL.."[Blackfathom Deeps]"..WHITE..". You get the Large Soran'ruk Fragment in "..NORMAL.."[Shadowfang Keep]"..WHITE.." from Shadowfang Darksouls.",
 				["id"] = 1740,
 				["attain"] = 20,
@@ -2921,7 +2939,7 @@ AtlasQuest.data = {
 				["level"] = 27,
 			},
 			[4] = {
-				["note"] = "Twilight Lord Kelris is at "..NORMAL.."[8]"..WHITE..". You find Bashana Runetotem in Thunderbluff - The Elder Rise ("..NORMAL.."70,33"..WHITE.."). \n\nATTENTION! If you turn on the flames beside Lord Kelris, enemies appear and attack you.",
+				["note"] = "Twilight Lord Kelris is at "..NORMAL.."[9]"..WHITE..". You find Bashana Runetotem in Thunderbluff - The Elder Rise ("..NORMAL.."70,33"..WHITE.."). \n\nATTENTION! If you turn on the flames beside Lord Kelris, enemies appear and attack you.",
 				["id"] = 6561,
 				["attain"] = 18,
 				["aim"] = "Bring the head of Twilight Lord Kelris to Bashana Runetotem in Thunder Bluff.",
@@ -2946,6 +2964,24 @@ AtlasQuest.data = {
 				},
 			},
 			[5] = {
+				["note"] = "The Seed of Bloom are found around the tree next to Velthelaxx the Defiler, located at "..NORMAL.."[8]"..WHITE..".",
+				["id"] = 41812,
+				["attain"] = 18,
+				["aim"] = "Traverse into the depths of Blackfathom Deeps and recover a 'Seed of Bloom' from within the Moonshrine Ruins. Once acquired, return to Aelennia Starbloom east of The Zoram Strand in Ashenvale.",
+				["title"] = "The Moonshrine Ruins",
+				["location"] = "Aelennia Starbloom (Ashenvale; "..NORMAL.."[17.3,26.0]"..WHITE..")",
+				["level"] = 26,
+				["rewards"] = {
+					[1] = {
+						["subtext"] = L.RING,
+						["name"] = "Starbloom Ring",
+						["id"] = 41919,
+						["icon"] = "INV_Jewelry_Ring_12",
+						["quality"] = 2,
+					},
+				},
+			},
+			[6] = {
 				["note"] = WARLOCK.."(Warlock only)"..WHITE.." You get the 3 Soran'ruk Fragments from Twilight Accolytes in "..NORMAL.."[Blackfathom Deeps]"..WHITE..". You get the Large Soran'ruk Fragment in "..NORMAL.."[Shadowfang Keep]"..WHITE.." from Shadowfang Darksouls.",
 				["id"] = 1740,
 				["attain"] = 20,
@@ -2970,7 +3006,7 @@ AtlasQuest.data = {
 					},
 				},
 			},
-			[6] = {
+			[7] = {
 				["note"] = "Using Fathom Stone "..NORMAL.."[7]"..WHITE.." for the quest #3 summons Baron Aquanis. He drops Strange Water Globe that starts the quest.",
 				["id"] = 6922,
 				["attain"] = 21,
