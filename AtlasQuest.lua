@@ -406,7 +406,7 @@ AtlasQuest.AtlasMapToDungeon = {
 	["EmeraldSanctum"] = 46,
 	["Ostarius"] = 47,
 	["DragonmawRetreat"] = 48,
-	-- ["StormwroughtRuins"] = 49,
+	["StormwroughtRuins"] = 49,
 }
 
 function AtlasQuest_GetDungeonIndex()
