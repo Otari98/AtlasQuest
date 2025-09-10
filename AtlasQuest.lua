@@ -118,24 +118,12 @@ function AtlasQuest_OnEvent()
 end
 
 -----------------------------------------------------------------------------
--- Check which program is used (Atlas or AlphaMap)
 -- hide panel if instance is -1 (nothing)
 -----------------------------------------------------------------------------
 function AQ_OnUpdate()
 	local previousValue = CurrentDungeon;
 
-	-- Show whether atlas or am is shown atm
-	if ( AtlasFrame and AtlasFrame:IsVisible() ) then
-		AtlasORAlphaMap = "Atlas";
-	elseif ( AlphaMapFrame:IsVisible() ) then
-		AtlasORAlphaMap = "AlphaMap";
-	end
-
-	if ( AtlasORAlphaMap == "Atlas" ) then
-		CurrentDungeon = AtlasQuest_GetDungeonIndex();
-	elseif ( AtlasORAlphaMap == "AlphaMap" ) then
-		AtlasQuest_InstanzencheckAM();
-	end
+	CurrentDungeon = AtlasQuest_GetDungeonIndex();
 
 	-- Hides the panel if the map which is shown no quests have (map = -1)
 	if ( CurrentDungeon == -1 ) then
@@ -148,42 +136,6 @@ function AQ_OnUpdate()
 		if ( AtlasQuest.data[CurrentDungeon] ) then
 			AtlasQuestFrameZoneName:SetText(AtlasQuest.data[CurrentDungeon].name)
 		end
-	elseif ( AtlasORAlphaMap == "AlphaMap" and not AlphaMapAlphaMapFrame:IsVisible() ) then
-		AtlasQuestFrame:Hide();
-		AtlasQuestInsideFrame:Hide();
-	end
-end
-
------------------------------------------------------------------------------
---  AlphaMap parent change
------------------------------------------------------------------------------
-function AQ_AtlasOrAlphamap()
-	if ( AtlasFrame and AtlasFrame:IsVisible() ) then
-		AtlasORAlphaMap = "Atlas";
-		AtlasQuestFrame:SetParent(AtlasFrame);
-		if ( Side == "Right" ) then
-			AtlasQuestFrame:ClearAllPoints();
-			AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, -10);
-		elseif ( Side == "Left" ) then
-			AtlasQuestFrame:ClearAllPoints();
-			AtlasQuestFrame:SetPoint("RIGHT", AtlasFrame, "LEFT", 16, -10);
-		end
-		AtlasQuestInsideFrame:SetParent(AtlasFrame);
-		AtlasQuestInsideFrame:ClearAllPoints();
-		AtlasQuestInsideFrame:SetPoint("TOPLEFT", AtlasFrame, 18, -84);
-	elseif ( AlphaMapFrame and AlphaMapFrame:IsVisible() ) then
-		AtlasORAlphaMap = "AlphaMap";
-		AtlasQuestFrame:SetParent(AlphaMapFrame);
-		if ( Side == "Right" ) then
-			AtlasQuestFrame:ClearAllPoints();
-			AtlasQuestFrame:SetPoint("TOP", AlphaMapFrame, 400, -107);
-		elseif ( Side == "Left" ) then
-			AtlasQuestFrame:ClearAllPoints();
-			AtlasQuestFrame:SetPoint("TOPLEFT", AlphaMapFrame, -195, -107);
-		end
-		AtlasQuestInsideFrame:SetParent(AlphaMapFrame);
-		AtlasQuestInsideFrame:ClearAllPoints();
-		AtlasQuestInsideFrame:SetPoint("TOPLEFT", AlphaMapFrame, 1, -108);
 	end
 end
 
@@ -209,7 +161,7 @@ function AtlasQuest_UpdateButtons()
 			local isFinished = AtlasQuest_CharData[CurrentDungeon][CurrentFaction][i]
 			local questLevel = AtlasQuest.data[CurrentDungeon][CurrentFaction][i].level
 			local rewards = AtlasQuest.data[CurrentDungeon][CurrentFaction][i].rewards
-			local hasQuest = AtlasQuest_HasQuest(text)
+			local hasQuest = PlayerFaction == CurrentFaction and AtlasQuest_HasQuest(text)
 			if ( text ) then
 				if ( hasQuest ) then
 					icon:SetTexture("Interface\\QuestFrame\\UI-Quest-BulletPoint")
@@ -317,7 +269,7 @@ function AtlasQuestItem_OnClick(arg1)
 			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
 			GameTooltip:SetHyperlink("item:"..itemID..":0:0:0");
 			GameTooltip:Show();
-		elseif ( IsShiftKeyDown() ) then
+		elseif ( IsShiftKeyDown() and ChatFrameEditBox:IsShown() ) then
 			if ( GetItemInfo(itemID) ) then
 				local itemName, _, itemQuality = GetItemInfo(itemID);
 				local r, g, b, hex = GetItemQualityColor(itemQuality);
@@ -346,7 +298,7 @@ end
 
 -----------------------------------------------------------------------------
 -- This functions returns AQINSTANZ with a number
--- that tells which instance is shown atm for Atlas or AlphaMap
+-- that tells which instance is shown atm for Atlas
 -----------------------------------------------------------------------------
 AtlasQuest.AtlasMapToDungeon = {
 	["TheDeadmines"] = 1,
@@ -409,113 +361,12 @@ AtlasQuest.AtlasMapToDungeon = {
 	["StormwroughtRuins"] = 49,
 }
 
+local pathAtlas = "Interface\\AddOns\\Atlas\\Images\\Maps\\"
+
 function AtlasQuest_GetDungeonIndex()
-	local map = gsub(AtlasMap:GetTexture() or "", "Interface\\AddOns\\Atlas\\Images\\Maps\\", "")
-	return AtlasQuest.AtlasMapToDungeon[map] or -1
-end
-
------------------------------------------------------------------------------
--- Alpha Map Support
------------------------------------------------------------------------------
-local pathAlphaMapInst = "Interface\\AddOns\\AlphaMap_Instances\\Maps\\"
-local pathAlphaMapExt = "Interface\\AddOns\\AlphaMap_Exteriors\\Maps\\"
-local pathAlphaMapBG = "Interface\\AddOns\\AlphaMap_Battlegrounds\\Maps\\"
-
-function AtlasQuest_InstanzencheckAM()
-	local map = AlphaMapAlphaMapTexture:GetTexture();
-	-- Original Instances
-	if ( map == pathAlphaMapInst.."TheDeadmines" or map == pathAlphaMapExt.."TheDeadminesExt" ) then
-		CurrentDungeon = 1;
-	elseif ( map == pathAlphaMapInst.."WailingCaverns" or map == pathAlphaMapExt.."WailingCavernsExt" ) then
-		CurrentDungeon = 2;
-	elseif ( map == pathAlphaMapInst.."RagefireChasm" ) then
-		CurrentDungeon = 3;
-	elseif ( map == pathAlphaMapInst.."Uldaman" or map == pathAlphaMapExt.."UldamanExt" ) then
-		CurrentDungeon = 4;
-	elseif ( map == pathAlphaMapInst.."BlackrockDepths" ) then
-		CurrentDungeon = 5;
-	elseif ( map == pathAlphaMapInst.."BlackwingLair" ) then
-		CurrentDungeon = 6;
-	elseif ( map == pathAlphaMapInst.."BlackfathomDeeps" or map == pathAlphaMapExt.."BlackfathomDeepsExt" ) then
-		CurrentDungeon = 7;
-	elseif ( map == pathAlphaMapInst.."LBRS" ) then
-		CurrentDungeon = 8;
-	elseif ( map == pathAlphaMapInst.."UBRS" ) then
-		CurrentDungeon = 9;
-	elseif ( map == pathAlphaMapInst.."DMEast" ) then
-		CurrentDungeon = 10;
-	elseif ( map == pathAlphaMapInst.."DMNorth" ) then
-		CurrentDungeon = 11;
-	elseif ( map == pathAlphaMapInst.."DMWest" ) then
-		CurrentDungeon = 12;
-	elseif ( map == pathAlphaMapInst.."Maraudon" or map == pathAlphaMapExt.."MaraudonExt" ) then
-		CurrentDungeon = 13;
-	elseif ( map == pathAlphaMapInst.."MoltenCore" ) then
-		CurrentDungeon = 14;
-	elseif ( map == pathAlphaMapInst.."Naxxramas" ) then
-		CurrentDungeon = 15;
-	elseif ( map == pathAlphaMapInst.."OnyxiasLair" ) then
-		CurrentDungeon = 16;
-	elseif ( map == pathAlphaMapInst.."RazorfenDowns" ) then
-		CurrentDungeon = 17;
-	elseif ( map == pathAlphaMapInst.."RazorfenKraul" ) then
-		CurrentDungeon = 18;
-	elseif ( map == pathAlphaMapInst.."ScarletMonastery" ) then
-		CurrentDungeon = 19;
-	elseif ( map == pathAlphaMapInst.."Scholomance" ) then
-		CurrentDungeon = 23;
-	elseif ( map == pathAlphaMapInst.."ShadowfangKeep" ) then
-		CurrentDungeon = 24;
-	elseif ( map == pathAlphaMapInst.."Stratholme" ) then
-		CurrentDungeon = 25;
-	elseif ( map == pathAlphaMapInst.."RuinsofAhnQiraj" ) then
-		CurrentDungeon = 26;
-	elseif ( map == pathAlphaMapInst.."TheStockade" ) then
-		CurrentDungeon = 27;
-	elseif ( map == pathAlphaMapInst.."TheSunkenTemple" or map == pathAlphaMapExt.."SunkenTempleExt" ) then
-		CurrentDungeon = 28;
-	elseif ( map == pathAlphaMapInst.."TempleofAhnQiraj" ) then
-		CurrentDungeon = 29;
-	elseif ( map == pathAlphaMapInst.."ZulFarrak" ) then
-		CurrentDungeon = 30;
-	elseif ( map == pathAlphaMapInst.."ZulGurub" ) then
-		CurrentDungeon = 31;
-	elseif ( map == pathAlphaMapInst.."Gnomeregan" or map == pathAlphaMapExt.."GnomereganExt" ) then
-		CurrentDungeon = 32;
-	-- Battlegrounds
-	elseif ( map == pathAlphaMapBG.."AlteracValley" ) then
-		CurrentDungeon = 36;
-	elseif ( map == pathAlphaMapBG.."ArathiBasin" ) then
-		CurrentDungeon = 37;
-	elseif ( map == pathAlphaMapBG.."WarsongGulch" ) then
-		CurrentDungeon = 38;
-	-- Default
-	else
-		CurrentDungeon = -1;
-	end
-	-----------------------------------------------------------------------------
-	-- function to work with outdoor boss @ alphamap
-	-----------------------------------------------------------------------------
-	if ( AlphaMapAlphaMapFrame:IsVisible() ) then
-		if ( GamAlphaMapMap ) then
-			if ( GamAlphaMapMap.type == AM_TYP_WORLDBOSSES ) then
-				if ( GamAlphaMapMap.filename == "AM_Kazzak_Map" ) then
-					CurrentDungeon = 35;
-				elseif ( GamAlphaMapMap.filename == "AM_Azuregos_Map" ) then
-					CurrentDungeon = 34;
-				elseif ( GamAlphaMapMap.filename == "AM_Dragon_Duskwood_Map" ) then
-					CurrentDungeon = 33;
-				elseif ( GamAlphaMapMap.filename == "AM_Dragon_Hinterlands_Map" ) then
-					CurrentDungeon = 33;
-				elseif ( GamAlphaMapMap.filename == "AM_Dragon_Feralas_Map" ) then
-					CurrentDungeon = 33;
-				elseif ( GamAlphaMapMap.filename == "AM_Dragon_Ashenvale_Map" ) then
-					CurrentDungeon = 33;
-				else
-					CurrentDungeon = -1;
-				end
-			end
-		end
+	if ( AtlasMap ) then
+		local map = gsub(AtlasMap:GetTexture() or "", pathAtlas, "")
+		return AtlasQuest.AtlasMapToDungeon[map] or -1
 	end
 end
 
@@ -547,12 +398,9 @@ end
 -- Right option
 -----------------------------------------------------------------------------
 function AQRIGHTOption_OnClick()
-	if ( AtlasFrame and AtlasORAlphaMap == "Atlas" ) then
+	if ( AtlasFrame ) then
 		AtlasQuestFrame:ClearAllPoints();
 		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, -10);
-	elseif ( AtlasORAlphaMap == "AlphaMap" ) then
-		AtlasQuestFrame:ClearAllPoints();
-		AtlasQuestFrame:SetPoint("TOP", "AlphaMapFrame", 400, -107);
 	end
 	AQRIGHTOption:SetChecked(true);
 	AQLEFTOption:SetChecked(false);
@@ -564,12 +412,9 @@ end
 -- Left option
 -----------------------------------------------------------------------------
 function AQLEFTOption_OnClick()
-	if ( AtlasFrame and AtlasORAlphaMap == "Atlas" and Side == "Right" ) then
+	if ( AtlasFrame and Side == "Right" ) then
 		AtlasQuestFrame:ClearAllPoints();
 		AtlasQuestFrame:SetPoint("RIGHT", AtlasFrame, "LEFT", 16, -10);
-	elseif ( AtlasORAlphaMap == "AlphaMap" and Side == "Right" ) then
-		AtlasQuestFrame:ClearAllPoints();
-		AtlasQuestFrame:SetPoint("TOPLEFT", "AlphaMapFrame", -195, -107);
 	end
 	AQRIGHTOption:SetChecked(false);
 	AQLEFTOption:SetChecked(true);
@@ -609,7 +454,6 @@ end
 -- upper right button / to show/close panel
 -----------------------------------------------------------------------------
 function AQCLOSE_OnClick()
-	AQ_AtlasOrAlphamap();
 	if ( AtlasQuestFrame:IsVisible() ) then
 		AtlasQuestFrame:Hide();
 		AtlasQuestInsideFrame:Hide();
@@ -674,7 +518,7 @@ end
 function AtlasQuestButton_OnClick()
 	CurrentQuest = this:GetID();
 
-	if ( ChatFrameEditBox:IsVisible() and IsShiftKeyDown() ) then
+	if ( ChatFrameEditBox:IsShown() and IsShiftKeyDown() ) then
 		AQInsertQuestInformation();
 	else
 		for i = 1, MAX_QUEST_BUTTONS do
@@ -718,7 +562,8 @@ end
 function AQInsertQuestInformation()
 	local questName = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title
 	local questLevel = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
-	ChatFrameEditBox:Insert("["..questName.."] ["..questLevel.."]");
+	local questID =  AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].id
+	ChatFrameEditBox:Insert(format("|cffFFFF00|Hquest:%d:%d|h[%s]|h|r", questID, questLevel, questName));
 end
 
 -----------------------------------------------------------------------------

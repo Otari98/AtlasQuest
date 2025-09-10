@@ -110,7 +110,7 @@
 		</Scripts>
 	</Button>
 
-	<!-- AtlasQuest Inside Atlas/AlphaMap frame -->
+	<!-- AtlasQuest Inside Atlas frame -->
 	<Frame name="AtlasQuestInsideFrame" toplevel="true" enableMouse="true" parent="AtlasFrame">
 		<Size x="510" y="510"/>
 		<Anchors>
@@ -735,21 +735,4 @@
 			</OnEvent>
 		</Scripts>
 	</Frame>
-	
-	<!-- Added for AlphaMap Compatibility -->
-	
-	<Button name="AQ_AMCloseButton" inherits="OptionsButtonTemplate" parent="AlphaMapAlphaMapFrame">
-		<Size x="45" y="35"/>
-		<Anchors>
-			<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="AlphaMapAlphaMapFrame">
-				<Offset x="0" y="5"/>
-			</Anchor>
-		</Anchors>
-		<Scripts>
-			<OnClick>
-				AQCLOSE_OnClick();
-			</OnClick>
-		</Scripts>
-	</Button>
-	
 </Ui>

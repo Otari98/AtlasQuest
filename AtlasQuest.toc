@@ -15,7 +15,7 @@
 ## X-Category: MYADDONS_CATEGORY_MAP
 ## X-Date: 22.01.2024
 ## X-Help: AtlasQuestHelp
-## OptionalDeps: AlphaMap, myAddOns, AtlasLoot
+## OptionalDeps: myAddOns, AtlasLoot
 ## LoadOnDemand: 0
 ## SavedVariablesPerCharacter: AtlasQuest_CharData
 ## SavedVariables: AtlasQuest_Options,
