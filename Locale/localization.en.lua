@@ -13446,7 +13446,7 @@ AtlasQuest.data = {
 					[3] = {
 						["subtext"] = L.WRIST..", "..L.LEATHER,
 						["name"] = "Torwyll's Cuffs",
-						["id"] = 41757,
+						["id"] = 41844,
 						["icon"] = "INV_Bracer_07",
 						["quality"] = 3,
 					},
