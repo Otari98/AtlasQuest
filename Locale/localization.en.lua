@@ -277,7 +277,7 @@ AtlasQuest.data = {
 				},
 			},
 			[4] = {
-				["note"] = "The prequest can be obtained from Gnoarn (Ironforge - Tinkertown; "..NORMAL.."69,50"..WHITE..").\nSneed's Shredder drops the Sprecklesprocket "..NORMAL.."[3]"..WHITE..".",
+				["note"] = "The prequest can be obtained from Gnoarn (Ironforge - Tinkertown; "..NORMAL.."69,50"..WHITE..").\nSneed's Shredder drops the Sprecklesprocket "..NORMAL.."[4]"..WHITE..".",
 				["id"] = 2040,
 				["attain"] = 15,
 				["aim"] = "Retrieve the Gnoam Sprecklesprocket from the Deadmines and return it to Shoni the Shilent in Stormwind.",
@@ -303,7 +303,7 @@ AtlasQuest.data = {
 				["prequest"] = "Speak with Shoni",
 			},
 			[5] = {
-				["note"] = "You start this Questline at Gryan Stoutmantle (Westfall - Sentinel Hill; "..NORMAL.."56,47"..WHITE..").\nEdwin VanCleef is the last boss of The Deadmines. You can find him at the top of his ship "..NORMAL.."[6]"..WHITE..".",
+				["note"] = "You start this Questline at Gryan Stoutmantle (Westfall - Sentinel Hill; "..NORMAL.."56,47"..WHITE..").\nEdwin VanCleef is the last boss of The Deadmines. You can find him at the top of his ship "..NORMAL.."[10]"..WHITE..".",
 				["id"] = 166,
 				["attain"] = 14,
 				["aim"] = "Kill Edwin VanCleef and bring his head to Gryan Stoutmantle.",
@@ -364,7 +364,7 @@ AtlasQuest.data = {
 				["attain"] = 16,
 				["aim"] = "Deliver the Letter to the City Architect to Baros Alexston in Stormwind.",
 				["title"] = "The Unsent Letter",
-				["location"] = "An Unsent Letter (drops from Edwin VanCleef; "..NORMAL.."[6]"..WHITE..")",
+				["location"] = "An Unsent Letter (drops from Edwin VanCleef; "..NORMAL.."[10]"..WHITE..")",
 				["level"] = 22,
 				["followup"] = "Bazil Thredd",
 			},
@@ -388,7 +388,7 @@ AtlasQuest.data = {
 				["prequest"] = "Food for Sailing Thoughts?",
 			},
 			[9] = {
-				["note"] = "You start this Questline at Christopher Hewen (Westfall - Sentinel Hill Inn; "..NORMAL.."52.3,52.8"..WHITE..").\nGilnid is at "..NORMAL.."[4]"..WHITE..".",
+				["note"] = "You start this Questline at Christopher Hewen (Westfall - Sentinel Hill Inn; "..NORMAL.."52.3,52.8"..WHITE..").\nGilnid is at "..NORMAL.."[5]"..WHITE..".",
 				["id"] = 40478,
 				["attain"] = 15,
 				["aim"] = "Venture into the Deadmines and slay Gilnid, once done, return to Maltimor Gartside at the Gartside Plot in Westfall.",
