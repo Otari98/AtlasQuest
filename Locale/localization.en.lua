@@ -193,8 +193,6 @@ local L = AtlasQuest.L
 -- 45 - Lower Karazhan Halls
 -- 46 - Emerald Sanctum
 -- 47 - Ostarius of Uldum
-
--- TODO ADD
 -- 48 - Dragonmaw Retreat
 -- 49 - Stormwrought Ruins
 
