@@ -23,26 +23,26 @@
 local _G = _G or getfenv(0)
 local L = AtlasQuest.L
 
-local RED = "|cffcc6666";
-local WHITE = "|cffFFFFFF";
-local BLUE = "|cff0070dd";
+local RED = "|cffcc6666"
+local WHITE = "|cffFFFFFF"
+local BLUE = "|cff0070dd"
 
 local MAX_INSTANCES = getn(AtlasQuest.data)
 local MAX_QUEST_BUTTONS = 23
-local CurrentFaction = 1;
-local CurrentDungeon = -1;
-local PrevDungeon;
+local CurrentDungeon = -1
+local PrevDungeon
 local Side = "Left"
-local AutoShow = true;
+local AutoShow = true
 local CurrentPage = 1
 local PlayerName = UnitName("player")
 local _, Race = UnitRace("player")
 local LastSelectedQuest
 local SearchPattern = gsub(ERR_QUEST_COMPLETE_S, "%%s", "(.+)")
+local CurrentFaction = 1
 local PlayerFaction = 1
 
 if ( Race == "Orc" or Race == "Troll" or Race == "Scourge" or Race == "Tauren" or Race == "Goblin" ) then
-	CurrentFaction = 2;
+	CurrentFaction = 2
 	PlayerFaction = 2
 end
 
@@ -51,42 +51,41 @@ local AtlasQuest_Defaults = {
 		["ShownSide"] = "Left",
 		["AtlasAutoShow"] = true,
 	},
-};
+}
 
 function AQ_OnLoad()
-	this:RegisterEvent("VARIABLES_LOADED");
+	this:RegisterEvent("VARIABLES_LOADED")
 	this:RegisterEvent("CHAT_MSG_SYSTEM") -- ERR_QUEST_COMPLETE_S = "%s completed."
-	AtlasQuestFrameStoryButton:SetText(L["Story"]);
-	AtlasQuestFrameOptionsButton:SetText(L["Options"]);
-	AtlasQuestInsideFrameFinishedText:SetText(L["Quest finished:"]);
+	this:RegisterEvent("CHAT_MSG_ADDON")
+	this:SetFrameLevel(this:GetParent():GetFrameLevel() - 1)
+	AtlasQuestFrameStoryButton:SetText(L["Story"])
+	AtlasQuestFrameOptionsButton:SetText(L["Options"])
+	AtlasQuestInsideFrameFinishedText:SetText(L["Quest finished:"])
 	AQAutoshowOptionText:SetText(L.AUTOSHOW)
 	AQLEFTOptionText:SetText(L.SHOW_ON_LEFT)
 	AQRIGHTOptionText:SetText(L.SHOW_ON_RIGHT)
-	AtlasQuestOptionFrame_Title:SetText(L.OPTIONS);
-	AQUpdateNOW = true;
-	AtlasQuestFrame_Title:SetText("AtlasQuest");
-	this:SetFrameLevel(this:GetParent():GetFrameLevel() - 1)
+	AtlasQuestOptionFrame_Title:SetText(L.OPTIONS)
+	AQUpdateNOW = true
+	AtlasQuestFrame_Title:SetText("AtlasQuest")
+	tinsert(UISpecialFrames, "AtlasQuestOptionFrame")
 end
 
 function AtlasQuest_OnEvent()
 	if ( event == "VARIABLES_LOADED" ) then
-		VariablesLoaded = 1; -- data is loaded completely
-		tinsert(UISpecialFrames, "AtlasQuestOptionFrame")
+		DEFAULT_CHAT_FRAME:AddMessage(L.ADDON_LOADED)
 		if ( not AtlasQuest_Options ) then
-			AtlasQuest_Options = AtlasQuest_Defaults;
-			DEFAULT_CHAT_FRAME:AddMessage("AtlasQuest Options database not found. Generating...");
+			AtlasQuest_Options = AtlasQuest_Defaults
 		elseif ( not AtlasQuest_Options[PlayerName] ) then
-			DEFAULT_CHAT_FRAME:AddMessage("Generate default database for this character");
 			AtlasQuest_Options[PlayerName] = AtlasQuest_Defaults[PlayerName]
 		end
 		if ( type(AtlasQuest_Options[PlayerName]) == "table" ) then
 			-- Which side
 			if ( AtlasQuest_Options[PlayerName]["ShownSide"] ~= nil ) then
-				Side = AtlasQuest_Options[PlayerName]["ShownSide"];
+				Side = AtlasQuest_Options[PlayerName]["ShownSide"]
 			end
 			-- atlas autoshow
 			if ( AtlasQuest_Options[PlayerName]["AtlasAutoShow"] ~= nil ) then
-				AutoShow = AtlasQuest_Options[PlayerName]["AtlasAutoShow"];
+				AutoShow = AtlasQuest_Options[PlayerName]["AtlasAutoShow"]
 			end
 			-- finished quests
 			AtlasQuest_CharData = AtlasQuest_CharData or {}
@@ -114,6 +113,26 @@ function AtlasQuest_OnEvent()
 				end
 			end
 		end
+	elseif ( event == "CHAT_MSG_ADDON" and arg1 == "TWQUEST" ) then
+		local completedQuests = explode(arg2, " ")
+		for _, id in pairs(completedQuests) do
+			id = tonumber(id)
+			if id then
+				for index, data in ipairs(AtlasQuest.data) do
+					for faction, quests in ipairs(data) do
+						if type(quests) == "table" then
+							for i = 1, getn(quests) do
+								if tonumber(quests[i].id) == id then
+									AtlasQuest_CharData[index][faction][i] = true
+									break
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+		AtlasQuest_UpdateButtons()
 	end
 end
 
@@ -121,18 +140,18 @@ end
 -- hide panel if instance is -1 (nothing)
 -----------------------------------------------------------------------------
 function AQ_OnUpdate()
-	local previousValue = CurrentDungeon;
+	local previousValue = CurrentDungeon
 
-	CurrentDungeon = AtlasQuest_GetDungeonIndex();
+	CurrentDungeon = AtlasQuest_GetDungeonIndex()
 
 	-- Hides the panel if the map which is shown no quests have (map = -1)
 	if ( CurrentDungeon == -1 ) then
-		AtlasQuestFrame:Hide();
-		AtlasQuestInsideFrame:Hide();
+		AtlasQuestFrame:Hide()
+		AtlasQuestInsideFrame:Hide()
 	elseif ( (CurrentDungeon ~= previousValue) or AQUpdateNOW ) then
-		AtlasQuest_UpdateButtons();
+		AtlasQuest_UpdateButtons()
 		AQUpdateNOW = false
-		AtlasQuestFrameZoneName:SetText();
+		AtlasQuestFrameZoneName:SetText()
 		if ( AtlasQuest.data[CurrentDungeon] ) then
 			AtlasQuestFrameZoneName:SetText(AtlasQuest.data[CurrentDungeon].name)
 		end
@@ -144,11 +163,11 @@ function AtlasQuest_UpdateButtons()
 		return
 	end
 	if ( PrevDungeon ~= CurrentDungeon ) then
-		AtlasQuestInsideFrame:Hide();
+		AtlasQuestInsideFrame:Hide()
 	end
-	PrevDungeon = CurrentDungeon;
+	PrevDungeon = CurrentDungeon
 	if ( AtlasQuest.data[CurrentDungeon] ) then
-		AtlasQuestFrameNumQuests:SetText(QUESTS_COLON.." "..getn(AtlasQuest.data[CurrentDungeon][CurrentFaction]));
+		AtlasQuestFrameNumQuests:SetText(QUESTS_COLON.." "..getn(AtlasQuest.data[CurrentDungeon][CurrentFaction]))
 	end
 	for i = 1, MAX_QUEST_BUTTONS do
 		_G["AQQuestButton"..i]:Hide()
@@ -165,22 +184,22 @@ function AtlasQuest_UpdateButtons()
 			if ( text ) then
 				if ( hasQuest ) then
 					icon:SetTexture("Interface\\QuestFrame\\UI-Quest-BulletPoint")
-					icon:Show();
+					icon:Show()
 					button:SetAlpha(1)
 				else
-					icon:Hide();
+					icon:Hide()
 					button:SetAlpha(1)
 				end
 				if ( isFinished ) then
 					icon:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
-					icon:Show();
+					icon:Show()
 					button:SetAlpha(0.6)
 				end
 				if ( questLevel ) then
 					local color = GetDifficultyColor(questLevel, true)
 					button:SetTextColor(color.r, color.g, color.b)
 				end
-				button:SetText(i..". "..text);
+				button:SetText(i..". "..text)
 				button:Show()
 				if ( rewards ) then
 					for j = 1, 6 do
@@ -220,19 +239,19 @@ end
 -- Shows the AQ panel with atlas
 -- function hooked now! thx dan for his help
 -----------------------------------------------------------------------------
-local original_Atlas_OnShow = Atlas_OnShow;
+local original_Atlas_OnShow = Atlas_OnShow
 function Atlas_OnShow()
 	if ( AutoShow ) then
-		AtlasQuestFrame:Show();
+		AtlasQuestFrame:Show()
 	else
-		AtlasQuestFrame:Hide();
+		AtlasQuestFrame:Hide()
 	end
-	AtlasQuestInsideFrame:Hide();
+	AtlasQuestInsideFrame:Hide()
 	if ( Side == "Right" ) then
-		AtlasQuestFrame:ClearAllPoints();
-		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, 10);
+		AtlasQuestFrame:ClearAllPoints()
+		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, 10)
 	end
-	original_Atlas_OnShow();
+	original_Atlas_OnShow()
 end
 
 --******************************************
@@ -247,9 +266,9 @@ function AtlasQuestItem_OnEnter()
 		itemID = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[this:GetID()].id
 	end
 	if ( itemID ) then
-		GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-		GameTooltip:SetHyperlink("item:"..itemID..":0:0:0");
-		GameTooltip:Show();
+		GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24)
+		GameTooltip:SetHyperlink("item:"..itemID..":0:0:0")
+		GameTooltip:Show()
 	end
 end
 
@@ -266,17 +285,17 @@ function AtlasQuestItem_OnClick(arg1)
 	end
 	if ( itemID ) then
 		if ( arg1 == "RightButton" ) then
-			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24);
-			GameTooltip:SetHyperlink("item:"..itemID..":0:0:0");
-			GameTooltip:Show();
+			GameTooltip:SetOwner(this, "ANCHOR_RIGHT", -(this:GetWidth() / 2), 24)
+			GameTooltip:SetHyperlink("item:"..itemID..":0:0:0")
+			GameTooltip:Show()
 		elseif ( IsShiftKeyDown() and ChatFrameEditBox:IsShown() ) then
 			if ( GetItemInfo(itemID) ) then
-				local itemName, _, itemQuality = GetItemInfo(itemID);
-				local r, g, b, hex = GetItemQualityColor(itemQuality);
-				ChatFrameEditBox:Insert(hex.."|Hitem:"..itemID..":0:0:0|h["..itemName.."]|h|r");
+				local itemName, _, itemQuality = GetItemInfo(itemID)
+				local r, g, b, hex = GetItemQualityColor(itemQuality)
+				ChatFrameEditBox:Insert(hex.."|Hitem:"..itemID..":0:0:0|h["..itemName.."]|h|r")
 			end
 		elseif ( IsControlKeyDown() and GetItemInfo(itemID) ) then
-			DressUpItemLink(itemID);
+			DressUpItemLink(itemID)
 		end
 	end
 end
@@ -287,11 +306,11 @@ end
 -----------------------------------------------------------------------------
 function AQ_OnShow()
 	if ( CurrentFaction == 2 ) then
-		AtlasQuestFrameHordeButton:SetChecked(true);
-		AtlasQuestFrameAllianceButton:SetChecked(false);
+		AtlasQuestFrameHordeButton:SetChecked(true)
+		AtlasQuestFrameAllianceButton:SetChecked(false)
 	elseif ( CurrentFaction == 1 ) then
-		AtlasQuestFrameHordeButton:SetChecked(false);
-		AtlasQuestFrameAllianceButton:SetChecked(true);
+		AtlasQuestFrameHordeButton:SetChecked(false)
+		AtlasQuestFrameAllianceButton:SetChecked(true)
 	end
 	AtlasQuest_UpdateButtons()
 end
@@ -375,13 +394,13 @@ end
 -- and sets checks after the variables
 -----------------------------------------------------------------------------
 function AtlasQuestOptionFrame_OnShow()
-	AQAutoshowOption:SetChecked(AutoShow);
+	AQAutoshowOption:SetChecked(AutoShow)
 	if ( Side == "Left" ) then
-		AQRIGHTOption:SetChecked(false);
-		AQLEFTOption:SetChecked(true);
+		AQRIGHTOption:SetChecked(false)
+		AQLEFTOption:SetChecked(true)
 	else
-		AQRIGHTOption:SetChecked(true);
-		AQLEFTOption:SetChecked(false);
+		AQRIGHTOption:SetChecked(true)
+		AQLEFTOption:SetChecked(false)
 	end
 end
 
@@ -389,9 +408,9 @@ end
 -- Autoshow option
 -----------------------------------------------------------------------------
 function AQAutoshowOption_OnClick()
-	AutoShow = not AutoShow;
-	AQAutoshowOption:SetChecked(AutoShow);
-	AtlasQuest_Options[PlayerName]["ShownSide"] = Side;
+	AutoShow = not AutoShow
+	AQAutoshowOption:SetChecked(AutoShow)
+	AtlasQuest_Options[PlayerName]["ShownSide"] = Side
 end
 
 -----------------------------------------------------------------------------
@@ -399,13 +418,13 @@ end
 -----------------------------------------------------------------------------
 function AQRIGHTOption_OnClick()
 	if ( AtlasFrame ) then
-		AtlasQuestFrame:ClearAllPoints();
-		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, -10);
+		AtlasQuestFrame:ClearAllPoints()
+		AtlasQuestFrame:SetPoint("LEFT", AtlasFrame, "RIGHT", -5, -10)
 	end
-	AQRIGHTOption:SetChecked(true);
-	AQLEFTOption:SetChecked(false);
-	Side = "Right";
-	AtlasQuest_Options[PlayerName]["ShownSide"] = Side;
+	AQRIGHTOption:SetChecked(true)
+	AQLEFTOption:SetChecked(false)
+	Side = "Right"
+	AtlasQuest_Options[PlayerName]["ShownSide"] = Side
 end
 
 -----------------------------------------------------------------------------
@@ -413,29 +432,29 @@ end
 -----------------------------------------------------------------------------
 function AQLEFTOption_OnClick()
 	if ( AtlasFrame and Side == "Right" ) then
-		AtlasQuestFrame:ClearAllPoints();
-		AtlasQuestFrame:SetPoint("RIGHT", AtlasFrame, "LEFT", 16, -10);
+		AtlasQuestFrame:ClearAllPoints()
+		AtlasQuestFrame:SetPoint("RIGHT", AtlasFrame, "LEFT", 16, -10)
 	end
-	AQRIGHTOption:SetChecked(false);
-	AQLEFTOption:SetChecked(true);
-	Side = "Left";
-	AtlasQuest_Options[PlayerName]["ShownSide"] = Side;
+	AQRIGHTOption:SetChecked(false)
+	AQLEFTOption:SetChecked(true)
+	Side = "Left"
+	AtlasQuest_Options[PlayerName]["ShownSide"] = Side
 end
 
 function AQClearALL()
-	AtlasQuestInsideFramePagesText:SetText();
-	AtlasQuestInsideFrameNextPage:Hide();
-	AtlasQuestInsideFramePrevPage:Hide();
-	AtlasQuestInsideFrameQuestName:SetText();
-	AtlasQuestInsideFrameQuestLevel:SetText();
-	AtlasQuestInsideFrameQuestInfo:SetText();
-	AtlasQuestInsideFrameAttainLevel:SetText();
-	AtlasQuestInsideFrameRewardText:SetText();
-	AtlasQuestInsideFrameStoryText:SetText();
-	AtlasQuestInsideFrameFinishedText:SetText();
-	AtlasQuestInsideFrameFinishedButton:Hide();
+	AtlasQuestInsideFramePagesText:SetText()
+	AtlasQuestInsideFrameNextPage:Hide()
+	AtlasQuestInsideFramePrevPage:Hide()
+	AtlasQuestInsideFrameQuestName:SetText()
+	AtlasQuestInsideFrameQuestLevel:SetText()
+	AtlasQuestInsideFrameQuestInfo:SetText()
+	AtlasQuestInsideFrameAttainLevel:SetText()
+	AtlasQuestInsideFrameRewardText:SetText()
+	AtlasQuestInsideFrameStoryText:SetText()
+	AtlasQuestInsideFrameFinishedText:SetText()
+	AtlasQuestInsideFrameFinishedButton:Hide()
 	for i = 1, 6 do
-		_G["AtlasQuestItemframe"..i]:Hide();
+		_G["AtlasQuestItemframe"..i]:Hide()
 	end
 end
 
@@ -444,9 +463,9 @@ end
 -----------------------------------------------------------------------------
 function AQOPTION1_OnClick()
 	if ( AtlasQuestOptionFrame:IsVisible() ) then
-		AtlasQuestOptionFrame:Hide();
+		AtlasQuestOptionFrame:Hide()
 	else
-		AtlasQuestOptionFrame:Show();
+		AtlasQuestOptionFrame:Show()
 	end
 end
 
@@ -455,12 +474,12 @@ end
 -----------------------------------------------------------------------------
 function AQCLOSE_OnClick()
 	if ( AtlasQuestFrame:IsVisible() ) then
-		AtlasQuestFrame:Hide();
-		AtlasQuestInsideFrame:Hide();
+		AtlasQuestFrame:Hide()
+		AtlasQuestInsideFrame:Hide()
 	else
-		AtlasQuestFrame:Show();
+		AtlasQuestFrame:Show()
 	end
-	AQUpdateNOW = true;
+	AQUpdateNOW = true
 end
 
 -----------------------------------------------------------------------------
@@ -468,10 +487,10 @@ end
 -----------------------------------------------------------------------------
 function AtlasQuestFrameAllianceButton_OnClick()
 	CurrentFaction = 1
-	AtlasQuestFrameHordeButton:SetChecked(false);
-	AtlasQuestFrameAllianceButton:SetChecked(true);
-	AtlasQuestInsideFrame:Hide();
-	AQUpdateNOW = true;
+	AtlasQuestFrameHordeButton:SetChecked(false)
+	AtlasQuestFrameAllianceButton:SetChecked(true)
+	AtlasQuestInsideFrame:Hide()
+	AQUpdateNOW = true
 	for i = 1, MAX_QUEST_BUTTONS do
 		_G["AQQuestButton"..i.."Highlight"]:Hide()
 		_G["AQQuestButton"..i]:UnlockHighlight()
@@ -483,10 +502,10 @@ end
 -----------------------------------------------------------------------------
 function AtlasQuestFrameHordeButton_OnClick()
 	CurrentFaction = 2
-	AtlasQuestFrameHordeButton:SetChecked(true);
-	AtlasQuestFrameAllianceButton:SetChecked(false);
-	AtlasQuestInsideFrame:Hide();
-	AQUpdateNOW = true;
+	AtlasQuestFrameHordeButton:SetChecked(true)
+	AtlasQuestFrameAllianceButton:SetChecked(false)
+	AtlasQuestInsideFrame:Hide()
+	AQUpdateNOW = true
 	for i = 1, MAX_QUEST_BUTTONS do
 		_G["AQQuestButton"..i.."Highlight"]:Hide()
 		_G["AQQuestButton"..i]:UnlockHighlight()
@@ -497,16 +516,16 @@ end
 -- Story Button
 -----------------------------------------------------------------------------
 function AtlasQuestStoryButton_OnClick()
-	AQHideAtlasLoot();
+	AQHideAtlasLoot()
 	if ( AtlasQuestInsideFrame:IsShown( ) ) then
 		if ( not LastSelectedQuest ) then
-			AtlasQuestInsideFrame:Hide();
+			AtlasQuestInsideFrame:Hide()
 		else
-			AQButtonSTORY_SetText();
+			AQButtonSTORY_SetText()
 		end
 	else
 		AtlasQuestInsideFrame:Show()
-		AQButtonSTORY_SetText();
+		AQButtonSTORY_SetText()
 	end
 	for i = 1, MAX_QUEST_BUTTONS do
 		_G["AQQuestButton"..i.."Highlight"]:Hide()
@@ -516,33 +535,33 @@ function AtlasQuestStoryButton_OnClick()
 end
 
 function AtlasQuestButton_OnClick()
-	CurrentQuest = this:GetID();
+	CurrentQuest = this:GetID()
 
 	if ( ChatFrameEditBox:IsShown() and IsShiftKeyDown() ) then
-		AQInsertQuestInformation();
+		AQInsertQuestInformation()
 	else
 		for i = 1, MAX_QUEST_BUTTONS do
 			_G["AQQuestButton"..i.."Highlight"]:Hide()
 			_G["AQQuestButton"..i]:UnlockHighlight()
 		end
-		AQHideAtlasLoot();
-		AtlasQuestInsideFrameStoryText:SetText();
+		AQHideAtlasLoot()
+		AtlasQuestInsideFrameStoryText:SetText()
 		if ( not AtlasQuestInsideFrame:IsVisible() ) then
-			AtlasQuestInsideFrame:Show();
-			LastSelectedQuest = CurrentQuest;
+			AtlasQuestInsideFrame:Show()
+			LastSelectedQuest = CurrentQuest
 			_G[this:GetName().."Highlight"]:SetVertexColor(this:GetTextColor())
 			_G[this:GetName().."Highlight"]:Show()
 			this:LockHighlight()
-			AtlasQuest_SetQuestText();
+			AtlasQuest_SetQuestText()
 		elseif ( LastSelectedQuest == CurrentQuest ) then
-			AtlasQuestInsideFrame:Hide();
-			LastSelectedQuest = nil;
+			AtlasQuestInsideFrame:Hide()
+			LastSelectedQuest = nil
 		else
-			LastSelectedQuest = CurrentQuest;
+			LastSelectedQuest = CurrentQuest
 			_G[this:GetName().."Highlight"]:SetVertexColor(this:GetTextColor())
 			_G[this:GetName().."Highlight"]:Show()
 			this:LockHighlight()
-			AtlasQuest_SetQuestText();
+			AtlasQuest_SetQuestText()
 		end
 	end
 end
@@ -552,7 +571,7 @@ end
 -----------------------------------------------------------------------------
 function AQHideAtlasLoot()
 	if ( AtlasLootItemsFrame ) then
-		AtlasLootItemsFrame:Hide(); -- hide atlasloot
+		AtlasLootItemsFrame:Hide() -- hide atlasloot
 	end
 end
 
@@ -563,7 +582,7 @@ function AQInsertQuestInformation()
 	local questName = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title
 	local questLevel = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
 	local questID =  AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].id
-	ChatFrameEditBox:Insert(format("|cffFFFF00|Hquest:%d:%d|h[%s]|h|r", questID, questLevel, questName));
+	ChatFrameEditBox:Insert(format("|cffFFFF00|Hquest:%d:%d|h[%s]|h|r", questID, questLevel, questName))
 end
 
 -----------------------------------------------------------------------------
@@ -571,10 +590,10 @@ end
 -- executed when you push a button
 -----------------------------------------------------------------------------
 function AtlasQuest_SetQuestText()
-	AQClearALL();
+	AQClearALL()
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameFinishedText:SetText(factionColor..L["Quest finished:"]);
-	AtlasQuestInsideFrameFinishedButton:Show();
+	AtlasQuestInsideFrameFinishedText:SetText(factionColor..L["Quest finished:"])
+	AtlasQuestInsideFrameFinishedButton:Show()
 
 	local level = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
 	local attain = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].attain
@@ -588,14 +607,14 @@ function AtlasQuest_SetQuestText()
 		local color = GetDifficultyColor(level, true)
 		AtlasQuestInsideFrameQuestName:SetTextColor(color.r, color.g, color.b)
 	end
-	AtlasQuestInsideFrameQuestName:SetText(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title);
-	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..L["Level: "].."|r"..level);
-	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..L["Attain: "].."|r"..attain);
+	AtlasQuestInsideFrameQuestName:SetText(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title)
+	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..L["Level: "].."|r"..level)
+	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..L["Attain: "].."|r"..attain)
 	AtlasQuestInsideFrameQuestInfo:SetText(factionColor..L["Prequest: "].."|r"..prequest.."\n\n"
 		..factionColor..L["Quest follows: "].."|r"..followup.."\n\n"
 		..factionColor..L["Starts at:\n"].."|r"..location.."\n\n"
 		..factionColor..L["Objective:\n"].."|r"..aim.."\n\n"
-		..factionColor..L["Note:\n"].."|r"..note);
+		..factionColor..L["Note:\n"].."|r"..note)
 
 	local numRewards = rewards and getn(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards) or 0
 	
@@ -605,7 +624,7 @@ function AtlasQuest_SetQuestText()
 			local itemID = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].id
 			local itemName, itemLink, itemQuality, itemLevel, itemType, itemSubType, itemCount, itemEquipLoc, itemTexture = GetItemInfo(itemID)
 			if ( not itemName ) then
-				GameTooltip:SetHyperlink("item:"..itemID);
+				GameTooltip:SetHyperlink("item:"..itemID)
 			end
 			local name = itemName or AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].name
 			local quality = itemQuality or AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].quality
@@ -613,17 +632,17 @@ function AtlasQuest_SetQuestText()
 			local subtext = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].subtext
 			local count = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].count
 			local r, g, b = GetItemQualityColor(quality)
-			_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexture(icon);
-			_G["AtlasQuestItemframe"..i.."_Name"]:SetText(name);
-			_G["AtlasQuestItemframe"..i.."_Name"]:SetTextColor(r, g, b);
-			_G["AtlasQuestItemframe"..i.."_Extra"]:SetText(subtext);
+			_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexture(icon)
+			_G["AtlasQuestItemframe"..i.."_Name"]:SetText(name)
+			_G["AtlasQuestItemframe"..i.."_Name"]:SetTextColor(r, g, b)
+			_G["AtlasQuestItemframe"..i.."_Extra"]:SetText(subtext)
 			if ( count ) then
-				_G["AtlasQuestItemframe"..i.."_Count"]:SetText(count);
-				_G["AtlasQuestItemframe"..i.."_Count"]:Show();
+				_G["AtlasQuestItemframe"..i.."_Count"]:SetText(count)
+				_G["AtlasQuestItemframe"..i.."_Count"]:Show()
 			else
-				_G["AtlasQuestItemframe"..i.."_Count"]:Hide();
+				_G["AtlasQuestItemframe"..i.."_Count"]:Hide()
 			end
-			_G["AtlasQuestItemframe"..i]:Show();
+			_G["AtlasQuestItemframe"..i]:Show()
 		end
 	else
 		AtlasQuestInsideFrameRewardText:SetText(factionColor..L["No Rewards"])
@@ -632,16 +651,16 @@ function AtlasQuest_SetQuestText()
 	local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
 
 	if ( AtlasQuest_CharData[CurrentDungeon][CurrentFaction][CurrentQuest] ) then
-		AtlasQuestInsideFrameFinishedButton:SetChecked(true);
+		AtlasQuestInsideFrameFinishedButton:SetChecked(true)
 	else
-		AtlasQuestInsideFrameFinishedButton:SetChecked(false);
+		AtlasQuestInsideFrameFinishedButton:SetChecked(false)
 	end
 
 	if ( pages ) then
-		AtlasQuestInsideFrameNextPage:Show();
-		AQ_PageType = "Quest";
-		CurrentPage = 1;
-		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..(getn(pages) + 1));
+		AtlasQuestInsideFrameNextPage:Show()
+		AQ_PageType = "Quest"
+		CurrentPage = 1
+		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..(getn(pages) + 1))
 	end
 end
 
@@ -649,18 +668,18 @@ end
 -- Set Story Text
 -----------------------------------------------------------------------------
 function AQButtonSTORY_SetText()
-	AQClearALL();
+	AQClearALL()
 	local factionColor = CurrentFaction == 1 and BLUE or RED
 	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name)
 	local story = AtlasQuest.data[CurrentDungeon].story
 	if ( type(story) == "string" ) then
-		AtlasQuestInsideFrameStoryText:SetText(WHITE..story);
+		AtlasQuestInsideFrameStoryText:SetText(WHITE..story)
 	elseif ( type(story) == "table" ) then
 		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[1])
-		AtlasQuestInsideFrameNextPage:Show();
-		CurrentPage = 1;
+		AtlasQuestInsideFrameNextPage:Show()
+		CurrentPage = 1
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..getn(story))
-		AQ_PageType = "Story";
+		AQ_PageType = "Story"
 	end
 end
 
@@ -668,49 +687,49 @@ end
 -- shows the next side
 -----------------------------------------------------------------------------
 function AQNextPage_OnClick()
-	AQClearALL();
+	AQClearALL()
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name);
+	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name)
 	
 	if ( AQ_PageType == "Story" ) then
-		CurrentPage = CurrentPage + 1;
+		CurrentPage = CurrentPage + 1
 		local story = AtlasQuest.data[CurrentDungeon].story
-		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[CurrentPage]);
+		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[CurrentPage])
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..getn(story))
 		if ( story[CurrentPage + 1] ) then
-			AtlasQuestInsideFrameNextPage:Show();
+			AtlasQuestInsideFrameNextPage:Show()
 		else
-			AtlasQuestInsideFrameNextPage:Hide();
+			AtlasQuestInsideFrameNextPage:Hide()
 		end
 	elseif ( AQ_PageType == "Quest" ) then
 		local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
 		AtlasQuestInsideFrameStoryText:SetText(WHITE..pages[CurrentPage])
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..(getn(pages) + 1))
 		if ( pages[CurrentPage + 1] ) then
-			AtlasQuestInsideFrameNextPage:Show();
+			AtlasQuestInsideFrameNextPage:Show()
 		else
-			AtlasQuestInsideFrameNextPage:Hide();
+			AtlasQuestInsideFrameNextPage:Hide()
 		end
-		CurrentPage = CurrentPage + 1;
+		CurrentPage = CurrentPage + 1
 	end
 
-	AtlasQuestInsideFramePrevPage:Show();
+	AtlasQuestInsideFramePrevPage:Show()
 end
 
 -----------------------------------------------------------------------------
 -- shows the side before this side
 -----------------------------------------------------------------------------
 function AQPrevPage_OnClick()
-	CurrentPage = CurrentPage - 1;
+	CurrentPage = CurrentPage - 1
 	local factionColor = CurrentFaction == 1 and BLUE or RED
-	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name);
+	AtlasQuestInsideFrameQuestName:SetText(factionColor..AtlasQuest.data[CurrentDungeon].name)
 
 	if ( AQ_PageType == "Story" ) then
 		local story = AtlasQuest.data[CurrentDungeon].story
-		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[CurrentPage]);
+		AtlasQuestInsideFrameStoryText:SetText(WHITE..story[CurrentPage])
 		AtlasQuestInsideFramePagesText:SetText(CurrentPage.."/"..getn(story))
 		if ( CurrentPage == 1 ) then
-			AtlasQuestInsideFramePrevPage:Hide();
+			AtlasQuestInsideFramePrevPage:Hide()
 		end
 	elseif ( AQ_PageType == "Quest" ) then
 		local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
@@ -722,7 +741,7 @@ function AQPrevPage_OnClick()
 		end
 	end
 
-	AtlasQuestInsideFrameNextPage:Show();
+	AtlasQuestInsideFrameNextPage:Show()
 end
 
 -----------------------------------------------------------------------------

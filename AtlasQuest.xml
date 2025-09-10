@@ -431,10 +431,11 @@
 				<Offset x="-556" y="-20"/>
 			</Anchor>
 		</Anchors>
-		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+		<Backdrop bgFile="Interface\Buttons\WHITE8x8" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize val="32"/>
 			<TileSize val="32"/>
 			<BackgroundInsets left="5" right="5" top="5" bottom="5"/>
+			<Color r="0" g="0" b="0" a="0.8"/>
 		</Backdrop>
 		<Frames>
 			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">

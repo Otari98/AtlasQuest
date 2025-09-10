@@ -44,6 +44,7 @@ local WARLOCK = "|cff9482c9";
 AtlasQuest = {}
 
 AtlasQuest.L = {
+	ADDON_LOADED = BLUE.."AtlasQuest|r loaded. Type "..NORMAL..".queststatus|r to query server for completed quests.",
 	OPTIONS = "AtlasQuest Options",
 	AUTOSHOW = "Show AtlasQuest panel with Atlas.",
 	SHOW_ON_LEFT = "Show the AtlasQuest panel ont the "..WHITE.."left.",
@@ -193,10 +194,11 @@ local L = AtlasQuest.L
 -- 45 - Lower Karazhan Halls
 -- 46 - Emerald Sanctum
 -- 47 - Ostarius of Uldum
-
--- TODO ADD
 -- 48 - Dragonmaw Retreat
 -- 49 - Stormwrought Ruins
+
+-- TODO ADD
+-- 50 - Tower of Karazhan
 
 AtlasQuest.data = {
 	[1] = {
