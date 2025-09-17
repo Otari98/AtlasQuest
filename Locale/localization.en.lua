@@ -14318,6 +14318,32 @@ AtlasQuest.data = {
 					},
 				},
 			},
+			[10] = {
+				["id"] = 41841,
+				["title"] = "Artifact of the Dark Lady",
+				["aim"] = "Deliver the Bloodstone Pendant to Lady Sylvanas Windrunner in Undercity.",
+				["note"] = "Ighal'for "..NORMAL.."[12]|r drops Broken Bloodstone Pendant which starts this quest. In order to get 'Artifact of the Dark Lady', you need to complete 'Prison Break In' quest from Magus Wordeen Voidglare (Hillsbrad Foothills - Tarren Mill "..NORMAL.."[61.6 / 20.8]|r).",
+				["location"] = "Broken Bloodstone Pendant.",
+				["attain"] = 32,
+				["level"] = 38,
+				["prequest"] = "Prison Break In",
+				["rewards"] = {
+					[1] = {
+						["id"] = 58277,
+						["name"] = "Lady Winter's Touch",
+						["subtext"] = L.WAND,
+						["icon"] = "INV_Wand_06",
+						["quality"] = 2,
+					},
+					[2] = {
+						["id"] = 58278,
+						["name"] = "Ring of Judgement",
+						["subtext"] = L.RING,
+						["icon"] = "INV_Belt_35",
+						["quality"] = 2,
+					},
+				},
+			},
 		},
 	}
 }
