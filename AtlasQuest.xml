@@ -358,7 +358,7 @@
 				<Scripts>
 					<OnClick>
 						AQAutoshowOption_OnClick();
-						PlayClickSound()
+						PlaySound("igMainMenuOptionCheckBoxOn")
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -373,7 +373,7 @@
 				<Scripts>
 					<OnClick>
 						AQLEFTOption_OnClick();
-						PlayClickSound()
+						PlaySound("igMainMenuOptionCheckBoxOn")
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -388,7 +388,7 @@
 				<Scripts>
 					<OnClick>
 						AQRIGHTOption_OnClick();
-						PlayClickSound()
+						PlaySound("igMainMenuOptionCheckBoxOn")
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -485,7 +485,7 @@
 				<Scripts>
 					<OnClick>
 						AtlasQuestFrameAllianceButton_OnClick();
-						PlayClickSound()
+						PlaySound("igMainMenuOptionCheckBoxOn")
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -502,7 +502,7 @@
 				<Scripts>
 					<OnClick>
 						AtlasQuestFrameHordeButton_OnClick();
-						PlayClickSound()
+						PlaySound("igMainMenuOptionCheckBoxOn")
 					</OnClick>
 				</Scripts>
 			</CheckButton>

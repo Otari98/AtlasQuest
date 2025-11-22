@@ -13719,12 +13719,12 @@ AtlasQuest.data = {
 				["level"] = 34,
 			},
 			[11] = {
-				["note"] = "Quest for the Lower Reserve Key, which is required to access the second half of the dungeon.\nFragment of Algoron is dropped by Web Master Torkon located at "..NORMAL.."[3]"..WHITE..".\nFragment of Dathronag is contained inside of the Chest of Dathronag, located at "..NORMAL.."[5]"..WHITE..", and requires 50 lockpicking to open.",
+				["note"] = "Quest for the Lower Reserve Key, which is required to access the second half of the dungeon.\nFragment of Algoron is dropped by Web Master Torkon located at "..NORMAL.."[3]"..WHITE..".\nFragment of Dathronag is contained inside of the Chest of Dathronag, located at "..NORMAL.."[8]"..WHITE..", and requires 50 lockpicking to open.",
 				["id"] = 41774,
 				["attain"] = 25,
 				["aim"] = "Collect both tablet fragments to receive the Lower Reserve Key.",
 				["title"] = "Pedestal of Unity",
-				["location"] = "Pedestal of Unity (Dragonmaw Retreat)",
+				["location"] = "Pedestal of Unity (Dragonmaw Retreat "..NORMAL.."[5]"..WHITE..")",
 				["rewards"] = {
 					[1] = {
 						["subtext"] = L.KEY,
@@ -13914,12 +13914,12 @@ AtlasQuest.data = {
 				["level"] = 34,
 			},
 			[9] = {
-				["note"] = "Quest for the Lower Reserve Key, which is required to access the second half of the dungeon.\nFragment of Algoron is dropped by Web Master Torkon located at "..NORMAL.."[3]"..WHITE..".\nFragment of Dathronag is contained inside of the Chest of Dathronag, located at "..NORMAL.."[5]"..WHITE..", and requires 50 lockpicking to open.",
+				["note"] = "Quest for the Lower Reserve Key, which is required to access the second half of the dungeon.\nFragment of Algoron is dropped by Web Master Torkon located at "..NORMAL.."[3]"..WHITE..".\nFragment of Dathronag is contained inside of the Chest of Dathronag, located at "..NORMAL.."[8]"..WHITE..", and requires 50 lockpicking to open.",
 				["id"] = 41774,
 				["attain"] = 25,
 				["aim"] = "Collect both tablet fragments to receive the Lower Reserve Key.",
 				["title"] = "Pedestal of Unity",
-				["location"] = "Pedestal of Unity (Dragonmaw Retreat)",
+				["location"] = "Pedestal of Unity (Dragonmaw Retreat "..NORMAL.."[5]"..WHITE..")",
 				["rewards"] = {
 					[1] = {
 						["subtext"] = L.KEY,
@@ -14345,5 +14345,14 @@ AtlasQuest.data = {
 				},
 			},
 		},
-	}
+	},
+	-- [50] = {
+	-- 	["name"] = "Tower of Karazhan",
+	-- 	["story"] = "",
+	-- 	-- 41310
+	-- 	-- 41312
+	-- 	-- 41370
+	-- 	-- 41373
+	-- 	-- 41577
+	-- },
 }
