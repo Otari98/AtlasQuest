@@ -378,7 +378,13 @@ AtlasQuest.AtlasMapToDungeon = {
 	["Ostarius"] = 47,
 	["DragonmawRetreat"] = 48,
 	["StormwroughtRuins"] = 49,
-	-- ["UpperKara"] = 50,
+	["UpperKara"] = 50,
+	["UpperKaraEnt"] = 50,
+	["FrostmaneHollow"] = 53,
+	["FrostmaneHollowEnt"] = 53,
+	["WindhornCanyon"] = 51,
+	["WindhornCanyonEnt"] = 51,
+	["TimbermawHold"] = 52,
 }
 
 local pathAtlas = "Interface\\AddOns\\Atlas\\Images\\Maps\\"
@@ -600,9 +606,9 @@ function AtlasQuest_SetQuestText()
 	local attain = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].attain
 	local prequest = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].prequest or NOT_APPLICABLE
 	local followup = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].followup or NOT_APPLICABLE
-	local location = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].location
-	local aim = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].aim
-	local note = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].note
+	local location = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].location or ""
+	local aim = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].aim or ""
+	local note = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].note or ""
 	local rewards = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards
 	if ( level ) then
 		local color = GetDifficultyColor(level, true)
