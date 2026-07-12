@@ -10243,7 +10243,7 @@ AtlasQuest.data = {
 				},
 			},
 			[7] = {
-				["note"] = "You get the prequest from Klockmort Spannerspan (Ironforge - Tinkertown; "..NORMAL.."[68 / 46]|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[6]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul; "..NORMAL.."[49 / 70]|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."[59 / 77]|r before it can be used in Zul'Farrak.",
+				["note"] = "You get the prequest from Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility; "..NORMAL.."[25.0 / 30.1]|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[6]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul; "..NORMAL.."[49 / 70]|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."[59 / 77]|r before it can be used in Zul'Farrak.",
 				["id"] = 2770,
 				["attain"] = 40,
 				["aim"] = "Bring Gahz'rilla's Electrified Scale to Wizzle Brassbolts in the Shimmering Flats.",
@@ -10374,7 +10374,7 @@ AtlasQuest.data = {
 				},
 			},
 			[7] = {
-				["note"] = "You get the prequest from Klockmort Spannerspan (Ironforge - Tinkertown; "..NORMAL.."[68 / 46]|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[6]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul; "..NORMAL.."[49 / 70]|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."[59 / 77]|r before it can be used in Zul'Farrak.",
+				["note"] = "You get the prequest from Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility; "..NORMAL.."[25.0 / 30.1]|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[6]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul; "..NORMAL.."[49 / 70]|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."[59 / 77]|r before it can be used in Zul'Farrak.",
 				["id"] = 2770,
 				["attain"] = 40,
 				["aim"] = "Bring Gahz'rilla's Electrified Scale to Wizzle Brassbolts in the Shimmering Flats.",
@@ -10720,7 +10720,7 @@ AtlasQuest.data = {
 	[32] = {
 		[1] = {
 			[1] = {
-				["note"] = "You get the prequest from Brother Sarno (Stormwind - Cathedral Square; "..NORMAL.."4030|r).\nYou find Techbot before you enter the instance near the backdoor, at "..NORMAL.."[4] on Entrance Map|r.",
+				["note"] = "You get the prequest from Brother Sarno (Stormwind - Cathedral Square; "..NORMAL.."[40.6 / 30.9]|r).\nYou find Techbot before you enter the instance near the backdoor, at "..NORMAL.."[4] on Entrance Map|r.",
 				["id"] = 2922,
 				["attain"] = 20,
 				["aim"] = "Bring Techbot's Memory Core to Tinkmaster Overspark at the Gnomeregan Reclamation Facility.",
@@ -10781,7 +10781,7 @@ AtlasQuest.data = {
 				["attain"] = 24,
 				["aim"] = "Bring 12 Essential Artificials to Klockmort Spannerspan at the Gnomeregan Reclamation Facility.",
 				["title"] = "Essential Artificials",
-				["location"] = "Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility; "..NORMAL.."23.[6 / 28]|r)",
+				["location"] = "Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility; "..NORMAL.."[25.0 / 30.1]|r)",
 				["level"] = 30,
 				["prequest"] = "Klockmort's Essentials",
 			},
