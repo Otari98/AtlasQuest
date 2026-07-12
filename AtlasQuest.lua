@@ -380,11 +380,11 @@ AtlasQuest.AtlasMapToDungeon = {
 	["StormwroughtRuins"] = 49,
 	["UpperKara"] = 50,
 	["UpperKaraEnt"] = 50,
-	["FrostmaneHollow"] = 53,
-	["FrostmaneHollowEnt"] = 53,
 	["WindhornCanyon"] = 51,
 	["WindhornCanyonEnt"] = 51,
 	["TimbermawHold"] = 52,
+	["FrostmaneHollow"] = 53,
+	["FrostmaneHollowEnt"] = 53,
 }
 
 local pathAtlas = "Interface\\AddOns\\Atlas\\Images\\Maps\\"
