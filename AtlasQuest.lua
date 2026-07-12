@@ -652,7 +652,7 @@ function AtlasQuest_SetQuestText()
 			_G["AtlasQuestItemframe"..i]:Show()
 		end
 	else
-		AtlasQuestInsideFrameRewardText:SetText(factionColor..L["No Rewards"])
+		AtlasQuestInsideFrameRewardText:SetText("")
 	end
 
 	local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
