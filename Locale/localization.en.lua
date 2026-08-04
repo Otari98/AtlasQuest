@@ -10151,7 +10151,7 @@ AtlasQuest.data = {
 	[30] = {
 		[1] = {
 			[1] = {
-				["note"] = "The Questline starts at Gryphon Master Talonaxe (The Hinterlands - Wildhammer Stronghold "..NORMAL.."9, 44|r).\nNekrum spawns at "..NORMAL.."[4]|r with the final crowd you fight for the Temple event.",
+				["note"] = "The Questline starts at Gryphon Master Talonaxe (The Hinterlands - Wildhammer Stronghold "..NORMAL.."9, 44|r).\nNekrum spawns at "..NORMAL.."[5]|r with the final crowd you fight for the Temple event.",
 				["id"] = 2991,
 				["attain"] = 40,
 				["aim"] = "Bring Nekrum's Medallion to Thadius Grimshade in the Blasted Lands.",
@@ -10171,7 +10171,7 @@ AtlasQuest.data = {
 				["level"] = 45,
 			},
 			[3] = {
-				["note"] = "The prequest starts at Krazek (Stranglethorn Vale - Booty Bay "..NORMAL.."25, 77|r).\nEvery Scarab can drop the Shells. A lot of Scarabs are at "..NORMAL.."[2]|r.",
+				["note"] = "The prequest starts at Krazek (Stranglethorn Vale - Booty Bay "..NORMAL.."25, 77|r).\nEvery Scarab can drop the Shells. A lot of Scarabs are at "..NORMAL.."[3]|r.",
 				["id"] = 2865,
 				["attain"] = 40,
 				["aim"] = "Bring 5 Uncracked Scarab Shells to Tran'rek in Gadgetzan.",
@@ -10181,7 +10181,7 @@ AtlasQuest.data = {
 				["prequest"] = "Tran'rek",
 			},
 			[4] = {
-				["note"] = "Hydromancer Velratha drops the Tiara of the Deep at "..NORMAL.."[6]|r.",
+				["note"] = "Hydromancer Velratha drops the Tiara of the Deep at "..NORMAL.."[8]|r.",
 				["id"] = 2846,
 				["attain"] = 40,
 				["aim"] = "Bring the Tiara of the Deep to Tabetha in Dustwallow Marsh.",
@@ -10207,7 +10207,7 @@ AtlasQuest.data = {
 				["prequest"] = "Tabetha's Task",
 			},
 			[5] = {
-				["note"] = "You get the prequest from the same NPC.\nThe Tablets drop from Theka the Martyr at "..NORMAL.."[2]|r and Hydromancer Velratha at "..NORMAL.."[6]|r.",
+				["note"] = "You get the prequest from the same NPC.\nThe Tablets drop from Theka the Martyr at "..NORMAL.."[3]|r and Hydromancer Velratha at "..NORMAL.."[8]|r.",
 				["id"] = 3527,
 				["attain"] = 40,
 				["aim"] = "Bring the First and Second Mosh'aru Tablets to Yeh'kinya in Tanaris.",
@@ -10218,7 +10218,7 @@ AtlasQuest.data = {
 				["prequest"] = "Screecher Spirits",
 			},
 			[6] = {
-				["note"] = "You get the Rod from Sergeant Bly. You can find him at "..NORMAL.."[4]|r after the Temple event.",
+				["note"] = "You get the Rod from Sergeant Bly. You can find him at "..NORMAL.."[5]|r after the Temple event.",
 				["id"] = 2768,
 				["attain"] = 40,
 				["aim"] = "Bring the Divino-matic Rod to Chief Engineer Bilgewhizzle in Gadgetzan.",
@@ -10243,7 +10243,7 @@ AtlasQuest.data = {
 				},
 			},
 			[7] = {
-				["note"] = "You get the prequest from Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility "..NORMAL.."25.0, 30.1|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[6]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul "..NORMAL.."49, 70|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."59, 77|r before it can be used in Zul'Farrak.",
+				["note"] = "You get the prequest from Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility "..NORMAL.."25.0, 30.1|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[8]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul "..NORMAL.."49, 70|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."59, 77|r before it can be used in Zul'Farrak.",
 				["id"] = 2770,
 				["attain"] = 40,
 				["aim"] = "Bring Gahz'rilla's Electrified Scale to Wizzle Brassbolts in the Shimmering Flats.",
@@ -10262,7 +10262,7 @@ AtlasQuest.data = {
 				["prequest"] = "The Brassbolts Brothers",
 			},
 			[8] = {
-				["note"] = "In the room with Witch Doctor Zum'Rah "..NORMAL.."[3]|r Ancient Burial Container (little green wooden box).",
+				["note"] = "In the room with Witch Doctor Zum'Rah "..NORMAL.."[4]|r or in the room next to "..NORMAL.."[9]|r. Ancient Burial Container is a little green wooden box.",
 				["id"] = 40519,
 				["attain"] = 40,
 				["aim"] = "Venture into Zul'Farrak and find the Ancient Troll Remains, then return them to Hansu Go'sha at the Southmoon Ruins in Tanaris.",
@@ -10279,10 +10279,35 @@ AtlasQuest.data = {
 					},
 				},
 			},
+			[9] = {
+				["id"] = 41811,
+				["title"] = "The Farraki Ancient",
+				["level"] = 46,
+				["attain"] = 40,
+				["note"] = "Zel'jeb is at "..NORMAL.."[9]|r. You need to break his shield with fire spell. If you dont have any, you can grab fire from brazier at "..NORMAL.."[7]|r.",
+				["aim"] = "Venture in Zul'Farrak, and slay Zel'jeb the Ancient, then return to Zalsu the Wanderer, who can be found south of Zul'Farrak.",
+				["location"] = "Zalsu the Wanderer (Tanaris - wandering around "..NORMAL.."38.8, 34.4|r).",
+				["rewards"] = {
+					[1] = {
+						["name"] = "Dune Wanderer's Hauberk",
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["id"] = 41916,
+						["icon"] = "INV_Chest_Samurai",
+						["quality"] = 2,
+					},
+					[2] = {
+						["name"] = "Desert Seeker's Pants",
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["id"] = 41917,
+						["icon"] = "INV_Pants_09",
+						["quality"] = 2,
+					},
+				},
+			},
 		},
 		[2] = {
 			[1] = {
-				["note"] = "The Questline starts at a Venom Bottle, which is found on tables in Troll Villages in The Hinterlands.\nYou find the Tablet at "..NORMAL.."[2]|r.",
+				["note"] = "The Questline starts at a Venom Bottle, which is found on tables in Troll Villages in The Hinterlands.\nYou find the Tablet at "..NORMAL.."[3]|r.",
 				["id"] = 2936,
 				["attain"] = 40,
 				["aim"] = "Read from the Tablet of Theka to learn the name of the Witherbark spider god, then return to Master Gadrin.",
@@ -10302,7 +10327,7 @@ AtlasQuest.data = {
 				["level"] = 45,
 			},
 			[3] = {
-				["note"] = "The prequest starts at Krazek (Stranglethorn Vale - Booty Bay "..NORMAL.."25, 77|r).\nEvery Scarab can drop the Shells. A lot of Scarabs are at "..NORMAL.."[2]|r.",
+				["note"] = "The prequest starts at Krazek (Stranglethorn Vale - Booty Bay "..NORMAL.."25, 77|r).\nEvery Scarab can drop the Shells. A lot of Scarabs are at "..NORMAL.."[3]|r.",
 				["id"] = 2865,
 				["attain"] = 40,
 				["aim"] = "Bring 5 Uncracked Scarab Shells to Tran'rek in Gadgetzan.",
@@ -10312,7 +10337,7 @@ AtlasQuest.data = {
 				["prequest"] = "Tran'rek",
 			},
 			[4] = {
-				["note"] = "Hydromancer Velratha drops the Tiara of the Deep at "..NORMAL.."[6]|r.",
+				["note"] = "Hydromancer Velratha drops the Tiara of the Deep at "..NORMAL.."[8]|r.",
 				["id"] = 2846,
 				["attain"] = 40,
 				["aim"] = "Bring the Tiara of the Deep to Tabetha in Dustwallow Marsh.",
@@ -10338,7 +10363,7 @@ AtlasQuest.data = {
 				["prequest"] = "Tabetha's Task",
 			},
 			[5] = {
-				["note"] = "You get the prequest from the same NPC.\nThe Tablets drop from Theka the Martyr at "..NORMAL.."[2]|r and Hydromancer Velratha at "..NORMAL.."[6]|r.",
+				["note"] = "You get the prequest from the same NPC.\nThe Tablets drop from Theka the Martyr at "..NORMAL.."[3]|r and Hydromancer Velratha at "..NORMAL.."[8]|r.",
 				["id"] = 3527,
 				["attain"] = 40,
 				["aim"] = "Bring the First and Second Mosh'aru Tablets to Yeh'kinya in Tanaris.",
@@ -10349,7 +10374,7 @@ AtlasQuest.data = {
 				["prequest"] = "Screecher Spirits",
 			},
 			[6] = {
-				["note"] = "You get the Rod from Sergeant Bly. You can find him at "..NORMAL.."[4]|r after the Temple event.",
+				["note"] = "You get the Rod from Sergeant Bly. You can find him at "..NORMAL.."[5]|r after the Temple event.",
 				["id"] = 2768,
 				["attain"] = 40,
 				["aim"] = "Bring the Divino-matic Rod to Chief Engineer Bilgewhizzle in Gadgetzan.",
@@ -10374,7 +10399,7 @@ AtlasQuest.data = {
 				},
 			},
 			[7] = {
-				["note"] = "You get the prequest from Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility "..NORMAL.."25.0, 30.1|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[6]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul "..NORMAL.."49, 70|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."59, 77|r before it can be used in Zul'Farrak.",
+				["note"] = "You get the prequest from Klockmort Spannerspan (Dun Morogh - Gnomeregan Reclamation Facility "..NORMAL.."25.0, 30.1|r). It is not necessary to have the prequest to get the Gahz'rilla quest.\nYou summon Gahz'rilla at "..NORMAL.."[8]|r with the Mallet of Zul'Farrak.\nThe Sacred Mallet comes from Qiaga the Keeper (The Hinterlands - The Altar of Zul "..NORMAL.."49, 70|r) and must be completed at the Altar in Jinta'Alor at "..NORMAL.."59, 77|r before it can be used in Zul'Farrak.",
 				["id"] = 2770,
 				["attain"] = 40,
 				["aim"] = "Bring Gahz'rilla's Electrified Scale to Wizzle Brassbolts in the Shimmering Flats.",
@@ -10393,7 +10418,7 @@ AtlasQuest.data = {
 				["prequest"] = "The Brassbolts Brothers",
 			},
 			[8] = {
-				["note"] = "In the room with Witch Doctor Zum'Rah "..NORMAL.."[3]|r Ancient Burial Container (little green wooden box).",
+				["note"] = "In the room with Witch Doctor Zum'Rah "..NORMAL.."[4]|r or in the room next to "..NORMAL.."[9]|r. Ancient Burial Container is a little green wooden box.",
 				["id"] = 40519,
 				["attain"] = 40,
 				["aim"] = "Venture into Zul'Farrak and find the Ancient Troll Remains, then return them to Hansu Go'sha at the Southmoon Ruins in Tanaris.",
@@ -10411,7 +10436,7 @@ AtlasQuest.data = {
 				},
 			},
 			[9] = {
-				["note"] = "The Questline starts with quest 'Sandfury Redemption I' at Seer Maz'ek in Sandmoon Village(Tanaris) "..NORMAL.."59.1, 17.1|r.",
+				["note"] = "The Questline starts with quest 'Sandfury Redemption I' at Seer Maz'ek in Sandmoon Village(Tanaris) "..NORMAL.."59.1, 17.1|r.\nUkorz Sandscalp and Ruuzlu are at "..NORMAL.."[7]|r.",
 				["id"] = 40527,
 				["attain"] = 40,
 				["aim"] = "Slay Ukorz Sandscalp and Ruuzlu within Zul'Farrak for Champion Taza'go at Sandmoon Village in Tanaris.",
@@ -10435,6 +10460,31 @@ AtlasQuest.data = {
 					},
 				},
 				["prequest"] = "Plight of the Sandfury",
+			},
+			[10] = {
+				["id"] = 41811,
+				["title"] = "The Farraki Ancient",
+				["level"] = 46,
+				["attain"] = 40,
+				["note"] = "Zel'jeb is at "..NORMAL.."[9]|r. You need to break his shield with fire spell. If you dont have any, you can grab fire from brazier at "..NORMAL.."[7]|r.",
+				["aim"] = "Venture in Zul'Farrak, and slay Zel'jeb the Ancient, then return to Zalsu the Wanderer, who can be found south of Zul'Farrak.",
+				["location"] = "Zalsu the Wanderer (Tanaris - wandering around "..NORMAL.."38.8, 34.4|r).",
+				["rewards"] = {
+					[1] = {
+						["name"] = "Dune Wanderer's Hauberk",
+						["subtext"] = L.CHEST..", "..L.MAIL,
+						["id"] = 41916,
+						["icon"] = "INV_Chest_Samurai",
+						["quality"] = 2,
+					},
+					[2] = {
+						["name"] = "Desert Seeker's Pants",
+						["subtext"] = L.LEGS..", "..L.CLOTH,
+						["id"] = 41917,
+						["icon"] = "INV_Pants_09",
+						["quality"] = 2,
+					},
+				},
 			},
 		},
 		["story"] = "This sun-blasted city is home to the Sandfury trolls, known for their particular ruthlessness and dark mysticism. Troll legends tell of a powerful sword called Sul'thraze the Lasher, a weapon capable of instilling fear and weakness in even the most formidable of foes. Long ago, the weapon was split in half. However, rumors have circulated that the two halves may be found somewhere within Zul'Farrak's walls. Reports have also suggested that a band of mercenaries fleeing Gadgetzan wandered into the city and became trapped. Their fate remains unknown. But perhaps most disturbing of all are the hushed whispers of an ancient creature sleeping within a sacred pool at the city's heart - a mighty demigod who will wreak untold destruction upon any adventurer foolish enough to awaken him.",
