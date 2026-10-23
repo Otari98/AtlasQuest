@@ -96,6 +96,15 @@
 					</Anchors>
 				</FontString>
 			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parent_IconBorder" file="Interface\AddOns\AtlasQuest\border">
+					<Size x="37" y="37"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="$parent_Icon"/>
+					</Anchors>
+					<Color r="1" g="1" b="1" a="1"/>
+				</Texture>
+			</Layer>
 		</Layers>
 		<Scripts>
 			<OnEnter>
@@ -304,11 +313,12 @@
 			</OnHide>
 		</Scripts>
 	</Frame>
+
 	<Button name="AtlasQuestButton" parent="AtlasFrame" inherits="UIPanelButtonTemplate2" text="AtlasQuest">
-		<Size x="90" y="32"/>
+		<Size x="90" y="20"/>
 		<Anchors>
 			<Anchor point="TOPRIGHT">
-				<Offset x="-120" y="-50"/>
+				<Offset x="-130" y="-60"/>
 			</Anchor>
 		</Anchors>
 		<Scripts>

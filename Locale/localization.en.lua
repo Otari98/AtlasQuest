@@ -15111,7 +15111,7 @@ AtlasQuest.data = {
 					[1] = {
 						["id"] = 136,
 						["name"] = "Archaeologist's Lantern",
-						["subtext"] = "Held In Off-hand",
+						["subtext"] = L.HELD_IN_OFFHAND,
 						["icon"] = "INV_Misc_Lantern_01",
 						["quality"] = 2,
 					},
@@ -15129,7 +15129,7 @@ AtlasQuest.data = {
 					[1] = {
 						["id"] = 158,
 						["name"] = "Thalassian Silk Cape",
-						["subtext"] = "Back",
+						["subtext"] = L.BACK,
 						["icon"] = "INV_Misc_Cape_16",
 						["quality"] = 2,
 					},

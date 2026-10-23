@@ -523,7 +523,9 @@ end
 -- Story Button
 -----------------------------------------------------------------------------
 function AtlasQuestStoryButton_OnClick()
-	AQHideAtlasLoot()
+	if ( AtlasLootItemsFrame ) then
+		AtlasLootItemsFrame:Hide()
+	end
 	if ( AtlasQuestInsideFrame:IsShown( ) ) then
 		if ( not LastSelectedQuest ) then
 			AtlasQuestInsideFrame:Hide()
@@ -545,13 +547,20 @@ function AtlasQuestButton_OnClick()
 	CurrentQuest = this:GetID()
 
 	if ( ChatFrameEditBox:IsShown() and IsShiftKeyDown() ) then
-		AQInsertQuestInformation()
+		local data = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest]
+		if not data then return end
+		local questName = data.title
+		local questLevel = data.level
+		local questID =  data.id
+		ChatFrameEditBox:Insert(format("|cffFFFF00|Hquest:%d:%d|h[%s]|h|r", questID, questLevel, questName))
 	else
 		for i = 1, MAX_QUEST_BUTTONS do
 			_G["AQQuestButton"..i.."Highlight"]:Hide()
 			_G["AQQuestButton"..i]:UnlockHighlight()
 		end
-		AQHideAtlasLoot()
+		if ( AtlasLootItemsFrame ) then
+			AtlasLootItemsFrame:Hide()
+		end
 		AtlasQuestInsideFrameStoryText:SetText()
 		if ( not AtlasQuestInsideFrame:IsVisible() ) then
 			AtlasQuestInsideFrame:Show()
@@ -574,25 +583,6 @@ function AtlasQuestButton_OnClick()
 end
 
 -----------------------------------------------------------------------------
--- Hide the AtlasLoot Frame if available
------------------------------------------------------------------------------
-function AQHideAtlasLoot()
-	if ( AtlasLootItemsFrame ) then
-		AtlasLootItemsFrame:Hide() -- hide atlasloot
-	end
-end
-
------------------------------------------------------------------------------
--- Insert Quest Information into the chat box
------------------------------------------------------------------------------
-function AQInsertQuestInformation()
-	local questName = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title
-	local questLevel = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
-	local questID =  AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].id
-	ChatFrameEditBox:Insert(format("|cffFFFF00|Hquest:%d:%d|h[%s]|h|r", questID, questLevel, questName))
-end
-
------------------------------------------------------------------------------
 -- set the Quest text
 -- executed when you push a button
 -----------------------------------------------------------------------------
@@ -602,19 +592,22 @@ function AtlasQuest_SetQuestText()
 	AtlasQuestInsideFrameFinishedText:SetText(factionColor..L["Quest finished:"])
 	AtlasQuestInsideFrameFinishedButton:Show()
 
-	local level = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].level
-	local attain = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].attain
-	local prequest = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].prequest or NOT_APPLICABLE
-	local followup = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].followup or NOT_APPLICABLE
-	local location = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].location or ""
-	local aim = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].aim or ""
-	local note = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].note or ""
-	local rewards = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards
+	local data = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest]
+	if not data then return end
+	local title = data.title
+	local level = data.level
+	local attain = data.attain
+	local prequest = data.prequest or NOT_APPLICABLE
+	local followup = data.followup or NOT_APPLICABLE
+	local location = data.location or ""
+	local aim = data.aim or ""
+	local note = data.note or ""
+	local rewards = data.rewards
 	if ( level ) then
 		local color = GetDifficultyColor(level, true)
 		AtlasQuestInsideFrameQuestName:SetTextColor(color.r, color.g, color.b)
 	end
-	AtlasQuestInsideFrameQuestName:SetText(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].title)
+	AtlasQuestInsideFrameQuestName:SetText(title)
 	AtlasQuestInsideFrameQuestLevel:SetText(factionColor ..L["Level: "].."|r"..level)
 	AtlasQuestInsideFrameAttainLevel:SetText(factionColor ..L["Attain: "].."|r"..attain)
 	AtlasQuestInsideFrameQuestInfo:SetText(factionColor..L["Prequest: "].."|r"..prequest.."\n\n"
@@ -623,31 +616,31 @@ function AtlasQuest_SetQuestText()
 		..factionColor..L["Objective:\n"].."|r"..aim.."\n\n"
 		..factionColor..L["Note:\n"].."|r"..note)
 
-	local numRewards = rewards and getn(AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards) or 0
+	local numRewards = rewards and getn(rewards) or 0
 	
 	if ( numRewards > 0 ) then
 		AtlasQuestInsideFrameRewardText:SetText(factionColor..L["Reward: "])
 		for i = 1, numRewards do
-			local itemID = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].id
+			local itemID = rewards[i].id
 			local itemName, itemLink, itemQuality, itemLevel, itemType, itemSubType, itemCount, itemEquipLoc, itemTexture = GetItemInfo(itemID)
 			if ( not itemName ) then
 				GameTooltip:SetHyperlink("item:"..itemID)
 			end
-			local name = itemName or AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].name
-			local quality = itemQuality or AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].quality
-			local icon = itemTexture or ("Interface\\Icons\\"..AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].icon)
-			local subtext = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].subtext
-			local count = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].rewards[i].count
+			local name = itemName or rewards[i].name
+			local quality = itemQuality or rewards[i].quality
+			local icon = itemTexture or ("Interface\\Icons\\"..rewards[i].icon)
+			local subtext = rewards[i].subtext
+			local count = rewards[i].count
 			local r, g, b = GetItemQualityColor(quality)
 			_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexture(icon)
+			_G["AtlasQuestItemframe"..i.."_IconBorder"]:SetVertexColor(r, g, b)
 			_G["AtlasQuestItemframe"..i.."_Name"]:SetText(name)
 			_G["AtlasQuestItemframe"..i.."_Name"]:SetTextColor(r, g, b)
 			_G["AtlasQuestItemframe"..i.."_Extra"]:SetText(subtext)
 			if ( count ) then
 				_G["AtlasQuestItemframe"..i.."_Count"]:SetText(count)
-				_G["AtlasQuestItemframe"..i.."_Count"]:Show()
 			else
-				_G["AtlasQuestItemframe"..i.."_Count"]:Hide()
+				_G["AtlasQuestItemframe"..i.."_Count"]:SetText("")
 			end
 			_G["AtlasQuestItemframe"..i]:Show()
 		end
@@ -655,14 +648,13 @@ function AtlasQuest_SetQuestText()
 		AtlasQuestInsideFrameRewardText:SetText("")
 	end
 
-	local pages = AtlasQuest.data[CurrentDungeon][CurrentFaction][CurrentQuest].pages
-
 	if ( AtlasQuest_CharData[CurrentDungeon][CurrentFaction][CurrentQuest] ) then
 		AtlasQuestInsideFrameFinishedButton:SetChecked(true)
 	else
 		AtlasQuestInsideFrameFinishedButton:SetChecked(false)
 	end
 
+	local pages = data.pages
 	if ( pages ) then
 		AtlasQuestInsideFrameNextPage:Show()
 		AQ_PageType = "Quest"
